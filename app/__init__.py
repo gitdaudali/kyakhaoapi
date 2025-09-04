@@ -1,0 +1,1 @@
+# FastAPI Cup Streaming Application

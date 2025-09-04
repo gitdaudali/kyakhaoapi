@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+
+# Virtualenv
+venv/
+env/
+.venv/
+ENV/
+
+# Django
+logs/
+*.log
+*.pot
+*.pyc
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+static/
+
+# Migrations (optional, keep if you want them tracked)
+*/migrations/__pycache__/
+*/migrations/*.pyc
+# Uncomment next line if you don’t want migration files in git
+# */migrations/
+
+# IDEs / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage / Testing
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# Environments
+.env
+.env.local
+.env.*.local
+
+# AWS / S3 / Secrets
+*.pem
+*.key
+*.crt
+*.der
+
+# Cache
+.cache/
