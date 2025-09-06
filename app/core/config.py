@@ -42,7 +42,7 @@ class Settings(BaseSettings):
     SMTP_PASSWORD: str = ""
     
     class Config:
-        env_file = None
+        env_file = ".env"
         case_sensitive = False
 
 settings = Settings()
