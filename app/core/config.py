@@ -13,9 +13,9 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     
     # Database
-    DB_NAME: str = "cup_streaming"
+    DB_NAME: str = "cup-entertainment"
     DB_USER: str = "postgres"
-    DB_PASSWORD: str = "password"
+    DB_PASSWORD: str = "#Trigonometry1"
     DB_HOST: str = "localhost"
     DB_PORT: str = "5432"
     
@@ -42,7 +42,8 @@ class Settings(BaseSettings):
     SMTP_PASSWORD: str = ""
     
     class Config:
-        env_file = None
+        env_file = ".env"
         case_sensitive = False
+        extra = "ignore"
 
 settings = Settings()
