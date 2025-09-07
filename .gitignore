@@ -24,7 +24,7 @@ logs/
 db.sqlite3
 media/
 staticfiles/
-static/
+
 
 # Migrations (optional, keep if you want them tracked)
 */migrations/__pycache__/
