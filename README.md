@@ -1,38 +1,43 @@
-# Cup Streaming - FastAPI Version
+# Cup Streaming Platform
 
-A modern, high-performance video streaming platform built with FastAPI, SQLAlchemy, and PostgreSQL.
+A modern, high-performance video streaming platform with both Django and FastAPI implementations.
 
 ## 🚀 Features
 
-- **FastAPI Backend**: Modern, fast web framework with automatic API documentation
+- **Dual Backend Support**: Both Django REST Framework and FastAPI implementations
 - **JWT Authentication**: Secure user authentication with JWT tokens
 - **Video Management**: Upload, manage, and stream videos
 - **User Management**: User registration, profiles, and permissions
 - **Analytics**: Track video views and user engagement
 - **PostgreSQL Database**: Robust relational database backend
-- **Async Operations**: High-performance asynchronous operations
+- **Social Authentication**: Google and Facebook OAuth integration
+- **Async Operations**: High-performance asynchronous operations (FastAPI)
 
-## 🏗️ Architecture
+## 🏗️ Project Structure
 
 ```
-app/
-├── core/           # Core configuration and utilities
-│   ├── config.py   # Application settings
-│   ├── database.py # Database configuration
-│   └── auth.py     # Authentication utilities
-├── models/         # SQLAlchemy database models
-│   ├── user.py     # User model
-│   └── video.py    # Video and related models
-├── schemas/        # Pydantic request/response schemas
-│   ├── user.py     # User schemas
-│   └── video.py    # Video schemas
-└── api/            # API endpoints
-    └── v1/         # API version 1
-        ├── api.py  # Main router
-        └── endpoints/
-            ├── auth.py   # Authentication endpoints
-            ├── users.py  # User management endpoints
-            └── videos.py # Video management endpoints
+Cup_Streaming/
+├── django/                 # Django REST Framework implementation
+│   ├── core/              # Django project settings
+│   ├── apps/              # Django applications
+│   │   ├── authentication/ # User authentication
+│   │   ├── users/         # User management
+│   │   ├── videos/        # Video management
+│   │   └── api/           # API utilities
+│   ├── manage.py          # Django management script
+│   ├── start_django.py    # Django startup script
+│   └── requirements.txt   # Django dependencies
+├── fastapi/               # FastAPI implementation
+│   ├── app/               # FastAPI application
+│   │   ├── core/          # Core configuration
+│   │   ├── models/        # SQLAlchemy models
+│   │   ├── schemas/       # Pydantic schemas
+│   │   └── api/           # API endpoints
+│   ├── main.py            # FastAPI main application
+│   ├── start_fastapi.py   # FastAPI startup script
+│   └── requirements.txt   # FastAPI dependencies
+├── start_projects.py      # Main project launcher
+└── requirements.txt       # Combined dependencies
 ```
 
 ## 🛠️ Installation
@@ -48,19 +53,30 @@ app/
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd cup-streaming-main
+   cd Cup_Streaming
    ```
 
-2. **Install dependencies**
+2. **Create a virtual environment**
    ```bash
-   pip install -r requirements_fastapi.txt
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-3. **Environment Configuration**
+3. **Install dependencies**
+   ```bash
+   # Install all dependencies
+   pip install -r requirements.txt
+   
+   # Or install project-specific dependencies
+   pip install -r django/requirements.txt    # For Django only
+   pip install -r fastapi/requirements.txt   # For FastAPI only
+   ```
+
+4. **Environment Configuration**
    Create a `.env` file with your configuration:
    ```env
    SECRET_KEY=your-secret-key-here
-   DB_NAME=cup-entertainment
+   DB_NAME=cup_streaming
    DB_USER=postgres
    DB_PASSWORD=your-password
    DB_HOST=localhost
@@ -68,29 +84,46 @@ app/
    REDIS_URL=redis://localhost:6379
    ```
 
-4. **Database Setup**
+5. **Database Setup**
    ```bash
    # Create PostgreSQL database
-   createdb cup-entertainment
+   createdb cup_streaming
    ```
 
-5. **Run the Application**
+6. **Run the Application**
    ```bash
-   # Option 1: Using the startup script
-   python start_fastapi.py
+   # Use the main launcher
+   python start_projects.py
    
-   # Option 2: Direct uvicorn
-   uvicorn main:app --reload --host 127.0.0.1 --port 8000
+   # Or start individual projects
+   cd django && python start_django.py      # Django on port 8000
+   cd fastapi && python start_fastapi.py    # FastAPI on port 8001
    ```
+
+## 🚀 Quick Start
+
+### Django Project
+- **URL**: http://localhost:8000
+- **Admin**: http://localhost:8000/admin
+- **API**: http://localhost:8000/api/v1/
+
+### FastAPI Project
+- **URL**: http://localhost:8001
+- **Docs**: http://localhost:8001/docs
+- **ReDoc**: http://localhost:8001/redoc
 
 ## 📚 API Documentation
 
-Once the application is running, you can access:
+### Django Project (Port 8000)
+- **Admin Panel**: http://localhost:8000/admin
+- **API Root**: http://localhost:8000/api/v1/
+- **Browsable API**: http://localhost:8000/api/v1/
 
-- **Interactive API Docs**: http://127.0.0.1:8000/docs
-- **ReDoc Documentation**: http://127.0.0.1:8000/redoc
-- **OpenAPI Schema**: http://127.0.0.1:8000/openapi.json
-- **Health Check**: http://127.0.0.1:8000/health
+### FastAPI Project (Port 8001)
+- **Interactive API Docs**: http://localhost:8001/docs
+- **ReDoc Documentation**: http://localhost:8001/redoc
+- **OpenAPI Schema**: http://localhost:8001/openapi.json
+- **Health Check**: http://localhost:8001/health
 
 ## 🔐 Authentication
 
