@@ -1,0 +1,31 @@
+repos:
+  # Black - Python code formatter
+  - repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+      - id: black
+        language_version: python3
+        args: [--line-length=88, --target-version=py310, --exclude="env/|venv/|.git/|__pycache__/|.mypy_cache/|.ruff_cache/"]
+        files: ^fastapi/
+
+  # isort - Import sorter
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: [--profile=black, --line-length=88, --skip-glob="env/*", --skip-glob="venv/*", --skip-glob=".git/*", --skip-glob="__pycache__/*", --skip-glob=".mypy_cache/*", --skip-glob=".ruff_cache/*"]
+        files: ^fastapi/
+
+  # Basic file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: debug-statements
+      - id: detect-private-key
