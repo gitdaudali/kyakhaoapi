@@ -63,6 +63,6 @@ htmlcov/
 # Cache
 .cache/
 
-#Database 
+#Database
 *.db
 *.sqlite3
