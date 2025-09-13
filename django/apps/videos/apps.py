@@ -2,10 +2,9 @@ from django.apps import AppConfig
 
 
 class VideosConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.videos'
-    verbose_name = 'Videos'
-    
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "apps.videos"
+    verbose_name = "Videos"
+
     def ready(self):
         """Import signals when the app is ready."""
-        import apps.videos.signals

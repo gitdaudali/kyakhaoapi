@@ -1,7 +1,7 @@
-from django.db.models.signals import post_save, post_delete
-from django.dispatch import receiver
-from django.conf import settings
 import logging
+
+from django.db.models.signals import post_delete, post_save
+from django.dispatch import receiver
 
 from .models import Video
 
@@ -16,23 +16,23 @@ def video_post_save(sender, instance, created, **kwargs):
     """
     if created:
         logger.info(f"New video created: {instance.title} (ID: {instance.id})")
-        
+
         # Trigger video processing task
         # In a real implementation, this would queue a Celery task
         # from .tasks import process_video
         # process_video.delay(instance.id)
-        
+
         # For now, just log the event
         logger.info(f"Video processing queued for: {instance.title}")
-    
-    elif instance.status == 'uploading':
+
+    elif instance.status == "uploading":
         logger.info(f"Video upload completed: {instance.title} (ID: {instance.id})")
-        
+
         # Trigger video processing task
         # In a real implementation, this would queue a Celery task
         # from .tasks import process_video
         # process_video.delay(instance.id)
-        
+
         # For now, just log the event
         logger.info(f"Video processing queued for: {instance.title}")
 
@@ -44,13 +44,13 @@ def video_post_delete(sender, instance, **kwargs):
     Cleans up associated S3 files when a video is deleted.
     """
     logger.info(f"Video deleted: {instance.title} (ID: {instance.id})")
-    
+
     # Clean up S3 files
     # In a real implementation, this would delete files from S3
     # from .utils import delete_s3_file
     # if instance.s3_key:
     #     delete_s3_file(instance.s3_bucket, instance.s3_key)
-    
+
     # For now, just log the event
     logger.info(f"S3 cleanup completed for: {instance.title}")
 

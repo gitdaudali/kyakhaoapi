@@ -5,7 +5,7 @@ Django Cup Streaming Application Startup Script
 
 import os
 import sys
-import django
+
 from django.core.management import execute_from_command_line
 
 # Add current directory to Python path
@@ -17,14 +17,14 @@ if __name__ == "__main__":
     print("🔧 Admin panel: http://localhost:8000/admin")
     print("📚 API Documentation: http://localhost:8000/api/v1/")
     print("=" * 50)
-    
+
     # Set Django settings
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
-    
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
+
     # Run migrations first
     print("🔄 Running database migrations...")
-    execute_from_command_line(['manage.py', 'migrate'])
-    
+    execute_from_command_line(["manage.py", "migrate"])
+
     # Start the development server
     print("🌐 Starting Django development server...")
-    execute_from_command_line(['manage.py', 'runserver', '0.0.0.0:8000'])
+    execute_from_command_line(["manage.py", "runserver", "0.0.0.0:8000"])

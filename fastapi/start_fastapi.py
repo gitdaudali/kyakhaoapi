@@ -3,9 +3,10 @@
 FastAPI Cup Streaming Application Startup Script
 """
 
-import uvicorn
-import sys
 import os
+import sys
+
+import uvicorn
 
 # Add current directory to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -17,11 +18,5 @@ if __name__ == "__main__":
     print("📖 ReDoc: http://localhost:8001/redoc")
     print("🎨 Custom Swagger: http://localhost:8001/static/swagger-ui.html")
     print("=" * 50)
-    
-    uvicorn.run(
-        "main:app",
-        host="0.0.0.0",
-        port=8001,
-        reload=True,
-        log_level="info"
-    )
+
+    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True, log_level="info")

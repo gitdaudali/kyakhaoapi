@@ -1,67 +1,58 @@
-import uuid
-from sqlalchemy import Column, String, Text, Float, Integer, DateTime, ForeignKey
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.sql import func
-from sqlalchemy.orm import relationship
-from app.core.database import Base
+from typing import Optional
 
-class Video(Base):
+from sqlalchemy import Text
+from sqlmodel import Field
+
+from app.models.base import BaseModel, TimestampMixin
+
+
+class Video(BaseModel, TimestampMixin, table=True):
     __tablename__ = "videos_video"
-    
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    title = Column(String(255), nullable=False)
-    description = Column(Text, nullable=True)
-    file_url = Column(String(500), nullable=False)
-    duration = Column(Float, nullable=False)
-    thumbnail_url = Column(String(500), nullable=True)
-    uploaded_by_id = Column(UUID(as_uuid=True), ForeignKey("users_user.id"), nullable=False)
-    uploaded_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
-    views_count = Column(Integer, default=0)
-    likes_count = Column(Integer, default=0)
-    status = Column(String(20), default="uploading")
-    file_size = Column(Integer, nullable=True)
-    resolution = Column(String(20), nullable=True)
-    format = Column(String(10), nullable=True)
-    s3_bucket = Column(String(255), nullable=True)
-    s3_key = Column(String(500), nullable=True)
-    
-    # Relationships
-    uploaded_by = relationship("User", back_populates="uploaded_videos")
-    views = relationship("VideoView", back_populates="video")
-    likes = relationship("VideoLike", back_populates="video")
-    
+
+    title: str = Field(max_length=255, index=True)
+    description: Optional[str] = Field(default=None, sa_type=Text)
+    file_url: str = Field(max_length=500)
+    duration: float = Field(ge=0)
+    thumbnail_url: Optional[str] = Field(max_length=500, default=None)
+    uploaded_by_id: str = Field(foreign_key="users_user.id", index=True)
+    views_count: int = Field(default=0, index=True)
+    likes_count: int = Field(default=0, index=True)
+    status: str = Field(max_length=20, default="uploading", index=True)
+    file_size: Optional[int] = Field(default=None)
+    resolution: Optional[str] = Field(max_length=20, default=None)
+    format: Optional[str] = Field(max_length=10, default=None)
+    s3_bucket: Optional[str] = Field(max_length=255, default=None)
+    s3_key: Optional[str] = Field(max_length=500, default=None)
+
+    # Relationships will be handled separately
+
     def __repr__(self):
         return f"<Video(id={self.id}, title='{self.title}')>"
 
-class VideoView(Base):
-    __tablename__ = "videos_video_view"
-    
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    video_id = Column(UUID(as_uuid=True), ForeignKey("videos_video.id"), nullable=False)
-    viewer_id = Column(UUID(as_uuid=True), ForeignKey("users_user.id"), nullable=True)
-    ip_address = Column(String(45), nullable=True)
-    user_agent = Column(Text, nullable=True)
-    viewed_at = Column(DateTime(timezone=True), server_default=func.now())
-    
-    # Relationships
-    video = relationship("Video", back_populates="views")
-    viewer = relationship("User", back_populates="video_views")
-    
-    def __repr__(self):
-        return f"<VideoView(video_id={self.video_id}, viewed_at={self.viewed_at})>"
 
-class VideoLike(Base):
+class VideoView(BaseModel, TimestampMixin, table=True):
+    __tablename__ = "videos_video_view"
+
+    video_id: str = Field(foreign_key="videos_video.id", index=True)
+    viewer_id: Optional[str] = Field(
+        foreign_key="users_user.id", default=None, index=True
+    )
+    ip_address: Optional[str] = Field(max_length=45, default=None)
+    user_agent: Optional[str] = Field(default=None, sa_type=Text)
+
+    # Relationships will be handled separately
+
+    def __repr__(self):
+        return f"<VideoView(video_id={self.video_id}, viewed_at={self.created_at})>"
+
+
+class VideoLike(BaseModel, TimestampMixin, table=True):
     __tablename__ = "videos_video_like"
-    
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    video_id = Column(UUID(as_uuid=True), ForeignKey("videos_video.id"), nullable=False)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users_user.id"), nullable=False)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    
-    # Relationships
-    video = relationship("Video", back_populates="likes")
-    user = relationship("User", back_populates="video_likes")
-    
+
+    video_id: str = Field(foreign_key="videos_video.id", index=True)
+    user_id: str = Field(foreign_key="users_user.id", index=True)
+
+    # Relationships will be handled separately
+
     def __repr__(self):
         return f"<VideoLike(video_id={self.video_id}, user_id={self.user_id})>"

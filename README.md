@@ -66,7 +66,7 @@ Cup_Streaming/
    ```bash
    # Install all dependencies
    pip install -r requirements.txt
-   
+
    # Or install project-specific dependencies
    pip install -r django/requirements.txt    # For Django only
    pip install -r fastapi/requirements.txt   # For FastAPI only
@@ -94,7 +94,7 @@ Cup_Streaming/
    ```bash
    # Use the main launcher
    python start_projects.py
-   
+
    # Or start individual projects
    cd django && python start_django.py      # Django on port 8000
    cd fastapi && python start_fastapi.py    # FastAPI on port 8001
@@ -303,7 +303,7 @@ type app\core\config.py
 
 # The current settings are:
 # DB_NAME: "cup-entertainment"
-# DB_USER: "postgres" 
+# DB_USER: "postgres"
 # DB_PASSWORD: "#Trigonometry1"
 # DB_HOST: "localhost"
 # DB_PORT: "5432"

@@ -1,6 +1,8 @@
-from pydantic import BaseModel, UUID4, HttpUrl
-from typing import Optional
 from datetime import datetime
+from typing import Optional
+
+from pydantic import UUID4, BaseModel, HttpUrl
+
 
 class VideoBase(BaseModel):
     title: str
@@ -12,14 +14,17 @@ class VideoBase(BaseModel):
     resolution: Optional[str] = None
     format: Optional[str] = None
 
+
 class VideoCreate(VideoBase):
     pass
+
 
 class VideoUpdate(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
     thumbnail_url: Optional[HttpUrl] = None
     status: Optional[str] = None
+
 
 class VideoInDB(VideoBase):
     id: UUID4
@@ -35,13 +40,16 @@ class VideoInDB(VideoBase):
     class Config:
         from_attributes = True
 
+
 class Video(VideoInDB):
     uploaded_by: Optional[str] = None  # username
+
 
 class VideoViewCreate(BaseModel):
     video_id: UUID4
     ip_address: Optional[str] = None
     user_agent: Optional[str] = None
+
 
 class VideoView(VideoViewCreate):
     id: UUID4
@@ -51,8 +59,10 @@ class VideoView(VideoViewCreate):
     class Config:
         from_attributes = True
 
+
 class VideoLikeCreate(BaseModel):
     video_id: UUID4
+
 
 class VideoLike(VideoLikeCreate):
     id: UUID4

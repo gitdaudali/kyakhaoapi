@@ -1,6 +1,8 @@
-from pydantic import BaseModel, EmailStr, UUID4
-from typing import Optional
 from datetime import datetime
+from typing import Optional
+
+from pydantic import UUID4, BaseModel, EmailStr
+
 
 class UserBase(BaseModel):
     username: str
@@ -10,8 +12,10 @@ class UserBase(BaseModel):
     bio: Optional[str] = None
     avatar_url: Optional[str] = None
 
+
 class UserCreate(UserBase):
     password: str
+
 
 class UserUpdate(BaseModel):
     username: Optional[str] = None
@@ -20,6 +24,7 @@ class UserUpdate(BaseModel):
     last_name: Optional[str] = None
     bio: Optional[str] = None
     avatar_url: Optional[str] = None
+
 
 class UserInDB(UserBase):
     id: UUID4
@@ -33,16 +38,20 @@ class UserInDB(UserBase):
     class Config:
         from_attributes = True
 
+
 class User(UserInDB):
     pass
+
 
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
+
 class Token(BaseModel):
     access_token: str
     token_type: str
+
 
 class TokenData(BaseModel):
     email: Optional[str] = None
