@@ -1,10 +1,11 @@
 from contextlib import asynccontextmanager
 
 import uvicorn
+from sqlmodel import SQLModel
 
 from app.api.v1.api import api_router
 from app.core.config import settings
-from app.core.database import Base, engine
+from app.core.database import engine
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
@@ -17,7 +18,8 @@ from fastapi.staticfiles import StaticFiles
 async def lifespan(app: FastAPI):
     # Startup
     try:
-        Base.metadata.create_all(bind=engine)
+        async with engine.begin() as conn:
+            await conn.run_sync(SQLModel.metadata.create_all)
         print("✅ Database tables created successfully")
     except Exception as e:
         print(f"⚠️  Database connection failed: {e}")
