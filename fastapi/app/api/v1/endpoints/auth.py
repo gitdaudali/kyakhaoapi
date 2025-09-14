@@ -247,9 +247,7 @@ async def get_current_user_info(
     current_user: Annotated[User, Depends(get_current_user)],
 ) -> Any:
     """
-    Get current authenticated user information.
     Returns user profile data from JWT token.
-
     **Authentication Required**: Bearer token in Authorization header
     """
     return UserSchema.from_orm(current_user)

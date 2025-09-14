@@ -12,6 +12,7 @@ from sqlmodel import Field, Relationship, SQLModel
 
 from app.core.config import settings
 from app.models.base import BaseModel, TimestampMixin
+from app.models.user import User
 
 
 class PasswordResetToken(BaseModel, TimestampMixin, table=True):

@@ -1,5 +1,5 @@
-from .base import BaseModel, TimestampMixin
-from .content import (
+from app.models.base import BaseModel, TimestampMixin
+from app.models.content import (
     Content,
     ContentCast,
     ContentCrew,
@@ -23,9 +23,9 @@ from .content import (
     WatchQuality,
     WatchSession,
 )
-from .token import RefreshToken, Token, TokenBlacklist
-from .user import ProfileStatus, User, UserRole
-from .verification import EmailVerificationToken, PasswordResetToken
+from app.models.token import RefreshToken, Token, TokenBlacklist
+from app.models.user import ProfileStatus, User, UserRole
+from app.models.verification import EmailVerificationToken, PasswordResetToken
 
 __all__ = [
     "BaseModel",
