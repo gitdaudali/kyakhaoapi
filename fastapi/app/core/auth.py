@@ -167,7 +167,6 @@ async def create_token_pair(
         expires_delta=access_expires,
         additional_claims={
             "email": user.email,
-            "username": user.username,
             "is_superuser": user.is_superuser,
             "is_active": user.is_active,
         },
