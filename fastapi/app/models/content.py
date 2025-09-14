@@ -169,6 +169,13 @@ class Content(BaseModel, TimestampMixin, table=True):
     search_keywords: Optional[str] = Field(sa_type=Text, default=None)
 
     # Relationships
+    genres: List["Genre"] = Relationship(
+        back_populates="contents",
+        sa_relationship_kwargs={
+            "lazy": "selectin",
+            "secondary": "content_genres",
+        },
+    )
     seasons: List["Season"] = Relationship(
         back_populates="content",
         sa_relationship_kwargs={
@@ -468,6 +475,13 @@ class Genre(BaseModel, TimestampMixin, table=True):
     content_count: int = Field(sa_type=Integer, default=0)
 
     # Relationships
+    contents: List["Content"] = Relationship(
+        back_populates="genres",
+        sa_relationship_kwargs={
+            "lazy": "dynamic",
+            "secondary": "content_genres",
+        },
+    )
     parent_genre: Optional["Genre"] = Relationship(
         sa_relationship_kwargs={"remote_side": "Genre.id"}
     )
