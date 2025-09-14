@@ -1,0 +1,92 @@
+[
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440001",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440001",
+    "is_primary": true,
+    "relevance_score": 0.95
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440001",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440004",
+    "is_primary": false,
+    "relevance_score": 0.90
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440001",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440007",
+    "is_primary": false,
+    "relevance_score": 0.85
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440002",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440004",
+    "is_primary": true,
+    "relevance_score": 0.98
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440002",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440015",
+    "is_primary": false,
+    "relevance_score": 0.92
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440002",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440007",
+    "is_primary": false,
+    "relevance_score": 0.88
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440003",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440002",
+    "is_primary": true,
+    "relevance_score": 0.90
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440003",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440006",
+    "is_primary": false,
+    "relevance_score": 0.95
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440003",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440012",
+    "is_primary": false,
+    "relevance_score": 0.85
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440004",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440009",
+    "is_primary": true,
+    "relevance_score": 0.98
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440004",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440003",
+    "is_primary": false,
+    "relevance_score": 0.80
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440005",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440001",
+    "is_primary": true,
+    "relevance_score": 0.95
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440005",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440004",
+    "is_primary": false,
+    "relevance_score": 0.90
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440005",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440010",
+    "is_primary": false,
+    "relevance_score": 0.88
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440006",
+    "genre_id": "650e8400-e29b-41d4-a716-446655440008",
+    "is_primary": true,
+    "relevance_score": 0.99
+  }
+]

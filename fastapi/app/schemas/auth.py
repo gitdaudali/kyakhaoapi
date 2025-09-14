@@ -11,9 +11,9 @@ class UserRegisterRequest(BaseModel):
     """User registration request schema"""
 
     email: EmailStr = Field(..., description="User email address")
-    username: constr(min_length=3, max_length=50) = Field(
-        ..., description="Username (3-50 characters)", pattern=r"^[a-zA-Z0-9_-]+$"
-    )
+    # username: constr(min_length=3, max_length=50) = Field(
+    #     ..., description="Username (3-50 characters)", pattern=r"^[a-zA-Z0-9_-]+$"
+    # )
     password: constr(min_length=8, max_length=128) = Field(
         ..., description="Password (8-128 characters)"
     )
@@ -42,7 +42,6 @@ class UserRegisterRequest(BaseModel):
         json_schema_extra = {
             "example": {
                 "email": "user@example.com",
-                "username": "username",
                 "password": "Securepassword123",
                 "password_confirm": "Securepassword123",
             }

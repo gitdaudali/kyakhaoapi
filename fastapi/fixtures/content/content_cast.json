@@ -1,0 +1,58 @@
+[
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440001",
+    "person_id": "750e8400-e29b-41d4-a716-446655440002",
+    "character_name": "Dom Cobb",
+    "cast_order": 1,
+    "is_main_cast": true,
+    "character_image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440001",
+    "person_id": "750e8400-e29b-41d4-a716-446655440003",
+    "character_name": "Mal Cobb",
+    "cast_order": 2,
+    "is_main_cast": true,
+    "character_image_url": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face"
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440001",
+    "person_id": "750e8400-e29b-41d4-a716-446655440004",
+    "character_name": "Eames",
+    "cast_order": 3,
+    "is_main_cast": true,
+    "character_image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440002",
+    "person_id": "750e8400-e29b-41d4-a716-446655440008",
+    "character_name": "Officer K",
+    "cast_order": 1,
+    "is_main_cast": true,
+    "character_image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440002",
+    "person_id": "750e8400-e29b-41d4-a716-446655440010",
+    "character_name": "Luv",
+    "cast_order": 2,
+    "is_main_cast": true,
+    "character_image_url": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face"
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440003",
+    "person_id": "750e8400-e29b-41d4-a716-446655440007",
+    "character_name": "Mia Dolan",
+    "cast_order": 1,
+    "is_main_cast": true,
+    "character_image_url": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face"
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440003",
+    "person_id": "750e8400-e29b-41d4-a716-446655440008",
+    "character_name": "Sebastian Wilder",
+    "cast_order": 2,
+    "is_main_cast": true,
+    "character_image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
+  }
+]

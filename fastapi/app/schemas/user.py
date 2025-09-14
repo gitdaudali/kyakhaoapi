@@ -3,9 +3,10 @@ from typing import Optional
 
 from pydantic import UUID4, BaseModel, EmailStr
 
+from app.models.user import ProfileStatus, UserRole
+
 
 class UserBase(BaseModel):
-    username: str
     email: EmailStr
     first_name: Optional[str] = None
     last_name: Optional[str] = None
@@ -18,7 +19,6 @@ class UserCreate(UserBase):
 
 
 class UserUpdate(BaseModel):
-    username: Optional[str] = None
     email: Optional[EmailStr] = None
     first_name: Optional[str] = None
     last_name: Optional[str] = None
@@ -35,7 +35,8 @@ class UserInDB(UserBase):
     updated_at: datetime
     is_deleted: bool
     last_login: Optional[datetime] = None
-    role: str
+    role: UserRole
+    profile_status: ProfileStatus
 
     class Config:
         from_attributes = True

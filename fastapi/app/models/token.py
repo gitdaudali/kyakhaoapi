@@ -9,7 +9,7 @@ from sqlmodel import Field, Relationship
 from .base import BaseModel, TimestampMixin
 
 if TYPE_CHECKING:
-    from .user import User
+    from app.models.user import User
 
 
 class Token(BaseModel, TimestampMixin, table=True):
