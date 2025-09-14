@@ -29,6 +29,28 @@ USER_CREATED_SUCCESS = "User created successfully"
 USER_UPDATED_SUCCESS = "User updated successfully"
 USER_DELETED_SUCCESS = "User deleted successfully"
 
+# Content Messages
+CONTENT_NOT_FOUND = "Content not found"
+CONTENT_CREATED_SUCCESS = "Content created successfully"
+CONTENT_UPDATED_SUCCESS = "Content updated successfully"
+CONTENT_DELETED_SUCCESS = "Content deleted successfully"
+CONTENT_FEATURED_SUCCESS = "Featured content retrieved successfully"
+CONTENT_TRENDING_SUCCESS = "Trending content retrieved successfully"
+CONTENT_LIST_SUCCESS = "Content list retrieved successfully"
+
+# Genre Messages
+GENRE_NOT_FOUND = "Genre not found"
+GENRE_ALREADY_EXISTS = "Genre already exists"
+GENRE_CREATED_SUCCESS = "Genre created successfully"
+GENRE_UPDATED_SUCCESS = "Genre updated successfully"
+GENRE_DELETED_SUCCESS = "Genre deleted successfully"
+GENRE_LIST_SUCCESS = "Genres retrieved successfully"
+
+# General Messages
+INVALID_PAGINATION = "Invalid pagination parameters"
+INVALID_FILTERS = "Invalid filter parameters"
+INVALID_SORT_PARAMS = "Invalid sort parameters"
+
 # Token Messages
 TOKEN_EXPIRED = "Token has expired"
 TOKEN_INVALID = "Invalid token"
