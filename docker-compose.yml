@@ -1,0 +1,63 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+    image: cup_streaming_api:latest
+    container_name: cup_streaming_backend
+    volumes:
+      - static_volume:/app/static
+      - uploads_volume:/app/uploads
+    env_file:
+      - ./.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    restart: always
+    # Override entrypoint for production (no database waiting)
+    entrypoint: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+
+  celery:
+    image: cup_streaming_api:latest
+    env_file:
+      - ./.env
+    depends_on:
+      - redis
+      - backend
+    restart: always
+    # Override entrypoint for production (no database waiting)
+    entrypoint: ["celery", "-A", "app.core.celery_app", "worker", "--loglevel=INFO"]
+
+  celery-beat:
+    image: cup_streaming_api:latest
+    env_file:
+      - ./.env
+    depends_on:
+      - celery
+    restart: always
+    # Override entrypoint for production (no database waiting)
+    entrypoint: ["celery", "-A", "app.core.celery_app", "beat", "--loglevel=INFO"]
+
+volumes:
+  redis_data:
+  static_volume:
+  uploads_volume:
+
+networks:
+  default:
+    driver: bridge
