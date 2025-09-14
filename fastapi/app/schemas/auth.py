@@ -60,11 +60,7 @@ class UserLoginRequest(BaseModel):
     class Config:
         from_attributes = True
         json_schema_extra = {
-            "example": {
-                "email": "user@example.com",
-                "password": "securepassword123",
-                "remember_me": False,
-            }
+            "example": {"email": "user@example.com", "password": "Securepassword123"}
         }
 
 

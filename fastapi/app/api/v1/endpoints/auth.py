@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, timezone
-from typing import Any
+from typing import Annotated, Any
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -13,7 +13,7 @@ from app.core.auth import (
 )
 from app.core.config import settings
 from app.core.database import get_db
-from app.core.deps import CurrentUser, verify_refresh_token
+from app.core.deps import CurrentUser, get_current_user, verify_refresh_token
 from app.core.messages import (
     ACCOUNT_DEACTIVATED,
     CURRENT_PASSWORD_INCORRECT,
@@ -35,6 +35,7 @@ from app.schemas.auth import (
     EmailVerificationRequest,
     LogoutRequest,
     LogoutResponse,
+    MessageResponse,
     PasswordChangeRequest,
     PasswordResetConfirm,
     PasswordResetRequest,
@@ -66,6 +67,7 @@ from app.utils.token_utils import (
     validate_password_reset_token,
 )
 from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi.security import HTTPBearer
 
 router = APIRouter()
 
@@ -204,7 +206,7 @@ async def refresh_access_token(
 @router.post("/logout", response_model=LogoutResponse)
 async def logout_user(
     logout_data: LogoutRequest,
-    current_user: CurrentUser,
+    current_user: Annotated[User, Depends(get_current_user)],
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
@@ -240,23 +242,29 @@ async def logout_user(
             )
 
 
-@router.get("/me", response_model=UserSchema)
+@router.get("/me", response_model=UserSchema, dependencies=[Depends(HTTPBearer())])
 async def get_current_user_info(
-    current_user: CurrentUser,
+    current_user: Annotated[User, Depends(get_current_user)],
 ) -> Any:
     """
     Get current authenticated user information.
     Returns user profile data from JWT token.
+
+    **Authentication Required**: Bearer token in Authorization header
     """
     return UserSchema.from_orm(current_user)
 
 
-@router.post("/change-password")
+@router.post(
+    "/change-password",
+    response_model=MessageResponse,
+    dependencies=[Depends(HTTPBearer())],
+)
 async def change_password(
     password_data: PasswordChangeRequest,
-    current_user: CurrentUser,
+    current_user: Annotated[User, Depends(get_current_user)],
     db: AsyncSession = Depends(get_db),
-) -> Any:
+) -> MessageResponse:
     """
     Change user password with current password verification.
     Validates current password before updating to new password.
@@ -270,13 +278,13 @@ async def change_password(
     current_user.password = get_password_hash(password_data.new_password)
     await db.commit()
 
-    return {"message": PASSWORD_CHANGED_SUCCESS}
+    return MessageResponse(message=PASSWORD_CHANGED_SUCCESS)
 
 
-@router.post("/password/reset")
+@router.post("/password/reset", response_model=MessageResponse)
 async def request_password_reset(
     reset_data: PasswordResetRequest, db: AsyncSession = Depends(get_db)
-) -> Any:
+) -> MessageResponse:
     """
     Request password reset by email.
     Sends reset token to user email if account exists.
@@ -292,13 +300,13 @@ async def request_password_reset(
             reset_token=reset_token.token,
         )
 
-    return {"message": PASSWORD_RESET_SENT}
+    return MessageResponse(message=PASSWORD_RESET_SENT)
 
 
-@router.post("/password/reset/confirm")
+@router.post("/password/reset/confirm", response_model=MessageResponse)
 async def confirm_password_reset(
     reset_data: PasswordResetConfirm, db: AsyncSession = Depends(get_db)
-) -> Any:
+) -> MessageResponse:
     """
     Confirm password reset with validation token.
     Validates reset token and updates user password.
@@ -314,21 +322,19 @@ async def confirm_password_reset(
 
     user = await get_user_by_id_or_404(db, reset_token.user_id)
 
-    # Update password
     user.password = get_password_hash(reset_data.new_password)
 
-    # Mark token as used
     await mark_password_reset_token_used(db, reset_data.reset_token)
 
     await db.commit()
 
-    return {"message": PASSWORD_RESET_SUCCESS}
+    return MessageResponse(message=PASSWORD_RESET_SUCCESS)
 
 
-@router.post("/email/verify")
+@router.post("/email/verify", response_model=MessageResponse)
 async def verify_email(
     verification_data: EmailVerificationRequest, db: AsyncSession = Depends(get_db)
-) -> Any:
+) -> MessageResponse:
     """
     Verify email address using verification token.
     Validates token and marks email as verified.
@@ -342,18 +348,20 @@ async def verify_email(
             detail=EMAIL_VERIFICATION_TOKEN_INVALID,
         )
 
-    user = await get_user_by_id_or_404(db, verification_token.user_id)
+    await get_user_by_id_or_404(db, verification_token.user_id)
 
     await mark_email_verification_token_used(db, verification_data.verification_token)
 
     await db.commit()
 
-    return {"message": EMAIL_VERIFICATION_SUCCESS}
+    return MessageResponse(message=EMAIL_VERIFICATION_SUCCESS)
 
 
-@router.get("/token-info", response_model=TokenInfo)
+@router.get(
+    "/token-info", response_model=TokenInfo, dependencies=[Depends(HTTPBearer())]
+)
 async def get_token_info(
-    current_user: CurrentUser,
+    current_user: Annotated[User, Depends(get_current_user)],
 ) -> Any:
     """
     Get information about current authentication token.

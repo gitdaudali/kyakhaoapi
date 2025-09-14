@@ -119,8 +119,7 @@ def custom_openapi():
         }
     }
 
-    # Add global security requirement
-    openapi_schema["security"] = [{"BearerAuth": []}]
+    # Don't apply global security requirement - let individual endpoints define their own security
 
     app.openapi_schema = openapi_schema
     return app.openapi_schema
