@@ -68,7 +68,6 @@ Cup_Streaming/
    pip install -r requirements.txt
 
    # Or install project-specific dependencies
-   pip install -r django/requirements.txt    # For Django only
    pip install -r fastapi/requirements.txt   # For FastAPI only
    ```
 

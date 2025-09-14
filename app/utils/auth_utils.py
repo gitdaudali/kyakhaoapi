@@ -4,6 +4,7 @@ Authentication utility functions for user management and validation.
 
 from typing import Optional
 
+from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -14,7 +15,6 @@ from app.core.messages import (
     USERNAME_EXISTS,
 )
 from app.models.user import User as UserModel
-from fastapi import HTTPException, status
 
 
 async def get_user_by_email(session: AsyncSession, email: str) -> Optional[UserModel]:

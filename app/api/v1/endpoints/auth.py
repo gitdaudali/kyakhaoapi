@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta, timezone
 from typing import Annotated, Any
 
+from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi.security import HTTPBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.auth import (
@@ -66,8 +68,6 @@ from app.utils.token_utils import (
     validate_email_verification_token,
     validate_password_reset_token,
 )
-from fastapi import APIRouter, Depends, HTTPException, Request, status
-from fastapi.security import HTTPBearer
 
 router = APIRouter()
 

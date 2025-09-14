@@ -1,6 +1,7 @@
 from typing import Any, Optional
 from uuid import UUID
 
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings
@@ -37,7 +38,6 @@ from app.utils.content_utils import (
     get_genres_list,
     get_trending_content,
 )
-from fastapi import APIRouter, Depends, HTTPException, Query, status
 
 router = APIRouter()
 
