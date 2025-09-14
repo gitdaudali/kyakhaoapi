@@ -83,9 +83,7 @@ def send_email_verification_task(
     """
     try:
         subject, html_content = create_email_verification_email(
-            user_email=email_to,
-            verification_token=verification_token,
-            user_name=user_name,
+            user_email=email_to, verification_token=verification_token
         )
 
         send_email(
