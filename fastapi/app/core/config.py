@@ -1,5 +1,9 @@
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv(os.getenv("ENV_FILE", ".env"))
+
 
 class Settings:
     # Required hardcoded values
@@ -16,21 +20,19 @@ class Settings:
     DEBUG: bool = os.getenv("DEBUG", "true").lower() == "true"
 
     # Security
-    SECRET_KEY: str = os.getenv(
-        "SECRET_KEY", "cup-streaming-secret-key-2024-very-secure-key-for-jwt-tokens"
-    )
-    ALGORITHM: str = os.getenv("ALGORITHM", "HS256")
+    SECRET_KEY: str = os.getenv("SECRET_KEY")
+    ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(
         os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30")
     )
     REFRESH_TOKEN_EXPIRE_DAYS: int = int(os.getenv("REFRESH_TOKEN_EXPIRE_DAYS", "1"))
 
     # Database - All from environment
-    DB_NAME: str = os.getenv("DB_NAME", "cup_streaming")
-    DB_USER: str = os.getenv("DB_USER", "postgres")
-    DB_PASSWORD: str = os.getenv("DB_PASSWORD", "postgres123")
-    DB_HOST: str = os.getenv("DB_HOST", "localhost")
-    DB_PORT: str = os.getenv("DB_PORT", "5432")
+    DB_NAME: str = os.getenv("DB_NAME")
+    DB_USER: str = os.getenv("DB_USER")
+    DB_PASSWORD: str = os.getenv("DB_PASSWORD")
+    DB_HOST: str = os.getenv("DB_HOST")
+    DB_PORT: str = os.getenv("DB_PORT")
 
     @property
     def DATABASE_URL(self) -> str:
@@ -44,11 +46,11 @@ class Settings:
     REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 
     # AWS S3
-    AWS_ACCESS_KEY_ID: str = os.getenv("AWS_ACCESS_KEY_ID", "")
-    AWS_SECRET_ACCESS_KEY: str = os.getenv("AWS_SECRET_ACCESS_KEY", "")
-    AWS_REGION: str = os.getenv("AWS_REGION", "us-east-1")
-    S3_BUCKET: str = os.getenv("S3_BUCKET", "")
-    S3_CUSTOM_DOMAIN: str = os.getenv("S3_CUSTOM_DOMAIN", "")
+    AWS_ACCESS_KEY_ID: str = os.getenv("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY: str = os.getenv("AWS_SECRET_ACCESS_KEY")
+    AWS_REGION: str = os.getenv("AWS_REGION")
+    S3_BUCKET: str = os.getenv("S3_BUCKET")
+    S3_CUSTOM_DOMAIN: str = os.getenv("S3_CUSTOM_DOMAIN")
 
     # CORS
     ALLOWED_HOSTS: list[str] = (
@@ -73,21 +75,19 @@ class Settings:
     UPLOAD_DIR: str = os.getenv("UPLOAD_DIR", "uploads")
 
     # Email - All from environment
-    SMTP_HOST: str = os.getenv("SMTP_HOST", "smtp.gmail.com")
+    SMTP_HOST: str = os.getenv("SMTP_HOST")
     SMTP_PORT: int = int(os.getenv("SMTP_PORT", "587"))
-    SMTP_USER: str = os.getenv("SMTP_USER", "")
-    SMTP_PASSWORD: str = os.getenv("SMTP_PASSWORD", "")
+    SMTP_USER: str = os.getenv("SMTP_USER")
+    SMTP_PASSWORD: str = os.getenv("SMTP_PASSWORD")
     SMTP_TLS: bool = os.getenv("SMTP_TLS", "true").lower() == "true"
-    FROM_EMAIL: str = os.getenv(
-        "FROM_EMAIL", "Cup Streaming <noreply@cupstreaming.com>"
-    )
+    FROM_EMAIL: str = os.getenv("FROM_EMAIL")
 
     # Pagination
-    DEFAULT_PAGE_SIZE: int = int(os.getenv("DEFAULT_PAGE_SIZE", "20"))
-    MAX_PAGE_SIZE: int = int(os.getenv("MAX_PAGE_SIZE", "100"))
+    DEFAULT_PAGE_SIZE: int = 20
+    MAX_PAGE_SIZE: int = 100
 
     # Rate limiting
-    RATE_LIMIT_PER_MINUTE: int = int(os.getenv("RATE_LIMIT_PER_MINUTE", "60"))
+    RATE_LIMIT_PER_MINUTE: int = 60
 
     # Logging
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
@@ -96,7 +96,7 @@ class Settings:
     )
 
     # Cache
-    CACHE_TTL: int = int(os.getenv("CACHE_TTL", "300"))  # 5 minutes
+    CACHE_TTL: int = 300
 
     # Video processing
     VIDEO_PROCESSING_QUEUE: str = os.getenv(
