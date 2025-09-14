@@ -8,6 +8,7 @@ from app.models.base import BaseModel, TimestampMixin
 
 if TYPE_CHECKING:
     from .token import RefreshToken, Token
+    from .verification import EmailVerificationToken, PasswordResetToken
     from .video import Video, VideoLike, VideoView
 
 
@@ -47,6 +48,14 @@ class User(BaseModel, TimestampMixin, table=True):
         sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
     )
     refresh_tokens: List["RefreshToken"] = Relationship(
+        back_populates="user",
+        sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
+    )
+    password_reset_tokens: List["PasswordResetToken"] = Relationship(
+        back_populates="user",
+        sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
+    )
+    email_verification_tokens: List["EmailVerificationToken"] = Relationship(
         back_populates="user",
         sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
     )

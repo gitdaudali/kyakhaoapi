@@ -1,6 +1,7 @@
 from .base import BaseModel, TimestampMixin
 from .token import RefreshToken, Token, TokenBlacklist
 from .user import User
+from .verification import EmailVerificationToken, PasswordResetToken
 from .video import Video, VideoLike, VideoView
 
 __all__ = [
@@ -13,4 +14,6 @@ __all__ = [
     "Token",
     "RefreshToken",
     "TokenBlacklist",
+    "PasswordResetToken",
+    "EmailVerificationToken",
 ]

@@ -17,6 +17,8 @@ from app.core.deps import CurrentUser, verify_refresh_token
 from app.core.messages import (
     ACCOUNT_DEACTIVATED,
     CURRENT_PASSWORD_INCORRECT,
+    EMAIL_VERIFICATION_SUCCESS,
+    EMAIL_VERIFICATION_TOKEN_INVALID,
     INVALID_CREDENTIALS,
     INVALID_REFRESH_TOKEN,
     LOGOUT_ALL_SUCCESS,
@@ -25,10 +27,12 @@ from app.core.messages import (
     PASSWORD_CHANGED_SUCCESS,
     PASSWORD_RESET_SENT,
     PASSWORD_RESET_SUCCESS,
+    PASSWORD_RESET_TOKEN_INVALID,
 )
 from app.models.user import User
 from app.schemas.auth import (
     AuthResponse,
+    EmailVerificationRequest,
     LogoutRequest,
     LogoutResponse,
     PasswordChangeRequest,
@@ -41,11 +45,25 @@ from app.schemas.auth import (
     UserRegisterRequest,
 )
 from app.schemas.user import User as UserSchema
+from app.tasks.email_tasks import (
+    send_email_verification_task,
+    send_password_reset_email_task,
+)
 from app.utils.auth_utils import (
     calculate_token_expiration,
     check_user_exists,
     get_device_info,
     get_user_by_email,
+    get_user_by_id_or_404,
+    validate_password_match,
+)
+from app.utils.token_utils import (
+    create_email_verification_token,
+    create_password_reset_token,
+    mark_email_verification_token_used,
+    mark_password_reset_token_used,
+    validate_email_verification_token,
+    validate_password_reset_token,
 )
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 
@@ -75,6 +93,16 @@ async def register_user(
     db.add(db_user)
     await db.commit()
     await db.refresh(db_user)
+
+    # Create email verification token and send email
+    verification_token = await create_email_verification_token(
+        db, db_user.id, db_user.email
+    )
+    send_email_verification_task.delay(
+        email_to=db_user.email,
+        verification_token=verification_token.token,
+        user_name=db_user.username,
+    )
 
     device_info = get_device_info(request)
     access_token, refresh_token = await create_token_pair(
@@ -245,19 +273,28 @@ async def change_password(
     return {"message": PASSWORD_CHANGED_SUCCESS}
 
 
-@router.post("/reset-password-request")
+@router.post("/password/reset")
 async def request_password_reset(
     reset_data: PasswordResetRequest, db: AsyncSession = Depends(get_db)
 ) -> Any:
     """
     Request password reset by email.
-    Sends reset link to user email if account exists.
+    Sends reset token to user email if account exists.
     """
     user = await get_user_by_email(db, reset_data.email)
+    if user:
+        # Create password reset token
+        reset_token = await create_password_reset_token(db, user.id)
+
+        # Send email via Celery task
+        send_password_reset_email_task.delay(
+            email_to=user.email, reset_token=reset_token.token, user_name=user.username
+        )
+
     return {"message": PASSWORD_RESET_SENT}
 
 
-@router.post("/reset-password-confirm")
+@router.post("/password/reset/confirm")
 async def confirm_password_reset(
     reset_data: PasswordResetConfirm, db: AsyncSession = Depends(get_db)
 ) -> Any:
@@ -265,7 +302,52 @@ async def confirm_password_reset(
     Confirm password reset with validation token.
     Validates reset token and updates user password.
     """
+    validate_password_match(reset_data.new_password, reset_data.new_password_confirm)
+
+    reset_token = await validate_password_reset_token(db, reset_data.reset_token)
+    if not reset_token:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=PASSWORD_RESET_TOKEN_INVALID,
+        )
+
+    user = await get_user_by_id_or_404(db, reset_token.user_id)
+
+    # Update password
+    user.password = get_password_hash(reset_data.new_password)
+
+    # Mark token as used
+    await mark_password_reset_token_used(db, reset_data.reset_token)
+
+    await db.commit()
+
     return {"message": PASSWORD_RESET_SUCCESS}
+
+
+@router.post("/email/verify")
+async def verify_email(
+    verification_data: EmailVerificationRequest, db: AsyncSession = Depends(get_db)
+) -> Any:
+    """
+    Verify email address using verification token.
+    Validates token and marks email as verified.
+    """
+    verification_token = await validate_email_verification_token(
+        db, verification_data.verification_token
+    )
+    if not verification_token:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=EMAIL_VERIFICATION_TOKEN_INVALID,
+        )
+
+    user = await get_user_by_id_or_404(db, verification_token.user_id)
+
+    await mark_email_verification_token_used(db, verification_data.verification_token)
+
+    await db.commit()
+
+    return {"message": EMAIL_VERIFICATION_SUCCESS}
 
 
 @router.get("/token-info", response_model=TokenInfo)

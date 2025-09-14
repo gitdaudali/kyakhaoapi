@@ -71,3 +71,39 @@ setup: install-dev pre-commit-install ## Setup development environment
 	@echo "Development environment setup complete!"
 
 check: lint test ## Run all checks (linting and tests)
+
+# Celery commands
+celery-worker: ## Start Celery worker
+	@if [ -f env/bin/activate ]; then \
+		. env/bin/activate && celery -A app.core.celery_app worker --loglevel=info; \
+	else \
+		echo "Virtual environment not found. Please run 'make setup' first."; \
+		exit 1; \
+	fi
+
+celery-flower: ## Start Celery Flower monitoring
+	@if [ -f env/bin/activate ]; then \
+		. env/bin/activate && celery -A app.core.celery_app flower; \
+	else \
+		echo "Virtual environment not found. Please run 'make setup' first."; \
+		exit 1; \
+	fi
+
+celery-beat: ## Start Celery beat scheduler
+	@if [ -f env/bin/activate ]; then \
+		. env/bin/activate && celery -A app.core.celery_app beat --loglevel=info; \
+	else \
+		echo "Virtual environment not found. Please run 'make setup' first."; \
+		exit 1; \
+	fi
+
+redis-start: ## Start Redis server (if installed locally)
+	redis-server
+
+# Development with all services
+dev-all: ## Start all development services (FastAPI, Celery, Redis)
+	@echo "Starting all development services..."
+	@echo "Make sure Redis is running: redis-server"
+	@echo "In separate terminals run:"
+	@echo "  make celery-worker"
+	@echo "  make run-dev"

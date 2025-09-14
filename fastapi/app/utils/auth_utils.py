@@ -7,7 +7,12 @@ from typing import Optional
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.messages import EMAIL_EXISTS, USERNAME_EXISTS
+from app.core.messages import (
+    EMAIL_EXISTS,
+    PASSWORDS_DO_NOT_MATCH,
+    USER_NOT_FOUND,
+    USERNAME_EXISTS,
+)
 from app.models.user import User as UserModel
 from fastapi import HTTPException, status
 
@@ -65,6 +70,45 @@ async def get_user_by_id(session: AsyncSession, user_id: str) -> Optional[UserMo
         select(UserModel).where(UserModel.id == user_id, UserModel.is_deleted == False)
     )
     return result.scalar_one_or_none()
+
+
+async def get_user_by_id_or_404(session: AsyncSession, user_id: str) -> UserModel:
+    """
+    Get user by ID or raise 404 error if not found.
+
+    Args:
+        session: Database session
+        user_id: User ID
+
+    Returns:
+        User object if found
+
+    Raises:
+        HTTPException: If user not found
+    """
+    user = await get_user_by_id(session, user_id)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=USER_NOT_FOUND
+        )
+    return user
+
+
+def validate_password_match(password: str, password_confirm: str) -> None:
+    """
+    Validate that passwords match.
+
+    Args:
+        password: Password
+        password_confirm: Password confirmation
+
+    Raises:
+        HTTPException: If passwords don't match
+    """
+    if password != password_confirm:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail=PASSWORDS_DO_NOT_MATCH
+        )
 
 
 async def check_user_exists(session: AsyncSession, email: str, username: str) -> None:

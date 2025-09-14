@@ -256,3 +256,34 @@ class DeviceInfo(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+# Password Reset Schemas
+class PasswordResetRequest(BaseModel):
+    """Request schema for password reset"""
+
+    email: str = Field(..., description="User email address")
+
+
+class PasswordResetConfirm(BaseModel):
+    """Request schema for password reset confirmation"""
+
+    reset_token: str = Field(..., description="Password reset token")
+    new_password: str = Field(..., min_length=8, description="New password")
+    new_password_confirm: str = Field(..., description="Confirm new password")
+
+
+# Email Verification Schemas
+class EmailVerificationRequest(BaseModel):
+    """Request schema for email verification"""
+
+    verification_token: str = Field(..., description="Email verification token")
+
+
+# Response Schemas
+class StandardResponse(BaseModel):
+    """Standard API response schema"""
+
+    code: int = Field(200, description="Response code")
+    message: str = Field(..., description="Response message")
+    data: Optional[dict] = Field(None, description="Response data")
