@@ -21,10 +21,6 @@ from app.models.base import BaseModel, TimestampMixin
 if TYPE_CHECKING:
     from app.models.user import User
 
-# =============================================================================
-# ENUMS
-# =============================================================================
-
 
 class ContentType(str, Enum):
     MOVIE = "movie"
@@ -335,7 +331,11 @@ class Episode(BaseModel, TimestampMixin, table=True):
     season: Optional["Season"] = Relationship(back_populates="episodes")
     episode_views: List["EpisodeView"] = Relationship(
         back_populates="episode",
-        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
+        sa_relationship_kwargs={
+            "lazy": "dynamic",
+            "cascade": "all, delete-orphan",
+            "foreign_keys": "[EpisodeView.episode_id]",
+        },
     )
     quality_versions: List["EpisodeQuality"] = Relationship(
         back_populates="episode",
@@ -427,7 +427,6 @@ class MovieFile(BaseModel, TimestampMixin, table=True):
 
     # Processing Status
     is_ready: bool = Field(sa_type=Boolean, default=False, index=True)
-    processing_progress: Optional[int] = Field(sa_type=Integer, default=None)
 
     # Subtitle and Audio Information
     subtitle_tracks: Optional[str] = Field(sa_type=Text, default=None)  # JSON
@@ -440,11 +439,6 @@ class MovieFile(BaseModel, TimestampMixin, table=True):
     __table_args__ = (
         UniqueConstraint("content_id", "quality_level", name="unique_movie_quality"),
     )
-
-
-# =============================================================================
-# GENRE AND CATEGORIZATION
-# =============================================================================
 
 
 class Genre(BaseModel, TimestampMixin, table=True):
@@ -475,10 +469,9 @@ class Genre(BaseModel, TimestampMixin, table=True):
 
     # Relationships
     parent_genre: Optional["Genre"] = Relationship(
-        back_populates="sub_genres", sa_relationship_kwargs={"remote_side": "Genre.id"}
+        sa_relationship_kwargs={"remote_side": "Genre.id"}
     )
     sub_genres: List["Genre"] = Relationship(
-        back_populates="parent_genre",
         sa_relationship_kwargs={"remote_side": "Genre.id"},
     )
 
@@ -501,11 +494,6 @@ class ContentGenre(BaseModel, table=True):
     relevance_score: Optional[float] = Field(sa_type=Float, default=None)
 
 
-# =============================================================================
-# CAST AND CREW
-# =============================================================================
-
-
 class Person(BaseModel, TimestampMixin, table=True):
     """People involved in content (actors, directors, writers, etc.)"""
 
@@ -526,19 +514,10 @@ class Person(BaseModel, TimestampMixin, table=True):
     profile_image_url: Optional[str] = Field(sa_type=String(500), default=None)
     cover_image_url: Optional[str] = Field(sa_type=String(500), default=None)
 
-    # External IDs
-    imdb_id: Optional[str] = Field(sa_type=String(20), default=None, index=True)
-    tmdb_id: Optional[int] = Field(sa_type=Integer, default=None, index=True)
-
     # Career Information
     known_for_department: Optional[str] = Field(
         sa_type=String(100), default=None
     )  # Acting, Directing, Writing
-    popularity_score: float = Field(sa_type=Float, default=0.0, index=True)
-
-    # Platform Statistics
-    content_count: int = Field(sa_type=Integer, default=0)
-    follower_count: int = Field(sa_type=Integer, default=0)
 
     # Status
     is_verified: bool = Field(sa_type=Boolean, default=False)
@@ -585,11 +564,6 @@ class ContentCrew(BaseModel, table=True):
     credit_order: int = Field(sa_type=Integer, default=0)
 
 
-# =============================================================================
-# USER INTERACTIONS
-# =============================================================================
-
-
 class UserContentInteraction(BaseModel, TimestampMixin, table=True):
     """User interactions with content (likes, favorites, watchlist)"""
 
@@ -615,7 +589,7 @@ class UserContentInteraction(BaseModel, TimestampMixin, table=True):
     )  # For watchlist ordering
 
     # Relationships
-    user: "User" = Relationship()
+    user: "User" = Relationship(back_populates="user_content_interactions")
     content: "Content" = Relationship(back_populates="interactions")
 
     __table_args__ = (
@@ -644,15 +618,11 @@ class ContentReview(BaseModel, TimestampMixin, table=True):
     )
 
     # Review Content
-    rating: float = Field(sa_type=Float, nullable=False)  # 1.0 - 10.0 scale
+    rating: float = Field(sa_type=Float, nullable=False)  # 1.0 - 5.0 scale
     title: Optional[str] = Field(sa_type=String(255), default=None)
     review_text: Optional[str] = Field(sa_type=Text, default=None)
 
     # Review Metadata
-    is_spoiler: bool = Field(sa_type=Boolean, default=False)
-    is_verified_watch: bool = Field(
-        sa_type=Boolean, default=False
-    )  # User actually watched the content
     language: str = Field(sa_type=String(10), default="en")
 
     # Moderation
@@ -673,16 +643,11 @@ class ContentReview(BaseModel, TimestampMixin, table=True):
 
     # Relationships
     content: "Content" = Relationship(back_populates="reviews")
-    user: "User" = Relationship()
+    user: "User" = Relationship(back_populates="content_reviews")
 
     __table_args__ = (
         UniqueConstraint("content_id", "user_id", name="unique_user_content_review"),
     )
-
-
-# =============================================================================
-# VIEWING ANALYTICS
-# =============================================================================
 
 
 class ContentView(BaseModel, TimestampMixin, table=True):
@@ -700,36 +665,13 @@ class ContentView(BaseModel, TimestampMixin, table=True):
         sa_type=UUID(as_uuid=True), foreign_key="users.id", default=None, index=True
     )
 
-    # Session Information
-    session_id: Optional[str] = Field(sa_type=String(255), default=None, index=True)
-    ip_address: Optional[str] = Field(sa_type=String(45), default=None)
-    user_agent: Optional[str] = Field(sa_type=Text, default=None)
-
-    # Device and Context
-    device_type: Optional[DeviceType] = Field(sa_type=String(20), default=None)
-    browser_name: Optional[str] = Field(sa_type=String(100), default=None)
-    operating_system: Optional[str] = Field(sa_type=String(100), default=None)
-    screen_resolution: Optional[str] = Field(sa_type=String(20), default=None)
-
-    # Geographic Information
-    country_code: Optional[str] = Field(sa_type=String(2), default=None)
-    region: Optional[str] = Field(sa_type=String(100), default=None)
-    city: Optional[str] = Field(sa_type=String(100), default=None)
-    timezone: Optional[str] = Field(sa_type=String(50), default=None)
-
-    # Traffic Source
-    referrer_url: Optional[str] = Field(sa_type=String(500), default=None)
-    utm_source: Optional[str] = Field(sa_type=String(100), default=None)
-    utm_medium: Optional[str] = Field(sa_type=String(100), default=None)
-    utm_campaign: Optional[str] = Field(sa_type=String(100), default=None)
-
     # Relationships
     content: "Content" = Relationship(back_populates="content_views")
     viewer: Optional["User"] = Relationship()
 
 
 class EpisodeView(BaseModel, TimestampMixin, table=True):
-    """Detailed episode viewing analytics"""
+    """episode viewing analytics"""
 
     __tablename__ = "episode_views"
 
@@ -743,25 +685,14 @@ class EpisodeView(BaseModel, TimestampMixin, table=True):
         sa_type=UUID(as_uuid=True), foreign_key="users.id", default=None, index=True
     )
 
-    # Viewing Progress
-    watch_duration_seconds: Optional[int] = Field(sa_type=Integer, default=None)
-    completion_percentage: Optional[float] = Field(sa_type=Float, default=None)
-    max_position_reached: Optional[int] = Field(
-        sa_type=Integer, default=None
-    )  # Furthest point watched
-
     # Quality and Performance
     quality_watched: Optional[WatchQuality] = Field(sa_type=String(10), default=None)
-    buffer_events: Optional[int] = Field(sa_type=Integer, default=None)
-    seek_events: Optional[int] = Field(sa_type=Integer, default=None)
-    pause_events: Optional[int] = Field(sa_type=Integer, default=None)
 
     # Session Context
     session_id: Optional[str] = Field(sa_type=String(255), default=None, index=True)
     device_type: Optional[DeviceType] = Field(sa_type=String(20), default=None)
 
     # Viewing Context
-    is_autoplay: bool = Field(sa_type=Boolean, default=False)
     is_binge_watch: bool = Field(
         sa_type=Boolean, default=False
     )  # Part of consecutive episode viewing
@@ -770,19 +701,14 @@ class EpisodeView(BaseModel, TimestampMixin, table=True):
     )
 
     # Audio/Video Settings
-    volume_level: Optional[int] = Field(sa_type=Integer, default=None)  # 0-100
     subtitle_language: Optional[str] = Field(sa_type=String(10), default=None)
     audio_language: Optional[str] = Field(sa_type=String(10), default=None)
 
-    # Skip Behavior
-    skipped_intro: bool = Field(sa_type=Boolean, default=False)
-    skipped_credits: bool = Field(sa_type=Boolean, default=False)
-    skip_segments: Optional[str] = Field(
-        sa_type=Text, default=None
-    )  # JSON of skipped time ranges
-
     # Relationships
-    episode: "Episode" = Relationship(back_populates="episode_views")
+    episode: "Episode" = Relationship(
+        back_populates="episode_views",
+        sa_relationship_kwargs={"foreign_keys": "[EpisodeView.episode_id]"},
+    )
     viewer: Optional["User"] = Relationship()
 
 
@@ -806,26 +732,13 @@ class WatchSession(BaseModel, TimestampMixin, table=True):
 
     # Session Details
     session_id: str = Field(sa_type=String(255), nullable=False, index=True)
-    device_id: Optional[str] = Field(sa_type=String(255), default=None)
     device_type: Optional[DeviceType] = Field(sa_type=String(20), default=None)
-
-    # Watch Progress
-    start_position_seconds: int = Field(sa_type=Integer, default=0)
-    end_position_seconds: int = Field(sa_type=Integer, default=0)
-    total_watch_time_seconds: int = Field(sa_type=Integer, default=0)
-
-    # Session Status
-    is_active: bool = Field(sa_type=Boolean, default=True)
-    ended_at: Optional[datetime] = Field(sa_type=DateTime(timezone=True), default=None)
-    end_reason: Optional[str] = Field(
-        sa_type=String(50), default=None
-    )  # completed, paused, error, etc.
 
     # Quality Settings
     quality_setting: Optional[WatchQuality] = Field(sa_type=String(10), default=None)
 
     # Relationships
-    user: "User" = Relationship()
+    user: "User" = Relationship(back_populates="watch_sessions")
     content: "Content" = Relationship(back_populates="watch_sessions")
 
 
@@ -852,8 +765,6 @@ class UserWatchHistory(BaseModel, TimestampMixin, table=True):
 
     # Overall Progress
     total_episodes_watched: int = Field(sa_type=Integer, default=0)
-    total_watch_time_seconds: int = Field(sa_type=Integer, default=0)
-    completion_percentage: float = Field(sa_type=Float, default=0.0)
 
     # Status
     is_completed: bool = Field(sa_type=Boolean, default=False)
@@ -876,7 +787,7 @@ class UserWatchHistory(BaseModel, TimestampMixin, table=True):
     preferred_audio_language: Optional[str] = Field(sa_type=String(10), default=None)
 
     # Relationships
-    user: "User" = Relationship()
+    user: "User" = Relationship(back_populates="watch_history")
     content: "Content" = Relationship(back_populates="watch_history")
 
     __table_args__ = (
@@ -889,93 +800,82 @@ class UserWatchHistory(BaseModel, TimestampMixin, table=True):
 # =============================================================================
 
 
-class Collection(BaseModel, TimestampMixin, table=True):
-    """Curated collections of content"""
+# class Collection(BaseModel, TimestampMixin, table=True):
+#     """collections of content"""
 
-    __tablename__ = "collections"
+#     __tablename__ = "collections"
 
-    name: str = Field(sa_type=String(255), nullable=False, index=True)
-    slug: str = Field(sa_type=String(300), unique=True, index=True)
-    description: Optional[str] = Field(sa_type=Text, default=None)
+#     name: str = Field(sa_type=String(255), nullable=False, index=True)
+#     slug: str = Field(sa_type=String(300), unique=True, index=True)
+#     description: Optional[str] = Field(sa_type=Text, default=None)
 
-    # Visual Assets
-    cover_image_url: Optional[str] = Field(sa_type=String(500), default=None)
-    backdrop_url: Optional[str] = Field(sa_type=String(500), default=None)
-    logo_url: Optional[str] = Field(sa_type=String(500), default=None)
+#     # Visual Assets
+#     cover_image_url: Optional[str] = Field(sa_type=String(500), default=None)
+#     backdrop_url: Optional[str] = Field(sa_type=String(500), default=None)
+#     logo_url: Optional[str] = Field(sa_type=String(500), default=None)
 
-    # Collection Properties
-    collection_type: str = Field(
-        sa_type=String(50), default="manual"
-    )  # manual, auto, featured
-    is_featured: bool = Field(sa_type=Boolean, default=False, index=True)
-    is_public: bool = Field(sa_type=Boolean, default=True, index=True)
+#     # Collection Properties
+#     collection_type: str = Field(
+#         sa_type=String(50), default="manual"
+#     )  # manual, auto, featured
+#     is_featured: bool = Field(sa_type=Boolean, default=False, index=True)
+#     is_public: bool = Field(sa_type=Boolean, default=True, index=True)
 
-    # Ordering and Display
-    sort_order: int = Field(sa_type=Integer, default=0)
-    display_style: Optional[str] = Field(
-        sa_type=String(50), default=None
-    )  # carousel, grid, list
+#     # Ordering and Display
+#     sort_order: int = Field(sa_type=Integer, default=0)
+#     display_style: Optional[str] = Field(
+#         sa_type=String(50), default=None
+#     )  # carousel, grid, list
 
-    # Auto-collection rules (for algorithmic collections)
-    auto_rules: Optional[str] = Field(
-        sa_type=Text, default=None
-    )  # JSON rules for auto-collections
+#     # Auto-collection rules (for algorithmic collections)
+#     auto_rules: Optional[str] = Field(
+#         sa_type=Text, default=None
+#     )  # JSON rules for auto-collections
 
-    # Creator Information
-    created_by_id: Optional[uuid.UUID] = Field(
-        sa_type=UUID(as_uuid=True), foreign_key="users.id", default=None
-    )
+#     # Creator Information
+#     created_by_id: Optional[uuid.UUID] = Field(
+#         sa_type=UUID(as_uuid=True), foreign_key="users.id", default=None
+#     )
 
-    # Statistics
-    content_count: int = Field(sa_type=Integer, default=0)
-    view_count: int = Field(sa_type=Integer, default=0)
-
-    # SEO
-    meta_title: Optional[str] = Field(sa_type=String(255), default=None)
-    meta_description: Optional[str] = Field(sa_type=String(500), default=None)
-
-    # Relationships
-    created_by: Optional["User"] = Relationship()
+#     # Statistics
+#     content_count: int = Field(sa_type=Integer, default=0)
+#     view_count: int = Field(sa_type=Integer, default=0)
 
 
-class CollectionContent(BaseModel, TimestampMixin, table=True):
-    """Content items in collections"""
+# class CollectionContent(BaseModel, TimestampMixin, table=True):
+#     """Content items in collections"""
 
-    __tablename__ = "collection_contents"
+#     __tablename__ = "collection_contents"
 
-    collection_id: uuid.UUID = Field(
-        sa_type=UUID(as_uuid=True),
-        foreign_key="collections.id",
-        nullable=False,
-        index=True,
-    )
-    content_id: uuid.UUID = Field(
-        sa_type=UUID(as_uuid=True),
-        foreign_key="contents.id",
-        nullable=False,
-        index=True,
-    )
+#     collection_id: uuid.UUID = Field(
+#         sa_type=UUID(as_uuid=True),
+#         foreign_key="collections.id",
+#         nullable=False,
+#         index=True,
+#     )
+#     content_id: uuid.UUID = Field(
+#         sa_type=UUID(as_uuid=True),
+#         foreign_key="contents.id",
+#         nullable=False,
+#         index=True,
+#     )
 
-    # Ordering and Display
-    sort_order: int = Field(sa_type=Integer, default=0, index=True)
-    added_at: datetime = Field(
-        sa_type=DateTime(timezone=True), default_factory=datetime.utcnow
-    )
+#     # Ordering and Display
+#     sort_order: int = Field(sa_type=Integer, default=0, index=True)
+#     added_at: datetime = Field(
+#         sa_type=DateTime(timezone=True), default_factory=datetime.utcnow
+#     )
 
-    # Editorial Notes
-    editorial_note: Optional[str] = Field(sa_type=Text, default=None)
-    is_featured_in_collection: bool = Field(sa_type=Boolean, default=False)
+#     # Editorial Notes
+#     editorial_note: Optional[str] = Field(sa_type=Text, default=None)
+#     is_featured_in_collection: bool = Field(sa_type=Boolean, default=False)
 
-    # Added By
-    added_by_id: Optional[uuid.UUID] = Field(
-        sa_type=UUID(as_uuid=True), foreign_key="users.id", default=None
-    )
 
-    __table_args__ = (
-        UniqueConstraint(
-            "collection_id", "content_id", name="unique_collection_content"
-        ),
-    )
+#     __table_args__ = (
+#         UniqueConstraint(
+#             "collection_id", "content_id", name="unique_collection_content"
+#         ),
+#     )
 
 
 # =============================================================================
@@ -983,98 +883,93 @@ class CollectionContent(BaseModel, TimestampMixin, table=True):
 # =============================================================================
 
 
-class SearchQuery(BaseModel, TimestampMixin, table=True):
-    """Search analytics and improvement"""
+# class SearchQuery(BaseModel, TimestampMixin, table=True):
+#     """Search analytics and improvement"""
 
-    __tablename__ = "search_queries"
+#     __tablename__ = "search_queries"
 
-    query_text: str = Field(sa_type=String(500), nullable=False, index=True)
-    normalized_query: str = Field(sa_type=String(500), nullable=False, index=True)
-    query_language: str = Field(sa_type=String(10), default="en")
+#     query_text: str = Field(sa_type=String(500), nullable=False, index=True)
+#     normalized_query: str = Field(sa_type=String(500), nullable=False, index=True)
 
-    # User Context
-    user_id: Optional[uuid.UUID] = Field(
-        sa_type=UUID(as_uuid=True), foreign_key="users.id", default=None, index=True
-    )
-    session_id: Optional[str] = Field(sa_type=String(255), default=None, index=True)
-
-    # Search Results
-    total_results: int = Field(sa_type=Integer, default=0)
-    clicked_results: int = Field(sa_type=Integer, default=0)
-    first_click_position: Optional[int] = Field(sa_type=Integer, default=None)
-
-    # Applied Filters
-    filters_applied: Optional[str] = Field(sa_type=Text, default=None)  # JSON
-    sort_method: Optional[str] = Field(sa_type=String(50), default=None)
-
-    # Performance
-    response_time_ms: Optional[int] = Field(sa_type=Integer, default=None)
-
-    # Context
-    device_type: Optional[DeviceType] = Field(sa_type=String(20), default=None)
-    ip_address: Optional[str] = Field(sa_type=String(45), default=None)
-
-    # Relationships
-    user: Optional["User"] = Relationship()
+#     # User Context
+#     user_id: Optional[uuid.UUID] = Field(
+#         sa_type=UUID(as_uuid=True), foreign_key="users.id", default=None, index=True
+#     )
+#     session_id: Optional[str] = Field(sa_type=String(255), default=None, index=True)
 
 
-class ContentRecommendation(BaseModel, TimestampMixin, table=True):
-    """AI/ML generated content recommendations"""
+#     # Applied Filters
+#     filters_applied: Optional[str] = Field(sa_type=Text, default=None)  # JSON
+#     sort_method: Optional[str] = Field(sa_type=String(50), default=None)
 
-    __tablename__ = "content_recommendations"
+#     # Performance
+#     response_time_ms: Optional[int] = Field(sa_type=Integer, default=None)
 
-    user_id: uuid.UUID = Field(
-        sa_type=UUID(as_uuid=True), foreign_key="users.id", nullable=False, index=True
-    )
-    content_id: uuid.UUID = Field(
-        sa_type=UUID(as_uuid=True),
-        foreign_key="contents.id",
-        nullable=False,
-        index=True,
-    )
+#     # Context
+#     device_type: Optional[DeviceType] = Field(sa_type=String(20), default=None)
+#     ip_address: Optional[str] = Field(sa_type=String(45), default=None)
 
-    # Recommendation Details
-    recommendation_score: float = Field(sa_type=Float, nullable=False)  # 0.0 - 1.0
-    recommendation_type: str = Field(
-        sa_type=String(50), nullable=False, index=True
-    )  # homepage, similar, trending
-    algorithm_version: str = Field(sa_type=String(50), default="v1.0")
+#     # Relationships
+#     user: Optional["User"] = Relationship()
 
-    # Context
-    reason_tags: Optional[str] = Field(
-        sa_type=Text, default=None
-    )  # JSON array of reasons
-    explanation: Optional[str] = Field(sa_type=String(500), default=None)
 
-    # Positioning
-    position_in_list: Optional[int] = Field(sa_type=Integer, default=None)
-    recommendation_group: Optional[str] = Field(sa_type=String(100), default=None)
+# class ContentRecommendation(BaseModel, TimestampMixin, table=True):
+#     """AI/ML generated content recommendations"""
 
-    # Interaction Tracking
-    was_shown: bool = Field(sa_type=Boolean, default=False)
-    shown_at: Optional[datetime] = Field(sa_type=DateTime(timezone=True), default=None)
-    was_clicked: bool = Field(sa_type=Boolean, default=False)
-    clicked_at: Optional[datetime] = Field(
-        sa_type=DateTime(timezone=True), default=None
-    )
+#     __tablename__ = "content_recommendations"
 
-    # Expiry
-    expires_at: Optional[datetime] = Field(
-        sa_type=DateTime(timezone=True), default=None
-    )
+#     user_id: uuid.UUID = Field(
+#         sa_type=UUID(as_uuid=True), foreign_key="users.id", nullable=False, index=True
+#     )
+#     content_id: uuid.UUID = Field(
+#         sa_type=UUID(as_uuid=True),
+#         foreign_key="contents.id",
+#         nullable=False,
+#         index=True,
+#     )
 
-    # Relationships
-    user: "User" = Relationship()
-    content: "Content" = Relationship()
+#     # Recommendation Details
+#     recommendation_score: float = Field(sa_type=Float, nullable=False)  # 0.0 - 1.0
+#     recommendation_type: str = Field(
+#         sa_type=String(50), nullable=False, index=True
+#     )  # homepage, similar, trending
+#     algorithm_version: str = Field(sa_type=String(50), default="v1.0")
 
-    __table_args__ = (
-        UniqueConstraint(
-            "user_id",
-            "content_id",
-            "recommendation_type",
-            name="unique_user_content_recommendation",
-        ),
-    )
+#     # Context
+#     reason_tags: Optional[str] = Field(
+#         sa_type=Text, default=None
+#     )  # JSON array of reasons
+#     explanation: Optional[str] = Field(sa_type=String(500), default=None)
+
+#     # Positioning
+#     position_in_list: Optional[int] = Field(sa_type=Integer, default=None)
+#     recommendation_group: Optional[str] = Field(sa_type=String(100), default=None)
+
+#     # Interaction Tracking
+#     was_shown: bool = Field(sa_type=Boolean, default=False)
+#     shown_at: Optional[datetime] = Field(sa_type=DateTime(timezone=True), default=None)
+#     was_clicked: bool = Field(sa_type=Boolean, default=False)
+#     clicked_at: Optional[datetime] = Field(
+#         sa_type=DateTime(timezone=True), default=None
+#     )
+
+#     # Expiry
+#     expires_at: Optional[datetime] = Field(
+#         sa_type=DateTime(timezone=True), default=None
+#     )
+
+#     # Relationships
+#     user: "User" = Relationship()
+#     content: "Content" = Relationship()
+
+#     __table_args__ = (
+#         UniqueConstraint(
+#             "user_id",
+#             "content_id",
+#             "recommendation_type",
+#             name="unique_user_content_recommendation",
+#         ),
+#     )
 
 
 # =============================================================================
@@ -1082,109 +977,63 @@ class ContentRecommendation(BaseModel, TimestampMixin, table=True):
 # =============================================================================
 
 
-class UserPreference(BaseModel, TimestampMixin, table=True):
-    """User preferences and settings"""
+# class UserPreference(BaseModel, TimestampMixin, table=True):
+#     """User preferences and settings"""
 
-    __tablename__ = "user_preferences"
+#     __tablename__ = "user_preferences"
 
-    user_id: uuid.UUID = Field(
-        sa_type=UUID(as_uuid=True),
-        foreign_key="users.id",
-        nullable=False,
-        primary_key=True,
-    )
+#     user_id: uuid.UUID = Field(
+#         sa_type=UUID(as_uuid=True),
+#         foreign_key="users.id",
+#         nullable=False,
+#         primary_key=True,
+#     )
 
-    # Language and Localization
-    preferred_language: str = Field(sa_type=String(10), default="en")
-    preferred_country: Optional[str] = Field(sa_type=String(2), default=None)
-    timezone: Optional[str] = Field(sa_type=String(50), default=None)
+#     # Language and Localization
+#     preferred_language: str = Field(sa_type=String(10), default="en")
+#     preferred_country: Optional[str] = Field(sa_type=String(2), default=None)
+#     timezone: Optional[str] = Field(sa_type=String(50), default=None)
 
-    # Content Preferences
-    preferred_genres: Optional[str] = Field(sa_type=Text, default=None)  # JSON array
-    blocked_genres: Optional[str] = Field(sa_type=Text, default=None)  # JSON array
-    content_rating_limit: Optional[ContentRating] = Field(
-        sa_type=String(10), default=None
-    )
+#     # Content Preferences
+#     preferred_genres: Optional[str] = Field(sa_type=Text, default=None)  # JSON array
+#     blocked_genres: Optional[str] = Field(sa_type=Text, default=None)  # JSON array
+#     content_rating_limit: Optional[ContentRating] = Field(
+#         sa_type=String(10), default=None
+#     )
 
-    # Viewing Preferences
-    default_quality: WatchQuality = Field(sa_type=String(10), default=WatchQuality.AUTO)
-    preferred_subtitle_language: Optional[str] = Field(sa_type=String(10), default=None)
-    preferred_audio_language: str = Field(sa_type=String(10), default="en")
-    autoplay_enabled: bool = Field(sa_type=Boolean, default=True)
-    autoplay_previews: bool = Field(sa_type=Boolean, default=True)
-    skip_intro_enabled: bool = Field(sa_type=Boolean, default=True)
-    skip_credits_enabled: bool = Field(sa_type=Boolean, default=False)
+#     # Viewing Preferences
+#     default_quality: WatchQuality = Field(sa_type=String(10), default=WatchQuality.AUTO)
+#     preferred_subtitle_language: Optional[str] = Field(sa_type=String(10), default=None)
+#     preferred_audio_language: str = Field(sa_type=String(10), default="en")
+#     autoplay_enabled: bool = Field(sa_type=Boolean, default=True)
+#     autoplay_previews: bool = Field(sa_type=Boolean, default=True)
+#     skip_intro_enabled: bool = Field(sa_type=Boolean, default=True)
+#     skip_credits_enabled: bool = Field(sa_type=Boolean, default=False)
 
-    # Parental Controls
-    parental_controls_enabled: bool = Field(sa_type=Boolean, default=False)
-    parental_pin: Optional[str] = Field(sa_type=String(255), default=None)  # Hashed PIN
-    restricted_content_types: Optional[str] = Field(
-        sa_type=Text, default=None
-    )  # JSON array
+#     # Parental Controls
+#     parental_controls_enabled: bool = Field(sa_type=Boolean, default=False)
+#     parental_pin: Optional[str] = Field(sa_type=String(255), default=None)  # Hashed PIN
+#     restricted_content_types: Optional[str] = Field(
+#         sa_type=Text, default=None
+#     )  # JSON array
 
-    # Privacy Settings
-    watch_history_enabled: bool = Field(sa_type=Boolean, default=True)
-    recommendations_enabled: bool = Field(sa_type=Boolean, default=True)
-    data_collection_consent: bool = Field(sa_type=Boolean, default=False)
+#     # Privacy Settings
+#     watch_history_enabled: bool = Field(sa_type=Boolean, default=True)
+#     recommendations_enabled: bool = Field(sa_type=Boolean, default=True)
+#     data_collection_consent: bool = Field(sa_type=Boolean, default=False)
 
-    # Notification Preferences
-    email_notifications: bool = Field(sa_type=Boolean, default=True)
-    push_notifications: bool = Field(sa_type=Boolean, default=True)
-    new_episodes_notifications: bool = Field(sa_type=Boolean, default=True)
-    recommendations_notifications: bool = Field(sa_type=Boolean, default=False)
-    marketing_notifications: bool = Field(sa_type=Boolean, default=False)
+#     # Notification Preferences
+#     email_notifications: bool = Field(sa_type=Boolean, default=True)
+#     push_notifications: bool = Field(sa_type=Boolean, default=True)
+#     new_episodes_notifications: bool = Field(sa_type=Boolean, default=True)
+#     recommendations_notifications: bool = Field(sa_type=Boolean, default=False)
+#     marketing_notifications: bool = Field(sa_type=Boolean, default=False)
 
-    # Accessibility
-    closed_captions_enabled: bool = Field(sa_type=Boolean, default=False)
-    audio_descriptions_enabled: bool = Field(sa_type=Boolean, default=False)
-    high_contrast_mode: bool = Field(sa_type=Boolean, default=False)
-    font_size: str = Field(sa_type=String(20), default="medium")  # small, medium, large
+#     # Accessibility
+#     closed_captions_enabled: bool = Field(sa_type=Boolean, default=False)
+#     audio_descriptions_enabled: bool = Field(sa_type=Boolean, default=False)
+#     high_contrast_mode: bool = Field(sa_type=Boolean, default=False)
+#     font_size: str = Field(sa_type=String(20), default="medium")  # small, medium, large
 
-    # Relationships
-    user: "User" = Relationship()
-
-
-# =============================================================================
-# UPDATED USER MODEL RELATIONSHIPS
-# =============================================================================
-
-# Add these relationships to your existing User model:
-"""
-# Content and viewing relationships
-user_content_interactions: List["UserContentInteraction"] = Relationship(
-    back_populates="user",
-    sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"}
-)
-content_reviews: List["ContentReview"] = Relationship(
-    back_populates="user",
-    sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"}
-)
-watch_history: List["UserWatchHistory"] = Relationship(
-    back_populates="user",
-    sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"}
-)
-watch_sessions: List["WatchSession"] = Relationship(
-    back_populates="user",
-    sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"}
-)
-
-# Collections and recommendations
-created_collections: List["Collection"] = Relationship(
-    back_populates="created_by",
-    sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"}
-)
-content_recommendations: List["ContentRecommendation"] = Relationship(
-    back_populates="user",
-    sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"}
-)
-
-# Search and preferences
-search_queries: List["SearchQuery"] = Relationship(
-    back_populates="user",
-    sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"}
-)
-preferences: Optional["UserPreference"] = Relationship(
-    back_populates="user",
-    sa_relationship_kwargs={"lazy": "selectin", "uselist": False}
-)
-"""
+#     # Relationships
+#     user: "User" = Relationship()
