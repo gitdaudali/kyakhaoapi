@@ -1,14 +1,18 @@
 from datetime import datetime
-from typing import Optional
+from typing import TYPE_CHECKING, List, Optional
 
 from sqlalchemy import DateTime, Text
-from sqlmodel import Field
+from sqlmodel import Field, Relationship
 
 from app.models.base import BaseModel, TimestampMixin
 
+if TYPE_CHECKING:
+    from .token import RefreshToken, Token
+    from .video import Video, VideoLike, VideoView
+
 
 class User(BaseModel, TimestampMixin, table=True):
-    __tablename__ = "users_user"
+    __tablename__ = "users"
 
     username: str = Field(max_length=150, unique=True, index=True)
     email: str = Field(max_length=254, unique=True, index=True)
@@ -25,7 +29,27 @@ class User(BaseModel, TimestampMixin, table=True):
     bio: Optional[str] = Field(default=None, sa_type=Text)
     avatar_url: Optional[str] = Field(max_length=500, default=None)
 
-    # Relationships will be handled separately
+    # Relationships
+    videos: List["Video"] = Relationship(
+        back_populates="uploaded_by",
+        sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
+    )
+    video_views: List["VideoView"] = Relationship(
+        back_populates="viewer",
+        sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
+    )
+    video_likes: List["VideoLike"] = Relationship(
+        back_populates="user",
+        sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
+    )
+    tokens: List["Token"] = Relationship(
+        back_populates="user",
+        sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
+    )
+    refresh_tokens: List["RefreshToken"] = Relationship(
+        back_populates="user",
+        sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
+    )
 
     def __repr__(self):
         return f"<User(id={self.id}, username='{self.username}', email='{self.email}')>"

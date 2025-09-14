@@ -31,7 +31,9 @@ class UserInDB(UserBase):
     is_active: bool
     is_staff: bool
     is_superuser: bool
-    date_joined: datetime
+    created_at: datetime
+    updated_at: datetime
+    is_deleted: bool
     last_login: Optional[datetime] = None
     role: str
 

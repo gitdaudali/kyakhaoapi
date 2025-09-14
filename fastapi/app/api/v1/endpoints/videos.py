@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from app.core.auth import get_current_active_user, get_current_user
 from app.core.database import get_db
+from app.core.deps import get_current_active_user, get_current_user
 from app.models.user import User
 from app.models.video import Video, VideoLike, VideoView
 from app.schemas.video import Video as VideoSchema
