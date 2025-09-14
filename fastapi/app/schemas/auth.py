@@ -276,6 +276,16 @@ class EmailVerificationRequest(BaseModel):
 
 
 # Response Schemas
+class MessageResponse(BaseModel):
+    """message response schema for APIs that return only a message"""
+
+    message: str = Field(..., description="Response message")
+
+    class Config:
+        from_attributes = True
+        json_schema_extra = {"example": {"message": "Operation completed successfully"}}
+
+
 class StandardResponse(BaseModel):
     """Standard API response schema"""
 
