@@ -29,7 +29,7 @@ from app.core.messages import (
     PASSWORD_RESET_SUCCESS,
     PASSWORD_RESET_TOKEN_INVALID,
 )
-from app.models.user import User
+from app.models.user import ProfileStatus, User, UserRole
 from app.schemas.auth import (
     AuthResponse,
     EmailVerificationRequest,
@@ -80,15 +80,17 @@ async def register_user(
     Register a new user account with email and username validation.
     Creates user account and returns authentication tokens.
     """
-    await check_user_exists(db, user_data.email, user_data.username)
+    await check_user_exists(db, user_data.email)
 
     hashed_password = get_password_hash(user_data.password)
     db_user = User(
         email=user_data.email,
-        username=user_data.username,
+        # username=user_data.username,
         password=hashed_password,
         is_active=True,
         is_superuser=False,
+        role=UserRole.USER,
+        profile_status=ProfileStatus.PENDING_VERIFICATION,
     )
     db.add(db_user)
     await db.commit()
@@ -99,9 +101,7 @@ async def register_user(
         db, db_user.id, db_user.email
     )
     send_email_verification_task.delay(
-        email_to=db_user.email,
-        verification_token=verification_token.token,
-        user_name=db_user.username,
+        email_to=db_user.email, verification_token=verification_token.token
     )
 
     device_info = get_device_info(request)
@@ -288,7 +288,8 @@ async def request_password_reset(
 
         # Send email via Celery task
         send_password_reset_email_task.delay(
-            email_to=user.email, reset_token=reset_token.token, user_name=user.username
+            email_to=user.email,
+            reset_token=reset_token.token,
         )
 
     return {"message": PASSWORD_RESET_SENT}
