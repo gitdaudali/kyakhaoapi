@@ -61,5 +61,82 @@
     "job_title": "Composer",
     "department": "Sound",
     "credit_order": 2
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440005",
+    "person_id": "750e8400-e29b-41d4-a716-446655440015",
+    "job_title": "Executive Producer",
+    "department": "Production",
+    "credit_order": 1
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440005",
+    "person_id": "750e8400-e29b-41d4-a716-446655440016",
+    "job_title": "Composer",
+    "department": "Sound",
+    "credit_order": 2
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440006",
+    "person_id": "750e8400-e29b-41d4-a716-446655440019",
+    "job_title": "Presenter",
+    "department": "Production",
+    "credit_order": 1
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440001",
+    "person_id": "750e8400-e29b-41d4-a716-446655440001",
+    "job_title": "Writer",
+    "department": "Writing",
+    "credit_order": 4
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440001",
+    "person_id": "750e8400-e29b-41d4-a716-446655440001",
+    "job_title": "Producer",
+    "department": "Production",
+    "credit_order": 5
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440002",
+    "person_id": "750e8400-e29b-41d4-a716-446655440009",
+    "job_title": "Writer",
+    "department": "Writing",
+    "credit_order": 3
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440002",
+    "person_id": "750e8400-e29b-41d4-a716-446655440009",
+    "job_title": "Producer",
+    "department": "Production",
+    "credit_order": 4
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440003",
+    "person_id": "750e8400-e29b-41d4-a716-446655440001",
+    "job_title": "Writer",
+    "department": "Writing",
+    "credit_order": 3
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440003",
+    "person_id": "750e8400-e29b-41d4-a716-446655440001",
+    "job_title": "Producer",
+    "department": "Production",
+    "credit_order": 4
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440004",
+    "person_id": "750e8400-e29b-41d4-a716-446655440011",
+    "job_title": "Writer",
+    "department": "Writing",
+    "credit_order": 3
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440004",
+    "person_id": "750e8400-e29b-41d4-a716-446655440011",
+    "job_title": "Producer",
+    "department": "Production",
+    "credit_order": 4
   }
 ]

@@ -54,5 +54,61 @@
     "cast_order": 2,
     "is_main_cast": true,
     "character_image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440005",
+    "person_id": "750e8400-e29b-41d4-a716-446655440013",
+    "character_name": "Din Djarin / The Mandalorian",
+    "cast_order": 1,
+    "is_main_cast": true,
+    "character_image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440005",
+    "person_id": "750e8400-e29b-41d4-a716-446655440014",
+    "character_name": "Cara Dune",
+    "cast_order": 2,
+    "is_main_cast": true,
+    "character_image_url": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face"
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440004",
+    "person_id": "750e8400-e29b-41d4-a716-446655440017",
+    "character_name": "Chihiro Ogino",
+    "cast_order": 1,
+    "is_main_cast": true,
+    "character_image_url": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face"
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440004",
+    "person_id": "750e8400-e29b-41d4-a716-446655440018",
+    "character_name": "Haku",
+    "cast_order": 2,
+    "is_main_cast": true,
+    "character_image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440006",
+    "person_id": "750e8400-e29b-41d4-a716-446655440019",
+    "character_name": "Narrator",
+    "cast_order": 1,
+    "is_main_cast": true,
+    "character_image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440001",
+    "person_id": "750e8400-e29b-41d4-a716-446655440020",
+    "character_name": "Arthur",
+    "cast_order": 4,
+    "is_main_cast": false,
+    "character_image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
+  },
+  {
+    "content_id": "850e8400-e29b-41d4-a716-446655440001",
+    "person_id": "750e8400-e29b-41d4-a716-446655440021",
+    "character_name": "Ariadne",
+    "cast_order": 5,
+    "is_main_cast": false,
+    "character_image_url": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face"
   }
 ]

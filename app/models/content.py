@@ -208,6 +208,21 @@ class Content(BaseModel, TimestampMixin, table=True):
         back_populates="content",
         sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
     )
+    # People relationships
+    cast: List["ContentCast"] = Relationship(
+        sa_relationship_kwargs={
+            "lazy": "selectin",
+            "cascade": "all, delete-orphan",
+            "order_by": "ContentCast.cast_order",
+        },
+    )
+    crew: List["ContentCrew"] = Relationship(
+        sa_relationship_kwargs={
+            "lazy": "selectin",
+            "cascade": "all, delete-orphan",
+            "order_by": "ContentCrew.credit_order",
+        },
+    )
 
     def __repr__(self):
         return (
@@ -557,6 +572,9 @@ class ContentCast(BaseModel, table=True):
     is_main_cast: bool = Field(sa_type=Boolean, default=False)
     character_image_url: Optional[str] = Field(sa_type=String(500), default=None)
 
+    # Relationships
+    person: "Person" = Relationship()
+
 
 class ContentCrew(BaseModel, table=True):
     """Crew members for content"""
@@ -576,6 +594,9 @@ class ContentCrew(BaseModel, table=True):
         sa_type=String(100), nullable=False
     )  # Directing, Production, Writing, etc.
     credit_order: int = Field(sa_type=Integer, default=0)
+
+    # Relationships
+    person: "Person" = Relationship()
 
 
 class UserContentInteraction(BaseModel, TimestampMixin, table=True):

@@ -7,20 +7,31 @@ from sqlalchemy.orm import selectinload
 from sqlmodel import select
 
 from app.core.config import settings
-from app.models.content import Content, ContentGenre, Genre
+from app.models.content import (
+    Content,
+    ContentCast,
+    ContentCrew,
+    ContentGenre,
+    Genre,
+    Person,
+)
 from app.schemas.content import ContentFilters, GenreFilters, PaginationParams
 
 
 async def get_content_by_id(
-    db: AsyncSession, content_id: UUID, include_genres: bool = True
+    db: AsyncSession, content_id: UUID, include_relationships: bool = True
 ) -> Optional[Content]:
-    """Get content by ID with optional genre loading"""
+    """Get content by ID with optional relationship loading"""
     query = select(Content).where(
         and_(Content.id == content_id, Content.is_deleted == False)
     )
 
-    if include_genres:
-        query = query.options(selectinload(Content.genres))
+    if include_relationships:
+        query = query.options(
+            selectinload(Content.genres),
+            selectinload(Content.cast).selectinload(ContentCast.person),
+            selectinload(Content.crew).selectinload(ContentCrew.person),
+        )
 
     result = await db.execute(query)
     return result.scalar_one_or_none()

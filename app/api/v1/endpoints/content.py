@@ -19,6 +19,7 @@ from app.core.messages import (
 )
 from app.schemas.content import (
     Content,
+    ContentDetail,
     ContentFilters,
     ContentList,
     ContentListResponse,
@@ -222,17 +223,17 @@ async def get_contents(
         )
 
 
-@router.get("/{content_id}", response_model=ContentList)
+@router.get("/{content_id}", response_model=ContentDetail)
 async def get_content(
     content_id: UUID,
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
     Get content by ID.
-    Returns detailed information about a specific content item.
+    Returns detailed information about a specific content item including cast, crew, and genres.
     """
     try:
-        content = await get_content_by_id(db, content_id)
+        content = await get_content_by_id(db, content_id, include_relationships=True)
         if not content:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND, detail=CONTENT_NOT_FOUND
