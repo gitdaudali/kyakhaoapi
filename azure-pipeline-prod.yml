@@ -19,7 +19,6 @@ stages:
                 --exclude .gitignore \
                 --exclude .github \
                 --exclude .azure-pipelines \
-                --exclude '*.yml' \
                 --exclude '*.env' \
                 --exclude 'node_modules' \
                 --exclude 'venv' \
