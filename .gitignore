@@ -66,6 +66,3 @@ htmlcov/
 #Database
 *.db
 *.sqlite3
-/alembic.ini
-./alembic.ini
-alembic/

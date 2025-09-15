@@ -13,20 +13,14 @@ from fastapi.security import HTTPBearer
 from fastapi.staticfiles import StaticFiles
 
 
-# Create database tables
+# Database tables are now managed by Alembic migrations
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
-    try:
-        async with engine.begin() as conn:
-            await conn.run_sync(SQLModel.metadata.create_all)
-        print("✅ Database tables created successfully")
-    except Exception as e:
-        print(f"⚠️  Database connection failed: {e}")
-        print("   The app will run but database features won't work")
+    print("✅ FastAPI application started")
     yield
     # Shutdown
-    pass
+    print("✅ FastAPI application shutdown")
 
 
 # Create FastAPI app with enhanced OpenAPI documentation
