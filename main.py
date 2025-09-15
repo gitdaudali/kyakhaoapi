@@ -39,7 +39,7 @@ app = FastAPI(
             "url": f"http://{settings.HOST}:{settings.PORT}",
             "description": "Development server",
         },
-        {"url": "https://dev-cup-strmng.vertexaitec.com", "description": "Production server"},
+        {"url": "https://http://{settings.HOST}", "description": "Production server"},
     ],
     tags_metadata=[
         {
