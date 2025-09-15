@@ -37,6 +37,83 @@ async def get_content_by_id(
     return result.scalar_one_or_none()
 
 
+async def get_content_detail_optimized(
+    db: AsyncSession, content_id: UUID
+) -> Optional[Content]:
+    """Get content by ID optimized for detail view - loads appropriate relationships based on content type"""
+    query = select(Content).where(
+        and_(Content.id == content_id, Content.is_deleted == False)
+    )
+
+    # Always load genres
+    query = query.options(selectinload(Content.genres))
+
+    # Load content-type specific relationships
+    from app.models.content import Episode, Season
+
+    query = query.options(
+        selectinload(Content.movie_files),  # For movies
+        selectinload(Content.seasons).selectinload(Season.episodes),  # For TV series
+    )
+
+    result = await db.execute(query)
+    return result.scalar_one_or_none()
+
+
+async def get_content_crew_cast(
+    db: AsyncSession, content_id: UUID
+) -> Optional[Content]:
+    """Get content with only cast and crew relationships for performance"""
+    from app.models.content import ContentCast, ContentCrew, Person
+
+    # First get the content
+    content_query = select(Content).where(
+        and_(Content.id == content_id, Content.is_deleted == False)
+    )
+    content_result = await db.execute(content_query)
+    content = content_result.scalar_one_or_none()
+
+    if not content:
+        return None
+
+    # Manually load cast and crew to avoid recursion
+    cast_query = select(ContentCast).where(ContentCast.content_id == content_id)
+    cast_result = await db.execute(cast_query)
+    cast_items = cast_result.scalars().all()
+
+    crew_query = select(ContentCrew).where(ContentCrew.content_id == content_id)
+    crew_result = await db.execute(crew_query)
+    crew_items = crew_result.scalars().all()
+
+    # Load people for cast
+    if cast_items:
+        person_ids = [item.person_id for item in cast_items]
+        people_query = select(Person).where(Person.id.in_(person_ids))
+        people_result = await db.execute(people_query)
+        people = {p.id: p for p in people_result.scalars().all()}
+
+        # Attach people to cast items
+        for cast_item in cast_items:
+            cast_item.person = people.get(cast_item.person_id)
+
+    # Load people for crew
+    if crew_items:
+        person_ids = [item.person_id for item in crew_items]
+        people_query = select(Person).where(Person.id.in_(person_ids))
+        people_result = await db.execute(people_query)
+        people = {p.id: p for p in people_result.scalars().all()}
+
+        # Attach people to crew items
+        for crew_item in crew_items:
+            crew_item.person = people.get(crew_item.person_id)
+
+    # Manually set the relationships
+    content.cast = cast_items
+    content.crew = crew_items
+
+    return content
+
+
 async def get_genre_by_id(db: AsyncSession, genre_id: UUID) -> Optional[Genre]:
     """Get genre by ID"""
     query = select(Genre).where(and_(Genre.id == genre_id, Genre.is_deleted == False))
@@ -148,7 +225,9 @@ async def get_content_list(
     pagination: PaginationParams,
     filters: Optional[ContentFilters] = None,
 ) -> Tuple[List[Content], int]:
-    """Get content list with pagination and filtering"""
+    """Get content list with pagination and filtering - optimized for different content types"""
+    from app.models.content import Episode, Season
+
     query = select(Content).where(Content.is_deleted == False)
 
     # Apply filters
@@ -158,8 +237,18 @@ async def get_content_list(
     # Apply pagination
     query = _apply_pagination(query, pagination, Content)
 
-    # Load genres
+    # Load genres for all content
     query = query.options(selectinload(Content.genres))
+
+    # Load content-type specific relationships for list view
+    # For movies: load movie_files (basic info only)
+    # For TV series: load seasons (basic info only, no episodes)
+    query = query.options(
+        selectinload(Content.movie_files),  # For movies
+        selectinload(
+            Content.seasons
+        ),  # For TV series (without episodes for performance)
+    )
 
     # Execute query
     result = await db.execute(query)

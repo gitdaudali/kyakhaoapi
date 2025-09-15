@@ -4,6 +4,7 @@ from enum import Enum
 from typing import TYPE_CHECKING, List, Optional
 
 from sqlalchemy import (
+    BigInteger,
     Boolean,
     Date,
     DateTime,
@@ -207,6 +208,15 @@ class Content(BaseModel, TimestampMixin, table=True):
     watch_history: List["UserWatchHistory"] = Relationship(
         back_populates="content",
         sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
+    )
+    # Movie files relationship
+    movie_files: List["MovieFile"] = Relationship(
+        back_populates="content",
+        sa_relationship_kwargs={
+            "lazy": "selectin",
+            "cascade": "all, delete-orphan",
+            "order_by": "MovieFile.quality_level.desc()",
+        },
     )
     # People relationships
     cast: List["ContentCast"] = Relationship(
@@ -434,7 +444,7 @@ class MovieFile(BaseModel, TimestampMixin, table=True):
 
     # File Information
     file_url: str = Field(sa_type=String(500), nullable=False)
-    file_size_bytes: Optional[int] = Field(sa_type=Integer, default=None)
+    file_size_bytes: Optional[int] = Field(sa_type=BigInteger, default=None)
     duration_seconds: float = Field(sa_type=Float, nullable=False)
     bitrate_kbps: Optional[int] = Field(sa_type=Integer, default=None)
     video_codec: Optional[str] = Field(sa_type=String(50), default=None)
@@ -456,7 +466,7 @@ class MovieFile(BaseModel, TimestampMixin, table=True):
     available_languages: Optional[str] = Field(sa_type=Text, default=None)  # JSON
 
     # Relationships
-    content: "Content" = Relationship()
+    content: "Content" = Relationship(back_populates="movie_files")
 
     __table_args__ = (
         UniqueConstraint("content_id", "quality_level", name="unique_movie_quality"),
@@ -501,7 +511,7 @@ class Genre(BaseModel, TimestampMixin, table=True):
         sa_relationship_kwargs={"remote_side": "Genre.id"}
     )
     sub_genres: List["Genre"] = Relationship(
-        sa_relationship_kwargs={"remote_side": "Genre.id"},
+        sa_relationship_kwargs={"remote_side": "Genre.id", "overlaps": "parent_genre"},
     )
 
     def __repr__(self):
@@ -573,6 +583,7 @@ class ContentCast(BaseModel, table=True):
     character_image_url: Optional[str] = Field(sa_type=String(500), default=None)
 
     # Relationships
+    content: "Content" = Relationship()
     person: "Person" = Relationship()
 
 
@@ -596,6 +607,7 @@ class ContentCrew(BaseModel, table=True):
     credit_order: int = Field(sa_type=Integer, default=0)
 
     # Relationships
+    content: "Content" = Relationship()
     person: "Person" = Relationship()
 
 

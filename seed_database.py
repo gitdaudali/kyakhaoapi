@@ -274,6 +274,29 @@ class DatabaseSeeder:
         await self.session.commit()
         print(f"✅ Seeded {len(crew_data)} crew relationships")
 
+    async def seed_movie_files(self, content_mapping: Dict[str, str]):
+        """Seed movie files for movie content."""
+        movie_files_data = await self.load_json_fixture("content/movie_files.json")
+
+        for movie_file_data in movie_files_data:
+            # Map content ID
+            content_slug = next(
+                (
+                    slug
+                    for slug, cid in content_mapping.items()
+                    if cid == movie_file_data["content_id"]
+                ),
+                None,
+            )
+
+            if content_slug:
+                movie_file_data["content_id"] = content_mapping[content_slug]
+                movie_file = MovieFile(**movie_file_data)
+                self.session.add(movie_file)
+
+        await self.session.commit()
+        print(f"✅ Seeded {len(movie_files_data)} movie files")
+
     async def seed_seasons(self, content_mapping: Dict[str, str]) -> Dict[str, str]:
         """Seed seasons and return mapping of season ID to content ID."""
         seasons_data = await self.load_json_fixture("episodes/seasons.json")
@@ -532,6 +555,7 @@ class DatabaseSeeder:
             await self.seed_content_genres(content_mapping, genre_mapping)
             await self.seed_content_cast(content_mapping, person_mapping)
             await self.seed_content_crew(content_mapping, person_mapping)
+            await self.seed_movie_files(content_mapping)
 
             # Seed episodes and seasons
             print("\n📺 Seeding episodes and seasons...")

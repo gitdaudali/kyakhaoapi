@@ -157,8 +157,93 @@ class Content(ContentBase):
         from_attributes = True
 
 
+class MovieFileSimple(BaseModel):
+    """Simplified movie file schema"""
+
+    id: UUID = Field(..., description="Movie file ID")
+    quality_level: str = Field(..., description="Quality level (1080p, 720p, etc.)")
+    resolution_width: int = Field(..., description="Video width in pixels")
+    resolution_height: int = Field(..., description="Video height in pixels")
+    file_url: str = Field(..., description="File URL")
+    file_size_bytes: Optional[int] = Field(None, description="File size in bytes")
+    duration_seconds: float = Field(..., description="Duration in seconds")
+    bitrate_kbps: Optional[int] = Field(None, description="Bitrate in kbps")
+    video_codec: Optional[str] = Field(None, description="Video codec")
+    audio_codec: Optional[str] = Field(None, description="Audio codec")
+    container_format: Optional[str] = Field(None, description="Container format")
+    is_ready: bool = Field(True, description="Whether file is ready for streaming")
+
+    class Config:
+        from_attributes = True
+
+
+class EpisodeSimple(BaseModel):
+    """Simplified episode schema for TV series"""
+
+    id: UUID = Field(..., description="Episode ID")
+    episode_number: int = Field(..., description="Episode number")
+    title: str = Field(..., description="Episode title")
+    slug: str = Field(..., description="Episode slug")
+    description: Optional[str] = Field(None, description="Episode description")
+    runtime: Optional[int] = Field(None, description="Runtime in minutes")
+    air_date: Optional[date] = Field(None, description="Air date")
+    thumbnail_url: Optional[str] = Field(None, description="Thumbnail URL")
+    views_count: int = Field(0, description="View count")
+    is_available: bool = Field(True, description="Whether episode is available")
+
+    class Config:
+        from_attributes = True
+
+
+class SeasonSimple(BaseModel):
+    """Simplified season schema for TV series"""
+
+    id: UUID = Field(..., description="Season ID")
+    season_number: int = Field(..., description="Season number")
+    title: Optional[str] = Field(None, description="Season title")
+    description: Optional[str] = Field(None, description="Season description")
+    poster_url: Optional[str] = Field(None, description="Season poster URL")
+    air_date: Optional[date] = Field(None, description="Air date")
+    episode_count: int = Field(0, description="Number of episodes")
+    is_complete: bool = Field(False, description="Whether season is complete")
+    episodes: List[EpisodeSimple] = Field(
+        default_factory=list, description="Season episodes"
+    )
+
+    class Config:
+        from_attributes = True
+
+
+class SeasonListSimple(BaseModel):
+    """Simplified season schema for list views (no episodes)"""
+
+    id: UUID = Field(..., description="Season ID")
+    season_number: int = Field(..., description="Season number")
+    title: Optional[str] = Field(None, description="Season title")
+    description: Optional[str] = Field(None, description="Season description")
+    poster_url: Optional[str] = Field(None, description="Season poster URL")
+    air_date: Optional[date] = Field(None, description="Air date")
+    episode_count: int = Field(0, description="Number of episodes")
+    is_complete: bool = Field(False, description="Whether season is complete")
+
+    class Config:
+        from_attributes = True
+
+
+class CastCrewResponse(BaseModel):
+    """Response schema for cast and crew APIs"""
+
+    cast: List[CastMember] = Field(default_factory=list, description="Cast members")
+    crew: List[CrewMember] = Field(default_factory=list, description="Crew members")
+    total_cast: int = Field(0, description="Total number of cast members")
+    total_crew: int = Field(0, description="Total number of crew members")
+
+    class Config:
+        from_attributes = True
+
+
 class ContentDetail(BaseModel):
-    """Detailed content schema for content detail endpoint"""
+    """Simplified content detail schema - no cast/crew"""
 
     # Basic Information
     id: UUID = Field(..., description="Content ID")
@@ -194,8 +279,13 @@ class ContentDetail(BaseModel):
     genres: List[GenreSimple] = Field(
         default_factory=list, description="Content genres"
     )
-    cast: List[CastMember] = Field(default_factory=list, description="Cast members")
-    crew: List[CrewMember] = Field(default_factory=list, description="Crew members")
+    # Content type specific data
+    movie_files: List[MovieFileSimple] = Field(
+        default_factory=list, description="Movie files (for movies)"
+    )
+    seasons: List[SeasonSimple] = Field(
+        default_factory=list, description="Seasons (for TV series)"
+    )
 
     # Metadata
     created_at: datetime = Field(..., description="Creation timestamp")
@@ -224,6 +314,14 @@ class ContentList(BaseModel):
     poster_url: Optional[str] = Field(None, description="Poster image URL")
     backdrop_url: Optional[str] = Field(None, description="Backdrop image URL")
     genres: List[Genre] = Field(default_factory=list, description="Content genres")
+
+    # Content type specific data for list view
+    movie_files: List[MovieFileSimple] = Field(
+        default_factory=list, description="Movie files (for movies)"
+    )
+    seasons: List[SeasonListSimple] = Field(
+        default_factory=list, description="Seasons (for TV series)"
+    )
 
     class Config:
         from_attributes = True
