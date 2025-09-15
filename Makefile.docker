@@ -1,0 +1,101 @@
+# Docker Makefile for Cup Streaming API
+
+.PHONY: help build up down logs shell clean restart status dev
+
+# Default target
+help:
+	@echo "Cup Streaming API - Docker Commands"
+	@echo "=================================="
+	@echo "dev             - Start development environment with hot reload"
+	@echo "dev-build       - Build development images"
+	@echo "dev-logs        - Show development logs"
+	@echo "dev-shell       - Open shell in development backend"
+	@echo "dev-down        - Stop development environment"
+	@echo ""
+	@echo "Production Commands:"
+	@echo "build           - Build production images"
+	@echo "up              - Start production environment"
+	@echo "down            - Stop production environment"
+	@echo "logs            - Show production logs"
+	@echo "shell           - Open shell in production backend"
+	@echo "restart         - Restart production environment"
+	@echo ""
+	@echo "General Commands:"
+	@echo "clean           - Remove all containers and volumes"
+	@echo "status          - Show status of all services"
+	@echo "migrate         - Run database migrations"
+	@echo "seed            - Seed database with sample data"
+
+# Development environment with hot reload
+dev:
+	@echo "Starting development environment..."
+	docker-compose -f docker-compose-dev.yml up
+
+# Build development images
+dev-build:
+	@echo "Building development images..."
+	docker-compose -f docker-compose-dev.yml build
+
+# Show development logs
+dev-logs:
+	docker-compose -f docker-compose-dev.yml logs -f
+
+# Open shell in development backend
+dev-shell:
+	docker-compose -f docker-compose-dev.yml exec backend bash
+
+# Stop development environment
+dev-down:
+	docker-compose -f docker-compose-dev.yml down
+
+# Build production images
+build:
+	@echo "Building production images..."
+	docker-compose build
+
+build-no-cache:
+	@echo "Building production images..."
+	docker-compose build --no-cache
+
+# Start production environment
+up:
+	@echo "Starting production environment..."
+	docker-compose up -d
+
+# Start with logs
+up-logs:
+	docker-compose up
+
+# Stop production environment
+down:
+	docker-compose down
+
+# Show production logs
+logs:
+	docker-compose logs -f
+
+# Open shell in production backend
+shell:
+	docker-compose exec backend bash
+
+# Restart production environment
+restart:
+	docker-compose restart
+
+# Clean up
+clean:
+	docker-compose down -v --remove-orphans
+	docker-compose -f docker-compose-dev.yml down -v --remove-orphans
+	docker system prune -f
+
+# Show status
+status:
+	docker-compose ps
+
+# Run database migrations
+migrate:
+	docker-compose exec backend alembic upgrade head
+
+# Seed database
+seed:
+	docker-compose exec backend python seed_database.py

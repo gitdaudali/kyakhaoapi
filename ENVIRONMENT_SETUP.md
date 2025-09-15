@@ -183,7 +183,3 @@ export DB_HOST="your-production-db-host"
 export DB_PASSWORD="your-production-db-password"
 # ... other production values
 ```
-
-
-
-

@@ -1,0 +1,90 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${DB_USER}", "-d", "${DB_NAME}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+    volumes:
+      - .:/app
+    ports:
+      - "8005:8000"
+    env_file:
+      - ./.env
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+    depends_on:
+      - postgres
+      - redis
+    restart: always
+    # Use entrypoint for development (with database waiting)
+    entrypoint: ["/app/entrypoint.sh", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+  celery:
+    build:
+      context: .
+    volumes:
+      - .:/app
+    env_file:
+      - ./.env
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+    depends_on:
+      - redis
+      - postgres
+    restart: always
+    # Use entrypoint for development (with database waiting)
+    entrypoint: ["/app/entrypoint.sh", "celery", "-A", "app.core.celery_app", "worker", "--loglevel=INFO", "--reload"]
+
+  celery-beat:
+    build:
+      context: .
+    volumes:
+      - .:/app
+    env_file:
+      - ./.env
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+    depends_on:
+      - redis
+      - postgres
+    restart: always
+    # Use entrypoint for development (with database waiting)
+    entrypoint: ["/app/entrypoint.sh", "celery", "-A", "app.core.celery_app", "beat", "--loglevel=INFO"]
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    driver: bridge

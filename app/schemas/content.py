@@ -1,0 +1,394 @@
+from datetime import date, datetime
+from typing import List, Optional
+from uuid import UUID
+
+from pydantic import BaseModel, Field
+
+from app.models.content import ContentRating, ContentStatus, ContentType
+
+
+class GenreBase(BaseModel):
+    """Base genre schema"""
+
+    name: str = Field(..., description="Genre name")
+    slug: str = Field(..., description="Genre slug")
+    description: Optional[str] = Field(None, description="Genre description")
+    icon_name: Optional[str] = Field(None, description="Icon name for UI")
+    color: Optional[str] = Field(None, description="Color code for UI")
+    is_active: bool = Field(True, description="Whether genre is active")
+
+
+class GenreCreate(GenreBase):
+    """Schema for creating a genre"""
+
+    pass
+
+
+class GenreUpdate(BaseModel):
+    """Schema for updating a genre"""
+
+    name: Optional[str] = Field(None, description="Genre name")
+    slug: Optional[str] = Field(None, description="Genre slug")
+    description: Optional[str] = Field(None, description="Genre description")
+    icon_name: Optional[str] = Field(None, description="Icon name for UI")
+    color: Optional[str] = Field(None, description="Color code for UI")
+    is_active: Optional[bool] = Field(None, description="Whether genre is active")
+
+
+class Genre(GenreBase):
+    """Genre response schema"""
+
+    id: UUID = Field(..., description="Genre ID")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+    is_deleted: bool = Field(False, description="Whether genre is deleted")
+
+    class Config:
+        from_attributes = True
+
+
+class GenreSimple(BaseModel):
+    """Simplified genre schema for content detail"""
+
+    id: UUID = Field(..., description="Genre ID")
+    name: str = Field(..., description="Genre name")
+    slug: str = Field(..., description="Genre slug")
+
+    class Config:
+        from_attributes = True
+
+
+class PersonSimple(BaseModel):
+    """Simplified person schema for content detail"""
+
+    id: UUID = Field(..., description="Person ID")
+    name: str = Field(..., description="Person name")
+    slug: str = Field(..., description="Person slug")
+
+    class Config:
+        from_attributes = True
+
+
+class CastMember(BaseModel):
+    """Cast member schema for content detail"""
+
+    person: PersonSimple = Field(..., description="Person information")
+    character_name: Optional[str] = Field(None, description="Character name")
+    is_main_cast: bool = Field(False, description="Whether main cast member")
+    cast_order: int = Field(0, description="Billing order")
+
+    class Config:
+        from_attributes = True
+
+
+class CrewMember(BaseModel):
+    """Crew member schema for content detail"""
+
+    person: PersonSimple = Field(..., description="Person information")
+    job_title: str = Field(..., description="Job title (Director, Writer, etc.)")
+    department: str = Field(..., description="Department (Directing, Writing, etc.)")
+    credit_order: int = Field(0, description="Credit order")
+
+    class Config:
+        from_attributes = True
+
+
+class ContentBase(BaseModel):
+    """Base content schema"""
+
+    title: str = Field(..., description="Content title")
+    slug: str = Field(..., description="Content slug")
+    description: Optional[str] = Field(None, description="Content description")
+    tagline: Optional[str] = Field(None, description="Content tagline")
+    content_type: ContentType = Field(..., description="Type of content")
+    status: ContentStatus = Field(..., description="Content status")
+    rating: ContentRating = Field(..., description="Content rating")
+    release_date: Optional[date] = Field(None, description="Release date")
+    duration_minutes: Optional[int] = Field(None, description="Duration in minutes")
+    imdb_id: Optional[str] = Field(None, description="IMDB ID")
+    tmdb_id: Optional[int] = Field(None, description="TMDB ID")
+    is_featured: bool = Field(False, description="Whether content is featured")
+    is_trending: bool = Field(False, description="Whether content is trending")
+    view_count: int = Field(0, description="Total view count")
+    like_count: int = Field(0, description="Total like count")
+    average_rating: Optional[float] = Field(None, description="Average user rating")
+    poster_url: Optional[str] = Field(None, description="Poster image URL")
+    backdrop_url: Optional[str] = Field(None, description="Backdrop image URL")
+    trailer_url: Optional[str] = Field(None, description="Trailer video URL")
+
+
+class ContentCreate(ContentBase):
+    """Schema for creating content"""
+
+    pass
+
+
+class ContentUpdate(BaseModel):
+    """Schema for updating content"""
+
+    title: Optional[str] = Field(None, description="Content title")
+    slug: Optional[str] = Field(None, description="Content slug")
+    description: Optional[str] = Field(None, description="Content description")
+    tagline: Optional[str] = Field(None, description="Content tagline")
+    content_type: Optional[ContentType] = Field(None, description="Type of content")
+    status: Optional[ContentStatus] = Field(None, description="Content status")
+    rating: Optional[ContentRating] = Field(None, description="Content rating")
+    release_date: Optional[date] = Field(None, description="Release date")
+    duration_minutes: Optional[int] = Field(None, description="Duration in minutes")
+    imdb_id: Optional[str] = Field(None, description="IMDB ID")
+    tmdb_id: Optional[int] = Field(None, description="TMDB ID")
+    is_featured: Optional[bool] = Field(None, description="Whether content is featured")
+    is_trending: Optional[bool] = Field(None, description="Whether content is trending")
+    poster_url: Optional[str] = Field(None, description="Poster image URL")
+    backdrop_url: Optional[str] = Field(None, description="Backdrop image URL")
+    trailer_url: Optional[str] = Field(None, description="Trailer video URL")
+
+
+class Content(ContentBase):
+    """Content response schema"""
+
+    id: UUID = Field(..., description="Content ID")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+    is_deleted: bool = Field(False, description="Whether content is deleted")
+    genres: List[Genre] = Field(default_factory=list, description="Content genres")
+
+    class Config:
+        from_attributes = True
+
+
+class MovieFileSimple(BaseModel):
+    """Simplified movie file schema"""
+
+    id: UUID = Field(..., description="Movie file ID")
+    quality_level: str = Field(..., description="Quality level (1080p, 720p, etc.)")
+    resolution_width: int = Field(..., description="Video width in pixels")
+    resolution_height: int = Field(..., description="Video height in pixels")
+    file_url: str = Field(..., description="File URL")
+    file_size_bytes: Optional[int] = Field(None, description="File size in bytes")
+    duration_seconds: float = Field(..., description="Duration in seconds")
+    bitrate_kbps: Optional[int] = Field(None, description="Bitrate in kbps")
+    video_codec: Optional[str] = Field(None, description="Video codec")
+    audio_codec: Optional[str] = Field(None, description="Audio codec")
+    container_format: Optional[str] = Field(None, description="Container format")
+    is_ready: bool = Field(True, description="Whether file is ready for streaming")
+
+    class Config:
+        from_attributes = True
+
+
+class EpisodeSimple(BaseModel):
+    """Simplified episode schema for TV series"""
+
+    id: UUID = Field(..., description="Episode ID")
+    episode_number: int = Field(..., description="Episode number")
+    title: str = Field(..., description="Episode title")
+    slug: str = Field(..., description="Episode slug")
+    description: Optional[str] = Field(None, description="Episode description")
+    runtime: Optional[int] = Field(None, description="Runtime in minutes")
+    air_date: Optional[date] = Field(None, description="Air date")
+    thumbnail_url: Optional[str] = Field(None, description="Thumbnail URL")
+    views_count: int = Field(0, description="View count")
+    is_available: bool = Field(True, description="Whether episode is available")
+
+    class Config:
+        from_attributes = True
+
+
+class SeasonSimple(BaseModel):
+    """Simplified season schema for TV series"""
+
+    id: UUID = Field(..., description="Season ID")
+    season_number: int = Field(..., description="Season number")
+    title: Optional[str] = Field(None, description="Season title")
+    description: Optional[str] = Field(None, description="Season description")
+    poster_url: Optional[str] = Field(None, description="Season poster URL")
+    air_date: Optional[date] = Field(None, description="Air date")
+    episode_count: int = Field(0, description="Number of episodes")
+    is_complete: bool = Field(False, description="Whether season is complete")
+    episodes: List[EpisodeSimple] = Field(
+        default_factory=list, description="Season episodes"
+    )
+
+    class Config:
+        from_attributes = True
+
+
+class SeasonListSimple(BaseModel):
+    """Simplified season schema for list views (no episodes)"""
+
+    id: UUID = Field(..., description="Season ID")
+    season_number: int = Field(..., description="Season number")
+    title: Optional[str] = Field(None, description="Season title")
+    description: Optional[str] = Field(None, description="Season description")
+    poster_url: Optional[str] = Field(None, description="Season poster URL")
+    air_date: Optional[date] = Field(None, description="Air date")
+    episode_count: int = Field(0, description="Number of episodes")
+    is_complete: bool = Field(False, description="Whether season is complete")
+
+    class Config:
+        from_attributes = True
+
+
+class CastCrewResponse(BaseModel):
+    """Response schema for cast and crew APIs"""
+
+    cast: List[CastMember] = Field(default_factory=list, description="Cast members")
+    crew: List[CrewMember] = Field(default_factory=list, description="Crew members")
+    total_cast: int = Field(0, description="Total number of cast members")
+    total_crew: int = Field(0, description="Total number of crew members")
+
+    class Config:
+        from_attributes = True
+
+
+class ContentDetail(BaseModel):
+    """Simplified content detail schema - no cast/crew"""
+
+    # Basic Information
+    id: UUID = Field(..., description="Content ID")
+    title: str = Field(..., description="Content title")
+    slug: str = Field(..., description="Content slug")
+    description: Optional[str] = Field(None, description="Content description")
+    tagline: Optional[str] = Field(None, description="Content tagline")
+
+    # Content Classification
+    content_type: ContentType = Field(..., description="Type of content")
+    status: ContentStatus = Field(..., description="Content status")
+    content_rating: Optional[ContentRating] = Field(None, description="Content rating")
+
+    # Visual Assets
+    poster_url: Optional[str] = Field(None, description="Poster image URL")
+    backdrop_url: Optional[str] = Field(None, description="Backdrop image URL")
+    trailer_url: Optional[str] = Field(None, description="Trailer video URL")
+
+    # Release Information
+    release_date: Optional[date] = Field(None, description="Release date")
+    duration_minutes: Optional[int] = Field(None, description="Duration in minutes")
+
+    # Statistics
+    view_count: int = Field(0, description="Total view count")
+    like_count: int = Field(0, description="Total like count")
+    average_rating: Optional[float] = Field(None, description="Average user rating")
+
+    # Flags
+    is_featured: bool = Field(False, description="Whether content is featured")
+    is_trending: bool = Field(False, description="Whether content is trending")
+
+    # Relationships
+    genres: List[GenreSimple] = Field(
+        default_factory=list, description="Content genres"
+    )
+    # Content type specific data
+    movie_files: List[MovieFileSimple] = Field(
+        default_factory=list, description="Movie files (for movies)"
+    )
+    seasons: List[SeasonSimple] = Field(
+        default_factory=list, description="Seasons (for TV series)"
+    )
+
+    # Metadata
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+
+    class Config:
+        from_attributes = True
+
+
+class ContentList(BaseModel):
+    """Content list response schema"""
+
+    id: UUID = Field(..., description="Content ID")
+    title: str = Field(..., description="Content title")
+    slug: str = Field(..., description="Content slug")
+    content_type: ContentType = Field(..., description="Type of content")
+    status: ContentStatus = Field(..., description="Content status")
+    content_rating: ContentRating = Field(..., description="Content rating")
+    release_date: Optional[date] = Field(None, description="Release date")
+    duration_minutes: Optional[int] = Field(None, description="Duration in minutes")
+    is_featured: bool = Field(False, description="Whether content is featured")
+    is_trending: bool = Field(False, description="Whether content is trending")
+    view_count: int = Field(0, description="Total view count")
+    like_count: int = Field(0, description="Total like count")
+    average_rating: Optional[float] = Field(None, description="Average user rating")
+    poster_url: Optional[str] = Field(None, description="Poster image URL")
+    backdrop_url: Optional[str] = Field(None, description="Backdrop image URL")
+    genres: List[Genre] = Field(default_factory=list, description="Content genres")
+
+    # Content type specific data for list view
+    movie_files: List[MovieFileSimple] = Field(
+        default_factory=list, description="Movie files (for movies)"
+    )
+    seasons: List[SeasonListSimple] = Field(
+        default_factory=list, description="Seasons (for TV series)"
+    )
+
+    class Config:
+        from_attributes = True
+
+
+class PaginationParams(BaseModel):
+    """Pagination parameters"""
+
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(20, ge=1, le=100, description="Page size")
+    sort_by: Optional[str] = Field("created_at", description="Sort field")
+    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+
+
+class PaginatedResponse(BaseModel):
+    """Paginated response schema"""
+
+    items: List[dict] = Field(..., description="List of items")
+    total: int = Field(..., description="Total number of items")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+
+class ContentListResponse(BaseModel):
+    """Response schema for content list endpoints"""
+
+    items: List[ContentList] = Field(..., description="List of content items")
+    total: int = Field(..., description="Total number of items")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+
+class GenreListResponse(BaseModel):
+    """Response schema for genre list endpoints"""
+
+    items: List[Genre] = Field(..., description="List of genre items")
+    total: int = Field(..., description="Total number of items")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+
+class ContentFilters(BaseModel):
+    """Content filtering parameters"""
+
+    content_type: Optional[ContentType] = Field(
+        None, description="Filter by content type"
+    )
+    status: Optional[ContentStatus] = Field(None, description="Filter by status")
+    rating: Optional[ContentRating] = Field(None, description="Filter by rating")
+    genre_ids: Optional[List[UUID]] = Field(None, description="Filter by genre IDs")
+    is_featured: Optional[bool] = Field(None, description="Filter featured content")
+    is_trending: Optional[bool] = Field(None, description="Filter trending content")
+    year: Optional[int] = Field(None, description="Filter by release year")
+    search: Optional[str] = Field(None, description="Search in title and description")
+
+
+class GenreFilters(BaseModel):
+    """Genre filtering parameters"""
+
+    is_active: Optional[bool] = Field(None, description="Filter by active status")
+    search: Optional[str] = Field(None, description="Search in name and description")
