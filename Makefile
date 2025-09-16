@@ -7,9 +7,6 @@ help: ## Show this help message
 install: ## Install production dependencies
 	pip install -r requirements.txt
 
-install-dev: ## Install development dependencies
-	pip install -r requirements-dev.txt
-
 test: ## Run tests
 	@if [ -f env/bin/activate ]; then \
 		. env/bin/activate && pytest; \
