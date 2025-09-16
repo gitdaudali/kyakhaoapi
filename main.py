@@ -36,10 +36,9 @@ app = FastAPI(
     license_info={"name": "MIT License", "url": "https://opensource.org/licenses/MIT"},
     servers=[
         {
-            "url": f"http://{settings.HOST}:{settings.PORT}",
+            "url": f"{settings.BASE_URL}",
             "description": "Development server",
-        },
-        {"url": "https://dev-cup-strmng.vertexaitec.com", "description": "Production server"},
+        }
     ],
     tags_metadata=[
         {
@@ -61,9 +60,9 @@ app = FastAPI(
             ),
         },
         {
-            "name": "videos",
+            "name": "Content",
             "description": (
-                "Video management operations. Upload, stream, and manage video content."
+                "Content Related Operations of Videos TV and serials."
             ),
         },
     ],

@@ -1,585 +1,436 @@
-# Cup Streaming Platform
+# Cup Streaming API
 
-A modern, high-performance video streaming platform with both Django and FastAPI implementations.
+A modern, high-performance video streaming platform built with FastAPI, featuring user authentication, content management, and real-time video streaming capabilities.
 
 ## 🚀 Features
 
-- **Dual Backend Support**: Both Django REST Framework and FastAPI implementations
-- **JWT Authentication**: Secure user authentication with JWT tokens
-- **Video Management**: Upload, manage, and stream videos
-- **User Management**: User registration, profiles, and permissions
-- **Analytics**: Track video views and user engagement
-- **PostgreSQL Database**: Robust relational database backend
-- **Social Authentication**: Google and Facebook OAuth integration
-- **Async Operations**: High-performance asynchronous operations (FastAPI)
+- **User Authentication & Management**: JWT-based authentication with user registration, login, and profile management
+- **Video Upload & Streaming**: Support for multiple video formats with AWS S3 integration
+- **Content Management**: Organize videos, TV shows, and series with metadata
+- **Social Features**: User interactions, reviews, and content discovery
+- **Analytics & Metrics**: Track views, engagement, and user behavior
+- **Background Processing**: Celery-based task queue for video processing
+- **API Documentation**: Interactive Swagger UI and ReDoc documentation
+- **Database Migrations**: Alembic for database schema management
+- **Code Quality**: Pre-commit hooks, linting, and type checking
 
 ## 🏗️ Project Structure
 
 ```
 Cup_Streaming/
-├── django/                 # Django REST Framework implementation
-│   ├── core/              # Django project settings
-│   ├── apps/              # Django applications
-│   │   ├── authentication/ # User authentication
-│   │   ├── users/         # User management
-│   │   ├── videos/        # Video management
-│   │   └── api/           # API utilities
-│   ├── manage.py          # Django management script
-│   ├── start_django.py    # Django startup script
-│   └── requirements.txt   # Django dependencies
-├── fastapi/               # FastAPI implementation
-│   ├── app/               # FastAPI application
-│   │   ├── core/          # Core configuration
-│   │   ├── models/        # SQLAlchemy models
-│   │   ├── schemas/       # Pydantic schemas
-│   │   └── api/           # API endpoints
-│   ├── main.py            # FastAPI main application
-│   ├── start_fastapi.py   # FastAPI startup script
-│   └── requirements.txt   # FastAPI dependencies
-├── start_projects.py      # Main project launcher
-└── requirements.txt       # Combined dependencies
+├── alembic/                    # Database migrations
+│   ├── versions/              # Migration files
+│   ├── env.py                 # Alembic environment configuration
+│   └── script.py.mako         # Migration template
+├── app/                       # Main application package
+│   ├── api/                   # API routes and endpoints
+│   │   └── v1/               # API version 1
+│   │       ├── api.py        # Main API router
+│   │       └── endpoints/    # Individual endpoint modules
+│   │           ├── auth.py   # Authentication endpoints
+│   │           ├── content.py # Content management endpoints
+│   │           └── users.py  # User management endpoints
+│   ├── core/                 # Core application components
+│   │   ├── auth.py           # Authentication utilities
+│   │   ├── celery_app.py     # Celery configuration
+│   │   ├── config.py         # Application settings
+│   │   ├── database.py       # Database configuration
+│   │   ├── deps.py           # Dependency injection
+│   │   └── messages.py       # Application messages
+│   ├── models/               # SQLAlchemy models
+│   │   ├── base.py           # Base model class
+│   │   ├── content.py        # Content-related models
+│   │   ├── token.py          # Token models
+│   │   ├── user.py           # User models
+│   │   └── verification.py   # Email verification models
+│   ├── schemas/              # Pydantic schemas
+│   │   ├── auth.py           # Authentication schemas
+│   │   ├── content.py        # Content schemas
+│   │   └── user.py           # User schemas
+│   ├── tasks/                # Celery background tasks
+│   │   └── email_tasks.py    # Email-related tasks
+│   └── utils/                # Utility functions
+│       ├── auth_utils.py     # Authentication utilities
+│       ├── content_utils.py  # Content processing utilities
+│       ├── email_utils.py    # Email utilities
+│       └── token_utils.py    # Token utilities
+├── fixtures/                  # Database fixtures and sample data
+│   ├── content/              # Content fixtures
+│   ├── episodes/             # Episode fixtures
+│   ├── genres/               # Genre fixtures
+│   ├── interactions/         # User interaction fixtures
+│   └── users/                # User fixtures
+├── static/                   # Static files
+│   └── swagger-ui.html       # Custom Swagger UI
+├── alembic.ini              # Alembic configuration
+├── celery_worker.py         # Celery worker entry point
+├── docker-compose.yml       # Docker Compose configuration
+├── docker-compose.dev.yml   # Development Docker Compose
+├── docker-compose.prod.yml  # Production Docker Compose
+├── Dockerfile               # Docker configuration
+├── entrypoint.sh            # Docker entrypoint script
+├── main.py                  # FastAPI application entry point
+├── Makefile                 # Development commands
+├── pyproject.toml           # Project configuration and dependencies
+├── requirements.txt         # Python dependencies
+├── seed_database.py         # Database seeding script
+└── README.md                # This file
 ```
 
-## 🛠️ Installation
+## 🛠️ Installation & Setup
 
 ### Prerequisites
 
-- Python 3.8+
-- PostgreSQL
-- Redis (optional)
+- Python 3.10 or higher
+- PostgreSQL 12 or higher
+- Redis 6 or higher
+- Git
 
-### Setup
+### 1. Clone the Repository
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd Cup_Streaming
-   ```
+```bash
+git clone <repository-url>
+cd Cup_Streaming
+```
 
-2. **Create a virtual environment**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+### 2. Create Virtual Environment
 
-3. **Install dependencies**
-   ```bash
-   # Install all dependencies
-   pip install -r requirements.txt
+```bash
+python -m venv env
+source env/bin/activate  # On Windows: env\Scripts\activate
+```
 
-   # Or install project-specific dependencies
-   pip install -r fastapi/requirements.txt   # For FastAPI only
-   ```
+### 3. Install Dependencies
 
-4. **Environment Configuration**
-   Create a `.env` file with your configuration:
-   ```env
-   SECRET_KEY=your-secret-key-here
-   DB_NAME=cup_streaming
-   DB_USER=postgres
-   DB_PASSWORD=your-password
-   DB_HOST=localhost
-   DB_PORT=5432
-   REDIS_URL=redis://localhost:6379
-   ```
+```bash
+# Install production dependencies
+pip install -r requirements.txt
 
-5. **Database Setup**
-   ```bash
-   # Create PostgreSQL database
-   createdb cup_streaming
-   ```
+# Or install development dependencies
+make install-dev
+```
 
-6. **Run the Application**
-   ```bash
-   # Use the main launcher
-   python start_projects.py
+### 4. Environment Configuration
 
-   # Or start individual projects
-   cd django && python start_django.py      # Django on port 8000
-   cd fastapi && python start_fastapi.py    # FastAPI on port 8001
-   ```
+Create a `.env` file in the project root with the following variables:
 
-## 🚀 Quick Start
+```bash
+# Database Configuration
+DB_NAME=cup_streaming_db
+DB_USER=your_db_user
+DB_PASSWORD=your_db_password
+DB_HOST=localhost
+DB_PORT=5432
 
-### Django Project
-- **URL**: http://localhost:8000
-- **Admin**: http://localhost:8000/admin
-- **API**: http://localhost:8000/api/v1/
+# Security
+SECRET_KEY=your-secret-key-here
+DEBUG=true
 
-### FastAPI Project
-- **URL**: http://localhost:8001
-- **Docs**: http://localhost:8001/docs
-- **ReDoc**: http://localhost:8001/redoc
+# Redis Configuration
+REDIS_URL=redis://localhost:6379/0
+CELERY_BROKER_URL=redis://localhost:6379/0
+CELERY_RESULT_BACKEND=redis://localhost:6379/0
+
+# AWS S3 (Optional)
+AWS_ACCESS_KEY_ID=your_aws_access_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+AWS_REGION=us-east-1
+S3_BUCKET=your-s3-bucket
+
+# Email Configuration (Optional)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your_email@gmail.com
+SMTP_PASSWORD=your_app_password
+SMTP_TLS=true
+FROM_EMAIL=your_email@gmail.com
+FROM_NAME=Cup Streaming
+EMAILS_ENABLED=false
+
+# CORS Settings
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000
+```
+
+### 5. Database Setup
+
+```bash
+# Create PostgreSQL database
+createdb cup_streaming_db
+
+# Run database migrations
+alembic upgrade head
+
+# Seed the database with sample data (optional)
+python seed_database.py
+```
+
+## 🚀 Running the Application
+
+### Development Mode
+
+```bash
+# Using Makefile (recommended)
+make run-dev
+
+# Or directly with uvicorn
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+
+# Or using Python
+python main.py
+```
+
+### Production Mode
+
+```bash
+# Using uvicorn
+uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
+
+# Using Docker
+docker-compose up -d
+```
+
+### Background Services
+
+```bash
+# Start Redis (if not using Docker)
+redis-server
+
+# Start Celery worker
+make celery-worker
+
+# Start Celery Flower (monitoring)
+make celery-flower
+
+# Start Celery beat (scheduler)
+make celery-beat
+```
+
+## 📋 Available Commands
+
+The project includes a comprehensive Makefile with the following commands:
+
+```bash
+# Setup and Installation
+make setup              # Complete development environment setup
+make install            # Install production dependencies
+make install-dev        # Install development dependencies
+
+# Running the Application
+make run                # Run the FastAPI application
+make run-dev            # Run in development mode with auto-reload
+make dev-all            # Start all development services
+
+# Code Quality
+make format             # Format code with black and isort
+make lint               # Run linting checks
+make check              # Run all checks (linting and tests)
+make pre-commit         # Run pre-commit hooks on all files
+
+# Testing
+make test               # Run tests with pytest
+
+# Background Services
+make celery-worker      # Start Celery worker
+make celery-flower      # Start Celery Flower monitoring
+make celery-beat        # Start Celery beat scheduler
+make redis-start        # Start Redis server
+
+# Utilities
+make clean              # Clean up temporary files
+make help               # Show all available commands
+```
+
+## 🔧 Pre-commit Setup
+
+Pre-commit hooks ensure code quality and consistency. Here's how to set them up:
+
+### 1. Install Pre-commit
+
+```bash
+# Install pre-commit in your virtual environment
+pip install pre-commit
+
+# Or install development dependencies (includes pre-commit)
+make install-dev
+```
+
+### 2. Install Pre-commit Hooks
+
+```bash
+# Install pre-commit hooks
+make pre-commit-install
+
+# Or manually
+pre-commit install
+```
+
+### 3. Run Pre-commit on All Files
+
+```bash
+# Run pre-commit on all files
+make pre-commit
+
+# Or manually
+pre-commit run --all-files
+```
+
+### Pre-commit Configuration
+
+The project includes the following pre-commit hooks:
+- **Black**: Code formatting
+- **isort**: Import sorting
+- **flake8**: Linting
+- **mypy**: Type checking
+- **bandit**: Security linting
+- **ruff**: Fast Python linter
 
 ## 📚 API Documentation
 
-### Django Project (Port 8000)
-- **Admin Panel**: http://localhost:8000/admin
-- **API Root**: http://localhost:8000/api/v1/
-- **Browsable API**: http://localhost:8000/api/v1/
+Once the application is running, you can access the interactive API documentation:
 
-### FastAPI Project (Port 8001)
-- **Interactive API Docs**: http://localhost:8001/docs
-- **ReDoc Documentation**: http://localhost:8001/redoc
-- **OpenAPI Schema**: http://localhost:8001/openapi.json
-- **Health Check**: http://localhost:8001/health
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
+- **Custom Swagger UI**: http://localhost:8000/static/swagger-ui.html
+- **OpenAPI JSON**: http://localhost:8000/openapi.json
 
-## 🔐 Authentication
+### API Endpoints
 
-The API uses JWT tokens for authentication:
+- **Authentication**: `/api/v1/auth/`
+  - `POST /register` - User registration
+  - `POST /login` - User login
+  - `POST /refresh` - Refresh access token
+  - `POST /logout` - User logout
 
-1. **Register**: `POST /api/v1/auth/register`
-2. **Login**: `POST /api/v1/auth/login`
-3. **Use Token**: Include `Authorization: Bearer <token>` in headers
+- **Users**: `/api/v1/users/`
+  - `GET /me` - Get current user profile
+  - `PUT /me` - Update user profile
+  - `DELETE /me` - Delete user account
 
-## 📹 Video Management
+- **Content**: `/api/v1/content/`
+  - `GET /` - List all content
+  - `POST /` - Create new content
+  - `GET /{content_id}` - Get specific content
+  - `PUT /{content_id}` - Update content
+  - `DELETE /{content_id}` - Delete content
 
-### Endpoints
+## 🐳 Docker Support
 
-- `GET /api/v1/videos/` - List videos
-- `POST /api/v1/videos/` - Upload video
-- `GET /api/v1/videos/{id}` - Get video details
-- `PUT /api/v1/videos/{id}` - Update video
-- `DELETE /api/v1/videos/{id}` - Delete video
-- `POST /api/v1/videos/{id}/like` - Like video
-- `DELETE /api/v1/videos/{id}/like` - Unlike video
+The project includes comprehensive Docker configuration:
 
-## 👥 User Management
-
-### Endpoints
-
-- `GET /api/v1/users/` - List users (admin only)
-- `GET /api/v1/users/{id}` - Get user profile
-- `PUT /api/v1/users/{id}` - Update user profile
-- `DELETE /api/v1/users/{id}` - Delete user (admin only)
-
-## 🔧 Development
-
-### Running Tests
 ```bash
-# Install test dependencies
-pip install pytest pytest-asyncio httpx
+# Development with Docker
+docker-compose -f docker-compose.dev.yml up -d
 
-# Run tests
-pytest
+# Production with Docker
+docker-compose -f docker-compose.prod.yml up -d
+
+# Build custom image
+docker build -t cup-streaming-api .
 ```
 
-### Code Quality
-```bash
-# Install linting tools
-pip install black isort flake8
+## 🧪 Testing
 
+```bash
+# Run all tests
+make test
+
+# Run tests with coverage
+pytest --cov=app
+
+# Run specific test file
+pytest tests/test_auth.py
+
+# Run tests with verbose output
+pytest -v
+```
+
+## 🔍 Code Quality
+
+The project enforces high code quality standards:
+
+```bash
 # Format code
-black app/
-isort app/
+make format
 
-# Lint code
-flake8 app/
+# Run linting
+make lint
+
+# Run type checking
+mypy app/
+
+# Run security checks
+bandit -r app/
+
+# Run all quality checks
+make check
 ```
 
-## 🚀 Production Deployment
+## 📊 Database Management
 
-### Using Gunicorn
 ```bash
-pip install gunicorn
-gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+# Create new migration
+alembic revision --autogenerate -m "Description of changes"
+
+# Apply migrations
+alembic upgrade head
+
+# Rollback migration
+alembic downgrade -1
+
+# View migration history
+alembic history
 ```
 
-### Docker Deployment
-```dockerfile
-FROM python:3.11-slim
-
-WORKDIR /app
-COPY requirements_fastapi.txt .
-RUN pip install -r requirements_fastapi.txt
-
-COPY . .
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-```
-
-## 📊 Performance Features
-
-- **Async Operations**: Non-blocking I/O operations
-- **Database Optimization**: Efficient SQLAlchemy queries
-- **Connection Pooling**: Database connection optimization
-- **Background Tasks**: Celery integration for heavy operations
-
-## 🔒 Security Features
-
-- **JWT Authentication**: Secure token-based auth
-- **Password Hashing**: bcrypt password encryption
-- **CORS Protection**: Configurable cross-origin policies
-- **Input Validation**: Pydantic schema validation
-- **SQL Injection Protection**: SQLAlchemy ORM protection
-
-## 🗄️ Database
-
-This application uses PostgreSQL for robust data management:
-
-- **Database**: PostgreSQL with connection pooling
-- **Models**: User, Video, VideoView, VideoLike
-- **UUID Support**: Native PostgreSQL UUID support
-- **Auto-migration**: Tables are created automatically on startup
-- **Connection**: Configured via environment variables
-
-## 🚀 Complete Setup & Run Guide
-
-### Step 1: Navigate to Project Directory
-```bash
-# Windows PowerShell
-cd "C:\Users\DIGITAL ZONE\Downloads\cup-streaming-main (2) (1)\cup-streaming-main\cup-streaming-main"
-
-# Verify you're in the right directory
-ls
-# Should see: main.py, requirements_fastapi.txt, app/, etc.
-```
-
-### Step 2: Install Dependencies
-```bash
-# Install FastAPI dependencies
-pip install -r requirements_fastapi.txt
-
-# Or install individually if requirements file fails
-pip install fastapi uvicorn sqlalchemy psycopg2-binary python-jose[cryptography] passlib[bcrypt] python-multipart
-
-# Verify installation
-pip list | findstr fastapi
-```
-
-### Step 3: PostgreSQL Database Setup
-
-#### 3.1: Install PostgreSQL (if not installed)
-```bash
-# Download from: https://www.postgresql.org/download/windows/
-# Or using chocolatey
-choco install postgresql
-
-# Or using winget
-winget install PostgreSQL.PostgreSQL
-```
-
-#### 3.2: Start PostgreSQL Service
-```bash
-# Start PostgreSQL service
-net start postgresql-x64-14
-
-# Or using services.msc
-services.msc
-# Find "postgresql" service and start it
-```
-
-#### 3.3: Create Database and User
-```bash
-# Connect to PostgreSQL
-psql -U postgres
-
-# Create database
-CREATE DATABASE "cup-entertainment";
-
-# Create user (optional)
-CREATE USER cup_user WITH PASSWORD 'password123';
-
-# Grant privileges
-GRANT ALL PRIVILEGES ON DATABASE "cup-entertainment" TO cup_user;
-
-# Exit psql
-\q
-```
-
-#### 3.4: Test Database Connection
-```bash
-# Test connection
-psql -U postgres -d cup-entertainment -c "SELECT version();"
-
-# Or test with Python
-python -c "import psycopg2; conn = psycopg2.connect(host='localhost', database='cup-entertainment', user='postgres', password='#Trigonometry1'); print('Database connected successfully!')"
-```
-
-### Step 4: Configure Database Credentials
-```bash
-# Check current database configuration
-type app\core\config.py
-
-# The current settings are:
-# DB_NAME: "cup-entertainment"
-# DB_USER: "postgres"
-# DB_PASSWORD: "#Trigonometry1"
-# DB_HOST: "localhost"
-# DB_PORT: "5432"
-```
-
-### Step 5: Run the Application
-
-#### 5.1: Basic Run Commands
-```bash
-# Option 1: Using uvicorn directly
-uvicorn main:app --reload --host 127.0.0.1 --port 8000
-
-# Option 2: Using Python module
-py -m uvicorn main:app --reload --host 127.0.0.1 --port 8000
-
-# Option 3: With detailed logging
-py -m uvicorn main:app --host 127.0.0.1 --port 8000 --log-level info
-
-# Option 4: Using startup script
-python start_fastapi.py
-
-# Option 5: Run on different port (if 8000 is busy)
-uvicorn main:app --reload --host 127.0.0.1 --port 8001
-py -m uvicorn main:app --host 127.0.0.1 --port 8001 --log-level info
-```
-
-#### 5.2: Production Run Commands
-```bash
-# Without reload (production)
-uvicorn main:app --host 127.0.0.1 --port 8000
-
-# With multiple workers
-uvicorn main:app --host 127.0.0.1 --port 8000 --workers 4
-
-# Using gunicorn (if installed)
-gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 127.0.0.1:8000
-```
-
-### Step 5: Access the API
-Once running, access:
-- **API Documentation**: http://127.0.0.1:8000/docs
-- **ReDoc Documentation**: http://127.0.0.1:8000/redoc
-- **Health Check**: http://127.0.0.1:8000/health
-- **OpenAPI Schema**: http://127.0.0.1:8000/openapi.json
-
-### Step 6: Test Database Connectivity
-
-#### 6.1: Test PostgreSQL Connection
-```bash
-# Test basic connection
-psql -U postgres -h localhost -p 5432 -c "SELECT version();"
-
-# Test specific database
-psql -U postgres -d cup-entertainment -c "SELECT current_database();"
-
-# Test with Python
-python -c "
-import psycopg2
-try:
-    conn = psycopg2.connect(
-        host='localhost',
-        database='cup-entertainment',
-        user='postgres',
-        password='#Trigonometry1'
-    )
-    print('✅ Database connected successfully!')
-    conn.close()
-except Exception as e:
-    print(f'❌ Database connection failed: {e}')
-"
-```
-
-#### 6.2: Test FastAPI Application
-```bash
-# Test health endpoint
-curl http://127.0.0.1:8000/health
-
-# Or using PowerShell
-Invoke-WebRequest -Uri http://127.0.0.1:8000/health -UseBasicParsing
-
-# Test API documentation
-# Open browser: http://127.0.0.1:8000/docs
-```
-
-#### 6.3: Verify Database Tables Created
-```bash
-# Check if tables were created
-psql -U postgres -d cup-entertainment -c "\dt"
-
-# Should see tables like:
-# users_user
-# videos_video
-# videos_video_view
-# videos_video_like
-```
-
-## 🔧 Troubleshooting
-
-### Common Issues and Solutions
-
-#### 1. Port Already in Use
-```bash
-# Error: [Errno 10048] error while attempting to bind on address
-# Solution: Use a different port
-uvicorn main:app --reload --host 127.0.0.1 --port 8001
-```
-
-#### 2. PostgreSQL Connection Failed
-```bash
-# Error: password authentication failed for user "postgres"
-# Solution 1: Check PostgreSQL service is running
-net start postgresql-x64-14
-# or
-services.msc
-
-# Solution 2: Reset PostgreSQL password
-psql -U postgres
-ALTER USER postgres PASSWORD '#Trigonometry1';
-
-# Solution 3: Check pg_hba.conf file
-# Edit: C:\Program Files\PostgreSQL\14\data\pg_hba.conf
-# Change: md5 to trust for local connections
-
-# Solution 4: Test connection manually
-psql -U postgres -h localhost -p 5432
-
-# Solution 5: Check if database exists
-psql -U postgres -l
-# Should see "cup-entertainment" in the list
-```
-
-#### 3. Module Import Error
-```bash
-# Error: Could not import module "main"
-# Solution: Make sure you're in the correct directory
-cd "C:\Users\DIGITAL ZONE\Downloads\cup-streaming-main (2) (1)\cup-streaming-main\cup-streaming-main"
-```
-
-#### 4. Missing Dependencies
-```bash
-# Error: No module named 'fastapi'
-# Solution: Install dependencies
-pip install -r requirements_fastapi.txt
-```
-
-#### 5. Database Tables Not Created
-```bash
-# Solution: Check database connection and restart the application
-# Tables are created automatically on startup
-```
-
-### Windows-Specific Commands
-
-```powershell
-# Navigate to project directory
-cd "C:\Users\DIGITAL ZONE\Downloads\cup-streaming-main (2) (1)\cup-streaming-main\cup-streaming-main"
-
-# Install dependencies
-pip install -r requirements_fastapi.txt
-
-# Run application
-py -m uvicorn main:app --reload --host 127.0.0.1 --port 8000
-
-# Test API
-Invoke-WebRequest -Uri http://127.0.0.1:8000/health -UseBasicParsing
-```
+## 🚀 Deployment
+
+### Environment Variables
+
+Ensure all required environment variables are set in your production environment:
+
+- Database credentials
+- Secret keys
+- AWS credentials (if using S3)
+- Email configuration
+- Redis configuration
+
+### Production Checklist
+
+- [ ] Set `DEBUG=false`
+- [ ] Configure production database
+- [ ] Set up Redis instance
+- [ ] Configure AWS S3 (if using)
+- [ ] Set up email service
+- [ ] Configure CORS origins
+- [ ] Set up monitoring and logging
+- [ ] Run database migrations
+- [ ] Start background workers
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests
-5. Submit a pull request
-
-## ⚡ Quick Start - All Commands in Sequence
-
-### Complete Setup & Run (Copy & Paste)
-```bash
-# 1. Navigate to project
-cd "C:\Users\DIGITAL ZONE\Downloads\cup-streaming-main (2) (1)\cup-streaming-main\cup-streaming-main"
-
-# 2. Install dependencies
-pip install -r requirements_fastapi.txt
-
-# 3. Start PostgreSQL service
-net start postgresql-x64-14
-
-# 4. Create database
-psql -U postgres -c "CREATE DATABASE \"cup-entertainment\";"
-
-# 5. Test database connection
-python -c "import psycopg2; conn = psycopg2.connect(host='localhost', database='cup-entertainment', user='postgres', password='#Trigonometry1'); print('✅ Database connected!'); conn.close()"
-
-# 6. Run FastAPI application
-py -m uvicorn main:app --host 127.0.0.1 --port 8000 --log-level info
-
-# 7. Test application (in new terminal)
-Invoke-WebRequest -Uri http://127.0.0.1:8000/health -UseBasicParsing
-```
-
-### Alternative Port Commands
-```bash
-# If port 8000 is busy, use port 8001
-py -m uvicorn main:app --host 127.0.0.1 --port 8001 --log-level info
-
-# Test on port 8001
-Invoke-WebRequest -Uri http://127.0.0.1:8001/health -UseBasicParsing
-```
-
-## 📋 Complete Command Reference
-
-### Setup Commands
-```bash
-# 1. Navigate to project
-cd "C:\Users\DIGITAL ZONE\Downloads\cup-streaming-main (2) (1)\cup-streaming-main\cup-streaming-main"
-
-# 2. Install dependencies
-pip install -r requirements_fastapi.txt
-
-# 3. Create database (PostgreSQL)
-createdb cup-entertainment
-```
-
-### Run Commands
-```bash
-# Basic run
-uvicorn main:app --reload --host 127.0.0.1 --port 8000
-
-# Using Python module
-py -m uvicorn main:app --reload --host 127.0.0.1 --port 8000
-
-# With detailed logging
-py -m uvicorn main:app --host 127.0.0.1 --port 8000 --log-level info
-
-# Using startup script
-python start_fastapi.py
-
-# Run on different port
-uvicorn main:app --reload --host 127.0.0.1 --port 8001
-
-# Run without reload (production)
-uvicorn main:app --host 127.0.0.1 --port 8000
-```
-
-### Test Commands
-```bash
-# Test health endpoint
-curl http://127.0.0.1:8000/health
-
-# PowerShell test
-Invoke-WebRequest -Uri http://127.0.0.1:8000/health -UseBasicParsing
-
-# Test API documentation
-# Open browser: http://127.0.0.1:8000/docs
-```
-
-### Development Commands
-```bash
-# Install development dependencies
-pip install pytest pytest-asyncio httpx black isort flake8
-
-# Run tests
-pytest
-
-# Format code
-black app/
-isort app/
-
-# Lint code
-flake8 app/
-```
+4. Run tests and quality checks
+5. Commit your changes
+6. Push to your branch
+7. Create a pull request
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 📞 Support
+## 🆘 Support
 
-For questions and support, please open an issue in the repository.
+For support and questions:
+- Create an issue in the repository
+- Contact the development team
+- Check the documentation at `/docs`
+
+## 🔄 Version History
+
+- **v1.0.0** - Initial release with core streaming functionality
+  - User authentication and management
+  - Content upload and streaming
+  - API documentation
+  - Docker support
+  - Background task processing
