@@ -26,6 +26,7 @@ help:
 	@echo "migrate         - Run database migrations"
 	@echo "seed            - Seed database with sample data"
 
+
 # Development environment with hot reload
 dev:
 	@echo "Starting development environment..."
