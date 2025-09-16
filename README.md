@@ -123,8 +123,12 @@ DB_HOST=localhost
 DB_PORT=5432
 
 # Security
-SECRET_KEY=your-secret-key-here
 DEBUG=true
+HOST=0.0.0.0
+PORT=8000
+BASE_URL=http://localhost:8000
+# Security
+SECRET_KEY=cup-streaming
 
 # Redis Configuration
 REDIS_URL=redis://localhost:6379/0
@@ -290,28 +294,7 @@ Once the application is running, you can access the interactive API documentatio
 
 - **Swagger UI**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
-- **Custom Swagger UI**: http://localhost:8000/static/swagger-ui.html
-- **OpenAPI JSON**: http://localhost:8000/openapi.json
 
-### API Endpoints
-
-- **Authentication**: `/api/v1/auth/`
-  - `POST /register` - User registration
-  - `POST /login` - User login
-  - `POST /refresh` - Refresh access token
-  - `POST /logout` - User logout
-
-- **Users**: `/api/v1/users/`
-  - `GET /me` - Get current user profile
-  - `PUT /me` - Update user profile
-  - `DELETE /me` - Delete user account
-
-- **Content**: `/api/v1/content/`
-  - `GET /` - List all content
-  - `POST /` - Create new content
-  - `GET /{content_id}` - Get specific content
-  - `PUT /{content_id}` - Update content
-  - `DELETE /{content_id}` - Delete content
 
 ## 🐳 Docker Support
 
@@ -404,33 +387,3 @@ Ensure all required environment variables are set in your production environment
 - [ ] Set up monitoring and logging
 - [ ] Run database migrations
 - [ ] Start background workers
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests and quality checks
-5. Commit your changes
-6. Push to your branch
-7. Create a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🆘 Support
-
-For support and questions:
-- Create an issue in the repository
-- Contact the development team
-- Check the documentation at `/docs`
-
-## 🔄 Version History
-
-- **v1.0.0** - Initial release with core streaming functionality
-  - User authentication and management
-  - Content upload and streaming
-  - API documentation
-  - Docker support
-  - Background task processing
