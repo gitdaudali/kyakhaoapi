@@ -18,6 +18,7 @@ class Settings:
     HOST: str = os.getenv("HOST", "0.0.0.0")
     PORT: int = int(os.getenv("PORT", "8000"))
     DEBUG: bool = os.getenv("DEBUG", "true").lower() == "true"
+    BASE_URL: str = os.getenv("BASE_URL")
 
     # Security
     SECRET_KEY: str = os.getenv("SECRET_KEY")
