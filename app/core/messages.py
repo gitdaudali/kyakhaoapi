@@ -22,6 +22,19 @@ LOGOUT_SUCCESS = "Successfully logged out"
 LOGOUT_ALL_SUCCESS = "Successfully logged out from all devices"
 LOGOUT_NO_TOKENS = "Logout successful (no tokens to revoke)"
 
+# Registration Messages
+REGISTRATION_SUCCESS = (
+    "Registration successful. Please check your email for verification code."
+)
+REGISTRATION_EMAIL_SENT = "Verification code sent to your email address"
+OTP_INVALID = "Invalid or expired verification code"
+OTP_VERIFICATION_SUCCESS = "Email verified successfully. You can now login."
+OTP_VERIFICATION_FAILED = "Verification failed. Please check your code and try again."
+EMAIL_NOT_VERIFIED = "Please verify your email address before logging in"
+OTP_EXPIRED = "Verification code has expired. Please request a new one."
+OTP_ALREADY_USED = "Verification code has already been used"
+OTP_INVALID_OR_EXPIRED = "Invalid or expired verification code"
+
 # User Messages
 USER_NOT_FOUND = "User not found"
 USER_ALREADY_EXISTS = "User already exists"

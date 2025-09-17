@@ -1,5 +1,5 @@
 """
-Email utility functions for sending emails.
+Email utility functions for sending emails using Jinja2 templates.
 """
 
 import smtplib
@@ -8,6 +8,7 @@ from email.mime.text import MIMEText
 from typing import Optional
 
 from app.core.config import settings
+from app.utils.template_utils import EmailData, render_email_template
 
 
 def send_email(
@@ -76,9 +77,9 @@ def send_email(
 
 def create_password_reset_email(
     user_email: str, reset_token: str, user_name: str = None
-) -> tuple[str, str]:
+) -> EmailData:
     """
-    Create password reset email content.
+    Create password reset email content using template.
 
     Args:
         user_email: User's email address
@@ -86,61 +87,30 @@ def create_password_reset_email(
         user_name: User's name (optional)
 
     Returns:
-        Tuple of (subject, html_content)
+        EmailData object with subject and html_content
     """
-    display_name = user_name or user_email.split("@")[0]
+    username = user_name or user_email.split("@")[0]
+    subject = f"{settings.PROJECT_NAME} - Password Reset Request"
 
-    subject = "Password Reset Request - Cup Streaming"
+    html_content = render_email_template(
+        template_name="password_reset.html",
+        context={
+            "project_name": settings.PROJECT_NAME,
+            "username": username,
+            "email": user_email,
+            "reset_token": reset_token,
+            "valid_hours": settings.PASSWORD_RESET_TOKEN_EXPIRE_HOURS,
+        },
+    )
 
-    # Simple HTML email template
-    html_content = f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Password Reset</title>
-        <style>
-            body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
-            .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
-            .header {{ background-color: #4f46e5; color: white; padding: 20px; text-align: center; }}
-            .content {{ padding: 20px; background-color: #f9fafb; }}
-            .button {{ display: inline-block; padding: 12px 24px; background-color: #4f46e5; color: white; text-decoration: none; border-radius: 6px; margin: 20px 0; }}
-            .footer {{ padding: 20px; text-align: center; color: #6b7280; font-size: 14px; }}
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <h1>Cup Streaming</h1>
-            </div>
-            <div class="content">
-                <h2>Password Reset Request</h2>
-                <p>Hello {display_name},</p>
-                <p>We received a request to reset your password for your Cup Streaming account.</p>
-                <p>To reset your password, please use the following token:</p>
-                <div style="background-color: #e5e7eb; padding: 15px; border-radius: 6px; font-family: monospace; font-size: 18px; text-align: center; margin: 20px 0;">
-                    {reset_token}
-                </div>
-                <p>This token will expire in {settings.PASSWORD_RESET_TOKEN_EXPIRE_HOURS} hour(s).</p>
-                <p>If you did not request this password reset, please ignore this email.</p>
-                <p>For security reasons, do not share this token with anyone.</p>
-            </div>
-            <div class="footer">
-                <p>This email was sent from Cup Streaming. If you have any questions, please contact support.</p>
-            </div>
-        </div>
-    </body>
-    </html>
-    """
-
-    return subject, html_content
+    return EmailData(html_content=html_content, subject=subject)
 
 
 def create_email_verification_email(
     user_email: str, verification_token: str, user_name: str = None
-) -> tuple[str, str]:
+) -> EmailData:
     """
-    Create email verification email content.
+    Create email verification email content using template.
 
     Args:
         user_email: User's email address
@@ -148,50 +118,50 @@ def create_email_verification_email(
         user_name: User's name (optional)
 
     Returns:
-        Tuple of (subject, html_content)
+        EmailData object with subject and html_content
     """
-    display_name = user_name or user_email.split("@")[0]
+    username = user_name or user_email.split("@")[0]
+    subject = f"{settings.PROJECT_NAME} - Verify Your Email Address"
 
-    subject = "Verify Your Email - Cup Streaming"
+    html_content = render_email_template(
+        template_name="email_verification.html",
+        context={
+            "project_name": settings.PROJECT_NAME,
+            "username": username,
+            "email": user_email,
+            "verification_token": verification_token,
+            "valid_hours": settings.EMAIL_VERIFICATION_TOKEN_EXPIRE_HOURS,
+        },
+    )
 
-    # Simple HTML email template
-    html_content = f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Email Verification</title>
-        <style>
-            body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
-            .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
-            .header {{ background-color: #4f46e5; color: white; padding: 20px; text-align: center; }}
-            .content {{ padding: 20px; background-color: #f9fafb; }}
-            .button {{ display: inline-block; padding: 12px 24px; background-color: #4f46e5; color: white; text-decoration: none; border-radius: 6px; margin: 20px 0; }}
-            .footer {{ padding: 20px; text-align: center; color: #6b7280; font-size: 14px; }}
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <h1>Cup Streaming</h1>
-            </div>
-            <div class="content">
-                <h2>Verify Your Email Address</h2>
-                <p>Hello {display_name},</p>
-                <p>Welcome to Cup Streaming! Please verify your email address to complete your account setup.</p>
-                <p>To verify your email, please use the following token:</p>
-                <div style="background-color: #e5e7eb; padding: 15px; border-radius: 6px; font-family: monospace; font-size: 18px; text-align: center; margin: 20px 0;">
-                    {verification_token}
-                </div>
-                <p>This token will expire in {settings.EMAIL_VERIFICATION_TOKEN_EXPIRE_HOURS} hour(s).</p>
-                <p>If you did not create an account with us, please ignore this email.</p>
-            </div>
-            <div class="footer">
-                <p>This email was sent from Cup Streaming. If you have any questions, please contact support.</p>
-            </div>
-        </div>
-    </body>
-    </html>
+    return EmailData(html_content=html_content, subject=subject)
+
+
+def create_registration_otp_email(
+    user_email: str, otp_code: str, user_name: str = None
+) -> EmailData:
     """
+    Create registration OTP email content using template.
 
-    return subject, html_content
+    Args:
+        user_email: User's email address
+        otp_code: 6-digit OTP code
+        user_name: User's name (optional)
+
+    Returns:
+        EmailData object with subject and html_content
+    """
+    username = user_name or user_email.split("@")[0]
+    subject = f"{settings.PROJECT_NAME} - Welcome! Verify Your Email"
+
+    html_content = render_email_template(
+        template_name="register_user.html",
+        context={
+            "project_name": settings.PROJECT_NAME,
+            "username": username,
+            "email": user_email,
+            "otp_code": otp_code,
+        },
+    )
+
+    return EmailData(html_content=html_content, subject=subject)

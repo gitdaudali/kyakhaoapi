@@ -52,3 +52,23 @@ class EmailVerificationToken(BaseModel, TimestampMixin, table=True):
 
     # Relationship
     user: Optional["User"] = Relationship(back_populates="email_verification_tokens")
+
+
+class EmailVerificationOTP(BaseModel, TimestampMixin, table=True):
+    """Model for email verification OTP codes"""
+
+    __tablename__ = "email_verification_otps"
+
+    otp_code: str = Field(max_length=6, index=True)
+    user_id: uuid.UUID = Field(foreign_key="users.id", index=True)
+    email: str = Field(max_length=254, index=True)
+    expires_at: datetime = Field(
+        sa_type=TIMESTAMP(timezone=True),
+        default_factory=lambda: datetime.now(timezone.utc) + timedelta(minutes=10),
+    )
+    is_used: bool = Field(default=False, index=True)
+    used_at: Optional[datetime] = Field(default=None, sa_type=TIMESTAMP(timezone=True))
+    attempts: int = Field(default=0, description="Number of verification attempts")
+
+    # Relationship
+    user: Optional["User"] = Relationship(back_populates="email_verification_otps")

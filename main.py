@@ -36,8 +36,7 @@ app = FastAPI(
     license_info={"name": "MIT License", "url": "https://opensource.org/licenses/MIT"},
     servers=[
         {
-            "url": f"{settings.BASE_URL}",
-            "description": "Development server",
+            "url": f"{settings.BASE_URL}"
         }
     ],
     tags_metadata=[
@@ -82,7 +81,7 @@ app.add_middleware(
 security = HTTPBearer()
 
 # Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Include API router
 app.include_router(api_router, prefix="/api/v1")
@@ -130,13 +129,12 @@ async def root():
         "documentation": {
             "swagger_ui": "/docs",
             "redoc": "/redoc",
-            "custom_swagger": "/static/swagger-ui.html",
             "openapi_json": "/openapi.json",
         },
         "endpoints": {
             "authentication": "/api/v1/auth",
             "users": "/api/v1/users",
-            "videos": "/api/v1/videos",
+            "videos": "/api/v1/content",
         },
     }
 
@@ -144,12 +142,6 @@ async def root():
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
-
-
-@app.get("/docs/custom")
-async def custom_swagger_ui():
-    """Custom Swagger UI endpoint"""
-    return {"message": "Custom Swagger UI available at /static/swagger-ui.html"}
 
 
 @app.get("/api-info")

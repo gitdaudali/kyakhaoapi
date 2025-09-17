@@ -19,6 +19,7 @@ from app.core.deps import CurrentUser, get_current_user, verify_refresh_token
 from app.core.messages import (
     ACCOUNT_DEACTIVATED,
     CURRENT_PASSWORD_INCORRECT,
+    EMAIL_NOT_VERIFIED,
     EMAIL_VERIFICATION_SUCCESS,
     EMAIL_VERIFICATION_TOKEN_INVALID,
     INVALID_CREDENTIALS,
@@ -26,10 +27,13 @@ from app.core.messages import (
     LOGOUT_ALL_SUCCESS,
     LOGOUT_NO_TOKENS,
     LOGOUT_SUCCESS,
+    OTP_INVALID_OR_EXPIRED,
+    OTP_VERIFICATION_SUCCESS,
     PASSWORD_CHANGED_SUCCESS,
     PASSWORD_RESET_SENT,
     PASSWORD_RESET_SUCCESS,
     PASSWORD_RESET_TOKEN_INVALID,
+    REGISTRATION_SUCCESS,
 )
 from app.models.user import ProfileStatus, User, UserRole
 from app.schemas.auth import (
@@ -38,6 +42,7 @@ from app.schemas.auth import (
     LogoutRequest,
     LogoutResponse,
     MessageResponse,
+    OTPVerificationRequest,
     PasswordChangeRequest,
     PasswordResetConfirm,
     PasswordResetRequest,
@@ -51,13 +56,18 @@ from app.schemas.user import User as UserSchema
 from app.tasks.email_tasks import (
     send_email_verification_task,
     send_password_reset_email_task,
+    send_registration_otp_email_task,
 )
 from app.utils.auth_utils import (
     calculate_token_expiration,
     check_user_exists,
+    create_email_verification_otp,
     get_device_info,
     get_user_by_email,
     get_user_by_id_or_404,
+    increment_otp_attempts,
+    mark_email_verification_otp_used,
+    validate_email_verification_otp,
     validate_password_match,
 )
 from app.utils.token_utils import (
@@ -73,21 +83,20 @@ router = APIRouter()
 
 
 @router.post(
-    "/register", response_model=AuthResponse, status_code=status.HTTP_201_CREATED
+    "/register", response_model=MessageResponse, status_code=status.HTTP_201_CREATED
 )
 async def register_user(
     user_data: UserRegisterRequest, request: Request, db: AsyncSession = Depends(get_db)
 ) -> Any:
     """
-    Register a new user account with email and username validation.
-    Creates user account and returns authentication tokens.
+    Register a new user account with email validation.
+    Creates user account and sends OTP for email verification.
     """
     await check_user_exists(db, user_data.email)
 
     hashed_password = get_password_hash(user_data.password)
     db_user = User(
         email=user_data.email,
-        # username=user_data.username,
         password=hashed_password,
         is_active=True,
         is_superuser=False,
@@ -98,33 +107,13 @@ async def register_user(
     await db.commit()
     await db.refresh(db_user)
 
-    # Create email verification token and send email
-    verification_token = await create_email_verification_token(
-        db, db_user.id, db_user.email
-    )
-    send_email_verification_task.delay(
-        email_to=db_user.email, verification_token=verification_token.token
+    # Create email verification OTP and send email
+    otp = await create_email_verification_otp(db, db_user.id, db_user.email)
+    send_registration_otp_email_task.delay(
+        email_to=db_user.email, otp_code=otp.otp_code
     )
 
-    device_info = get_device_info(request)
-    access_token, refresh_token = await create_token_pair(
-        db_user, db, device_info, remember_me=False
-    )
-
-    access_expires_in, refresh_expires_in = calculate_token_expiration(
-        settings.ACCESS_TOKEN_EXPIRE_MINUTES, settings.REFRESH_TOKEN_EXPIRE_DAYS
-    )
-
-    return AuthResponse(
-        user=UserSchema.from_orm(db_user),
-        tokens=TokenResponse(
-            access_token=access_token,
-            refresh_token=refresh_token,
-            token_type="bearer",
-            expires_in=access_expires_in,
-            refresh_expires_in=refresh_expires_in,
-        ),
-    )
+    return MessageResponse(message=REGISTRATION_SUCCESS)
 
 
 @router.post("/login", response_model=AuthResponse)
@@ -147,6 +136,12 @@ async def login_user(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=ACCOUNT_DEACTIVATED,
+        )
+
+    if user.profile_status == ProfileStatus.PENDING_VERIFICATION:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=EMAIL_NOT_VERIFIED,
         )
 
     device_info = get_device_info(request)
@@ -289,10 +284,8 @@ async def request_password_reset(
     """
     user = await get_user_by_email(db, reset_data.email)
     if user:
-        # Create password reset token
         reset_token = await create_password_reset_token(db, user.id)
 
-        # Send email via Celery task
         send_password_reset_email_task.delay(
             email_to=user.email,
             reset_token=reset_token.token,
@@ -329,30 +322,36 @@ async def confirm_password_reset(
     return MessageResponse(message=PASSWORD_RESET_SUCCESS)
 
 
-@router.post("/email/verify", response_model=MessageResponse)
-async def verify_email(
-    verification_data: EmailVerificationRequest, db: AsyncSession = Depends(get_db)
+@router.post("/verify-otp", response_model=MessageResponse)
+async def verify_otp(
+    verification_data: OTPVerificationRequest, db: AsyncSession = Depends(get_db)
 ) -> MessageResponse:
     """
-    Verify email address using verification token.
-    Validates token and marks email as verified.
+    Verify email address using OTP code.
+    Validates OTP and marks email as verified.
     """
-    verification_token = await validate_email_verification_token(
-        db, verification_data.verification_token
+    otp = await validate_email_verification_otp(
+        db, verification_data.otp_code, verification_data.email
     )
-    if not verification_token:
+    if not otp:
+        await increment_otp_attempts(
+            db, verification_data.otp_code, verification_data.email
+        )
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=EMAIL_VERIFICATION_TOKEN_INVALID,
+            detail=OTP_INVALID_OR_EXPIRED,
         )
 
-    await get_user_by_id_or_404(db, verification_token.user_id)
+    user = await get_user_by_id_or_404(db, otp.user_id)
+    user.profile_status = ProfileStatus.ACTIVE
 
-    await mark_email_verification_token_used(db, verification_data.verification_token)
+    await mark_email_verification_otp_used(
+        db, verification_data.otp_code, verification_data.email
+    )
 
     await db.commit()
 
-    return MessageResponse(message=EMAIL_VERIFICATION_SUCCESS)
+    return MessageResponse(message=OTP_VERIFICATION_SUCCESS)
 
 
 @router.get(

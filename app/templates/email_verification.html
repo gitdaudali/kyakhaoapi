@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Verification - Cup Streaming</title>
+</head>
+<body style="font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 400px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-top: 5px solid #78226C;">
+    <tr>
+        <td align="center" style="padding: 35px;">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td align="center" style="margin-bottom: 15px;">
+                        <img src="https://dev-cup-adm.vertexaitec.com/assets/logo-C-Uwywz6.png" alt="Cup Streaming Logo" style="width: 104px; height: 68px; margin-right: 8px; display: inline-block; vertical-align: middle;">
+                        <h1 style="font-size: 22px; font-weight: 700; color: #333333; margin: 0; letter-spacing: 0.5px; display: inline-block; vertical-align: middle;">
+                            Cup<span style="color: #78226C;">Streaming</span>
+                        </h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td><div style="height: 1px; background-color: #78226C; margin: 10px 0;"></div></td>
+                </tr>
+                <tr>
+                    <td style="margin-bottom: 30px;">
+                        <h2 style="color: #333333; margin-bottom: 15px; font-weight: 600;">Verify Your Email Address</h2>
+                        <p style="color: #555555; margin-bottom: 20px; font-size: 15px; line-height: 1.5;">Hello {{ username }},</p>
+                        <p style="color: #555555; margin-bottom: 20px; font-size: 15px; line-height: 1.5;">Welcome to Cup Streaming! Please verify your email address to complete your account setup.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="margin-bottom: 30px;">
+                        <div style="background-color: #F7EAF4; padding: 20px; border-radius: 8px; border-left: 4px solid #78226C; margin-bottom: 25px; text-align: center;">
+                            <p style="font-size: 18px; font-weight: bold; letter-spacing: 2px; color: #333333; margin: 0; display: inline-block; text-align: center; word-break: break-all;">{{ verification_token }}</p>
+                        </div>
+                        <p style="color: #777777; font-size: 13px; margin-top: 15px;">This token will expire in {{ valid_hours }} hour(s)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="margin: 30px 0; padding: 20px; background-color: #f9f9f9; border-radius: 8px; text-align: left;">
+                        <p style="color: #555555; margin: 0 0 10px 0; font-size: 14px; line-height: 1.5;">If you did not create an account with us, please ignore this email.</p>
+                        <p style="color: #555555; margin: 0 0 10px 0; font-size: 14px; line-height: 1.5;">Need help? Contact our support team:</p>
+                        <a href="mailto:support@cupstreaming.com" style="color: #78226C; text-decoration: none; font-weight: 500;">support@cupstreaming.com</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color: #999999; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eeeeee; text-align: center;">
+                        <p style="margin: 0 0 5px 0;">© 2025 Cup Streaming | London, UK</p>
+                        <div style="margin-top: 10px;">
+                            <a href="#" style="color: #777777; text-decoration: none; margin: 0 5px;">Privacy Policy</a> |
+                            <a href="#" style="color: #777777; text-decoration: none; margin: 0 5px;">Terms of Service</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
