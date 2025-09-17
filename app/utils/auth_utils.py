@@ -2,6 +2,8 @@
 Authentication utility functions for user management and validation.
 """
 
+import random
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 from fastapi import HTTPException, status
@@ -10,11 +12,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.messages import (
     EMAIL_EXISTS,
+    OTP_EXPIRED,
+    OTP_INVALID,
     PASSWORDS_DO_NOT_MATCH,
     USER_NOT_FOUND,
     USERNAME_EXISTS,
 )
 from app.models.user import User as UserModel
+from app.models.verification import EmailVerificationOTP
 
 
 async def get_user_by_email(session: AsyncSession, email: str) -> Optional[UserModel]:
@@ -178,3 +183,147 @@ def calculate_token_expiration(
         refresh_expires_in *= 7
 
     return access_expires_in, refresh_expires_in
+
+
+def generate_otp() -> str:
+    """
+    Generate a 6-digit OTP code.
+
+    Returns:
+        6-digit OTP code as string
+    """
+    return str(random.randint(100000, 999999))
+
+
+async def create_email_verification_otp(
+    session: AsyncSession, user_id: str, email: str
+) -> EmailVerificationOTP:
+    """
+    Create a new email verification OTP for a user.
+
+    Args:
+        session: Database session
+        user_id: User ID
+        email: User email address
+
+    Returns:
+        EmailVerificationOTP object
+    """
+    # Invalidate any existing OTPs for this user
+    await session.execute(
+        select(EmailVerificationOTP).where(
+            EmailVerificationOTP.user_id == user_id,
+            EmailVerificationOTP.is_used == False,
+        )
+    )
+    existing_otps = await session.execute(
+        select(EmailVerificationOTP).where(
+            EmailVerificationOTP.user_id == user_id,
+            EmailVerificationOTP.is_used == False,
+        )
+    )
+    for otp in existing_otps.scalars().all():
+        otp.is_used = True
+        otp.used_at = datetime.now(timezone.utc)
+
+    # Create new OTP
+    otp_code = generate_otp()
+    otp = EmailVerificationOTP(
+        otp_code=otp_code,
+        user_id=user_id,
+        email=email,
+        expires_at=datetime.now(timezone.utc) + timedelta(minutes=10),
+    )
+
+    session.add(otp)
+    await session.commit()
+    await session.refresh(otp)
+
+    return otp
+
+
+async def validate_email_verification_otp(
+    session: AsyncSession, otp_code: str, email: str
+) -> Optional[EmailVerificationOTP]:
+    """
+    Validate email verification OTP.
+
+    Args:
+        session: Database session
+        otp_code: OTP code to validate
+        email: User email address
+
+    Returns:
+        EmailVerificationOTP object if valid, None otherwise
+    """
+    result = await session.execute(
+        select(EmailVerificationOTP).where(
+            EmailVerificationOTP.otp_code == otp_code,
+            EmailVerificationOTP.email == email,
+            EmailVerificationOTP.is_used == False,
+            EmailVerificationOTP.expires_at > datetime.now(timezone.utc),
+        )
+    )
+    return result.scalar_one_or_none()
+
+
+async def mark_email_verification_otp_used(
+    session: AsyncSession, otp_code: str, email: str
+) -> bool:
+    """
+    Mark email verification OTP as used.
+
+    Args:
+        session: Database session
+        otp_code: OTP code to mark as used
+        email: User email address
+
+    Returns:
+        True if OTP was marked as used, False otherwise
+    """
+    result = await session.execute(
+        select(EmailVerificationOTP).where(
+            EmailVerificationOTP.otp_code == otp_code,
+            EmailVerificationOTP.email == email,
+            EmailVerificationOTP.is_used == False,
+        )
+    )
+    otp = result.scalar_one_or_none()
+
+    if otp:
+        otp.is_used = True
+        otp.used_at = datetime.now(timezone.utc)
+        await session.commit()
+        return True
+
+    return False
+
+
+async def increment_otp_attempts(
+    session: AsyncSession, otp_code: str, email: str
+) -> bool:
+    """
+    Increment OTP verification attempts.
+
+    Args:
+        session: Database session
+        otp_code: OTP code
+        email: User email address
+
+    Returns:
+        True if attempts were incremented, False otherwise
+    """
+    result = await session.execute(
+        select(EmailVerificationOTP).where(
+            EmailVerificationOTP.otp_code == otp_code,
+            EmailVerificationOTP.email == email,
+        )
+    )
+    otp = result.scalar_one_or_none()
+
+    if otp:
+        otp.attempts += 1
+        await session.commit()
+        return True
+
+    return False

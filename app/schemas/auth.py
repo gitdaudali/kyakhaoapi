@@ -275,6 +275,21 @@ class EmailVerificationRequest(BaseModel):
     verification_token: str = Field(..., description="Email verification token")
 
 
+class OTPVerificationRequest(BaseModel):
+    """Request schema for OTP verification"""
+
+    email: EmailStr = Field(..., description="User email address")
+    otp_code: str = Field(
+        ..., min_length=6, max_length=6, description="6-digit OTP code"
+    )
+
+    class Config:
+        from_attributes = True
+        json_schema_extra = {
+            "example": {"email": "user@example.com", "otp_code": "123456"}
+        }
+
+
 # Response Schemas
 class MessageResponse(BaseModel):
     """message response schema for APIs that return only a message"""

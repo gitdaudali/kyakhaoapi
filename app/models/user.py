@@ -15,7 +15,11 @@ if TYPE_CHECKING:
         WatchSession,
     )
     from app.models.token import RefreshToken, Token
-    from app.models.verification import EmailVerificationToken, PasswordResetToken
+    from app.models.verification import (
+        EmailVerificationOTP,
+        EmailVerificationToken,
+        PasswordResetToken,
+    )
 
 
 class UserRole(str, Enum):
@@ -66,6 +70,10 @@ class User(BaseModel, TimestampMixin, table=True):
         sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
     )
     email_verification_tokens: List["EmailVerificationToken"] = Relationship(
+        back_populates="user",
+        sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
+    )
+    email_verification_otps: List["EmailVerificationOTP"] = Relationship(
         back_populates="user",
         sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
     )
