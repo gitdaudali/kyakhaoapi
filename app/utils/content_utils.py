@@ -12,10 +12,19 @@ from app.models.content import (
     ContentCast,
     ContentCrew,
     ContentGenre,
+    ContentReview,
     Genre,
     Person,
 )
-from app.schemas.content import ContentFilters, GenreFilters, PaginationParams
+from app.models.user import User
+from app.schemas.content import (
+    CastFilters,
+    ContentFilters,
+    CrewFilters,
+    GenreFilters,
+    PaginationParams,
+    ReviewFilters,
+)
 
 
 async def get_content_by_id(
@@ -380,3 +389,391 @@ def calculate_pagination_info(page: int, size: int, total: int) -> dict:
         "has_next": has_next,
         "has_prev": has_prev,
     }
+
+
+async def get_content_cast(
+    db: AsyncSession,
+    content_id: UUID,
+    pagination: PaginationParams,
+    filters: CastFilters,
+) -> Tuple[List[ContentCast], int]:
+    """Get cast for a specific content with pagination and filtering"""
+    # Base query
+    query = (
+        select(ContentCast)
+        .join(Person, ContentCast.person_id == Person.id)
+        .where(
+            and_(
+                ContentCast.content_id == content_id,
+                Person.is_deleted == False,
+            )
+        )
+    )
+
+    # Apply filters
+    if filters.is_main_cast is not None:
+        query = query.where(ContentCast.is_main_cast == filters.is_main_cast)
+
+    if filters.search:
+        search_term = f"%{filters.search}%"
+        query = query.where(
+            or_(
+                ContentCast.character_name.ilike(search_term),
+                Person.name.ilike(search_term),
+            )
+        )
+
+    if filters.department:
+        # For cast, department is typically "Acting" or similar
+        query = query.where(
+            Person.known_for_department.ilike(f"%{filters.department}%")
+        )
+
+    # Get total count
+    count_query = select(func.count()).select_from(query.subquery())
+    total_result = await db.execute(count_query)
+    total = total_result.scalar()
+
+    # Apply pagination and sorting
+    if pagination.sort_by == "character_name":
+        sort_field = ContentCast.character_name
+    elif pagination.sort_by == "person_name":
+        sort_field = Person.name
+    elif pagination.sort_by == "cast_order":
+        sort_field = ContentCast.cast_order
+    else:
+        sort_field = ContentCast.cast_order
+
+    if pagination.sort_order == "desc":
+        query = query.order_by(desc(sort_field))
+    else:
+        query = query.order_by(sort_field)
+
+    # Apply pagination
+    offset = (pagination.page - 1) * pagination.size
+    query = query.offset(offset).limit(pagination.size)
+
+    # Execute query with person relationship
+    query = query.options(selectinload(ContentCast.person))
+    result = await db.execute(query)
+    cast_members = result.scalars().all()
+
+    return cast_members, total
+
+
+async def get_content_crew(
+    db: AsyncSession,
+    content_id: UUID,
+    pagination: PaginationParams,
+    filters: CrewFilters,
+) -> Tuple[List[ContentCrew], int]:
+    """Get crew for a specific content with pagination and filtering"""
+    # Base query
+    query = (
+        select(ContentCrew)
+        .join(Person, ContentCrew.person_id == Person.id)
+        .where(
+            and_(
+                ContentCrew.content_id == content_id,
+                Person.is_deleted == False,
+            )
+        )
+    )
+
+    # Apply filters
+    if filters.department:
+        query = query.where(ContentCrew.department.ilike(f"%{filters.department}%"))
+
+    if filters.job_title:
+        query = query.where(ContentCrew.job_title.ilike(f"%{filters.job_title}%"))
+
+    if filters.search:
+        search_term = f"%{filters.search}%"
+        query = query.where(
+            or_(
+                ContentCrew.job_title.ilike(search_term),
+                ContentCrew.department.ilike(search_term),
+                Person.name.ilike(search_term),
+            )
+        )
+
+    # Get total count
+    count_query = select(func.count()).select_from(query.subquery())
+    total_result = await db.execute(count_query)
+    total = total_result.scalar()
+
+    # Apply pagination and sorting
+    if pagination.sort_by == "job_title":
+        sort_field = ContentCrew.job_title
+    elif pagination.sort_by == "department":
+        sort_field = ContentCrew.department
+    elif pagination.sort_by == "person_name":
+        sort_field = Person.name
+    elif pagination.sort_by == "credit_order":
+        sort_field = ContentCrew.credit_order
+    else:
+        sort_field = ContentCrew.credit_order
+
+    if pagination.sort_order == "desc":
+        query = query.order_by(desc(sort_field))
+    else:
+        query = query.order_by(sort_field)
+
+    # Apply pagination
+    offset = (pagination.page - 1) * pagination.size
+    query = query.offset(offset).limit(pagination.size)
+
+    # Execute query with person relationship
+    query = query.options(selectinload(ContentCrew.person))
+    result = await db.execute(query)
+    crew_members = result.scalars().all()
+
+    return crew_members, total
+
+
+async def get_content_cast_crew(
+    db: AsyncSession, content_id: UUID
+) -> Tuple[List[ContentCast], List[ContentCrew]]:
+    """Get both cast and crew for a specific content"""
+    # Get cast
+    cast_query = (
+        select(ContentCast)
+        .join(Person, ContentCast.person_id == Person.id)
+        .where(
+            and_(
+                ContentCast.content_id == content_id,
+                Person.is_deleted == False,
+            )
+        )
+        .options(selectinload(ContentCast.person))
+        .order_by(ContentCast.cast_order)
+    )
+
+    # Get crew
+    crew_query = (
+        select(ContentCrew)
+        .join(Person, ContentCrew.person_id == Person.id)
+        .where(
+            and_(
+                ContentCrew.content_id == content_id,
+                Person.is_deleted == False,
+            )
+        )
+        .options(selectinload(ContentCrew.person))
+        .order_by(ContentCrew.credit_order)
+    )
+
+    # Execute both queries
+    cast_result = await db.execute(cast_query)
+    crew_result = await db.execute(crew_query)
+
+    cast_members = cast_result.scalars().all()
+    crew_members = crew_result.scalars().all()
+
+    return cast_members, crew_members
+
+
+async def get_content_reviews(
+    db: AsyncSession,
+    content_id: UUID,
+    pagination: PaginationParams,
+    filters: ReviewFilters,
+) -> Tuple[List[ContentReview], int]:
+    """Get reviews for a specific content with pagination and filtering"""
+    # Base query
+    query = (
+        select(ContentReview)
+        .join(User, ContentReview.user_id == User.id)
+        .where(
+            and_(
+                ContentReview.content_id == content_id,
+                User.is_deleted == False,
+                ContentReview.status == "published",
+            )
+        )
+    )
+
+    # Apply filters
+    if filters.rating_min is not None:
+        query = query.where(ContentReview.rating >= filters.rating_min)
+
+    if filters.rating_max is not None:
+        query = query.where(ContentReview.rating <= filters.rating_max)
+
+    if filters.is_featured is not None:
+        query = query.where(ContentReview.is_featured == filters.is_featured)
+
+    if filters.language:
+        query = query.where(ContentReview.language == filters.language)
+
+    if filters.user_id:
+        query = query.where(ContentReview.user_id == filters.user_id)
+
+    if filters.search:
+        search_term = f"%{filters.search}%"
+        query = query.where(
+            or_(
+                ContentReview.title.ilike(search_term),
+                ContentReview.review_text.ilike(search_term),
+            )
+        )
+
+    # Get total count
+    count_query = select(func.count()).select_from(query.subquery())
+    total_result = await db.execute(count_query)
+    total = total_result.scalar()
+
+    # Apply pagination and sorting
+    if pagination.sort_by == "rating":
+        sort_field = ContentReview.rating
+    elif pagination.sort_by == "helpful_votes":
+        sort_field = ContentReview.helpful_votes
+    elif pagination.sort_by == "created_at":
+        sort_field = ContentReview.created_at
+    elif pagination.sort_by == "title":
+        sort_field = ContentReview.title
+    else:
+        sort_field = ContentReview.created_at
+
+    if pagination.sort_order == "desc":
+        query = query.order_by(desc(sort_field))
+    else:
+        query = query.order_by(sort_field)
+
+    # Apply pagination
+    offset = (pagination.page - 1) * pagination.size
+    query = query.offset(offset).limit(pagination.size)
+
+    # Execute query with user relationship
+    query = query.options(selectinload(ContentReview.user))
+    result = await db.execute(query)
+    reviews = result.scalars().all()
+
+    return reviews, total
+
+
+async def get_review_stats(db: AsyncSession, content_id: UUID) -> dict:
+    """Get review statistics for a content"""
+    # Total reviews count
+    total_reviews_query = select(func.count()).where(
+        and_(
+            ContentReview.content_id == content_id,
+            ContentReview.status == "published",
+        )
+    )
+    total_reviews_result = await db.execute(total_reviews_query)
+    total_reviews = total_reviews_result.scalar()
+
+    if total_reviews == 0:
+        return {
+            "total_reviews": 0,
+            "average_rating": None,
+            "rating_distribution": {},
+            "featured_reviews_count": 0,
+            "recent_reviews_count": 0,
+        }
+
+    # Average rating
+    avg_rating_query = select(func.avg(ContentReview.rating)).where(
+        and_(
+            ContentReview.content_id == content_id,
+            ContentReview.status == "published",
+        )
+    )
+    avg_rating_result = await db.execute(avg_rating_query)
+    average_rating = avg_rating_result.scalar()
+
+    # Rating distribution
+    rating_dist_query = (
+        select(
+            ContentReview.rating,
+            func.count().label("count"),
+        )
+        .where(
+            and_(
+                ContentReview.content_id == content_id,
+                ContentReview.status == "published",
+            )
+        )
+        .group_by(ContentReview.rating)
+        .order_by(ContentReview.rating)
+    )
+    rating_dist_result = await db.execute(rating_dist_query)
+    rating_distribution = {
+        str(row.rating): row.count for row in rating_dist_result.fetchall()
+    }
+
+    # Featured reviews count
+    featured_query = select(func.count()).where(
+        and_(
+            ContentReview.content_id == content_id,
+            ContentReview.status == "published",
+            ContentReview.is_featured == True,
+        )
+    )
+    featured_result = await db.execute(featured_query)
+    featured_reviews_count = featured_result.scalar()
+
+    # Recent reviews count (last 30 days)
+    from datetime import datetime, timedelta
+
+    thirty_days_ago = datetime.utcnow() - timedelta(days=30)
+    recent_query = select(func.count()).where(
+        and_(
+            ContentReview.content_id == content_id,
+            ContentReview.status == "published",
+            ContentReview.created_at >= thirty_days_ago,
+        )
+    )
+    recent_result = await db.execute(recent_query)
+    recent_reviews_count = recent_result.scalar()
+
+    return {
+        "total_reviews": total_reviews,
+        "average_rating": round(average_rating, 2) if average_rating else None,
+        "rating_distribution": rating_distribution,
+        "featured_reviews_count": featured_reviews_count,
+        "recent_reviews_count": recent_reviews_count,
+    }
+
+
+async def get_content_review_by_id(
+    db: AsyncSession, review_id: UUID
+) -> Optional[ContentReview]:
+    """Get a specific review by ID"""
+    query = (
+        select(ContentReview)
+        .join(User, ContentReview.user_id == User.id)
+        .where(
+            and_(
+                ContentReview.id == review_id,
+                User.is_deleted == False,
+                ContentReview.status == "published",
+            )
+        )
+        .options(selectinload(ContentReview.user))
+    )
+
+    result = await db.execute(query)
+    return result.scalar_one_or_none()
+
+
+async def get_user_review_for_content(
+    db: AsyncSession, content_id: UUID, user_id: UUID
+) -> Optional[ContentReview]:
+    """Get a user's review for specific content"""
+    query = (
+        select(ContentReview)
+        .join(User, ContentReview.user_id == User.id)
+        .where(
+            and_(
+                ContentReview.content_id == content_id,
+                ContentReview.user_id == user_id,
+                User.is_deleted == False,
+            )
+        )
+        .options(selectinload(ContentReview.user))
+    )
+
+    result = await db.execute(query)
+    return result.scalar_one_or_none()

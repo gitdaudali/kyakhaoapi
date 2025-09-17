@@ -76,6 +76,7 @@ class CastMember(BaseModel):
     character_name: Optional[str] = Field(None, description="Character name")
     is_main_cast: bool = Field(False, description="Whether main cast member")
     cast_order: int = Field(0, description="Billing order")
+    character_image_url: Optional[str] = Field(None, description="Poster image URL")
 
     class Config:
         from_attributes = True
@@ -102,15 +103,19 @@ class ContentBase(BaseModel):
     tagline: Optional[str] = Field(None, description="Content tagline")
     content_type: ContentType = Field(..., description="Type of content")
     status: ContentStatus = Field(..., description="Content status")
-    rating: ContentRating = Field(..., description="Content rating")
+    rating: ContentRating = Field(
+        ..., alias="content_rating", description="Content rating"
+    )
     release_date: Optional[date] = Field(None, description="Release date")
-    duration_minutes: Optional[int] = Field(None, description="Duration in minutes")
+    duration_minutes: Optional[int] = Field(
+        None, alias="runtime", description="Duration in minutes"
+    )
     imdb_id: Optional[str] = Field(None, description="IMDB ID")
     tmdb_id: Optional[int] = Field(None, description="TMDB ID")
     is_featured: bool = Field(False, description="Whether content is featured")
     is_trending: bool = Field(False, description="Whether content is trending")
-    view_count: int = Field(0, description="Total view count")
-    like_count: int = Field(0, description="Total like count")
+    view_count: int = Field(0, alias="total_views", description="Total view count")
+    like_count: int = Field(0, alias="likes_count", description="Total like count")
     average_rating: Optional[float] = Field(None, description="Average user rating")
     poster_url: Optional[str] = Field(None, description="Poster image URL")
     backdrop_url: Optional[str] = Field(None, description="Backdrop image URL")
@@ -134,7 +139,9 @@ class ContentUpdate(BaseModel):
     status: Optional[ContentStatus] = Field(None, description="Content status")
     rating: Optional[ContentRating] = Field(None, description="Content rating")
     release_date: Optional[date] = Field(None, description="Release date")
-    duration_minutes: Optional[int] = Field(None, description="Duration in minutes")
+    duration_minutes: Optional[int] = Field(
+        None, alias="runtime", description="Duration in minutes"
+    )
     imdb_id: Optional[str] = Field(None, description="IMDB ID")
     tmdb_id: Optional[int] = Field(None, description="TMDB ID")
     is_featured: Optional[bool] = Field(None, description="Whether content is featured")
@@ -177,6 +184,24 @@ class MovieFileSimple(BaseModel):
         from_attributes = True
 
 
+class EpisodeQualitySimple(BaseModel):
+    """Simplified episode quality schema"""
+
+    id: UUID = Field(..., description="Episode quality ID")
+    quality_level: str = Field(..., description="Quality level (1080p, 720p, etc.)")
+    resolution_width: int = Field(..., description="Video width in pixels")
+    resolution_height: int = Field(..., description="Video height in pixels")
+    file_url: str = Field(..., description="File URL")
+    file_size_bytes: Optional[int] = Field(None, description="File size in bytes")
+    duration_seconds: Optional[float] = Field(None, description="Duration in seconds")
+    bitrate_kbps: Optional[int] = Field(None, description="Bitrate in kbps")
+    video_codec: Optional[str] = Field(None, description="Video codec")
+    is_ready: bool = Field(True, description="Whether file is ready for streaming")
+
+    class Config:
+        from_attributes = True
+
+
 class EpisodeSimple(BaseModel):
     """Simplified episode schema for TV series"""
 
@@ -190,6 +215,9 @@ class EpisodeSimple(BaseModel):
     thumbnail_url: Optional[str] = Field(None, description="Thumbnail URL")
     views_count: int = Field(0, description="View count")
     is_available: bool = Field(True, description="Whether episode is available")
+    quality_versions: List[EpisodeQualitySimple] = Field(
+        default_factory=list, description="Available quality versions"
+    )
 
     class Config:
         from_attributes = True
@@ -205,6 +233,12 @@ class SeasonSimple(BaseModel):
     poster_url: Optional[str] = Field(None, description="Season poster URL")
     air_date: Optional[date] = Field(None, description="Air date")
     episode_count: int = Field(0, description="Number of episodes")
+    total_duration_minutes: Optional[int] = Field(
+        None, description="Total season duration in minutes"
+    )
+    average_episode_duration: Optional[float] = Field(
+        None, description="Average episode duration in minutes"
+    )
     is_complete: bool = Field(False, description="Whether season is complete")
     episodes: List[EpisodeSimple] = Field(
         default_factory=list, description="Season episodes"
@@ -224,6 +258,12 @@ class SeasonListSimple(BaseModel):
     poster_url: Optional[str] = Field(None, description="Season poster URL")
     air_date: Optional[date] = Field(None, description="Air date")
     episode_count: int = Field(0, description="Number of episodes")
+    total_duration_minutes: Optional[int] = Field(
+        None, description="Total season duration in minutes"
+    )
+    average_episode_duration: Optional[float] = Field(
+        None, description="Average episode duration in minutes"
+    )
     is_complete: bool = Field(False, description="Whether season is complete")
 
     class Config:
@@ -264,11 +304,13 @@ class ContentDetail(BaseModel):
 
     # Release Information
     release_date: Optional[date] = Field(None, description="Release date")
-    duration_minutes: Optional[int] = Field(None, description="Duration in minutes")
+    duration_minutes: Optional[int] = Field(
+        None, alias="runtime", description="Duration in minutes"
+    )
 
     # Statistics
-    view_count: int = Field(0, description="Total view count")
-    like_count: int = Field(0, description="Total like count")
+    view_count: int = Field(0, alias="total_views", description="Total view count")
+    like_count: int = Field(0, alias="likes_count", description="Total like count")
     average_rating: Optional[float] = Field(None, description="Average user rating")
 
     # Flags
@@ -305,14 +347,17 @@ class ContentList(BaseModel):
     status: ContentStatus = Field(..., description="Content status")
     content_rating: ContentRating = Field(..., description="Content rating")
     release_date: Optional[date] = Field(None, description="Release date")
-    duration_minutes: Optional[int] = Field(None, description="Duration in minutes")
+    duration_minutes: Optional[int] = Field(
+        None, alias="runtime", description="Duration in minutes"
+    )
     is_featured: bool = Field(False, description="Whether content is featured")
     is_trending: bool = Field(False, description="Whether content is trending")
-    view_count: int = Field(0, description="Total view count")
-    like_count: int = Field(0, description="Total like count")
+    view_count: int = Field(0, alias="total_views", description="Total view count")
+    like_count: int = Field(0, alias="likes_count", description="Total like count")
     average_rating: Optional[float] = Field(None, description="Average user rating")
     poster_url: Optional[str] = Field(None, description="Poster image URL")
     backdrop_url: Optional[str] = Field(None, description="Backdrop image URL")
+    trailer_url: Optional[str] = Field(None, description="Trailer URL")
     genres: List[Genre] = Field(default_factory=list, description="Content genres")
 
     # Content type specific data for list view
@@ -392,3 +437,177 @@ class GenreFilters(BaseModel):
 
     is_active: Optional[bool] = Field(None, description="Filter by active status")
     search: Optional[str] = Field(None, description="Search in name and description")
+
+
+class CastListResponse(BaseModel):
+    """Response schema for cast list with pagination"""
+
+    items: List[CastMember] = Field(..., description="List of cast members")
+    total: int = Field(..., description="Total number of cast members")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+
+class CrewListResponse(BaseModel):
+    """Response schema for crew list with pagination"""
+
+    items: List[CrewMember] = Field(..., description="List of crew members")
+    total: int = Field(..., description="Total number of crew members")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+
+class CastFilters(BaseModel):
+    """Filters for cast queries"""
+
+    is_main_cast: Optional[bool] = Field(None, description="Filter by main cast status")
+    search: Optional[str] = Field(
+        None, description="Search in character name or person name"
+    )
+    department: Optional[str] = Field(None, description="Filter by department")
+
+
+class CrewFilters(BaseModel):
+    """Filters for crew queries"""
+
+    department: Optional[str] = Field(None, description="Filter by department")
+    job_title: Optional[str] = Field(None, description="Filter by job title")
+    search: Optional[str] = Field(
+        None, description="Search in job title or person name"
+    )
+
+
+class ReviewUser(BaseModel):
+    """Simplified user schema for reviews"""
+
+    id: UUID = Field(..., description="User ID")
+    email: str = Field(..., description="User email")
+    first_name: Optional[str] = Field(None, description="First name")
+    last_name: Optional[str] = Field(None, description="Last name")
+    avatar_url: Optional[str] = Field(None, description="Profile image URL")
+    is_verified: bool = Field(False, description="Whether user is verified")
+
+    class Config:
+        from_attributes = True
+
+
+class ReviewBase(BaseModel):
+    """Base review schema"""
+
+    rating: float = Field(..., ge=1.0, le=5.0, description="Rating (1.0-5.0)")
+    title: Optional[str] = Field(None, description="Review title")
+    review_text: Optional[str] = Field(None, description="Review text")
+    language: str = Field("en", description="Review language")
+    is_featured: bool = Field(False, description="Whether review is featured")
+    helpful_votes: int = Field(0, description="Number of helpful votes")
+    total_votes: int = Field(0, description="Total number of votes")
+    is_edited: bool = Field(False, description="Whether review was edited")
+    last_edited_at: Optional[datetime] = Field(None, description="Last edit timestamp")
+
+
+class ReviewCreate(ReviewBase):
+    """Schema for creating a review"""
+
+    content_id: UUID = Field(..., description="Content ID")
+
+
+class ReviewUpdate(BaseModel):
+    """Schema for updating a review"""
+
+    rating: Optional[float] = Field(
+        None, ge=1.0, le=5.0, description="Rating (1.0-5.0)"
+    )
+    title: Optional[str] = Field(None, description="Review title")
+    review_text: Optional[str] = Field(None, description="Review text")
+    language: Optional[str] = Field(None, description="Review language")
+
+
+class Review(ReviewBase):
+    """Review response schema"""
+
+    id: UUID = Field(..., description="Review ID")
+    content_id: UUID = Field(..., description="Content ID")
+    user_id: UUID = Field(..., description="User ID")
+    status: str = Field(..., description="Review status")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+    user: ReviewUser = Field(..., description="Review author")
+
+    class Config:
+        from_attributes = True
+
+
+class ReviewSimple(BaseModel):
+    """Simplified review schema for lists"""
+
+    id: UUID = Field(..., description="Review ID")
+    rating: float = Field(..., description="Rating (1.0-5.0)")
+    title: Optional[str] = Field(None, description="Review title")
+    review_text: Optional[str] = Field(None, description="Review text")
+    language: str = Field(..., description="Review language")
+    is_featured: bool = Field(False, description="Whether review is featured")
+    helpful_votes: int = Field(0, description="Number of helpful votes")
+    total_votes: int = Field(0, description="Total number of votes")
+    is_edited: bool = Field(False, description="Whether review was edited")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    last_edited_at: Optional[datetime] = Field(None, description="Last edit timestamp")
+    user: ReviewUser = Field(..., description="Review author")
+
+    class Config:
+        from_attributes = True
+
+
+class ReviewListResponse(BaseModel):
+    """Response schema for review list with pagination"""
+
+    items: List[ReviewSimple] = Field(..., description="List of reviews")
+    total: int = Field(..., description="Total number of reviews")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+
+class ReviewFilters(BaseModel):
+    """Filters for review queries"""
+
+    rating_min: Optional[float] = Field(
+        None, ge=1.0, le=5.0, description="Minimum rating"
+    )
+    rating_max: Optional[float] = Field(
+        None, ge=1.0, le=5.0, description="Maximum rating"
+    )
+    is_featured: Optional[bool] = Field(None, description="Filter by featured status")
+    language: Optional[str] = Field(None, description="Filter by language")
+    search: Optional[str] = Field(None, description="Search in title or review text")
+    user_id: Optional[UUID] = Field(None, description="Filter by specific user")
+
+
+class ReviewStats(BaseModel):
+    """Review statistics for content"""
+
+    total_reviews: int = Field(0, description="Total number of reviews")
+    average_rating: Optional[float] = Field(None, description="Average rating")
+    rating_distribution: dict = Field(
+        default_factory=dict, description="Rating distribution"
+    )
+    featured_reviews_count: int = Field(0, description="Number of featured reviews")
+    recent_reviews_count: int = Field(
+        0, description="Number of recent reviews (last 30 days)"
+    )
+
+
+class ContentReviewsResponse(BaseModel):
+    """Response schema for content reviews with statistics"""
+
+    content_id: UUID = Field(..., description="Content ID")
+    reviews: List[ReviewSimple] = Field(..., description="List of reviews")
+    stats: ReviewStats = Field(..., description="Review statistics")
+    pagination: dict = Field(..., description="Pagination information")

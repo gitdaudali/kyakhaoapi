@@ -265,6 +265,12 @@ class Season(BaseModel, TimestampMixin, table=True):
 
     # Season Metrics
     episode_count: int = Field(sa_type=Integer, default=0)
+    total_duration_minutes: Optional[int] = Field(
+        sa_type=Integer, default=None
+    )  # Total season duration in minutes
+    average_episode_duration: Optional[float] = Field(
+        sa_type=Float, default=None
+    )  # Average episode duration in minutes
 
     # Status
     is_complete: bool = Field(sa_type=Boolean, default=False)
@@ -309,7 +315,7 @@ class Episode(BaseModel, TimestampMixin, table=True):
     tag_line: Optional[str] = Field(sa_type=Text, default=None)
 
     # Technical Information
-    runtime: Optional[int] = Field(sa_type=Integer, default=None)
+    runtime: Optional[int] = Field(sa_type=Integer, default=None)  # Duration in minutes
 
     # Air Information
     air_date: Optional[date] = Field(sa_type=Date, default=None, index=True)
@@ -408,6 +414,9 @@ class EpisodeQuality(BaseModel, TimestampMixin, table=True):
     # File Information
     file_url: str = Field(sa_type=String(500), nullable=False)
     file_size_bytes: Optional[int] = Field(sa_type=Integer, default=None)
+    duration_seconds: Optional[float] = Field(
+        sa_type=Float, default=None
+    )  # Duration in seconds for this quality
     bitrate_kbps: Optional[int] = Field(sa_type=Integer, default=None)
     video_codec: Optional[str] = Field(sa_type=String(50), default=None)
 
