@@ -21,6 +21,9 @@ from app.core.messages import (
     INVALID_FILTERS,
     INVALID_PAGINATION,
     INVALID_SORT_PARAMS,
+    REVIEW_LIST_SUCCESS,
+    REVIEW_NOT_FOUND,
+    REVIEW_STATS_SUCCESS,
 )
 from app.schemas.content import (
     CastCrewResponse,
@@ -31,6 +34,7 @@ from app.schemas.content import (
     ContentFilters,
     ContentList,
     ContentListResponse,
+    ContentReviewsResponse,
     CrewFilters,
     CrewListResponse,
     Genre,
@@ -38,6 +42,9 @@ from app.schemas.content import (
     GenreListResponse,
     PaginatedResponse,
     PaginationParams,
+    ReviewFilters,
+    ReviewListResponse,
+    ReviewStats,
 )
 from app.utils.content_utils import (
     calculate_pagination_info,
@@ -46,10 +53,13 @@ from app.utils.content_utils import (
     get_content_cast_crew,
     get_content_crew,
     get_content_list,
+    get_content_review_by_id,
+    get_content_reviews,
     get_featured_content,
     get_genre_by_id,
     get_genre_by_slug,
     get_genres_list,
+    get_review_stats,
     get_trending_content,
 )
 
@@ -501,4 +511,95 @@ async def get_content_cast_crew_endpoint(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error retrieving cast and crew: {str(e)}",
+        )
+
+
+@router.get("/{content_id}/reviews", response_model=ReviewListResponse)
+async def get_content_reviews_endpoint(
+    content_id: UUID,
+    page: int = Query(1, ge=1, description="Page number"),
+    size: int = Query(
+        settings.DEFAULT_PAGE_SIZE,
+        ge=1,
+        le=settings.MAX_PAGE_SIZE,
+        description="Page size",
+    ),
+    rating_min: Optional[float] = Query(
+        None, ge=1.0, le=5.0, description="Minimum rating filter"
+    ),
+    rating_max: Optional[float] = Query(
+        None, ge=1.0, le=5.0, description="Maximum rating filter"
+    ),
+    is_featured: Optional[bool] = Query(None, description="Filter by featured status"),
+    language: Optional[str] = Query(None, description="Filter by language"),
+    search: Optional[str] = Query(None, description="Search in title or review text"),
+    user_id: Optional[UUID] = Query(None, description="Filter by specific user"),
+    sort_by: str = Query("created_at", description="Sort field"),
+    sort_order: str = Query("desc", pattern="^(asc|desc)$", description="Sort order"),
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Get reviews for a specific content with pagination and filtering.
+    Returns a paginated list of reviews for the specified content.
+    """
+    try:
+        # Verify content exists
+        content = await get_content_by_id(db, content_id, include_relationships=False)
+        if not content:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=CONTENT_NOT_FOUND
+            )
+
+        filters = ReviewFilters(
+            rating_min=rating_min,
+            rating_max=rating_max,
+            is_featured=is_featured,
+            language=language,
+            search=search,
+            user_id=user_id,
+        )
+
+        pagination = PaginationParams(
+            page=page, size=size, sort_by=sort_by, sort_order=sort_order
+        )
+
+        reviews, total = await get_content_reviews(db, content_id, pagination, filters)
+
+        pagination_info = calculate_pagination_info(page, size, total)
+
+        return ReviewListResponse(items=reviews, **pagination_info)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving reviews: {str(e)}",
+        )
+
+
+@router.get("/reviews/{review_id}")
+async def get_review_by_id(
+    review_id: UUID,
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Get a specific review by ID.
+    Returns detailed information about a specific review.
+    """
+    try:
+        review = await get_content_review_by_id(db, review_id)
+        if not review:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=REVIEW_NOT_FOUND
+            )
+
+        return review
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving review: {str(e)}",
         )

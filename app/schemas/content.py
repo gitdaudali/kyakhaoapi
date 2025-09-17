@@ -481,3 +481,133 @@ class CrewFilters(BaseModel):
     search: Optional[str] = Field(
         None, description="Search in job title or person name"
     )
+
+
+class ReviewUser(BaseModel):
+    """Simplified user schema for reviews"""
+
+    id: UUID = Field(..., description="User ID")
+    email: str = Field(..., description="User email")
+    first_name: Optional[str] = Field(None, description="First name")
+    last_name: Optional[str] = Field(None, description="Last name")
+    avatar_url: Optional[str] = Field(None, description="Profile image URL")
+    is_verified: bool = Field(False, description="Whether user is verified")
+
+    class Config:
+        from_attributes = True
+
+
+class ReviewBase(BaseModel):
+    """Base review schema"""
+
+    rating: float = Field(..., ge=1.0, le=5.0, description="Rating (1.0-5.0)")
+    title: Optional[str] = Field(None, description="Review title")
+    review_text: Optional[str] = Field(None, description="Review text")
+    language: str = Field("en", description="Review language")
+    is_featured: bool = Field(False, description="Whether review is featured")
+    helpful_votes: int = Field(0, description="Number of helpful votes")
+    total_votes: int = Field(0, description="Total number of votes")
+    is_edited: bool = Field(False, description="Whether review was edited")
+    last_edited_at: Optional[datetime] = Field(None, description="Last edit timestamp")
+
+
+class ReviewCreate(ReviewBase):
+    """Schema for creating a review"""
+
+    content_id: UUID = Field(..., description="Content ID")
+
+
+class ReviewUpdate(BaseModel):
+    """Schema for updating a review"""
+
+    rating: Optional[float] = Field(
+        None, ge=1.0, le=5.0, description="Rating (1.0-5.0)"
+    )
+    title: Optional[str] = Field(None, description="Review title")
+    review_text: Optional[str] = Field(None, description="Review text")
+    language: Optional[str] = Field(None, description="Review language")
+
+
+class Review(ReviewBase):
+    """Review response schema"""
+
+    id: UUID = Field(..., description="Review ID")
+    content_id: UUID = Field(..., description="Content ID")
+    user_id: UUID = Field(..., description="User ID")
+    status: str = Field(..., description="Review status")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+    user: ReviewUser = Field(..., description="Review author")
+
+    class Config:
+        from_attributes = True
+
+
+class ReviewSimple(BaseModel):
+    """Simplified review schema for lists"""
+
+    id: UUID = Field(..., description="Review ID")
+    rating: float = Field(..., description="Rating (1.0-5.0)")
+    title: Optional[str] = Field(None, description="Review title")
+    review_text: Optional[str] = Field(None, description="Review text")
+    language: str = Field(..., description="Review language")
+    is_featured: bool = Field(False, description="Whether review is featured")
+    helpful_votes: int = Field(0, description="Number of helpful votes")
+    total_votes: int = Field(0, description="Total number of votes")
+    is_edited: bool = Field(False, description="Whether review was edited")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    last_edited_at: Optional[datetime] = Field(None, description="Last edit timestamp")
+    user: ReviewUser = Field(..., description="Review author")
+
+    class Config:
+        from_attributes = True
+
+
+class ReviewListResponse(BaseModel):
+    """Response schema for review list with pagination"""
+
+    items: List[ReviewSimple] = Field(..., description="List of reviews")
+    total: int = Field(..., description="Total number of reviews")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+
+class ReviewFilters(BaseModel):
+    """Filters for review queries"""
+
+    rating_min: Optional[float] = Field(
+        None, ge=1.0, le=5.0, description="Minimum rating"
+    )
+    rating_max: Optional[float] = Field(
+        None, ge=1.0, le=5.0, description="Maximum rating"
+    )
+    is_featured: Optional[bool] = Field(None, description="Filter by featured status")
+    language: Optional[str] = Field(None, description="Filter by language")
+    search: Optional[str] = Field(None, description="Search in title or review text")
+    user_id: Optional[UUID] = Field(None, description="Filter by specific user")
+
+
+class ReviewStats(BaseModel):
+    """Review statistics for content"""
+
+    total_reviews: int = Field(0, description="Total number of reviews")
+    average_rating: Optional[float] = Field(None, description="Average rating")
+    rating_distribution: dict = Field(
+        default_factory=dict, description="Rating distribution"
+    )
+    featured_reviews_count: int = Field(0, description="Number of featured reviews")
+    recent_reviews_count: int = Field(
+        0, description="Number of recent reviews (last 30 days)"
+    )
+
+
+class ContentReviewsResponse(BaseModel):
+    """Response schema for content reviews with statistics"""
+
+    content_id: UUID = Field(..., description="Content ID")
+    reviews: List[ReviewSimple] = Field(..., description="List of reviews")
+    stats: ReviewStats = Field(..., description="Review statistics")
+    pagination: dict = Field(..., description="Pagination information")

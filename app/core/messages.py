@@ -66,6 +66,14 @@ CREW_NOT_FOUND = "Crew not found"
 CREW_LIST_SUCCESS = "Crew list retrieved successfully"
 CAST_CREW_SUCCESS = "Cast and crew retrieved successfully"
 
+# Review Messages
+REVIEW_NOT_FOUND = "Review not found"
+REVIEW_LIST_SUCCESS = "Reviews retrieved successfully"
+REVIEW_CREATED_SUCCESS = "Review created successfully"
+REVIEW_UPDATED_SUCCESS = "Review updated successfully"
+REVIEW_DELETED_SUCCESS = "Review deleted successfully"
+REVIEW_STATS_SUCCESS = "Review statistics retrieved successfully"
+
 # General Messages
 INVALID_PAGINATION = "Invalid pagination parameters"
 INVALID_FILTERS = "Invalid filter parameters"
