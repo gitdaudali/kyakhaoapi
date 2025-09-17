@@ -102,15 +102,19 @@ class ContentBase(BaseModel):
     tagline: Optional[str] = Field(None, description="Content tagline")
     content_type: ContentType = Field(..., description="Type of content")
     status: ContentStatus = Field(..., description="Content status")
-    rating: ContentRating = Field(..., description="Content rating")
+    rating: ContentRating = Field(
+        ..., alias="content_rating", description="Content rating"
+    )
     release_date: Optional[date] = Field(None, description="Release date")
-    duration_minutes: Optional[int] = Field(None, description="Duration in minutes")
+    duration_minutes: Optional[int] = Field(
+        None, alias="runtime", description="Duration in minutes"
+    )
     imdb_id: Optional[str] = Field(None, description="IMDB ID")
     tmdb_id: Optional[int] = Field(None, description="TMDB ID")
     is_featured: bool = Field(False, description="Whether content is featured")
     is_trending: bool = Field(False, description="Whether content is trending")
-    view_count: int = Field(0, description="Total view count")
-    like_count: int = Field(0, description="Total like count")
+    view_count: int = Field(0, alias="total_views", description="Total view count")
+    like_count: int = Field(0, alias="likes_count", description="Total like count")
     average_rating: Optional[float] = Field(None, description="Average user rating")
     poster_url: Optional[str] = Field(None, description="Poster image URL")
     backdrop_url: Optional[str] = Field(None, description="Backdrop image URL")
@@ -134,7 +138,9 @@ class ContentUpdate(BaseModel):
     status: Optional[ContentStatus] = Field(None, description="Content status")
     rating: Optional[ContentRating] = Field(None, description="Content rating")
     release_date: Optional[date] = Field(None, description="Release date")
-    duration_minutes: Optional[int] = Field(None, description="Duration in minutes")
+    duration_minutes: Optional[int] = Field(
+        None, alias="runtime", description="Duration in minutes"
+    )
     imdb_id: Optional[str] = Field(None, description="IMDB ID")
     tmdb_id: Optional[int] = Field(None, description="TMDB ID")
     is_featured: Optional[bool] = Field(None, description="Whether content is featured")
@@ -264,11 +270,13 @@ class ContentDetail(BaseModel):
 
     # Release Information
     release_date: Optional[date] = Field(None, description="Release date")
-    duration_minutes: Optional[int] = Field(None, description="Duration in minutes")
+    duration_minutes: Optional[int] = Field(
+        None, alias="runtime", description="Duration in minutes"
+    )
 
     # Statistics
-    view_count: int = Field(0, description="Total view count")
-    like_count: int = Field(0, description="Total like count")
+    view_count: int = Field(0, alias="total_views", description="Total view count")
+    like_count: int = Field(0, alias="likes_count", description="Total like count")
     average_rating: Optional[float] = Field(None, description="Average user rating")
 
     # Flags
@@ -305,14 +313,17 @@ class ContentList(BaseModel):
     status: ContentStatus = Field(..., description="Content status")
     content_rating: ContentRating = Field(..., description="Content rating")
     release_date: Optional[date] = Field(None, description="Release date")
-    duration_minutes: Optional[int] = Field(None, description="Duration in minutes")
+    duration_minutes: Optional[int] = Field(
+        None, alias="runtime", description="Duration in minutes"
+    )
     is_featured: bool = Field(False, description="Whether content is featured")
     is_trending: bool = Field(False, description="Whether content is trending")
-    view_count: int = Field(0, description="Total view count")
-    like_count: int = Field(0, description="Total like count")
+    view_count: int = Field(0, alias="total_views", description="Total view count")
+    like_count: int = Field(0, alias="likes_count", description="Total like count")
     average_rating: Optional[float] = Field(None, description="Average user rating")
     poster_url: Optional[str] = Field(None, description="Poster image URL")
     backdrop_url: Optional[str] = Field(None, description="Backdrop image URL")
+    trailer_url: Optional[str] = Field(None, description="Trailer URL")
     genres: List[Genre] = Field(default_factory=list, description="Content genres")
 
     # Content type specific data for list view
