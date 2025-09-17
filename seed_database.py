@@ -385,6 +385,19 @@ class DatabaseSeeder:
         await self.session.commit()
         print(f"✅ Seeded {len(episodes_data)} episodes")
 
+    async def seed_episode_qualities(self):
+        """Seed episode qualities."""
+        episode_qualities_data = await self.load_json_fixture(
+            "episodes/episode_qualities.json"
+        )
+
+        for quality_data in episode_qualities_data:
+            episode_quality = EpisodeQuality(**quality_data)
+            self.session.add(episode_quality)
+
+        await self.session.commit()
+        print(f"✅ Seeded {len(episode_qualities_data)} episode qualities")
+
     async def seed_user_interactions(
         self, user_mapping: Dict[str, str], content_mapping: Dict[str, str]
     ):
@@ -561,6 +574,7 @@ class DatabaseSeeder:
             print("\n📺 Seeding episodes and seasons...")
             season_mapping = await self.seed_seasons(content_mapping)
             await self.seed_episodes(content_mapping, season_mapping)
+            await self.seed_episode_qualities()
 
             # Seed user interactions
             print("\n👤 Seeding user interactions...")

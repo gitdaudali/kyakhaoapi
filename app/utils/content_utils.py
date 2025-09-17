@@ -15,7 +15,13 @@ from app.models.content import (
     Genre,
     Person,
 )
-from app.schemas.content import ContentFilters, GenreFilters, PaginationParams
+from app.schemas.content import (
+    CastFilters,
+    ContentFilters,
+    CrewFilters,
+    GenreFilters,
+    PaginationParams,
+)
 
 
 async def get_content_by_id(
@@ -380,3 +386,185 @@ def calculate_pagination_info(page: int, size: int, total: int) -> dict:
         "has_next": has_next,
         "has_prev": has_prev,
     }
+
+
+async def get_content_cast(
+    db: AsyncSession,
+    content_id: UUID,
+    pagination: PaginationParams,
+    filters: CastFilters,
+) -> Tuple[List[ContentCast], int]:
+    """Get cast for a specific content with pagination and filtering"""
+    # Base query
+    query = (
+        select(ContentCast)
+        .join(Person, ContentCast.person_id == Person.id)
+        .where(
+            and_(
+                ContentCast.content_id == content_id,
+                Person.is_deleted == False,
+            )
+        )
+    )
+
+    # Apply filters
+    if filters.is_main_cast is not None:
+        query = query.where(ContentCast.is_main_cast == filters.is_main_cast)
+
+    if filters.search:
+        search_term = f"%{filters.search}%"
+        query = query.where(
+            or_(
+                ContentCast.character_name.ilike(search_term),
+                Person.name.ilike(search_term),
+            )
+        )
+
+    if filters.department:
+        # For cast, department is typically "Acting" or similar
+        query = query.where(
+            Person.known_for_department.ilike(f"%{filters.department}%")
+        )
+
+    # Get total count
+    count_query = select(func.count()).select_from(query.subquery())
+    total_result = await db.execute(count_query)
+    total = total_result.scalar()
+
+    # Apply pagination and sorting
+    if pagination.sort_by == "character_name":
+        sort_field = ContentCast.character_name
+    elif pagination.sort_by == "person_name":
+        sort_field = Person.name
+    elif pagination.sort_by == "cast_order":
+        sort_field = ContentCast.cast_order
+    else:
+        sort_field = ContentCast.cast_order
+
+    if pagination.sort_order == "desc":
+        query = query.order_by(desc(sort_field))
+    else:
+        query = query.order_by(sort_field)
+
+    # Apply pagination
+    offset = (pagination.page - 1) * pagination.size
+    query = query.offset(offset).limit(pagination.size)
+
+    # Execute query with person relationship
+    query = query.options(selectinload(ContentCast.person))
+    result = await db.execute(query)
+    cast_members = result.scalars().all()
+
+    return cast_members, total
+
+
+async def get_content_crew(
+    db: AsyncSession,
+    content_id: UUID,
+    pagination: PaginationParams,
+    filters: CrewFilters,
+) -> Tuple[List[ContentCrew], int]:
+    """Get crew for a specific content with pagination and filtering"""
+    # Base query
+    query = (
+        select(ContentCrew)
+        .join(Person, ContentCrew.person_id == Person.id)
+        .where(
+            and_(
+                ContentCrew.content_id == content_id,
+                Person.is_deleted == False,
+            )
+        )
+    )
+
+    # Apply filters
+    if filters.department:
+        query = query.where(ContentCrew.department.ilike(f"%{filters.department}%"))
+
+    if filters.job_title:
+        query = query.where(ContentCrew.job_title.ilike(f"%{filters.job_title}%"))
+
+    if filters.search:
+        search_term = f"%{filters.search}%"
+        query = query.where(
+            or_(
+                ContentCrew.job_title.ilike(search_term),
+                ContentCrew.department.ilike(search_term),
+                Person.name.ilike(search_term),
+            )
+        )
+
+    # Get total count
+    count_query = select(func.count()).select_from(query.subquery())
+    total_result = await db.execute(count_query)
+    total = total_result.scalar()
+
+    # Apply pagination and sorting
+    if pagination.sort_by == "job_title":
+        sort_field = ContentCrew.job_title
+    elif pagination.sort_by == "department":
+        sort_field = ContentCrew.department
+    elif pagination.sort_by == "person_name":
+        sort_field = Person.name
+    elif pagination.sort_by == "credit_order":
+        sort_field = ContentCrew.credit_order
+    else:
+        sort_field = ContentCrew.credit_order
+
+    if pagination.sort_order == "desc":
+        query = query.order_by(desc(sort_field))
+    else:
+        query = query.order_by(sort_field)
+
+    # Apply pagination
+    offset = (pagination.page - 1) * pagination.size
+    query = query.offset(offset).limit(pagination.size)
+
+    # Execute query with person relationship
+    query = query.options(selectinload(ContentCrew.person))
+    result = await db.execute(query)
+    crew_members = result.scalars().all()
+
+    return crew_members, total
+
+
+async def get_content_cast_crew(
+    db: AsyncSession, content_id: UUID
+) -> Tuple[List[ContentCast], List[ContentCrew]]:
+    """Get both cast and crew for a specific content"""
+    # Get cast
+    cast_query = (
+        select(ContentCast)
+        .join(Person, ContentCast.person_id == Person.id)
+        .where(
+            and_(
+                ContentCast.content_id == content_id,
+                Person.is_deleted == False,
+            )
+        )
+        .options(selectinload(ContentCast.person))
+        .order_by(ContentCast.cast_order)
+    )
+
+    # Get crew
+    crew_query = (
+        select(ContentCrew)
+        .join(Person, ContentCrew.person_id == Person.id)
+        .where(
+            and_(
+                ContentCrew.content_id == content_id,
+                Person.is_deleted == False,
+            )
+        )
+        .options(selectinload(ContentCrew.person))
+        .order_by(ContentCrew.credit_order)
+    )
+
+    # Execute both queries
+    cast_result = await db.execute(cast_query)
+    crew_result = await db.execute(crew_query)
+
+    cast_members = cast_result.scalars().all()
+    crew_members = crew_result.scalars().all()
+
+    return cast_members, crew_members

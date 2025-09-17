@@ -43,11 +43,15 @@ async def drop_all_tables():
     try:
         async with engine.begin() as conn:
             # Get all table names
-            result = await conn.execute(text("""
+            result = await conn.execute(
+                text(
+                    """
                 SELECT tablename FROM pg_tables
                 WHERE schemaname = 'public'
                 AND tablename NOT LIKE 'alembic%'
-            """))
+            """
+                )
+            )
             tables = [row[0] for row in result.fetchall()]
 
             if tables:
@@ -82,7 +86,7 @@ async def run_migrations():
             cwd=project_root,
             capture_output=True,
             text=True,
-            check=True
+            check=True,
         )
 
         print("✅ Migrations completed successfully!")

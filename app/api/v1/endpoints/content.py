@@ -7,10 +7,15 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import settings
 from app.core.database import get_db
 from app.core.messages import (
+    CAST_CREW_SUCCESS,
+    CAST_LIST_SUCCESS,
+    CAST_NOT_FOUND,
     CONTENT_FEATURED_SUCCESS,
     CONTENT_LIST_SUCCESS,
     CONTENT_NOT_FOUND,
     CONTENT_TRENDING_SUCCESS,
+    CREW_LIST_SUCCESS,
+    CREW_NOT_FOUND,
     GENRE_LIST_SUCCESS,
     GENRE_NOT_FOUND,
     INVALID_FILTERS,
@@ -18,11 +23,16 @@ from app.core.messages import (
     INVALID_SORT_PARAMS,
 )
 from app.schemas.content import (
+    CastCrewResponse,
+    CastFilters,
+    CastListResponse,
     Content,
     ContentDetail,
     ContentFilters,
     ContentList,
     ContentListResponse,
+    CrewFilters,
+    CrewListResponse,
     Genre,
     GenreFilters,
     GenreListResponse,
@@ -32,6 +42,9 @@ from app.schemas.content import (
 from app.utils.content_utils import (
     calculate_pagination_info,
     get_content_by_id,
+    get_content_cast,
+    get_content_cast_crew,
+    get_content_crew,
     get_content_list,
     get_featured_content,
     get_genre_by_id,
@@ -342,4 +355,150 @@ async def get_genre_by_slug_endpoint(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error retrieving genre: {str(e)}",
+        )
+
+
+@router.get("/{content_id}/cast", response_model=CastListResponse)
+async def get_content_cast_endpoint(
+    content_id: UUID,
+    page: int = Query(1, ge=1, description="Page number"),
+    size: int = Query(
+        settings.DEFAULT_PAGE_SIZE,
+        ge=1,
+        le=settings.MAX_PAGE_SIZE,
+        description="Page size",
+    ),
+    is_main_cast: Optional[bool] = Query(
+        None, description="Filter by main cast status"
+    ),
+    search: Optional[str] = Query(
+        None, description="Search in character name or person name"
+    ),
+    department: Optional[str] = Query(None, description="Filter by department"),
+    sort_by: str = Query("cast_order", description="Sort field"),
+    sort_order: str = Query("asc", pattern="^(asc|desc)$", description="Sort order"),
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Get cast for a specific content with pagination and filtering.
+    Returns a paginated list of cast members for the specified content.
+    """
+    try:
+        content = await get_content_by_id(db, content_id, include_relationships=False)
+        if not content:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=CONTENT_NOT_FOUND
+            )
+
+        filters = CastFilters(
+            is_main_cast=is_main_cast,
+            search=search,
+            department=department,
+        )
+
+        pagination = PaginationParams(
+            page=page, size=size, sort_by=sort_by, sort_order=sort_order
+        )
+
+        cast_members, total = await get_content_cast(
+            db, content_id, pagination, filters
+        )
+
+        pagination_info = calculate_pagination_info(page, size, total)
+
+        return CastListResponse(items=cast_members, **pagination_info)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving cast: {str(e)}",
+        )
+
+
+@router.get("/{content_id}/crew", response_model=CrewListResponse)
+async def get_content_crew_endpoint(
+    content_id: UUID,
+    page: int = Query(1, ge=1, description="Page number"),
+    size: int = Query(
+        settings.DEFAULT_PAGE_SIZE,
+        ge=1,
+        le=settings.MAX_PAGE_SIZE,
+        description="Page size",
+    ),
+    department: Optional[str] = Query(None, description="Filter by department"),
+    job_title: Optional[str] = Query(None, description="Filter by job title"),
+    search: Optional[str] = Query(
+        None, description="Search in job title or person name"
+    ),
+    sort_by: str = Query("credit_order", description="Sort field"),
+    sort_order: str = Query("asc", pattern="^(asc|desc)$", description="Sort order"),
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Get crew for a specific content with pagination and filtering.
+    Returns a paginated list of crew members for the specified content.
+    """
+    try:
+        # Verify content exists
+        content = await get_content_by_id(db, content_id, include_relationships=False)
+        if not content:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=CONTENT_NOT_FOUND
+            )
+
+        filters = CrewFilters(
+            department=department,
+            job_title=job_title,
+            search=search,
+        )
+
+        pagination = PaginationParams(
+            page=page, size=size, sort_by=sort_by, sort_order=sort_order
+        )
+
+        crew_members, total = await get_content_crew(
+            db, content_id, pagination, filters
+        )
+
+        pagination_info = calculate_pagination_info(page, size, total)
+
+        return CrewListResponse(items=crew_members, **pagination_info)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving crew: {str(e)}",
+        )
+
+
+@router.get("/{content_id}/cast-crew", response_model=CastCrewResponse)
+async def get_content_cast_crew_endpoint(
+    content_id: UUID,
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Get both cast and crew for a specific content.
+    Returns both cast and crew members for the specified content in a single response.
+    """
+    try:
+        content = await get_content_by_id(db, content_id, include_relationships=False)
+        if not content:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=CONTENT_NOT_FOUND
+            )
+
+        cast_members, crew_members = await get_content_cast_crew(db, content_id)
+
+        return CastCrewResponse(cast=cast_members, crew=crew_members)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving cast and crew: {str(e)}",
         )

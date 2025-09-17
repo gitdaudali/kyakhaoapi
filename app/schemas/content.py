@@ -76,6 +76,7 @@ class CastMember(BaseModel):
     character_name: Optional[str] = Field(None, description="Character name")
     is_main_cast: bool = Field(False, description="Whether main cast member")
     cast_order: int = Field(0, description="Billing order")
+    character_image_url: Optional[str] = Field(None, description="Poster image URL")
 
     class Config:
         from_attributes = True
@@ -183,6 +184,24 @@ class MovieFileSimple(BaseModel):
         from_attributes = True
 
 
+class EpisodeQualitySimple(BaseModel):
+    """Simplified episode quality schema"""
+
+    id: UUID = Field(..., description="Episode quality ID")
+    quality_level: str = Field(..., description="Quality level (1080p, 720p, etc.)")
+    resolution_width: int = Field(..., description="Video width in pixels")
+    resolution_height: int = Field(..., description="Video height in pixels")
+    file_url: str = Field(..., description="File URL")
+    file_size_bytes: Optional[int] = Field(None, description="File size in bytes")
+    duration_seconds: Optional[float] = Field(None, description="Duration in seconds")
+    bitrate_kbps: Optional[int] = Field(None, description="Bitrate in kbps")
+    video_codec: Optional[str] = Field(None, description="Video codec")
+    is_ready: bool = Field(True, description="Whether file is ready for streaming")
+
+    class Config:
+        from_attributes = True
+
+
 class EpisodeSimple(BaseModel):
     """Simplified episode schema for TV series"""
 
@@ -196,6 +215,9 @@ class EpisodeSimple(BaseModel):
     thumbnail_url: Optional[str] = Field(None, description="Thumbnail URL")
     views_count: int = Field(0, description="View count")
     is_available: bool = Field(True, description="Whether episode is available")
+    quality_versions: List[EpisodeQualitySimple] = Field(
+        default_factory=list, description="Available quality versions"
+    )
 
     class Config:
         from_attributes = True
@@ -211,6 +233,12 @@ class SeasonSimple(BaseModel):
     poster_url: Optional[str] = Field(None, description="Season poster URL")
     air_date: Optional[date] = Field(None, description="Air date")
     episode_count: int = Field(0, description="Number of episodes")
+    total_duration_minutes: Optional[int] = Field(
+        None, description="Total season duration in minutes"
+    )
+    average_episode_duration: Optional[float] = Field(
+        None, description="Average episode duration in minutes"
+    )
     is_complete: bool = Field(False, description="Whether season is complete")
     episodes: List[EpisodeSimple] = Field(
         default_factory=list, description="Season episodes"
@@ -230,6 +258,12 @@ class SeasonListSimple(BaseModel):
     poster_url: Optional[str] = Field(None, description="Season poster URL")
     air_date: Optional[date] = Field(None, description="Air date")
     episode_count: int = Field(0, description="Number of episodes")
+    total_duration_minutes: Optional[int] = Field(
+        None, description="Total season duration in minutes"
+    )
+    average_episode_duration: Optional[float] = Field(
+        None, description="Average episode duration in minutes"
+    )
     is_complete: bool = Field(False, description="Whether season is complete")
 
     class Config:
@@ -403,3 +437,47 @@ class GenreFilters(BaseModel):
 
     is_active: Optional[bool] = Field(None, description="Filter by active status")
     search: Optional[str] = Field(None, description="Search in name and description")
+
+
+class CastListResponse(BaseModel):
+    """Response schema for cast list with pagination"""
+
+    items: List[CastMember] = Field(..., description="List of cast members")
+    total: int = Field(..., description="Total number of cast members")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+
+class CrewListResponse(BaseModel):
+    """Response schema for crew list with pagination"""
+
+    items: List[CrewMember] = Field(..., description="List of crew members")
+    total: int = Field(..., description="Total number of crew members")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+
+class CastFilters(BaseModel):
+    """Filters for cast queries"""
+
+    is_main_cast: Optional[bool] = Field(None, description="Filter by main cast status")
+    search: Optional[str] = Field(
+        None, description="Search in character name or person name"
+    )
+    department: Optional[str] = Field(None, description="Filter by department")
+
+
+class CrewFilters(BaseModel):
+    """Filters for crew queries"""
+
+    department: Optional[str] = Field(None, description="Filter by department")
+    job_title: Optional[str] = Field(None, description="Filter by job title")
+    search: Optional[str] = Field(
+        None, description="Search in job title or person name"
+    )

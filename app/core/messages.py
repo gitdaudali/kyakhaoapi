@@ -59,6 +59,13 @@ GENRE_UPDATED_SUCCESS = "Genre updated successfully"
 GENRE_DELETED_SUCCESS = "Genre deleted successfully"
 GENRE_LIST_SUCCESS = "Genres retrieved successfully"
 
+# Cast and Crew Messages
+CAST_NOT_FOUND = "Cast not found"
+CAST_LIST_SUCCESS = "Cast list retrieved successfully"
+CREW_NOT_FOUND = "Crew not found"
+CREW_LIST_SUCCESS = "Crew list retrieved successfully"
+CAST_CREW_SUCCESS = "Cast and crew retrieved successfully"
+
 # General Messages
 INVALID_PAGINATION = "Invalid pagination parameters"
 INVALID_FILTERS = "Invalid filter parameters"

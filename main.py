@@ -1,16 +1,16 @@
 from contextlib import asynccontextmanager
 
 import uvicorn
-from sqlmodel import SQLModel
-
-from app.api.v1.api import api_router
-from app.core.config import settings
-from app.core.database import engine
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.security import HTTPBearer
 from fastapi.staticfiles import StaticFiles
+from sqlmodel import SQLModel
+
+from app.api.v1.api import api_router
+from app.core.config import settings
+from app.core.database import engine
 
 
 # Database tables are now managed by Alembic migrations
@@ -34,11 +34,7 @@ app = FastAPI(
         "url": "https://cupstreaming.com",
     },
     license_info={"name": "MIT License", "url": "https://opensource.org/licenses/MIT"},
-    servers=[
-        {
-            "url": f"{settings.BASE_URL}"
-        }
-    ],
+    servers=[{"url": f"{settings.BASE_URL}"}],
     tags_metadata=[
         {
             "name": "authentication",
@@ -60,9 +56,7 @@ app = FastAPI(
         },
         {
             "name": "Content",
-            "description": (
-                "Content Related Operations of Videos TV and serials."
-            ),
+            "description": ("Content Related Operations of Videos TV and serials."),
         },
     ],
     lifespan=lifespan,
