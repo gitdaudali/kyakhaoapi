@@ -92,28 +92,37 @@ async def register_user(
     Register a new user account with email validation.
     Creates user account and sends OTP for email verification.
     """
-    await check_user_exists(db, user_data.email)
+    try:
+        await check_user_exists(db, user_data.email)
 
-    hashed_password = get_password_hash(user_data.password)
-    db_user = User(
-        email=user_data.email,
-        password=hashed_password,
-        is_active=True,
-        is_superuser=False,
-        role=UserRole.USER,
-        profile_status=ProfileStatus.PENDING_VERIFICATION,
-    )
-    db.add(db_user)
-    await db.commit()
-    await db.refresh(db_user)
+        hashed_password = get_password_hash(user_data.password)
+        db_user = User(
+            email=user_data.email,
+            password=hashed_password,
+            is_active=True,
+            is_superuser=False,
+            role=UserRole.USER,
+            profile_status=ProfileStatus.PENDING_VERIFICATION,
+        )
+        db.add(db_user)
+        await db.commit()
+        await db.refresh(db_user)
 
-    # Create email verification OTP and send email
-    otp = await create_email_verification_otp(db, db_user.id, db_user.email)
-    send_registration_otp_email_task.delay(
-        email_to=db_user.email, otp_code=otp.otp_code
-    )
+        # Create email verification OTP and send email
+        otp = await create_email_verification_otp(db, db_user.id, db_user.email)
+        send_registration_otp_email_task.delay(
+            email_to=db_user.email, otp_code=otp.otp_code
+        )
 
-    return MessageResponse(message=REGISTRATION_SUCCESS)
+        return MessageResponse(message=REGISTRATION_SUCCESS)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error registering user: {str(e)}",
+        )
 
 
 @router.post("/login", response_model=AuthResponse)
@@ -124,47 +133,56 @@ async def login_user(
     Authenticate user and return access and refresh tokens.
     Validates credentials and account status before token generation.
     """
-    user = await authenticate_user(login_data.email, login_data.password, db)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=INVALID_CREDENTIALS,
-            headers={"WWW-Authenticate": "Bearer"},
+    try:
+        user = await authenticate_user(login_data.email, login_data.password, db)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail=INVALID_CREDENTIALS,
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+
+        if user.is_active is False:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=ACCOUNT_DEACTIVATED,
+            )
+
+        if user.profile_status == ProfileStatus.PENDING_VERIFICATION:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=EMAIL_NOT_VERIFIED,
+            )
+
+        device_info = get_device_info(request)
+        access_token, refresh_token = await create_token_pair(
+            user, db, device_info, remember_me=login_data.remember_me
         )
 
-    if user.is_active is False:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=ACCOUNT_DEACTIVATED,
+        access_expires_in, refresh_expires_in = calculate_token_expiration(
+            settings.ACCESS_TOKEN_EXPIRE_MINUTES,
+            settings.REFRESH_TOKEN_EXPIRE_DAYS,
+            login_data.remember_me,
         )
 
-    if user.profile_status == ProfileStatus.PENDING_VERIFICATION:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=EMAIL_NOT_VERIFIED,
+        return AuthResponse(
+            user=UserSchema.from_orm(user),
+            tokens=TokenResponse(
+                access_token=access_token,
+                refresh_token=refresh_token,
+                token_type="bearer",
+                expires_in=access_expires_in,
+                refresh_expires_in=refresh_expires_in,
+            ),
         )
 
-    device_info = get_device_info(request)
-    access_token, refresh_token = await create_token_pair(
-        user, db, device_info, remember_me=login_data.remember_me
-    )
-
-    access_expires_in, refresh_expires_in = calculate_token_expiration(
-        settings.ACCESS_TOKEN_EXPIRE_MINUTES,
-        settings.REFRESH_TOKEN_EXPIRE_DAYS,
-        login_data.remember_me,
-    )
-
-    return AuthResponse(
-        user=UserSchema.from_orm(user),
-        tokens=TokenResponse(
-            access_token=access_token,
-            refresh_token=refresh_token,
-            token_type="bearer",
-            expires_in=access_expires_in,
-            refresh_expires_in=refresh_expires_in,
-        ),
-    )
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error during login: {str(e)}",
+        )
 
 
 @router.post("/refresh", response_model=TokenResponse)
@@ -177,25 +195,34 @@ async def refresh_access_token(
     Refresh access token using valid refresh token.
     Revokes old refresh token and generates new token pair.
     """
-    user = await verify_refresh_token(refresh_data.refresh_token, db)
-    device_info = get_device_info(request)
-    await revoke_token(refresh_data.refresh_token, db, "token_refresh")
+    try:
+        user = await verify_refresh_token(refresh_data.refresh_token, db)
+        device_info = get_device_info(request)
+        await revoke_token(refresh_data.refresh_token, db, "token_refresh")
 
-    access_token, refresh_token = await create_token_pair(
-        user, db, device_info, remember_me=False
-    )
+        access_token, refresh_token = await create_token_pair(
+            user, db, device_info, remember_me=False
+        )
 
-    access_expires_in, refresh_expires_in = calculate_token_expiration(
-        settings.ACCESS_TOKEN_EXPIRE_MINUTES, settings.REFRESH_TOKEN_EXPIRE_DAYS
-    )
+        access_expires_in, refresh_expires_in = calculate_token_expiration(
+            settings.ACCESS_TOKEN_EXPIRE_MINUTES, settings.REFRESH_TOKEN_EXPIRE_DAYS
+        )
 
-    return TokenResponse(
-        access_token=access_token,
-        refresh_token=refresh_token,
-        token_type="bearer",
-        expires_in=access_expires_in,
-        refresh_expires_in=refresh_expires_in,
-    )
+        return TokenResponse(
+            access_token=access_token,
+            refresh_token=refresh_token,
+            token_type="bearer",
+            expires_in=access_expires_in,
+            refresh_expires_in=refresh_expires_in,
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error refreshing token: {str(e)}",
+        )
 
 
 @router.post("/logout", response_model=LogoutResponse)
@@ -208,33 +235,42 @@ async def logout_user(
     Logout user and revoke authentication tokens.
     Supports single device or all devices logout.
     """
-    if logout_data.logout_all_devices:
-        revoked_count = await revoke_user_tokens(
-            current_user.id, db, "user_logout_all", current_user.id
-        )
-        return LogoutResponse(
-            message=LOGOUT_ALL_SUCCESS,
-            logged_out_devices=revoked_count,
-        )
-    else:
-        if logout_data.refresh_token:
-            success = await revoke_token(
-                logout_data.refresh_token, db, "user_logout", current_user.id
+    try:
+        if logout_data.logout_all_devices:
+            revoked_count = await revoke_user_tokens(
+                current_user.id, db, "user_logout_all", current_user.id
             )
-            if not success:
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail=INVALID_REFRESH_TOKEN,
-                )
             return LogoutResponse(
-                message=LOGOUT_SUCCESS,
-                logged_out_devices=1,
+                message=LOGOUT_ALL_SUCCESS,
+                logged_out_devices=revoked_count,
             )
         else:
-            return LogoutResponse(
-                message=LOGOUT_NO_TOKENS,
-                logged_out_devices=0,
-            )
+            if logout_data.refresh_token:
+                success = await revoke_token(
+                    logout_data.refresh_token, db, "user_logout", current_user.id
+                )
+                if not success:
+                    raise HTTPException(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        detail=INVALID_REFRESH_TOKEN,
+                    )
+                return LogoutResponse(
+                    message=LOGOUT_SUCCESS,
+                    logged_out_devices=1,
+                )
+            else:
+                return LogoutResponse(
+                    message=LOGOUT_NO_TOKENS,
+                    logged_out_devices=0,
+                )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error during logout: {str(e)}",
+        )
 
 
 @router.get("/me", response_model=UserSchema, dependencies=[Depends(HTTPBearer())])
@@ -245,7 +281,16 @@ async def get_current_user_info(
     Returns user profile data from JWT token.
     **Authentication Required**: Bearer token in Authorization header
     """
-    return UserSchema.from_orm(current_user)
+    try:
+        return UserSchema.from_orm(current_user)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving user info: {str(e)}",
+        )
 
 
 @router.post(
@@ -262,16 +307,25 @@ async def change_password(
     Change user password with current password verification.
     Validates current password before updating to new password.
     """
-    if not verify_password(password_data.current_password, current_user.password):
+    try:
+        if not verify_password(password_data.current_password, current_user.password):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=CURRENT_PASSWORD_INCORRECT,
+            )
+
+        current_user.password = get_password_hash(password_data.new_password)
+        await db.commit()
+
+        return MessageResponse(message=PASSWORD_CHANGED_SUCCESS)
+
+    except HTTPException:
+        raise
+    except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=CURRENT_PASSWORD_INCORRECT,
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error changing password: {str(e)}",
         )
-
-    current_user.password = get_password_hash(password_data.new_password)
-    await db.commit()
-
-    return MessageResponse(message=PASSWORD_CHANGED_SUCCESS)
 
 
 @router.post("/password/reset", response_model=MessageResponse)
@@ -282,16 +336,25 @@ async def request_password_reset(
     Request password reset by email.
     Sends reset token to user email if account exists.
     """
-    user = await get_user_by_email(db, reset_data.email)
-    if user:
-        reset_token = await create_password_reset_token(db, user.id)
+    try:
+        user = await get_user_by_email(db, reset_data.email)
+        if user:
+            reset_token = await create_password_reset_token(db, user.id)
 
-        send_password_reset_email_task.delay(
-            email_to=user.email,
-            reset_token=reset_token.token,
+            send_password_reset_email_task.delay(
+                email_to=user.email,
+                reset_token=reset_token.token,
+            )
+
+        return MessageResponse(message=PASSWORD_RESET_SENT)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error requesting password reset: {str(e)}",
         )
-
-    return MessageResponse(message=PASSWORD_RESET_SENT)
 
 
 @router.post("/password/reset/confirm", response_model=MessageResponse)
@@ -302,24 +365,35 @@ async def confirm_password_reset(
     Confirm password reset with validation token.
     Validates reset token and updates user password.
     """
-    validate_password_match(reset_data.new_password, reset_data.new_password_confirm)
-
-    reset_token = await validate_password_reset_token(db, reset_data.reset_token)
-    if not reset_token:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=PASSWORD_RESET_TOKEN_INVALID,
+    try:
+        validate_password_match(
+            reset_data.new_password, reset_data.new_password_confirm
         )
 
-    user = await get_user_by_id_or_404(db, reset_token.user_id)
+        reset_token = await validate_password_reset_token(db, reset_data.reset_token)
+        if not reset_token:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=PASSWORD_RESET_TOKEN_INVALID,
+            )
 
-    user.password = get_password_hash(reset_data.new_password)
+        user = await get_user_by_id_or_404(db, reset_token.user_id)
 
-    await mark_password_reset_token_used(db, reset_data.reset_token)
+        user.password = get_password_hash(reset_data.new_password)
 
-    await db.commit()
+        await mark_password_reset_token_used(db, reset_data.reset_token)
 
-    return MessageResponse(message=PASSWORD_RESET_SUCCESS)
+        await db.commit()
+
+        return MessageResponse(message=PASSWORD_RESET_SUCCESS)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error confirming password reset: {str(e)}",
+        )
 
 
 @router.post("/verify-otp", response_model=MessageResponse)
@@ -330,28 +404,37 @@ async def verify_otp(
     Verify email address using OTP code.
     Validates OTP and marks email as verified.
     """
-    otp = await validate_email_verification_otp(
-        db, verification_data.otp_code, verification_data.email
-    )
-    if not otp:
-        await increment_otp_attempts(
+    try:
+        otp = await validate_email_verification_otp(
             db, verification_data.otp_code, verification_data.email
         )
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=OTP_INVALID_OR_EXPIRED,
+        if not otp:
+            await increment_otp_attempts(
+                db, verification_data.otp_code, verification_data.email
+            )
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=OTP_INVALID_OR_EXPIRED,
+            )
+
+        user = await get_user_by_id_or_404(db, otp.user_id)
+        user.profile_status = ProfileStatus.ACTIVE
+
+        await mark_email_verification_otp_used(
+            db, verification_data.otp_code, verification_data.email
         )
 
-    user = await get_user_by_id_or_404(db, otp.user_id)
-    user.profile_status = ProfileStatus.ACTIVE
+        await db.commit()
 
-    await mark_email_verification_otp_used(
-        db, verification_data.otp_code, verification_data.email
-    )
+        return MessageResponse(message=OTP_VERIFICATION_SUCCESS)
 
-    await db.commit()
-
-    return MessageResponse(message=OTP_VERIFICATION_SUCCESS)
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error verifying OTP: {str(e)}",
+        )
 
 
 @router.get(
@@ -364,10 +447,19 @@ async def get_token_info(
     Get information about current authentication token.
     Returns token metadata and expiration details.
     """
-    return TokenInfo(
-        token_type="bearer",
-        expires_at=datetime.now(timezone.utc) + timedelta(minutes=30),
-        is_valid=True,
-        user_id=str(current_user.id),
-        scope="read write",
-    )
+    try:
+        return TokenInfo(
+            token_type="bearer",
+            expires_at=datetime.now(timezone.utc) + timedelta(minutes=30),
+            is_valid=True,
+            user_id=str(current_user.id),
+            scope="read write",
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving token info: {str(e)}",
+        )
