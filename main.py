@@ -105,8 +105,6 @@ def custom_openapi():
         }
     }
 
-    # Don't apply global security requirement - let individual endpoints define their own security
-
     app.openapi_schema = openapi_schema
     return app.openapi_schema
 

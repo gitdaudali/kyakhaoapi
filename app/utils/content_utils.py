@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import List, Optional, Tuple
 from uuid import UUID
 
@@ -14,8 +14,10 @@ from app.models.content import (
     ContentCrew,
     ContentGenre,
     ContentReview,
+    Episode,
     Genre,
     Person,
+    Season,
 )
 from app.models.user import User
 from app.schemas.content import (
@@ -59,8 +61,6 @@ async def get_content_detail_optimized(
     query = query.options(selectinload(Content.genres))
 
     # Load content-type specific relationships
-    from app.models.content import Episode, Season
-
     query = query.options(
         selectinload(Content.movie_files),  # For movies
         selectinload(Content.seasons).selectinload(Season.episodes),  # For TV series
@@ -74,8 +74,6 @@ async def get_content_crew_cast(
     db: AsyncSession, content_id: UUID
 ) -> Optional[Content]:
     """Get content with only cast and crew relationships for performance"""
-    from app.models.content import ContentCast, ContentCrew, Person
-
     # First get the content
     content_query = select(Content).where(
         and_(Content.id == content_id, Content.is_deleted == False)
@@ -236,8 +234,6 @@ async def get_content_list(
     filters: Optional[ContentFilters] = None,
 ) -> Tuple[List[Content], int]:
     """Get content list with pagination and filtering - optimized for different content types"""
-    from app.models.content import Episode, Season
-
     query = select(Content).where(Content.is_deleted == False)
 
     # Apply filters
@@ -716,8 +712,6 @@ async def get_review_stats(db: AsyncSession, content_id: UUID) -> dict:
     featured_reviews_count = featured_result.scalar()
 
     # Recent reviews count (last 30 days)
-    from datetime import datetime, timedelta
-
     thirty_days_ago = datetime.utcnow() - timedelta(days=30)
     recent_query = select(func.count()).where(
         and_(
@@ -992,8 +986,6 @@ async def get_content_review_stats(db: AsyncSession, content_id: UUID) -> dict:
     featured_reviews_count = featured_result.scalar()
 
     # Recent reviews count (last 30 days)
-    from datetime import datetime, timedelta
-
     thirty_days_ago = datetime.utcnow() - timedelta(days=30)
     recent_query = select(func.count()).where(
         and_(
