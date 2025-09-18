@@ -640,9 +640,7 @@ class UserContentInteraction(BaseModel, TimestampMixin, table=True):
 
     # Additional context
     note: Optional[str] = Field(sa_type=Text, default=None)  # User's personal note
-    priority: Optional[int] = Field(
-        sa_type=Integer, default=None
-    )  # For watchlist ordering
+    priority: Optional[int] = Field(sa_type=Integer, default=None)
 
     # Relationships
     user: "User" = Relationship(back_populates="user_content_interactions")

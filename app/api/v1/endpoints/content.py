@@ -6,6 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings
 from app.core.database import get_db
+from app.core.deps import get_current_active_user
 from app.core.messages import (
     CAST_CREW_SUCCESS,
     CAST_LIST_SUCCESS,
@@ -21,10 +22,17 @@ from app.core.messages import (
     INVALID_FILTERS,
     INVALID_PAGINATION,
     INVALID_SORT_PARAMS,
+    REVIEW_ALREADY_EXISTS,
+    REVIEW_CREATED_SUCCESS,
+    REVIEW_DELETED_SUCCESS,
     REVIEW_LIST_SUCCESS,
     REVIEW_NOT_FOUND,
+    REVIEW_PERMISSION_DENIED,
     REVIEW_STATS_SUCCESS,
+    REVIEW_UPDATED_SUCCESS,
+    REVIEW_VOTE_SUCCESS,
 )
+from app.models.user import User
 from app.schemas.content import (
     CastCrewResponse,
     CastFilters,
@@ -42,18 +50,29 @@ from app.schemas.content import (
     GenreListResponse,
     PaginatedResponse,
     PaginationParams,
+    Review,
+    ReviewCreate,
+    ReviewCreateResponse,
+    ReviewDeleteResponse,
     ReviewFilters,
     ReviewListResponse,
     ReviewStats,
+    ReviewUpdate,
+    ReviewUpdateResponse,
+    ReviewVoteRequest,
+    ReviewVoteResponse,
 )
 from app.utils.content_utils import (
     calculate_pagination_info,
+    create_content_review,
+    delete_content_review,
     get_content_by_id,
     get_content_cast,
     get_content_cast_crew,
     get_content_crew,
     get_content_list,
     get_content_review_by_id,
+    get_content_review_stats,
     get_content_reviews,
     get_featured_content,
     get_genre_by_id,
@@ -61,6 +80,8 @@ from app.utils.content_utils import (
     get_genres_list,
     get_review_stats,
     get_trending_content,
+    update_content_review,
+    vote_on_review,
 )
 
 router = APIRouter()
@@ -602,4 +623,139 @@ async def get_review_by_id(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error retrieving review: {str(e)}",
+        )
+
+
+@router.post("/{content_id}/reviews", response_model=ReviewCreateResponse)
+async def create_review(
+    content_id: UUID,
+    review_data: ReviewCreate,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_active_user),
+) -> Any:
+    """
+    Create a new review for content.
+    Users can create one review per content.
+    """
+    try:
+        # Verify content exists
+        content = await get_content_by_id(db, content_id)
+        if not content:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=CONTENT_NOT_FOUND
+            )
+
+        # Create review
+        review = await create_content_review(
+            db, content_id, current_user.id, review_data.model_dump()
+        )
+
+        return ReviewCreateResponse(message=REVIEW_CREATED_SUCCESS, review=review)
+
+    except ValueError as e:
+        if "already has a review" in str(e):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST, detail=REVIEW_ALREADY_EXISTS
+            )
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error creating review: {str(e)}",
+        )
+
+
+@router.put("/reviews/{review_id}", response_model=ReviewUpdateResponse)
+async def update_review(
+    review_id: UUID,
+    review_data: ReviewUpdate,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_active_user),
+) -> Any:
+    """
+    Update an existing review.
+    Users can only update their own reviews.
+    """
+    try:
+        # Update review
+        review = await update_content_review(
+            db, review_id, current_user.id, review_data.model_dump(exclude_unset=True)
+        )
+
+        if not review:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=REVIEW_NOT_FOUND
+            )
+
+        return ReviewUpdateResponse(message=REVIEW_UPDATED_SUCCESS, review=review)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error updating review: {str(e)}",
+        )
+
+
+@router.delete("/reviews/{review_id}", response_model=ReviewDeleteResponse)
+async def delete_review(
+    review_id: UUID,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_active_user),
+) -> Any:
+    """
+    Delete a review.
+    Users can only delete their own reviews.
+    """
+    try:
+        # Delete review
+        success = await delete_content_review(db, review_id, current_user.id)
+
+        if not success:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=REVIEW_NOT_FOUND
+            )
+
+        return ReviewDeleteResponse(message=REVIEW_DELETED_SUCCESS, review_id=review_id)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error deleting review: {str(e)}",
+        )
+
+
+@router.get("/{content_id}/reviews/stats", response_model=ReviewStats)
+async def get_content_review_stats_endpoint(
+    content_id: UUID,
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Get comprehensive review statistics for content.
+    Returns detailed statistics including rating distribution.
+    """
+    try:
+        # Verify content exists
+        content = await get_content_by_id(db, content_id)
+        if not content:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=CONTENT_NOT_FOUND
+            )
+
+        # Get review statistics
+        stats = await get_content_review_stats(db, content_id)
+
+        return ReviewStats(**stats)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving review statistics: {str(e)}",
         )
