@@ -42,9 +42,11 @@ from app.schemas.content import (
     ContentFilters,
     ContentList,
     ContentListResponse,
+    ContentQueryParams,
     ContentReviewsResponse,
     CrewFilters,
     CrewListResponse,
+    FeaturedContentQueryParams,
     Genre,
     GenreFilters,
     GenreListResponse,
@@ -61,6 +63,7 @@ from app.schemas.content import (
     ReviewUpdateResponse,
     ReviewVoteRequest,
     ReviewVoteResponse,
+    TrendingContentQueryParams,
 )
 from app.utils.content_utils import (
     calculate_pagination_info,
@@ -89,20 +92,7 @@ router = APIRouter()
 
 @router.get("/featured", response_model=ContentListResponse)
 async def get_featured_contents(
-    page: int = Query(1, ge=1, description="Page number"),
-    size: int = Query(
-        settings.DEFAULT_PAGE_SIZE,
-        ge=1,
-        le=settings.MAX_PAGE_SIZE,
-        description="Page size",
-    ),
-    content_type: Optional[str] = Query(None, description="Filter by content type"),
-    rating: Optional[str] = Query(None, description="Filter by rating"),
-    genre_ids: Optional[str] = Query(None, description="Comma-separated genre IDs"),
-    year: Optional[int] = Query(None, description="Filter by release year"),
-    search: Optional[str] = Query(None, description="Search in title and description"),
-    sort_by: str = Query("created_at", description="Sort field"),
-    sort_order: str = Query("desc", pattern="^(asc|desc)$", description="Sort order"),
+    query_params: FeaturedContentQueryParams = Depends(),
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
@@ -110,57 +100,34 @@ async def get_featured_contents(
     Returns a paginated list of featured content that is published and available to users.
     """
     try:
-        genre_id_list = None
-        if genre_ids:
-            try:
-                genre_id_list = [UUID(gid.strip()) for gid in genre_ids.split(",")]
-            except ValueError:
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST, detail=INVALID_FILTERS
-                )
-
-        filters = ContentFilters(
-            content_type=content_type,
-            rating=rating,
-            genre_ids=genre_id_list,
-            year=year,
-            search=search,
-            is_featured=True,
-        )
-
-        pagination = PaginationParams(
-            page=page, size=size, sort_by=sort_by, sort_order=sort_order
-        )
+        # Convert query params to filters and pagination
+        filters = query_params.to_filters()
+        pagination = query_params.to_pagination()
 
         contents, total = await get_featured_content(db, pagination, filters)
 
-        pagination_info = calculate_pagination_info(page, size, total)
+        pagination_info = calculate_pagination_info(
+            query_params.page, query_params.size, total
+        )
 
         return ContentListResponse(items=contents, **pagination_info)
-
+    except ValueError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e),
+        )
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            status_code=500,
             detail=f"Error retrieving featured content: {str(e)}",
         )
 
 
 @router.get("/trending", response_model=ContentListResponse)
 async def get_trending_contents(
-    page: int = Query(1, ge=1, description="Page number"),
-    size: int = Query(
-        settings.DEFAULT_PAGE_SIZE,
-        ge=1,
-        le=settings.MAX_PAGE_SIZE,
-        description="Page size",
-    ),
-    content_type: Optional[str] = Query(None, description="Filter by content type"),
-    rating: Optional[str] = Query(None, description="Filter by rating"),
-    genre_ids: Optional[str] = Query(None, description="Comma-separated genre IDs"),
-    year: Optional[int] = Query(None, description="Filter by release year"),
-    search: Optional[str] = Query(None, description="Search in title and description"),
-    sort_by: str = Query("view_count", description="Sort field"),
-    sort_order: str = Query("desc", pattern="^(asc|desc)$", description="Sort order"),
+    query_params: TrendingContentQueryParams = Depends(),
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
@@ -168,60 +135,34 @@ async def get_trending_contents(
     Returns a paginated list of trending content that is published and available to users.
     """
     try:
-        genre_id_list = None
-        if genre_ids:
-            try:
-                genre_id_list = [UUID(gid.strip()) for gid in genre_ids.split(",")]
-            except ValueError:
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST, detail=INVALID_FILTERS
-                )
-
-        filters = ContentFilters(
-            content_type=content_type,
-            rating=rating,
-            genre_ids=genre_id_list,
-            year=year,
-            search=search,
-            is_trending=True,
-        )
-
-        pagination = PaginationParams(
-            page=page, size=size, sort_by=sort_by, sort_order=sort_order
-        )
+        # Convert query params to filters and pagination
+        filters = query_params.to_filters()
+        pagination = query_params.to_pagination()
 
         contents, total = await get_trending_content(db, pagination, filters)
 
-        pagination_info = calculate_pagination_info(page, size, total)
+        pagination_info = calculate_pagination_info(
+            query_params.page, query_params.size, total
+        )
 
         return ContentListResponse(items=contents, **pagination_info)
-
+    except ValueError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e),
+        )
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            status_code=500,
             detail=f"Error retrieving trending content: {str(e)}",
         )
 
 
 @router.get("/", response_model=ContentListResponse)
 async def get_contents(
-    page: int = Query(1, ge=1, description="Page number"),
-    size: int = Query(
-        settings.DEFAULT_PAGE_SIZE,
-        ge=1,
-        le=settings.MAX_PAGE_SIZE,
-        description="Page size",
-    ),
-    content_type: Optional[str] = Query(None, description="Filter by content type"),
-    status: Optional[str] = Query(None, description="Filter by status"),
-    rating: Optional[str] = Query(None, description="Filter by rating"),
-    genre_ids: Optional[str] = Query(None, description="Comma-separated genre IDs"),
-    is_featured: Optional[bool] = Query(None, description="Filter featured content"),
-    is_trending: Optional[bool] = Query(None, description="Filter trending content"),
-    year: Optional[int] = Query(None, description="Filter by release year"),
-    search: Optional[str] = Query(None, description="Search in title and description"),
-    sort_by: str = Query("created_at", description="Sort field"),
-    sort_order: str = Query("desc", pattern="^(asc|desc)$", description="Sort order"),
+    query_params: ContentQueryParams = Depends(),
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
@@ -229,40 +170,27 @@ async def get_contents(
     Returns a paginated list of content with various filtering options.
     """
     try:
-        # Parse genre IDs
-        genre_id_list = None
-        if genre_ids:
-            try:
-                genre_id_list = [UUID(gid.strip()) for gid in genre_ids.split(",")]
-            except ValueError:
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST, detail=INVALID_FILTERS
-                )
-
-        filters = ContentFilters(
-            content_type=content_type,
-            status=status,
-            rating=rating,
-            genre_ids=genre_id_list,
-            is_featured=is_featured,
-            is_trending=is_trending,
-            year=year,
-            search=search,
-        )
-
-        pagination = PaginationParams(
-            page=page, size=size, sort_by=sort_by, sort_order=sort_order
-        )
+        # Convert query params to filters and pagination
+        filters = query_params.to_filters()
+        pagination = query_params.to_pagination()
 
         contents, total = await get_content_list(db, pagination, filters)
 
-        pagination_info = calculate_pagination_info(page, size, total)
+        pagination_info = calculate_pagination_info(
+            query_params.page, query_params.size, total
+        )
 
         return ContentListResponse(items=contents, **pagination_info)
-
+    except ValueError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e),
+        )
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            status_code=500,
             detail=f"Error retrieving content list: {str(e)}",
         )
 

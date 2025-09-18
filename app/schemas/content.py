@@ -432,6 +432,140 @@ class ContentFilters(BaseModel):
     search: Optional[str] = Field(None, description="Search in title and description")
 
 
+class ContentQueryParams(BaseModel):
+    """Query parameters for content list endpoint"""
+
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=100, description="Page size")
+    content_type: Optional[ContentType] = Field(
+        None, description="Filter by content type"
+    )
+    status: Optional[ContentStatus] = Field(None, description="Filter by status")
+    rating: Optional[ContentRating] = Field(None, description="Filter by rating")
+    genre_ids: Optional[str] = Field(None, description="Comma-separated genre IDs")
+    is_featured: Optional[bool] = Field(None, description="Filter featured content")
+    is_trending: Optional[bool] = Field(None, description="Filter trending content")
+    year: Optional[int] = Field(None, description="Filter by release year")
+    search: Optional[str] = Field(None, description="Search in title and description")
+    sort_by: str = Field("created_at", description="Sort field")
+    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+
+    def to_filters(self) -> ContentFilters:
+        """Convert to ContentFilters, handling genre_ids parsing"""
+        genre_id_list = None
+        if self.genre_ids:
+            try:
+                genre_id_list = [UUID(gid.strip()) for gid in self.genre_ids.split(",")]
+            except ValueError:
+                raise ValueError("Invalid genre IDs format")
+
+        return ContentFilters(
+            content_type=self.content_type,
+            status=self.status,
+            rating=self.rating,
+            genre_ids=genre_id_list,
+            is_featured=self.is_featured,
+            is_trending=self.is_trending,
+            year=self.year,
+            search=self.search,
+        )
+
+    def to_pagination(self) -> PaginationParams:
+        """Convert to PaginationParams"""
+        return PaginationParams(
+            page=self.page,
+            size=self.size,
+            sort_by=self.sort_by,
+            sort_order=self.sort_order,
+        )
+
+
+class FeaturedContentQueryParams(BaseModel):
+    """Query parameters for featured content endpoint"""
+
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=100, description="Page size")
+    content_type: Optional[ContentType] = Field(
+        None, description="Filter by content type"
+    )
+    rating: Optional[ContentRating] = Field(None, description="Filter by rating")
+    genre_ids: Optional[str] = Field(None, description="Comma-separated genre IDs")
+    year: Optional[int] = Field(None, description="Filter by release year")
+    search: Optional[str] = Field(None, description="Search in title and description")
+    sort_by: str = Field("created_at", description="Sort field")
+    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+
+    def to_filters(self) -> ContentFilters:
+        """Convert to ContentFilters, handling genre_ids parsing"""
+        genre_id_list = None
+        if self.genre_ids:
+            try:
+                genre_id_list = [UUID(gid.strip()) for gid in self.genre_ids.split(",")]
+            except ValueError:
+                raise ValueError("Invalid genre IDs format")
+
+        return ContentFilters(
+            content_type=self.content_type,
+            rating=self.rating,
+            genre_ids=genre_id_list,
+            year=self.year,
+            search=self.search,
+            is_featured=True,  # Always true for featured content
+        )
+
+    def to_pagination(self) -> PaginationParams:
+        """Convert to PaginationParams"""
+        return PaginationParams(
+            page=self.page,
+            size=self.size,
+            sort_by=self.sort_by,
+            sort_order=self.sort_order,
+        )
+
+
+class TrendingContentQueryParams(BaseModel):
+    """Query parameters for trending content endpoint"""
+
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=100, description="Page size")
+    content_type: Optional[ContentType] = Field(
+        None, description="Filter by content type"
+    )
+    rating: Optional[ContentRating] = Field(None, description="Filter by rating")
+    genre_ids: Optional[str] = Field(None, description="Comma-separated genre IDs")
+    year: Optional[int] = Field(None, description="Filter by release year")
+    search: Optional[str] = Field(None, description="Search in title and description")
+    sort_by: str = Field("view_count", description="Sort field")
+    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+
+    def to_filters(self) -> ContentFilters:
+        """Convert to ContentFilters, handling genre_ids parsing"""
+        genre_id_list = None
+        if self.genre_ids:
+            try:
+                genre_id_list = [UUID(gid.strip()) for gid in self.genre_ids.split(",")]
+            except ValueError:
+                raise ValueError("Invalid genre IDs format")
+
+        return ContentFilters(
+            content_type=self.content_type,
+            rating=self.rating,
+            genre_ids=genre_id_list,
+            year=self.year,
+            search=self.search,
+            is_trending=True,  # Always true for trending content
+        )
+
+    def to_pagination(self) -> PaginationParams:
+        """Convert to PaginationParams"""
+        return PaginationParams(
+            page=self.page,
+            size=self.size,
+            sort_by=self.sort_by,
+            sort_order=self.sort_order,
+        )
+
+
 class GenreFilters(BaseModel):
     """Genre filtering parameters"""
 

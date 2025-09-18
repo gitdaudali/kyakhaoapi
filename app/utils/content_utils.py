@@ -34,19 +34,22 @@ async def get_content_by_id(
     db: AsyncSession, content_id: UUID, include_relationships: bool = True
 ) -> Optional[Content]:
     """Get content by ID with optional relationship loading"""
-    query = select(Content).where(
-        and_(Content.id == content_id, Content.is_deleted == False)
-    )
-
-    if include_relationships:
-        query = query.options(
-            selectinload(Content.genres),
-            selectinload(Content.cast).selectinload(ContentCast.person),
-            selectinload(Content.crew).selectinload(ContentCrew.person),
+    try:
+        query = select(Content).where(
+            and_(Content.id == content_id, Content.is_deleted == False)
         )
 
-    result = await db.execute(query)
-    return result.scalar_one_or_none()
+        if include_relationships:
+            query = query.options(
+                selectinload(Content.genres),
+                selectinload(Content.cast).selectinload(ContentCast.person),
+                selectinload(Content.crew).selectinload(ContentCrew.person),
+            )
+
+        result = await db.execute(query)
+        return result.scalar_one_or_none()
+    except Exception as e:
+        raise Exception(f"Error retrieving content by ID: {str(e)}")
 
 
 async def get_content_detail_optimized(
@@ -234,42 +237,45 @@ async def get_content_list(
     filters: Optional[ContentFilters] = None,
 ) -> Tuple[List[Content], int]:
     """Get content list with pagination and filtering - optimized for different content types"""
-    query = select(Content).where(Content.is_deleted == False)
+    try:
+        query = select(Content).where(Content.is_deleted == False)
 
-    # Apply filters
-    if filters:
-        query = _apply_content_filters(query, filters)
+        # Apply filters
+        if filters:
+            query = _apply_content_filters(query, filters)
 
-    # Apply pagination
-    query = _apply_pagination(query, pagination, Content)
+        # Apply pagination
+        query = _apply_pagination(query, pagination, Content)
 
-    # Load genres for all content
-    query = query.options(selectinload(Content.genres))
+        # Load genres for all content
+        query = query.options(selectinload(Content.genres))
 
-    # Load content-type specific relationships for list view
-    # For movies: load movie_files (basic info only)
-    # For TV series: load seasons (basic info only, no episodes)
-    query = query.options(
-        selectinload(Content.movie_files),  # For movies
-        selectinload(
-            Content.seasons
-        ),  # For TV series (without episodes for performance)
-    )
+        # Load content-type specific relationships for list view
+        # For movies: load movie_files (basic info only)
+        # For TV series: load seasons (basic info only, no episodes)
+        query = query.options(
+            selectinload(Content.movie_files),  # For movies
+            selectinload(
+                Content.seasons
+            ),  # For TV series (without episodes for performance)
+        )
 
-    # Execute query
-    result = await db.execute(query)
-    contents = result.scalars().all()
+        # Execute query
+        result = await db.execute(query)
+        contents = result.scalars().all()
 
-    # Get total count
-    count_query = select(func.count(Content.id)).where(Content.is_deleted == False)
+        # Get total count
+        count_query = select(func.count(Content.id)).where(Content.is_deleted == False)
 
-    if filters:
-        count_query = _apply_content_filters(count_query, filters)
+        if filters:
+            count_query = _apply_content_filters(count_query, filters)
 
-    count_result = await db.execute(count_query)
-    total = count_result.scalar()
+        count_result = await db.execute(count_query)
+        total = count_result.scalar()
 
-    return contents, total
+        return contents, total
+    except Exception as e:
+        raise Exception(f"Error retrieving content list: {str(e)}")
 
 
 async def get_genres_list(
