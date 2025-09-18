@@ -18,6 +18,7 @@ from app.core.database import get_db
 from app.core.deps import CurrentUser, get_current_user, verify_refresh_token
 from app.core.messages import (
     ACCOUNT_DEACTIVATED,
+    ACCOUNT_NOT_FOUND,
     CURRENT_PASSWORD_INCORRECT,
     EMAIL_NOT_VERIFIED,
     EMAIL_VERIFICATION_SUCCESS,
@@ -30,6 +31,7 @@ from app.core.messages import (
     OTP_INVALID_OR_EXPIRED,
     OTP_VERIFICATION_SUCCESS,
     PASSWORD_CHANGED_SUCCESS,
+    PASSWORD_RESET_OTP_SENT,
     PASSWORD_RESET_SENT,
     PASSWORD_RESET_SUCCESS,
     PASSWORD_RESET_TOKEN_INVALID,
@@ -56,19 +58,24 @@ from app.schemas.user import User as UserSchema
 from app.tasks.email_tasks import (
     send_email_verification_task,
     send_password_reset_email_task,
+    send_password_reset_otp_email_task,
     send_registration_otp_email_task,
 )
 from app.utils.auth_utils import (
     calculate_token_expiration,
     check_user_exists,
     create_email_verification_otp,
+    create_password_reset_otp,
     get_device_info,
     get_user_by_email,
     get_user_by_id_or_404,
     increment_otp_attempts,
+    increment_password_reset_otp_attempts,
     mark_email_verification_otp_used,
+    mark_password_reset_otp_used,
     validate_email_verification_otp,
     validate_password_match,
+    validate_password_reset_otp,
 )
 from app.utils.token_utils import (
     create_email_verification_token,
@@ -334,19 +341,25 @@ async def request_password_reset(
 ) -> MessageResponse:
     """
     Request password reset by email.
-    Sends reset token to user email if account exists.
+    Sends reset OTP to user email if account exists.
     """
     try:
         user = await get_user_by_email(db, reset_data.email)
-        if user:
-            reset_token = await create_password_reset_token(db, user.id)
-
-            send_password_reset_email_task.delay(
-                email_to=user.email,
-                reset_token=reset_token.token,
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=ACCOUNT_NOT_FOUND,
             )
 
-        return MessageResponse(message=PASSWORD_RESET_SENT)
+        otp = await create_password_reset_otp(db, user.id, user.email)
+
+        send_password_reset_otp_email_task.delay(
+            email_to=user.email,
+            otp_code=otp.otp_code,
+            user_name=user.first_name or user.email.split("@")[0],
+        )
+
+        return MessageResponse(message=PASSWORD_RESET_OTP_SENT)
 
     except HTTPException:
         raise
@@ -362,26 +375,34 @@ async def confirm_password_reset(
     reset_data: PasswordResetConfirm, db: AsyncSession = Depends(get_db)
 ) -> MessageResponse:
     """
-    Confirm password reset with validation token.
-    Validates reset token and updates user password.
+    Confirm password reset with OTP validation.
+    Validates OTP and updates user password.
     """
     try:
         validate_password_match(
             reset_data.new_password, reset_data.new_password_confirm
         )
 
-        reset_token = await validate_password_reset_token(db, reset_data.reset_token)
-        if not reset_token:
+        otp = await validate_password_reset_otp(
+            db, reset_data.otp_code, reset_data.email
+        )
+        if not otp:
+            await increment_password_reset_otp_attempts(
+                db, reset_data.otp_code, reset_data.email
+            )
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=PASSWORD_RESET_TOKEN_INVALID,
+                detail=OTP_INVALID_OR_EXPIRED,
             )
 
-        user = await get_user_by_id_or_404(db, reset_token.user_id)
+        user = await get_user_by_id_or_404(db, otp.user_id)
 
         user.password = get_password_hash(reset_data.new_password)
 
-        await mark_password_reset_token_used(db, reset_data.reset_token)
+        await mark_password_reset_otp_used(db, reset_data.otp_code, reset_data.email)
+
+        if reset_data.logout_all_devices:
+            await revoke_user_tokens(user.id, db, "password_reset", user.id)
 
         await db.commit()
 

@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.auth import get_current_user_id
 from app.core.database import get_db
-from app.models.token import TokenBlacklist
+from app.models.token import Token, TokenBlacklist
 from app.models.user import User
 
 # OAuth2 scheme
@@ -54,6 +54,23 @@ async def get_current_user(
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid authentication credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    # Check if token exists in database and is not revoked
+    token_query = select(Token).where(
+        Token.token == token,
+        Token.user_id == user_id,
+        Token.is_revoked == False,
+        Token.expires_at > datetime.now(timezone.utc),
+    )
+    token_result = await db.execute(token_query)
+    token_obj = token_result.scalar_one_or_none()
+
+    if not token_obj:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token has been revoked or expired",
             headers={"WWW-Authenticate": "Bearer"},
         )
 

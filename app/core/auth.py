@@ -260,6 +260,7 @@ async def revoke_token(
             token_obj = result.scalar_one_or_none()
             if token_obj:
                 token_obj.is_revoked = True
+                db.add(token_obj)
         elif payload.get("type") == "refresh":
             result = await db.execute(
                 select(RefreshToken).where(RefreshToken.token == token)
@@ -267,6 +268,7 @@ async def revoke_token(
             refresh_token_obj = result.scalar_one_or_none()
             if refresh_token_obj:
                 refresh_token_obj.is_revoked = True
+                db.add(refresh_token_obj)
 
         await db.commit()
         return True
@@ -295,27 +297,40 @@ async def revoke_user_tokens(
         Number of tokens revoked
     """
     try:
-        # Get all active tokens for user
+        # Convert asyncpg UUID to standard Python UUID if needed
+        if hasattr(user_id, "__class__") and "asyncpg" in str(user_id.__class__):
+            user_id = uuid.UUID(str(user_id))
+
+        if (
+            revoked_by
+            and hasattr(revoked_by, "__class__")
+            and "asyncpg" in str(revoked_by.__class__)
+        ):
+            revoked_by = uuid.UUID(str(revoked_by))
+
+        # Get all non-revoked tokens for user (including expired ones for blacklisting)
         access_tokens = await db.execute(
             select(Token).where(
                 Token.user_id == user_id,
-                Token.is_revoked is False,
-                Token.expires_at > datetime.now(timezone.utc),
+                Token.is_revoked == False,
             )
         )
         refresh_tokens = await db.execute(
             select(RefreshToken).where(
                 RefreshToken.user_id == user_id,
-                RefreshToken.is_revoked is False,
-                RefreshToken.expires_at > datetime.now(timezone.utc),
+                RefreshToken.is_revoked == False,
             )
         )
 
         revoked_count = 0
 
+        access_tokens_list = list(access_tokens.scalars())
+        refresh_tokens_list = list(refresh_tokens.scalars())
+
         # Revoke access tokens
-        for token_obj in access_tokens.scalars():
+        for token_obj in access_tokens_list:
             token_obj.is_revoked = True
+            db.add(token_obj)  # Add to session
             revoked_count += 1
 
             # Add to blacklist
@@ -330,8 +345,9 @@ async def revoke_user_tokens(
             db.add(blacklist_entry)
 
         # Revoke refresh tokens
-        for refresh_token_obj in refresh_tokens.scalars():
+        for refresh_token_obj in refresh_tokens_list:
             refresh_token_obj.is_revoked = True
+            db.add(refresh_token_obj)  # Add to session
             revoked_count += 1
 
             # Add to blacklist

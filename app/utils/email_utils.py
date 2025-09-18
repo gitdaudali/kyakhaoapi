@@ -165,3 +165,33 @@ def create_registration_otp_email(
     )
 
     return EmailData(html_content=html_content, subject=subject)
+
+
+def create_password_reset_otp_email(
+    user_email: str, otp_code: str, user_name: str = None
+) -> EmailData:
+    """
+    Create password reset OTP email content using template.
+
+    Args:
+        user_email: User's email address
+        otp_code: 6-digit OTP code
+        user_name: User's name (optional)
+
+    Returns:
+        EmailData object with subject and html_content
+    """
+    username = user_name or user_email.split("@")[0]
+    subject = f"{settings.PROJECT_NAME} - Password Reset Code"
+
+    html_content = render_email_template(
+        template_name="password_reset.html",
+        context={
+            "project_name": settings.PROJECT_NAME,
+            "username": username,
+            "email": user_email,
+            "otp_code": otp_code,
+        },
+    )
+
+    return EmailData(html_content=html_content, subject=subject)
