@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from typing import List, Optional, Tuple
 from uuid import UUID
 
@@ -13,8 +14,10 @@ from app.models.content import (
     ContentCrew,
     ContentGenre,
     ContentReview,
+    Episode,
     Genre,
     Person,
+    Season,
 )
 from app.models.user import User
 from app.schemas.content import (
@@ -58,8 +61,6 @@ async def get_content_detail_optimized(
     query = query.options(selectinload(Content.genres))
 
     # Load content-type specific relationships
-    from app.models.content import Episode, Season
-
     query = query.options(
         selectinload(Content.movie_files),  # For movies
         selectinload(Content.seasons).selectinload(Season.episodes),  # For TV series
@@ -73,8 +74,6 @@ async def get_content_crew_cast(
     db: AsyncSession, content_id: UUID
 ) -> Optional[Content]:
     """Get content with only cast and crew relationships for performance"""
-    from app.models.content import ContentCast, ContentCrew, Person
-
     # First get the content
     content_query = select(Content).where(
         and_(Content.id == content_id, Content.is_deleted == False)
@@ -235,8 +234,6 @@ async def get_content_list(
     filters: Optional[ContentFilters] = None,
 ) -> Tuple[List[Content], int]:
     """Get content list with pagination and filtering - optimized for different content types"""
-    from app.models.content import Episode, Season
-
     query = select(Content).where(Content.is_deleted == False)
 
     # Apply filters
@@ -715,8 +712,6 @@ async def get_review_stats(db: AsyncSession, content_id: UUID) -> dict:
     featured_reviews_count = featured_result.scalar()
 
     # Recent reviews count (last 30 days)
-    from datetime import datetime, timedelta
-
     thirty_days_ago = datetime.utcnow() - timedelta(days=30)
     recent_query = select(func.count()).where(
         and_(
@@ -777,3 +772,247 @@ async def get_user_review_for_content(
 
     result = await db.execute(query)
     return result.scalar_one_or_none()
+
+
+async def create_content_review(
+    db: AsyncSession, content_id: UUID, user_id: UUID, review_data: dict
+) -> ContentReview:
+    """Create a new review for content - user-facing only"""
+    # Check if user already has a review for this content
+    existing_review = await get_user_review_for_content(db, content_id, user_id)
+    if existing_review:
+        raise ValueError("User already has a review for this content")
+
+    # Create new review with only user-facing fields
+    review = ContentReview(
+        content_id=content_id,
+        user_id=user_id,
+        rating=review_data["rating"],
+        title=review_data.get("title"),
+        review_text=review_data.get("review_text"),
+        language=review_data.get("language", "en"),
+        status="published",
+        # Admin fields are set to defaults
+        is_featured=False,
+        helpful_votes=0,
+        total_votes=0,
+        is_edited=False,
+        last_edited_at=None,
+    )
+
+    db.add(review)
+    await db.commit()  # Commit to get the ID and timestamps
+
+    # Update content review count
+    await update_content_review_count(db, content_id)
+
+    # Refresh to get all fields including timestamps
+    await db.refresh(review)
+
+    # Load user relationship separately
+    user_query = select(User).where(User.id == user_id)
+    user_result = await db.execute(user_query)
+    user = user_result.scalar_one_or_none()
+    if user:
+        review.user = user
+
+    return review
+
+
+async def update_content_review(
+    db: AsyncSession, review_id: UUID, user_id: UUID, review_data: dict
+) -> Optional[ContentReview]:
+    """Update an existing review - user-facing only"""
+    # Get the review with user relationship
+    query = (
+        select(ContentReview)
+        .where(and_(ContentReview.id == review_id, ContentReview.user_id == user_id))
+        .options(selectinload(ContentReview.user))
+    )
+    result = await db.execute(query)
+    review = result.scalar_one_or_none()
+
+    if not review:
+        return None
+
+    # Update only user-facing fields
+    if "rating" in review_data:
+        review.rating = review_data["rating"]
+    if "title" in review_data:
+        review.title = review_data["title"]
+    if "review_text" in review_data:
+        review.review_text = review_data["review_text"]
+    if "language" in review_data:
+        review.language = review_data["language"]
+
+    # Mark as edited (this is the only admin field users can affect)
+    review.is_edited = True
+    review.last_edited_at = datetime.utcnow()
+
+    # Add to session and commit
+    db.add(review)
+    await db.commit()
+    await db.refresh(review)
+
+    return review
+
+
+async def delete_content_review(
+    db: AsyncSession, review_id: UUID, user_id: UUID
+) -> bool:
+    """Delete a review"""
+    # Get the review
+    query = select(ContentReview).where(
+        and_(ContentReview.id == review_id, ContentReview.user_id == user_id)
+    )
+    result = await db.execute(query)
+    review = result.scalar_one_or_none()
+
+    if not review:
+        return False
+
+    content_id = review.content_id
+
+    # Delete the review
+    await db.delete(review)
+    await db.commit()
+
+    # Update content review count
+    await update_content_review_count(db, content_id)
+
+    return True
+
+
+async def vote_on_review(
+    db: AsyncSession, review_id: UUID, user_id: UUID, is_helpful: bool
+) -> Optional[ContentReview]:
+    """Vote on a review (helpful/not helpful)"""
+    # Get the review
+    query = select(ContentReview).where(ContentReview.id == review_id)
+    result = await db.execute(query)
+    review = result.scalar_one_or_none()
+
+    if not review:
+        return None
+
+    # Update vote counts
+    if is_helpful:
+        review.helpful_votes += 1
+    review.total_votes += 1
+
+    await db.commit()
+    await db.refresh(review, ["user"])
+
+    return review
+
+
+async def update_content_review_count(db: AsyncSession, content_id: UUID):
+    """Update the review count for content"""
+    # Count published reviews
+    count_query = select(func.count()).where(
+        and_(
+            ContentReview.content_id == content_id, ContentReview.status == "published"
+        )
+    )
+    count_result = await db.execute(count_query)
+    review_count = count_result.scalar()
+
+    # Update content
+    content_query = select(Content).where(Content.id == content_id)
+    content_result = await db.execute(content_query)
+    content = content_result.scalar_one_or_none()
+
+    if content:
+        content.reviews_count = review_count
+        await db.commit()
+
+
+async def get_content_review_stats(db: AsyncSession, content_id: UUID) -> dict:
+    """Get comprehensive review statistics for content"""
+    # Total reviews count
+    total_reviews_query = select(func.count()).where(
+        and_(
+            ContentReview.content_id == content_id, ContentReview.status == "published"
+        )
+    )
+    total_reviews_result = await db.execute(total_reviews_query)
+    total_reviews = total_reviews_result.scalar()
+
+    if total_reviews == 0:
+        return {
+            "total_reviews": 0,
+            "average_rating": None,
+            "rating_distribution": {},
+            "featured_reviews_count": 0,
+            "recent_reviews_count": 0,
+            "helpful_reviews_count": 0,
+        }
+
+    # Average rating
+    avg_rating_query = select(func.avg(ContentReview.rating)).where(
+        and_(
+            ContentReview.content_id == content_id, ContentReview.status == "published"
+        )
+    )
+    avg_rating_result = await db.execute(avg_rating_query)
+    average_rating = avg_rating_result.scalar()
+
+    # Rating distribution
+    rating_dist_query = (
+        select(ContentReview.rating, func.count().label("count"))
+        .where(
+            and_(
+                ContentReview.content_id == content_id,
+                ContentReview.status == "published",
+            )
+        )
+        .group_by(ContentReview.rating)
+        .order_by(ContentReview.rating)
+    )
+    rating_dist_result = await db.execute(rating_dist_query)
+    rating_distribution = {
+        str(row.rating): row.count for row in rating_dist_result.fetchall()
+    }
+
+    # Featured reviews count
+    featured_query = select(func.count()).where(
+        and_(
+            ContentReview.content_id == content_id,
+            ContentReview.status == "published",
+            ContentReview.is_featured == True,
+        )
+    )
+    featured_result = await db.execute(featured_query)
+    featured_reviews_count = featured_result.scalar()
+
+    # Recent reviews count (last 30 days)
+    thirty_days_ago = datetime.utcnow() - timedelta(days=30)
+    recent_query = select(func.count()).where(
+        and_(
+            ContentReview.content_id == content_id,
+            ContentReview.status == "published",
+            ContentReview.created_at >= thirty_days_ago,
+        )
+    )
+    recent_result = await db.execute(recent_query)
+    recent_reviews_count = recent_result.scalar()
+
+    # Helpful reviews count (reviews with helpful votes)
+    helpful_query = select(func.count()).where(
+        and_(
+            ContentReview.content_id == content_id,
+            ContentReview.status == "published",
+            ContentReview.helpful_votes > 0,
+        )
+    )
+    helpful_result = await db.execute(helpful_query)
+    helpful_reviews_count = helpful_result.scalar()
+
+    return {
+        "total_reviews": total_reviews,
+        "average_rating": round(average_rating, 2) if average_rating else None,
+        "rating_distribution": rating_distribution,
+        "featured_reviews_count": featured_reviews_count,
+        "recent_reviews_count": recent_reviews_count,
+        "helpful_reviews_count": helpful_reviews_count,
+    }

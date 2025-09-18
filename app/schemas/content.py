@@ -511,14 +511,17 @@ class ReviewBase(BaseModel):
     last_edited_at: Optional[datetime] = Field(None, description="Last edit timestamp")
 
 
-class ReviewCreate(ReviewBase):
-    """Schema for creating a review"""
+class ReviewCreate(BaseModel):
+    """Schema for creating a review - user-facing only"""
 
-    content_id: UUID = Field(..., description="Content ID")
+    rating: float = Field(..., ge=1.0, le=5.0, description="Rating (1.0-5.0)")
+    title: Optional[str] = Field(None, description="Review title")
+    review_text: Optional[str] = Field(None, description="Review text")
+    language: str = Field("en", description="Review language")
 
 
 class ReviewUpdate(BaseModel):
-    """Schema for updating a review"""
+    """Schema for updating a review - user-facing only"""
 
     rating: Optional[float] = Field(
         None, ge=1.0, le=5.0, description="Rating (1.0-5.0)"
@@ -611,3 +614,39 @@ class ContentReviewsResponse(BaseModel):
     reviews: List[ReviewSimple] = Field(..., description="List of reviews")
     stats: ReviewStats = Field(..., description="Review statistics")
     pagination: dict = Field(..., description="Pagination information")
+
+
+class ReviewVoteRequest(BaseModel):
+    """Schema for voting on a review"""
+
+    is_helpful: bool = Field(..., description="Whether the review is helpful")
+
+
+class ReviewVoteResponse(BaseModel):
+    """Response schema for review vote"""
+
+    message: str = Field(..., description="Success message")
+    review_id: UUID = Field(..., description="Review ID")
+    helpful_votes: int = Field(..., description="Number of helpful votes")
+    total_votes: int = Field(..., description="Total number of votes")
+
+
+class ReviewCreateResponse(BaseModel):
+    """Response schema for review creation"""
+
+    message: str = Field(..., description="Success message")
+    review: Review = Field(..., description="Created review")
+
+
+class ReviewUpdateResponse(BaseModel):
+    """Response schema for review update"""
+
+    message: str = Field(..., description="Success message")
+    review: Review = Field(..., description="Updated review")
+
+
+class ReviewDeleteResponse(BaseModel):
+    """Response schema for review deletion"""
+
+    message: str = Field(..., description="Success message")
+    review_id: UUID = Field(..., description="Deleted review ID")
