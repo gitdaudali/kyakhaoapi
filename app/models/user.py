@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from app.models.verification import (
         EmailVerificationOTP,
         EmailVerificationToken,
+        PasswordResetOTP,
         PasswordResetToken,
     )
 
@@ -74,6 +75,10 @@ class User(BaseModel, TimestampMixin, table=True):
         sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
     )
     email_verification_otps: List["EmailVerificationOTP"] = Relationship(
+        back_populates="user",
+        sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
+    )
+    password_reset_otps: List["PasswordResetOTP"] = Relationship(
         back_populates="user",
         sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
     )

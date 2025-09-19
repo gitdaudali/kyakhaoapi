@@ -263,9 +263,15 @@ class PasswordResetRequest(BaseModel):
 class PasswordResetConfirm(BaseModel):
     """Request schema for password reset confirmation"""
 
-    reset_token: str = Field(..., description="Password reset token")
+    email: EmailStr = Field(..., description="User email address")
+    otp_code: str = Field(
+        ..., min_length=6, max_length=6, description="6-digit OTP code"
+    )
     new_password: str = Field(..., min_length=8, description="New password")
     new_password_confirm: str = Field(..., description="Confirm new password")
+    logout_all_devices: bool = Field(
+        default=True, description="Logout from all devices after password reset"
+    )
 
 
 # Email Verification Schemas

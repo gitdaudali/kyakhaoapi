@@ -19,7 +19,7 @@ from app.core.messages import (
     USERNAME_EXISTS,
 )
 from app.models.user import User as UserModel
-from app.models.verification import EmailVerificationOTP
+from app.models.verification import EmailVerificationOTP, PasswordResetOTP
 
 
 async def get_user_by_email(session: AsyncSession, email: str) -> Optional[UserModel]:
@@ -192,7 +192,8 @@ def generate_otp() -> str:
     Returns:
         6-digit OTP code as string
     """
-    return str(random.randint(100000, 999999))
+    # return str(random.randint(100000, 999999)) static for now as Design is not updated yet for mobile
+    return "888888"
 
 
 async def create_email_verification_otp(
@@ -317,6 +318,140 @@ async def increment_otp_attempts(
         select(EmailVerificationOTP).where(
             EmailVerificationOTP.otp_code == otp_code,
             EmailVerificationOTP.email == email,
+        )
+    )
+    otp = result.scalar_one_or_none()
+
+    if otp:
+        otp.attempts += 1
+        await session.commit()
+        return True
+
+    return False
+
+
+async def create_password_reset_otp(
+    session: AsyncSession, user_id: str, email: str
+) -> PasswordResetOTP:
+    """
+    Create a new password reset OTP for a user.
+
+    Args:
+        session: Database session
+        user_id: User ID
+        email: User email address
+
+    Returns:
+        PasswordResetOTP object
+    """
+    # Invalidate any existing OTPs for this user
+    await session.execute(
+        select(PasswordResetOTP).where(
+            PasswordResetOTP.user_id == user_id,
+            PasswordResetOTP.is_used == False,
+        )
+    )
+    existing_otps = await session.execute(
+        select(PasswordResetOTP).where(
+            PasswordResetOTP.user_id == user_id,
+            PasswordResetOTP.is_used == False,
+        )
+    )
+    for otp in existing_otps.scalars().all():
+        otp.is_used = True
+        otp.used_at = datetime.now(timezone.utc)
+
+    # Create new OTP
+    otp_code = generate_otp()
+    otp = PasswordResetOTP(
+        otp_code=otp_code,
+        user_id=user_id,
+        email=email,
+        expires_at=datetime.now(timezone.utc) + timedelta(minutes=10),
+    )
+
+    session.add(otp)
+    await session.commit()
+    await session.refresh(otp)
+
+    return otp
+
+
+async def validate_password_reset_otp(
+    session: AsyncSession, otp_code: str, email: str
+) -> Optional[PasswordResetOTP]:
+    """
+    Validate password reset OTP.
+
+    Args:
+        session: Database session
+        otp_code: OTP code to validate
+        email: User email address
+
+    Returns:
+        PasswordResetOTP object if valid, None otherwise
+    """
+    result = await session.execute(
+        select(PasswordResetOTP).where(
+            PasswordResetOTP.otp_code == otp_code,
+            PasswordResetOTP.email == email,
+            PasswordResetOTP.is_used == False,
+            PasswordResetOTP.expires_at > datetime.now(timezone.utc),
+        )
+    )
+    return result.scalar_one_or_none()
+
+
+async def mark_password_reset_otp_used(
+    session: AsyncSession, otp_code: str, email: str
+) -> bool:
+    """
+    Mark password reset OTP as used.
+
+    Args:
+        session: Database session
+        otp_code: OTP code to mark as used
+        email: User email address
+
+    Returns:
+        True if OTP was marked as used, False otherwise
+    """
+    result = await session.execute(
+        select(PasswordResetOTP).where(
+            PasswordResetOTP.otp_code == otp_code,
+            PasswordResetOTP.email == email,
+            PasswordResetOTP.is_used == False,
+        )
+    )
+    otp = result.scalar_one_or_none()
+
+    if otp:
+        otp.is_used = True
+        otp.used_at = datetime.now(timezone.utc)
+        await session.commit()
+        return True
+
+    return False
+
+
+async def increment_password_reset_otp_attempts(
+    session: AsyncSession, otp_code: str, email: str
+) -> bool:
+    """
+    Increment password reset OTP verification attempts.
+
+    Args:
+        session: Database session
+        otp_code: OTP code
+        email: User email address
+
+    Returns:
+        True if attempts were incremented, False otherwise
+    """
+    result = await session.execute(
+        select(PasswordResetOTP).where(
+            PasswordResetOTP.otp_code == otp_code,
+            PasswordResetOTP.email == email,
         )
     )
     otp = result.scalar_one_or_none()
