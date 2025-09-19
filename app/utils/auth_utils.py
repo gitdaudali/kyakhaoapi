@@ -192,7 +192,7 @@ def generate_otp() -> str:
     Returns:
         6-digit OTP code as string
     """
-    # return str(random.randint(100000, 999999)) static for now as Design is not updated yet for mobile
+    # return str(random.randint(100000, 999999))
     return "888888"
 
 
