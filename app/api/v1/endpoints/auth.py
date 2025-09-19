@@ -63,6 +63,7 @@ from app.tasks.email_tasks import (
 )
 from app.utils.auth_utils import (
     calculate_token_expiration,
+    check_user_account_exists,
     check_user_exists,
     create_email_verification_otp,
     create_password_reset_otp,
@@ -141,6 +142,7 @@ async def login_user(
     Validates credentials and account status before token generation.
     """
     try:
+        await check_user_account_exists(db, login_data.email)
         user = await authenticate_user(login_data.email, login_data.password, db)
         if not user:
             raise HTTPException(

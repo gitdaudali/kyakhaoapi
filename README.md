@@ -311,21 +311,6 @@ docker-compose -f docker-compose.prod.yml up -d
 docker build -t cup-streaming-api .
 ```
 
-## 🧪 Testing
-
-```bash
-# Run all tests
-make test
-
-# Run tests with coverage
-pytest --cov=app
-
-# Run specific test file
-pytest tests/test_auth.py
-
-# Run tests with verbose output
-pytest -v
-```
 
 ## 🔍 Code Quality
 
