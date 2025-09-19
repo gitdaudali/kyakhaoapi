@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from typing import List, Optional, Tuple
 from uuid import UUID
 
@@ -231,6 +231,102 @@ async def get_trending_content(
     return contents, total
 
 
+async def get_most_reviewed_last_month(
+    db: AsyncSession,
+    pagination: PaginationParams,
+    filters: Optional[ContentFilters] = None,
+    min_rating: float = 3.0,
+    min_reviews: int = 5,
+) -> Tuple[List[Content], int]:
+    """Get most reviewed content in the last month with pagination and filtering"""
+    try:
+        # Calculate date 30 days ago
+        thirty_days_ago = datetime.now() - timedelta(days=30)
+
+        # Base query for content with reviews in the last month
+        query = (
+            select(Content)
+            .join(ContentReview, Content.id == ContentReview.content_id)
+            .where(
+                and_(
+                    Content.is_deleted == False,
+                    Content.status == "published",
+                    ContentReview.created_at >= thirty_days_ago,
+                    ContentReview.status == "published",
+                )
+            )
+            .group_by(Content.id)
+            .having(
+                and_(
+                    func.count(ContentReview.id) >= min_reviews,
+                    func.avg(ContentReview.rating) >= min_rating,
+                )
+            )
+        )
+
+        # Apply additional filters
+        if filters:
+            query = _apply_content_filters(query, filters)
+
+        # Order by review count (most reviewed first)
+        if pagination.sort_by == "reviews_count":
+            query = query.order_by(desc(func.count(ContentReview.id)))
+        elif pagination.sort_by == "average_rating":
+            query = query.order_by(desc(func.avg(ContentReview.rating)))
+        elif pagination.sort_by == "total_views":
+            query = query.order_by(desc(Content.total_views))
+        else:
+            query = query.order_by(desc(func.count(ContentReview.id)))
+
+        # Apply pagination
+        query = query.offset((pagination.page - 1) * pagination.size).limit(
+            pagination.size
+        )
+
+        # Load relationships
+        query = query.options(
+            selectinload(Content.genres),
+            selectinload(Content.movie_files),
+            selectinload(Content.seasons),
+        )
+
+        # Execute query
+        result = await db.execute(query)
+        contents = result.scalars().all()
+
+        # Get total count
+        count_query = (
+            select(func.count(func.distinct(Content.id)))
+            .select_from(Content)
+            .join(ContentReview, Content.id == ContentReview.content_id)
+            .where(
+                and_(
+                    Content.is_deleted == False,
+                    Content.status == "published",
+                    ContentReview.created_at >= thirty_days_ago,
+                    ContentReview.status == "published",
+                )
+            )
+            .group_by(Content.id)
+            .having(
+                and_(
+                    func.count(ContentReview.id) >= min_reviews,
+                    func.avg(ContentReview.rating) >= min_rating,
+                )
+            )
+        )
+
+        if filters:
+            count_query = _apply_content_filters(count_query, filters)
+
+        count_result = await db.execute(count_query)
+        total = count_result.scalar() or 0
+
+        return contents, total
+    except Exception as e:
+        raise Exception(f"Error retrieving most reviewed content: {str(e)}")
+
+
 async def get_content_list(
     db: AsyncSession,
     pagination: PaginationParams,
@@ -325,6 +421,16 @@ def _apply_content_filters(query, filters: ContentFilters):
 
     if filters.is_trending is not None:
         query = query.where(Content.is_trending == filters.is_trending)
+
+    if filters.is_new_release is not None:
+        if filters.is_new_release:
+            # Filter for content released in the last 30 days
+            thirty_days_ago = datetime.now().date() - timedelta(days=30)
+            query = query.where(Content.release_date >= thirty_days_ago)
+        else:
+            # Filter for content released more than 30 days ago
+            thirty_days_ago = datetime.now().date() - timedelta(days=30)
+            query = query.where(Content.release_date < thirty_days_ago)
 
     if filters.year:
         query = query.where(func.extract("year", Content.release_date) == filters.year)

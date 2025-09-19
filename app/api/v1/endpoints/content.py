@@ -50,6 +50,7 @@ from app.schemas.content import (
     Genre,
     GenreFilters,
     GenreListResponse,
+    MostReviewedLastMonthQueryParams,
     PaginatedResponse,
     PaginationParams,
     Review,
@@ -81,6 +82,7 @@ from app.utils.content_utils import (
     get_genre_by_id,
     get_genre_by_slug,
     get_genres_list,
+    get_most_reviewed_last_month,
     get_review_stats,
     get_trending_content,
     update_content_review,
@@ -157,6 +159,42 @@ async def get_trending_contents(
         raise HTTPException(
             status_code=500,
             detail=f"Error retrieving trending content: {str(e)}",
+        )
+
+
+@router.get("/most-reviewed-last-month", response_model=ContentListResponse)
+async def get_most_reviewed_last_month_endpoint(
+    query_params: MostReviewedLastMonthQueryParams = Depends(),
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Get most reviewed content from the last month.
+    Returns content that has received the most reviews in the last 30 days.
+    """
+    try:
+        filters = query_params.to_filters()
+        pagination = query_params.to_pagination()
+
+        contents, total = await get_most_reviewed_last_month(
+            db, pagination, filters, query_params.min_rating, query_params.min_reviews
+        )
+
+        pagination_info = calculate_pagination_info(
+            query_params.page, query_params.size, total
+        )
+
+        return ContentListResponse(items=contents, **pagination_info)
+    except ValueError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e),
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error retrieving most reviewed content: {str(e)}",
         )
 
 

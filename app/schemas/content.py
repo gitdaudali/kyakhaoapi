@@ -428,6 +428,9 @@ class ContentFilters(BaseModel):
     genre_ids: Optional[List[UUID]] = Field(None, description="Filter by genre IDs")
     is_featured: Optional[bool] = Field(None, description="Filter featured content")
     is_trending: Optional[bool] = Field(None, description="Filter trending content")
+    is_new_release: Optional[bool] = Field(
+        None, description="Filter new releases (last 30 days)"
+    )
     year: Optional[int] = Field(None, description="Filter by release year")
     search: Optional[str] = Field(None, description="Search in title and description")
 
@@ -445,6 +448,9 @@ class ContentQueryParams(BaseModel):
     genre_ids: Optional[str] = Field(None, description="Comma-separated genre IDs")
     is_featured: Optional[bool] = Field(None, description="Filter featured content")
     is_trending: Optional[bool] = Field(None, description="Filter trending content")
+    is_new_release: Optional[bool] = Field(
+        None, description="Filter new releases (last 30 days)"
+    )
     year: Optional[int] = Field(None, description="Filter by release year")
     search: Optional[str] = Field(None, description="Search in title and description")
     sort_by: str = Field("created_at", description="Sort field")
@@ -466,6 +472,7 @@ class ContentQueryParams(BaseModel):
             genre_ids=genre_id_list,
             is_featured=self.is_featured,
             is_trending=self.is_trending,
+            is_new_release=self.is_new_release,
             year=self.year,
             search=self.search,
         )
@@ -490,6 +497,9 @@ class FeaturedContentQueryParams(BaseModel):
     )
     rating: Optional[ContentRating] = Field(None, description="Filter by rating")
     genre_ids: Optional[str] = Field(None, description="Comma-separated genre IDs")
+    is_new_release: Optional[bool] = Field(
+        None, description="Filter new releases (last 30 days)"
+    )
     year: Optional[int] = Field(None, description="Filter by release year")
     search: Optional[str] = Field(None, description="Search in title and description")
     sort_by: str = Field("created_at", description="Sort field")
@@ -508,6 +518,7 @@ class FeaturedContentQueryParams(BaseModel):
             content_type=self.content_type,
             rating=self.rating,
             genre_ids=genre_id_list,
+            is_new_release=self.is_new_release,
             year=self.year,
             search=self.search,
             is_featured=True,  # Always true for featured content
@@ -533,6 +544,9 @@ class TrendingContentQueryParams(BaseModel):
     )
     rating: Optional[ContentRating] = Field(None, description="Filter by rating")
     genre_ids: Optional[str] = Field(None, description="Comma-separated genre IDs")
+    is_new_release: Optional[bool] = Field(
+        None, description="Filter new releases (last 30 days)"
+    )
     year: Optional[int] = Field(None, description="Filter by release year")
     search: Optional[str] = Field(None, description="Search in title and description")
     sort_by: str = Field("view_count", description="Sort field")
@@ -551,9 +565,56 @@ class TrendingContentQueryParams(BaseModel):
             content_type=self.content_type,
             rating=self.rating,
             genre_ids=genre_id_list,
+            is_new_release=self.is_new_release,
             year=self.year,
             search=self.search,
             is_trending=True,  # Always true for trending content
+        )
+
+    def to_pagination(self) -> PaginationParams:
+        """Convert to PaginationParams"""
+        return PaginationParams(
+            page=self.page,
+            size=self.size,
+            sort_by=self.sort_by,
+            sort_order=self.sort_order,
+        )
+
+
+class MostReviewedLastMonthQueryParams(BaseModel):
+    """Query parameters for most reviewed last month endpoint"""
+
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=100, description="Page size")
+    content_type: Optional[ContentType] = Field(
+        None, description="Filter by content type"
+    )
+    rating: Optional[ContentRating] = Field(None, description="Filter by rating")
+    genre_ids: Optional[str] = Field(None, description="Comma-separated genre IDs")
+    min_rating: Optional[float] = Field(
+        3.0, ge=0.0, le=5.0, description="Minimum average rating"
+    )
+    min_reviews: Optional[int] = Field(5, ge=0, description="Minimum reviews count")
+    year: Optional[int] = Field(None, description="Filter by release year")
+    search: Optional[str] = Field(None, description="Search in title and description")
+    sort_by: str = Field("reviews_count", description="Sort field")
+    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+
+    def to_filters(self) -> ContentFilters:
+        """Convert to ContentFilters, handling genre_ids parsing"""
+        genre_id_list = None
+        if self.genre_ids:
+            try:
+                genre_id_list = [UUID(gid.strip()) for gid in self.genre_ids.split(",")]
+            except ValueError:
+                raise ValueError("Invalid genre IDs format")
+
+        return ContentFilters(
+            content_type=self.content_type,
+            rating=self.rating,
+            genre_ids=genre_id_list,
+            year=self.year,
+            search=self.search,
         )
 
     def to_pagination(self) -> PaginationParams:
