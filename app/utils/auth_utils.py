@@ -11,12 +11,12 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.messages import (
+    ACCOUNT_NOT_FOUND,
     EMAIL_EXISTS,
     OTP_EXPIRED,
     OTP_INVALID,
     PASSWORDS_DO_NOT_MATCH,
     USER_NOT_FOUND,
-    USERNAME_EXISTS,
 )
 from app.models.user import User as UserModel
 from app.models.verification import EmailVerificationOTP, PasswordResetOTP
@@ -118,7 +118,7 @@ def validate_password_match(password: str, password_confirm: str) -> None:
 
 async def check_user_exists(session: AsyncSession, email: str) -> None:
     """
-    Check if user with email or username already exists.
+    Check if user with email
     Raises HTTPException if user exists.
 
     Args:
@@ -142,6 +142,24 @@ async def check_user_exists(session: AsyncSession, email: str) -> None:
     #     raise HTTPException(
     #         status_code=status.HTTP_400_BAD_REQUEST, detail=USERNAME_EXISTS
     #     )
+
+
+async def check_user_account_exists(session: AsyncSession, email: str) -> None:
+    """
+    Check if user account exists or not
+
+    Args:
+        session: Database session
+        email: User email address
+
+    Raises:
+        HTTPException: If account exist or not
+    """
+    email_user = await get_user_by_email(session, email)
+    if not email_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail=ACCOUNT_NOT_FOUND
+        )
 
 
 def get_device_info(request) -> dict:
