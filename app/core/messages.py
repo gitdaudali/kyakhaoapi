@@ -43,6 +43,12 @@ USER_ALREADY_EXISTS = "User already exists"
 USER_CREATED_SUCCESS = "User created successfully"
 USER_UPDATED_SUCCESS = "User updated successfully"
 USER_DELETED_SUCCESS = "User deleted successfully"
+PROFILE_UPDATE_SUCCESS = "Profile updated successfully"
+AVATAR_UPLOAD_SUCCESS = "Avatar uploaded successfully"
+AVATAR_REMOVED_SUCCESS = "Avatar removed successfully"
+AVATAR_UPDATE_FAILED = "Failed to update avatar"
+INVALID_FILE_TYPE = "Invalid file type"
+FILE_TOO_LARGE = "File is too large"
 
 # Content Messages
 CONTENT_NOT_FOUND = "Content not found"

@@ -10,7 +10,6 @@ class UserBase(BaseModel):
     email: EmailStr
     first_name: Optional[str] = None
     last_name: Optional[str] = None
-    bio: Optional[str] = None
     avatar_url: Optional[str] = None
 
 
@@ -22,7 +21,6 @@ class UserUpdate(BaseModel):
     email: Optional[EmailStr] = None
     first_name: Optional[str] = None
     last_name: Optional[str] = None
-    bio: Optional[str] = None
     avatar_url: Optional[str] = None
 
 
@@ -58,3 +56,14 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     email: Optional[str] = None
+
+
+class ProfileResponse(BaseModel):
+    """Response schema for user profile."""
+
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    avatar_url: Optional[str] = None
+
+    class Config:
+        from_attributes = True

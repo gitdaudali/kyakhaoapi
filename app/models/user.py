@@ -54,7 +54,6 @@ class User(BaseModel, TimestampMixin, table=True):
     profile_status: ProfileStatus = Field(
         sa_type=String(30), default=ProfileStatus.PENDING_VERIFICATION, index=True
     )
-    bio: Optional[str] = Field(default=None, sa_type=Text)
     avatar_url: Optional[str] = Field(max_length=500, default=None)
 
     # Relationships
