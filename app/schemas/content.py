@@ -845,3 +845,147 @@ class ReviewDeleteResponse(BaseModel):
 
     message: str = Field(..., description="Success message")
     review_id: UUID = Field(..., description="Deleted review ID")
+
+
+# Content Discovery Schemas - Optimized for Frontend Performance
+class GenreMinimal(BaseModel):
+    """Minimal genre data for content discovery"""
+
+    id: UUID = Field(..., description="Genre ID")
+    name: str = Field(..., description="Genre name")
+    slug: str = Field(..., description="Genre slug")
+    icon_name: Optional[str] = Field(None, description="Genre icon for UI")
+
+    class Config:
+        from_attributes = True
+
+
+class MovieFileMinimal(BaseModel):
+    """Minimal movie file data for discovery API"""
+
+    id: UUID = Field(..., description="Movie file ID")
+    quality_level: str = Field(..., description="Quality level (1080p, 720p, etc.)")
+    file_url: str = Field(..., description="File URL")
+    duration_seconds: float = Field(..., description="Duration in seconds")
+    is_ready: bool = Field(True, description="Whether file is ready for streaming")
+
+    class Config:
+        from_attributes = True
+
+
+class EpisodeMinimal(BaseModel):
+    """Minimal episode data for TV series discovery API"""
+
+    id: UUID = Field(..., description="Episode ID")
+    episode_number: int = Field(..., description="Episode number")
+    title: str = Field(..., description="Episode title")
+    slug: str = Field(..., description="Episode slug")
+    description: Optional[str] = Field(None, description="Episode description")
+    runtime: Optional[int] = Field(None, description="Runtime in minutes")
+    air_date: Optional[date] = Field(None, description="Air date")
+    thumbnail_url: Optional[str] = Field(None, description="Thumbnail URL")
+    views_count: int = Field(0, description="View count")
+    is_available: bool = Field(True, description="Whether episode is available")
+
+    class Config:
+        from_attributes = True
+
+
+class ContentMinimal(BaseModel):
+    """Minimal content data for fast loading"""
+
+    id: UUID = Field(..., description="Content ID")
+    title: str = Field(..., description="Content title")
+    slug: str = Field(..., description="Content slug")
+    description: Optional[str] = Field(None, description="Short description")
+    poster_url: Optional[str] = Field(None, description="Poster image URL")
+    backdrop_url: Optional[str] = Field(None, description="Backdrop image URL")
+    release_date: Optional[datetime] = Field(None, description="Release date")
+    content_type: str = Field(..., description="Content type (movie, tv_series, etc.)")
+    content_rating: Optional[str] = Field(
+        None, description="Content rating (PG, R, etc.)"
+    )
+    runtime: Optional[int] = Field(None, description="Runtime in minutes")
+    average_rating: Optional[float] = Field(None, description="Average user rating")
+    total_reviews: int = Field(0, description="Total number of reviews")
+    total_views: int = Field(0, description="Total view count")
+    is_featured: bool = Field(False, description="Is featured content")
+    is_trending: bool = Field(False, description="Is trending content")
+    # For movies: movie files
+    movie_files: List[MovieFileMinimal] = Field(
+        default_factory=list, description="Available movie files"
+    )
+    # For TV series: first episode of each season
+    episode_files: List[EpisodeMinimal] = Field(
+        default_factory=list, description="First episodes of each season"
+    )
+
+    class Config:
+        from_attributes = True
+
+
+class ContentSection(BaseModel):
+    """Content section with pagination"""
+
+    section_name: str = Field(
+        ..., description="Section name (featured, trending, etc.)"
+    )
+    items: List[ContentMinimal] = Field(
+        default_factory=list, description="Content items"
+    )
+    total_items: int = Field(0, description="Total items in section")
+    has_more: bool = Field(False, description="Whether there are more items")
+    next_page: Optional[int] = Field(
+        None, description="Next page number if has_more is true"
+    )
+
+    class Config:
+        from_attributes = True
+
+
+class ContentDiscoveryResponse(BaseModel):
+    """Main response for content discovery API"""
+
+    sections: List[ContentSection] = Field(..., description="Content sections")
+    genres: List[GenreMinimal] = Field(
+        default_factory=list, description="All available genres"
+    )
+    total_sections: int = Field(..., description="Total number of sections")
+    page: int = Field(1, description="Current page")
+    size: int = Field(10, description="Items per section")
+    generated_at: datetime = Field(
+        default_factory=datetime.utcnow, description="Response generation time"
+    )
+
+    class Config:
+        from_attributes = True
+
+
+class ContentDiscoveryQueryParams(BaseModel):
+    """Query parameters for content discovery API"""
+
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=50, description="Items per section")
+    content_type: Optional[ContentType] = Field(
+        None, description="Filter by content type"
+    )
+    genre_id: Optional[UUID] = Field(None, description="Filter by genre ID")
+    include_featured: bool = Field(True, description="Include featured section")
+    include_trending: bool = Field(True, description="Include trending section")
+    include_most_reviewed: bool = Field(
+        True, description="Include most reviewed section"
+    )
+    include_new_releases: bool = Field(True, description="Include new releases section")
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "page": 1,
+                "size": 10,
+                "content_type": "movie",
+                "include_featured": True,
+                "include_trending": True,
+                "include_most_reviewed": True,
+                "include_new_releases": True,
+            }
+        }

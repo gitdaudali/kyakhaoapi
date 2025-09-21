@@ -107,6 +107,14 @@ INVALID_PASSWORD_STRENGTH = "Password does not meet requirements"
 PASSWORDS_DO_NOT_MATCH = "Passwords do not match"
 REQUIRED_FIELD_MISSING = "Required field is missing"
 
+# Content Discovery Messages
+CONTENT_DISCOVERY_SUCCESS = "Content discovery data retrieved successfully"
+CONTENT_DISCOVERY_ERROR = "Error retrieving content discovery data"
+FEATURED_CONTENT_SUCCESS = "Featured content retrieved successfully"
+TRENDING_CONTENT_SUCCESS = "Trending content retrieved successfully"
+MOST_REVIEWED_SUCCESS = "Most reviewed content retrieved successfully"
+NEW_RELEASES_SUCCESS = "New releases content retrieved successfully"
+
 # General Messages
 SUCCESS = "Success"
 ERROR = "Error"

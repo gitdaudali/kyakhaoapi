@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Any, Optional
 from uuid import UUID
 
@@ -5,6 +6,20 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings
+from app.core.constants import (
+    FEATURED_DESCRIPTION,
+    FEATURED_SECTION,
+    FEATURED_TITLE,
+    MOST_REVIEWED_DESCRIPTION,
+    MOST_REVIEWED_SECTION,
+    MOST_REVIEWED_TITLE,
+    NEW_RELEASES_DESCRIPTION,
+    NEW_RELEASES_SECTION,
+    NEW_RELEASES_TITLE,
+    TRENDING_DESCRIPTION,
+    TRENDING_SECTION,
+    TRENDING_TITLE,
+)
 from app.core.database import get_db
 from app.core.deps import get_current_active_user
 from app.core.messages import (
@@ -39,18 +54,25 @@ from app.schemas.content import (
     CastListResponse,
     Content,
     ContentDetail,
+    ContentDiscoveryQueryParams,
+    ContentDiscoveryResponse,
     ContentFilters,
     ContentList,
     ContentListResponse,
+    ContentMinimal,
     ContentQueryParams,
     ContentReviewsResponse,
+    ContentSection,
     CrewFilters,
     CrewListResponse,
+    EpisodeMinimal,
     FeaturedContentQueryParams,
     Genre,
     GenreFilters,
     GenreListResponse,
+    GenreMinimal,
     MostReviewedLastMonthQueryParams,
+    MovieFileMinimal,
     PaginatedResponse,
     PaginationParams,
     Review,
@@ -70,6 +92,7 @@ from app.utils.content_utils import (
     calculate_pagination_info,
     create_content_review,
     delete_content_review,
+    get_all_genres_for_discovery,
     get_content_by_id,
     get_content_cast,
     get_content_cast_crew,
@@ -79,17 +102,332 @@ from app.utils.content_utils import (
     get_content_review_stats,
     get_content_reviews,
     get_featured_content,
+    get_featured_content_discovery,
     get_genre_by_id,
     get_genre_by_slug,
     get_genres_list,
+    get_most_reviewed_content_discovery,
     get_most_reviewed_last_month,
+    get_new_releases_content_discovery,
     get_review_stats,
     get_trending_content,
+    get_trending_content_discovery,
     update_content_review,
     vote_on_review,
 )
 
 router = APIRouter()
+
+
+@router.get("/discovery", response_model=ContentDiscoveryResponse)
+async def get_content_discovery(
+    query_params: ContentDiscoveryQueryParams = Depends(),
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Get content discovery data - Featured, Trending, Most Reviewed, and New Releases
+    """
+    try:
+        sections = []
+
+        # Get all genres for the response
+        all_genres = await get_all_genres_for_discovery(db)
+        genre_list = [
+            GenreMinimal(
+                id=genre.id, name=genre.name, slug=genre.slug, icon_name=genre.icon_name
+            )
+            for genre in all_genres
+        ]
+
+        # Get featured content
+        if query_params.include_featured:
+            featured_contents, featured_total = await get_featured_content_discovery(
+                db=db,
+                page=query_params.page,
+                size=query_params.size,
+                content_type_filter=query_params.content_type,
+                genre_id_filter=query_params.genre_id,
+            )
+
+            # Convert to minimal format
+            featured_items = []
+            for content in featured_contents:
+                # Initialize both arrays
+                movie_files = []
+                episode_files = []
+
+                # Determine content type and assign appropriate files
+                if content.content_type in ["movie", "anime"]:
+                    # Movies and anime movies should have movie files
+                    if content.movie_files:
+                        movie_files = [
+                            MovieFileMinimal(
+                                id=file.id,
+                                quality_level=file.quality_level,
+                                file_url=file.file_url,
+                                duration_seconds=file.duration_seconds,
+                                is_ready=file.is_ready,
+                            )
+                            for file in content.movie_files
+                        ]
+                elif content.content_type in ["tv_series", "mini_series"]:
+                    # TV series should have episode files
+                    if content.seasons:
+                        for season in content.seasons:
+                            if season.episodes:
+                                # Get first episode of each season
+                                first_episode = season.episodes[0]
+                                episode_files.append(
+                                    EpisodeMinimal(
+                                        id=first_episode.id,
+                                        episode_number=first_episode.episode_number,
+                                        title=first_episode.title,
+                                        slug=first_episode.slug,
+                                        description=first_episode.description,
+                                        runtime=first_episode.runtime,
+                                        air_date=first_episode.air_date,
+                                        thumbnail_url=first_episode.thumbnail_url,
+                                        views_count=first_episode.views_count,
+                                        is_available=first_episode.is_available,
+                                    )
+                                )
+                elif content.content_type == "documentary":
+                    # Documentaries can be either single movies or series
+                    if content.seasons:
+                        # Documentary series - use episode files
+                        for season in content.seasons:
+                            if season.episodes:
+                                # Get first episode of each season
+                                first_episode = season.episodes[0]
+                                episode_files.append(
+                                    EpisodeMinimal(
+                                        id=first_episode.id,
+                                        episode_number=first_episode.episode_number,
+                                        title=first_episode.title,
+                                        slug=first_episode.slug,
+                                        description=first_episode.description,
+                                        runtime=first_episode.runtime,
+                                        air_date=first_episode.air_date,
+                                        thumbnail_url=first_episode.thumbnail_url,
+                                        views_count=first_episode.views_count,
+                                        is_available=first_episode.is_available,
+                                    )
+                                )
+                    elif content.movie_files:
+                        # Single documentary movie - use movie files
+                        movie_files = [
+                            MovieFileMinimal(
+                                id=file.id,
+                                quality_level=file.quality_level,
+                                file_url=file.file_url,
+                                duration_seconds=file.duration_seconds,
+                                is_ready=file.is_ready,
+                            )
+                            for file in content.movie_files
+                        ]
+
+                item = ContentMinimal(
+                    id=content.id,
+                    title=content.title,
+                    slug=content.slug,
+                    description=content.description,
+                    poster_url=content.poster_url,
+                    backdrop_url=content.backdrop_url,
+                    release_date=content.release_date,
+                    content_type=content.content_type,
+                    content_rating=content.content_rating,
+                    runtime=content.runtime,
+                    average_rating=content.average_rating,  # Use actual rating from model
+                    total_reviews=content.reviews_count,  # Use actual review count from model
+                    total_views=content.total_views or 0,
+                    is_featured=content.is_featured,
+                    is_trending=content.is_trending,
+                    movie_files=movie_files,
+                    episode_files=episode_files,
+                )
+                featured_items.append(item)
+
+            # Calculate pagination info
+            offset = (query_params.page - 1) * query_params.size
+            has_more = (offset + query_params.size) < featured_total
+            next_page = query_params.page + 1 if has_more else None
+
+            featured_section = ContentSection(
+                section_name=FEATURED_SECTION,
+                items=featured_items,
+                total_items=featured_total,
+                has_more=has_more,
+                next_page=next_page,
+            )
+            sections.append(featured_section)
+
+        # Get trending content
+        if query_params.include_trending:
+            trending_contents, trending_total = await get_trending_content_discovery(
+                db=db,
+                page=query_params.page,
+                size=query_params.size,
+                content_type_filter=query_params.content_type,
+                genre_id_filter=query_params.genre_id,
+            )
+
+            # Convert to minimal format
+            trending_items = []
+            for content in trending_contents:
+                # NO movie files or episode files for trending content
+                item = ContentMinimal(
+                    id=content.id,
+                    title=content.title,
+                    slug=content.slug,
+                    description=content.description,
+                    poster_url=content.poster_url,
+                    backdrop_url=content.backdrop_url,
+                    release_date=content.release_date,
+                    content_type=content.content_type,
+                    content_rating=content.content_rating,
+                    runtime=content.runtime,
+                    average_rating=content.average_rating,  # Use actual rating from model
+                    total_reviews=content.reviews_count,  # Use actual review count from model
+                    total_views=content.total_views or 0,
+                    is_featured=content.is_featured,
+                    is_trending=content.is_trending,
+                    movie_files=[],  # Empty for trending
+                    episode_files=[],  # Empty for trending
+                )
+                trending_items.append(item)
+
+            # Calculate pagination info
+            offset = (query_params.page - 1) * query_params.size
+            has_more = (offset + query_params.size) < trending_total
+            next_page = query_params.page + 1 if has_more else None
+
+            trending_section = ContentSection(
+                section_name=TRENDING_SECTION,
+                items=trending_items,
+                total_items=trending_total,
+                has_more=has_more,
+                next_page=next_page,
+            )
+            sections.append(trending_section)
+
+        # Get most reviewed content
+        if query_params.include_most_reviewed:
+            (
+                most_reviewed_contents,
+                most_reviewed_total,
+            ) = await get_most_reviewed_content_discovery(
+                db=db,
+                page=query_params.page,
+                size=query_params.size,
+                content_type_filter=query_params.content_type,
+                genre_id_filter=query_params.genre_id,
+            )
+
+            # Convert to minimal format
+            most_reviewed_items = []
+            for content in most_reviewed_contents:
+                # NO movie files or episode files for most reviewed content
+                item = ContentMinimal(
+                    id=content.id,
+                    title=content.title,
+                    slug=content.slug,
+                    description=content.description,
+                    poster_url=content.poster_url,
+                    backdrop_url=content.backdrop_url,
+                    release_date=content.release_date,
+                    content_type=content.content_type,
+                    content_rating=content.content_rating,
+                    runtime=content.runtime,
+                    average_rating=content.average_rating,  # Use actual rating from model
+                    total_reviews=content.reviews_count,  # Use actual review count from model
+                    total_views=content.total_views or 0,
+                    is_featured=content.is_featured,
+                    is_trending=content.is_trending,
+                    movie_files=[],  # Empty for most reviewed
+                    episode_files=[],  # Empty for most reviewed
+                )
+                most_reviewed_items.append(item)
+
+            # Calculate pagination info
+            offset = (query_params.page - 1) * query_params.size
+            has_more = (offset + query_params.size) < most_reviewed_total
+            next_page = query_params.page + 1 if has_more else None
+
+            most_reviewed_section = ContentSection(
+                section_name=MOST_REVIEWED_SECTION,
+                items=most_reviewed_items,
+                total_items=most_reviewed_total,
+                has_more=has_more,
+                next_page=next_page,
+            )
+            sections.append(most_reviewed_section)
+
+        # Get new releases
+        if query_params.include_new_releases:
+            (
+                new_releases_contents,
+                new_releases_total,
+            ) = await get_new_releases_content_discovery(
+                db=db,
+                page=query_params.page,
+                size=query_params.size,
+                content_type_filter=query_params.content_type,
+                genre_id_filter=query_params.genre_id,
+            )
+
+            # Convert to minimal format
+            new_releases_items = []
+            for content in new_releases_contents:
+                # NO movie files or episode files for new releases content
+                item = ContentMinimal(
+                    id=content.id,
+                    title=content.title,
+                    slug=content.slug,
+                    description=content.description,
+                    poster_url=content.poster_url,
+                    backdrop_url=content.backdrop_url,
+                    release_date=content.release_date,
+                    content_type=content.content_type,
+                    content_rating=content.content_rating,
+                    runtime=content.runtime,
+                    average_rating=content.average_rating,  # Use actual rating from model
+                    total_reviews=content.reviews_count,  # Use actual review count from model
+                    total_views=content.total_views or 0,
+                    is_featured=content.is_featured,
+                    is_trending=content.is_trending,
+                    movie_files=[],  # Empty for new releases
+                    episode_files=[],  # Empty for new releases
+                )
+                new_releases_items.append(item)
+
+            # Calculate pagination info
+            offset = (query_params.page - 1) * query_params.size
+            has_more = (offset + query_params.size) < new_releases_total
+            next_page = query_params.page + 1 if has_more else None
+
+            new_releases_section = ContentSection(
+                section_name=NEW_RELEASES_SECTION,
+                items=new_releases_items,
+                total_items=new_releases_total,
+                has_more=has_more,
+                next_page=next_page,
+            )
+            sections.append(new_releases_section)
+
+        return ContentDiscoveryResponse(
+            sections=sections,
+            genres=genre_list,
+            total_sections=len(sections),
+            page=query_params.page,
+            size=query_params.size,
+            generated_at=datetime.utcnow(),
+        )
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving content discovery data: {str(e)}",
+        )
 
 
 @router.get("/featured", response_model=ContentListResponse)
@@ -172,6 +510,7 @@ async def get_most_reviewed_last_month_endpoint(
     Returns content that has received the most reviews in the last 30 days.
     """
     try:
+        # Convert query params to filters and pagination
         filters = query_params.to_filters()
         pagination = query_params.to_pagination()
 
