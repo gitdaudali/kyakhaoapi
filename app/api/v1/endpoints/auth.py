@@ -20,6 +20,7 @@ from app.core.messages import (
     ACCOUNT_DEACTIVATED,
     ACCOUNT_NOT_FOUND,
     CURRENT_PASSWORD_INCORRECT,
+    EMAIL_EXISTS,
     EMAIL_NOT_VERIFIED,
     EMAIL_VERIFICATION_SUCCESS,
     EMAIL_VERIFICATION_TOKEN_INVALID,
@@ -29,12 +30,12 @@ from app.core.messages import (
     LOGOUT_NO_TOKENS,
     LOGOUT_SUCCESS,
     OTP_INVALID_OR_EXPIRED,
+    OTP_RESEND_SUCCESS,
     OTP_VERIFICATION_SUCCESS,
     PASSWORD_CHANGED_SUCCESS,
     PASSWORD_RESET_OTP_SENT,
     PASSWORD_RESET_SENT,
     PASSWORD_RESET_SUCCESS,
-    PASSWORD_RESET_TOKEN_INVALID,
     REGISTRATION_SUCCESS,
 )
 from app.models.user import ProfileStatus, User, UserRole
@@ -101,7 +102,23 @@ async def register_user(
     Creates user account and sends OTP for email verification.
     """
     try:
-        await check_user_exists(db, user_data.email)
+        existing_user = await get_user_by_email(db, user_data.email)
+
+        if existing_user:
+            if existing_user.profile_status == ProfileStatus.PENDING_VERIFICATION:
+                existing_user.password = get_password_hash(user_data.password)
+                await db.commit()
+
+                otp = await create_email_verification_otp(
+                    db, existing_user.id, existing_user.email
+                )
+                send_registration_otp_email_task.delay(
+                    email_to=existing_user.email, otp_code=otp.otp_code
+                )
+
+                return MessageResponse(message=OTP_RESEND_SUCCESS)
+            else:
+                return MessageResponse(message=EMAIL_EXISTS)
 
         hashed_password = get_password_hash(user_data.password)
         db_user = User(
