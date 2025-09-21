@@ -8,6 +8,7 @@ from sqlalchemy.orm import selectinload
 from sqlmodel import select
 
 from app.core.config import settings
+from app.core.constants import MOST_REVIEWED_MIN_RATING, MOST_REVIEWED_MIN_REVIEWS
 from app.models.content import (
     Content,
     ContentCast,
@@ -1128,3 +1129,365 @@ async def get_content_review_stats(db: AsyncSession, content_id: UUID) -> dict:
         "recent_reviews_count": recent_reviews_count,
         "helpful_reviews_count": helpful_reviews_count,
     }
+
+
+# Content Discovery Utilities
+async def get_featured_content_discovery(
+    db: AsyncSession,
+    page: int,
+    size: int,
+    content_type_filter: Optional[str] = None,
+    genre_id_filter: Optional[UUID] = None,
+) -> Tuple[List[Content], int]:
+    """Get featured content for discovery API"""
+    # Build base query
+    query = select(Content).where(
+        and_(
+            Content.is_deleted == False,
+            Content.is_featured == True,
+            Content.status == "published",
+        )
+    )
+
+    # Apply filters
+    if content_type_filter:
+        query = query.where(Content.content_type == content_type_filter)
+
+    if genre_id_filter:
+        query = query.join(Content.genres).where(Genre.id == genre_id_filter)
+
+    # Get total count
+    count_query = select(func.count(Content.id)).where(
+        and_(
+            Content.is_deleted == False,
+            Content.is_featured == True,
+            Content.status == "published",
+        )
+    )
+
+    if content_type_filter:
+        count_query = count_query.where(Content.content_type == content_type_filter)
+
+    if genre_id_filter:
+        count_query = count_query.join(Content.genres).where(
+            Genre.id == genre_id_filter
+        )
+
+    count_result = await db.execute(count_query)
+    total_items = count_result.scalar() or 0
+
+    # Apply pagination and ordering
+    offset = (page - 1) * size
+    query = query.order_by(desc(Content.created_at)).offset(offset).limit(size)
+
+    # Load relationships for discovery API
+    query = query.options(
+        selectinload(Content.movie_files),  # For movies
+        selectinload(Content.seasons).selectinload(Season.episodes),  # For TV series
+    )
+
+    # Execute query
+    result = await db.execute(query)
+    contents = result.scalars().all()
+
+    return contents, total_items
+
+
+async def get_all_genres_for_discovery(db: AsyncSession) -> List[Genre]:
+    """Get all active genres for discovery API"""
+    query = (
+        select(Genre)
+        .where(
+            and_(
+                Genre.is_deleted == False,
+                Genre.is_active == True,
+            )
+        )
+        .order_by(Genre.name)
+    )
+
+    result = await db.execute(query)
+    genres = result.scalars().all()
+
+    return genres
+
+
+async def get_trending_content_discovery(
+    db: AsyncSession,
+    page: int,
+    size: int,
+    content_type_filter: Optional[str] = None,
+    genre_id_filter: Optional[UUID] = None,
+) -> Tuple[List[Content], int]:
+    """Get trending content for discovery API"""
+    # Build base query
+    query = select(Content).where(
+        and_(
+            Content.is_deleted == False,
+            Content.is_trending == True,
+            Content.status == "published",
+        )
+    )
+
+    # Apply filters
+    if content_type_filter:
+        query = query.where(Content.content_type == content_type_filter)
+
+    if genre_id_filter:
+        query = query.join(Content.genres).where(Genre.id == genre_id_filter)
+
+    # Get total count
+    count_query = select(func.count(Content.id)).where(
+        and_(
+            Content.is_deleted == False,
+            Content.is_trending == True,
+            Content.status == "published",
+        )
+    )
+
+    if content_type_filter:
+        count_query = count_query.where(Content.content_type == content_type_filter)
+
+    if genre_id_filter:
+        count_query = count_query.join(Content.genres).where(
+            Genre.id == genre_id_filter
+        )
+
+    count_result = await db.execute(count_query)
+    total_items = count_result.scalar() or 0
+
+    # Apply pagination and ordering
+    offset = (page - 1) * size
+    query = (
+        query.order_by(desc(Content.total_views), desc(Content.created_at))
+        .offset(offset)
+        .limit(size)
+    )
+
+    # Load relationships for discovery API
+    query = query.options(
+        selectinload(Content.movie_files),  # For movies
+        selectinload(Content.seasons).selectinload(Season.episodes),  # For TV series
+    )
+
+    # Execute query
+    result = await db.execute(query)
+    contents = result.scalars().all()
+
+    return contents, total_items
+
+
+async def get_all_genres_for_discovery(db: AsyncSession) -> List[Genre]:
+    """Get all active genres for discovery API"""
+    query = (
+        select(Genre)
+        .where(
+            and_(
+                Genre.is_deleted == False,
+                Genre.is_active == True,
+            )
+        )
+        .order_by(Genre.name)
+    )
+
+    result = await db.execute(query)
+    genres = result.scalars().all()
+
+    return genres
+
+
+async def get_most_reviewed_content_discovery(
+    db: AsyncSession,
+    page: int,
+    size: int,
+    content_type_filter: Optional[str] = None,
+    genre_id_filter: Optional[UUID] = None,
+) -> Tuple[List[Content], int]:
+    """Get most reviewed content from last month for discovery API"""
+    # Calculate date 30 days ago
+    thirty_days_ago = datetime.now() - timedelta(days=30)
+
+    # Base query for content with reviews in the last month
+    query = (
+        select(Content)
+        .join(ContentReview, Content.id == ContentReview.content_id)
+        .where(
+            and_(
+                Content.is_deleted == False,
+                Content.status == "published",
+                ContentReview.created_at >= thirty_days_ago,
+                ContentReview.status == "published",
+            )
+        )
+        .group_by(Content.id)
+        .having(
+            and_(
+                func.count(ContentReview.id) >= MOST_REVIEWED_MIN_REVIEWS,
+                func.avg(ContentReview.rating) >= MOST_REVIEWED_MIN_RATING,
+            )
+        )
+    )
+
+    # Apply additional filters
+    if content_type_filter:
+        query = query.where(Content.content_type == content_type_filter)
+
+    if genre_id_filter:
+        query = query.join(Content.genres).where(Genre.id == genre_id_filter)
+
+    # Order by review count (most reviewed first)
+    query = query.order_by(desc(func.count(ContentReview.id)))
+
+    # Apply pagination
+    offset = (page - 1) * size
+    query = query.offset(offset).limit(size)
+
+    # Load relationships for discovery API
+    query = query.options(
+        selectinload(Content.movie_files),  # For movies
+        selectinload(Content.seasons).selectinload(Season.episodes),  # For TV series
+    )
+
+    # Execute query
+    result = await db.execute(query)
+    contents = result.scalars().all()
+
+    # Get total count with same filters
+    count_query = (
+        select(func.count(func.distinct(Content.id)))
+        .select_from(Content)
+        .join(ContentReview, Content.id == ContentReview.content_id)
+        .where(
+            and_(
+                Content.is_deleted == False,
+                Content.status == "published",
+                ContentReview.created_at >= thirty_days_ago,
+                ContentReview.status == "published",
+            )
+        )
+        .group_by(Content.id)
+        .having(
+            and_(
+                func.count(ContentReview.id) >= MOST_REVIEWED_MIN_REVIEWS,
+                func.avg(ContentReview.rating) >= MOST_REVIEWED_MIN_RATING,
+            )
+        )
+    )
+
+    if content_type_filter:
+        count_query = count_query.where(Content.content_type == content_type_filter)
+
+    if genre_id_filter:
+        count_query = count_query.join(Content.genres).where(
+            Genre.id == genre_id_filter
+        )
+
+    count_result = await db.execute(count_query)
+    total_items = count_result.scalar() or 0
+
+    return contents, total_items
+
+
+async def get_all_genres_for_discovery(db: AsyncSession) -> List[Genre]:
+    """Get all active genres for discovery API"""
+    query = (
+        select(Genre)
+        .where(
+            and_(
+                Genre.is_deleted == False,
+                Genre.is_active == True,
+            )
+        )
+        .order_by(Genre.name)
+    )
+
+    result = await db.execute(query)
+    genres = result.scalars().all()
+
+    return genres
+
+
+async def get_new_releases_content_discovery(
+    db: AsyncSession,
+    page: int,
+    size: int,
+    content_type_filter: Optional[str] = None,
+    genre_id_filter: Optional[UUID] = None,
+) -> Tuple[List[Content], int]:
+    """Get new releases content for discovery API"""
+    thirty_days_ago = datetime.now().date() - timedelta(days=30)
+
+    # Build base query
+    query = select(Content).where(
+        and_(
+            Content.is_deleted == False,
+            Content.status == "published",
+            Content.release_date >= thirty_days_ago,
+        )
+    )
+
+    # Apply filters
+    if content_type_filter:
+        query = query.where(Content.content_type == content_type_filter)
+
+    if genre_id_filter:
+        query = query.join(Content.genres).where(Genre.id == genre_id_filter)
+
+    # Get total count
+    count_query = select(func.count(Content.id)).where(
+        and_(
+            Content.is_deleted == False,
+            Content.status == "published",
+            Content.release_date >= thirty_days_ago,
+        )
+    )
+
+    if content_type_filter:
+        count_query = count_query.where(Content.content_type == content_type_filter)
+
+    if genre_id_filter:
+        count_query = count_query.join(Content.genres).where(
+            Genre.id == genre_id_filter
+        )
+
+    count_result = await db.execute(count_query)
+    total_items = count_result.scalar() or 0
+
+    # Apply pagination and ordering
+    offset = (page - 1) * size
+    query = (
+        query.order_by(desc(Content.release_date), desc(Content.created_at))
+        .offset(offset)
+        .limit(size)
+    )
+
+    # Load relationships for discovery API
+    query = query.options(
+        selectinload(Content.movie_files),  # For movies
+        selectinload(Content.seasons).selectinload(Season.episodes),  # For TV series
+    )
+
+    # Execute query
+    result = await db.execute(query)
+    contents = result.scalars().all()
+
+    return contents, total_items
+
+
+async def get_all_genres_for_discovery(db: AsyncSession) -> List[Genre]:
+    """Get all active genres for discovery API"""
+    query = (
+        select(Genre)
+        .where(
+            and_(
+                Genre.is_deleted == False,
+                Genre.is_active == True,
+            )
+        )
+        .order_by(Genre.name)
+    )
+
+    result = await db.execute(query)
+    genres = result.scalars().all()
+
+    return genres

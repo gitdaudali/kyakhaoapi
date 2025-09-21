@@ -4,7 +4,7 @@ All error messages and success messages are defined here for consistency.
 """
 
 # Authentication Messages
-EMAIL_EXISTS = "Email already registered"
+EMAIL_EXISTS = "Account already registered and verified"
 USERNAME_EXISTS = "Username already taken"
 INVALID_CREDENTIALS = "Incorrect email or password"
 ACCOUNT_DEACTIVATED = "User account is deactivated"
@@ -24,6 +24,7 @@ LOGOUT_SUCCESS = "Successfully logged out"
 LOGOUT_ALL_SUCCESS = "Successfully logged out from all devices"
 LOGOUT_NO_TOKENS = "Logout successful (no tokens to revoke)"
 
+
 # Registration Messages
 REGISTRATION_SUCCESS = (
     "Registration successful. Please check your email for verification code."
@@ -36,6 +37,7 @@ EMAIL_NOT_VERIFIED = "Please verify your email address before logging in"
 OTP_EXPIRED = "Verification code has expired. Please request a new one."
 OTP_ALREADY_USED = "Verification code has already been used"
 OTP_INVALID_OR_EXPIRED = "Invalid or expired verification code"
+OTP_RESEND_SUCCESS = "New verification code sent to your email address"
 
 # User Messages
 USER_NOT_FOUND = "User not found"
@@ -43,6 +45,12 @@ USER_ALREADY_EXISTS = "User already exists"
 USER_CREATED_SUCCESS = "User created successfully"
 USER_UPDATED_SUCCESS = "User updated successfully"
 USER_DELETED_SUCCESS = "User deleted successfully"
+PROFILE_UPDATE_SUCCESS = "Profile updated successfully"
+AVATAR_UPLOAD_SUCCESS = "Avatar uploaded successfully"
+AVATAR_REMOVED_SUCCESS = "Avatar removed successfully"
+AVATAR_UPDATE_FAILED = "Failed to update avatar"
+INVALID_FILE_TYPE = "Invalid file type"
+FILE_TOO_LARGE = "File is too large"
 
 # Content Messages
 CONTENT_NOT_FOUND = "Content not found"
@@ -100,6 +108,14 @@ INVALID_EMAIL_FORMAT = "Invalid email format"
 INVALID_PASSWORD_STRENGTH = "Password does not meet requirements"
 PASSWORDS_DO_NOT_MATCH = "Passwords do not match"
 REQUIRED_FIELD_MISSING = "Required field is missing"
+
+# Content Discovery Messages
+CONTENT_DISCOVERY_SUCCESS = "Content discovery data retrieved successfully"
+CONTENT_DISCOVERY_ERROR = "Error retrieving content discovery data"
+FEATURED_CONTENT_SUCCESS = "Featured content retrieved successfully"
+TRENDING_CONTENT_SUCCESS = "Trending content retrieved successfully"
+MOST_REVIEWED_SUCCESS = "Most reviewed content retrieved successfully"
+NEW_RELEASES_SUCCESS = "New releases content retrieved successfully"
 
 # General Messages
 SUCCESS = "Success"
