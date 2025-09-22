@@ -85,6 +85,19 @@ class WatchQuality(str, Enum):
     QUALITY_8K = "8k"
 
 
+class MovieJobTitle(str, Enum):
+    DIRECTOR = "Director"
+    PRODUCER = "Producer"
+    ACTOR = "Actor"
+    ACTRESS = "Actress"
+    WRITER = "Writer"
+    CINEMATOGRAPHER = "Cinematographer"
+    EDITOR = "Editor"
+    SOUND_DESIGNER = "Sound Designer"
+    MAKEUP_ARTIST = "Makeup Artist"
+    COSTUME_DESIGNER = "Costume Designer"
+
+
 class Content(BaseModel, TimestampMixin, table=True):
     """Main content model for movies, TV series, documentaries, etc."""
 
@@ -591,6 +604,9 @@ class ContentCast(BaseModel, table=True):
     is_main_cast: bool = Field(sa_type=Boolean, default=False)
     character_image_url: Optional[str] = Field(sa_type=String(500), default=None)
 
+    # Job Title
+    job_title: MovieJobTitle = Field(sa_type=String(20), nullable=False, index=True)
+
     # Relationships
     content: "Content" = Relationship()
     person: "Person" = Relationship()
@@ -607,9 +623,7 @@ class ContentCrew(BaseModel, table=True):
     person_id: uuid.UUID = Field(
         sa_type=UUID(as_uuid=True), foreign_key="people.id", primary_key=True
     )
-    job_title: str = Field(
-        sa_type=String(100), nullable=False
-    )  # Director, Producer, Writer, etc.
+    job_title: MovieJobTitle = Field(sa_type=String(20), nullable=False, index=True)
     department: str = Field(
         sa_type=String(100), nullable=False
     )  # Directing, Production, Writing, etc.

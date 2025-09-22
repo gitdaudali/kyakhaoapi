@@ -4,7 +4,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, Field
 
-from app.models.content import ContentRating, ContentStatus, ContentType
+from app.models.content import ContentRating, ContentStatus, ContentType, MovieJobTitle
 
 
 class GenreBase(BaseModel):
@@ -77,6 +77,7 @@ class CastMember(BaseModel):
     is_main_cast: bool = Field(False, description="Whether main cast member")
     cast_order: int = Field(0, description="Billing order")
     character_image_url: Optional[str] = Field(None, description="Poster image URL")
+    job_title: Optional[MovieJobTitle] = Field(None, description="Cast Job Title")
 
     class Config:
         from_attributes = True
@@ -86,7 +87,7 @@ class CrewMember(BaseModel):
     """Crew member schema for content detail"""
 
     person: PersonSimple = Field(..., description="Person information")
-    job_title: str = Field(..., description="Job title (Director, Writer, etc.)")
+    job_title: Optional[MovieJobTitle] = Field(None, description="Cast Job Title")
     department: str = Field(..., description="Department (Directing, Writing, etc.)")
     credit_order: int = Field(0, description="Credit order")
 
