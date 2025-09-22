@@ -854,7 +854,7 @@ class GenreMinimal(BaseModel):
     id: UUID = Field(..., description="Genre ID")
     name: str = Field(..., description="Genre name")
     slug: str = Field(..., description="Genre slug")
-    icon_name: Optional[str] = Field(None, description="Genre icon for UI")
+    cover_image_url: Optional[str] = Field(None, description="Genre icon URL")
 
     class Config:
         from_attributes = True

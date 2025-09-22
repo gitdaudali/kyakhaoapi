@@ -311,7 +311,7 @@ async def get_current_user_info(
     **Authentication Required**: Bearer token in Authorization header
     """
     try:
-        return UserSchema.from_orm(current_user)
+        return UserSchema.model_validate(current_user)
 
     except HTTPException:
         raise
