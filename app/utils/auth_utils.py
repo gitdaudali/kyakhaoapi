@@ -229,12 +229,6 @@ async def create_email_verification_otp(
         EmailVerificationOTP object
     """
     # Invalidate any existing OTPs for this user
-    await session.execute(
-        select(EmailVerificationOTP).where(
-            EmailVerificationOTP.user_id == user_id,
-            EmailVerificationOTP.is_used == False,
-        )
-    )
     existing_otps = await session.execute(
         select(EmailVerificationOTP).where(
             EmailVerificationOTP.user_id == user_id,

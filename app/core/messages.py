@@ -23,6 +23,7 @@ EMAIL_VERIFICATION_TOKEN_USED = "Verification token has already been used"
 LOGOUT_SUCCESS = "Successfully logged out"
 LOGOUT_ALL_SUCCESS = "Successfully logged out from all devices"
 LOGOUT_NO_TOKENS = "Logout successful (no tokens to revoke)"
+EMAIL_ALREADY_VERIFIED = "Email already verified"
 
 
 # Registration Messages

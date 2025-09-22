@@ -20,9 +20,9 @@ from app.core.messages import (
     ACCOUNT_DEACTIVATED,
     ACCOUNT_NOT_FOUND,
     CURRENT_PASSWORD_INCORRECT,
+    EMAIL_ALREADY_VERIFIED,
     EMAIL_EXISTS,
     EMAIL_NOT_VERIFIED,
-    EMAIL_VERIFICATION_SUCCESS,
     EMAIL_VERIFICATION_TOKEN_INVALID,
     INVALID_CREDENTIALS,
     INVALID_REFRESH_TOKEN,
@@ -445,6 +445,19 @@ async def verify_otp(
     Validates OTP and marks email as verified.
     """
     try:
+        user = await get_user_by_email(db, verification_data.email)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=ACCOUNT_NOT_FOUND,
+            )
+
+        if user.profile_status == ProfileStatus.ACTIVE:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=EMAIL_ALREADY_VERIFIED,
+            )
+
         otp = await validate_email_verification_otp(
             db, verification_data.otp_code, verification_data.email
         )
@@ -457,7 +470,6 @@ async def verify_otp(
                 detail=OTP_INVALID_OR_EXPIRED,
             )
 
-        user = await get_user_by_id_or_404(db, otp.user_id)
         user.profile_status = ProfileStatus.ACTIVE
 
         await mark_email_verification_otp_used(
