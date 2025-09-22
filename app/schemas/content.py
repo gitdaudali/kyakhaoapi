@@ -310,8 +310,13 @@ class ContentDetail(BaseModel):
 
     # Statistics
     view_count: int = Field(0, alias="total_views", description="Total view count")
-    like_count: int = Field(0, alias="likes_count", description="Total like count")
     average_rating: Optional[float] = Field(None, description="Average user rating")
+    imdb_rating: Optional[float] = Field(None, description="IMDB rating")
+    stream_vibe: Optional[float] = Field(None, description="StreamVibe rating")
+
+    # Language
+    spoken_languages: Optional[str] = Field(None, description="Spoken language")
+    original_language: Optional[str] = Field(None, description="original language")
 
     # Flags
     is_featured: bool = Field(False, description="Whether content is featured")
@@ -847,7 +852,7 @@ class ReviewDeleteResponse(BaseModel):
     review_id: UUID = Field(..., description="Deleted review ID")
 
 
-# Content Discovery Schemas - Optimized for Frontend Performance
+# Content Discovery Schemas
 class GenreMinimal(BaseModel):
     """Minimal genre data for content discovery"""
 
