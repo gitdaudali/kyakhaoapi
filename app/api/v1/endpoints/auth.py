@@ -118,7 +118,10 @@ async def register_user(
 
                 return MessageResponse(message=OTP_RESEND_SUCCESS)
             else:
-                return MessageResponse(message=EMAIL_EXISTS)
+                raise HTTPException(
+                    status_code=status.HTTP_409_CONFLICT,
+                    detail=EMAIL_EXISTS,
+                )
 
         hashed_password = get_password_hash(user_data.password)
         db_user = User(
