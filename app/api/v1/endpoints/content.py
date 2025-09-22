@@ -134,7 +134,10 @@ async def get_content_discovery(
         all_genres = await get_all_genres_for_discovery(db)
         genre_list = [
             GenreMinimal(
-                id=genre.id, name=genre.name, slug=genre.slug, icon_name=genre.icon_name
+                id=genre.id,
+                name=genre.name,
+                slug=genre.slug,
+                cover_image_url=genre.cover_image_url,
             )
             for genre in all_genres
         ]
