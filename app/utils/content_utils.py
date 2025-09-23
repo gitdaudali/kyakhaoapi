@@ -15,6 +15,7 @@ from app.models.content import (
     ContentCrew,
     ContentGenre,
     ContentReview,
+    ContentType,
     Episode,
     Genre,
     Person,
@@ -24,11 +25,20 @@ from app.models.user import User
 from app.schemas.content import (
     CastFilters,
     ContentFilters,
+    ContentMinimal,
+    ContentSection,
     CrewFilters,
+    EpisodeMinimal,
     GenreFilters,
+    MovieFileMinimal,
     PaginationParams,
     ReviewFilters,
 )
+
+# Content type sets for efficient checking
+MOVIE_CONTENT_TYPES = {ContentType.MOVIE, ContentType.ANIME}
+SERIES_CONTENT_TYPES = {ContentType.TV_SERIES, ContentType.MINI_SERIES}
+DOCUMENTARY_CONTENT_TYPES = {ContentType.DOCUMENTARY}
 
 
 async def get_content_by_id(
@@ -1491,3 +1501,123 @@ async def get_all_genres_for_discovery(db: AsyncSession) -> List[Genre]:
     genres = result.scalars().all()
 
     return genres
+
+
+# =============================================================================
+# DISCOVERY API OPTIMIZATION HELPERS
+# =============================================================================
+
+
+def convert_movie_files_to_minimal_format(movie_files) -> List[MovieFileMinimal]:
+    """Convert movie files to minimal format efficiently"""
+    return [
+        MovieFileMinimal(
+            id=file.id,
+            quality_level=file.quality_level,
+            file_url=file.file_url,
+            duration_seconds=file.duration_seconds,
+            is_ready=file.is_ready,
+        )
+        for file in movie_files
+    ]
+
+
+def convert_episodes_to_minimal_format(seasons) -> List[EpisodeMinimal]:
+    """Convert first episodes of each season to minimal format efficiently"""
+    episode_files = []
+    for season in seasons:
+        if season.episodes:
+            first_episode = season.episodes[0]
+            episode_files.append(
+                EpisodeMinimal(
+                    id=first_episode.id,
+                    episode_number=first_episode.episode_number,
+                    title=first_episode.title,
+                    slug=first_episode.slug,
+                    description=first_episode.description,
+                    runtime=first_episode.runtime,
+                    air_date=first_episode.air_date,
+                    thumbnail_url=first_episode.thumbnail_url,
+                    views_count=first_episode.views_count,
+                    is_available=first_episode.is_available,
+                )
+            )
+    return episode_files
+
+
+def get_content_media_files(
+    content: Content, include_media_files: bool = True
+) -> Tuple[List[MovieFileMinimal], List[EpisodeMinimal]]:
+    """Get appropriate media files for content based on type and include_media_files flag"""
+    if not include_media_files:
+        return [], []
+
+    movie_files = []
+    episode_files = []
+
+    if content.content_type in MOVIE_CONTENT_TYPES:
+        # Movies and anime movies should have movie files
+        if content.movie_files:
+            movie_files = convert_movie_files_to_minimal_format(content.movie_files)
+    elif content.content_type in SERIES_CONTENT_TYPES:
+        # TV series should have episode files
+        if content.seasons:
+            episode_files = convert_episodes_to_minimal_format(content.seasons)
+    elif content.content_type in DOCUMENTARY_CONTENT_TYPES:
+        # Documentaries can be either single movies or series
+        if content.seasons:
+            # Documentary series - use episode files
+            episode_files = convert_episodes_to_minimal_format(content.seasons)
+        elif content.movie_files:
+            # Single documentary movie - use movie files
+            movie_files = convert_movie_files_to_minimal_format(content.movie_files)
+
+    return movie_files, episode_files
+
+
+def convert_content_to_minimal_format(
+    content: Content, include_media_files: bool = True
+) -> ContentMinimal:
+    """Convert content to minimal format efficiently"""
+    movie_files, episode_files = get_content_media_files(content, include_media_files)
+
+    return ContentMinimal(
+        id=content.id,
+        title=content.title,
+        slug=content.slug,
+        description=content.description,
+        poster_url=content.poster_url,
+        backdrop_url=content.backdrop_url,
+        release_date=content.release_date,
+        content_type=content.content_type,
+        content_rating=content.content_rating,
+        runtime=content.runtime,
+        average_rating=content.average_rating,
+        total_reviews=content.reviews_count,
+        total_views=content.total_views or 0,
+        is_featured=content.is_featured,
+        is_trending=content.is_trending,
+        movie_files=movie_files,
+        episode_files=episode_files,
+    )
+
+
+def create_content_section_with_pagination(
+    section_name: str,
+    content_items: List[ContentMinimal],
+    total_items: int,
+    page: int,
+    page_size: int,
+) -> ContentSection:
+    """Create content section with pagination info efficiently"""
+    offset = (page - 1) * page_size
+    has_more = (offset + page_size) < total_items
+    next_page = page + 1 if has_more else None
+
+    return ContentSection(
+        section_name=section_name,
+        items=content_items,
+        total_items=total_items,
+        has_more=has_more,
+        next_page=next_page,
+    )
