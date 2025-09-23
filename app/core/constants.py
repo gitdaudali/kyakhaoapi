@@ -1,6 +1,12 @@
 """
 Application constants for content discovery and filtering.
 """
+from app.models.content import ContentType
+
+MOVIE_CONTENT_TYPES = {ContentType.MOVIE, ContentType.ANIME}
+SERIES_CONTENT_TYPES = {ContentType.TV_SERIES, ContentType.MINI_SERIES}
+DOCUMENTARY_CONTENT_TYPES = {ContentType.DOCUMENTARY}
+
 
 # Content Discovery Constants
 MOST_REVIEWED_MIN_RATING = 3.0

@@ -118,6 +118,17 @@ TRENDING_CONTENT_SUCCESS = "Trending content retrieved successfully"
 MOST_REVIEWED_SUCCESS = "Most reviewed content retrieved successfully"
 NEW_RELEASES_SUCCESS = "New releases content retrieved successfully"
 
+# Streaming Channel Messages
+STREAMING_CHANNEL_LIST_SUCCESS = "Streaming channels retrieved successfully"
+STREAMING_CHANNEL_DETAIL_SUCCESS = "Streaming channel details retrieved successfully"
+STREAMING_CHANNEL_CREATED_SUCCESS = "Streaming channel created successfully"
+STREAMING_CHANNEL_UPDATED_SUCCESS = "Streaming channel updated successfully"
+STREAMING_CHANNEL_DELETED_SUCCESS = "Streaming channel deleted successfully"
+STREAMING_CHANNEL_NOT_FOUND = "Streaming channel not found"
+STREAMING_CHANNEL_ALREADY_EXISTS = "Streaming channel with this name already exists"
+STREAMING_CHANNEL_INVALID_URL = "Invalid stream URL format"
+STREAMING_CHANNEL_STATS_SUCCESS = "Streaming channel statistics retrieved successfully"
+
 # General Messages
 SUCCESS = "Success"
 ERROR = "Error"
