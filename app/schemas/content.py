@@ -950,7 +950,7 @@ class ContentSection(BaseModel):
 
 
 class ContentDiscoveryResponse(BaseModel):
-    """Main response for content discovery API"""
+    """Main response for content discovery"""
 
     sections: List[ContentSection] = Field(..., description="Content sections")
     genres: List[GenreMinimal] = Field(
@@ -959,9 +959,6 @@ class ContentDiscoveryResponse(BaseModel):
     total_sections: int = Field(..., description="Total number of sections")
     page: int = Field(1, description="Current page")
     size: int = Field(10, description="Items per section")
-    generated_at: datetime = Field(
-        default_factory=datetime.utcnow, description="Response generation time"
-    )
 
     class Config:
         from_attributes = True
