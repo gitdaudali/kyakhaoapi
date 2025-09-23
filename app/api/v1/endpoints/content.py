@@ -52,30 +52,22 @@ from app.schemas.content import (
     CastCrewResponse,
     CastFilters,
     CastListResponse,
-    Content,
     ContentDetail,
     ContentDiscoveryQueryParams,
     ContentDiscoveryResponse,
-    ContentFilters,
-    ContentList,
     ContentListResponse,
-    ContentMinimal,
     ContentQueryParams,
-    ContentReviewsResponse,
-    ContentSection,
     CrewFilters,
     CrewListResponse,
-    EpisodeMinimal,
     FeaturedContentQueryParams,
     Genre,
     GenreFilters,
     GenreListResponse,
     GenreMinimal,
     MostReviewedLastMonthQueryParams,
-    MovieFileMinimal,
-    PaginatedResponse,
     PaginationParams,
-    Review,
+    PersonDetail,
+    PersonListResponse,
     ReviewCreate,
     ReviewCreateResponse,
     ReviewDeleteResponse,
@@ -84,8 +76,6 @@ from app.schemas.content import (
     ReviewStats,
     ReviewUpdate,
     ReviewUpdateResponse,
-    ReviewVoteRequest,
-    ReviewVoteResponse,
     TrendingContentQueryParams,
 )
 from app.utils.content_utils import (
@@ -111,11 +101,11 @@ from app.utils.content_utils import (
     get_most_reviewed_content_discovery,
     get_most_reviewed_last_month,
     get_new_releases_content_discovery,
-    get_review_stats,
+    get_people_list,
+    get_person_by_id,
     get_trending_content,
     get_trending_content_discovery,
     update_content_review,
-    vote_on_review,
 )
 
 router = APIRouter()
@@ -899,4 +889,31 @@ async def get_content_review_stats_endpoint(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error retrieving review statistics: {str(e)}",
+        )
+
+
+@router.get("/people/{person_id}", response_model=PersonDetail)
+async def get_person_by_id_endpoint(
+    person_id: UUID,
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Get person details by ID.
+    Returns detailed information about a specific person including birth_place, nationality, and profile_image_url.
+    """
+    try:
+        person = await get_person_by_id(db, person_id)
+        if not person:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Person not found"
+            )
+
+        return PersonDetail.from_orm(person)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving person: {str(e)}",
         )

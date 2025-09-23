@@ -24,14 +24,17 @@ from app.models.content import (
 from app.models.user import User
 from app.schemas.content import (
     CastFilters,
+    CastMemberDetail,
     ContentFilters,
     ContentMinimal,
     ContentSection,
     CrewFilters,
+    CrewMemberDetail,
     EpisodeMinimal,
     GenreFilters,
     MovieFileMinimal,
     PaginationParams,
+    PersonDetail,
     ReviewFilters,
 )
 
@@ -1621,3 +1624,81 @@ def create_content_section_with_pagination(
         has_more=has_more,
         next_page=next_page,
     )
+
+
+async def get_person_by_id(db: AsyncSession, person_id: UUID) -> Optional[Person]:
+    """Get person by ID with all details"""
+    try:
+        query = select(Person).where(
+            and_(Person.id == person_id, Person.is_deleted == False)
+        )
+        result = await db.execute(query)
+        person = result.scalar_one_or_none()
+        return person
+    except Exception as e:
+        print(f"Error getting person by ID: {e}")
+        return None
+
+
+async def get_people_list(
+    db: AsyncSession,
+    page: int = 1,
+    size: int = 10,
+    search: Optional[str] = None,
+    department: Optional[str] = None,
+    nationality: Optional[str] = None,
+    is_featured: Optional[bool] = None,
+    sort_by: str = "name",
+    sort_order: str = "asc",
+) -> Tuple[List[Person], int]:
+    """Get paginated list of people with filtering"""
+    try:
+        # Base query
+        query = select(Person).where(Person.is_deleted == False)
+
+        # Apply filters
+        if search:
+            search_term = f"%{search}%"
+            query = query.where(Person.name.ilike(search_term))
+
+        if department:
+            query = query.where(Person.known_for_department.ilike(f"%{department}%"))
+
+        if nationality:
+            query = query.where(Person.nationality.ilike(f"%{nationality}%"))
+
+        if is_featured is not None:
+            query = query.where(Person.is_featured == is_featured)
+
+        # Get total count
+        count_query = select(func.count()).select_from(query.subquery())
+        total_result = await db.execute(count_query)
+        total = total_result.scalar()
+
+        # Apply sorting
+        if sort_by == "name":
+            sort_field = Person.name
+        elif sort_by == "birth_date":
+            sort_field = Person.birth_date
+        elif sort_by == "created_at":
+            sort_field = Person.created_at
+        else:
+            sort_field = Person.name
+
+        if sort_order.lower() == "desc":
+            query = query.order_by(desc(sort_field))
+        else:
+            query = query.order_by(sort_field)
+
+        # Apply pagination
+        offset = (page - 1) * size
+        query = query.offset(offset).limit(size)
+
+        result = await db.execute(query)
+        people = result.scalars().all()
+
+        return people, total
+
+    except Exception as e:
+        print(f"Error getting people list: {e}")
+        return [], 0
