@@ -59,11 +59,37 @@ class GenreSimple(BaseModel):
 
 
 class PersonSimple(BaseModel):
-    """Simplified person schema for content detail"""
+    """Simplified person schema for cast-crew detail"""
+
+    id: UUID = Field(..., description="Person ID")
+    name: str = Field(..., description="Person name")
+    birth_place: Optional[str] = Field(None, description="Birth place")
+    nationality: Optional[str] = Field(None, description="Nationality")
+    profile_image_url: Optional[str] = Field(None, description="Profile image URL")
+
+    class Config:
+        from_attributes = True
+
+
+class PersonDetail(BaseModel):
+    """Detailed person schema with full information"""
 
     id: UUID = Field(..., description="Person ID")
     name: str = Field(..., description="Person name")
     slug: str = Field(..., description="Person slug")
+    biography: Optional[str] = Field(None, description="Person biography")
+    birth_date: Optional[date] = Field(None, description="Birth date")
+    death_date: Optional[date] = Field(None, description="Death date")
+    birth_place: Optional[str] = Field(None, description="Birth place")
+    nationality: Optional[str] = Field(None, description="Nationality")
+    gender: Optional[str] = Field(None, description="Gender")
+    profile_image_url: Optional[str] = Field(None, description="Profile image URL")
+    cover_image_url: Optional[str] = Field(None, description="Cover image URL")
+    known_for_department: Optional[str] = Field(
+        None, description="Known for department"
+    )
+    is_verified: bool = Field(False, description="Whether person is verified")
+    is_featured: bool = Field(False, description="Whether person is featured")
 
     class Config:
         from_attributes = True
@@ -76,7 +102,21 @@ class CastMember(BaseModel):
     character_name: Optional[str] = Field(None, description="Character name")
     is_main_cast: bool = Field(False, description="Whether main cast member")
     cast_order: int = Field(0, description="Billing order")
-    character_image_url: Optional[str] = Field(None, description="Poster image URL")
+    job_title: Optional[MovieJobTitle] = Field(None, description="Cast Job Title")
+    # character_image_url: Optional[str] = Field(None, description="Cast image URL")
+
+    class Config:
+        from_attributes = True
+
+
+class CastMemberDetail(BaseModel):
+    """Cast member schema with detailed person information"""
+
+    person: PersonDetail = Field(..., description="Detailed person information")
+    character_name: Optional[str] = Field(None, description="Character name")
+    is_main_cast: bool = Field(False, description="Whether main cast member")
+    cast_order: int = Field(0, description="Billing order")
+    character_image_url: Optional[str] = Field(None, description="Cast image URL")
     job_title: Optional[MovieJobTitle] = Field(None, description="Cast Job Title")
 
     class Config:
@@ -90,6 +130,20 @@ class CrewMember(BaseModel):
     job_title: Optional[MovieJobTitle] = Field(None, description="Cast Job Title")
     department: str = Field(..., description="Department (Directing, Writing, etc.)")
     credit_order: int = Field(0, description="Credit order")
+    character_image_url: Optional[str] = Field(None, description="Crew image URL")
+
+    class Config:
+        from_attributes = True
+
+
+class CrewMemberDetail(BaseModel):
+    """Crew member schema with detailed person information"""
+
+    person: PersonDetail = Field(..., description="Detailed person information")
+    job_title: Optional[MovieJobTitle] = Field(None, description="Cast Job Title")
+    department: str = Field(..., description="Department (Directing, Writing, etc.)")
+    credit_order: int = Field(0, description="Credit order")
+    character_image_url: Optional[str] = Field(None, description="Crew image URL")
 
     class Config:
         from_attributes = True
@@ -278,6 +332,23 @@ class CastCrewResponse(BaseModel):
     crew: List[CrewMember] = Field(default_factory=list, description="Crew members")
     total_cast: int = Field(0, description="Total number of cast members")
     total_crew: int = Field(0, description="Total number of crew members")
+
+    class Config:
+        from_attributes = True
+
+
+class PersonListResponse(BaseModel):
+    """Response schema for people list API"""
+
+    people: List[PersonDetail] = Field(
+        default_factory=list, description="List of people"
+    )
+    total: int = Field(0, description="Total number of people")
+    page: int = Field(1, description="Current page number")
+    size: int = Field(10, description="Page size")
+    total_pages: int = Field(0, description="Total number of pages")
+    has_next: bool = Field(False, description="Whether there is a next page")
+    has_prev: bool = Field(False, description="Whether there is a previous page")
 
     class Config:
         from_attributes = True
@@ -950,7 +1021,7 @@ class ContentSection(BaseModel):
 
 
 class ContentDiscoveryResponse(BaseModel):
-    """Main response for content discovery API"""
+    """Main response for content discovery"""
 
     sections: List[ContentSection] = Field(..., description="Content sections")
     genres: List[GenreMinimal] = Field(
@@ -959,9 +1030,6 @@ class ContentDiscoveryResponse(BaseModel):
     total_sections: int = Field(..., description="Total number of sections")
     page: int = Field(1, description="Current page")
     size: int = Field(10, description="Items per section")
-    generated_at: datetime = Field(
-        default_factory=datetime.utcnow, description="Response generation time"
-    )
 
     class Config:
         from_attributes = True

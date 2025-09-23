@@ -52,30 +52,22 @@ from app.schemas.content import (
     CastCrewResponse,
     CastFilters,
     CastListResponse,
-    Content,
     ContentDetail,
     ContentDiscoveryQueryParams,
     ContentDiscoveryResponse,
-    ContentFilters,
-    ContentList,
     ContentListResponse,
-    ContentMinimal,
     ContentQueryParams,
-    ContentReviewsResponse,
-    ContentSection,
     CrewFilters,
     CrewListResponse,
-    EpisodeMinimal,
     FeaturedContentQueryParams,
     Genre,
     GenreFilters,
     GenreListResponse,
     GenreMinimal,
     MostReviewedLastMonthQueryParams,
-    MovieFileMinimal,
-    PaginatedResponse,
     PaginationParams,
-    Review,
+    PersonDetail,
+    PersonListResponse,
     ReviewCreate,
     ReviewCreateResponse,
     ReviewDeleteResponse,
@@ -84,13 +76,13 @@ from app.schemas.content import (
     ReviewStats,
     ReviewUpdate,
     ReviewUpdateResponse,
-    ReviewVoteRequest,
-    ReviewVoteResponse,
     TrendingContentQueryParams,
 )
 from app.utils.content_utils import (
     calculate_pagination_info,
+    convert_content_to_minimal_format,
     create_content_review,
+    create_content_section_with_pagination,
     delete_content_review,
     get_all_genres_for_discovery,
     get_content_by_id,
@@ -109,11 +101,11 @@ from app.utils.content_utils import (
     get_most_reviewed_content_discovery,
     get_most_reviewed_last_month,
     get_new_releases_content_discovery,
-    get_review_stats,
+    get_people_list,
+    get_person_by_id,
     get_trending_content,
     get_trending_content_discovery,
     update_content_review,
-    vote_on_review,
 )
 
 router = APIRouter()
@@ -152,115 +144,18 @@ async def get_content_discovery(
                 genre_id_filter=query_params.genre_id,
             )
 
-            # Convert to minimal format
-            featured_items = []
-            for content in featured_contents:
-                # Initialize both arrays
-                movie_files = []
-                episode_files = []
+            # Convert to minimal format efficiently
+            featured_items = [
+                convert_content_to_minimal_format(content, include_media_files=True)
+                for content in featured_contents
+            ]
 
-                # Determine content type and assign appropriate files
-                if content.content_type in ["movie", "anime"]:
-                    # Movies and anime movies should have movie files
-                    if content.movie_files:
-                        movie_files = [
-                            MovieFileMinimal(
-                                id=file.id,
-                                quality_level=file.quality_level,
-                                file_url=file.file_url,
-                                duration_seconds=file.duration_seconds,
-                                is_ready=file.is_ready,
-                            )
-                            for file in content.movie_files
-                        ]
-                elif content.content_type in ["tv_series", "mini_series"]:
-                    # TV series should have episode files
-                    if content.seasons:
-                        for season in content.seasons:
-                            if season.episodes:
-                                # Get first episode of each season
-                                first_episode = season.episodes[0]
-                                episode_files.append(
-                                    EpisodeMinimal(
-                                        id=first_episode.id,
-                                        episode_number=first_episode.episode_number,
-                                        title=first_episode.title,
-                                        slug=first_episode.slug,
-                                        description=first_episode.description,
-                                        runtime=first_episode.runtime,
-                                        air_date=first_episode.air_date,
-                                        thumbnail_url=first_episode.thumbnail_url,
-                                        views_count=first_episode.views_count,
-                                        is_available=first_episode.is_available,
-                                    )
-                                )
-                elif content.content_type == "documentary":
-                    # Documentaries can be either single movies or series
-                    if content.seasons:
-                        # Documentary series - use episode files
-                        for season in content.seasons:
-                            if season.episodes:
-                                # Get first episode of each season
-                                first_episode = season.episodes[0]
-                                episode_files.append(
-                                    EpisodeMinimal(
-                                        id=first_episode.id,
-                                        episode_number=first_episode.episode_number,
-                                        title=first_episode.title,
-                                        slug=first_episode.slug,
-                                        description=first_episode.description,
-                                        runtime=first_episode.runtime,
-                                        air_date=first_episode.air_date,
-                                        thumbnail_url=first_episode.thumbnail_url,
-                                        views_count=first_episode.views_count,
-                                        is_available=first_episode.is_available,
-                                    )
-                                )
-                    elif content.movie_files:
-                        # Single documentary movie - use movie files
-                        movie_files = [
-                            MovieFileMinimal(
-                                id=file.id,
-                                quality_level=file.quality_level,
-                                file_url=file.file_url,
-                                duration_seconds=file.duration_seconds,
-                                is_ready=file.is_ready,
-                            )
-                            for file in content.movie_files
-                        ]
-
-                item = ContentMinimal(
-                    id=content.id,
-                    title=content.title,
-                    slug=content.slug,
-                    description=content.description,
-                    poster_url=content.poster_url,
-                    backdrop_url=content.backdrop_url,
-                    release_date=content.release_date,
-                    content_type=content.content_type,
-                    content_rating=content.content_rating,
-                    runtime=content.runtime,
-                    average_rating=content.average_rating,  # Use actual rating from model
-                    total_reviews=content.reviews_count,  # Use actual review count from model
-                    total_views=content.total_views or 0,
-                    is_featured=content.is_featured,
-                    is_trending=content.is_trending,
-                    movie_files=movie_files,
-                    episode_files=episode_files,
-                )
-                featured_items.append(item)
-
-            # Calculate pagination info
-            offset = (query_params.page - 1) * query_params.size
-            has_more = (offset + query_params.size) < featured_total
-            next_page = query_params.page + 1 if has_more else None
-
-            featured_section = ContentSection(
-                section_name=FEATURED_SECTION,
-                items=featured_items,
-                total_items=featured_total,
-                has_more=has_more,
-                next_page=next_page,
+            featured_section = create_content_section_with_pagination(
+                FEATURED_SECTION,
+                featured_items,
+                featured_total,
+                query_params.page,
+                query_params.size,
             )
             sections.append(featured_section)
 
@@ -274,42 +169,18 @@ async def get_content_discovery(
                 genre_id_filter=query_params.genre_id,
             )
 
-            # Convert to minimal format
-            trending_items = []
-            for content in trending_contents:
-                # NO movie files or episode files for trending content
-                item = ContentMinimal(
-                    id=content.id,
-                    title=content.title,
-                    slug=content.slug,
-                    description=content.description,
-                    poster_url=content.poster_url,
-                    backdrop_url=content.backdrop_url,
-                    release_date=content.release_date,
-                    content_type=content.content_type,
-                    content_rating=content.content_rating,
-                    runtime=content.runtime,
-                    average_rating=content.average_rating,  # Use actual rating from model
-                    total_reviews=content.reviews_count,  # Use actual review count from model
-                    total_views=content.total_views or 0,
-                    is_featured=content.is_featured,
-                    is_trending=content.is_trending,
-                    movie_files=[],  # Empty for trending
-                    episode_files=[],  # Empty for trending
-                )
-                trending_items.append(item)
+            # Convert to minimal format efficiently (no files for trending)
+            trending_items = [
+                convert_content_to_minimal_format(content, include_media_files=False)
+                for content in trending_contents
+            ]
 
-            # Calculate pagination info
-            offset = (query_params.page - 1) * query_params.size
-            has_more = (offset + query_params.size) < trending_total
-            next_page = query_params.page + 1 if has_more else None
-
-            trending_section = ContentSection(
-                section_name=TRENDING_SECTION,
-                items=trending_items,
-                total_items=trending_total,
-                has_more=has_more,
-                next_page=next_page,
+            trending_section = create_content_section_with_pagination(
+                TRENDING_SECTION,
+                trending_items,
+                trending_total,
+                query_params.page,
+                query_params.size,
             )
             sections.append(trending_section)
 
@@ -326,42 +197,18 @@ async def get_content_discovery(
                 genre_id_filter=query_params.genre_id,
             )
 
-            # Convert to minimal format
-            most_reviewed_items = []
-            for content in most_reviewed_contents:
-                # NO movie files or episode files for most reviewed content
-                item = ContentMinimal(
-                    id=content.id,
-                    title=content.title,
-                    slug=content.slug,
-                    description=content.description,
-                    poster_url=content.poster_url,
-                    backdrop_url=content.backdrop_url,
-                    release_date=content.release_date,
-                    content_type=content.content_type,
-                    content_rating=content.content_rating,
-                    runtime=content.runtime,
-                    average_rating=content.average_rating,  # Use actual rating from model
-                    total_reviews=content.reviews_count,  # Use actual review count from model
-                    total_views=content.total_views or 0,
-                    is_featured=content.is_featured,
-                    is_trending=content.is_trending,
-                    movie_files=[],  # Empty for most reviewed
-                    episode_files=[],  # Empty for most reviewed
-                )
-                most_reviewed_items.append(item)
+            # Convert to minimal format efficiently (no files for most reviewed)
+            most_reviewed_items = [
+                convert_content_to_minimal_format(content, include_media_files=False)
+                for content in most_reviewed_contents
+            ]
 
-            # Calculate pagination info
-            offset = (query_params.page - 1) * query_params.size
-            has_more = (offset + query_params.size) < most_reviewed_total
-            next_page = query_params.page + 1 if has_more else None
-
-            most_reviewed_section = ContentSection(
-                section_name=MOST_REVIEWED_SECTION,
-                items=most_reviewed_items,
-                total_items=most_reviewed_total,
-                has_more=has_more,
-                next_page=next_page,
+            most_reviewed_section = create_content_section_with_pagination(
+                MOST_REVIEWED_SECTION,
+                most_reviewed_items,
+                most_reviewed_total,
+                query_params.page,
+                query_params.size,
             )
             sections.append(most_reviewed_section)
 
@@ -378,42 +225,18 @@ async def get_content_discovery(
                 genre_id_filter=query_params.genre_id,
             )
 
-            # Convert to minimal format
-            new_releases_items = []
-            for content in new_releases_contents:
-                # NO movie files or episode files for new releases content
-                item = ContentMinimal(
-                    id=content.id,
-                    title=content.title,
-                    slug=content.slug,
-                    description=content.description,
-                    poster_url=content.poster_url,
-                    backdrop_url=content.backdrop_url,
-                    release_date=content.release_date,
-                    content_type=content.content_type,
-                    content_rating=content.content_rating,
-                    runtime=content.runtime,
-                    average_rating=content.average_rating,  # Use actual rating from model
-                    total_reviews=content.reviews_count,  # Use actual review count from model
-                    total_views=content.total_views or 0,
-                    is_featured=content.is_featured,
-                    is_trending=content.is_trending,
-                    movie_files=[],  # Empty for new releases
-                    episode_files=[],  # Empty for new releases
-                )
-                new_releases_items.append(item)
+            # Convert to minimal format efficiently (no files for new releases)
+            new_releases_items = [
+                convert_content_to_minimal_format(content, include_media_files=False)
+                for content in new_releases_contents
+            ]
 
-            # Calculate pagination info
-            offset = (query_params.page - 1) * query_params.size
-            has_more = (offset + query_params.size) < new_releases_total
-            next_page = query_params.page + 1 if has_more else None
-
-            new_releases_section = ContentSection(
-                section_name=NEW_RELEASES_SECTION,
-                items=new_releases_items,
-                total_items=new_releases_total,
-                has_more=has_more,
-                next_page=next_page,
+            new_releases_section = create_content_section_with_pagination(
+                NEW_RELEASES_SECTION,
+                new_releases_items,
+                new_releases_total,
+                query_params.page,
+                query_params.size,
             )
             sections.append(new_releases_section)
 
@@ -1066,4 +889,31 @@ async def get_content_review_stats_endpoint(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error retrieving review statistics: {str(e)}",
+        )
+
+
+@router.get("/people/{person_id}", response_model=PersonDetail)
+async def get_person_by_id_endpoint(
+    person_id: UUID,
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Get person details by ID.
+    Returns detailed information about a specific person including birth_place, nationality, and profile_image_url.
+    """
+    try:
+        person = await get_person_by_id(db, person_id)
+        if not person:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Person not found"
+            )
+
+        return PersonDetail.from_orm(person)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving person: {str(e)}",
         )

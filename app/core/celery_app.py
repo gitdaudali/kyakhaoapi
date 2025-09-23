@@ -30,7 +30,7 @@ celery_app.conf.update(
     worker_max_tasks_per_child=1000,
 )
 
-# Optional configuration for better performance
+
 celery_app.conf.update(
     task_always_eager=False,  # Set to True for testing
     task_eager_propagates=True,

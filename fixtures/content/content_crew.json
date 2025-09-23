@@ -4,167 +4,191 @@
     "person_id": "750e8400-e29b-41d4-a716-446655440001",
     "job_title": "Director",
     "department": "Directing",
-    "credit_order": 1
+    "credit_order": 1,
+    "character_image_url": "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440001",
     "person_id": "750e8400-e29b-41d4-a716-446655440001",
     "job_title": "Writer",
     "department": "Writing",
-    "credit_order": 2
+    "credit_order": 2,
+    "character_image_url": "https://plus.unsplash.com/premium_photo-1664476788423-7899ac87bd7f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440001",
     "person_id": "750e8400-e29b-41d4-a716-446655440005",
     "job_title": "Sound Designer",
     "department": "Sound",
-    "credit_order": 3
+    "credit_order": 3,
+    "character_image_url": "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440001",
     "person_id": "750e8400-e29b-41d4-a716-446655440006",
     "job_title": "Cinematographer",
     "department": "Camera",
-    "credit_order": 4
+    "credit_order": 4,
+    "character_image_url": "https://plus.unsplash.com/premium_photo-1672239496412-ab605befa53f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440002",
     "person_id": "750e8400-e29b-41d4-a716-446655440009",
     "job_title": "Director",
     "department": "Directing",
-    "credit_order": 1
+    "credit_order": 1,
+    "character_image_url": "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440002",
     "person_id": "750e8400-e29b-41d4-a716-446655440009",
     "job_title": "Writer",
     "department": "Writing",
-    "credit_order": 2
+    "credit_order": 2,
+    "character_image_url": "https://plus.unsplash.com/premium_photo-1664476788423-7899ac87bd7f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440002",
     "person_id": "750e8400-e29b-41d4-a716-446655440005",
     "job_title": "Sound Designer",
     "department": "Sound",
-    "credit_order": 3
+    "credit_order": 3,
+    "character_image_url": "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440002",
     "person_id": "750e8400-e29b-41d4-a716-446655440006",
     "job_title": "Cinematographer",
     "department": "Camera",
-    "credit_order": 4
+    "credit_order": 4,
+    "character_image_url": "https://plus.unsplash.com/premium_photo-1672239496412-ab605befa53f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440003",
     "person_id": "750e8400-e29b-41d4-a716-446655440001",
     "job_title": "Director",
     "department": "Directing",
-    "credit_order": 1
+    "credit_order": 1,
+    "character_image_url": "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440003",
     "person_id": "750e8400-e29b-41d4-a716-446655440001",
     "job_title": "Writer",
     "department": "Writing",
-    "credit_order": 2
+    "credit_order": 2,
+    "character_image_url": "https://plus.unsplash.com/premium_photo-1664476788423-7899ac87bd7f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440003",
     "person_id": "750e8400-e29b-41d4-a716-446655440005",
     "job_title": "Sound Designer",
     "department": "Sound",
-    "credit_order": 3
+    "credit_order": 3,
+    "character_image_url": "https://plus.unsplash.com/premium_photo-1672239496412-ab605befa53f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440003",
     "person_id": "750e8400-e29b-41d4-a716-446655440006",
     "job_title": "Cinematographer",
     "department": "Camera",
-    "credit_order": 4
+    "credit_order": 4,
+    "character_image_url": "https://plus.unsplash.com/premium_photo-1672239496412-ab605befa53f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440004",
     "person_id": "750e8400-e29b-41d4-a716-446655440011",
     "job_title": "Director",
     "department": "Directing",
-    "credit_order": 1
+    "credit_order": 1,
+    "character_image_url": "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440004",
     "person_id": "750e8400-e29b-41d4-a716-446655440011",
     "job_title": "Writer",
     "department": "Writing",
-    "credit_order": 2
+    "credit_order": 2,
+    "character_image_url": "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440004",
     "person_id": "750e8400-e29b-41d4-a716-446655440012",
     "job_title": "Sound Designer",
     "department": "Sound",
-    "credit_order": 3
+    "credit_order": 3,
+    "character_image_url": "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440004",
     "person_id": "750e8400-e29b-41d4-a716-446655440006",
     "job_title": "Cinematographer",
     "department": "Camera",
-    "credit_order": 4
+    "credit_order": 4,
+    "character_image_url": "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440005",
     "person_id": "750e8400-e29b-41d4-a716-446655440015",
     "job_title": "Director",
     "department": "Directing",
-    "credit_order": 1
+    "credit_order": 1,
+    "character_image_url": "https://plus.unsplash.com/premium_photo-1664476788423-7899ac87bd7f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440005",
     "person_id": "750e8400-e29b-41d4-a716-446655440015",
     "job_title": "Writer",
     "department": "Writing",
-    "credit_order": 2
+    "credit_order": 2,
+    "character_image_url": "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440005",
     "person_id": "750e8400-e29b-41d4-a716-446655440016",
     "job_title": "Sound Designer",
     "department": "Sound",
-    "credit_order": 3
+    "credit_order": 3,
+    "character_image_url": "https://plus.unsplash.com/premium_photo-1672239496412-ab605befa53f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440005",
     "person_id": "750e8400-e29b-41d4-a716-446655440022",
     "job_title": "Producer",
     "department": "Production",
-    "credit_order": 4
+    "credit_order": 4,
+    "character_image_url": "https://plus.unsplash.com/premium_photo-1664476788423-7899ac87bd7f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440006",
     "person_id": "750e8400-e29b-41d4-a716-446655440022",
     "job_title": "Director",
     "department": "Directing",
-    "credit_order": 1
+    "credit_order": 1,
+    "character_image_url": "https://plus.unsplash.com/premium_photo-1672239496412-ab605befa53f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440006",
     "person_id": "750e8400-e29b-41d4-a716-446655440022",
     "job_title": "Writer",
     "department": "Writing",
-    "credit_order": 2
+    "credit_order": 2,
+    "character_image_url": "https://plus.unsplash.com/premium_photo-1664476788423-7899ac87bd7f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440006",
     "person_id": "750e8400-e29b-41d4-a716-446655440019",
     "job_title": "Producer",
     "department": "Production",
-    "credit_order": 3
+    "credit_order": 3,
+    "character_image_url": "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     "content_id": "850e8400-e29b-41d4-a716-446655440006",
     "person_id": "750e8400-e29b-41d4-a716-446655440005",
     "job_title": "Sound Designer",
     "department": "Sound",
-    "credit_order": 4
+    "credit_order": 4,
+    "character_image_url": "https://plus.unsplash.com/premium_photo-1672239496412-ab605befa53f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D"
   }
 ]
