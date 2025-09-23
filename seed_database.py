@@ -33,6 +33,7 @@ from app.models import (
     MovieFile,
     Person,
     Season,
+    StreamingChannel,
     User,
     UserContentInteraction,
     UserWatchHistory,
@@ -398,6 +399,26 @@ class DatabaseSeeder:
         await self.session.commit()
         print(f"✅ Seeded {len(episode_qualities_data)} episode qualities")
 
+    async def seed_streaming_channels(self):
+        """Seed streaming channels."""
+        streaming_channels_data = await self.load_json_fixture("streaming/streaming_channels.json")
+
+        for channel_data in streaming_channels_data:
+            # Convert category string to enum if it exists
+            if channel_data.get("category"):
+                from app.models.streaming import StreamingChannelCategory
+                try:
+                    channel_data["category"] = StreamingChannelCategory(channel_data["category"])
+                except ValueError:
+                    # If category is not a valid enum value, set to None
+                    channel_data["category"] = None
+
+            streaming_channel = StreamingChannel(**channel_data)
+            self.session.add(streaming_channel)
+
+        await self.session.commit()
+        print(f"✅ Seeded {len(streaming_channels_data)} streaming channels")
+
     async def seed_user_interactions(
         self, user_mapping: Dict[str, str], content_mapping: Dict[str, str]
     ):
@@ -575,6 +596,10 @@ class DatabaseSeeder:
             season_mapping = await self.seed_seasons(content_mapping)
             await self.seed_episodes(content_mapping, season_mapping)
             await self.seed_episode_qualities()
+
+            # Seed streaming channels
+            print("\n📡 Seeding streaming channels...")
+            await self.seed_streaming_channels()
 
             # Seed user interactions
             print("\n👤 Seeding user interactions...")
