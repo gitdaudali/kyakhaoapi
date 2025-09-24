@@ -8,7 +8,13 @@ from sqlalchemy.orm import selectinload
 from sqlmodel import select
 
 from app.core.config import settings
-from app.core.constants import MOST_REVIEWED_MIN_RATING, MOST_REVIEWED_MIN_REVIEWS
+from app.core.constants import (
+    DOCUMENTARY_CONTENT_TYPES,
+    MOST_REVIEWED_MIN_RATING,
+    MOST_REVIEWED_MIN_REVIEWS,
+    MOVIE_CONTENT_TYPES,
+    SERIES_CONTENT_TYPES,
+)
 from app.models.content import (
     Content,
     ContentCast,
@@ -37,11 +43,6 @@ from app.schemas.content import (
     PersonDetail,
     ReviewFilters,
 )
-
-# Content type sets for efficient checking
-MOVIE_CONTENT_TYPES = {ContentType.MOVIE, ContentType.ANIME}
-SERIES_CONTENT_TYPES = {ContentType.TV_SERIES, ContentType.MINI_SERIES}
-DOCUMENTARY_CONTENT_TYPES = {ContentType.DOCUMENTARY}
 
 
 async def get_content_by_id(

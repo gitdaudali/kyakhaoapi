@@ -23,6 +23,7 @@ from app.models.content import (
     WatchQuality,
     WatchSession,
 )
+from app.models.streaming import StreamingChannel
 from app.models.token import RefreshToken, Token, TokenBlacklist
 from app.models.user import ProfileStatus, User, UserRole
 from app.models.verification import EmailVerificationToken, PasswordResetToken
@@ -60,4 +61,5 @@ __all__ = [
     "UserWatchHistory",
     "WatchQuality",
     "WatchSession",
+    "StreamingChannel",
 ]
