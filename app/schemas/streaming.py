@@ -128,7 +128,7 @@ class StreamingChannelQueryParams(BaseModel):
     """Query parameters for streaming channel list"""
 
     page: int = Field(1, ge=1, description="Page number")
-    size: int = Field(10, ge=1, le=100, description="Page size")
+    size: int = Field(10, ge=1, le=500, description="Page size")
     search: Optional[str] = Field(
         None, min_length=1, max_length=255, description="Search by channel name"
     )
