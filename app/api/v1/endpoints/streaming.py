@@ -1,12 +1,10 @@
-from typing import Any, Optional
+from typing import Any
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.config import settings
 from app.core.database import get_db
 from app.core.deps import get_current_active_user
-from app.models.streaming import StreamingChannelCategory
 from app.models.user import User
 from app.schemas.streaming import (
     StreamingChannelListResponse,
@@ -21,30 +19,7 @@ router = APIRouter()
 
 @router.get("/channels", response_model=StreamingChannelListResponse)
 async def get_streaming_channels(
-    page: int = Query(1, ge=1, description="Page number"),
-    size: int = Query(
-        settings.DEFAULT_PAGE_SIZE,
-        ge=1,
-        le=500,
-        description="Page size",
-    ),
-    search: Optional[str] = Query(
-        None, min_length=1, max_length=255, description="Search by channel name"
-    ),
-    category: Optional[StreamingChannelCategory] = Query(
-        None, description="Filter by category"
-    ),
-    language: Optional[str] = Query(
-        None, max_length=50, description="Filter by language"
-    ),
-    country: Optional[str] = Query(
-        None, max_length=100, description="Filter by country"
-    ),
-    quality: Optional[str] = Query(
-        None, max_length=20, description="Filter by stream quality"
-    ),
-    sort_by: str = Query("name", description="Sort field"),
-    sort_order: str = Query("asc", pattern="^(asc|desc)$", description="Sort order"),
+    query_params: StreamingChannelQueryParams = Depends(),
     current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db),
 ) -> Any:
@@ -52,20 +27,7 @@ async def get_streaming_channels(
     Get paginated list of streaming channels with filtering and search.
     """
     try:
-        # Create query parameters
-        query_params = StreamingChannelQueryParams(
-            page=page,
-            size=size,
-            search=search,
-            category=category,
-            language=language,
-            country=country,
-            quality=quality,
-            sort_by=sort_by,
-            sort_order=sort_order,
-        )
-
-        # Get channels and total count
+        # Get channels and total count using query_params directly
         channels, total = await get_streaming_channels_list(db, query_params)
 
         # Convert to response schemas using list comprehension (no loops)
@@ -83,7 +45,9 @@ async def get_streaming_channels(
             for channel in channels
         ]
 
-        pagination_info = calculate_pagination_info(page, size, total)
+        pagination_info = calculate_pagination_info(
+            query_params.page, query_params.size, total
+        )
 
         return StreamingChannelListResponse(
             items=channel_responses,
