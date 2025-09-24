@@ -1,5 +1,4 @@
 from typing import Any, Optional
-from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -7,24 +6,15 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import settings
 from app.core.database import get_db
 from app.core.deps import get_current_active_user
-from app.core.messages import (
-    STREAMING_CHANNEL_DETAIL_SUCCESS,
-    STREAMING_CHANNEL_LIST_SUCCESS,
-    STREAMING_CHANNEL_NOT_FOUND,
-)
 from app.models.streaming import StreamingChannelCategory
 from app.models.user import User
 from app.schemas.streaming import (
-    StreamingChannel,
     StreamingChannelListResponse,
     StreamingChannelQueryParams,
     StreamingChannelSimple,
 )
 from app.utils.content_utils import calculate_pagination_info
-from app.utils.streaming_utils import (
-    get_streaming_channel_by_id,
-    get_streaming_channels_list,
-)
+from app.utils.streaming_utils import get_streaming_channels_list
 
 router = APIRouter()
 
@@ -35,7 +25,7 @@ async def get_streaming_channels(
     size: int = Query(
         settings.DEFAULT_PAGE_SIZE,
         ge=1,
-        le=settings.MAX_PAGE_SIZE,
+        le=500,
         description="Page size",
     ),
     search: Optional[str] = Query(
@@ -93,7 +83,6 @@ async def get_streaming_channels(
             for channel in channels
         ]
 
-        # Calculate pagination info using existing utility
         pagination_info = calculate_pagination_info(page, size, total)
 
         return StreamingChannelListResponse(
@@ -105,7 +94,8 @@ async def get_streaming_channels(
             has_next=pagination_info["has_next"],
             has_prev=pagination_info["has_prev"],
         )
-
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
