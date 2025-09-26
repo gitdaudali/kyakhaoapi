@@ -37,4 +37,3 @@ class GoogleOAuthResponse(BaseModel):
     is_new_user: bool = Field(
         ..., description="Whether this is a new user registration"
     )
-    message: str = Field(..., description="Response message")
