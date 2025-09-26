@@ -3,7 +3,7 @@ from typing import Optional
 
 from pydantic import UUID4, BaseModel, EmailStr
 
-from app.models.user import ProfileStatus, UserRole
+from app.models.user import ProfileStatus, SignupType, UserRole
 
 
 class UserBase(BaseModel):
@@ -35,6 +35,9 @@ class UserInDB(UserBase):
     last_login: Optional[datetime] = None
     role: UserRole
     profile_status: ProfileStatus
+    signup_type: SignupType
+    google_id: Optional[str] = None
+    apple_id: Optional[str] = None
 
     class Config:
         from_attributes = True

@@ -40,6 +40,16 @@ OTP_ALREADY_USED = "Verification code has already been used"
 OTP_INVALID_OR_EXPIRED = "Invalid or expired verification code"
 OTP_RESEND_SUCCESS = "New verification code sent to your email address"
 
+# Google OAuth Messages
+GOOGLE_OAUTH_SUCCESS = "Successfully authenticated with Google"
+GOOGLE_OAUTH_INVALID_TOKEN = "Invalid Google access token"
+GOOGLE_OAUTH_TOKEN_VERIFICATION_FAILED = "Failed to verify Google access token"
+GOOGLE_OAUTH_EMAIL_NOT_VERIFIED = "Google email is not verified"
+GOOGLE_OAUTH_ACCOUNT_CREATED = "Account created successfully with Google"
+GOOGLE_OAUTH_ACCOUNT_LINKED = "Google account linked successfully"
+GOOGLE_OAUTH_ACCOUNT_EXISTS = "Account already exists with this email"
+GOOGLE_OAUTH_DISABLED = "Google OAuth is currently disabled"
+
 # User Messages
 USER_NOT_FOUND = "User not found"
 USER_ALREADY_EXISTS = "User already exists"

@@ -97,6 +97,14 @@ class Settings:
     FROM_NAME: str = os.getenv("FROM_NAME", "Cup Streaming")
     EMAILS_ENABLED: bool = os.getenv("EMAILS_ENABLED", "false").lower() == "true"
 
+    # Google OAuth
+    GOOGLE_CLIENT_ID: str = os.getenv("GOOGLE_CLIENT_ID")
+    GOOGLE_CLIENT_SECRET: str = os.getenv("GOOGLE_CLIENT_SECRET")
+    GOOGLE_REDIRECT_URI: str = os.getenv("GOOGLE_REDIRECT_URI")
+    GOOGLE_OAUTH_ENABLED: bool = (
+        os.getenv("GOOGLE_OAUTH_ENABLED", "false").lower() == "true"
+    )
+
     # Token settings
     PASSWORD_RESET_TOKEN_EXPIRE_HOURS: int = int("1")
     EMAIL_VERIFICATION_TOKEN_EXPIRE_HOURS: int = int("24")

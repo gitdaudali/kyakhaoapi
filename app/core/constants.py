@@ -33,3 +33,7 @@ FEATURED_DESCRIPTION = "Handpicked content we think you'll love"
 TRENDING_DESCRIPTION = "What's popular right now"
 MOST_REVIEWED_DESCRIPTION = "Highly rated content with recent reviews"
 NEW_RELEASES_DESCRIPTION = "Fresh content released in the last 30 days"
+
+
+# CONSTANT API ENDPOINTS
+GOOGLE_USER_INFO_API_URL = "https://www.googleapis.com/oauth2/v2/userinfo"

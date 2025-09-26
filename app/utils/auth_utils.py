@@ -474,3 +474,21 @@ async def increment_password_reset_otp_attempts(
         return True
 
     return False
+
+
+async def update_last_login(session: AsyncSession, user_id: str) -> None:
+    """
+    Update user's last login timestamp.
+
+    Args:
+        session: Database session
+        user_id: User ID to update
+    """
+    from sqlalchemy import update
+
+    await session.execute(
+        update(UserModel)
+        .where(UserModel.id == user_id)
+        .values(last_login=datetime.now(timezone.utc))
+    )
+    await session.commit()
