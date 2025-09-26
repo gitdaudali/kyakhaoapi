@@ -36,6 +36,12 @@ class ProfileStatus(str, Enum):
     PENDING_VERIFICATION = "pending_verification"
 
 
+class SignupType(str, Enum):
+    EMAIL = "email"
+    GOOGLE = "google"
+    APPLE = "apple"
+
+
 class User(BaseModel, TimestampMixin, table=True):
     __tablename__ = "users"
 
@@ -43,7 +49,7 @@ class User(BaseModel, TimestampMixin, table=True):
     email: str = Field(max_length=254, unique=True, index=True)
     first_name: Optional[str] = Field(max_length=150, default=None)
     last_name: Optional[str] = Field(max_length=150, default=None)
-    password: str = Field(max_length=128)
+    password: Optional[str] = Field(max_length=128, default=None)
     is_active: bool = Field(default=True, index=True)
     is_staff: bool = Field(default=False)
     is_superuser: bool = Field(default=False)
@@ -55,6 +61,13 @@ class User(BaseModel, TimestampMixin, table=True):
         sa_type=String(30), default=ProfileStatus.PENDING_VERIFICATION, index=True
     )
     avatar_url: Optional[str] = Field(max_length=500, default=None)
+
+    # OAuth fields
+    signup_type: SignupType = Field(
+        sa_type=String(20), default=SignupType.EMAIL, index=True
+    )
+    google_id: Optional[str] = Field(max_length=100, default=None, index=True)
+    apple_id: Optional[str] = Field(max_length=100, default=None, index=True)
 
     # Relationships
     tokens: List["Token"] = Relationship(
@@ -99,4 +112,4 @@ class User(BaseModel, TimestampMixin, table=True):
     )
 
     def __repr__(self):
-        return f"<User(id={self.id}, username='{self.username}', email='{self.email}')>"
+        return f"<User(id={self.id}, email='{self.email}')>"

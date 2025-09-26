@@ -24,6 +24,10 @@ from app.core.messages import (
     EMAIL_EXISTS,
     EMAIL_NOT_VERIFIED,
     EMAIL_VERIFICATION_TOKEN_INVALID,
+    GOOGLE_OAUTH_ACCOUNT_CREATED,
+    GOOGLE_OAUTH_ACCOUNT_EXISTS,
+    GOOGLE_OAUTH_ACCOUNT_LINKED,
+    GOOGLE_OAUTH_SUCCESS,
     INVALID_CREDENTIALS,
     INVALID_REFRESH_TOKEN,
     LOGOUT_ALL_SUCCESS,
@@ -55,6 +59,7 @@ from app.schemas.auth import (
     UserLoginRequest,
     UserRegisterRequest,
 )
+from app.schemas.google_oauth import GoogleOAuthRequest, GoogleOAuthResponse
 from app.schemas.user import User as UserSchema
 from app.tasks.email_tasks import (
     send_email_verification_task,
@@ -75,9 +80,17 @@ from app.utils.auth_utils import (
     increment_password_reset_otp_attempts,
     mark_email_verification_otp_used,
     mark_password_reset_otp_used,
+    update_last_login,
     validate_email_verification_otp,
     validate_password_match,
     validate_password_reset_otp,
+)
+from app.utils.google_oauth_utils import create_google_user
+from app.utils.google_oauth_utils import get_user_by_email as get_user_by_email_oauth
+from app.utils.google_oauth_utils import (
+    get_user_by_google_id,
+    link_google_account,
+    verify_google_token,
 )
 from app.utils.token_utils import (
     create_email_verification_token,
@@ -517,4 +530,204 @@ async def get_token_info(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error retrieving token info: {str(e)}",
+        )
+
+
+@router.post("/social/google", response_model=GoogleOAuthResponse)
+async def google_oauth_auth(
+    oauth_data: GoogleOAuthRequest, request: Request, db: AsyncSession = Depends(get_db)
+) -> Any:
+    """
+    Google OAuth authentication Handles both signup and signin for Google users.
+    """
+    try:
+        # Verify Google access token and get user info
+        google_user_info = await verify_google_token(oauth_data.access_token)
+
+        # Check if user exists with Google ID
+        existing_google_user = await get_user_by_google_id(db, google_user_info.id)
+
+        if existing_google_user:
+            # User exists with Google ID - sign them in
+            if not existing_google_user.is_active:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail=ACCOUNT_DEACTIVATED,
+                )
+
+            # Update last login
+            await update_last_login(db, existing_google_user.id)
+
+            # Refresh user from database to ensure all attributes are loaded
+            await db.refresh(existing_google_user)
+
+            # Create token pair
+            device_info = get_device_info(request)
+            access_token, refresh_token = await create_token_pair(
+                existing_google_user, db, device_info, remember_me=False
+            )
+
+            access_expires_in, refresh_expires_in = calculate_token_expiration(
+                settings.ACCESS_TOKEN_EXPIRE_MINUTES,
+                settings.REFRESH_TOKEN_EXPIRE_DAYS,
+                False,
+            )
+
+            # Convert user to dict safely
+            user_dict = {
+                "id": str(existing_google_user.id),
+                "email": existing_google_user.email,
+                "first_name": existing_google_user.first_name,
+                "last_name": existing_google_user.last_name,
+                "is_active": existing_google_user.is_active,
+                "is_staff": existing_google_user.is_staff,
+                "is_superuser": existing_google_user.is_superuser,
+                "role": existing_google_user.role,
+                "profile_status": existing_google_user.profile_status,
+                "avatar_url": existing_google_user.avatar_url,
+                "signup_type": existing_google_user.signup_type,
+                "google_id": existing_google_user.google_id,
+                "apple_id": existing_google_user.apple_id,
+                "created_at": existing_google_user.created_at,
+                "updated_at": existing_google_user.updated_at,
+                "last_login": existing_google_user.last_login,
+            }
+
+            return GoogleOAuthResponse(
+                user=user_dict,
+                tokens={
+                    "access_token": access_token,
+                    "refresh_token": refresh_token,
+                    "token_type": "bearer",
+                    "expires_in": access_expires_in,
+                    "refresh_expires_in": refresh_expires_in,
+                },
+                is_new_user=False,
+            )
+
+        # Check if user exists with email but no Google ID
+        existing_email_user = await get_user_by_email_oauth(db, google_user_info.email)
+
+        if existing_email_user:
+            # Link Google account to existing user
+            if not existing_email_user.is_active:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail=ACCOUNT_DEACTIVATED,
+                )
+
+            # Link Google account
+            updated_user = await link_google_account(
+                db, existing_email_user, google_user_info
+            )
+
+            # Update last login
+            await update_last_login(db, updated_user.id)
+
+            # Refresh user from database to ensure all attributes are loaded
+            await db.refresh(updated_user)
+
+            # Create token pair
+            device_info = get_device_info(request)
+            access_token, refresh_token = await create_token_pair(
+                updated_user, db, device_info, remember_me=False
+            )
+
+            access_expires_in, refresh_expires_in = calculate_token_expiration(
+                settings.ACCESS_TOKEN_EXPIRE_MINUTES,
+                settings.REFRESH_TOKEN_EXPIRE_DAYS,
+                False,
+            )
+
+            # Convert user to dict safely
+            user_dict = {
+                "id": str(updated_user.id),
+                "email": updated_user.email,
+                "first_name": updated_user.first_name,
+                "last_name": updated_user.last_name,
+                "is_active": updated_user.is_active,
+                "is_staff": updated_user.is_staff,
+                "is_superuser": updated_user.is_superuser,
+                "role": updated_user.role,
+                "profile_status": updated_user.profile_status,
+                "avatar_url": updated_user.avatar_url,
+                "signup_type": updated_user.signup_type,
+                "google_id": updated_user.google_id,
+                "apple_id": updated_user.apple_id,
+                "created_at": updated_user.created_at,
+                "updated_at": updated_user.updated_at,
+                "last_login": updated_user.last_login,
+            }
+
+            return GoogleOAuthResponse(
+                user=user_dict,
+                tokens={
+                    "access_token": access_token,
+                    "refresh_token": refresh_token,
+                    "token_type": "bearer",
+                    "expires_in": access_expires_in,
+                    "refresh_expires_in": refresh_expires_in,
+                },
+                is_new_user=False,
+            )
+
+        # Create new user
+        new_user = await create_google_user(db, google_user_info)
+
+        # Update last login
+        await update_last_login(db, new_user.id)
+
+        # Refresh user from database to ensure all attributes are loaded
+        await db.refresh(new_user)
+
+        # Create token pair
+        device_info = get_device_info(request)
+        access_token, refresh_token = await create_token_pair(
+            new_user, db, device_info, remember_me=False
+        )
+
+        access_expires_in, refresh_expires_in = calculate_token_expiration(
+            settings.ACCESS_TOKEN_EXPIRE_MINUTES,
+            settings.REFRESH_TOKEN_EXPIRE_DAYS,
+            False,
+        )
+
+        # Convert user to dict safely
+        user_dict = {
+            "id": str(new_user.id),
+            "email": new_user.email,
+            "first_name": new_user.first_name,
+            "last_name": new_user.last_name,
+            "is_active": new_user.is_active,
+            "is_staff": new_user.is_staff,
+            "is_superuser": new_user.is_superuser,
+            "role": new_user.role,
+            "profile_status": new_user.profile_status,
+            "avatar_url": new_user.avatar_url,
+            "signup_type": new_user.signup_type,
+            "google_id": new_user.google_id,
+            "apple_id": new_user.apple_id,
+            "created_at": new_user.created_at,
+            "updated_at": new_user.updated_at,
+            "last_login": new_user.last_login,
+        }
+
+        return GoogleOAuthResponse(
+            user=user_dict,
+            tokens={
+                "access_token": access_token,
+                "refresh_token": refresh_token,
+                "token_type": "bearer",
+                "expires_in": access_expires_in,
+                "refresh_expires_in": refresh_expires_in,
+            },
+            is_new_user=True,
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error during Google OAuth authentication: {str(e)}",
         )
