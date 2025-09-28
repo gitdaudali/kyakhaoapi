@@ -92,14 +92,6 @@ from app.utils.google_oauth_utils import (
     link_google_account,
     verify_google_token,
 )
-from app.utils.token_utils import (
-    create_email_verification_token,
-    create_password_reset_token,
-    mark_email_verification_token_used,
-    mark_password_reset_token_used,
-    validate_email_verification_token,
-    validate_password_reset_token,
-)
 
 router = APIRouter()
 
@@ -541,27 +533,21 @@ async def google_oauth_auth(
     Google OAuth authentication Handles both signup and signin for Google users.
     """
     try:
-        # Verify Google access token and get user info
         google_user_info = await verify_google_token(oauth_data.access_token)
 
-        # Check if user exists with Google ID
         existing_google_user = await get_user_by_google_id(db, google_user_info.id)
 
         if existing_google_user:
-            # User exists with Google ID - sign them in
             if not existing_google_user.is_active:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,
                     detail=ACCOUNT_DEACTIVATED,
                 )
 
-            # Update last login
             await update_last_login(db, existing_google_user.id)
 
-            # Refresh user from database to ensure all attributes are loaded
             await db.refresh(existing_google_user)
 
-            # Create token pair
             device_info = get_device_info(request)
             access_token, refresh_token = await create_token_pair(
                 existing_google_user, db, device_info, remember_me=False
@@ -605,29 +591,23 @@ async def google_oauth_auth(
                 is_new_user=False,
             )
 
-        # Check if user exists with email but no Google ID
         existing_email_user = await get_user_by_email_oauth(db, google_user_info.email)
 
         if existing_email_user:
-            # Link Google account to existing user
             if not existing_email_user.is_active:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,
                     detail=ACCOUNT_DEACTIVATED,
                 )
 
-            # Link Google account
             updated_user = await link_google_account(
                 db, existing_email_user, google_user_info
             )
 
-            # Update last login
             await update_last_login(db, updated_user.id)
 
-            # Refresh user from database to ensure all attributes are loaded
             await db.refresh(updated_user)
 
-            # Create token pair
             device_info = get_device_info(request)
             access_token, refresh_token = await create_token_pair(
                 updated_user, db, device_info, remember_me=False
@@ -639,7 +619,6 @@ async def google_oauth_auth(
                 False,
             )
 
-            # Convert user to dict safely
             user_dict = {
                 "id": str(updated_user.id),
                 "email": updated_user.email,
@@ -671,16 +650,12 @@ async def google_oauth_auth(
                 is_new_user=False,
             )
 
-        # Create new user
         new_user = await create_google_user(db, google_user_info)
 
-        # Update last login
         await update_last_login(db, new_user.id)
 
-        # Refresh user from database to ensure all attributes are loaded
         await db.refresh(new_user)
 
-        # Create token pair
         device_info = get_device_info(request)
         access_token, refresh_token = await create_token_pair(
             new_user, db, device_info, remember_me=False
@@ -692,7 +667,6 @@ async def google_oauth_auth(
             False,
         )
 
-        # Convert user to dict safely
         user_dict = {
             "id": str(new_user.id),
             "email": new_user.email,

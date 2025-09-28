@@ -45,7 +45,6 @@ class SignupType(str, Enum):
 class User(BaseModel, TimestampMixin, table=True):
     __tablename__ = "users"
 
-    # username: str = Field(max_length=150, unique=True, index=True, default=None)
     email: str = Field(max_length=254, unique=True, index=True)
     first_name: Optional[str] = Field(max_length=150, default=None)
     last_name: Optional[str] = Field(max_length=150, default=None)
