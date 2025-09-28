@@ -3,7 +3,8 @@ version: "3.8"
 # Production overrides for docker-compose.yml
 services:
   backend:
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4 --worker-class uvicorn.workers.UvicornWorker
+    # Use Dockerfile entrypoint (runs migrations + starts app)
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
     environment:
       DEBUG: "false"
       LOG_LEVEL: INFO
@@ -18,7 +19,8 @@ services:
           memory: 1G
 
   celery:
-    command: celery -A app.core.celery_app worker --loglevel=INFO --concurrency=4 --max-tasks-per-child=1000
+    # Use Dockerfile entrypoint (runs migrations + starts celery)
+    command: ["celery", "-A", "app.core.celery_app", "worker", "--loglevel=INFO", "--concurrency=4", "--max-tasks-per-child=1000"]
     restart: always
     deploy:
       resources:
@@ -30,7 +32,8 @@ services:
           memory: 512M
 
   celery-beat:
-    command: celery -A app.core.celery_app beat --loglevel=INFO
+    # Use Dockerfile entrypoint (runs migrations + starts celery-beat)
+    command: ["celery", "-A", "app.core.celery_app", "beat", "--loglevel=INFO"]
     restart: always
 
   flower:
