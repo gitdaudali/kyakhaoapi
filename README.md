@@ -385,7 +385,7 @@ pytest -m "not slow"
 
 ```
 tests/
-├── conftest.py                    # Shared fixtures and configuration
+├── conftest.py                    # fixtures and configuration
 ├── unit/                         # Unit tests
 │   └── auth/                    # Authentication tests
 │       └── test_auth_endpoints.py # Authentication endpoint tests
