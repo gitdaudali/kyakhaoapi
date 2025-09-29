@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Database Reset and Seed Script for Cup Streaming FastAPI Application
 

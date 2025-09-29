@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Database Seeder for Cup Streaming FastAPI Application
 
