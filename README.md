@@ -349,6 +349,49 @@ alembic downgrade -1
 alembic history
 ```
 
+## 🧪 Testing
+
+The project includes comprehensive unit tests
+
+### Running Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run tests with verbose output
+pytest -v
+
+# Run specific test file
+pytest tests/unit/auth/test_auth_endpoints.py
+
+# Run tests with coverage
+pytest --cov=app tests/
+
+# Run tests in parallel
+pytest -n auto
+
+# Run only unit tests
+pytest -m unit
+
+# Run only integration tests
+pytest -m integration
+
+# Skip slow tests
+pytest -m "not slow"
+```
+
+### Test Structure
+
+```
+tests/
+├── conftest.py                    # Shared fixtures and configuration
+├── unit/                         # Unit tests
+│   └── auth/                    # Authentication tests
+│       └── test_auth_endpoints.py # Authentication endpoint tests
+└── pytest.ini                   # Pytest configuration
+```
+
 ## 🚀 Deployment
 
 ### Environment Variables
@@ -372,3 +415,4 @@ Ensure all required environment variables are set in your production environment
 - [ ] Set up monitoring and logging
 - [ ] Run database migrations
 - [ ] Start background workers
+- [ ] Run tests in CI/CD pipeline
