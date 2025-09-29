@@ -95,6 +95,7 @@ class StreamingChannelSimple(BaseModel):
     id: UUID = Field(..., description="Channel ID")
     name: str = Field(..., description="Channel name")
     icon: Optional[str] = Field(None, description="Channel icon URL")
+    stream_url: Optional[str] = Field(None, description="Channel Stream URL")
     description: Optional[str] = Field(None, description="Channel description")
     category: Optional[StreamingChannelCategory] = Field(
         None, description="Channel category"

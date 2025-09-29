@@ -27,15 +27,14 @@ async def get_streaming_channels(
     Get paginated list of streaming channels with filtering and search.
     """
     try:
-        # Get channels and total count using query_params directly
         channels, total = await get_streaming_channels_list(db, query_params)
 
-        # Convert to response schemas using list comprehension (no loops)
         channel_responses = [
             StreamingChannelSimple(
                 id=channel.id,
                 name=channel.name,
                 icon=channel.icon,
+                stream_url=channel.stream_url,
                 description=channel.description,
                 category=channel.category,
                 language=channel.language,
