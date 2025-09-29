@@ -27,8 +27,7 @@ services:
     depends_on:
       - redis
     restart: always
-    # Override entrypoint for production (no database waiting)
-    entrypoint: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+    # Use Dockerfile entrypoint (runs migrations + starts app)
 
   celery:
     image: cup_streaming_api:latest
@@ -38,8 +37,8 @@ services:
       - redis
       - backend
     restart: always
-    # Override entrypoint for production (no database waiting)
-    entrypoint: ["celery", "-A", "app.core.celery_app", "worker", "--loglevel=INFO"]
+    # Use Dockerfile entrypoint (runs migrations + starts celery)
+    command: ["celery", "-A", "app.core.celery_app", "worker", "--loglevel=INFO"]
 
   celery-beat:
     image: cup_streaming_api:latest
@@ -48,8 +47,8 @@ services:
     depends_on:
       - celery
     restart: always
-    # Override entrypoint for production (no database waiting)
-    entrypoint: ["celery", "-A", "app.core.celery_app", "beat", "--loglevel=INFO"]
+    # Use Dockerfile entrypoint (runs migrations + starts celery-beat)
+    command: ["celery", "-A", "app.core.celery_app", "beat", "--loglevel=INFO"]
 
 volumes:
   redis_data:
