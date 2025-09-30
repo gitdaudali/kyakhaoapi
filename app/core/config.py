@@ -133,7 +133,7 @@ class Settings:
         map(int, os.getenv("THUMBNAIL_SIZE", "320,240").split(","))
     )
 
-    AVATAR_ALLOWED_FILE_TYPES = [".jpg", ".jpeg", ".png", ".gif"]
+    AVATAR_ALLOWED_FILE_TYPES = [".jpg", ".jpeg", ".png", ".webp", ".gif"]
 
 
 settings = Settings()
