@@ -1592,6 +1592,7 @@ def convert_content_to_minimal_format(
         description=content.description,
         poster_url=content.poster_url,
         backdrop_url=content.backdrop_url,
+        trailer_url=content.trailer_url,
         release_date=content.release_date,
         content_type=content.content_type,
         content_rating=content.content_rating,

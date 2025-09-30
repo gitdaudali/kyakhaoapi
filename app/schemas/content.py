@@ -977,6 +977,7 @@ class ContentMinimal(BaseModel):
     description: Optional[str] = Field(None, description="Short description")
     poster_url: Optional[str] = Field(None, description="Poster image URL")
     backdrop_url: Optional[str] = Field(None, description="Backdrop image URL")
+    trailer_url: Optional[str] = Field(None, description="Trailer URL")
     release_date: Optional[datetime] = Field(None, description="Release date")
     content_type: str = Field(..., description="Content type (movie, tv_series, etc.)")
     content_rating: Optional[str] = Field(

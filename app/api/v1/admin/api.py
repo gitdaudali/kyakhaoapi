@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.api.v1.admin.endpoints import content, genre, streaming, upload, user
+from app.api.v1.admin.endpoints import content, genre, people, streaming, upload, user
 
 # Create main admin router
 router = APIRouter()
@@ -22,6 +22,12 @@ router.include_router(
     content.router,
     prefix="/content",
     tags=["Admin - Content"],
+)
+
+router.include_router(
+    people.router,
+    prefix="/people",
+    tags=["Admin - People"],
 )
 
 router.include_router(

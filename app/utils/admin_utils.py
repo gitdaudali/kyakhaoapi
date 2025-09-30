@@ -16,12 +16,14 @@ from app.models.content import (
     ContentGenre,
     Genre,
     MovieFile,
+    Person,
 )
 from app.models.streaming import StreamingChannel
 from app.models.user import User
 from app.schemas.admin import (
     ContentAdminQueryParams,
     GenreAdminQueryParams,
+    PersonAdminQueryParams,
     StreamingChannelAdminQueryParams,
     UserAdminQueryParams,
 )
@@ -1938,4 +1940,301 @@ async def _create_content_crew(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error creating crew members: {str(e)}",
+        )
+
+
+# =============================================================================
+# PEOPLE ADMIN UTILS
+# =============================================================================
+
+
+async def create_person(db: AsyncSession, person_data: dict) -> Person:
+    """Create new person"""
+    try:
+        # Check for name/slug conflicts
+        existing_name = await db.execute(
+            select(Person).where(Person.name == person_data["name"])
+        )
+        if existing_name.scalar_one_or_none():
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Person with this name already exists",
+            )
+
+        existing_slug = await db.execute(
+            select(Person).where(Person.slug == person_data["slug"])
+        )
+        if existing_slug.scalar_one_or_none():
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Person with this slug already exists",
+            )
+
+        # Create person
+        person = Person(**person_data)
+        db.add(person)
+        await db.commit()
+        await db.refresh(person)
+
+        return person
+    except HTTPException:
+        await db.rollback()
+        raise
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error creating person: {str(e)}",
+        )
+
+
+async def get_people_admin_list(
+    db: AsyncSession, query_params: PersonAdminQueryParams
+) -> Tuple[List[Person], int]:
+    """Get paginated list of people for admin"""
+    try:
+        # Build base query
+        query = select(Person)
+
+        # Apply filters
+        if query_params.search:
+            search_term = f"%{query_params.search}%"
+            query = query.where(
+                or_(
+                    Person.name.ilike(search_term),
+                    Person.biography.ilike(search_term),
+                    Person.birth_place.ilike(search_term),
+                    Person.nationality.ilike(search_term),
+                )
+            )
+
+        if query_params.is_verified is not None:
+            query = query.where(Person.is_verified == query_params.is_verified)
+
+        if query_params.is_featured is not None:
+            query = query.where(Person.is_featured == query_params.is_featured)
+
+        if query_params.known_for_department:
+            query = query.where(
+                Person.known_for_department == query_params.known_for_department
+            )
+
+        if query_params.nationality:
+            query = query.where(Person.nationality == query_params.nationality)
+
+        if query_params.gender:
+            query = query.where(Person.gender == query_params.gender)
+
+        # Apply sorting
+        sort_column = getattr(Person, query_params.sort_by, Person.created_at)
+        if query_params.sort_order == "desc":
+            query = query.order_by(desc(sort_column))
+        else:
+            query = query.order_by(sort_column)
+
+        # Get total count before pagination
+        count_query = select(func.count(Person.id))
+
+        # Apply the same filters to count query
+        if query_params.search:
+            search_term = f"%{query_params.search}%"
+            count_query = count_query.where(
+                or_(
+                    Person.name.ilike(search_term),
+                    Person.biography.ilike(search_term),
+                    Person.birth_place.ilike(search_term),
+                    Person.nationality.ilike(search_term),
+                )
+            )
+
+        if query_params.is_verified is not None:
+            count_query = count_query.where(
+                Person.is_verified == query_params.is_verified
+            )
+
+        if query_params.is_featured is not None:
+            count_query = count_query.where(
+                Person.is_featured == query_params.is_featured
+            )
+
+        if query_params.known_for_department:
+            count_query = count_query.where(
+                Person.known_for_department == query_params.known_for_department
+            )
+
+        if query_params.nationality:
+            count_query = count_query.where(
+                Person.nationality == query_params.nationality
+            )
+
+        if query_params.gender:
+            count_query = count_query.where(Person.gender == query_params.gender)
+
+        total_count = await db.scalar(count_query)
+
+        # Apply pagination
+        offset = (query_params.page - 1) * query_params.size
+        query = query.offset(offset).limit(query_params.size)
+
+        # Execute query with relationships
+        result = await db.execute(
+            query.options(
+                selectinload(Person.content_cast),
+                selectinload(Person.content_crew),
+            )
+        )
+        people = result.scalars().all()
+
+        return people, total_count
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving people list: {str(e)}",
+        )
+
+
+async def get_person_admin_by_id(db: AsyncSession, person_id: UUID) -> Optional[Person]:
+    """Get person by ID for admin"""
+    try:
+        result = await db.execute(
+            select(Person)
+            .where(Person.id == person_id)
+            .options(
+                selectinload(Person.content_cast),
+                selectinload(Person.content_crew),
+            )
+        )
+        return result.scalar_one_or_none()
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving person: {str(e)}",
+        )
+
+
+async def update_person(
+    db: AsyncSession, person_id: UUID, update_data: dict
+) -> Optional[Person]:
+    """Update person"""
+    try:
+        # Get existing person
+        query = select(Person).where(Person.id == person_id)
+        result = await db.execute(query)
+        person = result.scalar_one_or_none()
+
+        if not person:
+            return None
+
+        # Check for name conflicts if name is being updated
+        if "name" in update_data and update_data["name"] != person.name:
+            existing_name = await db.execute(
+                select(Person).where(
+                    and_(Person.name == update_data["name"], Person.id != person_id)
+                )
+            )
+            if existing_name.scalar_one_or_none():
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="Person with this name already exists",
+                )
+
+        # Check for slug conflicts if slug is being updated
+        if "slug" in update_data and update_data["slug"] != person.slug:
+            existing_slug = await db.execute(
+                select(Person).where(
+                    and_(Person.slug == update_data["slug"], Person.id != person_id)
+                )
+            )
+            if existing_slug.scalar_one_or_none():
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="Person with this slug already exists",
+                )
+
+        # Update person
+        for field, value in update_data.items():
+            if hasattr(person, field):
+                setattr(person, field, value)
+
+        await db.commit()
+        await db.refresh(person)
+
+        return person
+    except HTTPException:
+        await db.rollback()
+        raise
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error updating person: {str(e)}",
+        )
+
+
+async def delete_person(db: AsyncSession, person_id: UUID) -> bool:
+    """Delete person (soft delete)"""
+    try:
+        query = select(Person).where(Person.id == person_id)
+        result = await db.execute(query)
+        person = result.scalar_one_or_none()
+
+        if not person:
+            return False
+
+        # Soft delete
+        person.is_deleted = True
+        await db.commit()
+
+        return True
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error deleting person: {str(e)}",
+        )
+
+
+async def toggle_person_featured(db: AsyncSession, person_id: UUID) -> Optional[Person]:
+    """Toggle person featured status"""
+    try:
+        query = select(Person).where(Person.id == person_id)
+        result = await db.execute(query)
+        person = result.scalar_one_or_none()
+
+        if not person:
+            return None
+
+        person.is_featured = not person.is_featured
+        await db.commit()
+        await db.refresh(person)
+
+        return person
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error toggling person featured status: {str(e)}",
+        )
+
+
+async def toggle_person_verified(db: AsyncSession, person_id: UUID) -> Optional[Person]:
+    """Toggle person verified status"""
+    try:
+        query = select(Person).where(Person.id == person_id)
+        result = await db.execute(query)
+        person = result.scalar_one_or_none()
+
+        if not person:
+            return None
+
+        person.is_verified = not person.is_verified
+        await db.commit()
+        await db.refresh(person)
+
+        return person
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error toggling person verified status: {str(e)}",
         )
