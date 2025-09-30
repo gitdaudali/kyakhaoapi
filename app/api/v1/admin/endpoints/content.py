@@ -16,7 +16,6 @@ from app.core.messages import (
     CONTENT_TRENDING,
     CONTENT_UNFEATURED,
     CONTENT_UNPUBLISHED,
-    CONTENT_UPDATED,
 )
 from app.schemas.admin import (
     ContentAdminCreate,
