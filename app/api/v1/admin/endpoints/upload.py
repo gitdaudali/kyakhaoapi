@@ -8,7 +8,7 @@ from app.core.admin_deps import AdminUser
 from app.core.config import settings
 from app.core.database import get_db
 from app.core.messages import FILE_INVALID_FORMAT, FILE_UPLOADED
-from app.schemas.admin import EntityType, ImageType, S3PathType
+from app.schemas.admin import EntityType, FileType, ImageType, S3PathType
 from app.utils.s3_utils import upload_file_to_s3
 
 router = APIRouter()
@@ -144,4 +144,136 @@ async def upload_entity_image(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error uploading entity image: {str(e)}",
+        )
+
+
+@router.post("/video")
+async def upload_admin_video(
+    current_user: AdminUser,
+    video: UploadFile = File(...),
+    s3_path: S3PathType = Form(
+        ..., description="S3 path where video should be uploaded"
+    ),
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Upload video file to S3 with custom path (Admin only).
+
+    This is a generic video upload API that can be used for:
+    - Content videos: s3_path = "content/videos"
+    - Episode videos: s3_path = "content/episodes"
+    - Trailer videos: s3_path = "content/trailers"
+    - Any other admin video uploads
+
+    Args:
+        video: Video file to upload
+        s3_path: S3 folder path where video should be stored
+
+    Returns:
+        dict: Contains uploaded video URL and metadata
+    """
+    try:
+        # Validate file type
+        if not video.content_type or not video.content_type.startswith("video/"):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=FILE_INVALID_FORMAT,
+            )
+
+        # Define allowed extensions for videos
+        allowed_extensions = [".mp4", ".avi", ".mov", ".mkv", ".webm", ".flv", ".wmv"]
+        max_size_mb = 5000  # 5GB for video files
+
+        # Upload video to S3
+        video_url = await upload_file_to_s3(
+            file=video,
+            folder=s3_path,
+            allowed_extensions=allowed_extensions,
+            max_size_mb=max_size_mb,
+        )
+
+        return {
+            "message": FILE_UPLOADED,
+            "video_url": video_url,
+            "s3_path": s3_path.value,
+            "filename": video.filename,
+            "content_type": video.content_type,
+            "size_bytes": video.size if hasattr(video, "size") else None,
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error uploading video: {str(e)}",
+        )
+
+
+@router.post("/video/{entity_type}/{entity_id}")
+async def upload_entity_video(
+    entity_type: EntityType,
+    entity_id: UUID,
+    current_user: AdminUser,
+    video: UploadFile = File(...),
+    file_type: FileType = Form(
+        FileType.VIDEO, description="Type of video file (video, episode, movie, etc.)"
+    ),
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Upload video file for specific entity (Admin only).
+
+    This API automatically generates the S3 path based on entity type and ID.
+
+    Args:
+        entity_type: Type of entity (streaming-channels, genres, content, users)
+        entity_id: ID of the entity
+        video: Video file to upload
+        file_type: Type of video file (video, episode, movie, trailer, etc.)
+
+    Returns:
+        dict: Contains uploaded video URL and metadata
+    """
+    try:
+        # Entity type validation is handled by the EntityType enum
+
+        # Validate file type
+        if not video.content_type or not video.content_type.startswith("video/"):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=FILE_INVALID_FORMAT,
+            )
+
+        # Generate S3 path based on entity type and ID
+        s3_path = f"{entity_type.value}/{entity_id}/{file_type.value}s"
+
+        # Define allowed extensions for videos
+        allowed_extensions = [".mp4", ".avi", ".mov", ".mkv", ".webm", ".flv", ".wmv"]
+        max_size_mb = 5000  # 5GB for video files
+
+        # Upload video to S3
+        video_url = await upload_file_to_s3(
+            file=video,
+            folder=s3_path,
+            allowed_extensions=allowed_extensions,
+            max_size_mb=max_size_mb,
+        )
+
+        return {
+            "message": FILE_UPLOADED,
+            "video_url": video_url,
+            "s3_path": s3_path,
+            "entity_type": entity_type.value,
+            "entity_id": str(entity_id),
+            "file_type": file_type.value,
+            "filename": video.filename,
+            "content_type": video.content_type,
+            "size_bytes": video.size if hasattr(video, "size") else None,
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error uploading video for {entity_type} {entity_id}: {str(e)}",
         )

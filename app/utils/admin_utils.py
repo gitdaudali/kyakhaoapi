@@ -8,7 +8,18 @@ from sqlalchemy import and_, desc, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.models.content import Content, Genre
+from app.models.content import (
+    Content,
+    ContentCast,
+    ContentCrew,
+    ContentGenre,
+    Episode,
+    EpisodeQuality,
+    Genre,
+    MovieFile,
+    Person,
+    Season,
+)
 from app.models.streaming import StreamingChannel
 from app.models.user import User
 from app.schemas.admin import (
@@ -1473,4 +1484,349 @@ async def upload_genre_cover_image(file, genre_id: UUID) -> str:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error uploading genre cover image: {str(e)}",
+        )
+
+
+# =============================================================================
+# CONTENT ADMIN UTILS
+# =============================================================================
+
+
+async def create_content(db: AsyncSession, content_data: dict) -> Content:
+    """Create new content"""
+    try:
+        # Check for title/slug conflicts
+        existing_title = await db.execute(
+            select(Content).where(Content.title == content_data["title"])
+        )
+        if existing_title.scalar_one_or_none():
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=CONTENT_ALREADY_EXISTS,
+            )
+
+        existing_slug = await db.execute(
+            select(Content).where(Content.slug == content_data["slug"])
+        )
+        if existing_slug.scalar_one_or_none():
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Content with this slug already exists",
+            )
+
+        # Create content
+        content = Content(**content_data)
+        db.add(content)
+        await db.commit()
+        await db.refresh(content)
+
+        # Handle genre associations
+        if "genre_ids" in content_data and content_data["genre_ids"]:
+            await _associate_content_genres(db, content.id, content_data["genre_ids"])
+
+        return content
+    except HTTPException:
+        await db.rollback()
+        raise
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error creating content: {str(e)}",
+        )
+
+
+async def get_contents_admin_list(
+    db: AsyncSession, query_params: ContentAdminQueryParams
+) -> Tuple[List[Content], int]:
+    """Get paginated list of content for admin"""
+    try:
+        # Build query
+        query = select(Content)
+        count_query = select(func.count(Content.id))
+
+        # Apply filters
+        filters = []
+
+        if query_params.search:
+            search_filter = or_(
+                Content.title.ilike(f"%{query_params.search}%"),
+                Content.description.ilike(f"%{query_params.search}%"),
+                Content.tagline.ilike(f"%{query_params.search}%"),
+            )
+            filters.append(search_filter)
+
+        if query_params.content_type:
+            filters.append(Content.content_type == query_params.content_type)
+
+        if query_params.status:
+            filters.append(Content.status == query_params.status)
+
+        if query_params.is_featured is not None:
+            filters.append(Content.is_featured == query_params.is_featured)
+
+        if query_params.is_trending is not None:
+            filters.append(Content.is_trending == query_params.is_trending)
+
+        if query_params.is_new_release is not None:
+            filters.append(Content.is_new_release == query_params.is_new_release)
+
+        if query_params.is_premium is not None:
+            filters.append(Content.is_premium == query_params.is_premium)
+
+        if query_params.genre_id:
+            # Join with content_genres table
+            query = query.join(ContentGenre).where(
+                ContentGenre.genre_id == query_params.genre_id
+            )
+            count_query = count_query.join(ContentGenre).where(
+                ContentGenre.genre_id == query_params.genre_id
+            )
+
+        if filters:
+            query = query.where(and_(*filters))
+            count_query = count_query.where(and_(*filters))
+
+        # Apply sorting
+        sort_column = getattr(Content, query_params.sort_by, Content.created_at)
+        if query_params.sort_order == "desc":
+            query = query.order_by(desc(sort_column))
+        else:
+            query = query.order_by(sort_column)
+
+        # Apply pagination
+        offset = (query_params.page - 1) * query_params.size
+        query = query.offset(offset).limit(query_params.size)
+
+        # Execute queries
+        result = await db.execute(
+            query.options(
+                selectinload(Content.genres),
+                selectinload(Content.seasons),
+                selectinload(Content.cast),
+                selectinload(Content.crew),
+                selectinload(Content.movie_files),
+            )
+        )
+        contents = result.scalars().all()
+
+        count_result = await db.execute(count_query)
+        total = count_result.scalar()
+
+        return contents, total
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving content list: {str(e)}",
+        )
+
+
+async def get_content_admin_by_id(
+    db: AsyncSession, content_id: UUID
+) -> Optional[Content]:
+    """Get content by ID for admin"""
+    try:
+        result = await db.execute(
+            select(Content)
+            .where(Content.id == content_id)
+            .options(
+                selectinload(Content.genres),
+                selectinload(Content.seasons),
+                selectinload(Content.cast),
+                selectinload(Content.crew),
+                selectinload(Content.movie_files),
+            )
+        )
+        return result.scalar_one_or_none()
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving content: {str(e)}",
+        )
+
+
+async def update_content(
+    db: AsyncSession, content_id: UUID, update_data: dict
+) -> Optional[Content]:
+    """Update content"""
+    try:
+        content = await get_content_admin_by_id(db, content_id)
+        if not content:
+            return None
+
+        # Check for title/slug conflicts (excluding current content)
+        if "title" in update_data:
+            existing_title = await db.execute(
+                select(Content).where(
+                    and_(
+                        Content.title == update_data["title"], Content.id != content_id
+                    )
+                )
+            )
+            if existing_title.scalar_one_or_none():
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail=CONTENT_ALREADY_EXISTS,
+                )
+
+        if "slug" in update_data:
+            existing_slug = await db.execute(
+                select(Content).where(
+                    and_(Content.slug == update_data["slug"], Content.id != content_id)
+                )
+            )
+            if existing_slug.scalar_one_or_none():
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="Content with this slug already exists",
+                )
+
+        # Update content fields
+        for field, value in update_data.items():
+            if field != "genre_ids" and hasattr(content, field):
+                setattr(content, field, value)
+
+        # Handle genre associations
+        if "genre_ids" in update_data:
+            await _associate_content_genres(db, content_id, update_data["genre_ids"])
+
+        await db.commit()
+        await db.refresh(content)
+        return content
+    except HTTPException:
+        await db.rollback()
+        raise
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error updating content: {str(e)}",
+        )
+
+
+async def delete_content(db: AsyncSession, content_id: UUID) -> bool:
+    """Soft delete content"""
+    try:
+        content = await get_content_admin_by_id(db, content_id)
+        if not content:
+            return False
+
+        # Soft delete by updating status
+        content.status = "archived"
+        await db.commit()
+        return True
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error deleting content: {str(e)}",
+        )
+
+
+async def toggle_content_featured(
+    db: AsyncSession, content_id: UUID
+) -> Optional[Content]:
+    """Toggle content featured status"""
+    try:
+        content = await get_content_admin_by_id(db, content_id)
+        if not content:
+            return None
+
+        content.is_featured = not content.is_featured
+        await db.commit()
+        await db.refresh(content)
+        return content
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error toggling content featured status: {str(e)}",
+        )
+
+
+async def toggle_content_trending(
+    db: AsyncSession, content_id: UUID
+) -> Optional[Content]:
+    """Toggle content trending status"""
+    try:
+        content = await get_content_admin_by_id(db, content_id)
+        if not content:
+            return None
+
+        content.is_trending = not content.is_trending
+        await db.commit()
+        await db.refresh(content)
+        return content
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error toggling content trending status: {str(e)}",
+        )
+
+
+async def publish_content(db: AsyncSession, content_id: UUID) -> Optional[Content]:
+    """Publish content"""
+    try:
+        content = await get_content_admin_by_id(db, content_id)
+        if not content:
+            return None
+
+        content.status = "published"
+        await db.commit()
+        await db.refresh(content)
+        return content
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error publishing content: {str(e)}",
+        )
+
+
+async def unpublish_content(db: AsyncSession, content_id: UUID) -> Optional[Content]:
+    """Unpublish content"""
+    try:
+        content = await get_content_admin_by_id(db, content_id)
+        if not content:
+            return None
+
+        content.status = "draft"
+        await db.commit()
+        await db.refresh(content)
+        return content
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error unpublishing content: {str(e)}",
+        )
+
+
+async def _associate_content_genres(
+    db: AsyncSession, content_id: UUID, genre_ids: List[UUID]
+):
+    """Associate content with genres"""
+    try:
+        # Remove existing associations
+        await db.execute(
+            select(ContentGenre).where(ContentGenre.content_id == content_id)
+        )
+
+        # Add new associations
+        for i, genre_id in enumerate(genre_ids):
+            content_genre = ContentGenre(
+                content_id=content_id,
+                genre_id=genre_id,
+                is_primary=(i == 0),  # First genre is primary
+                relevance_score=1.0 - (i * 0.1),  # Decreasing relevance
+            )
+            db.add(content_genre)
+
+        await db.commit()
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error associating content with genres: {str(e)}",
         )
