@@ -175,6 +175,17 @@ CONTENT_UNFEATURED = "Content unfeatured successfully"
 CONTENT_TRENDING = "Content trending status updated successfully"
 CONTENT_ALREADY_EXISTS = "Content with this title already exists"
 
+# People Admin Messages
+PERSON_CREATED = "Person created successfully"
+PERSON_UPDATED = "Person updated successfully"
+PERSON_DELETED = "Person deleted successfully"
+PERSON_NOT_FOUND = "Person not found"
+PERSON_ALREADY_EXISTS = "Person with this name already exists"
+PERSON_FEATURED = "Person featured successfully"
+PERSON_UNFEATURED = "Person unfeatured successfully"
+PERSON_VERIFIED = "Person verified successfully"
+PERSON_UNVERIFIED = "Person unverified successfully"
+
 # Season Admin Messages
 SEASON_CREATED = "Season created successfully"
 SEASON_UPDATED = "Season updated successfully"
