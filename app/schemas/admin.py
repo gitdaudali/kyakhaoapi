@@ -5,7 +5,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, Field, HttpUrl, validator
 
-from app.models.content import ContentRating, ContentStatus, ContentType
+from app.models.content import ContentRating, ContentStatus, ContentType, MovieJobTitle
 from app.models.streaming import StreamingChannelCategory
 from app.models.user import ProfileStatus, UserRole
 
@@ -375,6 +375,86 @@ class GenreAdminQueryParams(BaseModel):
 # =============================================================================
 
 
+class MovieFileCreate(BaseModel):
+    """Schema for creating movie files in content creation"""
+
+    # Required fields
+    quality_level: str = Field(
+        ...,
+        min_length=1,
+        max_length=10,
+        description="Quality level (1080p, 720p, etc.)",
+    )
+    resolution_width: int = Field(..., ge=1, description="Resolution width in pixels")
+    resolution_height: int = Field(..., ge=1, description="Resolution height in pixels")
+    file_url: str = Field(..., min_length=1, max_length=500, description="File URL")
+    duration_seconds: float = Field(..., ge=0.1, description="Duration in seconds")
+
+    # Optional fields
+    file_size_bytes: Optional[int] = Field(None, ge=1, description="File size in bytes")
+    bitrate_kbps: Optional[int] = Field(None, ge=1, description="Bitrate in kbps")
+    video_codec: Optional[str] = Field(None, max_length=50, description="Video codec")
+    audio_codec: Optional[str] = Field(None, max_length=50, description="Audio codec")
+    container_format: Optional[str] = Field(
+        None, max_length=20, description="Container format"
+    )
+
+    # Storage Information
+    storage_bucket: Optional[str] = Field(
+        None, max_length=255, description="Storage bucket"
+    )
+    storage_key: Optional[str] = Field(None, max_length=500, description="Storage key")
+    storage_region: Optional[str] = Field(
+        None, max_length=50, description="Storage region"
+    )
+    cdn_url: Optional[str] = Field(None, max_length=500, description="CDN URL")
+
+    # Processing Status
+    is_ready: bool = Field(True, description="Is file ready for streaming")
+
+    # Subtitle and Audio Information
+    subtitle_tracks: Optional[str] = Field(None, description="Subtitle tracks (JSON)")
+    audio_tracks: Optional[str] = Field(None, description="Audio tracks (JSON)")
+    available_languages: Optional[str] = Field(
+        None, description="Available languages (JSON)"
+    )
+
+    class Config:
+        from_attributes = True
+
+
+class CastMemberCreate(BaseModel):
+    """Schema for creating cast members in content creation"""
+
+    person_id: UUID = Field(..., description="Person ID")
+    character_name: Optional[str] = Field(
+        None, max_length=255, description="Character name"
+    )
+    cast_order: int = Field(0, ge=0, description="Billing order")
+    is_main_cast: bool = Field(False, description="Is main cast member")
+    character_image_url: Optional[str] = Field(
+        None, max_length=500, description="Character image URL"
+    )
+    job_title: MovieJobTitle = Field(
+        MovieJobTitle.ACTOR, description="Job title (Actor, Actress, etc.)"
+    )
+
+    class Config:
+        from_attributes = True
+
+
+class CrewMemberCreate(BaseModel):
+    """Schema for creating crew members in content creation"""
+
+    person_id: UUID = Field(..., description="Person ID")
+    job_title: MovieJobTitle = Field(..., description="Job title")
+    department: str = Field(..., min_length=1, max_length=100, description="Department")
+    credit_order: int = Field(0, ge=0, description="Credit order")
+
+    class Config:
+        from_attributes = True
+
+
 class ContentAdminCreate(BaseModel):
     """Schema for creating content via admin"""
 
@@ -425,6 +505,15 @@ class ContentAdminCreate(BaseModel):
 
     # Genre IDs
     genre_ids: List[UUID] = Field(default_factory=list, description="Genre IDs")
+
+    # Movie Files (optional - for integrated approach)
+    movie_files: Optional[List[MovieFileCreate]] = Field(
+        None, description="Movie files data"
+    )
+
+    # Cast and Crew (optional - for integrated approach)
+    cast: Optional[List[CastMemberCreate]] = Field(None, description="Cast members")
+    crew: Optional[List[CrewMemberCreate]] = Field(None, description="Crew members")
 
 
 class ContentAdminUpdate(BaseModel):

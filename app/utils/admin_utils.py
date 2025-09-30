@@ -8,17 +8,14 @@ from sqlalchemy import and_, desc, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
+from app.core.messages import CONTENT_ALREADY_EXISTS
 from app.models.content import (
     Content,
     ContentCast,
     ContentCrew,
     ContentGenre,
-    Episode,
-    EpisodeQuality,
     Genre,
     MovieFile,
-    Person,
-    Season,
 )
 from app.models.streaming import StreamingChannel
 from app.models.user import User
@@ -838,7 +835,13 @@ async def get_content_admin_by_id(
     query = (
         select(Content)
         .where(and_(Content.id == content_id, Content.is_deleted == False))
-        .options(selectinload(Content.genres))
+        .options(
+            selectinload(Content.genres),
+            selectinload(Content.seasons),
+            selectinload(Content.cast),
+            selectinload(Content.crew),
+            selectinload(Content.movie_files),
+        )
     )
 
     result = await db.execute(query)
@@ -1514,6 +1517,11 @@ async def create_content(db: AsyncSession, content_data: dict) -> Content:
                 detail="Content with this slug already exists",
             )
 
+        # Extract related data before creating content
+        movie_files_data = content_data.pop("movie_files", None)
+        cast_data = content_data.pop("cast", None)
+        crew_data = content_data.pop("crew", None)
+
         # Create content
         content = Content(**content_data)
         db.add(content)
@@ -1524,6 +1532,20 @@ async def create_content(db: AsyncSession, content_data: dict) -> Content:
         if "genre_ids" in content_data and content_data["genre_ids"]:
             await _associate_content_genres(db, content.id, content_data["genre_ids"])
 
+        # Handle movie files creation
+        if movie_files_data:
+            await _create_movie_files(db, content.id, movie_files_data)
+
+        # Handle cast creation
+        if cast_data:
+            await _create_content_cast(db, content.id, cast_data)
+
+        # Handle crew creation
+        if crew_data:
+            await _create_content_crew(db, content.id, crew_data)
+
+        # Refresh content with all relationships loaded
+        content = await get_content_admin_by_id(db, content.id)
         return content
     except HTTPException:
         await db.rollback()
@@ -1829,4 +1851,91 @@ async def _associate_content_genres(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error associating content with genres: {str(e)}",
+        )
+
+
+async def _create_movie_files(
+    db: AsyncSession, content_id: UUID, movie_files_data: List[dict]
+) -> None:
+    """
+    Create movie files for content.
+
+    Args:
+        db: Database session
+        content_id: Content ID
+        movie_files_data: List of movie file data dictionaries
+    """
+    try:
+        for movie_file_data in movie_files_data:
+            # Add content_id to movie file data
+            movie_file_data["content_id"] = content_id
+
+            # Create movie file
+            movie_file = MovieFile(**movie_file_data)
+            db.add(movie_file)
+
+        await db.commit()
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error creating movie files: {str(e)}",
+        )
+
+
+async def _create_content_cast(
+    db: AsyncSession, content_id: UUID, cast_data: List[dict]
+) -> None:
+    """
+    Create cast members for content.
+
+    Args:
+        db: Database session
+        content_id: Content ID
+        cast_data: List of cast member data dictionaries
+    """
+    try:
+        for cast_member_data in cast_data:
+            # Add content_id to cast data
+            cast_member_data["content_id"] = content_id
+
+            # Create cast member
+            cast_member = ContentCast(**cast_member_data)
+            db.add(cast_member)
+
+        await db.commit()
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error creating cast members: {str(e)}",
+        )
+
+
+async def _create_content_crew(
+    db: AsyncSession, content_id: UUID, crew_data: List[dict]
+) -> None:
+    """
+    Create crew members for content.
+
+    Args:
+        db: Database session
+        content_id: Content ID
+        crew_data: List of crew member data dictionaries
+    """
+    try:
+        for crew_member_data in crew_data:
+            # Add content_id to crew data
+            crew_member_data["content_id"] = content_id
+
+            # Create crew member
+            crew_member = ContentCrew(**crew_member_data)
+            db.add(crew_member)
+
+        await db.commit()
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error creating crew members: {str(e)}",
         )
