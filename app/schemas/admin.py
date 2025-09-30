@@ -371,6 +371,172 @@ class GenreAdminQueryParams(BaseModel):
 
 
 # =============================================================================
+# PEOPLE ADMIN SCHEMAS
+# =============================================================================
+
+
+class PersonAdminCreate(BaseModel):
+    """Schema for creating people via admin"""
+
+    name: str = Field(
+        ..., min_length=1, max_length=255, description="Person's full name"
+    )
+    slug: str = Field(
+        ..., min_length=1, max_length=300, description="URL-friendly slug"
+    )
+    biography: Optional[str] = Field(None, description="Person's biography")
+
+    # Personal Information
+    birth_date: Optional[date] = Field(None, description="Birth date")
+    death_date: Optional[date] = Field(None, description="Death date")
+    birth_place: Optional[str] = Field(None, max_length=255, description="Birth place")
+    nationality: Optional[str] = Field(None, max_length=100, description="Nationality")
+    gender: Optional[str] = Field(None, max_length=20, description="Gender")
+
+    # Visual Assets
+    profile_image_url: Optional[str] = Field(
+        None, max_length=500, description="Profile image URL"
+    )
+    cover_image_url: Optional[str] = Field(
+        None, max_length=500, description="Cover image URL"
+    )
+
+    # Career Information
+    known_for_department: Optional[str] = Field(
+        None, max_length=100, description="Known for department"
+    )
+
+    # Status
+    is_verified: bool = Field(False, description="Is verified person")
+    is_featured: bool = Field(False, description="Is featured person")
+
+    class Config:
+        from_attributes = True
+
+
+class PersonAdminUpdate(BaseModel):
+    """Schema for updating people via admin"""
+
+    name: Optional[str] = Field(
+        None, min_length=1, max_length=255, description="Person's full name"
+    )
+    slug: Optional[str] = Field(
+        None, min_length=1, max_length=300, description="URL-friendly slug"
+    )
+    biography: Optional[str] = Field(None, description="Person's biography")
+
+    # Personal Information
+    birth_date: Optional[date] = Field(None, description="Birth date")
+    death_date: Optional[date] = Field(None, description="Death date")
+    birth_place: Optional[str] = Field(None, max_length=255, description="Birth place")
+    nationality: Optional[str] = Field(None, max_length=100, description="Nationality")
+    gender: Optional[str] = Field(None, max_length=20, description="Gender")
+
+    # Visual Assets
+    profile_image_url: Optional[str] = Field(
+        None, max_length=500, description="Profile image URL"
+    )
+    cover_image_url: Optional[str] = Field(
+        None, max_length=500, description="Cover image URL"
+    )
+
+    # Career Information
+    known_for_department: Optional[str] = Field(
+        None, max_length=100, description="Known for department"
+    )
+
+    # Status
+    is_verified: Optional[bool] = Field(None, description="Is verified person")
+    is_featured: Optional[bool] = Field(None, description="Is featured person")
+
+    class Config:
+        from_attributes = True
+
+
+class PersonAdminResponse(BaseModel):
+    """Response schema for people admin"""
+
+    id: UUID = Field(..., description="Person ID")
+    name: str = Field(..., description="Person's full name")
+    slug: str = Field(..., description="URL-friendly slug")
+    biography: Optional[str] = Field(None, description="Person's biography")
+
+    # Personal Information
+    birth_date: Optional[date] = Field(None, description="Birth date")
+    death_date: Optional[date] = Field(None, description="Death date")
+    birth_place: Optional[str] = Field(None, description="Birth place")
+    nationality: Optional[str] = Field(None, description="Nationality")
+    gender: Optional[str] = Field(None, description="Gender")
+
+    # Visual Assets
+    profile_image_url: Optional[str] = Field(None, description="Profile image URL")
+    cover_image_url: Optional[str] = Field(None, description="Cover image URL")
+
+    # Career Information
+    known_for_department: Optional[str] = Field(
+        None, description="Known for department"
+    )
+
+    # Status
+    is_verified: bool = Field(..., description="Is verified person")
+    is_featured: bool = Field(..., description="Is featured person")
+
+    # Timestamps
+    created_at: datetime = Field(..., description="Created at")
+    updated_at: datetime = Field(..., description="Updated at")
+
+    # Relationships
+    content_cast: List[dict] = Field(
+        default_factory=list, description="Content cast appearances"
+    )
+    content_crew: List[dict] = Field(
+        default_factory=list, description="Content crew appearances"
+    )
+
+    class Config:
+        from_attributes = True
+
+
+class PersonAdminListResponse(BaseModel):
+    """Response schema for people admin list"""
+
+    items: List[PersonAdminResponse] = Field(..., description="List of people")
+    total: int = Field(..., description="Total number of people")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Has next page")
+    has_prev: bool = Field(..., description="Has previous page")
+
+    class Config:
+        from_attributes = True
+
+
+class PersonAdminQueryParams(BaseModel):
+    """Query parameters for people admin endpoints"""
+
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=500, description="Page size")
+    search: Optional[str] = Field(
+        None, min_length=1, max_length=255, description="Search term"
+    )
+    is_verified: Optional[bool] = Field(None, description="Filter by verified status")
+    is_featured: Optional[bool] = Field(None, description="Filter by featured status")
+    known_for_department: Optional[str] = Field(
+        None, max_length=100, description="Filter by department"
+    )
+    nationality: Optional[str] = Field(
+        None, max_length=100, description="Filter by nationality"
+    )
+    gender: Optional[str] = Field(None, max_length=20, description="Filter by gender")
+    sort_by: str = Field("created_at", description="Sort field")
+    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+
+    class Config:
+        from_attributes = True
+
+
+# =============================================================================
 # CONTENT ADMIN SCHEMAS
 # =============================================================================
 
