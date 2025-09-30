@@ -139,6 +139,79 @@ STREAMING_CHANNEL_ALREADY_EXISTS = "Streaming channel with this name already exi
 STREAMING_CHANNEL_INVALID_URL = "Invalid stream URL format"
 STREAMING_CHANNEL_STATS_SUCCESS = "Streaming channel statistics retrieved successfully"
 
+# Admin Messages
+ADMIN_ACCESS_DENIED = "Admin access required"
+ADMIN_INSUFFICIENT_PERMISSIONS = "Insufficient admin permissions"
+ADMIN_OPERATION_SUCCESS = "Admin operation completed successfully"
+ADMIN_BULK_OPERATION_SUCCESS = "Bulk operation completed successfully"
+
+# Streaming Channel Admin Messages
+STREAMING_CHANNEL_CREATED = "Streaming channel created successfully"
+STREAMING_CHANNEL_UPDATED = "Streaming channel updated successfully"
+STREAMING_CHANNEL_DELETED = "Streaming channel deleted successfully"
+STREAMING_CHANNEL_NOT_FOUND = "Streaming channel not found"
+STREAMING_CHANNEL_ALREADY_EXISTS = "Streaming channel with this name already exists"
+STREAMING_CHANNEL_TEST_SUCCESS = "Stream URL test successful"
+STREAMING_CHANNEL_TEST_FAILED = "Stream URL test failed"
+
+# Genre Admin Messages
+GENRE_CREATED = "Genre created successfully"
+GENRE_UPDATED = "Genre updated successfully"
+GENRE_DELETED = "Genre deleted successfully"
+GENRE_NOT_FOUND = "Genre not found"
+GENRE_ALREADY_EXISTS = "Genre with this name already exists"
+GENRE_FEATURED = "Genre featured successfully"
+GENRE_UNFEATURED = "Genre unfeatured successfully"
+
+# Content Admin Messages
+CONTENT_CREATED = "Content created successfully"
+CONTENT_UPDATED = "Content updated successfully"
+CONTENT_DELETED = "Content deleted successfully"
+CONTENT_NOT_FOUND = "Content not found"
+CONTENT_PUBLISHED = "Content published successfully"
+CONTENT_UNPUBLISHED = "Content unpublished successfully"
+CONTENT_FEATURED = "Content featured successfully"
+CONTENT_UNFEATURED = "Content unfeatured successfully"
+CONTENT_TRENDING = "Content trending status updated successfully"
+CONTENT_ALREADY_EXISTS = "Content with this title already exists"
+
+# Season Admin Messages
+SEASON_CREATED = "Season created successfully"
+SEASON_UPDATED = "Season updated successfully"
+SEASON_DELETED = "Season deleted successfully"
+SEASON_NOT_FOUND = "Season not found"
+SEASON_ALREADY_EXISTS = "Season with this number already exists"
+
+# Episode Admin Messages
+EPISODE_CREATED = "Episode created successfully"
+EPISODE_UPDATED = "Episode updated successfully"
+EPISODE_DELETED = "Episode deleted successfully"
+EPISODE_NOT_FOUND = "Episode not found"
+EPISODE_ALREADY_EXISTS = "Episode with this number already exists"
+
+# File Admin Messages
+FILE_UPLOADED = "File uploaded successfully"
+FILE_DELETED = "File deleted successfully"
+FILE_NOT_FOUND = "File not found"
+FILE_PROCESSING_STARTED = "File processing started"
+FILE_PROCESSING_FAILED = "File processing failed"
+FILE_INVALID_FORMAT = "Invalid file format"
+
+# User Admin Messages
+USER_UPDATED = "User updated successfully"
+USER_DELETED = "User deleted successfully"
+USER_SUSPENDED = "User suspended successfully"
+USER_ACTIVATED = "User activated successfully"
+USER_BANNED = "User banned successfully"
+USER_UNBANNED = "User unbanned successfully"
+
+# Review Admin Messages
+REVIEW_UPDATED = "Review updated successfully"
+REVIEW_DELETED = "Review deleted successfully"
+REVIEW_FEATURED = "Review featured successfully"
+REVIEW_HIDDEN = "Review hidden successfully"
+REVIEW_APPROVED = "Review approved successfully"
+
 # General Messages
 SUCCESS = "Success"
 ERROR = "Error"
