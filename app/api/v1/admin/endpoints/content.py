@@ -52,7 +52,82 @@ async def create_content_admin(
     """
     try:
         content = await create_content(db, content_data.dict())
-        return ContentAdminResponse.model_validate(content)
+
+        # Convert SQLAlchemy object to dictionary for proper serialization
+        content_dict = {
+            "id": content.id,
+            "title": content.title,
+            "slug": content.slug,
+            "description": content.description,
+            "tagline": content.tagline,
+            "content_type": content.content_type,
+            "status": content.status,
+            "content_rating": content.content_rating,
+            "poster_url": content.poster_url,
+            "backdrop_url": content.backdrop_url,
+            "trailer_url": content.trailer_url,
+            "logo_url": content.logo_url,
+            "release_date": content.release_date,
+            "premiere_date": content.premiere_date,
+            "end_date": content.end_date,
+            "runtime": content.runtime,
+            "language": content.language,
+            "original_language": content.original_language,
+            "total_seasons": content.total_seasons,
+            "total_episodes": content.total_episodes,
+            "is_ongoing": content.is_ongoing,
+            "is_featured": content.is_featured,
+            "is_trending": content.is_trending,
+            "is_new_release": content.is_new_release,
+            "is_premium": content.is_premium,
+            "available_from": content.available_from,
+            "available_until": content.available_until,
+            "total_views": content.total_views,
+            "likes_count": content.likes_count,
+            "reviews_count": content.reviews_count,
+            "platform_rating": content.platform_rating,
+            "platform_votes": content.platform_votes,
+            "created_at": content.created_at,
+            "updated_at": content.updated_at,
+            # Convert relationships to dictionaries
+            "genres": [
+                {"id": genre.id, "name": genre.name, "slug": genre.slug}
+                for genre in content.genres
+            ],
+            "seasons": [
+                {
+                    "id": season.id,
+                    "season_number": season.season_number,
+                    "title": season.title,
+                }
+                for season in content.seasons
+            ],
+            "cast": [
+                {
+                    "person_id": cast.person_id,
+                    "character_name": cast.character_name,
+                    "job_title": cast.job_title,
+                }
+                for cast in content.cast
+            ],
+            "crew": [
+                {
+                    "person_id": crew.person_id,
+                    "job_title": crew.job_title,
+                    "department": crew.department,
+                }
+                for crew in content.crew
+            ],
+            "movie_files": [
+                {
+                    "id": file.id,
+                    "quality_level": file.quality_level,
+                    "file_url": file.file_url,
+                }
+                for file in content.movie_files
+            ],
+        }
+        return ContentAdminResponse.model_validate(content_dict)
     except HTTPException:
         raise
     except Exception as e:
@@ -77,8 +152,86 @@ async def get_contents_admin(
             query_params.page, query_params.size, total
         )
 
+        # Convert SQLAlchemy objects to dictionaries for proper serialization
+        serialized_contents = []
+        for content in contents:
+            content_dict = {
+                "id": content.id,
+                "title": content.title,
+                "slug": content.slug,
+                "description": content.description,
+                "tagline": content.tagline,
+                "content_type": content.content_type,
+                "status": content.status,
+                "content_rating": content.content_rating,
+                "poster_url": content.poster_url,
+                "backdrop_url": content.backdrop_url,
+                "trailer_url": content.trailer_url,
+                "logo_url": content.logo_url,
+                "release_date": content.release_date,
+                "premiere_date": content.premiere_date,
+                "end_date": content.end_date,
+                "runtime": content.runtime,
+                "language": content.language,
+                "original_language": content.original_language,
+                "total_seasons": content.total_seasons,
+                "total_episodes": content.total_episodes,
+                "is_ongoing": content.is_ongoing,
+                "is_featured": content.is_featured,
+                "is_trending": content.is_trending,
+                "is_new_release": content.is_new_release,
+                "is_premium": content.is_premium,
+                "available_from": content.available_from,
+                "available_until": content.available_until,
+                "total_views": content.total_views,
+                "likes_count": content.likes_count,
+                "reviews_count": content.reviews_count,
+                "platform_rating": content.platform_rating,
+                "platform_votes": content.platform_votes,
+                "created_at": content.created_at,
+                "updated_at": content.updated_at,
+                # Convert relationships to dictionaries
+                "genres": [
+                    {"id": genre.id, "name": genre.name, "slug": genre.slug}
+                    for genre in content.genres
+                ],
+                "seasons": [
+                    {
+                        "id": season.id,
+                        "season_number": season.season_number,
+                        "title": season.title,
+                    }
+                    for season in content.seasons
+                ],
+                "cast": [
+                    {
+                        "person_id": cast.person_id,
+                        "character_name": cast.character_name,
+                        "job_title": cast.job_title,
+                    }
+                    for cast in content.cast
+                ],
+                "crew": [
+                    {
+                        "person_id": crew.person_id,
+                        "job_title": crew.job_title,
+                        "department": crew.department,
+                    }
+                    for crew in content.crew
+                ],
+                "movie_files": [
+                    {
+                        "id": file.id,
+                        "quality_level": file.quality_level,
+                        "file_url": file.file_url,
+                    }
+                    for file in content.movie_files
+                ],
+            }
+            serialized_contents.append(content_dict)
+
         return ContentAdminListResponse(
-            items=contents,
+            items=serialized_contents,
             total=pagination_info["total"],
             page=pagination_info["page"],
             size=pagination_info["size"],
@@ -109,7 +262,82 @@ async def get_content_admin(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=CONTENT_NOT_FOUND,
             )
-        return ContentAdminResponse.model_validate(content)
+
+        # Convert SQLAlchemy object to dictionary for proper serialization
+        content_dict = {
+            "id": content.id,
+            "title": content.title,
+            "slug": content.slug,
+            "description": content.description,
+            "tagline": content.tagline,
+            "content_type": content.content_type,
+            "status": content.status,
+            "content_rating": content.content_rating,
+            "poster_url": content.poster_url,
+            "backdrop_url": content.backdrop_url,
+            "trailer_url": content.trailer_url,
+            "logo_url": content.logo_url,
+            "release_date": content.release_date,
+            "premiere_date": content.premiere_date,
+            "end_date": content.end_date,
+            "runtime": content.runtime,
+            "language": content.language,
+            "original_language": content.original_language,
+            "total_seasons": content.total_seasons,
+            "total_episodes": content.total_episodes,
+            "is_ongoing": content.is_ongoing,
+            "is_featured": content.is_featured,
+            "is_trending": content.is_trending,
+            "is_new_release": content.is_new_release,
+            "is_premium": content.is_premium,
+            "available_from": content.available_from,
+            "available_until": content.available_until,
+            "total_views": content.total_views,
+            "likes_count": content.likes_count,
+            "reviews_count": content.reviews_count,
+            "platform_rating": content.platform_rating,
+            "platform_votes": content.platform_votes,
+            "created_at": content.created_at,
+            "updated_at": content.updated_at,
+            # Convert relationships to dictionaries
+            "genres": [
+                {"id": genre.id, "name": genre.name, "slug": genre.slug}
+                for genre in content.genres
+            ],
+            "seasons": [
+                {
+                    "id": season.id,
+                    "season_number": season.season_number,
+                    "title": season.title,
+                }
+                for season in content.seasons
+            ],
+            "cast": [
+                {
+                    "person_id": cast.person_id,
+                    "character_name": cast.character_name,
+                    "job_title": cast.job_title,
+                }
+                for cast in content.cast
+            ],
+            "crew": [
+                {
+                    "person_id": crew.person_id,
+                    "job_title": crew.job_title,
+                    "department": crew.department,
+                }
+                for crew in content.crew
+            ],
+            "movie_files": [
+                {
+                    "id": file.id,
+                    "quality_level": file.quality_level,
+                    "file_url": file.file_url,
+                }
+                for file in content.movie_files
+            ],
+        }
+        return ContentAdminResponse.model_validate(content_dict)
     except HTTPException:
         raise
     except Exception as e:
@@ -139,7 +367,82 @@ async def update_content_admin(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=CONTENT_NOT_FOUND,
             )
-        return ContentAdminResponse.model_validate(content)
+
+        # Convert SQLAlchemy object to dictionary for proper serialization
+        content_dict = {
+            "id": content.id,
+            "title": content.title,
+            "slug": content.slug,
+            "description": content.description,
+            "tagline": content.tagline,
+            "content_type": content.content_type,
+            "status": content.status,
+            "content_rating": content.content_rating,
+            "poster_url": content.poster_url,
+            "backdrop_url": content.backdrop_url,
+            "trailer_url": content.trailer_url,
+            "logo_url": content.logo_url,
+            "release_date": content.release_date,
+            "premiere_date": content.premiere_date,
+            "end_date": content.end_date,
+            "runtime": content.runtime,
+            "language": content.language,
+            "original_language": content.original_language,
+            "total_seasons": content.total_seasons,
+            "total_episodes": content.total_episodes,
+            "is_ongoing": content.is_ongoing,
+            "is_featured": content.is_featured,
+            "is_trending": content.is_trending,
+            "is_new_release": content.is_new_release,
+            "is_premium": content.is_premium,
+            "available_from": content.available_from,
+            "available_until": content.available_until,
+            "total_views": content.total_views,
+            "likes_count": content.likes_count,
+            "reviews_count": content.reviews_count,
+            "platform_rating": content.platform_rating,
+            "platform_votes": content.platform_votes,
+            "created_at": content.created_at,
+            "updated_at": content.updated_at,
+            # Convert relationships to dictionaries
+            "genres": [
+                {"id": genre.id, "name": genre.name, "slug": genre.slug}
+                for genre in content.genres
+            ],
+            "seasons": [
+                {
+                    "id": season.id,
+                    "season_number": season.season_number,
+                    "title": season.title,
+                }
+                for season in content.seasons
+            ],
+            "cast": [
+                {
+                    "person_id": cast.person_id,
+                    "character_name": cast.character_name,
+                    "job_title": cast.job_title,
+                }
+                for cast in content.cast
+            ],
+            "crew": [
+                {
+                    "person_id": crew.person_id,
+                    "job_title": crew.job_title,
+                    "department": crew.department,
+                }
+                for crew in content.crew
+            ],
+            "movie_files": [
+                {
+                    "id": file.id,
+                    "quality_level": file.quality_level,
+                    "file_url": file.file_url,
+                }
+                for file in content.movie_files
+            ],
+        }
+        return ContentAdminResponse.model_validate(content_dict)
     except HTTPException:
         raise
     except Exception as e:
@@ -193,9 +496,85 @@ async def toggle_content_featured_admin(
             )
 
         message = CONTENT_FEATURED if content.is_featured else CONTENT_UNFEATURED
+
+        # Convert SQLAlchemy object to dictionary for proper serialization
+        content_dict = {
+            "id": content.id,
+            "title": content.title,
+            "slug": content.slug,
+            "description": content.description,
+            "tagline": content.tagline,
+            "content_type": content.content_type,
+            "status": content.status,
+            "content_rating": content.content_rating,
+            "poster_url": content.poster_url,
+            "backdrop_url": content.backdrop_url,
+            "trailer_url": content.trailer_url,
+            "logo_url": content.logo_url,
+            "release_date": content.release_date,
+            "premiere_date": content.premiere_date,
+            "end_date": content.end_date,
+            "runtime": content.runtime,
+            "language": content.language,
+            "original_language": content.original_language,
+            "total_seasons": content.total_seasons,
+            "total_episodes": content.total_episodes,
+            "is_ongoing": content.is_ongoing,
+            "is_featured": content.is_featured,
+            "is_trending": content.is_trending,
+            "is_new_release": content.is_new_release,
+            "is_premium": content.is_premium,
+            "available_from": content.available_from,
+            "available_until": content.available_until,
+            "total_views": content.total_views,
+            "likes_count": content.likes_count,
+            "reviews_count": content.reviews_count,
+            "platform_rating": content.platform_rating,
+            "platform_votes": content.platform_votes,
+            "created_at": content.created_at,
+            "updated_at": content.updated_at,
+            # Convert relationships to dictionaries
+            "genres": [
+                {"id": genre.id, "name": genre.name, "slug": genre.slug}
+                for genre in content.genres
+            ],
+            "seasons": [
+                {
+                    "id": season.id,
+                    "season_number": season.season_number,
+                    "title": season.title,
+                }
+                for season in content.seasons
+            ],
+            "cast": [
+                {
+                    "person_id": cast.person_id,
+                    "character_name": cast.character_name,
+                    "job_title": cast.job_title,
+                }
+                for cast in content.cast
+            ],
+            "crew": [
+                {
+                    "person_id": crew.person_id,
+                    "job_title": crew.job_title,
+                    "department": crew.department,
+                }
+                for crew in content.crew
+            ],
+            "movie_files": [
+                {
+                    "id": file.id,
+                    "quality_level": file.quality_level,
+                    "file_url": file.file_url,
+                }
+                for file in content.movie_files
+            ],
+        }
+
         return {
             "message": message,
-            "content": ContentAdminResponse.model_validate(content),
+            "content": ContentAdminResponse.model_validate(content_dict),
         }
     except HTTPException:
         raise
@@ -224,9 +603,85 @@ async def toggle_content_trending_admin(
             )
 
         message = CONTENT_TRENDING
+
+        # Convert SQLAlchemy object to dictionary for proper serialization
+        content_dict = {
+            "id": content.id,
+            "title": content.title,
+            "slug": content.slug,
+            "description": content.description,
+            "tagline": content.tagline,
+            "content_type": content.content_type,
+            "status": content.status,
+            "content_rating": content.content_rating,
+            "poster_url": content.poster_url,
+            "backdrop_url": content.backdrop_url,
+            "trailer_url": content.trailer_url,
+            "logo_url": content.logo_url,
+            "release_date": content.release_date,
+            "premiere_date": content.premiere_date,
+            "end_date": content.end_date,
+            "runtime": content.runtime,
+            "language": content.language,
+            "original_language": content.original_language,
+            "total_seasons": content.total_seasons,
+            "total_episodes": content.total_episodes,
+            "is_ongoing": content.is_ongoing,
+            "is_featured": content.is_featured,
+            "is_trending": content.is_trending,
+            "is_new_release": content.is_new_release,
+            "is_premium": content.is_premium,
+            "available_from": content.available_from,
+            "available_until": content.available_until,
+            "total_views": content.total_views,
+            "likes_count": content.likes_count,
+            "reviews_count": content.reviews_count,
+            "platform_rating": content.platform_rating,
+            "platform_votes": content.platform_votes,
+            "created_at": content.created_at,
+            "updated_at": content.updated_at,
+            # Convert relationships to dictionaries
+            "genres": [
+                {"id": genre.id, "name": genre.name, "slug": genre.slug}
+                for genre in content.genres
+            ],
+            "seasons": [
+                {
+                    "id": season.id,
+                    "season_number": season.season_number,
+                    "title": season.title,
+                }
+                for season in content.seasons
+            ],
+            "cast": [
+                {
+                    "person_id": cast.person_id,
+                    "character_name": cast.character_name,
+                    "job_title": cast.job_title,
+                }
+                for cast in content.cast
+            ],
+            "crew": [
+                {
+                    "person_id": crew.person_id,
+                    "job_title": crew.job_title,
+                    "department": crew.department,
+                }
+                for crew in content.crew
+            ],
+            "movie_files": [
+                {
+                    "id": file.id,
+                    "quality_level": file.quality_level,
+                    "file_url": file.file_url,
+                }
+                for file in content.movie_files
+            ],
+        }
+
         return {
             "message": message,
-            "content": ContentAdminResponse.model_validate(content),
+            "content": ContentAdminResponse.model_validate(content_dict),
         }
     except HTTPException:
         raise
@@ -253,9 +708,84 @@ async def publish_content_admin(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=CONTENT_NOT_FOUND,
             )
+        # Convert SQLAlchemy object to dictionary for proper serialization
+        content_dict = {
+            "id": content.id,
+            "title": content.title,
+            "slug": content.slug,
+            "description": content.description,
+            "tagline": content.tagline,
+            "content_type": content.content_type,
+            "status": content.status,
+            "content_rating": content.content_rating,
+            "poster_url": content.poster_url,
+            "backdrop_url": content.backdrop_url,
+            "trailer_url": content.trailer_url,
+            "logo_url": content.logo_url,
+            "release_date": content.release_date,
+            "premiere_date": content.premiere_date,
+            "end_date": content.end_date,
+            "runtime": content.runtime,
+            "language": content.language,
+            "original_language": content.original_language,
+            "total_seasons": content.total_seasons,
+            "total_episodes": content.total_episodes,
+            "is_ongoing": content.is_ongoing,
+            "is_featured": content.is_featured,
+            "is_trending": content.is_trending,
+            "is_new_release": content.is_new_release,
+            "is_premium": content.is_premium,
+            "available_from": content.available_from,
+            "available_until": content.available_until,
+            "total_views": content.total_views,
+            "likes_count": content.likes_count,
+            "reviews_count": content.reviews_count,
+            "platform_rating": content.platform_rating,
+            "platform_votes": content.platform_votes,
+            "created_at": content.created_at,
+            "updated_at": content.updated_at,
+            # Convert relationships to dictionaries
+            "genres": [
+                {"id": genre.id, "name": genre.name, "slug": genre.slug}
+                for genre in content.genres
+            ],
+            "seasons": [
+                {
+                    "id": season.id,
+                    "season_number": season.season_number,
+                    "title": season.title,
+                }
+                for season in content.seasons
+            ],
+            "cast": [
+                {
+                    "person_id": cast.person_id,
+                    "character_name": cast.character_name,
+                    "job_title": cast.job_title,
+                }
+                for cast in content.cast
+            ],
+            "crew": [
+                {
+                    "person_id": crew.person_id,
+                    "job_title": crew.job_title,
+                    "department": crew.department,
+                }
+                for crew in content.crew
+            ],
+            "movie_files": [
+                {
+                    "id": file.id,
+                    "quality_level": file.quality_level,
+                    "file_url": file.file_url,
+                }
+                for file in content.movie_files
+            ],
+        }
+
         return {
             "message": CONTENT_PUBLISHED,
-            "content": ContentAdminResponse.model_validate(content),
+            "content": ContentAdminResponse.model_validate(content_dict),
         }
     except HTTPException:
         raise
@@ -282,9 +812,84 @@ async def unpublish_content_admin(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=CONTENT_NOT_FOUND,
             )
+        # Convert SQLAlchemy object to dictionary for proper serialization
+        content_dict = {
+            "id": content.id,
+            "title": content.title,
+            "slug": content.slug,
+            "description": content.description,
+            "tagline": content.tagline,
+            "content_type": content.content_type,
+            "status": content.status,
+            "content_rating": content.content_rating,
+            "poster_url": content.poster_url,
+            "backdrop_url": content.backdrop_url,
+            "trailer_url": content.trailer_url,
+            "logo_url": content.logo_url,
+            "release_date": content.release_date,
+            "premiere_date": content.premiere_date,
+            "end_date": content.end_date,
+            "runtime": content.runtime,
+            "language": content.language,
+            "original_language": content.original_language,
+            "total_seasons": content.total_seasons,
+            "total_episodes": content.total_episodes,
+            "is_ongoing": content.is_ongoing,
+            "is_featured": content.is_featured,
+            "is_trending": content.is_trending,
+            "is_new_release": content.is_new_release,
+            "is_premium": content.is_premium,
+            "available_from": content.available_from,
+            "available_until": content.available_until,
+            "total_views": content.total_views,
+            "likes_count": content.likes_count,
+            "reviews_count": content.reviews_count,
+            "platform_rating": content.platform_rating,
+            "platform_votes": content.platform_votes,
+            "created_at": content.created_at,
+            "updated_at": content.updated_at,
+            # Convert relationships to dictionaries
+            "genres": [
+                {"id": genre.id, "name": genre.name, "slug": genre.slug}
+                for genre in content.genres
+            ],
+            "seasons": [
+                {
+                    "id": season.id,
+                    "season_number": season.season_number,
+                    "title": season.title,
+                }
+                for season in content.seasons
+            ],
+            "cast": [
+                {
+                    "person_id": cast.person_id,
+                    "character_name": cast.character_name,
+                    "job_title": cast.job_title,
+                }
+                for cast in content.cast
+            ],
+            "crew": [
+                {
+                    "person_id": crew.person_id,
+                    "job_title": crew.job_title,
+                    "department": crew.department,
+                }
+                for crew in content.crew
+            ],
+            "movie_files": [
+                {
+                    "id": file.id,
+                    "quality_level": file.quality_level,
+                    "file_url": file.file_url,
+                }
+                for file in content.movie_files
+            ],
+        }
+
         return {
             "message": CONTENT_UNPUBLISHED,
-            "content": ContentAdminResponse.model_validate(content),
+            "content": ContentAdminResponse.model_validate(content_dict),
         }
     except HTTPException:
         raise
