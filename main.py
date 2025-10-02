@@ -65,24 +65,20 @@ app = FastAPI(
 # Add CORS middleware - Allow all origins, methods, and headers
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins
-    allow_credentials=False,  # Set to False when allowing all origins
-    allow_methods=["*"],  # Allow all HTTP methods
-    allow_headers=["*"],  # Allow all headers
-    expose_headers=["*"],  # Expose all headers
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 # Security
 security = HTTPBearer()
 
-# Mount static files
-# app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Include API router
 app.include_router(api_router, prefix="/api/v1")
 
 
-# Customize OpenAPI schema
 def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema
@@ -154,8 +150,7 @@ async def api_info():
             "Social Features (Likes, Views)",
             "Analytics & Metrics",
             "AWS S3 Integration",
-        ],
-        "endpoints": {"total": 15, "authentication": 3, "users": 4, "videos": 8},
+        ]
     }
 
 
