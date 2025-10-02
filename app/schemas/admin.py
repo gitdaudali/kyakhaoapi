@@ -765,6 +765,7 @@ class ContentAdminResponse(BaseModel):
     runtime: Optional[int] = Field(None, description="Runtime in minutes")
     language: str = Field(..., description="Primary language")
     original_language: Optional[str] = Field(None, description="Original language")
+    keywords: Optional[str] = Field(None, description="Content keywords")
 
     # Series-specific Information
     total_seasons: int = Field(..., description="Total seasons")

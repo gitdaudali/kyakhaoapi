@@ -86,6 +86,7 @@ async def create_content_admin(
             "reviews_count": content.reviews_count,
             "platform_rating": content.platform_rating,
             "platform_votes": content.platform_votes,
+            "keywords": content.keywords,
             "created_at": content.created_at,
             "updated_at": content.updated_at,
             # Convert relationships to dictionaries
@@ -284,6 +285,7 @@ async def get_content_admin(
             "original_language": content.original_language,
             "total_seasons": content.total_seasons,
             "total_episodes": content.total_episodes,
+            "keywords": content.keywords,
             "is_ongoing": content.is_ongoing,
             "is_featured": content.is_featured,
             "is_trending": content.is_trending,
@@ -398,6 +400,7 @@ async def update_content_admin(
             "available_until": content.available_until,
             "total_views": content.total_views,
             "likes_count": content.likes_count,
+            "keywords": content.keywords,
             "reviews_count": content.reviews_count,
             "platform_rating": content.platform_rating,
             "platform_votes": content.platform_votes,
