@@ -4,7 +4,7 @@ from uuid import UUID
 
 import httpx
 from fastapi import HTTPException, status
-from sqlalchemy import and_, desc, func, or_, select
+from sqlalchemy import and_, delete, desc, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
@@ -836,7 +836,7 @@ async def get_content_admin_by_id(
     """
     query = (
         select(Content)
-        .where(and_(Content.id == content_id, Content.is_deleted == False))
+        .where(Content.id == content_id)
         .options(
             selectinload(Content.genres),
             selectinload(Content.seasons),
@@ -1520,6 +1520,7 @@ async def create_content(db: AsyncSession, content_data: dict) -> Content:
             )
 
         # Extract related data before creating content
+        genre_ids = content_data.pop("genre_ids", None)
         movie_files_data = content_data.pop("movie_files", None)
         cast_data = content_data.pop("cast", None)
         crew_data = content_data.pop("crew", None)
@@ -1527,12 +1528,10 @@ async def create_content(db: AsyncSession, content_data: dict) -> Content:
         # Create content
         content = Content(**content_data)
         db.add(content)
-        await db.commit()
-        await db.refresh(content)
 
         # Handle genre associations
-        if "genre_ids" in content_data and content_data["genre_ids"]:
-            await _associate_content_genres(db, content.id, content_data["genre_ids"])
+        if genre_ids:
+            await _associate_content_genres(db, content.id, genre_ids)
 
         # Handle movie files creation
         if movie_files_data:
@@ -1546,8 +1545,24 @@ async def create_content(db: AsyncSession, content_data: dict) -> Content:
         if crew_data:
             await _create_content_crew(db, content.id, crew_data)
 
-        # Refresh content with all relationships loaded
-        content = await get_content_admin_by_id(db, content.id)
+        # Commit all changes
+        await db.commit()
+        await db.refresh(content)
+
+        # Refresh with relationships loaded for return
+        content_with_relationships = await db.execute(
+            select(Content)
+            .where(Content.id == content.id)
+            .options(
+                selectinload(Content.genres),
+                selectinload(Content.seasons),
+                selectinload(Content.cast),
+                selectinload(Content.crew),
+                selectinload(Content.movie_files),
+            )
+        )
+        content = content_with_relationships.scalar_one()
+
         return content
     except HTTPException:
         await db.rollback()
@@ -1642,30 +1657,6 @@ async def get_contents_admin_list(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error retrieving content list: {str(e)}",
-        )
-
-
-async def get_content_admin_by_id(
-    db: AsyncSession, content_id: UUID
-) -> Optional[Content]:
-    """Get content by ID for admin"""
-    try:
-        result = await db.execute(
-            select(Content)
-            .where(Content.id == content_id)
-            .options(
-                selectinload(Content.genres),
-                selectinload(Content.seasons),
-                selectinload(Content.cast),
-                selectinload(Content.crew),
-                selectinload(Content.movie_files),
-            )
-        )
-        return result.scalar_one_or_none()
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving content: {str(e)}",
         )
 
 
@@ -1834,7 +1825,7 @@ async def _associate_content_genres(
     try:
         # Remove existing associations
         await db.execute(
-            select(ContentGenre).where(ContentGenre.content_id == content_id)
+            delete(ContentGenre).where(ContentGenre.content_id == content_id)
         )
 
         # Add new associations
