@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field, HttpUrl, validator
 
 from app.models.content import ContentRating, ContentStatus, ContentType, MovieJobTitle
 from app.models.streaming import StreamingChannelCategory
-from app.models.user import ProfileStatus, UserRole
+from app.models.user import ProfileStatus, SignupType, UserRole
 
 # =============================================================================
 # ADMIN UPLOAD ENUMS
@@ -294,7 +294,7 @@ class GenreAdminUpdate(BaseModel):
     )
     description: Optional[str] = Field(None, description="Genre description")
     icon_name: Optional[str] = Field(None, max_length=100, description="Icon name")
-    cover_image_url: Optional[HttpUrl] = Field(None, description="Cover image URL")
+    cover_image_url: Optional[str] = Field(None, description="Cover image URL")
     parent_genre_id: Optional[UUID] = Field(None, description="Parent genre ID")
     is_active: Optional[bool] = Field(None, description="Whether genre is active")
     is_featured: Optional[bool] = Field(None, description="Whether genre is featured")
@@ -848,6 +848,94 @@ class ContentAdminQueryParams(BaseModel):
 # =============================================================================
 
 
+class UserAdminCreate(BaseModel):
+    """Schema for creating a user (Admin only)"""
+
+    email: str = Field(..., min_length=5, max_length=254, description="User email")
+    first_name: Optional[str] = Field(None, max_length=150, description="First name")
+    last_name: Optional[str] = Field(None, max_length=150, description="Last name")
+    password: Optional[str] = Field(
+        None, min_length=8, max_length=128, description="Password"
+    )
+    role: UserRole = Field(UserRole.USER, description="User role")
+    profile_status: ProfileStatus = Field(
+        ProfileStatus.ACTIVE, description="Profile status"
+    )
+    is_active: bool = Field(True, description="Active status")
+    is_staff: bool = Field(False, description="Staff status")
+    is_superuser: bool = Field(False, description="Superuser status")
+    avatar_url: Optional[str] = Field(None, max_length=500, description="Avatar URL")
+    signup_type: SignupType = Field(SignupType.EMAIL, description="Signup type")
+    google_id: Optional[str] = Field(None, max_length=100, description="Google ID")
+    apple_id: Optional[str] = Field(None, max_length=100, description="Apple ID")
+
+    class Config:
+        from_attributes = True
+
+
+class UserAdminUpdate(BaseModel):
+    """Schema for updating a user (Admin only)"""
+
+    email: Optional[str] = Field(
+        None, min_length=5, max_length=254, description="User email"
+    )
+    first_name: Optional[str] = Field(None, max_length=150, description="First name")
+    last_name: Optional[str] = Field(None, max_length=150, description="Last name")
+    password: Optional[str] = Field(
+        None, min_length=8, max_length=128, description="Password"
+    )
+    role: Optional[UserRole] = Field(None, description="User role")
+    profile_status: Optional[ProfileStatus] = Field(None, description="Profile status")
+    is_active: Optional[bool] = Field(None, description="Active status")
+    is_staff: Optional[bool] = Field(None, description="Staff status")
+    is_superuser: Optional[bool] = Field(None, description="Superuser status")
+    avatar_url: Optional[str] = Field(None, max_length=500, description="Avatar URL")
+    signup_type: Optional[SignupType] = Field(None, description="Signup type")
+    google_id: Optional[str] = Field(None, max_length=100, description="Google ID")
+    apple_id: Optional[str] = Field(None, max_length=100, description="Apple ID")
+
+    class Config:
+        from_attributes = True
+
+
+class UserAdminResponse(BaseModel):
+    """Schema for user response (Admin only)"""
+
+    id: UUID = Field(..., description="User ID")
+    email: str = Field(..., description="User email")
+    first_name: Optional[str] = Field(None, description="First name")
+    last_name: Optional[str] = Field(None, description="Last name")
+    is_active: bool = Field(..., description="Active status")
+    is_staff: bool = Field(..., description="Staff status")
+    is_superuser: bool = Field(..., description="Superuser status")
+    last_login: Optional[datetime] = Field(None, description="Last login")
+    role: UserRole = Field(..., description="User role")
+    profile_status: ProfileStatus = Field(..., description="Profile status")
+    avatar_url: Optional[str] = Field(None, description="Avatar URL")
+    signup_type: SignupType = Field(..., description="Signup type")
+    google_id: Optional[str] = Field(None, description="Google ID")
+    apple_id: Optional[str] = Field(None, description="Apple ID")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+    is_deleted: bool = Field(..., description="Deleted status")
+
+    class Config:
+        from_attributes = True
+
+
+class UserAdminListResponse(BaseModel):
+    """Schema for user list response (Admin only)"""
+
+    items: List[UserAdminResponse] = Field(..., description="List of users")
+    total: int = Field(..., description="Total number of users")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+
+    class Config:
+        from_attributes = True
+
+
 class UserAdminQueryParams(BaseModel):
     """Query parameters for user admin endpoints"""
 
@@ -863,6 +951,7 @@ class UserAdminQueryParams(BaseModel):
     is_active: Optional[bool] = Field(None, description="Filter by active status")
     is_staff: Optional[bool] = Field(None, description="Filter by staff status")
     is_superuser: Optional[bool] = Field(None, description="Filter by superuser status")
+    signup_type: Optional[SignupType] = Field(None, description="Filter by signup type")
     sort_by: str = Field("created_at", description="Sort field")
     sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
 
