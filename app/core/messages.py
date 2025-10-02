@@ -209,12 +209,17 @@ FILE_PROCESSING_FAILED = "File processing failed"
 FILE_INVALID_FORMAT = "Invalid file format"
 
 # User Admin Messages
+USER_CREATED = "User created successfully"
 USER_UPDATED = "User updated successfully"
 USER_DELETED = "User deleted successfully"
+USER_NOT_FOUND = "User not found"
+USER_ALREADY_EXISTS = "User with this email already exists"
 USER_SUSPENDED = "User suspended successfully"
 USER_ACTIVATED = "User activated successfully"
 USER_BANNED = "User banned successfully"
 USER_UNBANNED = "User unbanned successfully"
+USER_ROLE_UPDATED = "User role updated successfully"
+USER_STATUS_UPDATED = "User status updated successfully"
 
 # Review Admin Messages
 REVIEW_UPDATED = "Review updated successfully"

@@ -8,7 +8,16 @@ from sqlalchemy import and_, delete, desc, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.core.messages import CONTENT_ALREADY_EXISTS
+from app.core.messages import (
+    CONTENT_ALREADY_EXISTS,
+    USER_ALREADY_EXISTS,
+    USER_CREATED,
+    USER_DELETED,
+    USER_NOT_FOUND,
+    USER_ROLE_UPDATED,
+    USER_STATUS_UPDATED,
+    USER_UPDATED,
+)
 from app.models.content import (
     Content,
     ContentCast,
@@ -1931,6 +1940,300 @@ async def _create_content_crew(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error creating crew members: {str(e)}",
+        )
+
+
+# =============================================================================
+# USER ADMIN UTILS
+# =============================================================================
+
+
+async def create_user(db: AsyncSession, user_data: dict) -> User:
+    """Create new user"""
+    try:
+        # Check for email conflicts
+        existing_email = await db.execute(
+            select(User).where(User.email == user_data["email"])
+        )
+        if existing_email.scalar_one_or_none():
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=USER_ALREADY_EXISTS,
+            )
+
+        # Hash password if provided
+        if user_data.get("password"):
+            from app.core.auth import get_password_hash
+
+            user_data["password"] = get_password_hash(user_data["password"])
+
+        # Create user
+        user = User(**user_data)
+        db.add(user)
+        await db.commit()
+        await db.refresh(user)
+        return user
+    except HTTPException:
+        await db.rollback()
+        raise
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error creating user: {str(e)}",
+        )
+
+
+async def get_users_admin_list(
+    db: AsyncSession, query_params: UserAdminQueryParams
+) -> Tuple[List[User], int]:
+    """Get paginated list of users for admin"""
+    try:
+        # Build query
+        query = select(User).where(User.is_deleted == False)
+        count_query = select(func.count(User.id)).where(User.is_deleted == False)
+
+        # Apply filters
+        if query_params.search:
+            search_term = f"%{query_params.search}%"
+            query = query.where(
+                or_(
+                    User.email.ilike(search_term),
+                    User.first_name.ilike(search_term),
+                    User.last_name.ilike(search_term),
+                )
+            )
+            count_query = count_query.where(
+                or_(
+                    User.email.ilike(search_term),
+                    User.first_name.ilike(search_term),
+                    User.last_name.ilike(search_term),
+                )
+            )
+
+        if query_params.role:
+            query = query.where(User.role == query_params.role)
+            count_query = count_query.where(User.role == query_params.role)
+
+        if query_params.profile_status:
+            query = query.where(User.profile_status == query_params.profile_status)
+            count_query = count_query.where(
+                User.profile_status == query_params.profile_status
+            )
+
+        if query_params.is_active is not None:
+            query = query.where(User.is_active == query_params.is_active)
+            count_query = count_query.where(User.is_active == query_params.is_active)
+
+        if query_params.is_staff is not None:
+            query = query.where(User.is_staff == query_params.is_staff)
+            count_query = count_query.where(User.is_staff == query_params.is_staff)
+
+        if query_params.is_superuser is not None:
+            query = query.where(User.is_superuser == query_params.is_superuser)
+            count_query = count_query.where(
+                User.is_superuser == query_params.is_superuser
+            )
+
+        if query_params.signup_type:
+            query = query.where(User.signup_type == query_params.signup_type)
+            count_query = count_query.where(
+                User.signup_type == query_params.signup_type
+            )
+
+        # Apply sorting
+        sort_column = getattr(User, query_params.sort_by, User.created_at)
+        if query_params.sort_order == "desc":
+            query = query.order_by(desc(sort_column))
+        else:
+            query = query.order_by(sort_column)
+
+        # Apply pagination
+        offset = (query_params.page - 1) * query_params.size
+        query = query.offset(offset).limit(query_params.size)
+
+        # Execute queries
+        result = await db.execute(query)
+        users = result.scalars().all()
+
+        count_result = await db.execute(count_query)
+        total = count_result.scalar()
+
+        return users, total
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving users list: {str(e)}",
+        )
+
+
+async def get_user_admin_by_id(db: AsyncSession, user_id: UUID) -> Optional[User]:
+    """
+    Get user by ID for admin.
+
+    Args:
+        db: Database session
+        user_id: User ID
+
+    Returns:
+        User or None
+    """
+    query = select(User).where(and_(User.id == user_id, User.is_deleted == False))
+
+    result = await db.execute(query)
+    return result.scalar_one_or_none()
+
+
+async def update_user(
+    db: AsyncSession, user_id: UUID, update_data: dict
+) -> Optional[User]:
+    """Update user"""
+    try:
+        # Get user
+        user = await get_user_admin_by_id(db, user_id)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=USER_NOT_FOUND,
+            )
+
+        # Check for email conflicts if email is being updated
+        if "email" in update_data and update_data["email"] != user.email:
+            existing_email = await db.execute(
+                select(User).where(User.email == update_data["email"])
+            )
+            if existing_email.scalar_one_or_none():
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail=USER_ALREADY_EXISTS,
+                )
+
+        # Hash password if provided
+        if update_data.get("password"):
+            from app.core.auth import get_password_hash
+
+            update_data["password"] = get_password_hash(update_data["password"])
+
+        # Update user
+        for key, value in update_data.items():
+            if hasattr(user, key):
+                setattr(user, key, value)
+
+        await db.commit()
+        await db.refresh(user)
+        return user
+    except HTTPException:
+        await db.rollback()
+        raise
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error updating user: {str(e)}",
+        )
+
+
+async def delete_user(db: AsyncSession, user_id: UUID) -> bool:
+    """Delete user (soft delete)"""
+    try:
+        user = await get_user_admin_by_id(db, user_id)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=USER_NOT_FOUND,
+            )
+
+        # Soft delete
+        user.is_deleted = True
+        await db.commit()
+        return True
+    except HTTPException:
+        await db.rollback()
+        raise
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error deleting user: {str(e)}",
+        )
+
+
+async def toggle_user_active(db: AsyncSession, user_id: UUID) -> Optional[User]:
+    """Toggle user active status"""
+    try:
+        user = await get_user_admin_by_id(db, user_id)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=USER_NOT_FOUND,
+            )
+
+        user.is_active = not user.is_active
+        await db.commit()
+        await db.refresh(user)
+        return user
+    except HTTPException:
+        await db.rollback()
+        raise
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error toggling user active status: {str(e)}",
+        )
+
+
+async def update_user_role(
+    db: AsyncSession, user_id: UUID, role: str
+) -> Optional[User]:
+    """Update user role"""
+    try:
+        user = await get_user_admin_by_id(db, user_id)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=USER_NOT_FOUND,
+            )
+
+        user.role = role
+        await db.commit()
+        await db.refresh(user)
+        return user
+    except HTTPException:
+        await db.rollback()
+        raise
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error updating user role: {str(e)}",
+        )
+
+
+async def update_user_status(
+    db: AsyncSession, user_id: UUID, status: str
+) -> Optional[User]:
+    """Update user profile status"""
+    try:
+        user = await get_user_admin_by_id(db, user_id)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=USER_NOT_FOUND,
+            )
+
+        user.profile_status = status
+        await db.commit()
+        await db.refresh(user)
+        return user
+    except HTTPException:
+        await db.rollback()
+        raise
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error updating user status: {str(e)}",
         )
 
 
