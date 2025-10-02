@@ -616,81 +616,6 @@ async def create_content(db: AsyncSession, content_data: dict) -> Content:
     return content
 
 
-async def update_content(
-    db: AsyncSession, content_id: UUID, update_data: dict
-) -> Optional[Content]:
-    """
-    Update content.
-
-    Args:
-        db: Database session
-        content_id: Content ID
-        update_data: Update data dictionary
-
-    Returns:
-        Content: Updated content or None if not found
-
-    Raises:
-        ValueError: If content with same title or slug already exists
-    """
-    # Get existing content
-    query = select(Content).where(
-        and_(Content.id == content_id, Content.is_deleted == False)
-    )
-    result = await db.execute(query)
-    content = result.scalar_one_or_none()
-
-    if not content:
-        return None
-
-    # Check if title is being changed and if new title already exists
-    if "title" in update_data and update_data["title"] != content.title:
-        existing_title_query = select(Content).where(
-            and_(
-                Content.title == update_data["title"],
-                Content.id != content_id,
-                Content.is_deleted == False,
-            )
-        )
-        existing_title_result = await db.execute(existing_title_query)
-        if existing_title_result.scalar_one_or_none():
-            raise ValueError("Content with this title already exists")
-
-    # Check if slug is being changed and if new slug already exists
-    if "slug" in update_data and update_data["slug"] != content.slug:
-        existing_slug_query = select(Content).where(
-            and_(
-                Content.slug == update_data["slug"],
-                Content.id != content_id,
-                Content.is_deleted == False,
-            )
-        )
-        existing_slug_result = await db.execute(existing_slug_query)
-        if existing_slug_result.scalar_one_or_none():
-            raise ValueError("Content with this slug already exists")
-
-    # Extract genre IDs if provided
-    genre_ids = update_data.pop("genre_ids", None)
-
-    # Update content
-    for key, value in update_data.items():
-        if value is not None:
-            setattr(content, key, value)
-
-    # Update genres if provided
-    if genre_ids is not None:
-        genres_query = select(Genre).where(
-            and_(Genre.id.in_(genre_ids), Genre.is_deleted == False)
-        )
-        genres_result = await db.execute(genres_query)
-        genres = genres_result.scalars().all()
-        content.genres = genres
-
-    await db.commit()
-    await db.refresh(content)
-    return content
-
-
 async def delete_content(db: AsyncSession, content_id: UUID) -> bool:
     """
     Soft delete content.
@@ -1705,17 +1630,65 @@ async def update_content(
                     detail="Content with this slug already exists",
                 )
 
+        # Extract related data before updating content
+        genre_ids = update_data.pop("genre_ids", None)
+        movie_files_data = update_data.pop("movie_files", None)
+        cast_data = update_data.pop("cast", None)
+        crew_data = update_data.pop("crew", None)
+
         # Update content fields
         for field, value in update_data.items():
-            if field != "genre_ids" and hasattr(content, field):
+            if hasattr(content, field):
                 setattr(content, field, value)
 
         # Handle genre associations
-        if "genre_ids" in update_data:
-            await _associate_content_genres(db, content_id, update_data["genre_ids"])
+        if genre_ids is not None:
+            await _associate_content_genres(db, content_id, genre_ids)
+
+        # Handle movie files update
+        if movie_files_data is not None:
+            # Delete existing movie files
+            await db.execute(
+                delete(MovieFile).where(MovieFile.content_id == content_id)
+            )
+            # Create new movie files
+            await _create_movie_files(db, content_id, movie_files_data)
+
+        # Handle cast update
+        if cast_data is not None:
+            # Delete existing cast
+            await db.execute(
+                delete(ContentCast).where(ContentCast.content_id == content_id)
+            )
+            # Create new cast
+            await _create_content_cast(db, content_id, cast_data)
+
+        # Handle crew update
+        if crew_data is not None:
+            # Delete existing crew
+            await db.execute(
+                delete(ContentCrew).where(ContentCrew.content_id == content_id)
+            )
+            # Create new crew
+            await _create_content_crew(db, content_id, crew_data)
 
         await db.commit()
         await db.refresh(content)
+
+        # Refresh with relationships loaded for return
+        content_with_relationships = await db.execute(
+            select(Content)
+            .where(Content.id == content.id)
+            .options(
+                selectinload(Content.genres),
+                selectinload(Content.seasons),
+                selectinload(Content.cast),
+                selectinload(Content.crew),
+                selectinload(Content.movie_files),
+            )
+        )
+        content = content_with_relationships.scalar_one()
+
         return content
     except HTTPException:
         await db.rollback()

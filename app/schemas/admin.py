@@ -737,6 +737,15 @@ class ContentAdminUpdate(BaseModel):
     # Genre IDs
     genre_ids: Optional[List[UUID]] = Field(None, description="Genre IDs")
 
+    # Movie Files (optional)
+    movie_files: Optional[List[MovieFileCreate]] = Field(
+        None, description="Movie files data"
+    )
+
+    # Cast and Crew (optional)
+    cast: Optional[List[CastMemberCreate]] = Field(None, description="Cast members")
+    crew: Optional[List[CrewMemberCreate]] = Field(None, description="Crew members")
+
 
 class ContentAdminResponse(BaseModel):
     """Admin response schema for content"""
