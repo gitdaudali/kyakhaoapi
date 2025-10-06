@@ -2243,6 +2243,17 @@ async def create_person(db: AsyncSession, person_data: dict) -> Person:
         await db.commit()
         await db.refresh(person)
 
+        # Reload with relationships for return
+        person_with_relationships = await db.execute(
+            select(Person)
+            .where(Person.id == person.id)
+            .options(
+                selectinload(Person.content_cast),
+                selectinload(Person.content_crew),
+            )
+        )
+        person = person_with_relationships.scalar_one()
+
         return person
     except HTTPException:
         await db.rollback()
@@ -2425,6 +2436,17 @@ async def update_person(
 
         await db.commit()
         await db.refresh(person)
+
+        # Reload with relationships for return
+        person_with_relationships = await db.execute(
+            select(Person)
+            .where(Person.id == person.id)
+            .options(
+                selectinload(Person.content_cast),
+                selectinload(Person.content_crew),
+            )
+        )
+        person = person_with_relationships.scalar_one()
 
         return person
     except HTTPException:

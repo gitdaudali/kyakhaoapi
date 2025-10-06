@@ -453,6 +453,34 @@ class PersonAdminUpdate(BaseModel):
         from_attributes = True
 
 
+class ContentCastResponse(BaseModel):
+    """Response schema for content cast"""
+
+    content_id: UUID = Field(..., description="Content ID")
+    person_id: UUID = Field(..., description="Person ID")
+    character_name: Optional[str] = Field(None, description="Character name")
+    cast_order: int = Field(..., description="Cast order")
+    is_main_cast: bool = Field(..., description="Is main cast")
+    character_image_url: Optional[str] = Field(None, description="Character image URL")
+    job_title: str = Field(..., description="Job title")
+
+    class Config:
+        from_attributes = True
+
+
+class ContentCrewResponse(BaseModel):
+    """Response schema for content crew"""
+
+    content_id: UUID = Field(..., description="Content ID")
+    person_id: UUID = Field(..., description="Person ID")
+    job_title: str = Field(..., description="Job title")
+    department: str = Field(..., description="Department")
+    credit_order: int = Field(..., description="Credit order")
+
+    class Config:
+        from_attributes = True
+
+
 class PersonAdminResponse(BaseModel):
     """Response schema for people admin"""
 
@@ -486,10 +514,10 @@ class PersonAdminResponse(BaseModel):
     updated_at: datetime = Field(..., description="Updated at")
 
     # Relationships
-    content_cast: List[dict] = Field(
+    content_cast: List["ContentCastResponse"] = Field(
         default_factory=list, description="Content cast appearances"
     )
-    content_crew: List[dict] = Field(
+    content_crew: List["ContentCrewResponse"] = Field(
         default_factory=list, description="Content crew appearances"
     )
 
