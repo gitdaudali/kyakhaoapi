@@ -48,44 +48,7 @@ async def create_person_admin(
     """
     try:
         person = await create_person(db, person_data.dict())
-
-        # Convert SQLAlchemy object to dictionary for proper serialization
-        person_dict = {
-            "id": person.id,
-            "name": person.name,
-            "slug": person.slug,
-            "biography": person.biography,
-            "birth_date": person.birth_date,
-            "death_date": person.death_date,
-            "birth_place": person.birth_place,
-            "nationality": person.nationality,
-            "gender": person.gender,
-            "profile_image_url": person.profile_image_url,
-            "cover_image_url": person.cover_image_url,
-            "known_for_department": person.known_for_department,
-            "is_verified": person.is_verified,
-            "is_featured": person.is_featured,
-            "created_at": person.created_at,
-            "updated_at": person.updated_at,
-            # Convert relationships to dictionaries
-            "content_cast": [
-                {
-                    "content_id": cast.content_id,
-                    "character_name": cast.character_name,
-                    "job_title": cast.job_title,
-                }
-                for cast in person.content_cast
-            ],
-            "content_crew": [
-                {
-                    "content_id": crew.content_id,
-                    "job_title": crew.job_title,
-                    "department": crew.department,
-                }
-                for crew in person.content_crew
-            ],
-        }
-        return PersonAdminResponse.model_validate(person_dict)
+        return PersonAdminResponse.model_validate(person)
     except HTTPException:
         raise
     except Exception as e:
@@ -110,48 +73,8 @@ async def get_people_admin(
             query_params.page, query_params.size, total
         )
 
-        # Convert SQLAlchemy objects to dictionaries for proper serialization
-        serialized_people = []
-        for person in people:
-            person_dict = {
-                "id": person.id,
-                "name": person.name,
-                "slug": person.slug,
-                "biography": person.biography,
-                "birth_date": person.birth_date,
-                "death_date": person.death_date,
-                "birth_place": person.birth_place,
-                "nationality": person.nationality,
-                "gender": person.gender,
-                "profile_image_url": person.profile_image_url,
-                "cover_image_url": person.cover_image_url,
-                "known_for_department": person.known_for_department,
-                "is_verified": person.is_verified,
-                "is_featured": person.is_featured,
-                "created_at": person.created_at,
-                "updated_at": person.updated_at,
-                # Convert relationships to dictionaries
-                "content_cast": [
-                    {
-                        "content_id": cast.content_id,
-                        "character_name": cast.character_name,
-                        "job_title": cast.job_title,
-                    }
-                    for cast in person.content_cast
-                ],
-                "content_crew": [
-                    {
-                        "content_id": crew.content_id,
-                        "job_title": crew.job_title,
-                        "department": crew.department,
-                    }
-                    for crew in person.content_crew
-                ],
-            }
-            serialized_people.append(person_dict)
-
         return PersonAdminListResponse(
-            items=serialized_people,
+            items=[PersonAdminResponse.model_validate(person) for person in people],
             total=pagination_info["total"],
             page=pagination_info["page"],
             size=pagination_info["size"],
@@ -183,43 +106,7 @@ async def get_person_admin(
                 detail=PERSON_NOT_FOUND,
             )
 
-        # Convert SQLAlchemy object to dictionary for proper serialization
-        person_dict = {
-            "id": person.id,
-            "name": person.name,
-            "slug": person.slug,
-            "biography": person.biography,
-            "birth_date": person.birth_date,
-            "death_date": person.death_date,
-            "birth_place": person.birth_place,
-            "nationality": person.nationality,
-            "gender": person.gender,
-            "profile_image_url": person.profile_image_url,
-            "cover_image_url": person.cover_image_url,
-            "known_for_department": person.known_for_department,
-            "is_verified": person.is_verified,
-            "is_featured": person.is_featured,
-            "created_at": person.created_at,
-            "updated_at": person.updated_at,
-            # Convert relationships to dictionaries
-            "content_cast": [
-                {
-                    "content_id": cast.content_id,
-                    "character_name": cast.character_name,
-                    "job_title": cast.job_title,
-                }
-                for cast in person.content_cast
-            ],
-            "content_crew": [
-                {
-                    "content_id": crew.content_id,
-                    "job_title": crew.job_title,
-                    "department": crew.department,
-                }
-                for crew in person.content_crew
-            ],
-        }
-        return PersonAdminResponse.model_validate(person_dict)
+        return PersonAdminResponse.model_validate(person)
     except HTTPException:
         raise
     except Exception as e:
@@ -250,43 +137,7 @@ async def update_person_admin(
                 detail=PERSON_NOT_FOUND,
             )
 
-        # Convert SQLAlchemy object to dictionary for proper serialization
-        person_dict = {
-            "id": person.id,
-            "name": person.name,
-            "slug": person.slug,
-            "biography": person.biography,
-            "birth_date": person.birth_date,
-            "death_date": person.death_date,
-            "birth_place": person.birth_place,
-            "nationality": person.nationality,
-            "gender": person.gender,
-            "profile_image_url": person.profile_image_url,
-            "cover_image_url": person.cover_image_url,
-            "known_for_department": person.known_for_department,
-            "is_verified": person.is_verified,
-            "is_featured": person.is_featured,
-            "created_at": person.created_at,
-            "updated_at": person.updated_at,
-            # Convert relationships to dictionaries
-            "content_cast": [
-                {
-                    "content_id": cast.content_id,
-                    "character_name": cast.character_name,
-                    "job_title": cast.job_title,
-                }
-                for cast in person.content_cast
-            ],
-            "content_crew": [
-                {
-                    "content_id": crew.content_id,
-                    "job_title": crew.job_title,
-                    "department": crew.department,
-                }
-                for crew in person.content_crew
-            ],
-        }
-        return PersonAdminResponse.model_validate(person_dict)
+        return PersonAdminResponse.model_validate(person)
     except HTTPException:
         raise
     except Exception as e:
@@ -342,46 +193,9 @@ async def toggle_person_featured_admin(
 
         message = PERSON_FEATURED if person.is_featured else PERSON_UNFEATURED
 
-        # Convert SQLAlchemy object to dictionary for proper serialization
-        person_dict = {
-            "id": person.id,
-            "name": person.name,
-            "slug": person.slug,
-            "biography": person.biography,
-            "birth_date": person.birth_date,
-            "death_date": person.death_date,
-            "birth_place": person.birth_place,
-            "nationality": person.nationality,
-            "gender": person.gender,
-            "profile_image_url": person.profile_image_url,
-            "cover_image_url": person.cover_image_url,
-            "known_for_department": person.known_for_department,
-            "is_verified": person.is_verified,
-            "is_featured": person.is_featured,
-            "created_at": person.created_at,
-            "updated_at": person.updated_at,
-            # Convert relationships to dictionaries
-            "content_cast": [
-                {
-                    "content_id": cast.content_id,
-                    "character_name": cast.character_name,
-                    "job_title": cast.job_title,
-                }
-                for cast in person.content_cast
-            ],
-            "content_crew": [
-                {
-                    "content_id": crew.content_id,
-                    "job_title": crew.job_title,
-                    "department": crew.department,
-                }
-                for crew in person.content_crew
-            ],
-        }
-
         return {
             "message": message,
-            "person": PersonAdminResponse.model_validate(person_dict),
+            "person": PersonAdminResponse.model_validate(person),
         }
     except HTTPException:
         raise
@@ -411,46 +225,9 @@ async def toggle_person_verified_admin(
 
         message = PERSON_VERIFIED if person.is_verified else PERSON_UNVERIFIED
 
-        # Convert SQLAlchemy object to dictionary for proper serialization
-        person_dict = {
-            "id": person.id,
-            "name": person.name,
-            "slug": person.slug,
-            "biography": person.biography,
-            "birth_date": person.birth_date,
-            "death_date": person.death_date,
-            "birth_place": person.birth_place,
-            "nationality": person.nationality,
-            "gender": person.gender,
-            "profile_image_url": person.profile_image_url,
-            "cover_image_url": person.cover_image_url,
-            "known_for_department": person.known_for_department,
-            "is_verified": person.is_verified,
-            "is_featured": person.is_featured,
-            "created_at": person.created_at,
-            "updated_at": person.updated_at,
-            # Convert relationships to dictionaries
-            "content_cast": [
-                {
-                    "content_id": cast.content_id,
-                    "character_name": cast.character_name,
-                    "job_title": cast.job_title,
-                }
-                for cast in person.content_cast
-            ],
-            "content_crew": [
-                {
-                    "content_id": crew.content_id,
-                    "job_title": crew.job_title,
-                    "department": crew.department,
-                }
-                for crew in person.content_crew
-            ],
-        }
-
         return {
             "message": message,
-            "person": PersonAdminResponse.model_validate(person_dict),
+            "person": PersonAdminResponse.model_validate(person),
         }
     except HTTPException:
         raise

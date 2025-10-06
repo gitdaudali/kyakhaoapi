@@ -584,6 +584,20 @@ class Person(BaseModel, TimestampMixin, table=True):
     is_verified: bool = Field(sa_type=Boolean, default=False)
     is_featured: bool = Field(sa_type=Boolean, default=False)
 
+    # Relationships
+    content_cast: List["ContentCast"] = Relationship(
+        sa_relationship_kwargs={
+            "lazy": "selectin",
+            "cascade": "all, delete-orphan",
+        },
+    )
+    content_crew: List["ContentCrew"] = Relationship(
+        sa_relationship_kwargs={
+            "lazy": "selectin",
+            "cascade": "all, delete-orphan",
+        },
+    )
+
     def __repr__(self):
         return f"<Person(id={self.id}, name='{self.name}')>"
 
