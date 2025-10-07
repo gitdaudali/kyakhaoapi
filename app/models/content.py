@@ -441,6 +441,23 @@ class EpisodeQuality(BaseModel, TimestampMixin, table=True):
     # Processing Status
     is_ready: bool = Field(sa_type=Boolean, default=False, index=True)
 
+    # Streaming Encryption
+    is_streaming_encrypted: bool = Field(sa_type=Boolean, default=False, index=True)
+    streaming_encrypted_file_url: Optional[str] = Field(
+        sa_type=String(500),
+        nullable=True,
+        description="Encrypted file URL for streaming",
+    )
+    streaming_encryption_key_id: Optional[str] = Field(
+        sa_type=String(100), nullable=True, description="Streaming encryption key ID"
+    )
+    streaming_chunk_size: int = Field(
+        sa_type=Integer, default=1048576, description="Chunk size for streaming (1MB)"
+    )
+    streaming_total_chunks: int = Field(
+        sa_type=Integer, default=0, description="Total number of chunks"
+    )
+
     # Relationships
     episode: "Episode" = Relationship(back_populates="quality_versions")
 
@@ -481,6 +498,23 @@ class MovieFile(BaseModel, TimestampMixin, table=True):
 
     # Processing Status
     is_ready: bool = Field(sa_type=Boolean, default=False, index=True)
+
+    # Streaming Encryption
+    is_streaming_encrypted: bool = Field(sa_type=Boolean, default=False, index=True)
+    streaming_encrypted_file_url: Optional[str] = Field(
+        sa_type=String(500),
+        nullable=True,
+        description="Encrypted file URL for streaming",
+    )
+    streaming_encryption_key_id: Optional[str] = Field(
+        sa_type=String(100), nullable=True, description="Streaming encryption key ID"
+    )
+    streaming_chunk_size: int = Field(
+        sa_type=Integer, default=1048576, description="Chunk size for streaming (1MB)"
+    )
+    streaming_total_chunks: int = Field(
+        sa_type=Integer, default=0, description="Total number of chunks"
+    )
 
     # Subtitle and Audio Information
     subtitle_tracks: Optional[str] = Field(sa_type=Text, default=None)  # JSON
