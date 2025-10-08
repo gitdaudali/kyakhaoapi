@@ -63,6 +63,13 @@ class DatabaseSeeder:
         user_mapping = {}
 
         for user_data in users_data:
+            # Check if user already exists
+            existing_user = await self.session.get(User, user_data["id"])
+            if existing_user:
+                print(f"⚠️  User {user_data['email']} already exists, skipping...")
+                user_mapping[user_data["email"]] = user_data["id"]
+                continue
+
             # Hash the password
             user_data["password"] = get_password_hash(user_data["password"])
 
@@ -81,6 +88,13 @@ class DatabaseSeeder:
         genre_mapping = {}
 
         for genre_data in genres_data:
+            # Check if genre already exists
+            existing_genre = await self.session.get(Genre, genre_data["id"])
+            if existing_genre:
+                print(f"⚠️  Genre {genre_data['slug']} already exists, skipping...")
+                genre_mapping[genre_data["slug"]] = genre_data["id"]
+                continue
+
             # Handle parent genre reference
             if genre_data.get("parent_genre_id"):
                 parent_slug = next(
@@ -110,6 +124,13 @@ class DatabaseSeeder:
         person_mapping = {}
 
         for person_data in people_data:
+            # Check if person already exists
+            existing_person = await self.session.get(Person, person_data["id"])
+            if existing_person:
+                print(f"⚠️  Person {person_data['slug']} already exists, skipping...")
+                person_mapping[person_data["slug"]] = person_data["id"]
+                continue
+
             # Convert string dates to date objects
             if person_data.get("birth_date"):
                 person_data["birth_date"] = datetime.strptime(
@@ -134,6 +155,13 @@ class DatabaseSeeder:
         content_mapping = {}
 
         for content_item in content_data:
+            # Check if content already exists
+            existing_content = await self.session.get(Content, content_item["id"])
+            if existing_content:
+                print(f"⚠️  Content {content_item['slug']} already exists, skipping...")
+                content_mapping[content_item["slug"]] = content_item["id"]
+                continue
+
             # Convert string dates to date objects
             if content_item.get("release_date"):
                 content_item["release_date"] = datetime.strptime(
@@ -234,6 +262,18 @@ class DatabaseSeeder:
             if content_slug and person_slug:
                 cast_item["content_id"] = content_mapping[content_slug]
                 cast_item["person_id"] = person_mapping[person_slug]
+
+                # Convert job_title string to enum
+                from app.models.content import MovieJobTitle
+                if cast_item.get("job_title"):
+                    try:
+                        cast_item["job_title"] = MovieJobTitle(cast_item["job_title"])
+                    except ValueError:
+                        print(f"⚠️  Invalid job_title '{cast_item['job_title']}' for cast, using Actor")
+                        cast_item["job_title"] = MovieJobTitle.ACTOR
+                else:
+                    cast_item["job_title"] = MovieJobTitle.ACTOR
+
                 cast = ContentCast(**cast_item)
                 self.session.add(cast)
 
@@ -268,6 +308,18 @@ class DatabaseSeeder:
             if content_slug and person_slug:
                 crew_item["content_id"] = content_mapping[content_slug]
                 crew_item["person_id"] = person_mapping[person_slug]
+
+                # Convert job_title string to enum
+                from app.models.content import MovieJobTitle
+                if crew_item.get("job_title"):
+                    try:
+                        crew_item["job_title"] = MovieJobTitle(crew_item["job_title"])
+                    except ValueError:
+                        print(f"⚠️  Invalid job_title '{crew_item['job_title']}' for crew, using Director")
+                        crew_item["job_title"] = MovieJobTitle.DIRECTOR
+                else:
+                    crew_item["job_title"] = MovieJobTitle.DIRECTOR
+
                 crew = ContentCrew(**crew_item)
                 self.session.add(crew)
 
