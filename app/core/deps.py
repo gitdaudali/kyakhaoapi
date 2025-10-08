@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from typing import Annotated, Optional
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -282,3 +282,42 @@ CurrentUser = Annotated[User, Depends(get_current_user)]
 CurrentActiveUser = Annotated[User, Depends(get_current_active_user)]
 CurrentSuperUser = Annotated[User, Depends(get_current_superuser)]
 OptionalCurrentUser = Annotated[Optional[User], Depends(get_optional_current_user)]
+
+
+async def validate_client_headers(request: Request) -> None:
+    """Validate required client headers for API requests only."""
+    
+    # Skip validation for certain paths
+    skip_paths = ["/docs", "/redoc", "/openapi.json", "/health", "/api-info"]
+    if any(request.url.path.startswith(path) for path in skip_paths):
+        return
+    
+    device_id = request.headers.get("X-Device-Id")
+    device_type = request.headers.get("X-Device-Type")
+    app_version = request.headers.get("X-App-Version")
+
+    if not device_id or not device_type or not app_version:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Security error: missing required client headers",
+        )
+
+    # Basic normalization/validation
+    normalized_type = device_type.strip().lower()
+    if normalized_type not in {"ios", "android", "web", "desktop"}:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Security error: invalid device type",
+        )
+
+    # Lightweight version format check: must contain at least one dot
+    if "." not in app_version:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Security error: invalid app version",
+        )
+
+    # Attach parsed values to request.state for use in endpoints
+    request.state.device_id = device_id
+    request.state.device_type = normalized_type
+    request.state.app_version = app_version

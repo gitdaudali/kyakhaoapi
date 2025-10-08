@@ -1,11 +1,10 @@
-aiosqlite==0.21.0
+﻿aiosqlite==0.21.0
 alembic==1.16.5
 amqp==5.3.1
 annotated-types==0.7.0
 anyio==4.10.0
 async-timeout==5.0.1
 asyncpg==0.30.0
-backports.asyncio.runner==1.2.0
 bandit==1.8.6
 bcrypt==4.3.0
 billiard==4.2.1
@@ -93,7 +92,7 @@ typing_extensions==4.15.0
 tzdata==2025.2
 urllib3==2.5.0
 uvicorn==0.35.0
-uvloop==0.21.0
+# âŒ uvloop removed (not supported on Windows)
 vine==5.1.0
 virtualenv==20.34.0
 watchfiles==1.1.0

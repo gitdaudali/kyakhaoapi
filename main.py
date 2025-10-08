@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 
 import uvicorn
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.security import HTTPBearer
@@ -11,6 +11,7 @@ from sqlmodel import SQLModel
 from app.api.v1.api import api_router
 from app.core.config import settings
 from app.core.database import engine
+from app.core.deps import validate_client_headers
 
 
 # Database tables are now managed by Alembic migrations
@@ -76,7 +77,7 @@ app.add_middleware(
 security = HTTPBearer()
 
 
-app.include_router(api_router, prefix="/api/v1")
+app.include_router(api_router, prefix="/api/v1", dependencies=[Depends(validate_client_headers)])
 
 
 def custom_openapi():
