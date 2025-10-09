@@ -64,6 +64,8 @@ from app.schemas.content import (
     GenreFilters,
     GenreListResponse,
     GenreMinimal,
+    GenreWithMovies,
+    GenreWithMoviesListResponse,
     MostReviewedLastMonthQueryParams,
     PaginationParams,
     PersonDetail,
@@ -98,6 +100,7 @@ from app.utils.content_utils import (
     get_genre_by_id,
     get_genre_by_slug,
     get_genres_list,
+    get_genres_with_movies,
     get_most_reviewed_content_discovery,
     get_most_reviewed_last_month,
     get_new_releases_content_discovery,
@@ -422,6 +425,47 @@ async def get_content(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error retrieving content: {str(e)}",
+        )
+
+
+@router.get("/genres/with-movies", response_model=GenreWithMoviesListResponse)
+async def get_genres_with_movies_endpoint(
+    page: int = Query(1, ge=1, description="Page number"),
+    size: int = Query(
+        settings.DEFAULT_PAGE_SIZE,
+        ge=1,
+        le=settings.MAX_PAGE_SIZE,
+        description="Page size",
+    ),
+    is_active: Optional[bool] = Query(None, description="Filter by active status"),
+    search: Optional[str] = Query(None, description="Search in name and description"),
+    sort_by: str = Query("name", description="Sort field"),
+    sort_order: str = Query("asc", pattern="^(asc|desc)$", description="Sort order"),
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Get genres with their first 4 movies for genre cards.
+    Returns a paginated list of genres, each containing the first 4 movies
+    """
+    try:
+        filters = GenreFilters(is_active=is_active, search=search)
+
+        pagination = PaginationParams(
+            page=page, size=size, sort_by=sort_by, sort_order=sort_order
+        )
+
+        genres_with_movies, total = await get_genres_with_movies(
+            db, pagination, filters
+        )
+
+        pagination_info = calculate_pagination_info(page, size, total)
+
+        return GenreWithMoviesListResponse(items=genres_with_movies, **pagination_info)
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving genres with movies: {str(e)}",
         )
 
 

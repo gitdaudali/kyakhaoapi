@@ -937,6 +937,46 @@ class GenreMinimal(BaseModel):
         from_attributes = True
 
 
+class MovieThumbnail(BaseModel):
+    """Ultra-minimal movie data - only poster URL for thumbnails"""
+
+    poster_url: Optional[str] = Field(None, description="Movie poster URL")
+
+    class Config:
+        from_attributes = True
+
+
+class GenreWithMovies(BaseModel):
+    """Genre with first 4 movie thumbnails for genre cards"""
+
+    id: UUID = Field(..., description="Genre ID")
+    name: str = Field(..., description="Genre name")
+    slug: str = Field(..., description="Genre slug")
+    description: Optional[str] = Field(None, description="Genre description")
+    icon_name: Optional[str] = Field(None, description="Icon name for UI")
+    cover_image_url: Optional[str] = Field(None, description="Genre cover image URL")
+    movies: List[MovieThumbnail] = Field(
+        default_factory=list, description="First 4 movie thumbnails in this genre"
+    )
+
+    class Config:
+        from_attributes = True
+
+
+class GenreWithMoviesListResponse(BaseModel):
+    """Response schema for genres with movies list"""
+
+    items: List[GenreWithMovies] = Field(
+        ..., description="List of genres with their movies"
+    )
+    total: int = Field(..., description="Total number of genres")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+
 class MovieFileMinimal(BaseModel):
     """Minimal movie file data for discovery API"""
 
