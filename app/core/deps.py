@@ -8,6 +8,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.auth import get_current_user_id
 from app.core.database import get_db
+from app.core.messages import (
+    SECURITY_ERROR_MISSING_HEADERS,
+    SECURITY_ERROR_INVALID_DEVICE_TYPE,
+    SECURITY_ERROR_INVALID_APP_VERSION
+)
 from app.models.token import Token, TokenBlacklist
 from app.models.user import User
 
@@ -299,7 +304,7 @@ async def validate_client_headers(request: Request) -> None:
     if not device_id or not device_type or not app_version:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Security error: missing required client headers",
+            detail=SECURITY_ERROR_MISSING_HEADERS,
         )
 
     # Basic normalization/validation
@@ -307,14 +312,14 @@ async def validate_client_headers(request: Request) -> None:
     if normalized_type not in {"ios", "android", "web", "desktop"}:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Security error: invalid device type",
+            detail=SECURITY_ERROR_INVALID_DEVICE_TYPE,
         )
 
     # Lightweight version format check: must contain at least one dot
     if "." not in app_version:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Security error: invalid app version",
+            detail=SECURITY_ERROR_INVALID_APP_VERSION,
         )
 
     # Attach parsed values to request.state for use in endpoints
