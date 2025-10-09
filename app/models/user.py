@@ -1,8 +1,10 @@
-from datetime import datetime
+import uuid
+from datetime import datetime, timezone
 from enum import Enum
 from typing import TYPE_CHECKING, List, Optional
 
 from sqlalchemy import DateTime, String, Text
+from sqlalchemy.dialects.postgresql import UUID
 from sqlmodel import Field, Relationship
 
 from app.models.base import BaseModel, TimestampMixin
@@ -109,6 +111,48 @@ class User(BaseModel, TimestampMixin, table=True):
         back_populates="user",
         sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
     )
+    search_history: List["UserSearchHistory"] = Relationship(
+        back_populates="user",
+        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
+    )
 
     def __repr__(self):
         return f"<User(id={self.id}, email='{self.email}')>"
+
+
+class UserSearchHistory(BaseModel, TimestampMixin, table=True):
+    """User search history model to track search queries"""
+
+    __tablename__ = "user_search_history"
+
+    user_id: uuid.UUID = Field(
+        sa_type=UUID(as_uuid=True), foreign_key="users.id", nullable=False, index=True
+    )
+    search_query: str = Field(
+        sa_type=String(255),
+        nullable=False,
+        index=True,
+        description="The search query text",
+    )
+    search_count: int = Field(
+        default=1,
+        nullable=False,
+        description="Number of times this search was performed",
+    )
+    last_searched_at: datetime = Field(
+        default_factory=lambda: datetime.now(timezone.utc),
+        sa_type=DateTime(timezone=True),
+        nullable=False,
+        index=True,
+        description="Last time this search was performed",
+    )
+
+    # Relationships
+    user: Optional["User"] = Relationship(back_populates="search_history")
+
+    class Config:
+        # Ensure unique constraint on user_id + search_query
+        table_args = ({"extend_existing": True},)
+
+    def __repr__(self):
+        return f"<UserSearchHistory(id={self.id}, user_id={self.user_id}, query='{self.search_query}')>"
