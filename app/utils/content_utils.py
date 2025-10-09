@@ -1817,3 +1817,137 @@ async def get_genres_with_movies(
     except Exception as e:
         print(f"Error getting genres with movies: {e}")
         return [], 0
+
+
+async def search_content(
+    db: AsyncSession,
+    pagination: PaginationParams,
+    filters: ContentFilters,
+    search_query: str,
+) -> Tuple[List[dict], int]:
+    """
+    Ultra-fast content search with minimal data.
+    Returns only id, title, poster_url, and trailer_url for maximum speed.
+    """
+    try:
+        from sqlalchemy import text
+
+        # Build WHERE conditions
+        where_conditions = ["c.is_deleted = false", "c.status = 'published'"]
+        params = {"search_query": f"%{search_query}%"}
+
+        # Add search condition
+        where_conditions.append(
+            "(c.title ILIKE :search_query OR c.description ILIKE :search_query)"
+        )
+
+        # Add filters
+        if filters.content_type:
+            where_conditions.append("c.content_type = :content_type")
+            params["content_type"] = filters.content_type.value
+
+        if filters.status:
+            where_conditions.append("c.status = :status")
+            params["status"] = filters.status.value
+
+        if filters.rating:
+            where_conditions.append("c.content_rating = :rating")
+            params["rating"] = filters.rating.value
+
+        if filters.is_featured is not None:
+            where_conditions.append("c.is_featured = :is_featured")
+            params["is_featured"] = filters.is_featured
+
+        if filters.is_trending is not None:
+            where_conditions.append("c.is_trending = :is_trending")
+            params["is_trending"] = filters.is_trending
+
+        if filters.year:
+            where_conditions.append("EXTRACT(YEAR FROM c.release_date) = :year")
+            params["year"] = filters.year
+
+        if filters.genre_ids:
+            genre_placeholders = ",".join(
+                [f":genre_id_{i}" for i in range(len(filters.genre_ids))]
+            )
+            where_conditions.append(
+                f"c.id IN (SELECT content_id FROM content_genres WHERE genre_id IN ({genre_placeholders}))"
+            )
+            for i, genre_id in enumerate(filters.genre_ids):
+                params[f"genre_id_{i}"] = str(genre_id)
+
+        # Handle new releases filter
+        if filters.is_new_release:
+            thirty_days_ago = datetime.utcnow() - timedelta(days=30)
+            where_conditions.append("c.release_date >= :new_release_date")
+            params["new_release_date"] = thirty_days_ago
+
+        where_clause = " AND ".join(where_conditions)
+
+        # Build ORDER BY clause
+        order_by = "c.created_at DESC"  # Default
+        if pagination.sort_by == "relevance":
+            # For relevance, we could use full-text search ranking, but for now use title similarity
+            order_by = "c.title ILIKE :search_query DESC, c.total_views DESC"
+        elif pagination.sort_by == "title":
+            order_by = f"c.title {pagination.sort_order.upper()}"
+        elif pagination.sort_by == "release_date":
+            order_by = f"c.release_date {pagination.sort_order.upper()}"
+        elif pagination.sort_by == "rating":
+            order_by = f"c.average_rating {pagination.sort_order.upper()}"
+        elif pagination.sort_by == "views":
+            order_by = f"c.total_views {pagination.sort_order.upper()}"
+
+        # Build the main query
+        query = text(
+            f"""
+            SELECT
+                c.id,
+                c.title,
+                c.poster_url,
+                c.trailer_url
+            FROM contents c
+            WHERE {where_clause}
+            ORDER BY {order_by}
+            LIMIT :limit OFFSET :offset
+        """
+        )
+
+        # Add pagination parameters
+        params["limit"] = pagination.size
+        params["offset"] = (pagination.page - 1) * pagination.size
+
+        # Execute query
+        result = await db.execute(query, params)
+        rows = result.fetchall()
+
+        # Convert to list of dicts
+        search_results = []
+        for row in rows:
+            search_results.append(
+                {
+                    "id": row.id,
+                    "title": row.title,
+                    "poster_url": row.poster_url,
+                    "trailer_url": row.trailer_url,
+                }
+            )
+
+        # Get total count
+        count_query = text(
+            f"""
+            SELECT COUNT(*)
+            FROM contents c
+            WHERE {where_clause}
+        """
+        )
+
+        # Remove pagination params for count query
+        count_params = {k: v for k, v in params.items() if k not in ["limit", "offset"]}
+        count_result = await db.execute(count_query, count_params)
+        total = count_result.scalar()
+
+        return search_results, total
+
+    except Exception as e:
+        return [], 0
