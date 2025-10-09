@@ -1704,3 +1704,116 @@ async def get_people_list(
     except Exception as e:
         print(f"Error getting people list: {e}")
         return [], 0
+
+
+async def get_genres_with_movies(
+    db: AsyncSession,
+    pagination: PaginationParams,
+    filters: Optional[GenreFilters] = None,
+) -> Tuple[List[dict], int]:
+    """
+    Ultra-fast query to get genres with movie poster URLs only.
+    Uses single optimized query with window functions for maximum speed.
+    """
+    try:
+        # Single optimized query using window functions to get genres with movie posters
+        from sqlalchemy import text
+
+        # Build the base WHERE clause
+        where_conditions = ["g.is_deleted = false", "g.is_active = true"]
+        params = {}
+
+        if filters:
+            if filters.is_active is not None:
+                where_conditions.append("g.is_active = :is_active")
+                params["is_active"] = filters.is_active
+            if filters.search:
+                where_conditions.append(
+                    "(g.name ILIKE :search OR g.description ILIKE :search)"
+                )
+                params["search"] = f"%{filters.search}%"
+
+        where_clause = " AND ".join(where_conditions)
+
+        # Single query with window function to get genres and their movie posters
+        query = text(
+            f"""
+            WITH genre_movies AS (
+                SELECT
+                    g.id as genre_id,
+                    g.name as genre_name,
+                    g.slug as genre_slug,
+                    g.description as genre_description,
+                    g.icon_name as genre_icon_name,
+                    g.cover_image_url as genre_cover_image_url,
+                    c.poster_url,
+                    ROW_NUMBER() OVER (PARTITION BY g.id ORDER BY c.created_at DESC) as rn
+                FROM genres g
+                LEFT JOIN content_genres cg ON g.id = cg.genre_id
+                LEFT JOIN contents c ON cg.content_id = c.id
+                    AND c.is_deleted = false
+                    AND c.status = 'published'
+                    AND c.content_type IN ('movie', 'anime')
+                WHERE {where_clause}
+            )
+            SELECT
+                genre_id,
+                genre_name,
+                genre_slug,
+                genre_description,
+                genre_icon_name,
+                genre_cover_image_url,
+                poster_url
+            FROM genre_movies
+            WHERE rn <= 4
+            ORDER BY genre_name, rn
+        """
+        )
+
+        # Execute the optimized query
+        result = await db.execute(query, params)
+        rows = result.fetchall()
+
+        # Get total count for pagination
+        count_query = text(
+            f"""
+            SELECT COUNT(DISTINCT g.id)
+            FROM genres g
+            WHERE {where_clause}
+        """
+        )
+        count_result = await db.execute(count_query, params)
+        total = count_result.scalar()
+
+        # Group results by genre
+        genres_dict = {}
+        for row in rows:
+            genre_id = row.genre_id
+            if genre_id not in genres_dict:
+                genres_dict[genre_id] = {
+                    "id": genre_id,
+                    "name": row.genre_name,
+                    "slug": row.genre_slug,
+                    "description": row.genre_description,
+                    "icon_name": row.genre_icon_name,
+                    "cover_image_url": row.genre_cover_image_url,
+                    "movies": [],
+                }
+
+            # Add poster URL if it exists
+            if row.poster_url:
+                genres_dict[genre_id]["movies"].append({"poster_url": row.poster_url})
+
+        # Convert to list and apply pagination
+        genres_list = list(genres_dict.values())
+
+        # Apply pagination manually since we're using raw SQL
+        start_idx = (pagination.page - 1) * pagination.size
+        end_idx = start_idx + pagination.size
+        paginated_genres = genres_list[start_idx:end_idx]
+
+        return paginated_genres, total
+
+    except Exception as e:
+        print(f"Error getting genres with movies: {e}")
+        return [], 0
