@@ -1,0 +1,3 @@
+"""
+Monetization tests package.
+"""
