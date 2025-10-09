@@ -232,6 +232,21 @@ SECURITY_ERROR_INVALID_DEVICE_TYPE = "Invalid device"
 SECURITY_ERROR_INVALID_APP_VERSION = "Invalid version"
 SECURITY_ERROR_HEADER_VALIDATION = "Header validation"
 
+# Monetization Messages
+CAMPAIGN_CREATED = "Campaign created successfully"
+CAMPAIGN_UPDATED = "Campaign updated successfully"
+CAMPAIGN_DELETED = "Campaign deleted successfully"
+CAMPAIGN_NOT_FOUND = "Campaign not found"
+CAMPAIGN_ALREADY_EXISTS = "Campaign with this title already exists"
+CAMPAIGN_STAT_CREATED = "Campaign stat created successfully"
+CAMPAIGN_STAT_NOT_FOUND = "Campaign stat not found"
+ACTIVITY_CREATED = "Activity log created successfully"
+ACTIVITY_NOT_FOUND = "Activity not found"
+PERFORMANCE_SUMMARY_SUCCESS = "Performance summary retrieved successfully"
+PERFORMANCE_TRENDS_SUCCESS = "Performance trends retrieved successfully"
+ENGAGEMENT_BY_TYPE_SUCCESS = "Engagement by type retrieved successfully"
+SUBSCRIBER_SEGMENTATION_SUCCESS = "Subscriber segmentation retrieved successfully"
+
 # General Messages
 SUCCESS = "Success"
 ERROR = "Error"

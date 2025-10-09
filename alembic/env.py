@@ -2,7 +2,7 @@ import os
 import sys
 from logging.config import fileConfig
 from pathlib import Path
-
+from app.models import content, token, user, verification, monetization
 from sqlalchemy import engine_from_config, pool
 
 from alembic import context
@@ -16,10 +16,7 @@ from sqlmodel import SQLModel
 # Import your models and settings
 from app.core.config import settings
 
-# Import all models to ensure they are registered with SQLModel
-from app.models import content, token, user, verification
 
-# this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
 

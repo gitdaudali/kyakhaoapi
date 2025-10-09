@@ -58,6 +58,8 @@ from app.schemas.content import (
     ContentDiscoveryResponse,
     ContentListResponse,
     ContentQueryParams,
+    ContentSearchQueryParams,
+    ContentSearchResponse,
     CrewFilters,
     CrewListResponse,
     FeaturedContentQueryParams,
@@ -109,6 +111,7 @@ from app.utils.content_utils import (
     get_person_by_id,
     get_trending_content,
     get_trending_content_discovery,
+    search_content,
     update_content_review,
 )
 
@@ -257,6 +260,49 @@ async def get_content_discovery(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error retrieving content discovery data: {str(e)}",
+        )
+
+
+@router.get("/search", response_model=ContentSearchResponse)
+async def search_contents(
+    query_params: ContentSearchQueryParams = Depends(),
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """
+    Search content with ultra-minimal response.
+    Returns only id, title, poster_url, and trailer_url for maximum speed.
+    Supports all content filters and sorting options.
+    """
+    try:
+        # Convert query params to filters and pagination
+        filters = query_params.to_filters()
+        pagination = query_params.to_pagination()
+
+        # Perform search
+        search_results, total = await search_content(
+            db, pagination, filters, query_params.q
+        )
+
+        # Calculate pagination info
+        pagination_info = calculate_pagination_info(
+            query_params.page, query_params.size, total
+        )
+
+        return ContentSearchResponse(
+            items=search_results, query=query_params.q, **pagination_info
+        )
+
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e),
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error searching content: {str(e)}",
         )
 
 

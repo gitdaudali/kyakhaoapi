@@ -17,25 +17,33 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Set test environment
 os.environ["TESTING"] = "true"
-os.environ["DATABASE_URL"] = "sqlite+aiosqlite:///:memory:"
+os.environ["DATABASE_URL"] = "sqlite+aiosqlite:///./test.db"
 os.environ["SECRET_KEY"] = "test-secret-key"
+os.environ["DB_NAME"] = "test_cup_streaming"
+os.environ["DB_USER"] = "test_user"
+os.environ["DB_PASSWORD"] = "test_password"
+os.environ["DB_HOST"] = "localhost"
+os.environ["DB_PORT"] = "5432"
 
 from app.core.database import get_db
 from main import app
 from app.models.user import User, UserRole, ProfileStatus, SignupType
+from app.models.monetization import AdCampaign, AdCampaignStat, MonetizationActivity
 from app.core.auth import get_password_hash
 from sqlmodel import SQLModel
+from app.core.database import Base
 
 
 @pytest_asyncio.fixture(scope="function")
 async def test_db() -> AsyncGenerator[AsyncSession, None]:
     """Create test database session with proper isolation."""
-    # Use in-memory SQLite database for complete isolation
-    engine = create_async_engine("sqlite+aiosqlite:///:memory:", echo=False)
+    # Use SQLite for testing
+    engine = create_async_engine("sqlite+aiosqlite:///./test.db", echo=False)
 
     # Create all tables
     async with engine.begin() as conn:
         await conn.run_sync(SQLModel.metadata.create_all)
+        await conn.run_sync(Base.metadata.create_all)
 
     # Create session
     async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
@@ -43,7 +51,11 @@ async def test_db() -> AsyncGenerator[AsyncSession, None]:
     async with async_session() as session:
         yield session
 
-    # Clean up - in-memory database is automatically destroyed when engine is disposed
+    # Clean up - drop all tables after test
+    async with engine.begin() as conn:
+        await conn.run_sync(SQLModel.metadata.drop_all)
+        await conn.run_sync(Base.metadata.drop_all)
+    
     await engine.dispose()
 
 

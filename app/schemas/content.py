@@ -1008,6 +1008,18 @@ class EpisodeMinimal(BaseModel):
         from_attributes = True
 
 
+class ContentSearchResult(BaseModel):
+    """Ultra-minimal content data for search results - only essential fields"""
+
+    id: UUID = Field(..., description="Content ID")
+    title: str = Field(..., description="Content title")
+    poster_url: Optional[str] = Field(None, description="Poster image URL")
+    trailer_url: Optional[str] = Field(None, description="Trailer URL")
+
+    class Config:
+        from_attributes = True
+
+
 class ContentMinimal(BaseModel):
     """Minimal content data for fast loading"""
 
@@ -1074,6 +1086,76 @@ class ContentDiscoveryResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class ContentSearchQueryParams(BaseModel):
+    """Query parameters for content search endpoint"""
+
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=100, description="Page size")
+    q: str = Field(..., description="Search query - required")
+    content_type: Optional[ContentType] = Field(
+        None, description="Filter by content type"
+    )
+    status: Optional[ContentStatus] = Field(None, description="Filter by status")
+    rating: Optional[ContentRating] = Field(None, description="Filter by rating")
+    genre_ids: Optional[str] = Field(None, description="Comma-separated genre IDs")
+    is_featured: Optional[bool] = Field(None, description="Filter featured content")
+    is_trending: Optional[bool] = Field(None, description="Filter trending content")
+    is_new_release: Optional[bool] = Field(
+        None, description="Filter new releases (last 30 days)"
+    )
+    year: Optional[int] = Field(None, description="Filter by release year")
+    year_from: Optional[int] = Field(None, description="Filter by release year from")
+    year_to: Optional[int] = Field(None, description="Filter by release year to")
+    sort_by: str = Field(
+        "relevance",
+        description="Sort field (relevance, title, release_date, rating, views)",
+    )
+    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+
+    def to_filters(self) -> ContentFilters:
+        """Convert to ContentFilters, handling genre_ids parsing"""
+        genre_id_list = None
+        if self.genre_ids:
+            try:
+                genre_id_list = [UUID(gid.strip()) for gid in self.genre_ids.split(",")]
+            except ValueError:
+                raise ValueError("Invalid genre IDs format")
+
+        return ContentFilters(
+            content_type=self.content_type,
+            status=self.status,
+            rating=self.rating,
+            genre_ids=genre_id_list,
+            is_featured=self.is_featured,
+            is_trending=self.is_trending,
+            is_new_release=self.is_new_release,
+            year=self.year,
+            search=self.q,  # Use the search query
+        )
+
+    def to_pagination(self) -> PaginationParams:
+        """Convert to PaginationParams"""
+        return PaginationParams(
+            page=self.page,
+            size=self.size,
+            sort_by=self.sort_by,
+            sort_order=self.sort_order,
+        )
+
+
+class ContentSearchResponse(BaseModel):
+    """Response schema for content search"""
+
+    items: List[ContentSearchResult] = Field(..., description="List of search results")
+    total: int = Field(..., description="Total number of results")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+    query: str = Field(..., description="Search query used")
 
 
 class ContentDiscoveryQueryParams(BaseModel):
