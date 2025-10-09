@@ -6,6 +6,7 @@ from uuid import UUID
 from pydantic import BaseModel, Field, HttpUrl, validator
 
 from app.models.content import ContentRating, ContentStatus, ContentType, MovieJobTitle
+from app.models.monetization import AdType, CampaignStatus, PlatformType
 from app.models.streaming import StreamingChannelCategory
 from app.models.user import ProfileStatus, SignupType, UserRole
 
@@ -995,3 +996,184 @@ class UserAdminQueryParams(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+# =============================================================================
+# MONETIZATION SCHEMAS
+# =============================================================================
+
+
+class AdCampaignBase(BaseModel):
+    """Base schema for ad campaign"""
+
+    title: str = Field(..., description="Campaign title", max_length=255)
+    target_platform: PlatformType = Field(..., description="Target platform")
+    ad_type: AdType = Field(..., description="Ad type")
+    budget: float = Field(0.0, ge=0, description="Campaign budget")
+    status: CampaignStatus = Field(CampaignStatus.DRAFT, description="Campaign status")
+    start_date: Optional[date] = Field(None, description="Campaign start date")
+    end_date: Optional[date] = Field(None, description="Campaign end date")
+
+
+class AdCampaignCreate(AdCampaignBase):
+    """Schema for creating ad campaign"""
+
+    pass
+
+
+class AdCampaignUpdate(BaseModel):
+    """Schema for updating ad campaign"""
+
+    title: Optional[str] = Field(None, description="Campaign title", max_length=255)
+    target_platform: Optional[PlatformType] = Field(None, description="Target platform")
+    ad_type: Optional[AdType] = Field(None, description="Ad type")
+    budget: Optional[float] = Field(None, ge=0, description="Campaign budget")
+    status: Optional[CampaignStatus] = Field(None, description="Campaign status")
+    start_date: Optional[date] = Field(None, description="Campaign start date")
+    end_date: Optional[date] = Field(None, description="Campaign end date")
+
+
+class AdCampaignResponse(AdCampaignBase):
+    """Schema for ad campaign response"""
+
+    id: UUID = Field(..., description="Campaign ID")
+    spend: float = Field(..., description="Total spend")
+    impressions: int = Field(..., description="Total impressions")
+    clicks: int = Field(..., description="Total clicks")
+    revenue: float = Field(..., description="Total revenue")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+    is_deleted: bool = Field(False, description="Whether campaign is deleted")
+
+    class Config:
+        from_attributes = True
+
+
+class AdCampaignListResponse(BaseModel):
+    """Schema for paginated ad campaigns list"""
+
+    items: List[AdCampaignResponse] = Field(..., description="List of campaigns")
+    total: int = Field(..., description="Total number of campaigns")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+
+class AdCampaignStatCreate(BaseModel):
+    """Schema for creating campaign stats"""
+
+    campaign_id: UUID = Field(..., description="Campaign ID")
+    stat_date: date = Field(..., description="Stats date")
+    impressions: int = Field(0, ge=0, description="Impressions count")
+    clicks: int = Field(0, ge=0, description="Clicks count")
+    revenue: float = Field(0.0, ge=0, description="Revenue amount")
+
+
+class AdCampaignStatResponse(BaseModel):
+    """Schema for campaign stats response"""
+
+    id: UUID = Field(..., description="Stat ID")
+    campaign_id: UUID = Field(..., description="Campaign ID")
+    stat_date: date = Field(..., description="Stats date")
+    impressions: int = Field(..., description="Impressions count")
+    clicks: int = Field(..., description="Clicks count")
+    revenue: float = Field(..., description="Revenue amount")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+
+    class Config:
+        from_attributes = True
+
+
+class ActivityCreate(BaseModel):
+    """Schema for creating activity log"""
+
+    campaign_id: Optional[UUID] = Field(None, description="Campaign ID")
+    action: str = Field(..., description="Action performed", max_length=255)
+    note: Optional[str] = Field(None, description="Activity note")
+    meta: Optional[str] = Field(None, description="Additional metadata")
+
+
+class ActivityResponse(BaseModel):
+    """Schema for activity response"""
+
+    id: UUID = Field(..., description="Activity ID")
+    campaign_id: Optional[UUID] = Field(None, description="Campaign ID")
+    action: str = Field(..., description="Action performed")
+    note: Optional[str] = Field(None, description="Activity note")
+    meta: Optional[str] = Field(None, description="Additional metadata")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+
+    class Config:
+        from_attributes = True
+
+
+class PerformanceSummary(BaseModel):
+    """Schema for performance summary"""
+
+    total_revenue: float = Field(0.0, description="Total revenue")
+    total_impressions: int = Field(0, description="Total impressions")
+    total_clicks: int = Field(0, description="Total clicks")
+    ctr: float = Field(0.0, description="Click-through rate percentage")
+    ecpm: float = Field(0.0, description="Effective cost per mille")
+
+
+class TrendPoint(BaseModel):
+    """Schema for trend data point"""
+
+    month: str = Field(..., description="Month in YYYY-MM format")
+    revenue: float = Field(..., description="Revenue for the month")
+    impressions: int = Field(..., description="Impressions for the month")
+
+
+class PerformanceTrendsResponse(BaseModel):
+    """Schema for performance trends response"""
+
+    trends: List[TrendPoint] = Field(..., description="List of trend points")
+    total_months: int = Field(..., description="Total number of months")
+
+
+class EngagementByTypeResponse(BaseModel):
+    """Schema for engagement by ad type response"""
+
+    by_type: List[dict] = Field(..., description="Engagement data by ad type")
+
+
+class SubscriberSegmentationResponse(BaseModel):
+    """Schema for subscriber segmentation response"""
+
+    segments: dict = Field(..., description="Subscriber counts by plan")
+
+
+class AdCampaignQueryParams(BaseModel):
+    """Schema for ad campaign query parameters"""
+
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=100, description="Page size")
+    status: Optional[CampaignStatus] = Field(None, description="Filter by status")
+    platform: Optional[PlatformType] = Field(None, description="Filter by platform")
+    ad_type: Optional[AdType] = Field(None, description="Filter by ad type")
+    search: Optional[str] = Field(None, description="Search in title")
+    sort_by: str = Field("created_at", description="Sort field")
+    sort_order: str = Field("desc", description="Sort order")
+
+    def to_filters(self):
+        """Convert to filters dict"""
+        return {
+            "status": self.status,
+            "platform": self.platform,
+            "ad_type": self.ad_type,
+            "search": self.search,
+        }
+
+    def to_pagination(self):
+        """Convert to pagination dict"""
+        return {
+            "page": self.page,
+            "size": self.size,
+            "sort_by": self.sort_by,
+            "sort_order": self.sort_order,
+        }
