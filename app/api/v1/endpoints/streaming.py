@@ -5,6 +5,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import get_db
 from app.core.deps import get_current_active_user
+from app.core.messages import STREAMING_CHANNEL_LIST_SUCCESS
+from app.core.response_handler import success_response, error_response, InternalServerException
 from app.models.user import User
 from app.schemas.streaming import (
     StreamingChannelListResponse,
@@ -48,7 +50,7 @@ async def get_streaming_channels(
             query_params.page, query_params.size, total
         )
 
-        return StreamingChannelListResponse(
+        response_data = StreamingChannelListResponse(
             items=channel_responses,
             total=pagination_info["total"],
             page=pagination_info["page"],
@@ -57,10 +59,14 @@ async def get_streaming_channels(
             has_next=pagination_info["has_next"],
             has_prev=pagination_info["has_prev"],
         )
+        
+        return success_response(
+            message=STREAMING_CHANNEL_LIST_SUCCESS,
+            data=response_data.dict()
+        )
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving streaming channels: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error retrieving streaming channels: {str(e)}"
         )

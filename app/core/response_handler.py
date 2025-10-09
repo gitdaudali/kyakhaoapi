@@ -480,6 +480,57 @@ class TokenRevokedException(AuthenticationException):
 
 
 # ============================================================================
+# UNIFIED RESPONSE FORMAT
+# ============================================================================
+
+def create_response(
+    success: bool = True,
+    message: str = "Success",
+    data: Any = None,
+    status_code: int = 200
+) -> JSONResponse:
+    """Create a unified response format for all API endpoints."""
+    response = {
+        "success": success,
+        "message": message,
+        "data": data
+    }
+    
+    return JSONResponse(
+        status_code=status_code,
+        content=response
+    )
+
+
+def success_response(
+    message: str = "Success",
+    data: Any = None,
+    status_code: int = 200
+) -> JSONResponse:
+    """Create a success response with unified format."""
+    return create_response(
+        success=True,
+        message=message,
+        data=data,
+        status_code=status_code
+    )
+
+
+def error_response(
+    message: str = "Error",
+    status_code: int = 400,
+    data: Any = None
+) -> JSONResponse:
+    """Create an error response with unified format."""
+    return create_response(
+        success=False,
+        message=message,
+        data=data,
+        status_code=status_code
+    )
+
+
+# ============================================================================
 # EXCEPTION HANDLERS
 # ============================================================================
 

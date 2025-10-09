@@ -13,6 +13,11 @@ from app.core.messages import (
     SECURITY_ERROR_INVALID_DEVICE_TYPE,
     SECURITY_ERROR_INVALID_APP_VERSION
 )
+from app.core.response_handler import (
+    HeaderValidationException,
+    InvalidDeviceTypeException,
+    InvalidAppVersionException
+)
 from app.models.token import Token, TokenBlacklist
 from app.models.user import User
 
@@ -305,25 +310,16 @@ async def validate_client_headers(request: Request) -> None:
     app_version = request.headers.get("X-App-Version")
 
     if not device_id or not device_type or not app_version:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=SECURITY_ERROR_MISSING_HEADERS,
-        )
+        raise HeaderValidationException()
 
     # Basic normalization/validation
     normalized_type = device_type.strip().lower()
     if normalized_type not in {"ios", "android", "web", "desktop"}:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=SECURITY_ERROR_INVALID_DEVICE_TYPE,
-        )
+        raise InvalidDeviceTypeException()
 
     # Lightweight version format check: must contain at least one dot
     if "." not in app_version:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=SECURITY_ERROR_INVALID_APP_VERSION,
-        )
+        raise InvalidAppVersionException()
 
     # Attach parsed values to request.state for use in endpoints
     request.state.device_id = device_id

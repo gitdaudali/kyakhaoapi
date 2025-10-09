@@ -255,3 +255,47 @@ FORBIDDEN = "Forbidden"
 NOT_FOUND = "Not found"
 BAD_REQUEST = "Bad request"
 INTERNAL_SERVER_ERROR = "Server error"
+
+# ============================================================================
+# UNIFIED RESPONSE SCHEMA
+# ============================================================================
+
+# Base response schema for all API endpoints
+RESPONSE_SCHEMA = {
+    "success": {
+        "type": "boolean",
+        "description": "Indicates if the request was successful"
+    },
+    "message": {
+        "type": "string", 
+        "description": "Human-readable message describing the result"
+    },
+    "data": {
+        "type": "object",
+        "description": "Response data payload",
+        "nullable": True
+    }
+}
+
+# Success response examples
+SUCCESS_RESPONSE_EXAMPLE = {
+    "success": True,
+    "message": "Operation completed successfully",
+    "data": {}
+}
+
+# Error response examples
+ERROR_RESPONSE_EXAMPLE = {
+    "success": False,
+    "message": "An error occurred",
+    "data": None
+}
+
+# Validation error response example
+VALIDATION_ERROR_RESPONSE_EXAMPLE = {
+    "success": False,
+    "message": "Request validation failed",
+    "data": {
+        "field_name": ["Error message 1", "Error message 2"]
+    }
+}
