@@ -1,7 +1,8 @@
 from contextlib import asynccontextmanager
 
 import uvicorn
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.security import HTTPBearer
@@ -11,6 +12,12 @@ from sqlmodel import SQLModel
 from app.api.v1.api import api_router
 from app.core.config import settings
 from app.core.database import engine
+from app.core.deps import validate_client_headers
+from app.core.response_handler import (
+    BaseAPIException,
+    handle_exception,
+    error_response
+)
 
 
 # Database tables are now managed by Alembic migrations
@@ -76,7 +83,46 @@ app.add_middleware(
 security = HTTPBearer()
 
 
-app.include_router(api_router, prefix="/api/v1")
+app.include_router(api_router, prefix="/api/v1", dependencies=[Depends(validate_client_headers)])
+
+
+# ============================================================================
+# EXCEPTION HANDLERS
+# ============================================================================
+
+@app.exception_handler(BaseAPIException)
+async def base_api_exception_handler(request: Request, exc: BaseAPIException):
+    """Handle custom API exceptions."""
+    return handle_exception(request, exc)
+
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    """Handle FastAPI HTTP exceptions."""
+    return handle_exception(request, exc)
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    """Handle validation exceptions with detailed error formatting."""
+    field_errors = {}
+    for error in exc.errors():
+        field = ".".join(str(loc) for loc in error["loc"])
+        if field not in field_errors:
+            field_errors[field] = []
+        field_errors[field].append(error["msg"])
+    
+    return error_response(
+        message="Request validation failed",
+        status_code=422,
+        data=field_errors
+    )
+
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    """Handle unexpected exceptions."""
+    return handle_exception(request, exc)
 
 
 def custom_openapi():
