@@ -85,11 +85,7 @@ security = HTTPBearer()
 
 app.include_router(api_router, prefix="/api/v1", dependencies=[Depends(validate_client_headers)])
 
-
-# ============================================================================
-# EXCEPTION HANDLERS
-# ============================================================================
-
+# Global exception handlers
 @app.exception_handler(BaseAPIException)
 async def base_api_exception_handler(request: Request, exc: BaseAPIException):
     """Handle custom API exceptions."""
@@ -98,7 +94,7 @@ async def base_api_exception_handler(request: Request, exc: BaseAPIException):
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException):
-    """Handle FastAPI HTTP exceptions."""
+    """Handle HTTP exceptions."""
     return handle_exception(request, exc)
 
 
@@ -121,7 +117,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 @app.exception_handler(Exception)
 async def general_exception_handler(request: Request, exc: Exception):
-    """Handle unexpected exceptions."""
+    """Handle general exceptions."""
     return handle_exception(request, exc)
 
 
@@ -145,8 +141,20 @@ def custom_openapi():
             "scheme": "bearer",
             "bearerFormat": "JWT",
             "description": "Enter your JWT token in the format: Bearer <token>",
+        },
+        "ClientHeaders": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "X-Device-Id",
+            "description": "Client device identifier (required for all API requests)"
         }
     }
+
+    # Add global security requirements
+    openapi_schema["security"] = [
+        {"ClientHeaders": []},
+        {"BearerAuth": []}
+    ]
 
     app.openapi_schema = openapi_schema
     return app.openapi_schema

@@ -15,6 +15,12 @@ env/
 .venv/
 ENV/
 
+# Celery
+celerybeat-schedule*
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir
+
 # Django
 logs/
 *.log

@@ -1,40 +1,104 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, EmailStr, Field, validator
+from pydantic import BaseModel, EmailStr, Field, validator, ValidationError
 from pydantic.types import constr
 
 from .user import User as UserSchema
 
 
 class UserRegisterRequest(BaseModel):
-    """User registration request schema"""
+    """User registration request schema with comprehensive validation"""
 
-    email: EmailStr = Field(..., description="User email address")
-    # username: constr(min_length=3, max_length=50) = Field(
-    #     ..., description="Username (3-50 characters)", pattern=r"^[a-zA-Z0-9_-]+$"
-    # )
+    email: EmailStr = Field(
+        ..., 
+        description="User email address",
+        example="user@example.com",
+        min_length=5,
+        max_length=254
+    )
     password: constr(min_length=8, max_length=128) = Field(
-        ..., description="Password (8-128 characters)"
+        ...,
+        description="Password (8-128 characters, must contain uppercase, lowercase, and digit)",
+        example="SecurePassword123"
     )
     password_confirm: constr(min_length=8, max_length=128) = Field(
-        ..., description="Password confirmation"
+        ...,
+        description="Password confirmation (must match password)",
+        example="SecurePassword123"
     )
 
     @validator("password_confirm")
     def passwords_match(cls, v, values, **kwargs):
         if "password" in values and v != values["password"]:
-            raise ValueError("Passwords do not match")
+            raise ValueError("Password confirmation does not match the original password")
         return v
 
     @validator("password")
     def validate_password_strength(cls, v):
+        errors = []
         if not any(c.isupper() for c in v):
-            raise ValueError("Password must contain at least one uppercase letter")
+            errors.append("at least one uppercase letter")
         if not any(c.islower() for c in v):
-            raise ValueError("Password must contain at least one lowercase letter")
+            errors.append("at least one lowercase letter")
         if not any(c.isdigit() for c in v):
-            raise ValueError("Password must contain at least one digit")
+            errors.append("at least one digit")
+        if not any(c in "!@#$%^&*()_+-=[]{}|;:,.<>?" for c in v):
+            errors.append("at least one special character")
+        
+        if errors:
+            raise ValueError(f"Password must contain {', '.join(errors)}")
+        return v
+
+    @validator("email")
+    def validate_email_format(cls, v):
+        if not v or len(v.strip()) == 0:
+            raise ValueError("Email address is required")
+        return v.strip().lower()
+
+    class Config:
+        from_attributes = True
+        json_schema_extra = {
+            "example": {
+                "email": "user@example.com",
+                "password": "SecurePassword123!",
+                "password_confirm": "SecurePassword123!",
+            },
+            "description": "User registration with email and password validation"
+        }
+
+
+class UserLoginRequest(BaseModel):
+    """User login request schema with validation"""
+
+    email: EmailStr = Field(
+        ...,
+        description="User email address",
+        example="user@example.com"
+    )
+    password: str = Field(
+        ...,
+        description="User password",
+        example="SecurePassword123!",
+        min_length=1,
+        max_length=128
+    )
+    remember_me: bool = Field(
+        default=False,
+        description="Remember user for longer session (extends token expiration)",
+        example=False
+    )
+
+    @validator("email")
+    def validate_email_format(cls, v):
+        if not v or len(v.strip()) == 0:
+            raise ValueError("Email address is required")
+        return v.strip().lower()
+
+    @validator("password")
+    def validate_password_not_empty(cls, v):
+        if not v or len(v.strip()) == 0:
+            raise ValueError("Password is required")
         return v
 
     class Config:
@@ -42,25 +106,10 @@ class UserRegisterRequest(BaseModel):
         json_schema_extra = {
             "example": {
                 "email": "user@example.com",
-                "password": "Securepassword123",
-                "password_confirm": "Securepassword123",
-            }
-        }
-
-
-class UserLoginRequest(BaseModel):
-    """User login request schema"""
-
-    email: EmailStr = Field(..., description="User email address")
-    password: str = Field(..., description="User password")
-    remember_me: bool = Field(
-        default=False, description="Remember user for longer session"
-    )
-
-    class Config:
-        from_attributes = True
-        json_schema_extra = {
-            "example": {"email": "user@example.com", "password": "Securepassword123"}
+                "password": "SecurePassword123!",
+                "remember_me": False
+            },
+            "description": "User login with email and password authentication"
         }
 
 
@@ -111,13 +160,26 @@ class AuthResponse(BaseModel):
 
 
 class PasswordResetRequest(BaseModel):
-    """Password reset request schema"""
+    """Password reset request schema with validation"""
 
-    email: EmailStr = Field(..., description="User email address")
+    email: EmailStr = Field(
+        ...,
+        description="User email address for password reset",
+        example="user@example.com"
+    )
+
+    @validator("email")
+    def validate_email_format(cls, v):
+        if not v or len(v.strip()) == 0:
+            raise ValueError("Email address is required")
+        return v.strip().lower()
 
     class Config:
         from_attributes = True
-        json_schema_extra = {"example": {"email": "user@example.com"}}
+        json_schema_extra = {
+            "example": {"email": "user@example.com"},
+            "description": "Request password reset for user account"
+        }
 
 
 class PasswordResetConfirm(BaseModel):
@@ -282,17 +344,43 @@ class EmailVerificationRequest(BaseModel):
 
 
 class OTPVerificationRequest(BaseModel):
-    """Request schema for OTP verification"""
+    """Request schema for OTP verification with validation"""
 
-    email: EmailStr = Field(..., description="User email address")
-    otp_code: str = Field(
-        ..., min_length=6, max_length=6, description="6-digit OTP code"
+    email: EmailStr = Field(
+        ...,
+        description="User email address",
+        example="user@example.com"
     )
+    otp_code: str = Field(
+        ...,
+        min_length=6,
+        max_length=6,
+        description="6-digit OTP code sent to your email",
+        example="123456"
+    )
+
+    @validator("email")
+    def validate_email_format(cls, v):
+        if not v or len(v.strip()) == 0:
+            raise ValueError("Email address is required")
+        return v.strip().lower()
+
+    @validator("otp_code")
+    def validate_otp_format(cls, v):
+        if not v or len(v.strip()) != 6:
+            raise ValueError("OTP code must be exactly 6 digits")
+        if not v.isdigit():
+            raise ValueError("OTP code must contain only digits")
+        return v.strip()
 
     class Config:
         from_attributes = True
         json_schema_extra = {
-            "example": {"email": "user@example.com", "otp_code": "123456"}
+            "example": {
+                "email": "user@example.com",
+                "otp_code": "123456"
+            },
+            "description": "Verify email address with OTP code"
         }
 
 

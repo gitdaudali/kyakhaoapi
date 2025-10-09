@@ -292,7 +292,6 @@ OptionalCurrentUser = Annotated[Optional[User], Depends(get_optional_current_use
 # ============================================================================
 # HEADER VALIDATION DEPENDENCY
 # ============================================================================
-
 async def validate_client_headers(request: Request) -> None:
     """Validate required client headers for API requests only."""
     
