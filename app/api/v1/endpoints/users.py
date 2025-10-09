@@ -1,6 +1,16 @@
 from typing import Annotated
+from uuid import UUID
 
-from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
+from fastapi import (
+    APIRouter,
+    Depends,
+    File,
+    Form,
+    HTTPException,
+    Query,
+    UploadFile,
+    status,
+)
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Session
 
@@ -8,103 +18,25 @@ from app.core.config import settings
 from app.core.database import get_db
 from app.core.deps import get_current_active_user, get_current_user
 from app.models.user import User
-from app.schemas.user import ProfileResponse
+from app.schemas.user import (
+    ProfileResponse,
+    SearchHistoryCreate,
+    SearchHistoryDeleteResponse,
+    SearchHistoryListResponse,
+    SearchHistoryResponse,
+)
 from app.schemas.user import User as UserSchema
 from app.schemas.user import UserUpdate
 from app.utils.s3_utils import delete_file_from_s3, upload_file_to_s3
+from app.utils.user_utils import (
+    add_search_to_history,
+    clear_all_search_history,
+    delete_search_from_history,
+    get_recent_searches,
+    get_user_search_history,
+)
 
 router = APIRouter()
-
-
-@router.get("/", response_model=list[UserSchema])
-async def get_users(
-    skip: int = 0,
-    limit: int = 100,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_active_user),
-):
-    """Get list of users (admin only)."""
-    if not current_user.is_staff:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions"
-        )
-
-    users = db.query(User).offset(skip).limit(limit).all()
-    return users
-
-
-@router.get("/{user_id}", response_model=UserSchema)
-async def get_user(
-    user_id: str,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_active_user),
-):
-    """Get user by ID."""
-    if not current_user.is_staff and str(current_user.id) != user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions"
-        )
-
-    user = db.query(User).filter(User.id == user_id).first()
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-        )
-
-    return user
-
-
-@router.put("/{user_id}", response_model=UserSchema)
-async def update_user(
-    user_id: str,
-    user_update: UserUpdate,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_active_user),
-):
-    """Update user information."""
-    if not current_user.is_staff and str(current_user.id) != user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions"
-        )
-
-    user = db.query(User).filter(User.id == user_id).first()
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-        )
-
-    # Update only provided fields
-    update_data = user_update.dict(exclude_unset=True)
-    for field, value in update_data.items():
-        setattr(user, field, value)
-
-    db.commit()
-    db.refresh(user)
-    return user
-
-
-@router.delete("/{user_id}")
-async def delete_user(
-    user_id: str,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_active_user),
-):
-    """Delete user (admin only)."""
-    if not current_user.is_staff:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions"
-        )
-
-    user = db.query(User).filter(User.id == user_id).first()
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-        )
-
-    db.delete(user)
-    db.commit()
-
-    return {"message": "User deleted successfully"}
 
 
 @router.patch("/profile", response_model=ProfileResponse)
@@ -163,4 +95,152 @@ async def update_profile_with_avatar(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error updating profile: {str(e)}",
+        )
+
+
+@router.post("/search-history", response_model=SearchHistoryResponse)
+async def add_search_history(
+    search_data: SearchHistoryCreate,
+    current_user: Annotated[User, Depends(get_current_active_user)] = None,
+    db: AsyncSession = Depends(get_db),
+) -> SearchHistoryResponse:
+    """
+    Add a search query to user's search history.
+    If the same search already exists, it will update the count and move it to the top.
+    """
+    try:
+        search_entry = await add_search_to_history(
+            db, current_user.id, search_data.search_query
+        )
+        return SearchHistoryResponse.from_orm(search_entry)
+
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e),
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error adding search to history: {str(e)}",
+        )
+
+
+@router.get("/search-history", response_model=SearchHistoryListResponse)
+async def get_search_history(
+    page: int = Query(1, ge=1, description="Page number"),
+    size: int = Query(10, ge=1, le=50, description="Page size"),
+    current_user: Annotated[User, Depends(get_current_active_user)] = None,
+    db: AsyncSession = Depends(get_db),
+) -> SearchHistoryListResponse:
+    """
+    Get user's search history with pagination.
+    Returns searches ordered by last_searched_at (most recent first).
+    """
+    try:
+        search_entries, total = await get_user_search_history(
+            db, current_user.id, page, size
+        )
+
+        # Calculate pagination info
+        pages = (total + size - 1) // size
+        has_next = page < pages
+        has_prev = page > 1
+
+        return SearchHistoryListResponse(
+            items=[SearchHistoryResponse.from_orm(entry) for entry in search_entries],
+            total=total,
+            page=page,
+            size=size,
+            pages=pages,
+            has_next=has_next,
+            has_prev=has_prev,
+        )
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving search history: {str(e)}",
+        )
+
+
+@router.get("/search-history/recent", response_model=list[SearchHistoryResponse])
+async def get_recent_search_history(
+    limit: int = Query(
+        5, ge=1, le=20, description="Number of recent searches to return"
+    ),
+    current_user: Annotated[User, Depends(get_current_active_user)] = None,
+    db: AsyncSession = Depends(get_db),
+) -> list[SearchHistoryResponse]:
+    """
+    Get user's recent search history for autocomplete/suggestions.
+    Returns the most recent searches ordered by last_searched_at.
+    """
+    try:
+        recent_searches = await get_recent_searches(db, current_user.id, limit)
+        return [SearchHistoryResponse.from_orm(entry) for entry in recent_searches]
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving recent searches: {str(e)}",
+        )
+
+
+@router.delete(
+    "/search-history/{search_history_id}", response_model=SearchHistoryDeleteResponse
+)
+async def delete_search_history(
+    search_history_id: UUID,
+    current_user: Annotated[User, Depends(get_current_active_user)] = None,
+    db: AsyncSession = Depends(get_db),
+) -> SearchHistoryDeleteResponse:
+    """
+    Delete a specific search history entry.
+    """
+    try:
+        deleted = await delete_search_from_history(
+            db, current_user.id, search_history_id
+        )
+
+        if not deleted:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Search history entry not found",
+            )
+
+        return SearchHistoryDeleteResponse(
+            message="Search history entry deleted successfully",
+            deleted_count=1,
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error deleting search history: {str(e)}",
+        )
+
+
+@router.delete("/search-history", response_model=SearchHistoryDeleteResponse)
+async def clear_search_history(
+    current_user: Annotated[User, Depends(get_current_active_user)] = None,
+    db: AsyncSession = Depends(get_db),
+) -> SearchHistoryDeleteResponse:
+    """
+    Clear all search history for the current user.
+    """
+    try:
+        deleted_count = await clear_all_search_history(db, current_user.id)
+
+        return SearchHistoryDeleteResponse(
+            message=f"All search history cleared successfully. {deleted_count} entries deleted.",
+            deleted_count=deleted_count,
+        )
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error clearing search history: {str(e)}",
         )

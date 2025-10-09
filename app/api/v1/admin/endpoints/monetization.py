@@ -6,18 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.admin_deps import AdminUser
 from app.core.database import get_db
-from app.core.messages import (
-    ACTIVITY_CREATED,
-    CAMPAIGN_CREATED,
-    CAMPAIGN_DELETED,
-    CAMPAIGN_NOT_FOUND,
-    CAMPAIGN_STAT_CREATED,
-    CAMPAIGN_UPDATED,
-    ENGAGEMENT_BY_TYPE_SUCCESS,
-    PERFORMANCE_SUMMARY_SUCCESS,
-    PERFORMANCE_TRENDS_SUCCESS,
-    SUBSCRIBER_SEGMENTATION_SUCCESS,
-)
+from app.core.messages import CAMPAIGN_DELETED, CAMPAIGN_NOT_FOUND
 from app.schemas.admin import (
     ActivityCreate,
     ActivityResponse,
@@ -60,7 +49,7 @@ async def create_ad_campaign(
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
-    Create new ad campaign (Admin only).
+    Create new ad campaign
     Creates a new advertising campaign for monetization.
     """
     try:
@@ -91,7 +80,7 @@ async def get_ad_campaigns(
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
-    Get ad campaigns list with pagination and filtering (Admin only).
+    Get ad campaigns list with pagination and filtering
     Returns a paginated list of advertising campaigns.
     """
     try:
@@ -126,7 +115,7 @@ async def get_ad_campaign(
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
-    Get ad campaign by ID (Admin only).
+    Get ad campaign by ID.
     Returns detailed information about a specific campaign.
     """
     try:
@@ -153,7 +142,7 @@ async def update_ad_campaign(
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
-    Update ad campaign (Admin only).
+    Update ad campaign.
     Updates an existing advertising campaign.
     """
     try:
@@ -191,7 +180,7 @@ async def delete_ad_campaign(
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
-    Delete ad campaign (Admin only).
+    Delete ad campaign.
     Soft deletes an advertising campaign.
     """
     try:
@@ -236,7 +225,7 @@ async def create_campaign_stat_endpoint(
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
-    Create campaign stat (Admin only).
+    Create campaign stat.
     Adds daily statistics for a campaign.
     """
     try:
@@ -259,7 +248,7 @@ async def get_campaign_stats_endpoint(
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
-    Get campaign stats (Admin only).
+    Get campaign stats.
     Returns recent statistics for a campaign.
     """
     try:
@@ -281,7 +270,6 @@ async def get_campaign_stats_endpoint(
         )
 
 
-# Activity endpoints
 @router.get("/activities/", response_model=list[ActivityResponse])
 async def get_activities_endpoint(
     current_user: AdminUser,
@@ -289,7 +277,7 @@ async def get_activities_endpoint(
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
-    Get monetization activities (Admin only).
+    Get monetization activities.
     Returns recent monetization activities.
     """
     try:
@@ -322,14 +310,13 @@ async def create_activity_log(
         )
 
 
-# Performance & Analytics endpoints
 @router.get("/performance/summary/", response_model=PerformanceSummary)
 async def get_performance_summary_endpoint(
     current_user: AdminUser,
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
-    Get performance summary (Admin only).
+    Get performance summary.
     Returns overall monetization performance metrics.
     """
     try:
@@ -349,7 +336,7 @@ async def get_performance_trends_endpoint(
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
-    Get performance trends (Admin only).
+    Get performance trends.
     Returns performance trends over time.
     """
     try:
@@ -390,7 +377,7 @@ async def get_subscriber_segmentation_endpoint(
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
-    Get subscriber segmentation (Admin only).
+    Get subscriber segmentation.
     Returns subscriber counts by plan.
     """
     try:
