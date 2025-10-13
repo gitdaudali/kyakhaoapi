@@ -1,0 +1,167 @@
+[
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440001",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440001",
+    "stat_date": "2024-06-01",
+    "impressions": 125000,
+    "clicks": 625,
+    "revenue": 937.5,
+    "created_at": "2024-06-02T00:00:00Z",
+    "updated_at": "2024-06-02T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440002",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440001",
+    "stat_date": "2024-06-02",
+    "impressions": 130000,
+    "clicks": 650,
+    "revenue": 975.0,
+    "created_at": "2024-06-03T00:00:00Z",
+    "updated_at": "2024-06-03T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440003",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440001",
+    "stat_date": "2024-06-03",
+    "impressions": 135000,
+    "clicks": 675,
+    "revenue": 1012.5,
+    "created_at": "2024-06-04T00:00:00Z",
+    "updated_at": "2024-06-04T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440004",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440002",
+    "stat_date": "2024-07-01",
+    "impressions": 200000,
+    "clicks": 4000,
+    "revenue": 3000.0,
+    "created_at": "2024-07-02T00:00:00Z",
+    "updated_at": "2024-07-02T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440005",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440002",
+    "stat_date": "2024-07-02",
+    "impressions": 210000,
+    "clicks": 4200,
+    "revenue": 3150.0,
+    "created_at": "2024-07-03T00:00:00Z",
+    "updated_at": "2024-07-03T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440006",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440002",
+    "stat_date": "2024-07-03",
+    "impressions": 220000,
+    "clicks": 4400,
+    "revenue": 3300.0,
+    "created_at": "2024-07-04T00:00:00Z",
+    "updated_at": "2024-07-04T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440007",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440003",
+    "stat_date": "2024-05-01",
+    "impressions": 100000,
+    "clicks": 2000,
+    "revenue": 1200.0,
+    "created_at": "2024-05-02T00:00:00Z",
+    "updated_at": "2024-05-02T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440008",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440003",
+    "stat_date": "2024-05-02",
+    "impressions": 110000,
+    "clicks": 2200,
+    "revenue": 1320.0,
+    "created_at": "2024-05-03T00:00:00Z",
+    "updated_at": "2024-05-03T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440009",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440005",
+    "stat_date": "2023-11-01",
+    "impressions": 500000,
+    "clicks": 10000,
+    "revenue": 15000.0,
+    "created_at": "2023-11-02T00:00:00Z",
+    "updated_at": "2023-11-02T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440010",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440005",
+    "stat_date": "2023-11-02",
+    "impressions": 520000,
+    "clicks": 10400,
+    "revenue": 15600.0,
+    "created_at": "2023-11-03T00:00:00Z",
+    "updated_at": "2023-11-03T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440011",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440006",
+    "stat_date": "2024-06-15",
+    "impressions": 150000,
+    "clicks": 3000,
+    "revenue": 1875.0,
+    "created_at": "2024-06-16T00:00:00Z",
+    "updated_at": "2024-06-16T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440012",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440006",
+    "stat_date": "2024-06-16",
+    "impressions": 160000,
+    "clicks": 3200,
+    "revenue": 2000.0,
+    "created_at": "2024-06-17T00:00:00Z",
+    "updated_at": "2024-06-17T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440013",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440007",
+    "stat_date": "2024-07-01",
+    "impressions": 300000,
+    "clicks": 6000,
+    "revenue": 4500.0,
+    "created_at": "2024-07-02T00:00:00Z",
+    "updated_at": "2024-07-02T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440014",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440007",
+    "stat_date": "2024-07-02",
+    "impressions": 320000,
+    "clicks": 6400,
+    "revenue": 4800.0,
+    "created_at": "2024-07-03T00:00:00Z",
+    "updated_at": "2024-07-03T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "660e8400-e29b-41d4-a716-446655440015",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440007",
+    "stat_date": "2024-07-03",
+    "impressions": 340000,
+    "clicks": 6800,
+    "revenue": 5100.0,
+    "created_at": "2024-07-04T00:00:00Z",
+    "updated_at": "2024-07-04T00:00:00Z",
+    "is_deleted": false
+  }
+]

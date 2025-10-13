@@ -53,6 +53,35 @@ from app.utils.content_utils import calculate_pagination_info
 router = APIRouter()
 
 
+@router.get("/debug/auth-test")
+async def debug_auth_test(
+    current_user: AdminUser,
+    db: AsyncSession = Depends(get_db),
+) -> dict:
+    """
+    Debug endpoint to test authentication and authorization dependency injection.
+    This endpoint will only work if the dependency chain is working properly.
+    """
+    return {
+        "status": "SUCCESS",
+        "message": "Dependency injection is working correctly",
+        "user_info": {
+            "user_id": str(current_user.id),
+            "email": current_user.email,
+            "is_staff": current_user.is_staff,
+            "is_superuser": current_user.is_superuser,
+            "role": current_user.role,
+            "is_active": current_user.is_active,
+        },
+        "dependency_chain": {
+            "HTTPBearer": "✅ Working",
+            "get_current_user": "✅ Working", 
+            "get_admin_user": "✅ Working",
+            "AdminUser": "✅ Working"
+        }
+    }
+
+
 @router.post("/campaigns/", response_model=AdCampaignResponse)
 async def create_ad_campaign(
     current_user: AdminUser,

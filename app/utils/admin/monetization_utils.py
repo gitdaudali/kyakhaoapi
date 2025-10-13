@@ -134,15 +134,65 @@ async def delete_campaign(db: AsyncSession, campaign_id: UUID) -> bool:
 
 
 # Campaign Stats
+async def update_campaign_totals(db: AsyncSession, campaign_id: UUID):
+    """Recalculate campaign totals from all stats"""
+    print(f"🔄 Updating campaign totals for campaign_id: {campaign_id}")
+    
+    # Get all stats for this campaign
+    stats_query = select(AdCampaignStat).where(AdCampaignStat.campaign_id == campaign_id)
+    result = await db.execute(stats_query)
+    stats = result.scalars().all()
+    
+    print(f"📊 Found {len(stats)} stats for campaign")
+    
+    # Calculate totals
+    total_spend = sum(stat.revenue for stat in stats)  # Using revenue as spend
+    total_impressions = sum(stat.impressions for stat in stats)
+    total_clicks = sum(stat.clicks for stat in stats)
+    total_revenue = sum(stat.revenue for stat in stats)
+    
+    print(f"💰 Calculated totals - Spend: {total_spend}, Impressions: {total_impressions}, Clicks: {total_clicks}, Revenue: {total_revenue}")
+    
+    # Update campaign with new totals
+    campaign = await get_campaign_by_id(db, campaign_id)
+    if campaign:
+        print(f"📈 Updating campaign: {campaign.title}")
+        campaign.spend = total_spend
+        campaign.impressions = total_impressions
+        campaign.clicks = total_clicks
+        campaign.revenue = total_revenue
+        print(f"✅ Campaign totals updated successfully")
+    else:
+        print(f"❌ Campaign not found with ID: {campaign_id}")
+
+
 async def create_campaign_stat(
     db: AsyncSession, stat_data: AdCampaignStatCreate
 ) -> AdCampaignStat:
-    """Create campaign stat"""
-    stat = AdCampaignStat(**stat_data.model_dump())
-    db.add(stat)
-    await db.commit()
-    await db.refresh(stat)
-    return stat
+    """Create campaign stat and update campaign totals"""
+    print(f"📝 Creating campaign stat for campaign_id: {stat_data.campaign_id}")
+    print(f"📊 Stat data: {stat_data.model_dump()}")
+    
+    try:
+        # Create the stat record
+        stat = AdCampaignStat(**stat_data.model_dump())
+        db.add(stat)
+        await db.flush()  # Flush to get the ID but don't commit yet
+        print(f"✅ Stat record created with ID: {stat.id}")
+        
+        # Update campaign totals before committing
+        await update_campaign_totals(db, stat_data.campaign_id)
+        
+        # Commit both stat creation and campaign update together
+        await db.commit()
+        await db.refresh(stat)
+        print(f"✅ Campaign stat created and campaign totals updated successfully")
+        
+        return stat
+    except Exception as e:
+        print(f"❌ Error creating campaign stat: {str(e)}")
+        await db.rollback()
+        raise e
 
 
 async def get_campaign_stats(
@@ -157,6 +207,56 @@ async def get_campaign_stats(
     )
     result = await db.execute(query)
     return result.scalars().all()
+
+
+async def delete_campaign_stat(db: AsyncSession, stat_id: UUID) -> bool:
+    """Delete campaign stat and update campaign totals"""
+    # Get stat to find campaign_id before deletion
+    stat_query = select(AdCampaignStat).where(AdCampaignStat.id == stat_id)
+    result = await db.execute(stat_query)
+    stat = result.scalar_one_or_none()
+    
+    if not stat:
+        return False
+    
+    campaign_id = stat.campaign_id
+    
+    # Delete the stat
+    await db.delete(stat)
+    await db.commit()
+    
+    # Update campaign totals
+    await update_campaign_totals(db, campaign_id)
+    
+    return True
+
+
+async def update_campaign_stat(
+    db: AsyncSession, stat_id: UUID, stat_data: dict
+) -> Optional[AdCampaignStat]:
+    """Update campaign stat and recalculate campaign totals"""
+    # Get existing stat
+    stat_query = select(AdCampaignStat).where(AdCampaignStat.id == stat_id)
+    result = await db.execute(stat_query)
+    stat = result.scalar_one_or_none()
+    
+    if not stat:
+        return None
+    
+    campaign_id = stat.campaign_id
+    
+    # Update stat fields
+    for field, value in stat_data.items():
+        if hasattr(stat, field):
+            setattr(stat, field, value)
+    
+    await db.commit()
+    await db.refresh(stat)
+    
+    # Update campaign totals
+    await update_campaign_totals(db, campaign_id)
+    
+    return stat
 
 
 # Activities

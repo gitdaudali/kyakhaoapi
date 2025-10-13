@@ -1,0 +1,192 @@
+[
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440001",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440001",
+    "action": "created_campaign",
+    "note": "Created campaign: Summer Movie Campaign 2024",
+    "meta": null,
+    "created_at": "2024-05-15T10:30:00Z",
+    "updated_at": "2024-05-15T10:30:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440002",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440001",
+    "action": "updated_campaign",
+    "note": "Updated campaign: Summer Movie Campaign 2024",
+    "meta": "{\"budget\": 50000.0, \"status\": \"ACTIVE\"}",
+    "created_at": "2024-06-15T14:22:00Z",
+    "updated_at": "2024-06-15T14:22:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440003",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440002",
+    "action": "created_campaign",
+    "note": "Created campaign: Mobile Video Ads Q3",
+    "meta": null,
+    "created_at": "2024-06-20T09:15:00Z",
+    "updated_at": "2024-06-20T09:15:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440004",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440002",
+    "action": "updated_campaign",
+    "note": "Updated campaign: Mobile Video Ads Q3",
+    "meta": "{\"budget\": 75000.0, \"status\": \"ACTIVE\"}",
+    "created_at": "2024-07-10T16:45:00Z",
+    "updated_at": "2024-07-10T16:45:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440005",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440003",
+    "action": "created_campaign",
+    "note": "Created campaign: iOS Native Ads Campaign",
+    "meta": null,
+    "created_at": "2024-04-25T11:20:00Z",
+    "updated_at": "2024-04-25T11:20:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440006",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440003",
+    "action": "updated_campaign",
+    "note": "Updated campaign: iOS Native Ads Campaign",
+    "meta": "{\"status\": \"PAUSED\"}",
+    "created_at": "2024-06-01T13:30:00Z",
+    "updated_at": "2024-06-01T13:30:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440007",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440004",
+    "action": "created_campaign",
+    "note": "Created campaign: Smart TV Interstitial Ads",
+    "meta": null,
+    "created_at": "2024-07-01T08:45:00Z",
+    "updated_at": "2024-07-01T08:45:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440008",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440005",
+    "action": "created_campaign",
+    "note": "Created campaign: Holiday Season Campaign 2023",
+    "meta": null,
+    "created_at": "2023-10-15T12:00:00Z",
+    "updated_at": "2023-10-15T12:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440009",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440005",
+    "action": "updated_campaign",
+    "note": "Updated campaign: Holiday Season Campaign 2023",
+    "meta": "{\"status\": \"ENDED\"}",
+    "created_at": "2024-01-05T09:30:00Z",
+    "updated_at": "2024-01-05T09:30:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440010",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440006",
+    "action": "created_campaign",
+    "note": "Created campaign: Gaming Content Banner Ads",
+    "meta": null,
+    "created_at": "2024-06-10T14:20:00Z",
+    "updated_at": "2024-06-10T14:20:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440011",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440006",
+    "action": "updated_campaign",
+    "note": "Updated campaign: Gaming Content Banner Ads",
+    "meta": "{\"budget\": 25000.0, \"status\": \"ACTIVE\"}",
+    "created_at": "2024-07-05T10:15:00Z",
+    "updated_at": "2024-07-05T10:15:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440012",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440007",
+    "action": "created_campaign",
+    "note": "Created campaign: Sports Streaming Ads",
+    "meta": null,
+    "created_at": "2024-06-25T16:30:00Z",
+    "updated_at": "2024-06-25T16:30:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440013",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440007",
+    "action": "updated_campaign",
+    "note": "Updated campaign: Sports Streaming Ads",
+    "meta": "{\"budget\": 60000.0, \"status\": \"ACTIVE\"}",
+    "created_at": "2024-07-20T11:45:00Z",
+    "updated_at": "2024-07-20T11:45:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440014",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440008",
+    "action": "created_campaign",
+    "note": "Created campaign: Test Campaign - Deleted",
+    "meta": null,
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440015",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440008",
+    "action": "deleted_campaign",
+    "note": "Deleted campaign: Test Campaign - Deleted",
+    "meta": null,
+    "created_at": "2024-01-02T00:00:00Z",
+    "updated_at": "2024-01-02T00:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440016",
+    "campaign_id": null,
+    "action": "system_maintenance",
+    "note": "System maintenance completed - all campaigns updated",
+    "meta": "{\"maintenance_type\": \"scheduled\", \"duration_minutes\": 30}",
+    "created_at": "2024-07-01T02:00:00Z",
+    "updated_at": "2024-07-01T02:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440017",
+    "campaign_id": null,
+    "action": "performance_report_generated",
+    "note": "Monthly performance report generated for Q2 2024",
+    "meta": "{\"report_period\": \"2024-04-01 to 2024-06-30\", \"total_revenue\": 125000.0}",
+    "created_at": "2024-07-01T09:00:00Z",
+    "updated_at": "2024-07-01T09:00:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440018",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440001",
+    "action": "budget_alert",
+    "note": "Campaign budget 80% utilized",
+    "meta": "{\"budget_used_percentage\": 80.0, \"remaining_budget\": 10000.0}",
+    "created_at": "2024-06-20T15:30:00Z",
+    "updated_at": "2024-06-20T15:30:00Z",
+    "is_deleted": false
+  },
+  {
+    "id": "770e8400-e29b-41d4-a716-446655440019",
+    "campaign_id": "550e8400-e29b-41d4-a716-446655440002",
+    "action": "performance_optimization",
+    "note": "Campaign performance optimized based on analytics",
+    "meta": "{\"optimization_type\": \"bid_adjustment\", \"ctr_improvement\": 15.5}",
+    "created_at": "2024-07-15T11:20:00Z",
+    "updated_at": "2024-07-15T11:20:00Z",
+    "is_deleted": false
+  }
+]
