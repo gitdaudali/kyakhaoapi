@@ -27,6 +27,7 @@ from app.models.streaming import StreamingChannel
 from app.models.token import RefreshToken, Token, TokenBlacklist
 from app.models.user import ProfileStatus, User, UserRole
 from app.models.verification import EmailVerificationToken, PasswordResetToken
+from app.models.policy import Policy, PolicyType, PolicyStatus
 
 __all__ = [
     "BaseModel",
@@ -62,4 +63,7 @@ __all__ = [
     "WatchQuality",
     "WatchSession",
     "StreamingChannel",
+    "Policy",
+    "PolicyType", 
+    "PolicyStatus",
 ]

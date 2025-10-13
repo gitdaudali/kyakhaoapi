@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field, HttpUrl, validator
 
 from app.models.content import ContentRating, ContentStatus, ContentType, MovieJobTitle
 from app.models.monetization import AdType, CampaignStatus, PlatformType
+from app.models.policy import PolicyType, PolicyStatus
 from app.models.streaming import StreamingChannelCategory
 from app.models.user import ProfileStatus, SignupType, UserRole
 
@@ -1177,3 +1178,77 @@ class AdCampaignQueryParams(BaseModel):
             "sort_by": self.sort_by,
             "sort_order": self.sort_order,
         }
+
+# =============================================================================
+# POLICY ADMIN SCHEMAS
+# =============================================================================
+
+class PolicyAdminCreate(BaseModel):
+    """Schema for creating policy via admin"""
+    
+    title: str = Field(..., min_length=1, max_length=255, description="Policy title")
+    slug: str = Field(..., min_length=1, max_length=300, description="Policy slug")
+    content: str = Field(..., min_length=1, description="Policy content")
+    policy_type: PolicyType = Field(..., description="Policy type")
+    status: PolicyStatus = Field(PolicyStatus.DRAFT, description="Policy status")
+    version: str = Field("1.0", max_length=20, description="Policy version")
+    effective_date: Optional[datetime] = Field(None, description="Effective date")
+    next_review_date: Optional[datetime] = Field(None, description="Next review date")
+    notes: Optional[str] = Field(None, description="Internal notes")
+
+class PolicyAdminUpdate(BaseModel):
+    """Schema for updating policy via admin"""
+    
+    title: Optional[str] = Field(None, min_length=1, max_length=255, description="Policy title")
+    slug: Optional[str] = Field(None, min_length=1, max_length=300, description="Policy slug")
+    content: Optional[str] = Field(None, min_length=1, description="Policy content")
+    policy_type: Optional[PolicyType] = Field(None, description="Policy type")
+    status: Optional[PolicyStatus] = Field(None, description="Policy status")
+    version: Optional[str] = Field(None, max_length=20, description="Policy version")
+    effective_date: Optional[datetime] = Field(None, description="Effective date")
+    next_review_date: Optional[datetime] = Field(None, description="Next review date")
+    notes: Optional[str] = Field(None, description="Internal notes")
+
+class PolicyAdminResponse(BaseModel):
+    """Admin response schema for policy"""
+    
+    id: UUID = Field(..., description="Policy ID")
+    title: str = Field(..., description="Policy title")
+    slug: str = Field(..., description="Policy slug")
+    content: str = Field(..., description="Policy content")
+    policy_type: PolicyType = Field(..., description="Policy type")
+    status: PolicyStatus = Field(..., description="Policy status")
+    version: str = Field(..., description="Policy version")
+    is_active: bool = Field(..., description="Whether policy is active")
+    effective_date: Optional[datetime] = Field(None, description="Effective date")
+    last_reviewed_at: Optional[datetime] = Field(None, description="Last reviewed date")
+    next_review_date: Optional[datetime] = Field(None, description="Next review date")
+    author_id: Optional[UUID] = Field(None, description="Author ID")
+    reviewer_id: Optional[UUID] = Field(None, description="Reviewer ID")
+    notes: Optional[str] = Field(None, description="Internal notes")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+    is_deleted: bool = Field(False, description="Whether policy is deleted")
+
+class PolicyAdminListResponse(BaseModel):
+    """Response schema for policy admin list"""
+    
+    items: List[PolicyAdminResponse] = Field(..., description="List of policies")
+    total: int = Field(..., description="Total number of policies")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+class PolicyAdminQueryParams(BaseModel):
+    """Query parameters for policy admin endpoints"""
+    
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=500, description="Page size")
+    search: Optional[str] = Field(None, min_length=1, max_length=255, description="Search term")
+    policy_type: Optional[PolicyType] = Field(None, description="Filter by policy type")
+    status: Optional[PolicyStatus] = Field(None, description="Filter by status")
+    is_active: Optional[bool] = Field(None, description="Filter by active status")
+    sort_by: str = Field("created_at", description="Sort field")
+    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
