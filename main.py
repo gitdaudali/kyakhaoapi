@@ -17,10 +17,10 @@ from app.core.database import engine
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
-    print("✅ FastAPI application started")
+    print("FastAPI application started")
     yield
     # Shutdown
-    print("✅ FastAPI application shutdown")
+    print("FastAPI application shutdown")
 
 
 # Create FastAPI app with enhanced OpenAPI documentation
@@ -34,7 +34,7 @@ app = FastAPI(
         "url": "https://cupstreaming.com",
     },
     license_info={"name": "MIT License", "url": "https://opensource.org/licenses/MIT"},
-    servers=[{"url": f"{settings.BASE_URL}"}],
+    servers=[{"url": "http://localhost:8000"}],
     tags_metadata=[
         {
             "name": "authentication",
@@ -155,4 +155,4 @@ async def api_info():
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

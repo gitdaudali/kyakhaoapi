@@ -710,6 +710,66 @@ class ContentAdminCreate(BaseModel):
     crew: Optional[List[CrewMemberCreate]] = Field(None, description="Crew members")
 
 
+class TVShowAdminCreate(BaseModel):
+    """Schema for creating TV shows via admin - content_type is automatically set to tv_series"""
+
+    title: str = Field(..., min_length=1, max_length=255, description="TV show title")
+    slug: str = Field(..., min_length=1, max_length=300, description="TV show slug")
+    description: Optional[str] = Field(None, description="TV show description")
+    tagline: Optional[str] = Field(None, max_length=500, description="TV show tagline")
+    content_rating: Optional[ContentRating] = Field(None, description="Content rating")
+
+    # Visual Assets
+    poster_url: Optional[str] = Field(None, description="Poster image URL")
+    backdrop_url: Optional[str] = Field(None, description="Backdrop image URL")
+    trailer_url: Optional[str] = Field(None, description="Trailer video URL")
+    logo_url: Optional[str] = Field(None, description="Logo image URL")
+
+    # Release Information
+    release_date: Optional[date] = Field(None, description="Release date")
+    premiere_date: Optional[date] = Field(None, description="Premiere date")
+    end_date: Optional[date] = Field(None, description="End date (for series)")
+
+    # Technical Information
+    runtime: Optional[int] = Field(None, ge=1, description="Runtime in minutes")
+    language: str = Field("en", max_length=10, description="Primary language")
+    original_language: Optional[str] = Field(
+        None, max_length=10, description="Original language"
+    )
+
+    # Series-specific Information
+    total_seasons: int = Field(0, ge=0, description="Total seasons")
+    total_episodes: int = Field(0, ge=0, description="Total episodes")
+    is_ongoing: bool = Field(False, description="Is ongoing series")
+
+    # Platform Features
+    is_featured: bool = Field(False, description="Is featured content")
+    is_trending: bool = Field(False, description="Is trending content")
+    is_new_release: bool = Field(False, description="Is new release")
+    is_premium: bool = Field(False, description="Is premium content")
+
+    # Availability
+    available_from: Optional[datetime] = Field(None, description="Available from date")
+    available_until: Optional[datetime] = Field(
+        None, description="Available until date"
+    )
+
+    # Discovery
+    keywords: Optional[str] = Field(None, description="Content keywords")
+
+    # Genre IDs
+    genre_ids: List[UUID] = Field(default_factory=list, description="Genre IDs")
+
+    # Movie Files (optional - for integrated approach)
+    movie_files: Optional[List[MovieFileCreate]] = Field(
+        None, description="Movie files data"
+    )
+
+    # Cast and Crew (optional - for integrated approach)
+    cast: Optional[List[CastMemberCreate]] = Field(None, description="Cast members")
+    crew: Optional[List[CrewMemberCreate]] = Field(None, description="Crew members")
+
+
 class ContentAdminUpdate(BaseModel):
     """Schema for updating content via admin"""
 

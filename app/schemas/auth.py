@@ -14,10 +14,10 @@ class UserRegisterRequest(BaseModel):
     # username: constr(min_length=3, max_length=50) = Field(
     #     ..., description="Username (3-50 characters)", pattern=r"^[a-zA-Z0-9_-]+$"
     # )
-    password: constr(min_length=8, max_length=128) = Field(
-        ..., description="Password (8-128 characters)"
+    password: constr(min_length=8, max_length=72) = Field(
+        ..., description="Password (8-72 characters)"
     )
-    password_confirm: constr(min_length=8, max_length=128) = Field(
+    password_confirm: constr(min_length=8, max_length=72) = Field(
         ..., description="Password confirmation"
     )
 
@@ -124,10 +124,10 @@ class PasswordResetConfirm(BaseModel):
     """Password reset confirmation schema"""
 
     token: str = Field(..., description="Password reset token")
-    password: constr(min_length=8, max_length=128) = Field(
-        ..., description="New password (8-128 characters)"
+    password: constr(min_length=8, max_length=72) = Field(
+        ..., description="New password (8-72 characters)"
     )
-    password_confirm: constr(min_length=8, max_length=128) = Field(
+    password_confirm: constr(min_length=8, max_length=72) = Field(
         ..., description="Password confirmation"
     )
 
@@ -162,10 +162,10 @@ class PasswordChangeRequest(BaseModel):
     """Password change request schema"""
 
     current_password: str = Field(..., description="Current password")
-    new_password: constr(min_length=8, max_length=128) = Field(
-        ..., description="New password (8-128 characters)"
+    new_password: constr(min_length=8, max_length=72) = Field(
+        ..., description="New password (8-72 characters)"
     )
-    new_password_confirm: constr(min_length=8, max_length=128) = Field(
+    new_password_confirm: constr(min_length=8, max_length=72) = Field(
         ..., description="New password confirmation"
     )
 

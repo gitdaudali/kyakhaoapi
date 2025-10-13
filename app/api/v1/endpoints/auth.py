@@ -117,9 +117,12 @@ async def register_user(
                 otp = await create_email_verification_otp(
                     db, existing_user.id, existing_user.email
                 )
-                send_registration_otp_email_task.delay(
-                    email_to=existing_user.email, otp_code=otp.otp_code
-                )
+                
+                # Only send email if emails are enabled
+                if settings.EMAILS_ENABLED:
+                    send_registration_otp_email_task.delay(
+                        email_to=existing_user.email, otp_code=otp.otp_code
+                    )
 
                 return MessageResponse(message=OTP_RESEND_SUCCESS)
             else:
@@ -143,9 +146,12 @@ async def register_user(
 
         # Create email verification OTP and send email
         otp = await create_email_verification_otp(db, db_user.id, db_user.email)
-        send_registration_otp_email_task.delay(
-            email_to=db_user.email, otp_code=otp.otp_code
-        )
+        
+        # Only send email if emails are enabled
+        if settings.EMAILS_ENABLED:
+            send_registration_otp_email_task.delay(
+                email_to=db_user.email, otp_code=otp.otp_code
+            )
 
         return MessageResponse(message=REGISTRATION_SUCCESS)
 
@@ -380,11 +386,13 @@ async def request_password_reset(
 
         otp = await create_password_reset_otp(db, user.id, user.email)
 
-        send_password_reset_otp_email_task.delay(
-            email_to=user.email,
-            otp_code=otp.otp_code,
-            user_name=user.first_name or user.email.split("@")[0],
-        )
+        # Only send email if emails are enabled
+        if settings.EMAILS_ENABLED:
+            send_password_reset_otp_email_task.delay(
+                email_to=user.email,
+                otp_code=otp.otp_code,
+                user_name=user.first_name or user.email.split("@")[0],
+            )
 
         return MessageResponse(message=PASSWORD_RESET_OTP_SENT)
 

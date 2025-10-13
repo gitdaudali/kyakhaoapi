@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any, List, Optional
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
@@ -59,6 +59,7 @@ from app.schemas.content import (
     ContentQueryParams,
     CrewFilters,
     CrewListResponse,
+    EpisodeMinimal,
     FeaturedContentQueryParams,
     Genre,
     GenreFilters,
@@ -76,6 +77,7 @@ from app.schemas.content import (
     ReviewStats,
     ReviewUpdate,
     ReviewUpdateResponse,
+    SeasonSimple,
     TrendingContentQueryParams,
 )
 from app.utils.content_utils import (
@@ -917,3 +919,4 @@ async def get_person_by_id_endpoint(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error retrieving person: {str(e)}",
         )
+

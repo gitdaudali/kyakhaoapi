@@ -168,6 +168,7 @@ async def create_token_pair(
         additional_claims={
             "email": user.email,
             "is_superuser": user.is_superuser,
+            "is_staff": user.is_staff,
             "is_active": user.is_active,
         },
     )
