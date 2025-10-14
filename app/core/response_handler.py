@@ -7,6 +7,7 @@ from typing import Any, Dict, List, Optional
 from fastapi import HTTPException, status
 from fastapi.responses import JSONResponse
 from app.core.messages import *
+from app.utils.serialization_utils import safe_json_response
 
 
 # ============================================================================
@@ -22,7 +23,7 @@ def success_response(
     response = {
         "success": True,
         "message": message,
-        "data": data
+        "data": safe_json_response(data) if data is not None else None
     }
     return JSONResponse(
         status_code=status_code,
@@ -33,14 +34,18 @@ def success_response(
 def error_response(
     message: str,
     status_code: int = 400,
-    data: Any = None
+    data: Any = None,
+    error_code: str = None
 ) -> JSONResponse:
     """Create a simple error response."""
     response = {
+        "success": False,
         "message": message,
-        "status_code": status_code,
-        "data": data
+        "data": safe_json_response(data) if data is not None else None
     }
+    if error_code:
+        response["error_code"] = error_code
+    
     return JSONResponse(
         status_code=status_code,
         content=response
@@ -487,14 +492,18 @@ def create_response(
     success: bool = True,
     message: str = "Success",
     data: Any = None,
-    status_code: int = 200
+    status_code: int = 200,
+    error_code: str = None
 ) -> JSONResponse:
     """Create a unified response format for all API endpoints."""
     response = {
         "success": success,
         "message": message,
-        "data": data
+        "data": safe_json_response(data) if data is not None else None
     }
+    
+    if error_code:
+        response["error_code"] = error_code
     
     return JSONResponse(
         status_code=status_code,
@@ -519,14 +528,50 @@ def success_response(
 def error_response(
     message: str = "Error",
     status_code: int = 400,
-    data: Any = None
+    data: Any = None,
+    error_code: str = None
 ) -> JSONResponse:
     """Create an error response with unified format."""
     return create_response(
         success=False,
         message=message,
         data=data,
+        status_code=status_code,
+        error_code=error_code
+    )
+
+
+# ============================================================================
+# RESPONSE UTILITIES
+# ============================================================================
+
+def create_success_response(
+    message: str = "Success",
+    data: Any = None,
+    status_code: int = 200
+) -> JSONResponse:
+    """Create a standardized success response."""
+    return create_response(
+        success=True,
+        message=message,
+        data=data,
         status_code=status_code
+    )
+
+
+def create_error_response(
+    message: str = "Error",
+    status_code: int = 400,
+    data: Any = None,
+    error_code: str = None
+) -> JSONResponse:
+    """Create a standardized error response."""
+    return create_response(
+        success=False,
+        message=message,
+        data=data,
+        status_code=status_code,
+        error_code=error_code
     )
 
 
@@ -541,7 +586,8 @@ def handle_exception(request, exc: Exception) -> JSONResponse:
     if isinstance(exc, BaseAPIException):
         return error_response(
             message=str(exc.detail),
-            status_code=exc.status_code
+            status_code=exc.status_code,
+            error_code=getattr(exc, 'error_code', None)
         )
     
     # Handle FastAPI HTTP exceptions
@@ -554,5 +600,6 @@ def handle_exception(request, exc: Exception) -> JSONResponse:
     # Handle unexpected errors
     return error_response(
         message="Internal server error",
-        status_code=500
+        status_code=500,
+        error_code="INTERNAL_ERROR"
     )

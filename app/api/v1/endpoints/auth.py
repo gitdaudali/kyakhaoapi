@@ -356,7 +356,14 @@ async def change_password(
         current_user.password = get_password_hash(password_data.new_password)
         await db.commit()
 
-        return MessageResponse(message=PASSWORD_CHANGED_SUCCESS)
+        return success_response(
+            message=PASSWORD_CHANGED_SUCCESS,
+            data={
+                "user_id": user.id,
+                "email": user.email,
+                "password_changed_at": datetime.utcnow()
+            }
+        )
 
     except HTTPException:
         raise
@@ -391,7 +398,13 @@ async def request_password_reset(
             user_name=user.first_name or user.email.split("@")[0],
         )
 
-        return MessageResponse(message=PASSWORD_RESET_OTP_SENT)
+        return success_response(
+            message=PASSWORD_RESET_OTP_SENT,
+            data={
+                "email": reset_data.email,
+                "otp_sent_at": datetime.utcnow()
+            }
+        )
 
     except HTTPException:
         raise
@@ -438,7 +451,14 @@ async def confirm_password_reset(
 
         await db.commit()
 
-        return MessageResponse(message=PASSWORD_RESET_SUCCESS)
+        return success_response(
+            message=PASSWORD_RESET_SUCCESS,
+            data={
+                "user_id": user.id,
+                "email": user.email,
+                "password_reset_at": datetime.utcnow()
+            }
+        )
 
     except HTTPException:
         raise
@@ -491,7 +511,15 @@ async def verify_otp(
 
         await db.commit()
 
-        return MessageResponse(message=OTP_VERIFICATION_SUCCESS)
+        return success_response(
+            message=OTP_VERIFICATION_SUCCESS,
+            data={
+                "user_id": user.id,
+                "email": user.email,
+                "status": "verified",
+                "verified_at": datetime.utcnow()
+            }
+        )
 
     except HTTPException:
         raise
