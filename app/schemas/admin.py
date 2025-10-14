@@ -1188,6 +1188,7 @@ class PolicyAdminCreate(BaseModel):
     
     title: str = Field(..., min_length=1, max_length=255, description="Policy title")
     slug: str = Field(..., min_length=1, max_length=300, description="Policy slug")
+    description: str = Field(..., min_length=1, max_length=4000, description="Policy description (3k-4k characters)")
     content: str = Field(..., min_length=1, description="Policy content")
     policy_type: PolicyType = Field(..., description="Policy type")
     status: PolicyStatus = Field(PolicyStatus.DRAFT, description="Policy status")
@@ -1201,6 +1202,7 @@ class PolicyAdminUpdate(BaseModel):
     
     title: Optional[str] = Field(None, min_length=1, max_length=255, description="Policy title")
     slug: Optional[str] = Field(None, min_length=1, max_length=300, description="Policy slug")
+    description: Optional[str] = Field(None, min_length=1, max_length=4000, description="Policy description (3k-4k characters)")
     content: Optional[str] = Field(None, min_length=1, description="Policy content")
     policy_type: Optional[PolicyType] = Field(None, description="Policy type")
     status: Optional[PolicyStatus] = Field(None, description="Policy status")
@@ -1215,6 +1217,7 @@ class PolicyAdminResponse(BaseModel):
     id: UUID = Field(..., description="Policy ID")
     title: str = Field(..., description="Policy title")
     slug: str = Field(..., description="Policy slug")
+    description: str = Field(..., description="Policy description")
     content: str = Field(..., description="Policy content")
     policy_type: PolicyType = Field(..., description="Policy type")
     status: PolicyStatus = Field(..., description="Policy status")

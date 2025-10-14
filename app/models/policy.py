@@ -26,6 +26,7 @@ class Policy(BaseModel, TimestampMixin, table=True):
     
     title: str = Field(sa_type=String(255), nullable=False, index=True)
     slug: str = Field(sa_type=String(300), unique=True, index=True)
+    description: str = Field(sa_type=String(4000), nullable=False, description="Policy description (3k-4k characters)")
     content: str = Field(sa_type=Text, nullable=False)
     policy_type: PolicyType = Field(sa_type=String(50), nullable=False, index=True)
     status: PolicyStatus = Field(sa_type=String(20), default=PolicyStatus.DRAFT, index=True)

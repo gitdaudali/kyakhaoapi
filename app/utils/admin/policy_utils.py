@@ -1,7 +1,7 @@
 from typing import List, Optional, Tuple
 from uuid import UUID
 
-from sqlalchemy import and_, or_, select, update, delete
+from sqlalchemy import and_, or_, select, update, delete, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.policy import Policy, PolicyType, PolicyStatus
