@@ -854,6 +854,137 @@ class ContentAdminQueryParams(BaseModel):
 
 
 # =============================================================================
+# FAQ ADMIN SCHEMAS
+# =============================================================================
+
+
+class FAQAdminCreate(BaseModel):
+    """Schema for creating FAQ via admin"""
+
+    question: str = Field(
+        ..., min_length=1, max_length=500, description="FAQ question"
+    )
+    answer: str = Field(..., min_length=1, description="FAQ answer")
+    category: Optional[str] = Field(
+        None, max_length=100, description="FAQ category"
+    )
+    is_active: bool = Field(True, description="Whether FAQ is active")
+    is_featured: bool = Field(False, description="Whether FAQ is featured")
+    sort_order: int = Field(0, ge=0, description="Sort order")
+
+    @validator("question")
+    def validate_question(cls, v):
+        """Validate FAQ question"""
+        if not v or not v.strip():
+            raise ValueError("FAQ question cannot be empty")
+        return v.strip()
+
+    @validator("answer")
+    def validate_answer(cls, v):
+        """Validate FAQ answer"""
+        if not v or not v.strip():
+            raise ValueError("FAQ answer cannot be empty")
+        return v.strip()
+
+    @validator("category")
+    def validate_category(cls, v):
+        """Validate FAQ category"""
+        if v is not None and v.strip():
+            return v.strip()
+        return v
+
+
+class FAQAdminUpdate(BaseModel):
+    """Schema for updating FAQ via admin"""
+
+    question: Optional[str] = Field(
+        None, min_length=1, max_length=500, description="FAQ question"
+    )
+    answer: Optional[str] = Field(None, min_length=1, description="FAQ answer")
+    category: Optional[str] = Field(
+        None, max_length=100, description="FAQ category"
+    )
+    is_active: Optional[bool] = Field(None, description="Whether FAQ is active")
+    is_featured: Optional[bool] = Field(None, description="Whether FAQ is featured")
+    sort_order: Optional[int] = Field(None, ge=0, description="Sort order")
+
+    @validator("question")
+    def validate_question(cls, v):
+        """Validate FAQ question"""
+        if v is not None and (not v or not v.strip()):
+            raise ValueError("FAQ question cannot be empty")
+        return v.strip() if v else v
+
+    @validator("answer")
+    def validate_answer(cls, v):
+        """Validate FAQ answer"""
+        if v is not None and (not v or not v.strip()):
+            raise ValueError("FAQ answer cannot be empty")
+        return v.strip() if v else v
+
+    @validator("category")
+    def validate_category(cls, v):
+        """Validate FAQ category"""
+        if v is not None and v.strip():
+            return v.strip()
+        return v
+
+
+class FAQAdminResponse(BaseModel):
+    """Admin response schema for FAQ"""
+
+    id: UUID = Field(..., description="FAQ ID")
+    question: str = Field(..., description="FAQ question")
+    answer: str = Field(..., description="FAQ answer")
+    category: Optional[str] = Field(None, description="FAQ category")
+    is_active: bool = Field(..., description="Whether FAQ is active")
+    is_featured: bool = Field(..., description="Whether FAQ is featured")
+    sort_order: int = Field(..., description="Sort order")
+    view_count: int = Field(..., description="View count")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+    is_deleted: bool = Field(False, description="Whether FAQ is deleted")
+
+    class Config:
+        from_attributes = True
+
+
+class FAQAdminListResponse(BaseModel):
+    """Response schema for FAQ admin list"""
+
+    items: List[FAQAdminResponse] = Field(..., description="List of FAQs")
+    total: int = Field(..., description="Total number of FAQs")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+    class Config:
+        from_attributes = True
+
+
+class FAQAdminQueryParams(BaseModel):
+    """Query parameters for FAQ admin endpoints"""
+
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=500, description="Page size")
+    search: Optional[str] = Field(
+        None, min_length=1, max_length=255, description="Search term"
+    )
+    category: Optional[str] = Field(
+        None, max_length=100, description="Filter by category"
+    )
+    is_active: Optional[bool] = Field(None, description="Filter by active status")
+    is_featured: Optional[bool] = Field(None, description="Filter by featured status")
+    sort_by: str = Field("created_at", description="Sort field")
+    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+
+    class Config:
+        from_attributes = True
+
+
+# =============================================================================
 # USER ADMIN SCHEMAS
 # =============================================================================
 

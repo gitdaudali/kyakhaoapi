@@ -1,0 +1,30 @@
+"""
+Test configuration to bypass environment variable issues.
+"""
+
+import os
+
+# Set test environment variables
+os.environ["TESTING"] = "true"
+os.environ["DATABASE_URL"] = "sqlite+aiosqlite:///:memory:"
+os.environ["SECRET_KEY"] = "test-secret-key"
+os.environ["DB_NAME"] = "test_db"
+os.environ["DB_USER"] = "test_user"
+os.environ["DB_PASSWORD"] = "test_password"
+os.environ["DB_HOST"] = "localhost"
+os.environ["DB_PORT"] = "5432"
+os.environ["REDIS_URL"] = "redis://localhost:6379/0"
+os.environ["CELERY_BROKER_URL"] = "redis://localhost:6379/0"
+os.environ["CELERY_RESULT_BACKEND"] = "redis://localhost:6379/0"
+os.environ["AWS_ACCESS_KEY_ID"] = "test"
+os.environ["AWS_SECRET_ACCESS_KEY"] = "test"
+os.environ["AWS_REGION"] = "us-east-1"
+os.environ["S3_BUCKET"] = "test-bucket"
+os.environ["SMTP_HOST"] = "localhost"
+os.environ["SMTP_PORT"] = "587"
+os.environ["SMTP_USER"] = "test"
+os.environ["SMTP_PASSWORD"] = "test"
+os.environ["FROM_EMAIL"] = "test@example.com"
+os.environ["GOOGLE_CLIENT_ID"] = "test"
+os.environ["GOOGLE_CLIENT_SECRET"] = "test"
+os.environ["GOOGLE_REDIRECT_URI"] = "http://localhost:8000/auth/google/callback"

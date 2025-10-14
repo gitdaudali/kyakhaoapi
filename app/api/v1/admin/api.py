@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.api.v1.admin.endpoints import content, genre, people, streaming, upload, user
+from app.api.v1.admin.endpoints import content, faq, genre, people, streaming, upload, user
 
 # Create main admin router
 router = APIRouter()
@@ -40,4 +40,10 @@ router.include_router(
     upload.router,
     prefix="/upload",
     tags=["Admin - File Upload"],
+)
+
+router.include_router(
+    faq.router,
+    prefix="/faq",
+    tags=["Admin - FAQ"],
 )
