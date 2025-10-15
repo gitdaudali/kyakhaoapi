@@ -23,8 +23,9 @@ class SubscriptionStatus(str, Enum):
 
 class SubscriptionPlan(str, Enum):
     FREE = "free"
-    PREMIUM = "premium"
-    PRO = "pro"
+    BASIC = "basic"
+    PREMIUM_MONTHLY = "premium_monthly"
+    PREMIUM_YEARLY = "premium_yearly"
 
 
 class PaymentStatus(str, Enum):
@@ -88,7 +89,7 @@ class Subscription(BaseModel, table=True):
     )
 
     def __repr__(self):
-        return f"<Subscription(id={self.id}, user_id={self.user_id}, plan='{self.plan}', status='{self.status}')>"
+        return f"<Subscription(id={self.id}, user_id={self.user_id}, plan='{self.plan}', status='{self.status}', amount=${self.amount})>"
 
 
 class SubscriptionPayment(BaseModel, table=True):

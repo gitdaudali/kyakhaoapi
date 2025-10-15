@@ -138,19 +138,50 @@
                 <p><strong>User ID:</strong> <span id="userId"></span></p>
             </div>
 
-            <!-- Current Subscription Status -->
+            <!-- Subscription Plans -->
             <div class="subscription-info">
-                <h3>Ready to Subscribe!</h3>
-                <p>Click "Subscribe to Premium" to start your subscription and get redirected to Stripe checkout.</p>
-            </div>
-
-            <!-- Subscription Actions -->
-            <div class="subscription-info">
-                <h3>Subscription Actions</h3>
-                <form method="post" action="/api/v1/stripe/checkout-simple" style="display: inline;">
-                    <button type="submit">Subscribe to Premium</button>
-                </form>
-                <button id="logoutBtn">Logout</button>
+                <h3>Choose Your Plan</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 20px 0;">
+                    <!-- Basic Plan -->
+                    <div style="border: 2px solid #ddd; padding: 20px; border-radius: 8px; text-align: center;">
+                        <h4 style="color: #28a745;">Basic</h4>
+                        <p style="font-size: 24px; font-weight: bold;">$9.99<span style="font-size: 14px;">/month</span></p>
+                        <ul style="text-align: left; list-style: none; padding: 0;">
+                            <li>✓ Basic features</li>
+                            <li>✓ HD streaming</li>
+                            <li>✓ 1 device</li>
+                        </ul>
+                        <button class="subscribe-btn" data-plan="basic">Subscribe to Basic</button>
+                    </div>
+                    
+                    <!-- Premium Monthly Plan -->
+                    <div style="border: 2px solid #007bff; padding: 20px; border-radius: 8px; text-align: center; background-color: #f0f8ff;">
+                        <h4 style="color: #007bff;">Premium Monthly</h4>
+                        <p style="font-size: 24px; font-weight: bold;">$19.99<span style="font-size: 14px;">/month</span></p>
+                        <ul style="text-align: left; list-style: none; padding: 0;">
+                            <li>✓ All features</li>
+                            <li>✓ 4K streaming</li>
+                            <li>✓ 4 devices</li>
+                            <li>✓ Downloads</li>
+                        </ul>
+                        <button class="subscribe-btn" data-plan="premium_monthly">Subscribe Monthly</button>
+                    </div>
+                    
+                    <!-- Premium Yearly Plan -->
+                    <div style="border: 2px solid #ffc107; padding: 20px; border-radius: 8px; text-align: center; background-color: #fffef0;">
+                        <h4 style="color: #ffc107;">Premium Yearly</h4>
+                        <p style="font-size: 24px; font-weight: bold;">$119.99<span style="font-size: 14px;">/year</span></p>
+                        <p style="color: #28a745; font-weight: bold;">Save 17%!</p>
+                        <ul style="text-align: left; list-style: none; padding: 0;">
+                            <li>✓ All features</li>
+                            <li>✓ 4K streaming</li>
+                            <li>✓ 4 devices</li>
+                            <li>✓ Downloads</li>
+                        </ul>
+                        <button class="subscribe-btn" data-plan="premium_yearly">Subscribe Yearly</button>
+                    </div>
+                </div>
+                <button id="logoutBtn" style="margin-top: 20px;">Logout</button>
             </div>
         </div>
 
@@ -198,6 +229,55 @@
         });
 
 
+
+        // Subscribe to any plan
+        document.querySelectorAll('.subscribe-btn').forEach(button => {
+            button.addEventListener('click', async (e) => {
+                if (!currentUser) {
+                    showMessage('Please login first', 'error');
+                    return;
+                }
+
+                const planType = e.target.getAttribute('data-plan');
+                const planNames = {
+                    'basic': 'Basic',
+                    'premium_monthly': 'Premium Monthly',
+                    'premium_yearly': 'Premium Yearly'
+                };
+
+                try {
+                    showMessage(`Processing ${planNames[planType]} subscription...`, 'success');
+                    
+                    const response = await fetch('/api/v1/stripe/checkout-simple', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            user_email: currentUser.email,
+                            plan_type: planType
+                        })
+                    });
+
+                    if (response.redirected) {
+                        // Redirect to Stripe checkout
+                        window.location.href = response.url;
+                    } else if (response.ok) {
+                        const data = await response.json();
+                        if (data.checkout_url) {
+                            window.location.href = data.checkout_url;
+                        } else {
+                            showMessage('Error: No checkout URL received', 'error');
+                        }
+                    } else {
+                        const error = await response.json();
+                        showMessage(`Cannot subscribe: ${error.detail}`, 'error');
+                    }
+                } catch (error) {
+                    showMessage(`Error: ${error.message}`, 'error');
+                }
+            });
+        });
 
         // Logout
         document.getElementById('logoutBtn').addEventListener('click', () => {
