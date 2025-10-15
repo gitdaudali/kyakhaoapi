@@ -16,6 +16,7 @@ if TYPE_CHECKING:
         UserWatchHistory,
         WatchSession,
     )
+    from app.models.subscription import Subscription
     from app.models.token import RefreshToken, Token
     from app.models.verification import (
         EmailVerificationOTP,
@@ -112,6 +113,11 @@ class User(BaseModel, TimestampMixin, table=True):
         sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
     )
     search_history: List["UserSearchHistory"] = Relationship(
+        back_populates="user",
+        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
+    )
+    # Subscriptions
+    subscriptions: List["Subscription"] = Relationship(
         back_populates="user",
         sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
     )

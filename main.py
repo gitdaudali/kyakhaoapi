@@ -78,6 +78,9 @@ security = HTTPBearer()
 
 app.include_router(api_router, prefix="/api/v1")
 
+# Mount static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 def custom_openapi():
     if app.openapi_schema:
