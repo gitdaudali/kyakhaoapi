@@ -17,6 +17,15 @@ from app.core.messages import (
     GENRE_UNFEATURED,
     GENRE_UPDATED,
 )
+from app.core.response_handler import (
+    success_response,
+    error_response,
+    GenreNotFoundException,
+    GenreExistsException,
+    FileNotFoundException,
+    InvalidFileFormatException,
+    InternalServerException
+)
 from app.models.user import User
 from app.schemas.admin import (
     GenreAdminCreate,
@@ -50,21 +59,20 @@ async def create_genre_admin(
     """
     try:
         genre = await create_genre(db, genre_data.dict())
-        return GenreAdminResponse.model_validate(genre)
+        return success_response(
+            message=GENRE_CREATED,
+            data=GenreAdminResponse.model_validate(genre).dict()
+        )
     except ValueError as e:
         if "already exists" in str(e):
-            raise HTTPException(
-                status_code=status.HTTP_409_CONFLICT,
-                detail=GENRE_ALREADY_EXISTS,
-            )
+            raise GenreExistsException()
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e),
         )
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error creating genre: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error creating genre: {str(e)}"
         )
 
 
@@ -83,7 +91,7 @@ async def get_genres_admin(
             query_params.page, query_params.size, total
         )
 
-        return GenreAdminListResponse(
+        response_data = GenreAdminListResponse(
             items=genres,
             total=pagination_info["total"],
             page=pagination_info["page"],
@@ -92,10 +100,14 @@ async def get_genres_admin(
             has_next=pagination_info["has_next"],
             has_prev=pagination_info["has_prev"],
         )
+        
+        return success_response(
+            message="Genres retrieved successfully",
+            data=response_data.dict()
+        )
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving genres: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error retrieving genres: {str(e)}"
         )
 
 
@@ -112,18 +124,17 @@ async def get_genre_admin(
         genre = await get_genre_admin_by_id(db, genre_id)
 
         if not genre:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail=GENRE_NOT_FOUND,
-            )
+            raise GenreNotFoundException()
 
-        return GenreAdminResponse.model_validate(genre)
+        return success_response(
+            message="Genre retrieved successfully",
+            data=GenreAdminResponse.model_validate(genre).dict()
+        )
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving genre: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error retrieving genre: {str(e)}"
         )
 
 
@@ -150,18 +161,15 @@ async def update_genre_admin(
         genre = await update_genre(db, genre_id, update_dict)
 
         if not genre:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail=GENRE_NOT_FOUND,
-            )
+            raise GenreNotFoundException()
 
-        return GenreAdminResponse.model_validate(genre)
+        return success_response(
+            message=GENRE_UPDATED,
+            data=GenreAdminResponse.model_validate(genre).dict()
+        )
     except ValueError as e:
         if "already exists" in str(e):
-            raise HTTPException(
-                status_code=status.HTTP_409_CONFLICT,
-                detail=GENRE_ALREADY_EXISTS,
-            )
+            raise GenreExistsException()
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e),
@@ -169,9 +177,8 @@ async def update_genre_admin(
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error updating genre: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error updating genre: {str(e)}"
         )
 
 
@@ -188,18 +195,17 @@ async def delete_genre_admin(
         success = await delete_genre(db, genre_id)
 
         if not success:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail=GENRE_NOT_FOUND,
-            )
+            raise GenreNotFoundException()
 
-        return {"message": GENRE_DELETED}
+        return success_response(
+            message=GENRE_DELETED,
+            data={"genre_id": str(genre_id)}
+        )
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error deleting genre: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error deleting genre: {str(e)}"
         )
 
 
@@ -216,19 +222,21 @@ async def feature_genre_admin(
         genre = await toggle_genre_featured(db, genre_id)
 
         if not genre:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail=GENRE_NOT_FOUND,
-            )
+            raise GenreNotFoundException()
 
         message = GENRE_FEATURED if genre.is_featured else GENRE_UNFEATURED
-        return {"message": message, "is_featured": genre.is_featured}
+        return success_response(
+            message=message,
+            data={
+                "genre_id": str(genre_id),
+                "is_featured": genre.is_featured
+            }
+        )
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error toggling genre featured status: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error toggling genre featured status: {str(e)}"
         )
 
 
@@ -246,19 +254,13 @@ async def upload_genre_cover(
         # Check if genre exists
         genre = await get_genre_admin_by_id(db, genre_id)
         if not genre:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail=GENRE_NOT_FOUND,
-            )
+            raise GenreNotFoundException()
 
         # Validate file type
         if not cover_image.content_type or not cover_image.content_type.startswith(
             "image/"
         ):
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=FILE_INVALID_FORMAT,
-            )
+            raise InvalidFileFormatException()
 
         # Upload image to S3
         image_url = await upload_genre_cover_image(cover_image, genre_id)
@@ -268,15 +270,16 @@ async def upload_genre_cover(
         await db.commit()
         await db.refresh(genre)
 
-        return {
-            "message": FILE_UPLOADED,
-            "cover_image_url": image_url,
-            "genre": GenreAdminResponse.model_validate(genre),
-        }
+        return success_response(
+            message=FILE_UPLOADED,
+            data={
+                "cover_image_url": image_url,
+                "genre": GenreAdminResponse.model_validate(genre).dict()
+            }
+        )
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error uploading genre cover image: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error uploading genre cover image: {str(e)}"
         )

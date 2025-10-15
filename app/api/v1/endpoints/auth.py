@@ -5,6 +5,16 @@ from fastapi import APIRouter, Depends, HTTPException, Request, status
 from fastapi.security import HTTPBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.response_handler import (
+    EmailExistsException,
+    InvalidCredentialsException,
+    AccountDeactivatedException,
+    EmailNotVerifiedException,
+    InvalidTokenException,
+    UserNotFoundException,
+    success_response
+)
+
 from app.core.auth import (
     authenticate_user,
     create_token_pair,
@@ -121,12 +131,11 @@ async def register_user(
                     email_to=existing_user.email, otp_code=otp.otp_code
                 )
 
-                return MessageResponse(message=OTP_RESEND_SUCCESS)
-            else:
-                raise HTTPException(
-                    status_code=status.HTTP_409_CONFLICT,
-                    detail=EMAIL_EXISTS,
+                return success_response(
+                    message=OTP_RESEND_SUCCESS
                 )
+            else:
+                raise EmailExistsException()
 
         hashed_password = get_password_hash(user_data.password)
         db_user = User(
@@ -147,7 +156,10 @@ async def register_user(
             email_to=db_user.email, otp_code=otp.otp_code
         )
 
-        return MessageResponse(message=REGISTRATION_SUCCESS)
+        return success_response(
+            message=REGISTRATION_SUCCESS,
+            status_code=201
+        )
 
     except HTTPException:
         raise
@@ -170,23 +182,13 @@ async def login_user(
         await check_user_account_exists(db, login_data.email)
         user = await authenticate_user(login_data.email, login_data.password, db)
         if not user:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail=INVALID_CREDENTIALS,
-                headers={"WWW-Authenticate": "Bearer"},
-            )
+            raise InvalidCredentialsException()
 
         if user.is_active is False:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=ACCOUNT_DEACTIVATED,
-            )
+            raise AccountDeactivatedException()
 
         if user.profile_status == ProfileStatus.PENDING_VERIFICATION:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=EMAIL_NOT_VERIFIED,
-            )
+            raise EmailNotVerifiedException()
 
         device_info = get_device_info(request)
         access_token, refresh_token = await create_token_pair(
@@ -199,15 +201,18 @@ async def login_user(
             login_data.remember_me,
         )
 
-        return AuthResponse(
-            user=UserSchema.from_orm(user),
-            tokens=TokenResponse(
-                access_token=access_token,
-                refresh_token=refresh_token,
-                token_type="bearer",
-                expires_in=access_expires_in,
-                refresh_expires_in=refresh_expires_in,
-            ),
+        return success_response(
+            message="Login successful",
+            data={
+                "user": UserSchema.from_orm(user).dict(),
+                "tokens": {
+                    "access_token": access_token,
+                    "refresh_token": refresh_token,
+                    "token_type": "bearer",
+                    "expires_in": access_expires_in,
+                    "refresh_expires_in": refresh_expires_in,
+                }
+            }
         )
 
     except HTTPException:
@@ -351,7 +356,14 @@ async def change_password(
         current_user.password = get_password_hash(password_data.new_password)
         await db.commit()
 
-        return MessageResponse(message=PASSWORD_CHANGED_SUCCESS)
+        return success_response(
+            message=PASSWORD_CHANGED_SUCCESS,
+            data={
+                "user_id": user.id,
+                "email": user.email,
+                "password_changed_at": datetime.utcnow()
+            }
+        )
 
     except HTTPException:
         raise
@@ -386,7 +398,13 @@ async def request_password_reset(
             user_name=user.first_name or user.email.split("@")[0],
         )
 
-        return MessageResponse(message=PASSWORD_RESET_OTP_SENT)
+        return success_response(
+            message=PASSWORD_RESET_OTP_SENT,
+            data={
+                "email": reset_data.email,
+                "otp_sent_at": datetime.utcnow()
+            }
+        )
 
     except HTTPException:
         raise
@@ -433,7 +451,14 @@ async def confirm_password_reset(
 
         await db.commit()
 
-        return MessageResponse(message=PASSWORD_RESET_SUCCESS)
+        return success_response(
+            message=PASSWORD_RESET_SUCCESS,
+            data={
+                "user_id": user.id,
+                "email": user.email,
+                "password_reset_at": datetime.utcnow()
+            }
+        )
 
     except HTTPException:
         raise
@@ -486,7 +511,15 @@ async def verify_otp(
 
         await db.commit()
 
-        return MessageResponse(message=OTP_VERIFICATION_SUCCESS)
+        return success_response(
+            message=OTP_VERIFICATION_SUCCESS,
+            data={
+                "user_id": user.id,
+                "email": user.email,
+                "status": "verified",
+                "verified_at": datetime.utcnow()
+            }
+        )
 
     except HTTPException:
         raise

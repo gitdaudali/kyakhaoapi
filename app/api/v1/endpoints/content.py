@@ -47,6 +47,7 @@ from app.core.messages import (
     REVIEW_UPDATED_SUCCESS,
     REVIEW_VOTE_SUCCESS,
 )
+from app.core.response_handler import success_response, error_response, GenreNotFoundException
 from app.models.user import User
 from app.schemas.content import (
     CastCrewResponse,
@@ -506,12 +507,19 @@ async def get_genres_with_movies_endpoint(
 
         pagination_info = calculate_pagination_info(page, size, total)
 
-        return GenreWithMoviesListResponse(items=genres_with_movies, **pagination_info)
+        # Return success response with genres data
+        return success_response(
+            message=GENRE_LIST_SUCCESS,
+            data={
+                "items": genres_with_movies,
+                **pagination_info
+            }
+        )
 
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving genres with movies: {str(e)}",
+        return error_response(
+            message=f"Error retrieving genres with movies: {str(e)}",
+            status_code=500
         )
 
 
@@ -545,12 +553,19 @@ async def get_genres(
 
         pagination_info = calculate_pagination_info(page, size, total)
 
-        return GenreListResponse(items=genres, **pagination_info)
+        # Return success response with genres data
+        return success_response(
+            message=GENRE_LIST_SUCCESS,
+            data={
+                "items": genres,
+                **pagination_info
+            }
+        )
 
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving genres: {str(e)}",
+        return error_response(
+            message=f"Error retrieving genres: {str(e)}",
+            status_code=500
         )
 
 

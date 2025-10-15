@@ -6,7 +6,24 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.admin_deps import AdminUser
 from app.core.database import get_db
-from app.core.messages import CAMPAIGN_DELETED, CAMPAIGN_NOT_FOUND
+from app.core.messages import (
+    CAMPAIGN_DELETED, 
+    CAMPAIGN_NOT_FOUND,
+    CAMPAIGN_CREATED,
+    CAMPAIGN_UPDATED,
+    CAMPAIGN_STAT_CREATED,
+    ACTIVITY_CREATED,
+    PERFORMANCE_SUMMARY_SUCCESS,
+    PERFORMANCE_TRENDS_SUCCESS,
+    ENGAGEMENT_BY_TYPE_SUCCESS,
+    SUBSCRIBER_SEGMENTATION_SUCCESS
+)
+from app.core.response_handler import (
+    success_response,
+    error_response,
+    NotFoundException,
+    InternalServerException
+)
 from app.schemas.admin import (
     ActivityCreate,
     ActivityResponse,
@@ -94,11 +111,13 @@ async def create_ad_campaign(
             ),
         )
 
-        return campaign
+        return success_response(
+            message=CAMPAIGN_CREATED,
+            data=campaign.dict() if hasattr(campaign, 'dict') else campaign
+        )
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error creating campaign: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error creating campaign: {str(e)}"
         )
 
 
@@ -129,11 +148,14 @@ async def get_ad_campaigns(
             pagination["page"], pagination["size"], total
         )
 
-        return AdCampaignListResponse(items=campaigns, **pagination_info)
+        response_data = AdCampaignListResponse(items=campaigns, **pagination_info)
+        return success_response(
+            message="Campaigns retrieved successfully",
+            data=response_data.dict()
+        )
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving campaigns: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error retrieving campaigns: {str(e)}"
         )
 
 
@@ -150,16 +172,17 @@ async def get_ad_campaign(
     try:
         campaign = await get_campaign_by_id(db, campaign_id)
         if not campaign:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail=CAMPAIGN_NOT_FOUND
-            )
-        return campaign
+            raise NotFoundException(detail=CAMPAIGN_NOT_FOUND)
+        
+        return success_response(
+            message="Campaign retrieved successfully",
+            data=campaign.dict() if hasattr(campaign, 'dict') else campaign
+        )
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving campaign: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error retrieving campaign: {str(e)}"
         )
 
 
@@ -177,9 +200,7 @@ async def update_ad_campaign(
     try:
         campaign = await update_campaign(db, campaign_id, campaign_data)
         if not campaign:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail=CAMPAIGN_NOT_FOUND
-            )
+            raise NotFoundException(detail=CAMPAIGN_NOT_FOUND)
 
         # Log activity
         await create_activity(
@@ -192,13 +213,15 @@ async def update_ad_campaign(
             ),
         )
 
-        return campaign
+        return success_response(
+            message=CAMPAIGN_UPDATED,
+            data=campaign.dict() if hasattr(campaign, 'dict') else campaign
+        )
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error updating campaign: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error updating campaign: {str(e)}"
         )
 
 
@@ -216,15 +239,11 @@ async def delete_ad_campaign(
         # Get campaign before deletion for logging
         campaign = await get_campaign_by_id(db, campaign_id)
         if not campaign:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail=CAMPAIGN_NOT_FOUND
-            )
+            raise NotFoundException(detail=CAMPAIGN_NOT_FOUND)
 
         success = await delete_campaign(db, campaign_id)
         if not success:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail=CAMPAIGN_NOT_FOUND
-            )
+            raise NotFoundException(detail=CAMPAIGN_NOT_FOUND)
 
         # Log activity
         await create_activity(
@@ -236,13 +255,15 @@ async def delete_ad_campaign(
             ),
         )
 
-        return {"message": CAMPAIGN_DELETED}
+        return success_response(
+            message=CAMPAIGN_DELETED,
+            data={"campaign_id": str(campaign_id)}
+        )
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error deleting campaign: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error deleting campaign: {str(e)}"
         )
 
 
@@ -259,11 +280,13 @@ async def create_campaign_stat_endpoint(
     """
     try:
         stat = await create_campaign_stat(db, stat_data)
-        return stat
+        return success_response(
+            message=CAMPAIGN_STAT_CREATED,
+            data=stat.dict() if hasattr(stat, 'dict') else stat
+        )
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error creating campaign stat: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error creating campaign stat: {str(e)}"
         )
 
 
@@ -284,18 +307,18 @@ async def get_campaign_stats_endpoint(
         # Verify campaign exists
         campaign = await get_campaign_by_id(db, campaign_id)
         if not campaign:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail=CAMPAIGN_NOT_FOUND
-            )
+            raise NotFoundException(detail=CAMPAIGN_NOT_FOUND)
 
         stats = await get_campaign_stats(db, campaign_id, limit)
-        return stats
+        return success_response(
+            message="Campaign stats retrieved successfully",
+            data=[stat.dict() if hasattr(stat, 'dict') else stat for stat in stats]
+        )
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving campaign stats: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error retrieving campaign stats: {str(e)}"
         )
 
 
@@ -311,11 +334,13 @@ async def get_activities_endpoint(
     """
     try:
         activities = await get_activities(db, limit)
-        return activities
+        return success_response(
+            message="Activities retrieved successfully",
+            data=[activity.dict() if hasattr(activity, 'dict') else activity for activity in activities]
+        )
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving activities: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error retrieving activities: {str(e)}"
         )
 
 
@@ -331,11 +356,13 @@ async def create_activity_log(
     """
     try:
         activity = await create_activity(db, activity_data)
-        return activity
+        return success_response(
+            message=ACTIVITY_CREATED,
+            data=activity.dict() if hasattr(activity, 'dict') else activity
+        )
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error creating activity: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error creating activity: {str(e)}"
         )
 
 
@@ -350,11 +377,13 @@ async def get_performance_summary_endpoint(
     """
     try:
         summary = await get_performance_summary(db)
-        return PerformanceSummary(**summary)
+        return success_response(
+            message=PERFORMANCE_SUMMARY_SUCCESS,
+            data=PerformanceSummary(**summary).dict()
+        )
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving performance summary: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error retrieving performance summary: {str(e)}"
         )
 
 
@@ -370,11 +399,13 @@ async def get_performance_trends_endpoint(
     """
     try:
         trends = await get_performance_trends(db, months)
-        return PerformanceTrendsResponse(trends=trends, total_months=len(trends))
+        return success_response(
+            message=PERFORMANCE_TRENDS_SUCCESS,
+            data=PerformanceTrendsResponse(trends=trends, total_months=len(trends)).dict()
+        )
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving performance trends: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error retrieving performance trends: {str(e)}"
         )
 
 
@@ -389,11 +420,13 @@ async def get_engagement_by_type_endpoint(
     """
     try:
         engagement = await get_engagement_by_ad_type(db)
-        return EngagementByTypeResponse(by_type=engagement)
+        return success_response(
+            message=ENGAGEMENT_BY_TYPE_SUCCESS,
+            data=EngagementByTypeResponse(by_type=engagement).dict()
+        )
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving engagement by type: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error retrieving engagement by type: {str(e)}"
         )
 
 
@@ -411,9 +444,11 @@ async def get_subscriber_segmentation_endpoint(
     """
     try:
         segments = await get_subscriber_segmentation(db)
-        return SubscriberSegmentationResponse(segments=segments)
+        return success_response(
+            message=SUBSCRIBER_SEGMENTATION_SUCCESS,
+            data=SubscriberSegmentationResponse(segments=segments).dict()
+        )
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving subscriber segmentation: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error retrieving subscriber segmentation: {str(e)}"
         )

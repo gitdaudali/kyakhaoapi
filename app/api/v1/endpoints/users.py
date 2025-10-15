@@ -17,6 +17,20 @@ from sqlalchemy.orm import Session
 from app.core.config import settings
 from app.core.database import get_db
 from app.core.deps import get_current_active_user, get_current_user
+from app.core.messages import (
+    PROFILE_UPDATE_SUCCESS,
+    AVATAR_UPLOAD_SUCCESS,
+    AVATAR_REMOVED_SUCCESS,
+    INVALID_FILE_TYPE,
+    FILE_TOO_LARGE
+)
+from app.core.response_handler import (
+    success_response,
+    error_response,
+    InvalidFileFormatException,
+    FileTooLargeException,
+    InternalServerException
+)
 from app.models.user import User
 from app.schemas.user import (
     ProfileResponse,
@@ -78,7 +92,7 @@ async def update_profile_with_avatar(
         await db.commit()
         await db.refresh(current_user)
 
-        return ProfileResponse(
+        profile_data = ProfileResponse(
             first_name=current_user.first_name,
             last_name=current_user.last_name,
             email=current_user.email,
@@ -86,15 +100,19 @@ async def update_profile_with_avatar(
             is_email_verified=current_user.profile_status != "pending_verification",
             profile_complete=bool(current_user.first_name and current_user.last_name),
         )
+        
+        return success_response(
+            message=PROFILE_UPDATE_SUCCESS,
+            data=profile_data.dict()
+        )
 
     except HTTPException:
         await db.rollback()
         raise
     except Exception as e:
         await db.rollback()
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error updating profile: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error updating profile: {str(e)}"
         )
 
 
@@ -112,7 +130,10 @@ async def add_search_history(
         search_entry = await add_search_to_history(
             db, current_user.id, search_data.search_query
         )
-        return SearchHistoryResponse.from_orm(search_entry)
+        return success_response(
+            message="Search added to history successfully",
+            data=SearchHistoryResponse.from_orm(search_entry).dict()
+        )
 
     except ValueError as e:
         raise HTTPException(
@@ -120,9 +141,8 @@ async def add_search_history(
             detail=str(e),
         )
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error adding search to history: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error adding search to history: {str(e)}"
         )
 
 
@@ -147,7 +167,7 @@ async def get_search_history(
         has_next = page < pages
         has_prev = page > 1
 
-        return SearchHistoryListResponse(
+        response_data = SearchHistoryListResponse(
             items=[SearchHistoryResponse.from_orm(entry) for entry in search_entries],
             total=total,
             page=page,
@@ -156,11 +176,15 @@ async def get_search_history(
             has_next=has_next,
             has_prev=has_prev,
         )
+        
+        return success_response(
+            message="Search history retrieved successfully",
+            data=response_data.dict()
+        )
 
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving search history: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error retrieving search history: {str(e)}"
         )
 
 
@@ -178,12 +202,14 @@ async def get_recent_search_history(
     """
     try:
         recent_searches = await get_recent_searches(db, current_user.id, limit)
-        return [SearchHistoryResponse.from_orm(entry) for entry in recent_searches]
+        return success_response(
+            message="Recent searches retrieved successfully",
+            data=[SearchHistoryResponse.from_orm(entry).dict() for entry in recent_searches]
+        )
 
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving recent searches: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error retrieving recent searches: {str(e)}"
         )
 
 
@@ -209,17 +235,16 @@ async def delete_search_history(
                 detail="Search history entry not found",
             )
 
-        return SearchHistoryDeleteResponse(
+        return success_response(
             message="Search history entry deleted successfully",
-            deleted_count=1,
+            data={"deleted_count": 1}
         )
 
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error deleting search history: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error deleting search history: {str(e)}"
         )
 
 
@@ -234,13 +259,12 @@ async def clear_search_history(
     try:
         deleted_count = await clear_all_search_history(db, current_user.id)
 
-        return SearchHistoryDeleteResponse(
+        return success_response(
             message=f"All search history cleared successfully. {deleted_count} entries deleted.",
-            deleted_count=deleted_count,
+            data={"deleted_count": deleted_count}
         )
 
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error clearing search history: {str(e)}",
+        raise InternalServerException(
+            detail=f"Error clearing search history: {str(e)}"
         )

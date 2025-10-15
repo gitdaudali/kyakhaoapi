@@ -1,13 +1,23 @@
 from datetime import datetime, timezone
 from typing import Annotated, Optional
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.auth import get_current_user_id
 from app.core.database import get_db
+from app.core.messages import (
+    SECURITY_ERROR_MISSING_HEADERS,
+    SECURITY_ERROR_INVALID_DEVICE_TYPE,
+    SECURITY_ERROR_INVALID_APP_VERSION
+)
+from app.core.response_handler import (
+    HeaderValidationException,
+    InvalidDeviceTypeException,
+    InvalidAppVersionException
+)
 from app.models.token import Token, TokenBlacklist
 from app.models.user import User
 
@@ -282,3 +292,36 @@ CurrentUser = Annotated[User, Depends(get_current_user)]
 CurrentActiveUser = Annotated[User, Depends(get_current_active_user)]
 CurrentSuperUser = Annotated[User, Depends(get_current_superuser)]
 OptionalCurrentUser = Annotated[Optional[User], Depends(get_optional_current_user)]
+
+
+# ============================================================================
+# HEADER VALIDATION DEPENDENCY
+# ============================================================================
+async def validate_client_headers(request: Request) -> None:
+    """Validate required client headers for API requests only."""
+    
+    # Skip validation for certain paths
+    skip_paths = ["/docs", "/redoc", "/openapi.json", "/health", "/api-info"]
+    if any(request.url.path.startswith(path) for path in skip_paths):
+        return
+    
+    device_id = request.headers.get("X-Device-Id")
+    device_type = request.headers.get("X-Device-Type")
+    app_version = request.headers.get("X-App-Version")
+
+    if not device_id or not device_type or not app_version:
+        raise HeaderValidationException()
+
+    # Basic normalization/validation
+    normalized_type = device_type.strip().lower()
+    if normalized_type not in {"ios", "android", "web", "desktop"}:
+        raise InvalidDeviceTypeException()
+
+    # Lightweight version format check: must contain at least one dot
+    if "." not in app_version:
+        raise InvalidAppVersionException()
+
+    # Attach parsed values to request.state for use in endpoints
+    request.state.device_id = device_id
+    request.state.device_type = normalized_type
+    request.state.app_version = app_version
