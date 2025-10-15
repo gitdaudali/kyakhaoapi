@@ -66,3 +66,6 @@ htmlcov/
 #Database
 *.db
 *.sqlite3
+
+# Test files
+policy_test_frontend.html
