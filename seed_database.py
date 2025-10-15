@@ -38,6 +38,7 @@ from app.models import (
     UserWatchHistory,
     WatchSession,
 )
+from app.models.monetization import AdCampaign, AdCampaignStat, MonetizationActivity
 
 
 class DatabaseSeeder:
@@ -612,6 +613,103 @@ class DatabaseSeeder:
             f"✅ Seeded {len(content_views)} content views, {len(watch_sessions)} watch sessions, {len(watch_history)} watch history records"
         )
 
+    async def seed_monetization_campaigns(self) -> Dict[str, str]:
+        """Seed ad campaigns and return mapping of old IDs to new IDs."""
+        campaigns_data = await self.load_json_fixture("monetization/ad_campaigns.json")
+        id_mapping = {}
+
+        for campaign_data in campaigns_data:
+            # Check if campaign already exists
+            existing_campaign = await self.session.get(AdCampaign, campaign_data["id"])
+            if existing_campaign:
+                print(f"⚠️  Campaign {campaign_data['title']} already exists, skipping...")
+                id_mapping[campaign_data["id"]] = campaign_data["id"]
+                continue
+
+            # Extract and store the old ID
+            old_id = campaign_data.pop('id')
+            
+            # Convert date strings to date objects
+            if campaign_data.get('start_date'):
+                campaign_data['start_date'] = datetime.fromisoformat(campaign_data['start_date'].replace('Z', '+00:00')).date()
+            if campaign_data.get('end_date'):
+                campaign_data['end_date'] = datetime.fromisoformat(campaign_data['end_date'].replace('Z', '+00:00')).date()
+            
+            # Convert datetime strings to datetime objects
+            if campaign_data.get('created_at'):
+                campaign_data['created_at'] = datetime.fromisoformat(campaign_data['created_at'].replace('Z', '+00:00'))
+            if campaign_data.get('updated_at'):
+                campaign_data['updated_at'] = datetime.fromisoformat(campaign_data['updated_at'].replace('Z', '+00:00'))
+            
+            # Create new campaign
+            campaign = AdCampaign(**campaign_data)
+            self.session.add(campaign)
+            await self.session.flush()  # Flush to get the new ID
+            
+            # Store mapping
+            id_mapping[old_id] = str(campaign.id)
+            print(f"Created campaign: {campaign.title} (ID: {campaign.id})")
+
+        await self.session.commit()
+        print(f"✅ Seeded {len(campaigns_data)} ad campaigns")
+        return id_mapping
+
+    async def seed_monetization_stats(self, id_mapping: Dict[str, str]):
+        """Seed campaign stats with updated campaign IDs."""
+        stats_data = await self.load_json_fixture("monetization/ad_campaign_stats.json")
+
+        for stat_data in stats_data:
+            # Update campaign_id using mapping
+            old_campaign_id = stat_data['campaign_id']
+            if old_campaign_id in id_mapping:
+                stat_data['campaign_id'] = uuid.UUID(id_mapping[old_campaign_id])
+            else:
+                print(f"Warning: Campaign ID {old_campaign_id} not found in mapping")
+                continue
+            
+            # Convert date strings
+            if stat_data.get('stat_date'):
+                stat_data['stat_date'] = datetime.fromisoformat(stat_data['stat_date'].replace('Z', '+00:00')).date()
+            
+            if stat_data.get('created_at'):
+                stat_data['created_at'] = datetime.fromisoformat(stat_data['created_at'].replace('Z', '+00:00'))
+            if stat_data.get('updated_at'):
+                stat_data['updated_at'] = datetime.fromisoformat(stat_data['updated_at'].replace('Z', '+00:00'))
+            
+            # Create new stat
+            stat = AdCampaignStat(**stat_data)
+            self.session.add(stat)
+
+        await self.session.commit()
+        print(f"✅ Seeded {len(stats_data)} campaign stats")
+
+    async def seed_monetization_activities(self, id_mapping: Dict[str, str]):
+        """Seed monetization activities with updated campaign IDs."""
+        activities_data = await self.load_json_fixture("monetization/monetization_activities.json")
+
+        for activity_data in activities_data:
+            # Update campaign_id using mapping
+            if activity_data.get('campaign_id'):
+                old_campaign_id = activity_data['campaign_id']
+                if old_campaign_id in id_mapping:
+                    activity_data['campaign_id'] = uuid.UUID(id_mapping[old_campaign_id])
+                else:
+                    print(f"Warning: Campaign ID {old_campaign_id} not found in mapping")
+                    activity_data['campaign_id'] = None
+            
+            # Convert datetime strings
+            if activity_data.get('created_at'):
+                activity_data['created_at'] = datetime.fromisoformat(activity_data['created_at'].replace('Z', '+00:00'))
+            if activity_data.get('updated_at'):
+                activity_data['updated_at'] = datetime.fromisoformat(activity_data['updated_at'].replace('Z', '+00:00'))
+            
+            # Create new activity
+            activity = MonetizationActivity(**activity_data)
+            self.session.add(activity)
+
+        await self.session.commit()
+        print(f"✅ Seeded {len(activities_data)} monetization activities")
+
     async def run_seeder(self):
         """Run the complete database seeding process."""
         print("🌱 Starting database seeding process...")
@@ -661,12 +759,19 @@ class DatabaseSeeder:
             print("\n📈 Seeding analytics data...")
             await self.seed_sample_views_and_sessions(user_mapping, content_mapping)
 
+            # Seed monetization data
+            print("\n💰 Seeding monetization data...")
+            campaign_mapping = await self.seed_monetization_campaigns()
+            await self.seed_monetization_stats(campaign_mapping)
+            await self.seed_monetization_activities(campaign_mapping)
+
             print("\n🎉 Database seeding completed successfully!")
             print(f"   - Users: {len(user_mapping)}")
             print(f"   - Genres: {len(genre_mapping)}")
             print(f"   - People: {len(person_mapping)}")
             print(f"   - Content: {len(content_mapping)}")
             print(f"   - Seasons: {len(season_mapping)}")
+            print(f"   - Campaigns: {len(campaign_mapping)}")
 
         except Exception as e:
             print(f"❌ Error during seeding: {e}")
