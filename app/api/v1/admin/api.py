@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 
+
 from app.api.v1.admin.endpoints import (
     content,
     genre,
@@ -8,6 +9,7 @@ from app.api.v1.admin.endpoints import (
     streaming,
     upload,
     user,
+    policy,
 )
 
 # Create main admin router
@@ -54,4 +56,10 @@ router.include_router(
     monetization.router,
     prefix="/monetization",
     tags=["Admin - Monetization"],
+)
+
+router.include_router(
+    policy.router,
+    prefix="/policies",
+    tags=["Admin - Policies"],
 )

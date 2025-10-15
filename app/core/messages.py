@@ -243,6 +243,12 @@ PERFORMANCE_TRENDS_SUCCESS = "Performance trends retrieved successfully"
 ENGAGEMENT_BY_TYPE_SUCCESS = "Engagement by type retrieved successfully"
 SUBSCRIBER_SEGMENTATION_SUCCESS = "Subscriber segmentation retrieved successfully"
 
+# Policy Messages
+POLICY_CREATED = "Policy created successfully"
+POLICY_UPDATED = "Policy updated successfully"
+POLICY_DELETED = "Policy deleted successfully"
+POLICY_NOT_FOUND = "Policy not found"
+
 # General Messages
 SUCCESS = "Success"
 ERROR = "Error"
