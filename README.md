@@ -1,18 +1,32 @@
 # Cup Streaming API
 
-A modern, high-performance video streaming platform built with FastAPI, featuring user authentication, content management, and real-time video streaming capabilities.
+A modern, high-performance video streaming platform built with FastAPI, featuring comprehensive user management, content streaming, subscription billing, monetization, and FAQ management capabilities.
 
 ## 🚀 Features
 
+### Core Features
 - **User Authentication & Management**: JWT-based authentication with user registration, login, and profile management
 - **Video Upload & Streaming**: Support for multiple video formats with AWS S3 integration
 - **Content Management**: Organize videos, TV shows, and series with metadata
 - **Social Features**: User interactions, reviews, and content discovery
 - **Analytics & Metrics**: Track views, engagement, and user behavior
 - **Background Processing**: Celery-based task queue for video processing
+
+### Advanced Features
+- **Subscription Management**: Complete subscription system with Stripe integration
+- **Monetization**: Ad campaigns, revenue tracking, and performance analytics
+- **User Policies**: Policy management and user acceptance tracking
+- **FAQ System**: Comprehensive FAQ management with admin controls
+- **Enhanced Error Handling**: Standardized API responses with detailed error messages
+- **Rate Limiting**: Built-in rate limiting and retry mechanisms
+- **Client Validation**: Device and app version validation
+
+### Technical Features
 - **API Documentation**: Interactive Swagger UI and ReDoc documentation
 - **Database Migrations**: Alembic for database schema management
+- **Standardized Responses**: Unified API response format across all endpoints
 - **Code Quality**: Pre-commit hooks, linting, and type checking
+- **Security**: Enhanced security with header validation and OAuth support
 
 ## 🏗️ Project Structure
 
@@ -24,36 +38,82 @@ Cup_Streaming/
 │   └── script.py.mako         # Migration template
 ├── app/                       # Main application package
 │   ├── api/                   # API routes and endpoints
-│   │   └── v1/               # API version 1
-│   │       ├── api.py        # Main API router
-│   │       └── endpoints/    # Individual endpoint modules
-│   │           ├── auth.py   # Authentication endpoints
-│   │           ├── content.py # Content management endpoints
-│   │           └── users.py  # User management endpoints
+│   │   ├── v1/               # API version 1
+│   │   │   ├── api.py        # Main API router
+│   │   │   ├── admin/        # Admin API endpoints
+│   │   │   │   ├── api.py    # Admin router
+│   │   │   │   └── endpoints/ # Admin endpoint modules
+│   │   │   │       ├── content.py # Content admin endpoints
+│   │   │   │       ├── faq.py     # FAQ admin endpoints
+│   │   │   │       ├── genre.py   # Genre admin endpoints
+│   │   │   │       ├── monetization.py # Monetization admin endpoints
+│   │   │   │       ├── people.py  # People admin endpoints
+│   │   │   │       ├── policy.py  # Policy admin endpoints
+│   │   │   │       ├── streaming.py # Streaming admin endpoints
+│   │   │   │       ├── upload.py  # Upload admin endpoints
+│   │   │   │       └── user.py   # User admin endpoints
+│   │   │   └── endpoints/    # Public endpoint modules
+│   │   │       ├── auth.py   # Authentication endpoints
+│   │   │       ├── content.py # Content management endpoints
+│   │   │       ├── faq.py    # FAQ endpoints
+│   │   │       ├── policy.py # Policy endpoints
+│   │   │       ├── streaming.py # Streaming endpoints
+│   │   │       ├── stripe.py # Stripe payment endpoints
+│   │   │       ├── subscriptions.py # Subscription endpoints
+│   │   │       ├── user_policy.py # User policy endpoints
+│   │   │       └── users.py  # User management endpoints
 │   ├── core/                 # Core application components
 │   │   ├── auth.py           # Authentication utilities
 │   │   ├── celery_app.py     # Celery configuration
 │   │   ├── config.py         # Application settings
 │   │   ├── database.py       # Database configuration
 │   │   ├── deps.py           # Dependency injection
-│   │   └── messages.py       # Application messages
+│   │   ├── messages.py       # Application messages
+│   │   └── response_handler.py # Standardized response handling
+│   ├── middleware/           # Custom middleware
+│   │   └── rate_limit.py     # Rate limiting middleware
 │   ├── models/               # SQLAlchemy models
 │   │   ├── base.py           # Base model class
 │   │   ├── content.py        # Content-related models
+│   │   ├── faq.py           # FAQ models
+│   │   ├── monetization.py   # Monetization models
+│   │   ├── policy.py         # Policy models
+│   │   ├── streaming.py      # Streaming models
+│   │   ├── subscription.py   # Subscription models
 │   │   ├── token.py          # Token models
 │   │   ├── user.py           # User models
 │   │   └── verification.py   # Email verification models
 │   ├── schemas/              # Pydantic schemas
+│   │   ├── admin.py          # Admin schemas
 │   │   ├── auth.py           # Authentication schemas
 │   │   ├── content.py        # Content schemas
+│   │   ├── faq.py           # FAQ schemas
+│   │   ├── google_oauth.py   # Google OAuth schemas
+│   │   ├── policy.py         # Policy schemas
+│   │   ├── streaming.py      # Streaming schemas
+│   │   ├── subscription.py   # Subscription schemas
+│   │   ├── user_policy.py    # User policy schemas
 │   │   └── user.py           # User schemas
 │   ├── tasks/                # Celery background tasks
 │   │   └── email_tasks.py    # Email-related tasks
 │   └── utils/                # Utility functions
+│       ├── admin/            # Admin utilities
+│       │   ├── monetization_utils.py # Monetization utilities
+│       │   └── policy_utils.py # Policy utilities
 │       ├── auth_utils.py     # Authentication utilities
 │       ├── content_utils.py  # Content processing utilities
 │       ├── email_utils.py    # Email utilities
-│       └── token_utils.py    # Token utilities
+│       ├── google_oauth_utils.py # Google OAuth utilities
+│       ├── policy_utils.py   # Policy utilities
+│       ├── retry_helper.py   # Retry mechanism utilities
+│       ├── s3_utils.py       # AWS S3 utilities
+│       ├── streaming_utils.py # Streaming utilities
+│       ├── subscription_utils.py # Subscription utilities
+│       ├── template_utils.py # Template utilities
+│       ├── token_utils.py    # Token utilities
+│       ├── user_policy_utils.py # User policy utilities
+│       ├── user_utils.py     # User utilities
+│       └── video_processing.py # Video processing utilities
 ├── fixtures/                  # Database fixtures and sample data
 │   ├── content/              # Content fixtures
 │   ├── episodes/             # Episode fixtures
@@ -294,6 +354,55 @@ Once the application is running, you can access the interactive API documentatio
 
 - **Swagger UI**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
+
+## 🔗 API Endpoints
+
+### Public Endpoints
+- **Authentication** (`/api/v1/auth`): User registration, login, password reset, email verification
+- **Users** (`/api/v1/users`): User profile management, avatar upload
+- **Content** (`/api/v1/content`): Video content, TV shows, series management
+- **Streaming** (`/api/v1/streaming`): Video streaming channels and live streaming
+- **FAQ** (`/api/v1/faq`): Frequently asked questions and answers
+- **Policies** (`/api/v1/policies`): User policies and terms of service
+- **Subscriptions** (`/api/v1/subscriptions`): Subscription management
+- **Stripe** (`/api/v1/stripe`): Payment processing and billing
+
+### Admin Endpoints
+- **Admin Content** (`/api/v1/admin/content`): Content management for administrators
+- **Admin FAQ** (`/api/v1/admin/faq`): FAQ management for administrators
+- **Admin Genres** (`/api/v1/admin/genres`): Genre management
+- **Admin Monetization** (`/api/v1/admin/monetization`): Revenue and campaign management
+- **Admin People** (`/api/v1/admin/people`): Cast and crew management
+- **Admin Policies** (`/api/v1/admin/policies`): Policy management
+- **Admin Streaming** (`/api/v1/admin/streaming`): Streaming channel management
+- **Admin Upload** (`/api/v1/admin/upload`): File upload management
+- **Admin Users** (`/api/v1/admin/users`): User management for administrators
+
+## 🎯 Key Features
+
+### Subscription Management
+- **Stripe Integration**: Complete payment processing with Stripe
+- **Subscription Plans**: Multiple subscription tiers and pricing
+- **Billing Management**: Automated billing and invoice generation
+- **Payment Methods**: Support for multiple payment methods
+
+### Monetization
+- **Ad Campaigns**: Create and manage advertising campaigns
+- **Revenue Tracking**: Monitor revenue and performance metrics
+- **Analytics**: Detailed analytics and reporting
+- **Performance Monitoring**: Track campaign performance and engagement
+
+### User Policies
+- **Policy Management**: Create and manage user policies
+- **Acceptance Tracking**: Track user policy acceptance
+- **Version Control**: Policy versioning and updates
+- **Compliance**: Ensure regulatory compliance
+
+### FAQ System
+- **Question Management**: Create and manage FAQ entries
+- **Categorization**: Organize FAQs by categories
+- **Search**: Full-text search capabilities
+- **Admin Controls**: Comprehensive admin management interface
 
 
 ## 🐳 Docker Support
