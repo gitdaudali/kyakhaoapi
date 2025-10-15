@@ -23,6 +23,7 @@ from app.models.content import (
     WatchQuality,
     WatchSession,
 )
+from app.models.faq import FAQ
 from app.models.streaming import StreamingChannel
 from app.models.token import RefreshToken, Token, TokenBlacklist
 from app.models.user import ProfileStatus, User, UserRole
@@ -53,6 +54,7 @@ __all__ = [
     "Episode",
     "EpisodeQuality",
     "EpisodeView",
+    "FAQ",
     "Genre",
     "InteractionType",
     "MovieFile",

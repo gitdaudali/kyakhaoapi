@@ -1,6 +1,5 @@
 from fastapi import APIRouter
 
-
 from app.api.v1.admin.endpoints import (
     content,
     genre,
@@ -10,6 +9,7 @@ from app.api.v1.admin.endpoints import (
     upload,
     user,
     policy,
+    faq,
 )
 
 # Create main admin router
@@ -62,4 +62,10 @@ router.include_router(
     policy.router,
     prefix="/policies",
     tags=["Admin - Policies"],
+)
+
+router.include_router(
+    faq.router,
+    prefix="/faq",
+    tags=["Admin - FAQ"],
 )

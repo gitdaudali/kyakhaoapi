@@ -1,5 +1,4 @@
 import os
-
 from dotenv import load_dotenv
 
 load_dotenv(os.getenv("ENV_FILE", ".env"))
@@ -114,7 +113,7 @@ class Settings:
     MAX_PAGE_SIZE: int = 100
 
     # Rate limiting
-    RATE_LIMIT_PER_MINUTE: int = 60
+    RATE_LIMIT_PER_MINUTE: int = 15  # Default requests per minute
 
     # Logging
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
@@ -134,6 +133,12 @@ class Settings:
     )
 
     AVATAR_ALLOWED_FILE_TYPES = [".jpg", ".jpeg", ".png", ".webp", ".gif"]
+
+    # ✅ NEW: Retry and Throttling Configuration
+    RATE_LIMIT: str = os.getenv("RATE_LIMIT", "5/minute")  # used by SlowAPI
+    RETRY_ATTEMPTS: int = int(os.getenv("RETRY_ATTEMPTS", 3))
+    RETRY_DELAY: float = float(os.getenv("RETRY_DELAY", 1.0))  # seconds
+    RETRY_BACKOFF: float = float(os.getenv("RETRY_BACKOFF", 2.0))  # exponential backoff
 
 
 settings = Settings()

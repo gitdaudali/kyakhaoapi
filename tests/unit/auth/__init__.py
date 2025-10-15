@@ -1,3 +1,0 @@
-"""
-Authentication unit tests package.
-"""
