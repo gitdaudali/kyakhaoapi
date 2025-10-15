@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -7,52 +7,36 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
 from app.schemas.user_policy import (
     UserPolicyResponse,
-    UserPolicyListPaginatedResponse,
-    UserPolicyQueryParams,
     UserPolicyListResponse,
+    UserPolicyItem,
 )
 from app.utils.user_policy_utils import (
     get_user_policies_list,
     get_user_policy_by_id,
 )
-from app.utils.content_utils import calculate_pagination_info
 
 router = APIRouter()
 
-@router.get("/", response_model=UserPolicyListPaginatedResponse)
+@router.get("/", response_model=UserPolicyListResponse)
 async def get_user_policies(
-    query_params: UserPolicyQueryParams = Depends(),
     db: AsyncSession = Depends(get_db),
 ) -> Any:
     """Get list of published policies (user access - names only)"""
     try:
-        policies, total = await get_user_policies_list(db, query_params)
-        pagination_info = calculate_pagination_info(
-            total=total,
-            page=query_params.page,
-            size=query_params.size
-        )
+        policies, total = await get_user_policies_list(db)
         
         # Convert to simple list response (names only)
         items = [
-            UserPolicyListResponse(
+            UserPolicyItem(
                 id=policy.id,
                 title=policy.title,
-                policy_type=policy.policy_type,
-                version=policy.version
+                description=policy.description,
+                status=policy.status
             )
             for policy in policies
         ]
         
-        return UserPolicyListPaginatedResponse(
-            items=items,
-            total=total,
-            page=query_params.page,
-            size=query_params.size,
-            pages=pagination_info["pages"],
-            has_next=pagination_info["has_next"],
-            has_prev=pagination_info["has_prev"],
-        )
+        return UserPolicyListResponse(policies=items)
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
