@@ -1,5 +1,5 @@
 trigger:
-  - development
+  - fix_merge
 
 pool:
   vmImage: 'ubuntu-latest'
