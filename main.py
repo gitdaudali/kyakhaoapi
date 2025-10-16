@@ -147,12 +147,26 @@ def custom_openapi():
             "in": "header",
             "name": "X-Device-Id",
             "description": "Client device identifier (required for all API requests)"
+        },
+        "DeviceTypeHeader": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "X-Device-Type",
+            "description": "Client device type (ios, android, web, desktop) - required for all API requests"
+        },
+        "AppVersionHeader": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "X-App-Version",
+            "description": "Client app version (e.g., 1.0.0) - required for all API requests"
         }
     }
 
     # Add global security requirements
     openapi_schema["security"] = [
         {"ClientHeaders": []},
+        {"DeviceTypeHeader": []},
+        {"AppVersionHeader": []},
         {"BearerAuth": []}
     ]
 
