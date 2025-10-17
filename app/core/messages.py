@@ -394,6 +394,34 @@ MAINTENANCE_SCHEDULED = "Maintenance scheduled"
 MAINTENANCE_COMPLETED = "Maintenance completed"
 MAINTENANCE_CANCELLED = "Maintenance cancelled"
 
+# Favorites Messages
+FAVORITES_RETRIEVED_SUCCESS = "Favorites retrieved successfully"
+FAVORITES_ADDED_SUCCESS = "Content added to favorites successfully"
+FAVORITES_REMOVED_SUCCESS = "Content removed from favorites successfully"
+FAVORITES_ALREADY_EXISTS = "Content already in favorites"
+FAVORITES_NOT_FOUND = "Content not found in favorites"
+FAVORITES_COUNT_SUCCESS = "Favorites count retrieved successfully"
+
+# Statistics Messages
+STATS_HOURS_WATCHED_SUCCESS = "Hours watched retrieved successfully"
+STATS_MOVIES_COMPLETED_SUCCESS = "Movies completed retrieved successfully"
+STATS_TV_EPISODES_SUCCESS = "TV episodes watched retrieved successfully"
+STATS_FAVORITES_COUNT_SUCCESS = "Favorites count retrieved successfully"
+STATS_RETRIEVED_SUCCESS = "Statistics retrieved successfully"
+STATS_NOT_FOUND = "Statistics not found"
+STATS_CALCULATION_ERROR = "Error calculating statistics"
+
+# Recommendations Messages
+RECOMMENDATIONS_GENERATED_SUCCESS = "Recommendations generated successfully"
+RECOMMENDATIONS_PERSONALIZED_SUCCESS = "Personalized recommendations retrieved successfully"
+RECOMMENDATIONS_TRENDING_SUCCESS = "Trending recommendations retrieved successfully"
+RECOMMENDATIONS_SIMILAR_SUCCESS = "Similar content recommendations retrieved successfully"
+RECOMMENDATIONS_GENRE_SUCCESS = "Genre-based recommendations retrieved successfully"
+RECOMMENDATIONS_NEW_RELEASES_SUCCESS = "New release recommendations retrieved successfully"
+RECOMMENDATIONS_NOT_FOUND = "No recommendations found"
+RECOMMENDATIONS_GENERATION_ERROR = "Error generating recommendations"
+RECOMMENDATIONS_ALGORITHM_UNAVAILABLE = "Recommendation algorithm temporarily unavailable"
+
 # General Messages
 SUCCESS = "Success"
 ERROR = "Error"
