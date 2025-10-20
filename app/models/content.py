@@ -21,6 +21,7 @@ from app.models.base import BaseModel, TimestampMixin
 
 if TYPE_CHECKING:
     from app.models.user import User
+    from app.models.watch_progress import UserWatchProgress
 
 
 class ContentType(str, Enum):
@@ -222,6 +223,10 @@ class Content(BaseModel, TimestampMixin, table=True):
         back_populates="content",
         sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
     )
+    watch_progress: List["UserWatchProgress"] = Relationship(
+        back_populates="content",
+        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
+    )
     # Movie files relationship
     movie_files: List["MovieFile"] = Relationship(
         back_populates="content",
@@ -387,6 +392,10 @@ class Episode(BaseModel, TimestampMixin, table=True):
             "cascade": "all, delete-orphan",
             "foreign_keys": "[EpisodeView.episode_id]",
         },
+    )
+    watch_progress: List["UserWatchProgress"] = Relationship(
+        back_populates="episode",
+        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
     )
     quality_versions: List["EpisodeQuality"] = Relationship(
         back_populates="episode",

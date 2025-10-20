@@ -28,6 +28,22 @@ from .response import (
     PerformanceResponse,
     MonetizationResponse,
 )
+from .watch_progress import (
+    WatchProgressUpdate,
+    WatchProgressResponse,
+    ContinueWatchingItem,
+    ContinueWatchingResponse,
+    ResumePositionResponse,
+    WatchProgressStats,
+    MarkAsCompletedRequest,
+    RemoveFromContinueWatchingRequest,
+)
+from .recently_watched import (
+    RecentlyWatchedItem,
+    RecentlyWatchedResponse,
+    RecentlyWatchedStats,
+    RecentlyWatchedDetail,
+)
 
 __all__ = [
     "BaseResponse",
@@ -56,4 +72,18 @@ __all__ = [
     "CastCrewResponse",
     "PerformanceResponse",
     "MonetizationResponse",
+    # Watch Progress schemas
+    "WatchProgressUpdate",
+    "WatchProgressResponse",
+    "ContinueWatchingItem",
+    "ContinueWatchingResponse",
+    "ResumePositionResponse",
+    "WatchProgressStats",
+    "MarkAsCompletedRequest",
+    "RemoveFromContinueWatchingRequest",
+    # Recently Watched schemas
+    "RecentlyWatchedItem",
+    "RecentlyWatchedResponse",
+    "RecentlyWatchedStats",
+    "RecentlyWatchedDetail",
 ]

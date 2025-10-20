@@ -24,6 +24,7 @@ if TYPE_CHECKING:
         PasswordResetOTP,
         PasswordResetToken,
     )
+    from app.models.watch_progress import UserWatchProgress
 
 
 class UserRole(str, Enum):
@@ -118,6 +119,11 @@ class User(BaseModel, TimestampMixin, table=True):
     )
     # Subscriptions
     subscriptions: List["Subscription"] = Relationship(
+        back_populates="user",
+        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
+    )
+    # Watch Progress
+    watch_progress: List["UserWatchProgress"] = Relationship(
         back_populates="user",
         sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
     )

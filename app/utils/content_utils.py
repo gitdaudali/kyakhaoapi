@@ -67,6 +67,20 @@ async def get_content_by_id(
         raise Exception(f"Error retrieving content by ID: {str(e)}")
 
 
+async def get_episode_by_id(
+    db: AsyncSession, episode_id: UUID
+) -> Optional[Episode]:
+    """Get episode by ID"""
+    try:
+        query = select(Episode).where(
+            and_(Episode.id == episode_id, Episode.is_deleted == False)
+        )
+        result = await db.execute(query)
+        return result.scalar_one_or_none()
+    except Exception as e:
+        raise Exception(f"Error retrieving episode by ID: {str(e)}")
+
+
 async def get_content_detail_optimized(
     db: AsyncSession, content_id: UUID
 ) -> Optional[Content]:
