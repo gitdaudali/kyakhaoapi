@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
 from app.core.deps import get_current_user
 from app.models.user import User
-from app.schemas.watch_progress import (
+from app.schemas.continue_watching import (
     ContinueWatchingItem,
     ContinueWatchingResponse,
     MarkAsCompletedRequest,
@@ -17,7 +17,7 @@ from app.schemas.watch_progress import (
     WatchProgressStats,
     WatchProgressUpdate,
 )
-from app.utils.watch_progress_utils import (
+from app.utils.continue_watching_utils import (
     get_continue_watching_list,
     get_resume_position,
     get_watch_progress_stats,

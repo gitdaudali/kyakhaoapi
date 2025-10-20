@@ -28,7 +28,7 @@ from .response import (
     PerformanceResponse,
     MonetizationResponse,
 )
-from .watch_progress import (
+from .continue_watching import (
     WatchProgressUpdate,
     WatchProgressResponse,
     ContinueWatchingItem,
