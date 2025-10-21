@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from app.api.v1.admin.api import router as admin_router
-from app.api.v1.endpoints import auth, content, streaming, users, stripe, subscriptions, user_policy, faq, stats, favorites, recommendations, continue_watching, recently_watched
+from app.api.v1.endpoints import auth, content, streaming, users, stripe, subscriptions, user_policy, faq, stats, favorites, recommendations, continue_watching, recently_watched, watch_history
 
 api_router = APIRouter()
 
@@ -18,6 +18,7 @@ api_router.include_router(subscriptions.router, prefix="/subscriptions", tags=["
 api_router.include_router(user_policy.router, prefix="/policies", tags=["user-policies"])
 api_router.include_router(continue_watching.router, prefix="/continue-watching", tags=["continue-watching"])
 api_router.include_router(recently_watched.router, prefix="/recently-watched", tags=["recently-watched"])
+api_router.include_router(watch_history.router)
 api_router.include_router(faq.router, prefix="/faq", tags=["faq"])
 
 # Include admin router

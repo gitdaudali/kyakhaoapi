@@ -44,6 +44,16 @@ from .recently_watched import (
     RecentlyWatchedStats,
     RecentlyWatchedDetail,
 )
+from .watch_history import (
+    WatchHistoryBase,
+    WatchHistoryCreate,
+    WatchHistoryUpdate,
+    WatchHistoryResponse,
+    WatchHistoryListResponse,
+    WatchHistoryDeleteResponse,
+    WatchHistoryClearResponse,
+    PaginationParams,
+)
 
 __all__ = [
     "BaseResponse",
@@ -86,4 +96,13 @@ __all__ = [
     "RecentlyWatchedResponse",
     "RecentlyWatchedStats",
     "RecentlyWatchedDetail",
+    # Watch History schemas
+    "WatchHistoryBase",
+    "WatchHistoryCreate",
+    "WatchHistoryUpdate",
+    "WatchHistoryResponse",
+    "WatchHistoryListResponse",
+    "WatchHistoryDeleteResponse",
+    "WatchHistoryClearResponse",
+    "PaginationParams",
 ]
