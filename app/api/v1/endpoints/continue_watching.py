@@ -227,3 +227,28 @@ async def remove_from_continue_watching(
             detail=f"Error removing content from continue watching: {str(e)}"
         )
 
+
+@router.delete("/")
+async def clear_continue_watching_history(
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """Clear all continue watching history for user"""
+    try:
+        from app.utils.continue_watching_utils import clear_all_continue_watching
+        
+        deleted_count = await clear_all_continue_watching(
+            user_id=current_user.id,
+            db=db
+        )
+        
+        return {
+            "message": f"Continue watching history cleared successfully. {deleted_count} items removed.",
+            "deleted_count": deleted_count
+        }
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error clearing continue watching history: {str(e)}"
+        )

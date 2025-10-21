@@ -177,3 +177,54 @@ async def get_recently_watched_stats(
     }
 
 
+async def remove_from_recently_watched(
+    user_id: UUID,
+    content_id: UUID,
+    db: AsyncSession,
+    episode_id: Optional[UUID] = None
+) -> bool:
+    """Remove specific content from recently watched history"""
+    query = select(UserWatchProgress).where(
+        and_(
+            UserWatchProgress.user_id == user_id,
+            UserWatchProgress.content_id == content_id,
+            UserWatchProgress.is_completed == True,
+            UserWatchProgress.episode_id == episode_id
+        )
+    )
+    
+    result = await db.execute(query)
+    progress = result.scalar_one_or_none()
+    
+    if not progress:
+        return False
+    
+    await db.delete(progress)
+    await db.commit()
+    return True
+
+
+async def clear_all_recently_watched(
+    user_id: UUID,
+    db: AsyncSession
+) -> int:
+    """Clear all recently watched history for user"""
+    query = select(UserWatchProgress).where(
+        and_(
+            UserWatchProgress.user_id == user_id,
+            UserWatchProgress.is_completed == True
+        )
+    )
+    
+    result = await db.execute(query)
+    progress_list = result.scalars().all()
+    
+    count = len(progress_list)
+    
+    for progress in progress_list:
+        await db.delete(progress)
+    
+    await db.commit()
+    return count
+
+

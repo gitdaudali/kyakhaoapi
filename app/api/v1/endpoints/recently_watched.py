@@ -179,3 +179,64 @@ async def get_recently_watched_detail(
         )
 
 
+@router.delete("/{content_id}")
+async def remove_from_recently_watched(
+    content_id: UUID,
+    episode_id: Optional[UUID] = Query(None, description="Episode ID if content is a TV series episode"),
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """Remove specific content from recently watched history"""
+    try:
+        from app.utils.recently_watched_utils import remove_from_recently_watched
+        
+        success = await remove_from_recently_watched(
+            user_id=current_user.id,
+            content_id=content_id,
+            db=db,
+            episode_id=episode_id
+        )
+        
+        if not success:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Content not found in recently watched history"
+            )
+        
+        return {"message": "Content removed from recently watched history successfully"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error removing content from recently watched: {str(e)}"
+        )
+
+
+@router.delete("/")
+async def clear_recently_watched_history(
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """Clear all recently watched history for user"""
+    try:
+        from app.utils.recently_watched_utils import clear_all_recently_watched
+        
+        deleted_count = await clear_all_recently_watched(
+            user_id=current_user.id,
+            db=db
+        )
+        
+        return {
+            "message": f"Recently watched history cleared successfully. {deleted_count} items removed.",
+            "deleted_count": deleted_count
+        }
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error clearing recently watched history: {str(e)}"
+        )
+
+

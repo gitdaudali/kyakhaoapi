@@ -11,6 +11,7 @@ from app.models.base import BaseModel, TimestampMixin
 if TYPE_CHECKING:
     from app.models.content import Content, Episode
     from app.models.user import User
+    from app.models.user_profile import UserProfile
 
 
 class UserWatchProgress(BaseModel, TimestampMixin, table=True):
@@ -20,6 +21,7 @@ class UserWatchProgress(BaseModel, TimestampMixin, table=True):
     
     # Foreign keys
     user_id: UUID = Field(foreign_key="users.id", nullable=False)
+    profile_id: Optional[UUID] = Field(foreign_key="user_profiles.id", nullable=True, default=None)
     content_id: UUID = Field(foreign_key="contents.id", nullable=False)
     episode_id: Optional[UUID] = Field(foreign_key="episodes.id", nullable=True, default=None)
     
@@ -38,6 +40,7 @@ class UserWatchProgress(BaseModel, TimestampMixin, table=True):
     
     # Relationships
     user: Optional["User"] = Relationship(back_populates="watch_progress")
+    profile: Optional["UserProfile"] = Relationship(back_populates="watch_progress")
     content: Optional["Content"] = Relationship(back_populates="watch_progress")
     episode: Optional["Episode"] = Relationship(back_populates="watch_progress")
     
