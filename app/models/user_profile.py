@@ -14,13 +14,15 @@ if TYPE_CHECKING:
 
 
 class ProfileType(str, Enum):
-    STANDARD = "standard"
+    ADULT = "ADULT"
+    CHILD = "CHILD"
+    TEEN = "TEEN"
 
 
 class ProfileStatus(str, Enum):
-    ACTIVE = "active"
-    INACTIVE = "inactive"
-    SUSPENDED = "suspended"
+    ACTIVE = "ACTIVE"
+    INACTIVE = "INACTIVE"
+    SUSPENDED = "SUSPENDED"
 
 
 class UserProfile(BaseModel, TimestampMixin, table=True):
@@ -30,11 +32,13 @@ class UserProfile(BaseModel, TimestampMixin, table=True):
     user_id: UUID = Field(foreign_key="users.id", nullable=False, index=True)
     name: str = Field(max_length=100, nullable=False)
     avatar_url: Optional[str] = Field(max_length=500, nullable=True)
-    profile_type: ProfileType = Field(default=ProfileType.STANDARD, nullable=False)
-    status: ProfileStatus = Field(default=ProfileStatus.ACTIVE, nullable=False)
+    profile_type: str = Field(default="ADULT", max_length=20, nullable=False)
+    status: str = Field(default="ACTIVE", max_length=20, nullable=False)
     
     # Profile settings
     is_primary: bool = Field(default=False, nullable=False)
+    is_kids_profile: bool = Field(default=False, nullable=False)
+    age_rating_limit: int = Field(default=18, nullable=False)  # Age rating limit for content
     language_preference: str = Field(default="en", max_length=10, nullable=False)
     subtitle_preference: str = Field(default="en", max_length=10, nullable=False)
     

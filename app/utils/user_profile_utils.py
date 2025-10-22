@@ -24,6 +24,14 @@ async def create_user_profile(
     existing_profiles = await get_user_profiles(user_id, db)
     is_primary = len(existing_profiles) == 0
     
+    # Handle parental controls safely
+    parental_controls = getattr(profile_data, 'parental_controls', None)
+    parental_controls_enabled = parental_controls.enabled if parental_controls else False
+    content_restrictions = parental_controls.content_restrictions if parental_controls else None
+    viewing_time_limit = parental_controls.viewing_time_limit if parental_controls else None
+    bedtime_start = parental_controls.bedtime_start if parental_controls else None
+    bedtime_end = parental_controls.bedtime_end if parental_controls else None
+    
     # Create profile
     profile = UserProfile(
         user_id=user_id,
@@ -35,11 +43,11 @@ async def create_user_profile(
         age_rating_limit=profile_data.age_rating_limit,
         language_preference=profile_data.language_preference,
         subtitle_preference=profile_data.subtitle_preference,
-        parental_controls_enabled=profile_data.parental_controls.enabled if profile_data.parental_controls else False,
-        content_restrictions=profile_data.parental_controls.content_restrictions if profile_data.parental_controls else None,
-        viewing_time_limit=profile_data.parental_controls.viewing_time_limit if profile_data.parental_controls else None,
-        bedtime_start=profile_data.parental_controls.bedtime_start if profile_data.parental_controls else None,
-        bedtime_end=profile_data.parental_controls.bedtime_end if profile_data.parental_controls else None,
+        parental_controls_enabled=parental_controls_enabled,
+        content_restrictions=content_restrictions,
+        viewing_time_limit=viewing_time_limit,
+        bedtime_start=bedtime_start,
+        bedtime_end=bedtime_end,
         last_used_at=datetime.utcnow()
     )
     

@@ -11,6 +11,7 @@ from app.schemas.user_profile import (
     UserProfileUpdate,
     UserProfileResponse,
     UserProfileListResponse,
+    UserProfileListData,
     ProfileSwitchRequest,
     ProfileSwitchResponse,
     ProfileDeleteResponse,
@@ -49,11 +50,10 @@ async def get_user_profiles_list(
                 avatar_url=profile.avatar_url,
                 profile_type=profile.profile_type,
                 is_primary=profile.is_primary,
-                is_kids_profile=profile.is_kids_profile,
                 age_rating_limit=profile.age_rating_limit,
                 language_preference=profile.language_preference,
                 subtitle_preference=profile.subtitle_preference,
-                status=profile.status,
+                is_active=getattr(profile, 'is_active', True),  # Handle existing data
                 created_at=profile.created_at,
                 updated_at=profile.updated_at,
                 last_used_at=profile.last_used_at
@@ -62,12 +62,17 @@ async def get_user_profiles_list(
         ]
         
         return UserProfileListResponse(
-            profiles=profile_responses,
-            total=len(profile_responses),
-            primary_profile_id=primary_profile.id if primary_profile else None
+            data=UserProfileListData(
+                profiles=profile_responses,
+                total=len(profile_responses),
+                primary_profile_id=primary_profile.id if primary_profile else None
+            )
         )
         
     except Exception as e:
+        print(f"Error in get_user_profiles_list: {str(e)}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error fetching user profiles: {str(e)}"
@@ -99,11 +104,10 @@ async def create_profile(
             avatar_url=profile.avatar_url,
             profile_type=profile.profile_type,
             is_primary=profile.is_primary,
-            is_kids_profile=profile.is_kids_profile,
             age_rating_limit=profile.age_rating_limit,
             language_preference=profile.language_preference,
             subtitle_preference=profile.subtitle_preference,
-            status=profile.status,
+            is_active=getattr(profile, 'is_active', True),
             created_at=profile.created_at,
             updated_at=profile.updated_at,
             last_used_at=profile.last_used_at
@@ -112,6 +116,9 @@ async def create_profile(
     except HTTPException:
         raise
     except Exception as e:
+        print(f"Error in create_profile: {str(e)}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error creating profile: {str(e)}"
@@ -140,11 +147,10 @@ async def get_profile(
             avatar_url=profile.avatar_url,
             profile_type=profile.profile_type,
             is_primary=profile.is_primary,
-            is_kids_profile=profile.is_kids_profile,
             age_rating_limit=profile.age_rating_limit,
             language_preference=profile.language_preference,
             subtitle_preference=profile.subtitle_preference,
-            status=profile.status,
+            is_active=getattr(profile, 'is_active', True),
             created_at=profile.created_at,
             updated_at=profile.updated_at,
             last_used_at=profile.last_used_at
@@ -182,11 +188,10 @@ async def update_profile(
             avatar_url=profile.avatar_url,
             profile_type=profile.profile_type,
             is_primary=profile.is_primary,
-            is_kids_profile=profile.is_kids_profile,
             age_rating_limit=profile.age_rating_limit,
             language_preference=profile.language_preference,
             subtitle_preference=profile.subtitle_preference,
-            status=profile.status,
+            is_active=getattr(profile, 'is_active', True),
             created_at=profile.created_at,
             updated_at=profile.updated_at,
             last_used_at=profile.last_used_at
