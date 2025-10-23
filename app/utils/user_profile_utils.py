@@ -39,7 +39,7 @@ async def create_user_profile(
         avatar_url=profile_data.avatar_url,
         profile_type=profile_data.profile_type,
         is_primary=is_primary,
-        is_kids_profile=profile_data.is_kids_profile,
+        is_kids_profile=profile_data.profile_type == "CHILD",
         age_rating_limit=profile_data.age_rating_limit,
         language_preference=profile_data.language_preference,
         subtitle_preference=profile_data.subtitle_preference,
@@ -110,8 +110,9 @@ async def update_user_profile(
         profile.avatar_url = profile_data.avatar_url
     if profile_data.profile_type is not None:
         profile.profile_type = profile_data.profile_type
-    if profile_data.is_kids_profile is not None:
-        profile.is_kids_profile = profile_data.is_kids_profile
+    # Derive is_kids_profile from profile_type
+    if profile_data.profile_type is not None:
+        profile.is_kids_profile = profile_data.profile_type == "CHILD"
     if profile_data.age_rating_limit is not None:
         profile.age_rating_limit = profile_data.age_rating_limit
     if profile_data.language_preference is not None:
@@ -205,14 +206,24 @@ async def update_profile_last_used(
     db: AsyncSession
 ) -> bool:
     """Update the last used timestamp for a profile"""
-    profile = await get_profile_by_id(profile_id, user_id, db)
-    if not profile:
+    from sqlalchemy import update
+    
+    try:
+        # Direct update without fetching the profile first
+        await db.execute(
+            update(UserProfile)
+            .where(
+                and_(
+                    UserProfile.id == profile_id,
+                    UserProfile.user_id == user_id
+                )
+            )
+            .values(last_used_at=datetime.utcnow())
+        )
+        await db.commit()
+        return True
+    except Exception:
         return False
-    
-    profile.last_used_at = datetime.utcnow()
-    await db.commit()
-    
-    return True
 
 
 async def get_profile_stats(

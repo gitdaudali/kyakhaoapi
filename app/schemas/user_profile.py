@@ -67,6 +67,7 @@ class UserProfileResponse(UserProfileBase):
     user_id: UUID
     is_primary: bool
     is_active: bool = True
+    status: str = "ACTIVE"
     created_at: datetime
     updated_at: datetime
     last_used_at: Optional[datetime] = None
@@ -113,3 +114,33 @@ class ProfileStats(BaseModel):
     tv_episodes_watched: int
     favorite_genres: List[str]
     last_watched_at: Optional[datetime] = None
+
+
+# ===== PROFILE-SPECIFIC FEATURES SCHEMAS =====
+
+class ProfileWatchHistoryItem(BaseModel):
+    content_id: str
+    title: str
+    slug: str
+    content_type: str
+    poster_url: Optional[str] = None
+    current_position_seconds: int
+    total_episodes_watched: int
+    is_completed: bool
+    is_currently_watching: bool
+    last_watched_at: datetime
+    first_watched_at: datetime
+
+
+class ProfileWatchHistoryResponse(BaseModel):
+    profile_id: str
+    profile_name: str
+    watch_history: List[ProfileWatchHistoryItem]
+    total_watched: int
+
+
+class ProfilePreferencesUpdate(BaseModel):
+    language_preference: Optional[str] = None
+    subtitle_preference: Optional[str] = None
+    age_rating_limit: Optional[int] = None
+    parental_controls: Optional[ParentalControls] = None
