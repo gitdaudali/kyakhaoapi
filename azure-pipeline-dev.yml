@@ -1,5 +1,5 @@
 trigger:
-  - fix_merge
+  - complete/dashboard
 
 pool:
   vmImage: 'ubuntu-latest'
