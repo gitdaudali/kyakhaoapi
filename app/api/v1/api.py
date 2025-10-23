@@ -20,7 +20,7 @@ api_router.include_router(user_policy.router, prefix="/policies", tags=["user-po
 api_router.include_router(continue_watching.router, prefix="/continue-watching", tags=["continue-watching"])
 api_router.include_router(recently_watched.router, prefix="/recently-watched", tags=["recently-watched"])
 api_router.include_router(user_profiles.router, prefix="/profiles", tags=["user-profiles"])
-api_router.include_router(watch_history.router, prefix="/watch-history", tags=["watch-history"])
+api_router.include_router(watch_history.router, prefix="/watch-history", tags=["Watch History"])
 api_router.include_router(faq.router, prefix="/faq", tags=["faq"])
 
 # Include admin router

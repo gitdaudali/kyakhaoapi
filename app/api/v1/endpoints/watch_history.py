@@ -104,7 +104,7 @@ async def add_watch_history(
     """
     try:
         watch_history = await create_watch_history(db, watch_history_data)
-        return WatchHistoryResponse.from_orm(watch_history)
+        return WatchHistoryResponse.model_validate(watch_history)
         
     except Exception as e:
         raise HTTPException(
@@ -144,7 +144,7 @@ async def get_watch_history_by_id_endpoint(
                 detail="Watch history record not found"
             )
         
-        return WatchHistoryResponse.from_orm(watch_history)
+        return WatchHistoryResponse.model_validate(watch_history)
         
     except HTTPException:
         raise
@@ -188,7 +188,7 @@ async def update_watch_history_endpoint(
                 detail="Watch history record not found"
             )
         
-        return WatchHistoryResponse.from_orm(watch_history)
+        return WatchHistoryResponse.model_validate(watch_history)
         
     except HTTPException:
         raise

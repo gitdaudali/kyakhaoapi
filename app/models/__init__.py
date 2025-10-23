@@ -30,6 +30,8 @@ from app.models.user import ProfileStatus, User, UserRole
 from app.models.verification import EmailVerificationToken, PasswordResetToken
 from app.models.policy import Policy, PolicyType, PolicyStatus
 from app.models.watch_progress import UserWatchProgress
+from app.models.watch_history import WatchHistory
+from app.models.user_profile import UserProfile
 
 __all__ = [
     "BaseModel",
@@ -71,4 +73,5 @@ __all__ = [
     "PolicyStatus",
     "UserWatchProgress",
     "WatchHistory",
+    "UserProfile",
 ]
