@@ -30,7 +30,6 @@ from app.utils.watch_history_utils import (
 )
 
 router = APIRouter(
-    prefix="/history",
     tags=["Watch History"],
     responses={
         404: {"description": "Not found"},
@@ -41,7 +40,7 @@ router = APIRouter(
 
 
 @router.get(
-    "",
+    "/history",
     response_model=WatchHistoryListResponse,
     summary="Get user watch history",
     description="Get paginated watch history for a user, sorted by last_watched_at DESC"
@@ -80,7 +79,7 @@ async def get_watch_history(
 
 
 @router.post(
-    "",
+    "/history",
     response_model=WatchHistoryResponse,
     status_code=status.HTTP_201_CREATED,
     summary="Add watch history record",
@@ -115,7 +114,7 @@ async def add_watch_history(
 
 
 @router.get(
-    "/{history_id}",
+    "/history/{history_id}",
     response_model=WatchHistoryResponse,
     summary="Get watch history by ID",
     description="Get a specific watch history record by its ID"
@@ -157,7 +156,7 @@ async def get_watch_history_by_id_endpoint(
 
 
 @router.put(
-    "/{history_id}",
+    "/history/{history_id}",
     response_model=WatchHistoryResponse,
     summary="Update watch history",
     description="Update an existing watch history record"
@@ -201,7 +200,7 @@ async def update_watch_history_endpoint(
 
 
 @router.delete(
-    "/{history_id}",
+    "/history/{history_id}",
     response_model=WatchHistoryDeleteResponse,
     summary="Delete watch history record",
     description="Delete a specific watch history record by its ID"
@@ -246,7 +245,7 @@ async def delete_watch_history_endpoint(
 
 
 @router.delete(
-    "/clear",
+    "/history/clear",
     response_model=WatchHistoryClearResponse,
     summary="Clear all watch history",
     description="Clear all watch history records for a user"
@@ -284,7 +283,7 @@ async def clear_watch_history(
 
 
 @router.get(
-    "/stats/{user_id}",
+    "/history/stats/{user_id}",
     summary="Get watch history statistics",
     description="Get statistics about a user's watch history"
 )
