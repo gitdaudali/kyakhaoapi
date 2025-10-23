@@ -2,7 +2,7 @@ import os
 import sys
 from logging.config import fileConfig
 from pathlib import Path
-from app.models import content, token, user, verification, monetization
+from app.models import content, token, user, verification, monetization, watch_history, user_profile, watch_progress
 from sqlalchemy import engine_from_config, pool
 
 from alembic import context

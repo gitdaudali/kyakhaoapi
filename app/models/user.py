@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     )
     from app.models.subscription import Subscription
     from app.models.token import RefreshToken, Token
+    from app.models.user_profile import UserProfile
     from app.models.verification import (
         EmailVerificationOTP,
         EmailVerificationToken,
@@ -124,6 +125,11 @@ class User(BaseModel, TimestampMixin, table=True):
     )
     # Watch Progress
     watch_progress: List["UserWatchProgress"] = Relationship(
+        back_populates="user",
+        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
+    )
+    # User Profiles
+    profiles: List["UserProfile"] = Relationship(
         back_populates="user",
         sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
     )

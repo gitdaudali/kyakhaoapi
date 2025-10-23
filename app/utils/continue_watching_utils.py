@@ -328,3 +328,26 @@ async def cleanup_old_progress(
     await db.commit()
     return count
 
+
+async def clear_all_continue_watching(
+    user_id: UUID,
+    db: AsyncSession
+) -> int:
+    """Clear all continue watching history for user"""
+    query = select(UserWatchProgress).where(
+        and_(
+            UserWatchProgress.user_id == user_id,
+            UserWatchProgress.is_completed == False
+        )
+    )
+    
+    result = await db.execute(query)
+    progress_list = result.scalars().all()
+    
+    count = len(progress_list)
+    
+    for progress in progress_list:
+        await db.delete(progress)
+    
+    await db.commit()
+    return count

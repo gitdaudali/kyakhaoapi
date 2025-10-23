@@ -6,7 +6,6 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.security import HTTPBearer
-from fastapi.staticfiles import StaticFiles
 from sqlmodel import SQLModel
 
 from app.api.v1.api import api_router

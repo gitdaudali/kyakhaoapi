@@ -22,6 +22,7 @@ from app.models.base import BaseModel, TimestampMixin
 if TYPE_CHECKING:
     from app.models.user import User
     from app.models.watch_progress import UserWatchProgress
+    from app.models.user_profile import UserProfile
 
 
 class ContentType(str, Enum):
@@ -671,6 +672,9 @@ class UserContentInteraction(BaseModel, TimestampMixin, table=True):
         nullable=False,
         index=True,
     )
+    profile_id: Optional[uuid.UUID] = Field(
+        sa_type=UUID(as_uuid=True), foreign_key="user_profiles.id", nullable=True, default=None, index=True
+    )
     interaction_type: InteractionType = Field(
         sa_type=String(20), nullable=False, index=True
     )
@@ -682,6 +686,7 @@ class UserContentInteraction(BaseModel, TimestampMixin, table=True):
     # Relationships
     user: "User" = Relationship(back_populates="user_content_interactions")
     content: "Content" = Relationship(back_populates="interactions")
+    profile: Optional["UserProfile"] = Relationship(back_populates="content_interactions")
 
     __table_args__ = (
         UniqueConstraint(
@@ -847,6 +852,9 @@ class UserWatchHistory(BaseModel, TimestampMixin, table=True):
         nullable=False,
         index=True,
     )
+    profile_id: Optional[uuid.UUID] = Field(
+        sa_type=UUID(as_uuid=True), foreign_key="user_profiles.id", nullable=True, default=None, index=True
+    )
 
     # Current Progress
     current_episode_id: Optional[uuid.UUID] = Field(
@@ -880,6 +888,7 @@ class UserWatchHistory(BaseModel, TimestampMixin, table=True):
     # Relationships
     user: "User" = Relationship(back_populates="watch_history")
     content: "Content" = Relationship(back_populates="watch_history")
+    profile: Optional["UserProfile"] = Relationship(back_populates="watch_history")
 
     __table_args__ = (
         UniqueConstraint("user_id", "content_id", name="unique_user_content_history"),
