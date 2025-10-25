@@ -2,6 +2,7 @@ import uuid
 from datetime import datetime, timezone
 from enum import Enum
 from typing import TYPE_CHECKING, List, Optional
+from typing import Optional
 
 from sqlalchemy import DateTime, String, Text
 from sqlalchemy.dialects.postgresql import UUID
@@ -60,6 +61,14 @@ class User(BaseModel, TimestampMixin, table=True):
     last_login: Optional[datetime] = Field(
         default=None, sa_type=DateTime(timezone=True)
     )
+
+    # Add these JSON fields for flexible data storage
+    analytics_data: Optional[str] = Field(default=None)  # JSON string
+    activity_log: Optional[str] = Field(default=None)  # JSON string
+    notification_preferences: Optional[str] = Field(default=None)  # JSON string
+    device_info: Optional[str] = Field(default=None)  # JSON string
+
+    
     role: UserRole = Field(sa_type=String(20), default=UserRole.USER, index=True)
     profile_status: ProfileStatus = Field(
         sa_type=String(30), default=ProfileStatus.PENDING_VERIFICATION, index=True

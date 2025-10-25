@@ -1,4 +1,5 @@
 from app.models.base import BaseModel, TimestampMixin
+from app.models.user_settings import UserSettings
 from app.models.content import (
     Content,
     ContentCast,
@@ -74,4 +75,5 @@ __all__ = [
     "UserWatchProgress",
     "WatchHistory",
     "UserProfile",
+    "UserSettings",
 ]
