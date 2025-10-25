@@ -33,6 +33,7 @@ from app.models import (
     Person,
     Season,
     StreamingChannel,
+    Subscription,
     User,
     UserContentInteraction,
     UserWatchHistory,
