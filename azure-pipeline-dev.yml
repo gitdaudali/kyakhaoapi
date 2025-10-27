@@ -1,5 +1,5 @@
 trigger:
-  - CUP_DASHBOARD_APIS
+  - complete/dashboard
 
 pool:
   vmImage: 'ubuntu-latest'
