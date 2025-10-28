@@ -76,11 +76,8 @@ __all__ = [
     "UserWatchProgress",
     "WatchHistory",
     "UserProfile",
-<<<<<<< HEAD
     "Subscription",
     "SubscriptionPayment",
     "StripeWebhookEvent",
-=======
     "UserSettings",
->>>>>>> origin/alishba-CupAPIs
 ]
