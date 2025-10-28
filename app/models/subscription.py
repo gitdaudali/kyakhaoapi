@@ -95,7 +95,7 @@ class Subscription(BaseModel, table=True):
 class SubscriptionPayment(BaseModel, table=True):
     __tablename__ = "subscription_payments"
 
-    subscription_id: str = Field(foreign_key="subscriptions.id", index=True)
+    subscription_id: uuid.UUID = Field(foreign_key="subscriptions.id", index=True)
     stripe_payment_intent_id: Optional[str] = Field(max_length=255, default=None, index=True)
     stripe_invoice_id: Optional[str] = Field(max_length=255, default=None, index=True)
     

@@ -28,6 +28,7 @@ from app.models.faq import FAQ
 from app.models.streaming import StreamingChannel
 from app.models.token import RefreshToken, Token, TokenBlacklist
 from app.models.user import ProfileStatus, User, UserRole
+from app.models.subscription import Subscription, SubscriptionPayment, StripeWebhookEvent
 from app.models.verification import EmailVerificationToken, PasswordResetToken
 from app.models.policy import Policy, PolicyType, PolicyStatus
 from app.models.watch_progress import UserWatchProgress
@@ -76,4 +77,7 @@ __all__ = [
     "WatchHistory",
     "UserProfile",
     "UserSettings",
+    "Subscription",
+    "SubscriptionPayment",
+    "StripeWebhookEvent",
 ]
