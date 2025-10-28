@@ -54,7 +54,7 @@ def upgrade() -> None:
     op.add_column('user_watch_history', sa.Column('profile_id', sa.UUID(), nullable=True))
     op.create_index(op.f('ix_user_watch_history_profile_id'), 'user_watch_history', ['profile_id'], unique=False)
     op.create_foreign_key(None, 'user_watch_history', 'user_profiles', ['profile_id'], ['id'])
-    op.add_column('user_watch_progress', sa.Column('profile_id', sa.Uuid(), nullable=True))
+    op.add_column('user_watch_progress', sa.Column('profile_id', sa.UUID(), nullable=True))
     op.create_foreign_key(None, 'user_watch_progress', 'user_profiles', ['profile_id'], ['id'])
     # ### end Alembic commands ###
 
