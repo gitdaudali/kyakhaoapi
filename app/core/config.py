@@ -2,7 +2,8 @@ import os
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
-load_dotenv(os.getenv("ENV_FILE", ".env"))
+# override=True ensures .env file values take precedence over system environment variables
+load_dotenv(override=True)
 
 
 class Settings:
@@ -70,12 +71,31 @@ class Settings:
         if os.getenv("ALLOWED_HOSTS")
         else ["*"]
     )
-    ALLOWED_ORIGINS: list[str] = os.getenv(
-        "ALLOWED_ORIGINS",
-        "http://localhost:3000,http://localhost:3001,"
-        "http://127.0.0.1:3000,http://127.0.0.1:3001,"
-        "http://localhost:8000,http://localhost:8001",
-    ).split(",")
+    @property
+    def ALLOWED_ORIGINS(self) -> list[str]:
+        """Get allowed CORS origins from environment, handling wildcard"""
+        allowed_origins_env = os.getenv("ALLOWED_ORIGINS")
+        
+        # If explicitly set to "*", return wildcard
+        if allowed_origins_env and allowed_origins_env.strip() == "*":
+            return ["*"]
+        
+        # If set, parse comma-separated list
+        if allowed_origins_env:
+            origins = [origin.strip() for origin in allowed_origins_env.split(",") if origin.strip()]
+            return origins if origins else ["*"]
+        
+        # Default: localhost origins for development
+        return [
+            "http://localhost:3000",
+            "http://localhost:3001",
+            "http://localhost:5173",  # Vite default port
+            "http://127.0.0.1:3000",
+            "http://127.0.0.1:3001",
+            "http://127.0.0.1:5173",  # Vite default port
+            "http://localhost:8000",
+            "http://localhost:8001",
+        ]
 
     # File upload
     MAX_FILE_SIZE: int = int(
@@ -143,3 +163,11 @@ class Settings:
 
 
 settings = Settings()
+
+# Print database config on startup for debugging
+print(f"[CONFIG] Database settings from .env file:")
+print(f"[CONFIG]   DB_HOST={settings.DB_HOST}")
+print(f"[CONFIG]   DB_PORT={settings.DB_PORT}")
+print(f"[CONFIG]   DB_NAME={settings.DB_NAME}")
+print(f"[CONFIG]   DB_USER={settings.DB_USER}")
+print(f"[CONFIG]   DATABASE_URL={settings.DATABASE_URL.split('@')[0]}@***")

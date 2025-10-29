@@ -45,11 +45,20 @@ async def get_current_user(
     token = credentials.credentials
 
     # Check if token is blacklisted
-    blacklist_query = select(TokenBlacklist).where(
-        TokenBlacklist.token == token,
-        TokenBlacklist.expires_at > datetime.now(timezone.utc),
-    )
-    blacklisted_token = await db.execute(blacklist_query)
+    try:
+        blacklist_query = select(TokenBlacklist).where(
+            TokenBlacklist.token == token,
+            TokenBlacklist.expires_at > datetime.now(timezone.utc),
+        )
+        blacklisted_token = await db.execute(blacklist_query)
+    except Exception as db_error:
+        # If database connection fails, log and raise proper error
+        from app.core.database import logger
+        logger.error(f"Database connection error in get_current_user: {str(db_error)}")
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database connection error. Please try again.",
+        )
     if blacklisted_token.scalar_one_or_none():
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
