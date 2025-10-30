@@ -171,7 +171,12 @@ async def get_admin_tv_shows(
         )
 
 
-@router.post("/tv-shows", response_model=ContentAdminResponse, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/tv-shows",
+    response_model=ContentAdminResponse,
+    status_code=status.HTTP_201_CREATED,
+    operation_id="create_admin_tv_show_v1",
+)
 async def create_admin_tv_show(
     current_user: AdminUser,
     tv_show_data: TVShowAdminCreate,
@@ -277,7 +282,11 @@ async def create_admin_tv_show(
         )
 
 
-@router.put("/tv-shows/{tv_show_id}", response_model=ContentAdminResponse)
+@router.put(
+    "/tv-shows/{tv_show_id}",
+    response_model=ContentAdminResponse,
+    operation_id="update_admin_tv_show_v1",
+)
 async def update_admin_tv_show(
     current_user: AdminUser,
     tv_show_id: UUID,
@@ -401,7 +410,10 @@ async def update_admin_tv_show(
         )
 
 
-@router.delete("/tv-shows/{tv_show_id}")
+@router.delete(
+    "/tv-shows/{tv_show_id}",
+    operation_id="delete_admin_tv_show_v1",
+)
 async def delete_admin_tv_show(
     current_user: AdminUser,
     tv_show_id: UUID,

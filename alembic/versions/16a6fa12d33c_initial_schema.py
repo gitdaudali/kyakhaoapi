@@ -1,8 +1,8 @@
-"""Initial migration
+"""initial schema
 
-Revision ID: b9a12917d7b6
+Revision ID: 16a6fa12d33c
 Revises: 
-Create Date: 2025-10-29 17:22:45.728471
+Create Date: 2025-10-30 15:38:22.522335
 
 """
 from alembic import op
@@ -11,7 +11,7 @@ import sqlmodel
 
 
 # revision identifiers, used by Alembic.
-revision = 'b9a12917d7b6'
+revision = '16a6fa12d33c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -298,6 +298,48 @@ def upgrade() -> None:
     op.create_index(op.f('ix_ad_campaign_stats_campaign_id'), 'ad_campaign_stats', ['campaign_id'], unique=False)
     op.create_index(op.f('ix_ad_campaign_stats_is_deleted'), 'ad_campaign_stats', ['is_deleted'], unique=False)
     op.create_index(op.f('ix_ad_campaign_stats_stat_date'), 'ad_campaign_stats', ['stat_date'], unique=False)
+    op.create_table('ad_slots',
+    sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('is_deleted', sa.Boolean(), nullable=False),
+    sa.Column('id', sa.UUID(), nullable=False),
+    sa.Column('name', sa.String(length=255), nullable=False),
+    sa.Column('slot_type', sa.String(length=20), nullable=False),
+    sa.Column('page_location', sa.String(length=100), nullable=True),
+    sa.Column('campaign_id', sa.UUID(), nullable=True),
+    sa.Column('status', sa.String(length=20), nullable=False),
+    sa.Column('dimensions', sa.String(length=20), nullable=True),
+    sa.Column('preview_image_url', sa.Text(), nullable=True),
+    sa.Column('description', sa.Text(), nullable=True),
+    sa.ForeignKeyConstraint(['campaign_id'], ['ad_campaigns.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_ad_slots_campaign_id'), 'ad_slots', ['campaign_id'], unique=False)
+    op.create_index(op.f('ix_ad_slots_is_deleted'), 'ad_slots', ['is_deleted'], unique=False)
+    op.create_index(op.f('ix_ad_slots_name'), 'ad_slots', ['name'], unique=False)
+    op.create_index(op.f('ix_ad_slots_page_location'), 'ad_slots', ['page_location'], unique=False)
+    op.create_index(op.f('ix_ad_slots_slot_type'), 'ad_slots', ['slot_type'], unique=False)
+    op.create_index(op.f('ix_ad_slots_status'), 'ad_slots', ['status'], unique=False)
+    op.create_table('announcements',
+    sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('is_deleted', sa.Boolean(), nullable=False),
+    sa.Column('id', sa.UUID(), nullable=False),
+    sa.Column('title', sa.String(length=255), nullable=False),
+    sa.Column('description', sa.Text(), nullable=False),
+    sa.Column('status', sa.String(length=20), nullable=False),
+    sa.Column('author_id', sa.Uuid(), nullable=False),
+    sa.Column('scheduled_date_time', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.ForeignKeyConstraint(['author_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_announcements_author_id'), 'announcements', ['author_id'], unique=False)
+    op.create_index(op.f('ix_announcements_is_active'), 'announcements', ['is_active'], unique=False)
+    op.create_index(op.f('ix_announcements_is_deleted'), 'announcements', ['is_deleted'], unique=False)
+    op.create_index(op.f('ix_announcements_scheduled_date_time'), 'announcements', ['scheduled_date_time'], unique=False)
+    op.create_index(op.f('ix_announcements_status'), 'announcements', ['status'], unique=False)
+    op.create_index(op.f('ix_announcements_title'), 'announcements', ['title'], unique=False)
     op.create_table('content_cast',
     sa.Column('id', sa.UUID(), nullable=False),
     sa.Column('content_id', sa.UUID(), nullable=False),
@@ -496,6 +538,30 @@ def upgrade() -> None:
     op.create_index(op.f('ix_password_reset_tokens_is_used'), 'password_reset_tokens', ['is_used'], unique=False)
     op.create_index(op.f('ix_password_reset_tokens_token'), 'password_reset_tokens', ['token'], unique=True)
     op.create_index(op.f('ix_password_reset_tokens_user_id'), 'password_reset_tokens', ['user_id'], unique=False)
+    op.create_table('popups',
+    sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('is_deleted', sa.Boolean(), nullable=False),
+    sa.Column('id', sa.UUID(), nullable=False),
+    sa.Column('popup_name', sa.String(length=255), nullable=False),
+    sa.Column('description', sa.Text(), nullable=True),
+    sa.Column('status', sa.String(length=20), nullable=False),
+    sa.Column('priority', sa.String(length=20), nullable=False),
+    sa.Column('assignee_id', sa.Uuid(), nullable=False),
+    sa.Column('due_date', sa.Date(), nullable=True),
+    sa.Column('project', sa.String(length=255), nullable=True),
+    sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.ForeignKeyConstraint(['assignee_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_popups_assignee_id'), 'popups', ['assignee_id'], unique=False)
+    op.create_index(op.f('ix_popups_due_date'), 'popups', ['due_date'], unique=False)
+    op.create_index(op.f('ix_popups_is_active'), 'popups', ['is_active'], unique=False)
+    op.create_index(op.f('ix_popups_is_deleted'), 'popups', ['is_deleted'], unique=False)
+    op.create_index(op.f('ix_popups_popup_name'), 'popups', ['popup_name'], unique=False)
+    op.create_index(op.f('ix_popups_priority'), 'popups', ['priority'], unique=False)
+    op.create_index(op.f('ix_popups_project'), 'popups', ['project'], unique=False)
+    op.create_index(op.f('ix_popups_status'), 'popups', ['status'], unique=False)
     op.create_table('refresh_tokens',
     sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
     sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
@@ -570,6 +636,30 @@ def upgrade() -> None:
     op.create_index(op.f('ix_subscriptions_stripe_customer_id'), 'subscriptions', ['stripe_customer_id'], unique=False)
     op.create_index(op.f('ix_subscriptions_stripe_subscription_id'), 'subscriptions', ['stripe_subscription_id'], unique=False)
     op.create_index(op.f('ix_subscriptions_user_id'), 'subscriptions', ['user_id'], unique=False)
+    op.create_table('tasks',
+    sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('is_deleted', sa.Boolean(), nullable=False),
+    sa.Column('id', sa.UUID(), nullable=False),
+    sa.Column('task_title', sa.String(length=255), nullable=False),
+    sa.Column('description', sa.Text(), nullable=True),
+    sa.Column('assigned_to', sa.Uuid(), nullable=False),
+    sa.Column('deadline', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('priority', sa.String(length=20), nullable=False),
+    sa.Column('status', sa.String(length=20), nullable=False),
+    sa.Column('project', sa.String(length=255), nullable=True),
+    sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.ForeignKeyConstraint(['assigned_to'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_tasks_assigned_to'), 'tasks', ['assigned_to'], unique=False)
+    op.create_index(op.f('ix_tasks_deadline'), 'tasks', ['deadline'], unique=False)
+    op.create_index(op.f('ix_tasks_is_active'), 'tasks', ['is_active'], unique=False)
+    op.create_index(op.f('ix_tasks_is_deleted'), 'tasks', ['is_deleted'], unique=False)
+    op.create_index(op.f('ix_tasks_priority'), 'tasks', ['priority'], unique=False)
+    op.create_index(op.f('ix_tasks_project'), 'tasks', ['project'], unique=False)
+    op.create_index(op.f('ix_tasks_status'), 'tasks', ['status'], unique=False)
+    op.create_index(op.f('ix_tasks_task_title'), 'tasks', ['task_title'], unique=False)
     op.create_table('token_blacklist',
     sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
     sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
@@ -982,6 +1072,15 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_token_blacklist_token'), table_name='token_blacklist')
     op.drop_index(op.f('ix_token_blacklist_is_deleted'), table_name='token_blacklist')
     op.drop_table('token_blacklist')
+    op.drop_index(op.f('ix_tasks_task_title'), table_name='tasks')
+    op.drop_index(op.f('ix_tasks_status'), table_name='tasks')
+    op.drop_index(op.f('ix_tasks_project'), table_name='tasks')
+    op.drop_index(op.f('ix_tasks_priority'), table_name='tasks')
+    op.drop_index(op.f('ix_tasks_is_deleted'), table_name='tasks')
+    op.drop_index(op.f('ix_tasks_is_active'), table_name='tasks')
+    op.drop_index(op.f('ix_tasks_deadline'), table_name='tasks')
+    op.drop_index(op.f('ix_tasks_assigned_to'), table_name='tasks')
+    op.drop_table('tasks')
     op.drop_index(op.f('ix_subscriptions_user_id'), table_name='subscriptions')
     op.drop_index(op.f('ix_subscriptions_stripe_subscription_id'), table_name='subscriptions')
     op.drop_index(op.f('ix_subscriptions_stripe_customer_id'), table_name='subscriptions')
@@ -998,6 +1097,15 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_refresh_tokens_token'), table_name='refresh_tokens')
     op.drop_index(op.f('ix_refresh_tokens_is_deleted'), table_name='refresh_tokens')
     op.drop_table('refresh_tokens')
+    op.drop_index(op.f('ix_popups_status'), table_name='popups')
+    op.drop_index(op.f('ix_popups_project'), table_name='popups')
+    op.drop_index(op.f('ix_popups_priority'), table_name='popups')
+    op.drop_index(op.f('ix_popups_popup_name'), table_name='popups')
+    op.drop_index(op.f('ix_popups_is_deleted'), table_name='popups')
+    op.drop_index(op.f('ix_popups_is_active'), table_name='popups')
+    op.drop_index(op.f('ix_popups_due_date'), table_name='popups')
+    op.drop_index(op.f('ix_popups_assignee_id'), table_name='popups')
+    op.drop_table('popups')
     op.drop_index(op.f('ix_password_reset_tokens_user_id'), table_name='password_reset_tokens')
     op.drop_index(op.f('ix_password_reset_tokens_token'), table_name='password_reset_tokens')
     op.drop_index(op.f('ix_password_reset_tokens_is_used'), table_name='password_reset_tokens')
@@ -1043,6 +1151,20 @@ def downgrade() -> None:
     op.drop_table('content_crew')
     op.drop_index(op.f('ix_content_cast_job_title'), table_name='content_cast')
     op.drop_table('content_cast')
+    op.drop_index(op.f('ix_announcements_title'), table_name='announcements')
+    op.drop_index(op.f('ix_announcements_status'), table_name='announcements')
+    op.drop_index(op.f('ix_announcements_scheduled_date_time'), table_name='announcements')
+    op.drop_index(op.f('ix_announcements_is_deleted'), table_name='announcements')
+    op.drop_index(op.f('ix_announcements_is_active'), table_name='announcements')
+    op.drop_index(op.f('ix_announcements_author_id'), table_name='announcements')
+    op.drop_table('announcements')
+    op.drop_index(op.f('ix_ad_slots_status'), table_name='ad_slots')
+    op.drop_index(op.f('ix_ad_slots_slot_type'), table_name='ad_slots')
+    op.drop_index(op.f('ix_ad_slots_page_location'), table_name='ad_slots')
+    op.drop_index(op.f('ix_ad_slots_name'), table_name='ad_slots')
+    op.drop_index(op.f('ix_ad_slots_is_deleted'), table_name='ad_slots')
+    op.drop_index(op.f('ix_ad_slots_campaign_id'), table_name='ad_slots')
+    op.drop_table('ad_slots')
     op.drop_index(op.f('ix_ad_campaign_stats_stat_date'), table_name='ad_campaign_stats')
     op.drop_index(op.f('ix_ad_campaign_stats_is_deleted'), table_name='ad_campaign_stats')
     op.drop_index(op.f('ix_ad_campaign_stats_campaign_id'), table_name='ad_campaign_stats')

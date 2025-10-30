@@ -164,10 +164,4 @@ class Settings:
 
 settings = Settings()
 
-# Print database config on startup for debugging
-print(f"[CONFIG] Database settings from .env file:")
-print(f"[CONFIG]   DB_HOST={settings.DB_HOST}")
-print(f"[CONFIG]   DB_PORT={settings.DB_PORT}")
-print(f"[CONFIG]   DB_NAME={settings.DB_NAME}")
-print(f"[CONFIG]   DB_USER={settings.DB_USER}")
-print(f"[CONFIG]   DATABASE_URL={settings.DATABASE_URL.split('@')[0]}@***")
+

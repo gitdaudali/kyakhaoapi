@@ -2,7 +2,7 @@ import os
 import sys
 from logging.config import fileConfig
 from pathlib import Path
-from app.models import content, token, user, verification, monetization, watch_history, user_profile, watch_progress, user_settings, announcement, task, popup, policy, faq
+from app.models import content, token, user, verification, monetization, watch_history, user_profile, watch_progress, user_settings
 from sqlalchemy import engine_from_config, pool
 
 from alembic import context
@@ -12,6 +12,10 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 from sqlmodel import SQLModel
+
+# Import your models and settings
+from app.core.config import settings
+
 
 # access to the values within the .ini file in use.
 config = context.config
@@ -32,24 +36,8 @@ target_metadata = SQLModel.metadata
 
 
 def get_url():
-    """Get database URL - Hardcoded to avoid system environment variable conflicts."""
-    # COMPLETELY HARDCODED VALUES - No environment variable reading at all
-    # Update these values to match your database configuration
-    
-    DB_USER = "postgres"
-    DB_PASSWORD = "root123"
-    DB_HOST = "localhost"
-    DB_PORT = "5432"  # PostgreSQL default port (not SQL Server's 1433)
-    DB_NAME = "cup3"
-    
-    # Construct PostgreSQL connection URL
-    # Format: postgresql://user:password@host:port/database
-    database_url = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-    
-    # Debug: Print the connection URL (comment out after confirming it's correct)
-    print(f"[DEBUG] Database URL: postgresql://{DB_USER}:***@{DB_HOST}:{DB_PORT}/{DB_NAME}")
-    
-    return database_url
+    """Get database URL from environment variables."""
+    return settings.DATABASE_URL
 
 
 def run_migrations_offline() -> None:

@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 Base = declarative_base()
 
 # Build database URL
-print(f"[DB] Original DATABASE_URL from settings: {settings.DATABASE_URL.split('@')[0]}@***")
+
 database_url = settings.DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://")
 
 # For local development, disable SSL via connect_args (asyncpg doesn't support ssl=disable in URL)
@@ -31,13 +31,7 @@ if is_local:
     connect_args["ssl"] = False
 
 # Print connection details (without password) - using print so it shows immediately
-try:
-    db_info = database_url.split('@')[1] if '@' in database_url else 'unknown'
-    print(f"[DB] Connecting to: postgresql+asyncpg://***@{db_info}")
-    print(f"[DB] Is localhost: {is_local}, SSL disabled: {is_local}")
-    print(f"[DB] Connect args: {connect_args}")
-except Exception as e:
-    print(f"[DB] Error parsing database URL: {e}")
+
 
 engine = create_async_engine(
     database_url,
