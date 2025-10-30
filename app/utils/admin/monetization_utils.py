@@ -1,5 +1,6 @@
 from datetime import date, datetime, timedelta
 from typing import List, Optional, Tuple
+from enum import Enum
 from uuid import UUID
 
 from sqlalchemy import and_, desc, func, or_, select
@@ -12,12 +13,17 @@ from app.models.monetization import (
     CampaignStatus,
     MonetizationActivity,
     PlatformType,
+    AdSlot,  # added
 )
 from app.schemas.admin import (
     ActivityCreate,
     AdCampaignCreate,
     AdCampaignStatCreate,
     AdCampaignUpdate,
+)
+from app.schemas.monetization_slots import (
+    AdSlotCreate,
+    AdSlotUpdate,
 )
 
 
@@ -403,3 +409,100 @@ async def get_subscriber_segmentation(db: AsyncSession) -> dict:
             "Premium Access": 0,
             "VIP Elite": 0,
         }
+
+
+# ---------------- Ad Slots ----------------
+async def create_slot(db: AsyncSession, slot_data: AdSlotCreate) -> AdSlot:
+    payload = slot_data.model_dump()
+    # Coerce enums to plain strings for DB columns
+    if isinstance(payload.get("slot_type"), Enum):
+        payload["slot_type"] = payload["slot_type"].value
+    if isinstance(payload.get("status"), Enum):
+        payload["status"] = payload["status"].value
+    slot = AdSlot(**payload)
+    db.add(slot)
+    await db.commit()
+    await db.refresh(slot)
+    return slot
+
+
+async def get_slot_by_id(db: AsyncSession, slot_id: UUID) -> Optional[AdSlot]:
+    query = select(AdSlot).where(and_(AdSlot.id == slot_id, AdSlot.is_deleted == False))
+    result = await db.execute(query)
+    return result.scalar_one_or_none()
+
+
+async def get_slots_list(
+    db: AsyncSession,
+    page: int = 1,
+    size: int = 10,
+    sort_by: str = "created_at",
+    sort_order: str = "desc",
+    slot_type: Optional[AdType] = None,
+    status: Optional[str] = None,
+    campaign_id: Optional[UUID] = None,
+    search: Optional[str] = None,
+) -> Tuple[List[AdSlot], int]:
+    query = select(AdSlot).where(AdSlot.is_deleted == False)
+
+    if slot_type:
+        query = query.where(AdSlot.slot_type == slot_type)
+    if status:
+        query = query.where(AdSlot.status == status)
+    if campaign_id:
+        query = query.where(AdSlot.campaign_id == campaign_id)
+    if search:
+        search_term = f"%{search}%"
+        query = query.where(AdSlot.name.ilike(search_term))
+
+    sort_field = getattr(AdSlot, sort_by, AdSlot.created_at)
+    if sort_order.lower() == "desc":
+        query = query.order_by(desc(sort_field))
+    else:
+        query = query.order_by(sort_field)
+
+    offset = (page - 1) * size
+    query = query.offset(offset).limit(size)
+
+    result = await db.execute(query)
+    slots = result.scalars().all()
+
+    count_query = select(func.count(AdSlot.id)).where(AdSlot.is_deleted == False)
+    if slot_type:
+        count_query = count_query.where(AdSlot.slot_type == slot_type)
+    if status:
+        count_query = count_query.where(AdSlot.status == status)
+    if campaign_id:
+        count_query = count_query.where(AdSlot.campaign_id == campaign_id)
+    if search:
+        search_term = f"%{search}%"
+        count_query = count_query.where(AdSlot.name.ilike(search_term))
+
+    total = (await db.execute(count_query)).scalar()
+    return slots, total
+
+
+async def update_slot(db: AsyncSession, slot_id: UUID, slot_data: AdSlotUpdate) -> Optional[AdSlot]:
+    slot = await get_slot_by_id(db, slot_id)
+    if not slot:
+        return None
+    update_data = slot_data.model_dump(exclude_unset=True)
+    # Coerce enums to plain strings for DB columns
+    if isinstance(update_data.get("slot_type"), Enum):
+        update_data["slot_type"] = update_data["slot_type"].value
+    if isinstance(update_data.get("status"), Enum):
+        update_data["status"] = update_data["status"].value
+    for field, value in update_data.items():
+        setattr(slot, field, value)
+    await db.commit()
+    await db.refresh(slot)
+    return slot
+
+
+async def delete_slot(db: AsyncSession, slot_id: UUID) -> bool:
+    slot = await get_slot_by_id(db, slot_id)
+    if not slot:
+        return False
+    slot.is_deleted = True
+    await db.commit()
+    return True
