@@ -76,8 +76,8 @@ __all__ = [
     "UserWatchProgress",
     "WatchHistory",
     "UserProfile",
+    "UserSettings",
     "Subscription",
     "SubscriptionPayment",
     "StripeWebhookEvent",
-    "UserSettings",
 ]

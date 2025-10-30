@@ -1424,6 +1424,9 @@ class PolicyAdminResponse(BaseModel):
     updated_at: datetime = Field(..., description="Last update timestamp")
     is_deleted: bool = Field(False, description="Whether policy is deleted")
 
+    class Config:
+        from_attributes = True
+
 class PolicyAdminListResponse(BaseModel):
     """Response schema for policy admin list"""
     
@@ -1434,6 +1437,9 @@ class PolicyAdminListResponse(BaseModel):
     pages: int = Field(..., description="Total number of pages")
     has_next: bool = Field(..., description="Whether there is a next page")
     has_prev: bool = Field(..., description="Whether there is a previous page")
+
+    class Config:
+        from_attributes = True
 
 class PolicyAdminQueryParams(BaseModel):
     """Query parameters for policy admin endpoints"""
