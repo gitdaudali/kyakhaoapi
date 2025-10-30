@@ -34,6 +34,9 @@ from app.models.policy import Policy, PolicyType, PolicyStatus
 from app.models.watch_progress import UserWatchProgress
 from app.models.watch_history import WatchHistory
 from app.models.user_profile import UserProfile
+from app.models.announcement import Announcement, AnnouncementStatus
+from app.models.task import Task, TaskPriority, TaskStatus
+from app.models.popup import Popup, PopupStatus, PopupPriority
 
 __all__ = [
     "BaseModel",
@@ -80,4 +83,12 @@ __all__ = [
     "Subscription",
     "SubscriptionPayment",
     "StripeWebhookEvent",
+    "Announcement",
+    "AnnouncementStatus",
+    "Task",
+    "TaskPriority",
+    "TaskStatus",
+    "Popup",
+    "PopupStatus",
+    "PopupPriority",
 ]

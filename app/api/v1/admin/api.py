@@ -1,11 +1,14 @@
 from fastapi import APIRouter
 
 from app.api.v1.admin.endpoints import (
+    announcement,
     content,
     genre,
     monetization,
     people,
+    popup,
     streaming,
+    task,
     upload,
     user,
     policy,
@@ -68,4 +71,22 @@ router.include_router(
     faq.router,
     prefix="/faq",
     tags=["Admin - FAQ"],
+)
+
+router.include_router(
+    announcement.router,
+    prefix="/announcements",
+    tags=["Admin - Announcements"],
+)
+
+router.include_router(
+    task.router,
+    prefix="/tasks",
+    tags=["Admin - Tasks"],
+)
+
+router.include_router(
+    popup.router,
+    prefix="/popups",
+    tags=["Admin - Popups"],
 )

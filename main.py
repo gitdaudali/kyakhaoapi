@@ -68,14 +68,29 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Add CORS middleware - Allow all origins, methods, and headers
+# Add CORS middleware - Configure from settings
+# Explicitly allow custom headers and ensure OPTIONS preflight works
+# When allow_credentials=True, we must explicitly list headers (can't use "*")
+cors_origins = settings.ALLOWED_ORIGINS
+allow_creds = "*" not in cors_origins
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=cors_origins,
+    allow_credentials=allow_creds,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"],
+    allow_headers=[
+        "Content-Type",
+        "Authorization",
+        "X-Device-Id",
+        "X-Device-Type",
+        "X-App-Version",
+        "Accept",
+        "Origin",
+        "X-Requested-With",
+    ] if allow_creds else ["*"],  # Use wildcard only when credentials=False
     expose_headers=["*"],
+    max_age=3600,  # Cache preflight for 1 hour
 )
 
 # Security

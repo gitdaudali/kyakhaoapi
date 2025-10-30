@@ -252,6 +252,24 @@ POLICY_CREATED = "Policy created successfully"
 POLICY_UPDATED = "Policy updated successfully"
 POLICY_DELETED = "Policy deleted successfully"
 POLICY_NOT_FOUND = "Policy not found"
+
+# Announcement Messages
+ANNOUNCEMENT_CREATED = "Announcement created successfully"
+ANNOUNCEMENT_UPDATED = "Announcement updated successfully"
+ANNOUNCEMENT_DELETED = "Announcement deleted successfully"
+ANNOUNCEMENT_NOT_FOUND = "Announcement not found"
+
+# Task Messages
+TASK_CREATED = "Task created successfully"
+TASK_UPDATED = "Task updated successfully"
+TASK_DELETED = "Task deleted successfully"
+TASK_NOT_FOUND = "Task not found"
+
+# Popup Messages
+POPUP_CREATED = "Popup created successfully"
+POPUP_UPDATED = "Popup updated successfully"
+POPUP_DELETED = "Popup deleted successfully"
+POPUP_NOT_FOUND = "Popup not found"
 POLICY_ALREADY_EXISTS = "Policy already exists"
 POLICY_ACCEPTED = "Policy accepted successfully"
 POLICY_DECLINED = "Policy declined successfully"

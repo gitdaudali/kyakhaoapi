@@ -10,6 +10,9 @@ from app.models.monetization import AdType, CampaignStatus, PlatformType
 from app.models.policy import PolicyType, PolicyStatus
 from app.models.streaming import StreamingChannelCategory
 from app.models.user import ProfileStatus, SignupType, UserRole
+from app.models.announcement import AnnouncementStatus
+from app.models.task import TaskPriority, TaskStatus
+from app.models.popup import PopupStatus, PopupPriority
 
 # =============================================================================
 # ADMIN UPLOAD ENUMS
@@ -1449,6 +1452,213 @@ class PolicyAdminQueryParams(BaseModel):
     search: Optional[str] = Field(None, min_length=1, max_length=255, description="Search term")
     policy_type: Optional[PolicyType] = Field(None, description="Filter by policy type")
     status: Optional[PolicyStatus] = Field(None, description="Filter by status")
+    is_active: Optional[bool] = Field(None, description="Filter by active status")
+    sort_by: str = Field("created_at", description="Sort field")
+    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+
+# =============================================================================
+# ANNOUNCEMENT ADMIN SCHEMAS
+# =============================================================================
+
+class AnnouncementAdminCreate(BaseModel):
+    """Schema for creating announcement via admin"""
+    
+    title: str = Field(..., min_length=1, max_length=255, description="Announcement title")
+    description: str = Field(..., min_length=1, description="Announcement description")
+    status: AnnouncementStatus = Field(AnnouncementStatus.DRAFT, description="Announcement status")
+    author_id: Optional[UUID] = Field(None, description="Author user ID (optional, defaults to current user)")
+    scheduled_date_time: Optional[datetime] = Field(None, description="Scheduled date and time for announcement")
+    is_active: bool = Field(True, description="Whether announcement is active")
+
+class AnnouncementAdminUpdate(BaseModel):
+    """Schema for updating announcement via admin"""
+    
+    title: Optional[str] = Field(None, min_length=1, max_length=255, description="Announcement title")
+    description: Optional[str] = Field(None, min_length=1, description="Announcement description")
+    status: Optional[AnnouncementStatus] = Field(None, description="Announcement status")
+    author_id: Optional[UUID] = Field(None, description="Author user ID")
+    scheduled_date_time: Optional[datetime] = Field(None, description="Scheduled date and time for announcement")
+    is_active: Optional[bool] = Field(None, description="Whether announcement is active")
+
+class AnnouncementAdminResponse(BaseModel):
+    """Admin response schema for announcement"""
+    
+    id: UUID = Field(..., description="Announcement ID")
+    title: str = Field(..., description="Announcement title")
+    description: str = Field(..., description="Announcement description")
+    status: AnnouncementStatus = Field(..., description="Announcement status")
+    author_id: UUID = Field(..., description="Author user ID")
+    scheduled_date_time: Optional[datetime] = Field(None, description="Scheduled date and time")
+    is_active: bool = Field(..., description="Whether announcement is active")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+    is_deleted: bool = Field(False, description="Whether announcement is deleted")
+    
+    class Config:
+        from_attributes = True
+
+class AnnouncementAdminListResponse(BaseModel):
+    """Response schema for announcement admin list"""
+    
+    items: List[AnnouncementAdminResponse] = Field(..., description="List of announcements")
+    total: int = Field(..., description="Total number of announcements")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+class AnnouncementAdminQueryParams(BaseModel):
+    """Query parameters for announcement admin endpoints"""
+    
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=500, description="Page size")
+    search: Optional[str] = Field(None, min_length=1, max_length=255, description="Search term")
+    status: Optional[AnnouncementStatus] = Field(None, description="Filter by status")
+    is_active: Optional[bool] = Field(None, description="Filter by active status")
+    sort_by: str = Field("created_at", description="Sort field")
+    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+
+# =============================================================================
+# TASK ADMIN SCHEMAS
+# =============================================================================
+
+class TaskAdminCreate(BaseModel):
+    """Schema for creating task via admin"""
+    
+    task_title: str = Field(..., min_length=1, max_length=255, description="Task title")
+    description: Optional[str] = Field(None, description="Task description")
+    assigned_to: Optional[UUID] = Field(None, description="Assigned user ID (optional, defaults to current user)")
+    deadline: Optional[datetime] = Field(None, description="Task deadline")
+    priority: TaskPriority = Field(TaskPriority.MEDIUM, description="Task priority")
+    status: TaskStatus = Field(TaskStatus.PENDING, description="Task status")
+    project: Optional[str] = Field(None, max_length=255, description="Project name")
+    is_active: bool = Field(True, description="Whether task is active")
+
+class TaskAdminUpdate(BaseModel):
+    """Schema for updating task via admin"""
+    
+    task_title: Optional[str] = Field(None, min_length=1, max_length=255, description="Task title")
+    description: Optional[str] = Field(None, description="Task description")
+    assigned_to: Optional[UUID] = Field(None, description="Assigned user ID")
+    deadline: Optional[datetime] = Field(None, description="Task deadline")
+    priority: Optional[TaskPriority] = Field(None, description="Task priority")
+    status: Optional[TaskStatus] = Field(None, description="Task status")
+    project: Optional[str] = Field(None, max_length=255, description="Project name")
+    is_active: Optional[bool] = Field(None, description="Whether task is active")
+
+class TaskAdminResponse(BaseModel):
+    """Admin response schema for task"""
+    
+    id: UUID = Field(..., description="Task ID")
+    task_title: str = Field(..., description="Task title")
+    description: Optional[str] = Field(None, description="Task description")
+    assigned_to: UUID = Field(..., description="Assigned user ID")
+    deadline: Optional[datetime] = Field(None, description="Task deadline")
+    priority: TaskPriority = Field(..., description="Task priority")
+    status: TaskStatus = Field(..., description="Task status")
+    project: Optional[str] = Field(None, description="Project name")
+    is_active: bool = Field(..., description="Whether task is active")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+    is_deleted: bool = Field(False, description="Whether task is deleted")
+    
+    class Config:
+        from_attributes = True
+
+class TaskAdminListResponse(BaseModel):
+    """Response schema for task admin list"""
+    
+    items: List[TaskAdminResponse] = Field(..., description="List of tasks")
+    total: int = Field(..., description="Total number of tasks")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+class TaskAdminQueryParams(BaseModel):
+    """Query parameters for task admin endpoints"""
+    
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=500, description="Page size")
+    search: Optional[str] = Field(None, min_length=1, max_length=255, description="Search term")
+    priority: Optional[TaskPriority] = Field(None, description="Filter by priority")
+    status: Optional[TaskStatus] = Field(None, description="Filter by status")
+    assigned_to: Optional[UUID] = Field(None, description="Filter by assigned user")
+    project: Optional[str] = Field(None, description="Filter by project")
+    is_active: Optional[bool] = Field(None, description="Filter by active status")
+    sort_by: str = Field("created_at", description="Sort field")
+    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+
+# =============================================================================
+# POPUP ADMIN SCHEMAS
+# =============================================================================
+
+class PopupAdminCreate(BaseModel):
+    """Schema for creating popup via admin"""
+    
+    popup_name: str = Field(..., min_length=1, max_length=255, description="Popup name")
+    description: Optional[str] = Field(None, description="Popup description")
+    status: PopupStatus = Field(PopupStatus.DRAFT, description="Popup status")
+    priority: PopupPriority = Field(PopupPriority.MEDIUM, description="Popup priority")
+    assignee_id: Optional[UUID] = Field(None, description="Assignee user ID (optional, defaults to current user)")
+    due_date: Optional[date] = Field(None, description="Due date")
+    project: Optional[str] = Field(None, max_length=255, description="Project name")
+    is_active: bool = Field(True, description="Whether popup is active")
+
+class PopupAdminUpdate(BaseModel):
+    """Schema for updating popup via admin"""
+    
+    popup_name: Optional[str] = Field(None, min_length=1, max_length=255, description="Popup name")
+    description: Optional[str] = Field(None, description="Popup description")
+    status: Optional[PopupStatus] = Field(None, description="Popup status")
+    priority: Optional[PopupPriority] = Field(None, description="Popup priority")
+    assignee_id: Optional[UUID] = Field(None, description="Assignee user ID")
+    due_date: Optional[date] = Field(None, description="Due date")
+    project: Optional[str] = Field(None, max_length=255, description="Project name")
+    is_active: Optional[bool] = Field(None, description="Whether popup is active")
+
+class PopupAdminResponse(BaseModel):
+    """Admin response schema for popup"""
+    
+    id: UUID = Field(..., description="Popup ID")
+    popup_name: str = Field(..., description="Popup name")
+    description: Optional[str] = Field(None, description="Popup description")
+    status: PopupStatus = Field(..., description="Popup status")
+    priority: PopupPriority = Field(..., description="Popup priority")
+    assignee_id: UUID = Field(..., description="Assignee user ID")
+    due_date: Optional[date] = Field(None, description="Due date")
+    project: Optional[str] = Field(None, description="Project name")
+    is_active: bool = Field(..., description="Whether popup is active")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+    is_deleted: bool = Field(False, description="Whether popup is deleted")
+    
+    class Config:
+        from_attributes = True
+
+class PopupAdminListResponse(BaseModel):
+    """Response schema for popup admin list"""
+    
+    items: List[PopupAdminResponse] = Field(..., description="List of popups")
+    total: int = Field(..., description="Total number of popups")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+class PopupAdminQueryParams(BaseModel):
+    """Query parameters for popup admin endpoints"""
+    
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=500, description="Page size")
+    search: Optional[str] = Field(None, min_length=1, max_length=255, description="Search term")
+    status: Optional[PopupStatus] = Field(None, description="Filter by status")
+    priority: Optional[PopupPriority] = Field(None, description="Filter by priority")
+    assignee_id: Optional[UUID] = Field(None, description="Filter by assignee")
+    project: Optional[str] = Field(None, description="Filter by project")
     is_active: Optional[bool] = Field(None, description="Filter by active status")
     sort_by: str = Field("created_at", description="Sort field")
     sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")

@@ -112,3 +112,33 @@ class MonetizationActivity(BaseModel, TimestampMixin, table=True):
 
     # Relationships
     campaign: Optional["AdCampaign"] = Relationship(back_populates="activities")
+
+
+class SlotStatus(str, Enum):
+    """Status options for ad slots"""
+
+    ACTIVE = "active"
+    PAUSED = "paused"
+    ENDED = "ended"
+    DRAFT = "draft"
+
+
+class AdSlot(BaseModel, TimestampMixin, table=True):
+    """Ad slot inventory item"""
+
+    __tablename__ = "ad_slots"
+
+    name: str = Field(sa_type=String(255), nullable=False, index=True)
+    # Store as simple strings to avoid Postgres ENUM dependency
+    slot_type: str = Field(sa_type=String(20), default=AdType.BANNER.value, index=True)
+    page_location: Optional[str] = Field(sa_type=String(100), default=None, index=True)
+    campaign_id: Optional[uuid.UUID] = Field(
+        sa_type=UUID(as_uuid=True), foreign_key="ad_campaigns.id", nullable=True, index=True
+    )
+    status: str = Field(sa_type=String(20), default=SlotStatus.DRAFT.value, index=True)
+    dimensions: Optional[str] = Field(sa_type=String(20), default=None)
+    preview_image_url: Optional[str] = Field(sa_type=Text, default=None)
+    description: Optional[str] = Field(sa_type=Text, default=None)
+
+    # Relationships
+    campaign: Optional[AdCampaign] = Relationship()

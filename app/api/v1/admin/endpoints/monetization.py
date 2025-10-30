@@ -39,6 +39,14 @@ from app.schemas.admin import (
     PerformanceTrendsResponse,
     SubscriberSegmentationResponse,
 )
+from app.schemas.monetization_slots import (
+    AdSlotCreate,
+    AdSlotUpdate,
+    AdSlotResponse,
+    AdSlotListResponse,
+)
+from app.models.monetization import AdType
+from app.schemas.monetization_slots import SlotStatus
 from app.utils.admin.monetization_utils import (
     create_activity,
     create_campaign,
@@ -53,10 +61,40 @@ from app.utils.admin.monetization_utils import (
     get_performance_trends,
     get_subscriber_segmentation,
     update_campaign,
+    create_slot,
+    get_slot_by_id,
+    get_slots_list,
+    update_slot,
+    delete_slot,
 )
 from app.utils.content_utils import calculate_pagination_info
 
 router = APIRouter()
+
+# Static list of allowed page locations for dropdowns (no DB migration required)
+PAGE_LOCATIONS = [
+    "homepage_top",
+    "homepage_hero",
+    "homepage_mid",
+    "homepage_bottom",
+    "sidebar_top",
+    "sidebar_middle",
+    "sidebar_bottom",
+    "header_nav",
+    "footer_leaderboard",
+    "category_top",
+    "category_inline",
+    "search_results_inline",
+    "content_above_player",
+    "content_below_player",
+    "player_preroll",
+    "player_midroll",
+    "player_postroll",
+    "player_overlay",
+    "mobile_home_top",
+    "mobile_feed_inline",
+    "tv_home_top",
+]
 
 
 @router.get("/debug/auth-test")
@@ -452,3 +490,125 @@ async def get_subscriber_segmentation_endpoint(
         raise InternalServerException(
             detail=f"Error retrieving subscriber segmentation: {str(e)}"
         )
+
+# --------- Slots Metadata (dropdown values) ---------
+@router.get("/slots/meta")
+async def get_slot_dropdown_meta(
+    current_user: AdminUser,
+    db: AsyncSession = Depends(get_db),
+):
+    """Return dropdown values for Slot Type, Status, and Page Location.
+
+    Note: Page locations are a curated list here; campaigns can be fetched
+    via the /campaigns endpoint for a campaign dropdown.
+    """
+    try:
+        return success_response(
+            message="Slot metadata retrieved successfully",
+            data={
+                "slot_types": [v.value for v in AdType],
+                "statuses": [v.value for v in SlotStatus],
+                "page_locations": PAGE_LOCATIONS,
+            },
+        )
+    except Exception as e:
+        raise InternalServerException(detail=f"Error retrieving slot meta: {str(e)}")
+
+# ---------------- Ad Slots CRUD ----------------
+@router.post("/slots/", response_model=AdSlotResponse)
+async def create_ad_slot(
+    current_user: AdminUser,
+    slot_data: AdSlotCreate,
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    try:
+        slot = await create_slot(db, slot_data)
+        return success_response(message="Slot created successfully", data=slot.dict() if hasattr(slot, 'dict') else slot)
+    except Exception as e:
+        raise InternalServerException(detail=f"Error creating slot: {str(e)}")
+
+
+@router.get("/slots/", response_model=AdSlotListResponse)
+async def list_ad_slots(
+    current_user: AdminUser,
+    page: int = Query(1, ge=1),
+    size: int = Query(10, ge=1, le=100),
+    sort_by: str = Query("created_at"),
+    sort_order: str = Query("desc"),
+    slot_type: str | None = Query(None),
+    status: str | None = Query(None),
+    campaign_id: UUID | None = Query(None),
+    search: str | None = Query(None),
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    try:
+        slots, total = await get_slots_list(
+            db=db,
+            page=page,
+            size=size,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            slot_type=slot_type,
+            status=status,
+            campaign_id=campaign_id,
+            search=search,
+        )
+        pagination = calculate_pagination_info(page, size, total)
+        return success_response(
+            message="Slots retrieved successfully",
+            data=AdSlotListResponse(items=slots, **pagination).dict(),
+        )
+    except Exception as e:
+        raise InternalServerException(detail=f"Error retrieving slots: {str(e)}")
+
+
+@router.get("/slots/{slot_id}", response_model=AdSlotResponse)
+async def get_ad_slot(
+    current_user: AdminUser,
+    slot_id: UUID,
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    try:
+        slot = await get_slot_by_id(db, slot_id)
+        if not slot:
+            raise NotFoundException(detail="Slot not found")
+        return success_response(message="Slot retrieved successfully", data=slot.dict() if hasattr(slot, 'dict') else slot)
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise InternalServerException(detail=f"Error retrieving slot: {str(e)}")
+
+
+@router.put("/slots/{slot_id}", response_model=AdSlotResponse)
+async def update_ad_slot(
+    current_user: AdminUser,
+    slot_id: UUID,
+    slot_data: AdSlotUpdate,
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    try:
+        slot = await update_slot(db, slot_id, slot_data)
+        if not slot:
+            raise NotFoundException(detail="Slot not found")
+        return success_response(message="Slot updated successfully", data=slot.dict() if hasattr(slot, 'dict') else slot)
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise InternalServerException(detail=f"Error updating slot: {str(e)}")
+
+
+@router.delete("/slots/{slot_id}")
+async def delete_ad_slot(
+    current_user: AdminUser,
+    slot_id: UUID,
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    try:
+        success = await delete_slot(db, slot_id)
+        if not success:
+            raise NotFoundException(detail="Slot not found")
+        return success_response(message="Slot deleted successfully", data={"slot_id": str(slot_id)})
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise InternalServerException(detail=f"Error deleting slot: {str(e)}")
