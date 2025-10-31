@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from app.api.v1.admin.endpoints import (
+    analytics,
     announcement,
     content,
     genre,
@@ -89,4 +90,10 @@ router.include_router(
     popup.router,
     prefix="/popups",
     tags=["Admin - Popups"],
+)
+
+router.include_router(
+    analytics.router,
+    prefix="/analytics",
+    tags=["Admin - Analytics"],
 )
