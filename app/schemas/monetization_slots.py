@@ -3,7 +3,7 @@ from enum import Enum
 from typing import List, Optional
 from uuid import UUID
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator, field_serializer
 
 from app.models.monetization import AdType
 
@@ -46,6 +46,44 @@ class AdSlotResponse(AdSlotBase):
     created_at: datetime
     updated_at: datetime
     is_deleted: bool = False
+
+    @validator("slot_type", pre=True)
+    def convert_slot_type(cls, v):
+        """Convert string to AdType enum"""
+        if isinstance(v, str):
+            try:
+                return AdType(v)
+            except ValueError:
+                return AdType.BANNER  # Default fallback
+        if isinstance(v, AdType):
+            return v
+        return v
+
+    @validator("status", pre=True)
+    def convert_status(cls, v):
+        """Convert string to SlotStatus enum"""
+        if isinstance(v, str):
+            try:
+                return SlotStatus(v)
+            except ValueError:
+                return SlotStatus.DRAFT  # Default fallback
+        if isinstance(v, SlotStatus):
+            return v
+        return v
+
+    @field_serializer("slot_type")
+    def serialize_slot_type(self, value: AdType) -> str:
+        """Serialize AdType enum to string"""
+        if isinstance(value, Enum):
+            return value.value
+        return str(value) if value else None
+
+    @field_serializer("status")
+    def serialize_status(self, value: SlotStatus) -> str:
+        """Serialize SlotStatus enum to string"""
+        if isinstance(value, Enum):
+            return value.value
+        return str(value) if value else None
 
     class Config:
         from_attributes = True

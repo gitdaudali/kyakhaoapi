@@ -523,7 +523,11 @@ async def create_ad_slot(
 ) -> Any:
     try:
         slot = await create_slot(db, slot_data)
-        return success_response(message="Slot created successfully", data=slot.dict() if hasattr(slot, 'dict') else slot)
+        # Convert model instance to response schema for proper enum serialization
+        slot_response = AdSlotResponse(**slot.dict())
+        # Use model_dump with mode='json' to ensure proper enum serialization, fallback to dict if not available
+        response_data = slot_response.model_dump(mode='json') if hasattr(slot_response, 'model_dump') else slot_response.dict()
+        return success_response(message="Slot created successfully", data=response_data)
     except Exception as e:
         raise InternalServerException(detail=f"Error creating slot: {str(e)}")
 
@@ -553,10 +557,15 @@ async def list_ad_slots(
             campaign_id=campaign_id,
             search=search,
         )
+        # Convert model instances to response schemas for proper enum serialization
+        slot_responses = [AdSlotResponse(**slot.dict()) for slot in slots]
         pagination = calculate_pagination_info(page, size, total)
+        # Use model_dump with mode='json' to ensure proper enum serialization, fallback to dict if not available
+        list_response = AdSlotListResponse(items=slot_responses, **pagination)
+        response_data = list_response.model_dump(mode='json') if hasattr(list_response, 'model_dump') else list_response.dict()
         return success_response(
             message="Slots retrieved successfully",
-            data=AdSlotListResponse(items=slots, **pagination).dict(),
+            data=response_data,
         )
     except Exception as e:
         raise InternalServerException(detail=f"Error retrieving slots: {str(e)}")
@@ -572,7 +581,11 @@ async def get_ad_slot(
         slot = await get_slot_by_id(db, slot_id)
         if not slot:
             raise NotFoundException(detail="Slot not found")
-        return success_response(message="Slot retrieved successfully", data=slot.dict() if hasattr(slot, 'dict') else slot)
+        # Convert model instance to response schema for proper enum serialization
+        slot_response = AdSlotResponse(**slot.dict())
+        # Use model_dump with mode='json' to ensure proper enum serialization, fallback to dict if not available
+        response_data = slot_response.model_dump(mode='json') if hasattr(slot_response, 'model_dump') else slot_response.dict()
+        return success_response(message="Slot retrieved successfully", data=response_data)
     except HTTPException:
         raise
     except Exception as e:
@@ -590,7 +603,11 @@ async def update_ad_slot(
         slot = await update_slot(db, slot_id, slot_data)
         if not slot:
             raise NotFoundException(detail="Slot not found")
-        return success_response(message="Slot updated successfully", data=slot.dict() if hasattr(slot, 'dict') else slot)
+        # Convert model instance to response schema for proper enum serialization
+        slot_response = AdSlotResponse(**slot.dict())
+        # Use model_dump with mode='json' to ensure proper enum serialization, fallback to dict if not available
+        response_data = slot_response.model_dump(mode='json') if hasattr(slot_response, 'model_dump') else slot_response.dict()
+        return success_response(message="Slot updated successfully", data=response_data)
     except HTTPException:
         raise
     except Exception as e:

@@ -5,6 +5,7 @@ Serialization utilities for handling non-JSON serializable objects.
 from uuid import UUID
 from datetime import datetime, date
 from decimal import Decimal
+from enum import Enum
 from typing import Any, Dict, List, Union
 
 
@@ -20,13 +21,17 @@ def serialize_for_json(obj: Any) -> Any:
     """
     if isinstance(obj, UUID):
         return str(obj)
+    elif isinstance(obj, Enum):
+        return obj.value  # Convert Enum to its string value
     elif isinstance(obj, datetime):
         return obj.isoformat()
     elif isinstance(obj, date):
         return obj.isoformat()
     elif isinstance(obj, Decimal):
         return float(obj)
-    elif hasattr(obj, 'dict'):  # Pydantic models
+    elif hasattr(obj, 'model_dump'):  # Pydantic v2 models - use model_dump for proper serialization
+        return obj.model_dump(mode='json')
+    elif hasattr(obj, 'dict'):  # Pydantic v1 models
         return obj.dict()
     elif hasattr(obj, '__dict__'):  # Regular objects
         return {k: serialize_for_json(v) for k, v in obj.__dict__.items() if not k.startswith('_')}
