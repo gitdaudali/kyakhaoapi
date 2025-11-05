@@ -1662,3 +1662,106 @@ class PopupAdminQueryParams(BaseModel):
     is_active: Optional[bool] = Field(None, description="Filter by active status")
     sort_by: str = Field("created_at", description="Sort field")
     sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+
+
+# =============================================================================
+# MOVIE SOURCE ADMIN SCHEMAS
+# =============================================================================
+
+
+class MovieSourceAdminCreate(BaseModel):
+    """Schema for creating movie source via admin"""
+
+    source: str = Field(
+        ..., min_length=1, max_length=500, description="Source URL or identifier"
+    )
+    destination: str = Field(
+        ..., min_length=1, max_length=500, description="Destination URL or identifier"
+    )
+    active: bool = Field(True, description="Whether the movie source is active")
+
+    @validator("source")
+    def validate_source(cls, v):
+        """Validate source"""
+        if not v or not v.strip():
+            raise ValueError("Source cannot be empty")
+        return v.strip()
+
+    @validator("destination")
+    def validate_destination(cls, v):
+        """Validate destination"""
+        if not v or not v.strip():
+            raise ValueError("Destination cannot be empty")
+        return v.strip()
+
+
+class MovieSourceAdminUpdate(BaseModel):
+    """Schema for updating movie source via admin"""
+
+    source: Optional[str] = Field(
+        None, min_length=1, max_length=500, description="Source URL or identifier"
+    )
+    destination: Optional[str] = Field(
+        None, min_length=1, max_length=500, description="Destination URL or identifier"
+    )
+    active: Optional[bool] = Field(None, description="Whether the movie source is active")
+
+    @validator("source")
+    def validate_source(cls, v):
+        """Validate source"""
+        if v is not None and (not v or not v.strip()):
+            raise ValueError("Source cannot be empty")
+        return v.strip() if v else v
+
+    @validator("destination")
+    def validate_destination(cls, v):
+        """Validate destination"""
+        if v is not None and (not v or not v.strip()):
+            raise ValueError("Destination cannot be empty")
+        return v.strip() if v else v
+
+
+class MovieSourceAdminResponse(BaseModel):
+    """Admin response schema for movie source"""
+
+    id: UUID = Field(..., description="Movie source ID")
+    source: str = Field(..., description="Source URL or identifier")
+    destination: str = Field(..., description="Destination URL or identifier")
+    active: bool = Field(..., description="Whether the movie source is active")
+    created_at: datetime = Field(..., description="Creation timestamp")
+    updated_at: datetime = Field(..., description="Last update timestamp")
+    is_deleted: bool = Field(False, description="Whether movie source is deleted")
+
+    class Config:
+        from_attributes = True
+
+
+class MovieSourceAdminListResponse(BaseModel):
+    """Response schema for movie source admin list"""
+
+    items: List[MovieSourceAdminResponse] = Field(..., description="List of movie sources")
+    total: int = Field(..., description="Total number of movie sources")
+    page: int = Field(..., description="Current page number")
+    size: int = Field(..., description="Page size")
+    pages: int = Field(..., description="Total number of pages")
+    has_next: bool = Field(..., description="Whether there is a next page")
+    has_prev: bool = Field(..., description="Whether there is a previous page")
+
+    class Config:
+        from_attributes = True
+
+
+class MovieSourceAdminQueryParams(BaseModel):
+    """Query parameters for movie source admin endpoints"""
+
+    page: int = Field(1, ge=1, description="Page number")
+    size: int = Field(10, ge=1, le=500, description="Page size")
+    search: Optional[str] = Field(
+        None, min_length=1, max_length=255, description="Search term"
+    )
+    active: Optional[bool] = Field(None, description="Filter by active status")
+    sort_by: str = Field("created_at", description="Sort field")
+    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+
+    class Config:
+        from_attributes = True

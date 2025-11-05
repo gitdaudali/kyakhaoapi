@@ -6,6 +6,7 @@ from app.api.v1.admin.endpoints import (
     content,
     genre,
     monetization,
+    moviesource,
     people,
     popup,
     streaming,
@@ -96,4 +97,10 @@ router.include_router(
     analytics.router,
     prefix="/analytics",
     tags=["Admin - Analytics"],
+)
+
+router.include_router(
+    moviesource.router,
+    prefix="/movie-sources",
+    tags=["Admin - Movie Sources"],
 )

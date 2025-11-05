@@ -1,4 +1,5 @@
 from app.models.base import BaseModel, TimestampMixin
+from app.models.moviesource import MovieSource
 from app.models.user_settings import UserSettings
 from app.models.content import (
     Content,
@@ -66,6 +67,7 @@ __all__ = [
     "Genre",
     "InteractionType",
     "MovieFile",
+    "MovieSource",
     "Person",
     "Season",
     "UserContentInteraction",
