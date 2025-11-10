@@ -4,7 +4,7 @@ Verification token models for password reset and email verification.
 
 import uuid
 from datetime import datetime, timedelta, timezone
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 
 from sqlalchemy import TIMESTAMP
 from sqlalchemy.dialects.postgresql import UUID
@@ -12,7 +12,9 @@ from sqlmodel import Field, Relationship, SQLModel
 
 from app.core.config import settings
 from app.models.base import BaseModel, TimestampMixin
-from app.models.user import User
+
+if TYPE_CHECKING:
+    from app.models.user import User
 
 
 class PasswordResetToken(BaseModel, TimestampMixin, table=True):

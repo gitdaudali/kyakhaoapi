@@ -6,7 +6,6 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.security import HTTPBearer
-from sqlmodel import SQLModel
 
 from app.api.v1.api import api_router
 from app.core.config import settings
@@ -35,35 +34,21 @@ app = FastAPI(
     description=settings.DESCRIPTION,
     version=settings.VERSION,
     contact={
-        "name": "Cup Streaming Team",
-        "email": "support@cupstreaming.com",
-        "url": "https://cupstreaming.com",
+        "name": "Redfin Team",
+        "email": "support@redfin.com",
+        "url": "https://www.redfin.com",
     },
     license_info={"name": "MIT License", "url": "https://opensource.org/licenses/MIT"},
     servers=[{"url": f"{settings.BASE_URL}"}],
     tags_metadata=[
         {
             "name": "authentication",
-            "description": (
-                "User authentication operations. Register, login, and "
-                "manage user sessions."
-            ),
+            "description": "Redfin authentication APIs: registration, login, tokens, and account security.",
             "externalDocs": {
                 "description": "JWT Authentication Guide",
                 "url": "https://fastapi.tiangolo.com/tutorial/security/",
             },
-        },
-        {
-            "name": "users",
-            "description": (
-                "User management operations. Create, read, update, and "
-                "delete user accounts."
-            ),
-        },
-        {
-            "name": "Content",
-            "description": ("Content Related Operations of Videos TV and serials."),
-        },
+        }
     ],
     lifespan=lifespan,
 )
@@ -203,9 +188,7 @@ async def root():
             "openapi_json": "/openapi.json",
         },
         "endpoints": {
-            "authentication": "/api/v1/auth",
-            "users": "/api/v1/users",
-            "videos": "/api/v1/content",
+            "authentication": "/api/v1/auth"
         },
     }
 
@@ -227,11 +210,11 @@ async def api_info():
         "authentication": "JWT",
         "debug": settings.DEBUG,
         "features": [
-            "User Authentication & Management",
-            "Video Upload & Streaming",
-            "Social Features (Likes, Views)",
-            "Analytics & Metrics",
-            "AWS S3 Integration",
+            "Email + password authentication",
+            "OTP-based email verification",
+            "Password reset flows",
+            "Google OAuth onboarding",
+            "Multi-device token management",
         ]
     }
 

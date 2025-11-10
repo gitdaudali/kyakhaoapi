@@ -10,9 +10,8 @@ from app.core.response_handler import (
     InvalidCredentialsException,
     AccountDeactivatedException,
     EmailNotVerifiedException,
-    InvalidTokenException,
     UserNotFoundException,
-    success_response
+    success_response,
 )
 
 from app.core.auth import (
@@ -48,14 +47,12 @@ from app.core.messages import (
     OTP_VERIFICATION_SUCCESS,
     PASSWORD_CHANGED_SUCCESS,
     PASSWORD_RESET_OTP_SENT,
-    PASSWORD_RESET_SENT,
     PASSWORD_RESET_SUCCESS,
     REGISTRATION_SUCCESS,
 )
 from app.models.user import ProfileStatus, User, UserRole
 from app.schemas.auth import (
     AuthResponse,
-    EmailVerificationRequest,
     LogoutRequest,
     LogoutResponse,
     MessageResponse,
@@ -72,8 +69,6 @@ from app.schemas.auth import (
 from app.schemas.google_oauth import GoogleOAuthRequest, GoogleOAuthResponse
 from app.schemas.user import User as UserSchema
 from app.tasks.email_tasks import (
-    send_email_verification_task,
-    send_password_reset_email_task,
     send_password_reset_otp_email_task,
     send_registration_otp_email_task,
 )
@@ -365,10 +360,10 @@ async def change_password(
         return success_response(
             message=PASSWORD_CHANGED_SUCCESS,
             data={
-                "user_id": user.id,
-                "email": user.email,
-                "password_changed_at": datetime.utcnow()
-            }
+                "user_id": current_user.id,
+                "email": current_user.email,
+                "password_changed_at": datetime.utcnow(),
+            },
         )
 
     except HTTPException:

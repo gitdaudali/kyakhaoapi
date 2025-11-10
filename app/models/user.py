@@ -1,32 +1,20 @@
-import uuid
-from datetime import datetime, timezone
+from datetime import datetime
 from enum import Enum
-from typing import TYPE_CHECKING, List, Optional
-from typing import Optional
+from typing import List, Optional, TYPE_CHECKING
 
-from sqlalchemy import DateTime, String, Text
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import DateTime, String
 from sqlmodel import Field, Relationship
 
 from app.models.base import BaseModel, TimestampMixin
+from app.models.token import RefreshToken, Token
 
 if TYPE_CHECKING:
-    from app.models.content import (
-        ContentReview,
-        UserContentInteraction,
-        UserWatchHistory,
-        WatchSession,
-    )
-    from app.models.subscription import Subscription
-    from app.models.token import RefreshToken, Token
-    from app.models.user_profile import UserProfile
     from app.models.verification import (
         EmailVerificationOTP,
         EmailVerificationToken,
         PasswordResetOTP,
         PasswordResetToken,
     )
-    from app.models.watch_progress import UserWatchProgress
 
 
 class UserRole(str, Enum):
@@ -83,11 +71,11 @@ class User(BaseModel, TimestampMixin, table=True):
     apple_id: Optional[str] = Field(max_length=100, default=None, index=True)
 
     # Relationships
-    tokens: List["Token"] = Relationship(
+    tokens: List[Token] = Relationship(
         back_populates="user",
         sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
     )
-    refresh_tokens: List["RefreshToken"] = Relationship(
+    refresh_tokens: List[RefreshToken] = Relationship(
         back_populates="user",
         sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
     )
@@ -107,79 +95,6 @@ class User(BaseModel, TimestampMixin, table=True):
         back_populates="user",
         sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
     )
-    user_content_interactions: List["UserContentInteraction"] = Relationship(
-        back_populates="user",
-        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
-    )
-    content_reviews: List["ContentReview"] = Relationship(
-        back_populates="user",
-        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
-    )
-    watch_history: List["UserWatchHistory"] = Relationship(
-        back_populates="user",
-        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
-    )
-    watch_sessions: List["WatchSession"] = Relationship(
-        back_populates="user",
-        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
-    )
-    search_history: List["UserSearchHistory"] = Relationship(
-        back_populates="user",
-        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
-    )
-    # Subscriptions
-    subscriptions: List["Subscription"] = Relationship(
-        back_populates="user",
-        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
-    )
-    # Watch Progress
-    watch_progress: List["UserWatchProgress"] = Relationship(
-        back_populates="user",
-        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
-    )
-    # User Profiles
-    profiles: List["UserProfile"] = Relationship(
-        back_populates="user",
-        sa_relationship_kwargs={"lazy": "dynamic", "cascade": "all, delete-orphan"},
-    )
 
     def __repr__(self):
         return f"<User(id={self.id}, email='{self.email}')>"
-
-
-class UserSearchHistory(BaseModel, TimestampMixin, table=True):
-    """User search history model to track search queries"""
-
-    __tablename__ = "user_search_history"
-
-    user_id: uuid.UUID = Field(
-        sa_type=UUID(as_uuid=True), foreign_key="users.id", nullable=False, index=True
-    )
-    search_query: str = Field(
-        sa_type=String(255),
-        nullable=False,
-        index=True,
-        description="The search query text",
-    )
-    search_count: int = Field(
-        default=1,
-        nullable=False,
-        description="Number of times this search was performed",
-    )
-    last_searched_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        sa_type=DateTime(timezone=True),
-        nullable=False,
-        index=True,
-        description="Last time this search was performed",
-    )
-
-    # Relationships
-    user: Optional["User"] = Relationship(back_populates="search_history")
-
-    class Config:
-        # Ensure unique constraint on user_id + search_query
-        table_args = ({"extend_existing": True},)
-
-    def __repr__(self):
-        return f"<UserSearchHistory(id={self.id}, user_id={self.user_id}, query='{self.search_query}')>"

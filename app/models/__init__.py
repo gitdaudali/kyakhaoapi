@@ -1,43 +1,12 @@
 from app.models.base import BaseModel, TimestampMixin
-from app.models.moviesource import MovieSource
-from app.models.user_settings import UserSettings
-from app.models.content import (
-    Content,
-    ContentCast,
-    ContentCrew,
-    ContentGenre,
-    ContentRating,
-    ContentReview,
-    ContentStatus,
-    ContentType,
-    ContentView,
-    DeviceType,
-    Episode,
-    EpisodeQuality,
-    EpisodeView,
-    Genre,
-    InteractionType,
-    MovieFile,
-    Person,
-    Season,
-    UserContentInteraction,
-    UserWatchHistory,
-    WatchQuality,
-    WatchSession,
-)
-from app.models.faq import FAQ
-from app.models.streaming import StreamingChannel
 from app.models.token import RefreshToken, Token, TokenBlacklist
-from app.models.user import ProfileStatus, User, UserRole
-from app.models.subscription import Subscription, SubscriptionPayment, StripeWebhookEvent
-from app.models.verification import EmailVerificationToken, PasswordResetToken
-from app.models.policy import Policy, PolicyType, PolicyStatus
-from app.models.watch_progress import UserWatchProgress
-from app.models.watch_history import WatchHistory
-from app.models.user_profile import UserProfile
-from app.models.announcement import Announcement, AnnouncementStatus
-from app.models.task import Task, TaskPriority, TaskStatus
-from app.models.popup import Popup, PopupStatus, PopupPriority
+from app.models.user import ProfileStatus, SignupType, User, UserRole
+from app.models.verification import (
+    EmailVerificationOTP,
+    EmailVerificationToken,
+    PasswordResetOTP,
+    PasswordResetToken,
+)
 
 __all__ = [
     "BaseModel",
@@ -45,52 +14,12 @@ __all__ = [
     "User",
     "UserRole",
     "ProfileStatus",
+    "SignupType",
     "Token",
     "RefreshToken",
     "TokenBlacklist",
     "PasswordResetToken",
     "EmailVerificationToken",
-    "Content",
-    "ContentCast",
-    "ContentCrew",
-    "ContentGenre",
-    "ContentRating",
-    "ContentReview",
-    "ContentStatus",
-    "ContentType",
-    "ContentView",
-    "DeviceType",
-    "Episode",
-    "EpisodeQuality",
-    "EpisodeView",
-    "FAQ",
-    "Genre",
-    "InteractionType",
-    "MovieFile",
-    "MovieSource",
-    "Person",
-    "Season",
-    "UserContentInteraction",
-    "UserWatchHistory",
-    "WatchQuality",
-    "WatchSession",
-    "StreamingChannel",
-    "Policy",
-    "PolicyType", 
-    "PolicyStatus",
-    "UserWatchProgress",
-    "WatchHistory",
-    "UserProfile",
-    "UserSettings",
-    "Subscription",
-    "SubscriptionPayment",
-    "StripeWebhookEvent",
-    "Announcement",
-    "AnnouncementStatus",
-    "Task",
-    "TaskPriority",
-    "TaskStatus",
-    "Popup",
-    "PopupStatus",
-    "PopupPriority",
+    "EmailVerificationOTP",
+    "PasswordResetOTP",
 ]

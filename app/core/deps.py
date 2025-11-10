@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from typing import Annotated, Optional
+from typing import Annotated
 
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -8,11 +8,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.auth import get_current_user_id
 from app.core.database import get_db
-from app.core.messages import (
-    SECURITY_ERROR_MISSING_HEADERS,
-    SECURITY_ERROR_INVALID_DEVICE_TYPE,
-    SECURITY_ERROR_INVALID_APP_VERSION
-)
 from app.core.response_handler import (
     HeaderValidationException,
     InvalidDeviceTypeException,
@@ -115,73 +110,6 @@ async def get_current_user(
     return user
 
 
-async def get_current_active_user(
-    current_user: Annotated[User, Depends(get_current_user)],
-) -> User:
-    """
-    Get current active user (additional check for active status)
-
-    Args:
-        current_user: Current user from get_current_user
-
-    Returns:
-        User: Current active user
-
-    Raises:
-        HTTPException: If user is not active
-    """
-    if not current_user.is_active:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="Inactive user"
-        )
-    return current_user
-
-
-async def get_current_superuser(
-    current_user: Annotated[User, Depends(get_current_user)],
-) -> User:
-    """
-    Get current superuser
-
-    Args:
-        current_user: Current user from get_current_user
-
-    Returns:
-        User: Current superuser
-
-    Raises:
-        HTTPException: If user is not a superuser
-    """
-    if not current_user.is_superuser:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions"
-        )
-    return current_user
-
-
-async def get_optional_current_user(
-    credentials: Annotated[Optional[HTTPAuthorizationCredentials], Depends(security)],
-    db: Annotated[AsyncSession, Depends(get_db)],
-) -> Optional[User]:
-    """
-    Get current user if authenticated, otherwise return None
-
-    Args:
-        credentials: Optional HTTP Bearer token credentials
-        db: Database session
-
-    Returns:
-        Optional[User]: Current user if authenticated, None otherwise
-    """
-    if not credentials:
-        return None
-
-    try:
-        return await get_current_user(credentials, db)
-    except HTTPException:
-        return None
-
-
 async def verify_refresh_token(
     refresh_token: str, db: Annotated[AsyncSession, Depends(get_db)]
 ) -> User:
@@ -243,94 +171,13 @@ async def verify_refresh_token(
     return user
 
 
-def require_permissions(required_permissions: list[str]):
-    """
-    Dependency factory for permission-based access control
-
-    Args:
-        required_permissions: List of required permissions
-
-    Returns:
-        Dependency function that checks permissions
-    """
-
-    async def permission_checker(
-        current_user: Annotated[User, Depends(get_current_user)],
-    ) -> User:
-        # For now, only check if user is superuser
-        # In the future, implement role-based permissions
-        if not current_user.is_superuser:
-            # Check if user has any of the required permissions
-            # This is a placeholder - implement actual permission checking
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN, detail="Insufficient permissions"
-            )
-        return current_user
-
-    return permission_checker
-
-
-def require_roles(required_roles: list[str]):
-    """
-    Dependency factory for role-based access control
-
-    Args:
-        required_roles: List of required roles
-
-    Returns:
-        Dependency function that checks roles
-    """
-
-    async def role_checker(
-        current_user: Annotated[User, Depends(get_current_user)],
-    ) -> User:
-        # For now, only check if user is superuser
-        # In the future, implement role-based access control
-        if not current_user.is_superuser:
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="Insufficient role permissions",
-            )
-        return current_user
-
-    return role_checker
-
-
-# Common dependency aliases
+# Common dependency alias
 CurrentUser = Annotated[User, Depends(get_current_user)]
-CurrentActiveUser = Annotated[User, Depends(get_current_active_user)]
-CurrentSuperUser = Annotated[User, Depends(get_current_superuser)]
-OptionalCurrentUser = Annotated[Optional[User], Depends(get_optional_current_user)]
 
 
 # ============================================================================
 # HEADER VALIDATION DEPENDENCY
 # ============================================================================
 async def validate_client_headers(request: Request) -> None:
-    """Validate required client headers for API requests only."""
-    
-    # Skip validation for certain paths
-    skip_paths = ["/docs", "/redoc", "/openapi.json", "/health", "/api-info"]
-    if any(request.url.path.startswith(path) for path in skip_paths):
-        return
-    
-    device_id = request.headers.get("X-Device-Id")
-    device_type = request.headers.get("X-Device-Type")
-    app_version = request.headers.get("X-App-Version")
-
-    if not device_id or not device_type or not app_version:
-        raise HeaderValidationException()
-
-    # Basic normalization/validation
-    normalized_type = device_type.strip().lower()
-    if normalized_type not in {"ios", "android", "web", "desktop"}:
-        raise InvalidDeviceTypeException()
-
-    # Lightweight version format check: must contain at least one dot
-    if "." not in app_version:
-        raise InvalidAppVersionException()
-
-    # Attach parsed values to request.state for use in endpoints
-    request.state.device_id = device_id
-    request.state.device_type = normalized_type
-    request.state.app_version = app_version
+    """Header validation disabled (legacy dependency placeholder)."""
+    return
