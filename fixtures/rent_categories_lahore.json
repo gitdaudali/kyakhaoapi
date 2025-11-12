@@ -1,0 +1,103 @@
+{
+  "city": "Lahore",
+  "groups": [
+    {
+      "title": "Lahore Searches",
+      "display_order": 1,
+      "categories": [
+        {
+          "title": "Apartments for rent",
+          "slug": "apartments-for-rent",
+          "url_path": "/rent/lahore/apartments",
+          "display_order": 1
+        },
+        {
+          "title": "Houses for rent",
+          "slug": "houses-for-rent",
+          "url_path": "/rent/lahore/houses",
+          "display_order": 2
+        },
+        {
+          "title": "Condos for rent",
+          "slug": "condos-for-rent",
+          "url_path": "/rent/lahore/condos",
+          "display_order": 3
+        },
+        {
+          "title": "Townhomes for rent",
+          "slug": "townhomes-for-rent",
+          "url_path": "/rent/lahore/townhomes",
+          "display_order": 4
+        }
+      ]
+    },
+    {
+      "title": "Rental Resources",
+      "display_order": 2,
+      "categories": [
+        {
+          "title": "Renter dashboard",
+          "slug": "renter-dashboard",
+          "url_path": "/rent/lahore/renter-dashboard",
+          "display_order": 1
+        },
+        {
+          "title": "Rental market tracker",
+          "slug": "rental-market-tracker",
+          "url_path": "/rent/lahore/market-tracker",
+          "display_order": 2
+        },
+        {
+          "title": "How much rent can I afford?",
+          "slug": "rent-affordability",
+          "url_path": "/rent/lahore/rent-affordability",
+          "display_order": 3
+        },
+        {
+          "title": "Should I rent or buy?",
+          "slug": "rent-or-buy",
+          "url_path": "/rent/lahore/rent-or-buy",
+          "display_order": 4
+        },
+        {
+          "title": "Renter guide",
+          "slug": "renter-guide",
+          "url_path": "/rent/lahore/guide",
+          "display_order": 5
+        }
+      ]
+    },
+    {
+      "title": "Redfin Rental Tools",
+      "display_order": 3,
+      "categories": [
+        {
+          "title": "List my home for rent",
+          "slug": "list-home-for-rent",
+          "url_path": "/rent/lahore/list-your-home",
+          "display_order": 1
+        },
+        {
+          "title": "Rental tools dashboard",
+          "slug": "rental-tools-dashboard",
+          "url_path": "/rent/lahore/tools-dashboard",
+          "display_order": 2
+        },
+        {
+          "title": "Lahore rental market trends",
+          "slug": "lahore-rental-market-trends",
+          "url_path": "/rent/lahore/market-trends",
+          "display_order": 3
+        },
+        {
+          "title": "Should I sell or rent my home?",
+          "slug": "sell-or-rent",
+          "url_path": "/rent/lahore/sell-or-rent",
+          "display_order": 4
+        }
+      ]
+    }
+  ]
+}
+
+

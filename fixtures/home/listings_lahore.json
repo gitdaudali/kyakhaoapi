@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "city": "Lahore",
+    "description": "Sample listings for Lahore home screen sections."
+  },
+  "listings": [
+    {
+      "id": "2adf59cb-2e52-47f5-907a-8f34a7822de2",
+      "title": "3 Bed Apartment DHA Lahore",
+      "city": "Lahore",
+      "price": 85000,
+      "bedrooms": 3,
+      "bathrooms": 3,
+      "is_pet_friendly": true,
+      "image_url": "https://images.unsplash.com/photo-1501183638710-841dd1904471",
+      "image_filename": "dha_apartment.jpg",
+      "sections": ["popular", "pets"],
+      "gallery_images": [
+        "https://images.unsplash.com/photo-1568600891621-2b95ff79d795",
+        "https://images.unsplash.com/photo-1580587771525-78b9dba3b914",
+        "https://images.unsplash.com/photo-1502005097973-6a7082348e28"
+      ]
+    },
+    {
+      "id": "f1c70125-1c5d-4404-927e-88341338e04e",
+      "title": "Canal View Family Home",
+      "city": "Lahore",
+      "price": 72000,
+      "bedrooms": 4,
+      "bathrooms": 4,
+      "is_pet_friendly": false,
+      "image_url": "https://images.unsplash.com/photo-1484154218962-a197022b5858",
+      "image_filename": "canal_view_home.jpg",
+      "sections": ["popular"],
+      "gallery_images": [
+        "https://images.unsplash.com/photo-1512914890250-353c97c9e7c5",
+        "https://images.unsplash.com/photo-1600585154340-0ef3c08b89af",
+        "https://images.unsplash.com/photo-1481277542470-605612bd2d61"
+      ]
+    },
+    {
+      "id": "0ac0f072-5ed8-4ead-a898-f43f8000db36",
+      "title": "Budget Studio in Johar Town",
+      "city": "Lahore",
+      "price": 35000,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "is_pet_friendly": false,
+      "image_url": "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8",
+      "image_filename": "johar_town_studio.jpg",
+      "sections": ["deals"],
+      "gallery_images": [
+        "https://images.unsplash.com/photo-1554995207-c18c203602cb",
+        "https://images.unsplash.com/photo-1570129477492-45c003edd2be",
+        "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df"
+      ]
+    },
+    {
+      "id": "5a8b1736-5ede-4cb1-8732-5e27df8c0f7c",
+      "title": "Executive Loft Gulberg",
+      "city": "Lahore",
+      "price": 95000,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "is_pet_friendly": true,
+      "image_url": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
+      "image_filename": "gulberg_loft.jpg",
+      "sections": ["popular", "deals"],
+      "gallery_images": [
+        "https://images.unsplash.com/photo-1505691723518-36a5ac3be353",
+        "https://images.unsplash.com/photo-1570129476769-55f4a5add009",
+        "https://images.unsplash.com/photo-1505691938895-1758d7feb511"
+      ]
+    },
+    {
+      "id": "f3161497-44f1-4e4b-a1ba-d71926d08e61",
+      "title": "Pet Friendly Villa Bahria Town",
+      "city": "Lahore",
+      "price": 78000,
+      "bedrooms": 3,
+      "bathrooms": 3,
+      "is_pet_friendly": true,
+      "image_url": "https://images.unsplash.com/photo-1600585154340-0ef3c08b89af",
+      "image_filename": "bahria_pet_villa.jpg",
+      "sections": ["pets"],
+      "gallery_images": [
+        "https://images.unsplash.com/photo-1494526585095-c41746248156",
+        "https://images.unsplash.com/photo-1430285561322-7808604715df",
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f"
+      ]
+    },
+    {
+      "id": "a6d53d47-1748-4d60-8f65-2462d01af0a1",
+      "title": "Affordable Family Apartment",
+      "city": "Lahore",
+      "price": 54000,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "is_pet_friendly": true,
+      "image_url": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+      "image_filename": "affordable_family_apartment.jpg",
+      "sections": ["deals", "pets"],
+      "gallery_images": [
+        "https://images.unsplash.com/photo-1523217582562-09d0def993a6",
+        "https://images.unsplash.com/photo-1486308510493-aa64833637b1",
+        "https://images.unsplash.com/photo-1505691938890-1e502d2fb1e6"
+      ]
+    }
+  ]
+}
+
