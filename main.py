@@ -34,16 +34,16 @@ app = FastAPI(
     description=settings.DESCRIPTION,
     version=settings.VERSION,
     contact={
-        "name": "Redfin Team",
-        "email": "support@redfin.com",
-        "url": "https://www.redfin.com",
+        "name": "Kya Khao Team",
+        "email": "support@kyakhao.com",
+        "url": "https://www.kyakhao.com",
     },
     license_info={"name": "MIT License", "url": "https://opensource.org/licenses/MIT"},
     servers=[{"url": f"{settings.BASE_URL}"}],
     tags_metadata=[
         {
             "name": "authentication",
-            "description": "Redfin authentication APIs: registration, login, tokens, and account security.",
+            "description": "Kya Khao authentication APIs: registration, login, tokens, and account security.",
             "externalDocs": {
                 "description": "JWT Authentication Guide",
                 "url": "https://fastapi.tiangolo.com/tutorial/security/",

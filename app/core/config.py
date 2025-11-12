@@ -9,11 +9,11 @@ load_dotenv(override=True)
 class Settings:
     """Runtime configuration for the authentication service."""
 
-    PROJECT_NAME: str = os.getenv("PROJECT_NAME", "Redfin Auth API")
+    PROJECT_NAME: str = os.getenv("PROJECT_NAME", "Kya Khao Auth API")
     VERSION: str = os.getenv("VERSION", "1.0.0")
     DESCRIPTION: str = os.getenv(
         "DESCRIPTION",
-        "Authentication service for the Redfin platform.",
+        "Authentication service for the Kya Khao platform.",
     )
     API_V1_STR: str = "/api/v1"
 
@@ -68,7 +68,7 @@ class Settings:
     SMTP_TLS: bool = os.getenv("SMTP_TLS", "true").lower() == "true"
     SMTP_SSL: bool = os.getenv("SMTP_SSL", "false").lower() == "true"
     FROM_EMAIL: str | None = os.getenv("FROM_EMAIL")
-    FROM_NAME: str = os.getenv("FROM_NAME", "Redfin")
+    FROM_NAME: str = os.getenv("FROM_NAME", "Kya Khao")
     EMAILS_ENABLED: bool = os.getenv("EMAILS_ENABLED", "false").lower() == "true"
 
     GOOGLE_CLIENT_ID: str | None = os.getenv("GOOGLE_CLIENT_ID")
