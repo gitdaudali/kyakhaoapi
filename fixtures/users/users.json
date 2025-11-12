@@ -1,0 +1,11 @@
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440001",
+    "email": "admin@kyakhao.com",
+    "password": "AdminPassword123!",
+    "is_active": true,
+    "is_staff": true,
+    "is_superuser": true,
+    "role": "admin"
+  }
+]
