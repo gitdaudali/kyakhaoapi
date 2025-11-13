@@ -3,7 +3,7 @@ services:
     image: redis:latest
     restart: always
     ports:
-      - "6380:6379"
+      - "6393:6379"
     volumes:
       - redis_data:/data
     healthcheck:
@@ -15,22 +15,22 @@ services:
   backend:
     build:
       context: .
-    image: cup_streaming_api:latest
-    container_name: cup_streaming_backend
+    image: kya_khao_api:latest
+    container_name: kya_khao_backend
     volumes:
       - static_volume:/app/static
       - uploads_volume:/app/uploads
     env_file:
       - ./.env
     ports:
-      - "8003:8000"
+      - "8099:8000"
     depends_on:
       - redis
     restart: always
     # Use Dockerfile entrypoint (runs migrations + starts app)
 
   celery:
-    image: cup_streaming_api:latest
+    image: kya_khao_api:latest
     env_file:
       - ./.env
     depends_on:
@@ -41,7 +41,7 @@ services:
     command: ["celery", "-A", "app.core.celery_app", "worker", "--loglevel=INFO"]
 
   celery-beat:
-    image: cup_streaming_api:latest
+    image: kya_khao_api:latest
     env_file:
       - ./.env
     depends_on:

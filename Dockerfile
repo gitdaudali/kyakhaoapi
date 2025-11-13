@@ -24,16 +24,16 @@ RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
 # Create necessary directories
-RUN mkdir -p /var/logs/cup_streaming
+RUN mkdir -p /var/logs/kya_khao
 RUN mkdir -p /app/static
 RUN mkdir -p /app/uploads
 
 # Copy project files
 COPY . .
 
-# Copy entrypoint script
+# Copy entrypoint script and convert line endings
 COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
+RUN dos2unix /app/entrypoint.sh && chmod +x /app/entrypoint.sh
 
 # Expose port
 EXPOSE 8000
