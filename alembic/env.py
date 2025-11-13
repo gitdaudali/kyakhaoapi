@@ -2,21 +2,21 @@ import os
 import sys
 from logging.config import fileConfig
 from pathlib import Path
-from app.models import token, user, verification
-from sqlalchemy import engine_from_config, pool
 
+from sqlalchemy import engine_from_config, pool, MetaData
 from alembic import context
 
 # Add the project root to the Python path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from sqlmodel import SQLModel
-
 # Import your models and settings
 from app.core.config import settings
+from app.core.database import Base
+from app.models import *  # make sure all models are imported so they're registered
+from sqlmodel import SQLModel
 
-
+# this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
 
@@ -27,7 +27,17 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-target_metadata = SQLModel.metadata
+# Combine both SQLModel and SQLAlchemy Base metadata to detect all models
+target_metadata = MetaData()
+
+# Add all tables from SQLModel.metadata (for User, FAQ, Token, etc.)
+for table in SQLModel.metadata.tables.values():
+    target_metadata._add_table(table.name, table.schema, table)
+
+# Add all tables from Base.metadata (for food models)
+for table in Base.metadata.tables.values():
+    if table.name not in target_metadata.tables:
+        target_metadata._add_table(table.name, table.schema, table)
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -72,7 +82,7 @@ def run_migrations_online() -> None:
 
     """
     # Override the sqlalchemy.url with our environment-based URL
-    configuration = config.get_section(config.config_ini_section)
+    configuration = config.get_section(config.config_ini_section, {})
     configuration["sqlalchemy.url"] = get_url()
 
     connectable = engine_from_config(
@@ -82,7 +92,9 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(connection=connection, target_metadata=target_metadata)
+        context.configure(
+            connection=connection, target_metadata=target_metadata
+        )
 
         with context.begin_transaction():
             context.run_migrations()
