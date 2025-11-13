@@ -22,8 +22,19 @@ kyakhao_API/
 │   ├── api/
 │   │   └── v1/
 │   │       ├── admin/           # Admin CRUD routers (dishes, cuisines, moods, restaurants, FAQs) with RBAC
-│   │       ├── auth/            # Authentication endpoints (registration, login, OTP, Google OAuth)
-│   │       └── endpoints/       # User-facing routers (discovery, AI, reservations, search, FAQs)
+│   │       │   └── endpoints/   # Admin endpoint modules
+│   │       ├── endpoints/       # All user-facing and auth endpoints
+│   │       │   ├── auth.py      # Authentication endpoints (registration, login, OTP, Google OAuth)
+│   │       │   ├── ai.py        # AI suggestion endpoints
+│   │       │   ├── cuisines.py  # Cuisine endpoints
+│   │       │   ├── dishes.py    # Dish endpoints
+│   │       │   ├── faq.py       # FAQ endpoints
+│   │       │   ├── featured.py  # Featured dish endpoints
+│   │       │   ├── moods.py     # Mood endpoints
+│   │       │   ├── reservations.py  # Reservation endpoints
+│   │       │   ├── restaurants.py   # Restaurant endpoints
+│   │       │   └── search.py    # Search endpoints
+│   │       └── api.py           # Main API router aggregator
 │   ├── core/                    # Config, DB, auth helpers, response handling
 │   ├── models/                  # Auth + food SQLAlchemy models
 │   ├── schemas/                 # Pydantic schemas (auth, food, pagination, search, AI, admin/user bases)

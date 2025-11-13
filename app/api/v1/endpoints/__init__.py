@@ -2,9 +2,12 @@ from fastapi import APIRouter, Depends
 
 from app.utils.auth import get_current_user
 
-from . import ai, cuisines, dishes, faq, featured, moods, reservations, restaurants, search
+from . import ai, auth, cuisines, dishes, faq, featured, moods, reservations, restaurants, search
 
 user_router = APIRouter()
+
+# Export auth_router for use in api.py
+auth_router = auth.router
 
 # ============================================================================
 # PUBLIC ROUTES (No authentication required)
