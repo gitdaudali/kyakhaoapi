@@ -200,23 +200,10 @@ async def seed_users(db: AsyncSession, fixture_data: Any) -> int:
         )
         existing_user = result.scalar_one_or_none()
         
-        if existing_user:
-            print(f"⏭️  User '{email}' already exists, skipping...")
-            continue
-        
-        # Prepare user data
-        user_id = user_data.get("id")
-        if user_id:
-            try:
-                user_id = UUID(user_id)
-            except ValueError:
-                print(f"⚠️  Invalid UUID '{user_id}' for user '{email}', generating new one...")
-                user_id = None
-        
-        # Hash password
+        # Hash password if provided (used for both create and update)
         password = user_data.get("password", "")
         hashed_password = get_password_hash(password) if password else None
-        
+
         # Map role string to UserRole enum
         role_str = user_data.get("role", "user").lower()
         role_map = {
@@ -225,8 +212,29 @@ async def seed_users(db: AsyncSession, fixture_data: Any) -> int:
             "super_admin": UserRole.SUPER_ADMIN,
         }
         role = role_map.get(role_str, UserRole.USER)
-        
-        # Create user
+
+        if existing_user:
+            print(f"🔄 Updating existing user '{email}' with fixture settings...")
+            existing_user.first_name = user_data.get("first_name", existing_user.first_name)
+            existing_user.last_name = user_data.get("last_name", existing_user.last_name)
+            existing_user.is_active = user_data.get("is_active", existing_user.is_active)
+            existing_user.is_staff = user_data.get("is_staff", existing_user.is_staff)
+            existing_user.is_superuser = user_data.get("is_superuser", existing_user.is_superuser)
+            existing_user.role = role
+            if hashed_password:
+                existing_user.password = hashed_password
+            created_count += 0
+            continue
+
+        # Prepare user data for creation
+        user_id = user_data.get("id")
+        if user_id:
+            try:
+                user_id = UUID(user_id)
+            except ValueError:
+                print(f"⚠️  Invalid UUID '{user_id}' for user '{email}', generating new one...")
+                user_id = None
+
         new_user = User(
             id=user_id,
             email=email,
@@ -239,7 +247,7 @@ async def seed_users(db: AsyncSession, fixture_data: Any) -> int:
             role=role,
             profile_status=ProfileStatus.ACTIVE,  # Set to ACTIVE so admin can login immediately
         )
-        
+
         db.add(new_user)
         created_count += 1
         print(f"✅ Created user: {email} (Role: {role.value}, Staff: {new_user.is_staff}, Superuser: {new_user.is_superuser})")

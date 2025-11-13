@@ -14,7 +14,7 @@ from app.schemas.pagination import PaginatedResponse, PaginationParams
 from app.schemas.reservation import ReservationCreate, ReservationOut
 from app.utils.pagination import paginate
 
-router = APIRouter(prefix="/reservations", tags=["Reservations"])
+router = APIRouter(prefix="/reservations", tags=["User Reservations"])
 
 
 async def get_reservation_or_404(session: AsyncSession, reservation_id: uuid.UUID) -> Reservation:

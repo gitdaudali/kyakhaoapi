@@ -24,7 +24,8 @@ from app.core.auth import (
 )
 from app.core.config import settings
 from app.core.database import get_db
-from app.core.deps import CurrentUser, get_current_user, verify_refresh_token
+from app.core.deps import verify_refresh_token
+from app.utils.auth import CurrentUser, get_current_user
 from app.core.messages import (
     ACCOUNT_DEACTIVATED,
     ACCOUNT_NOT_FOUND,
@@ -98,7 +99,7 @@ from app.utils.google_oauth_utils import (
     verify_google_token,
 )
 
-router = APIRouter()
+router = APIRouter(prefix="/auth", tags=["User Authentication"])
 
 
 @router.post(

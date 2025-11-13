@@ -3,7 +3,7 @@ from __future__ import annotations
 import uuid
 from typing import List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -12,14 +12,12 @@ from app.models.food import Restaurant
 from app.schemas.pagination import PaginatedResponse, PaginationParams
 from app.schemas.restaurant import (
     NearbyRestaurantRequest,
-    RestaurantCreate,
     RestaurantOut,
-    RestaurantUpdate,
 )
 from app.utils.pagination import paginate
 from app.utils.query_filters import haversine_distance_expr
 
-router = APIRouter(prefix="/restaurants", tags=["Restaurants"])
+router = APIRouter(prefix="/restaurants", tags=["User Restaurants"])
 
 
 async def get_restaurant_or_404(session: AsyncSession, restaurant_id: uuid.UUID) -> Restaurant:
@@ -28,7 +26,7 @@ async def get_restaurant_or_404(session: AsyncSession, restaurant_id: uuid.UUID)
     )
     restaurant = result.scalar_one_or_none()
     if not restaurant:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Restaurant not found")
+        raise HTTPException(status_code=404, detail="Restaurant not found")
     return restaurant
 
 
@@ -55,18 +53,6 @@ async def list_restaurants(
     )
 
 
-@router.post("/", response_model=RestaurantOut, status_code=status.HTTP_201_CREATED)
-async def create_restaurant(
-    payload: RestaurantCreate,
-    session: AsyncSession = Depends(get_db),
-) -> RestaurantOut:
-    restaurant = Restaurant(**payload.dict())
-    session.add(restaurant)
-    await session.commit()
-    await session.refresh(restaurant)
-    return RestaurantOut.model_validate(restaurant)
-
-
 @router.get("/{restaurant_id}", response_model=RestaurantOut)
 async def get_restaurant(
     restaurant_id: uuid.UUID,
@@ -74,31 +60,6 @@ async def get_restaurant(
 ) -> RestaurantOut:
     restaurant = await get_restaurant_or_404(session, restaurant_id)
     return RestaurantOut.model_validate(restaurant)
-
-
-@router.put("/{restaurant_id}", response_model=RestaurantOut)
-async def update_restaurant(
-    restaurant_id: uuid.UUID,
-    payload: RestaurantUpdate,
-    session: AsyncSession = Depends(get_db),
-) -> RestaurantOut:
-    restaurant = await get_restaurant_or_404(session, restaurant_id)
-    for field, value in payload.dict(exclude_unset=True).items():
-        setattr(restaurant, field, value)
-    await session.commit()
-    await session.refresh(restaurant)
-    return RestaurantOut.model_validate(restaurant)
-
-
-@router.delete("/{restaurant_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_restaurant(
-    restaurant_id: uuid.UUID,
-    session: AsyncSession = Depends(get_db),
-) -> Response:
-    restaurant = await get_restaurant_or_404(session, restaurant_id)
-    restaurant.is_deleted = True
-    await session.commit()
-    return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
 @router.get("/top-rated", response_model=List[RestaurantOut])

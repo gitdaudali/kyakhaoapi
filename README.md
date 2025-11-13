@@ -3,7 +3,7 @@
 The service now combines authentication with a rich food discovery experience for the Kya Khao platform. Alongside the original auth flows (registration, login, tokens, OTP, Google OAuth), it exposes curated content for dishes, cuisines, moods, restaurants, AI suggestions, and reservations.
 
 ### What’s Included
-- FastAPI application with `/api/v1/auth` plus new food-domain routers (dishes, cuisines, moods, restaurants, reservations, search, featured, AI suggestions)
+- FastAPI application with versioned `/api/v1/user` and `/api/v1/admin` routers (RBAC-protected discovery + admin CRUD)
 - PostgreSQL + SQLAlchemy models for cuisines, moods, restaurants, dishes, and reservations
 - Pagination, filtering, and reusable query utilities
 - Faker-powered seed script to populate sample data
@@ -18,14 +18,15 @@ kyakhao_API/
 │       ├── de5d1ac06c9d_initil_schema.py
 │       └── 20251112_add_food_domain.py
 ├── app/
-│   ├── api/v1/
-│   │   ├── api.py               # Aggregates all v1 routers
-│   │   └── endpoints/           # auth, dishes, restaurants, cuisines, moods, reservations, search, featured, AI
+│   ├── api/
+│   │   └── v1/
+│   │       ├── admin/           # Admin CRUD routers (dishes, cuisines, moods, restaurants) with RBAC
+│   │       └── user/            # User-facing routers (auth, discovery, AI, reservations, search)
 │   ├── core/                    # Config, DB, auth helpers, response handling
 │   ├── models/                  # Auth + food SQLAlchemy models
-│   ├── schemas/                 # Pydantic schemas (auth, food, pagination, search, AI)
+│   ├── schemas/                 # Pydantic schemas (auth, food, pagination, search, AI, admin/user bases)
 │   ├── tasks/                   # Celery email tasks
-│   └── utils/                   # Auth utils, Google OAuth, pagination, filters, seed data
+│   └── utils/                   # Auth helpers, Google OAuth, pagination, filters, seed data
 ├── tests/                       # Pytest suite
 ├── main.py                      # FastAPI entry point
 ├── requirements.txt             # Python dependencies
@@ -72,17 +73,29 @@ kyakhao_API/
    Visit `http://localhost:8000/docs` for interactive OpenAPI docs.
 
 ### API Surface
-| Category        | Endpoint (prefix `/api/v1`) | Highlights |
-|----------------|-----------------------------|------------|
+
+**User APIs (`/api/v1/user`)**
+
+| Category        | Endpoint                     | Highlights |
+|----------------|------------------------------|------------|
 | Auth           | `/auth/*`                    | Registration, login, refresh, logout, OTP, Google OAuth |
-| Cuisines       | `/cuisines`                  | CRUD + pagination |
-| Moods          | `/moods`                     | CRUD + pagination |
-| Restaurants    | `/restaurants`               | CRUD, top rated, nearby lookup |
-| Dishes         | `/dishes`                    | CRUD, filtering, featured, top-rated, by cuisine/mood |
+| Dishes         | `/dishes`                    | Filtering, pagination, featured, top-rated, by cuisine/mood |
+| Cuisines       | `/cuisines`                  | Paginated catalogue lookup |
+| Moods          | `/moods`                     | Paginated mood listing |
+| Restaurants    | `/restaurants`               | Listing, detail, top-rated, nearby lookup |
 | Reservations   | `/reservations`              | Create & list reservations |
 | AI Suggestions | `/ai/suggestions`            | Random or top-rated dish recommendations |
 | Featured       | `/featured`                  | Dish of the week feed |
 | Search         | `/search`                    | Unified search across dishes, restaurants, cuisines |
+
+**Admin APIs (`/api/v1/admin`)**
+
+| Category     | Endpoint       | Highlights |
+|--------------|----------------|------------|
+| Dishes       | `/dishes`      | Create, update, soft-delete dishes |
+| Cuisines     | `/cuisines`    | Manage cuisine catalogue |
+| Moods        | `/moods`       | Manage mood catalogue |
+| Restaurants  | `/restaurants` | Create, update, soft-delete restaurants |
 
 All collection endpoints support pagination (`limit`, `offset`) and filtering where applicable.
 

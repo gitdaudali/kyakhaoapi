@@ -14,7 +14,7 @@ from app.schemas.dish import DishOut
 from app.schemas.restaurant import RestaurantOut
 from app.schemas.search import SearchResponse
 
-router = APIRouter(prefix="/search", tags=["Search"])
+router = APIRouter(prefix="/search", tags=["User Search"])
 
 
 @router.get("/", response_model=SearchResponse)

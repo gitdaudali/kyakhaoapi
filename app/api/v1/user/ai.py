@@ -12,7 +12,7 @@ from app.models.food import Dish
 from app.schemas.ai import AISuggestionsResponse
 from app.schemas.dish import DishOut
 
-router = APIRouter(prefix="/ai", tags=["AI Suggestions"])
+router = APIRouter(prefix="/ai", tags=["User AI Suggestions"])
 
 
 @router.get("/suggestions", response_model=AISuggestionsResponse)

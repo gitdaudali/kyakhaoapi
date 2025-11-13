@@ -12,7 +12,7 @@ from app.core.database import get_db
 from app.models.food import Dish
 from app.schemas.dish import DishOut
 
-router = APIRouter(prefix="/featured", tags=["Featured"])
+router = APIRouter(prefix="/featured", tags=["User Featured"])
 
 
 @router.get("/", response_model=List[DishOut])
