@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Hyderabadi Dum Biryani",
+    "description": "Layered basmati rice with saffron, caramelized onions, and marinated chicken slow-cooked in a sealed handi.",
+    "image_url": "https://cdn.kyakhao.com/images/dishes/hyderabadi-dum-biryani.jpg",
+    "price": 12.99,
+    "rating": 4.7,
+    "is_featured": true,
+    "cuisine": "Indian",
+    "mood": "Comfort"
+  },
+  {
+    "name": "Karachi Beef Biryani",
+    "description": "Fragrant beef biryani packed with whole spices, potatoes, and a kick of green chilies inspired by Karachi street stalls.",
+    "image_url": "https://cdn.kyakhao.com/images/dishes/karachi-beef-biryani.jpg",
+    "price": 13.49,
+    "rating": 4.6,
+    "is_featured": false,
+    "cuisine": "Pakistani",
+    "mood": "Spicy"
+  }
+]

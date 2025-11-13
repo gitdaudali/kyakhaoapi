@@ -15,7 +15,9 @@ class Settings:
         "DESCRIPTION",
         "Authentication service for the Kya Khao platform.",
     )
-    API_V1_STR: str = "/api/v1"
+    API_USER_PREFIX: str = "/api/v1/user"
+    API_ADMIN_PREFIX: str = "/api/v1/admin"
+    API_V1_STR: str = API_USER_PREFIX  # Backwards compatibility for legacy imports
 
     HOST: str = os.getenv("HOST", "0.0.0.0")
     PORT: int = int(os.getenv("PORT", "8000"))

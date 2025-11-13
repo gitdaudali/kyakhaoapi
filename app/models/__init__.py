@@ -7,6 +7,7 @@ from app.models.verification import (
     PasswordResetOTP,
     PasswordResetToken,
 )
+from app.models.food import Cuisine, Dish, Mood, Reservation, Restaurant
 
 __all__ = [
     "BaseModel",
@@ -22,4 +23,9 @@ __all__ = [
     "EmailVerificationToken",
     "EmailVerificationOTP",
     "PasswordResetOTP",
+    "Cuisine",
+    "Mood",
+    "Restaurant",
+    "Dish",
+    "Reservation",
 ]

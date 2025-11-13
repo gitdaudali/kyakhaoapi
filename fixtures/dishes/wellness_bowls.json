@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Mediterranean Glow Bowl",
+    "description": "Quinoa, roasted chickpeas, grilled halloumi, cucumber ribbons, and lemon-tahini drizzle.",
+    "image_url": "https://cdn.kyakhao.com/images/dishes/mediterranean-glow-bowl.jpg",
+    "price": 11.25,
+    "rating": 4.6,
+    "is_featured": true,
+    "cuisine": "Mediterranean",
+    "mood": "Wellness"
+  },
+  {
+    "name": "Ginger Miso Macro Bowl",
+    "description": "Brown rice, sesame tofu, pickled vegetables, steamed greens, and ginger miso dressing.",
+    "image_url": "https://cdn.kyakhao.com/images/dishes/ginger-miso-macro-bowl.jpg",
+    "price": 12.0,
+    "rating": 4.3,
+    "is_featured": false,
+    "cuisine": "Asian Fusion",
+    "mood": "Balanced"
+  }
+]

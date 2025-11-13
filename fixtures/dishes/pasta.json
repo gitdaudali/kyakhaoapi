@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Truffle Mushroom Fettuccine",
+    "description": "Silky fettuccine tossed in a white wine cream sauce with wild mushrooms and shaved black truffle.",
+    "image_url": "https://cdn.kyakhao.com/images/dishes/truffle-mushroom-fettuccine.jpg",
+    "price": 16.5,
+    "rating": 4.8,
+    "is_featured": true,
+    "cuisine": "Italian",
+    "mood": "Indulgent"
+  },
+  {
+    "name": "Pesto Primavera Penne",
+    "description": "Fresh basil pesto, charred cherry tomatoes, and grilled vegetables folded through al dente penne.",
+    "image_url": "https://cdn.kyakhao.com/images/dishes/pesto-primavera-penne.jpg",
+    "price": 14.0,
+    "rating": 4.4,
+    "is_featured": false,
+    "cuisine": "Italian",
+    "mood": "Healthy"
+  }
+]
