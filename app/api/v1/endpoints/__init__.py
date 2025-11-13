@@ -2,13 +2,19 @@ from fastapi import APIRouter, Depends
 
 from app.utils.auth import get_current_user
 
-from . import ai, auth, cuisines, dishes, featured, moods, reservations, restaurants, search
+from . import ai, cuisines, dishes, faq, featured, moods, reservations, restaurants, search
 
 user_router = APIRouter()
 
-# Authentication routes must remain public so that new users can register/login
-user_router.include_router(auth.router)
+# ============================================================================
+# PUBLIC ROUTES (No authentication required)
+# ============================================================================
+# FAQ routes are public so users can view published FAQs
+user_router.include_router(faq.router, prefix="/faqs")
 
+# ============================================================================
+# PROTECTED ROUTES (Authentication required)
+# ============================================================================
 protected_dependencies = [Depends(get_current_user)]
 
 user_router.include_router(ai.router, dependencies=protected_dependencies)

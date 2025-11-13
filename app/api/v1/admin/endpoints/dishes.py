@@ -9,9 +9,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
 from app.models.food import Cuisine, Dish, Mood, Restaurant
 from app.schemas.dish import DishCreate, DishOut, DishUpdate
-from app.api.v1.user.dishes import get_dish_or_404, serialize_dish
+from app.api.v1.endpoints.dishes import get_dish_or_404, serialize_dish
 
-router = APIRouter(prefix="/dishes", tags=["Admin Dishes"])
+router = APIRouter(prefix="/dishes", tags=["Admin"])
 
 
 async def ensure_related_entities(

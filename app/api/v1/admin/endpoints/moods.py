@@ -8,9 +8,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
 from app.models.food import Mood
 from app.schemas.mood import MoodCreate, MoodOut, MoodUpdate
-from app.api.v1.user.moods import get_mood_or_404
+from app.api.v1.endpoints.moods import get_mood_or_404
 
-router = APIRouter(prefix="/moods", tags=["Admin Moods"])
+router = APIRouter(prefix="/moods", tags=["Admin"])
 
 
 @router.post("/", response_model=MoodOut, status_code=status.HTTP_201_CREATED)

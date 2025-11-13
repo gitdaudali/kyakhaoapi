@@ -14,7 +14,7 @@ from app.schemas.dish import DishFilterParams, DishOut
 from app.schemas.pagination import PaginatedResponse, PaginationParams
 from app.utils.pagination import paginate
 
-router = APIRouter(prefix="/dishes", tags=["User Dishes"])
+router = APIRouter(prefix="/dishes", tags=["Dishes"])
 
 
 async def get_dish_or_404(session: AsyncSession, dish_id: uuid.UUID) -> Dish:

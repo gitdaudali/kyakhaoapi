@@ -8,9 +8,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
 from app.models.food import Cuisine
 from app.schemas.cuisine import CuisineCreate, CuisineOut, CuisineUpdate
-from app.api.v1.user.cuisines import get_cuisine_or_404
+from app.api.v1.endpoints.cuisines import get_cuisine_or_404
 
-router = APIRouter(prefix="/cuisines", tags=["Admin Cuisines"])
+router = APIRouter(prefix="/cuisines", tags=["Admin"])
 
 
 @router.post("/", response_model=CuisineOut, status_code=status.HTTP_201_CREATED)

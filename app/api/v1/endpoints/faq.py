@@ -13,7 +13,7 @@ from app.utils.faq_utils import (
     get_published_faqs,
 )
 
-router = APIRouter()
+router = APIRouter(tags=["FAQs"])
 
 
 @router.get("/")

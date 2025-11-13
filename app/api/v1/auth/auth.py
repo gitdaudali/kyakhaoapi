@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime, timedelta, timezone
 from typing import Annotated, Any
 
@@ -99,7 +100,7 @@ from app.utils.google_oauth_utils import (
     verify_google_token,
 )
 
-router = APIRouter(prefix="/auth", tags=["User Authentication"])
+router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
 @router.post(
@@ -126,9 +127,16 @@ async def register_user(
                 
                 # Only send email if emails are enabled
                 if settings.EMAILS_ENABLED:
-                    send_registration_otp_email_task.delay(
-                        email_to=existing_user.email, otp_code=otp.otp_code
-                    )
+                    try:
+                        send_registration_otp_email_task.delay(
+                            email_to=existing_user.email, otp_code=otp.otp_code
+                        )
+                    except Exception as celery_error:
+                        # Log error but don't fail registration if Celery/Redis is unavailable
+                        logging.error(
+                            f"Failed to queue registration email task: {str(celery_error)}. "
+                            f"User registered but email may not be sent. OTP: {otp.otp_code}"
+                        )
 
                 return success_response(
                     message=OTP_RESEND_SUCCESS
@@ -154,9 +162,16 @@ async def register_user(
         
         # Only send email if emails are enabled
         if settings.EMAILS_ENABLED:
-            send_registration_otp_email_task.delay(
-                email_to=db_user.email, otp_code=otp.otp_code
-            )
+            try:
+                send_registration_otp_email_task.delay(
+                    email_to=db_user.email, otp_code=otp.otp_code
+                )
+            except Exception as celery_error:
+                # Log error but don't fail registration if Celery/Redis is unavailable
+                logging.error(
+                    f"Failed to queue registration email task: {str(celery_error)}. "
+                    f"User registered but email may not be sent. OTP: {otp.otp_code}"
+                )
 
         return success_response(
             message=REGISTRATION_SUCCESS,
@@ -396,11 +411,18 @@ async def request_password_reset(
 
         # Only send email if emails are enabled
         if settings.EMAILS_ENABLED:
-            send_password_reset_otp_email_task.delay(
-                email_to=user.email,
-                otp_code=otp.otp_code,
-                user_name=user.first_name or user.email.split("@")[0],
-            )
+            try:
+                send_password_reset_otp_email_task.delay(
+                    email_to=user.email,
+                    otp_code=otp.otp_code,
+                    user_name=user.first_name or user.email.split("@")[0],
+                )
+            except Exception as celery_error:
+                # Log error but don't fail password reset request if Celery/Redis is unavailable
+                logging.error(
+                    f"Failed to queue password reset email task: {str(celery_error)}. "
+                    f"Password reset OTP created but email may not be sent. OTP: {otp.otp_code}"
+                )
 
         return success_response(
             message=PASSWORD_RESET_OTP_SENT,

@@ -12,7 +12,7 @@ from app.schemas.cuisine import CuisineOut
 from app.schemas.pagination import PaginatedResponse, PaginationParams
 from app.utils.pagination import paginate
 
-router = APIRouter(prefix="/cuisines", tags=["User Cuisines"])
+router = APIRouter(prefix="/cuisines", tags=["Cuisines"])
 
 
 async def get_cuisine_or_404(session: AsyncSession, cuisine_id: uuid.UUID) -> Cuisine:

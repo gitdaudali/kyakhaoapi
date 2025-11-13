@@ -12,7 +12,7 @@ from app.schemas.mood import MoodOut
 from app.schemas.pagination import PaginatedResponse, PaginationParams
 from app.utils.pagination import paginate
 
-router = APIRouter(prefix="/moods", tags=["User Moods"])
+router = APIRouter(prefix="/moods", tags=["Moods"])
 
 
 async def get_mood_or_404(session: AsyncSession, mood_id: uuid.UUID) -> Mood:

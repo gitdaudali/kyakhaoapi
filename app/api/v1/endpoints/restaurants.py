@@ -17,7 +17,7 @@ from app.schemas.restaurant import (
 from app.utils.pagination import paginate
 from app.utils.query_filters import haversine_distance_expr
 
-router = APIRouter(prefix="/restaurants", tags=["User Restaurants"])
+router = APIRouter(prefix="/restaurants", tags=["Restaurants"])
 
 
 async def get_restaurant_or_404(session: AsyncSession, restaurant_id: uuid.UUID) -> Restaurant:

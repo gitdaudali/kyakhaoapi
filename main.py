@@ -7,8 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.security import HTTPBearer
 
-from app.api.v1.admin import admin_router
-from app.api.v1.user import user_router
+from app.api.v1 import api_router
 from app.core.config import settings
 from app.core.database import engine
 from app.core.deps import validate_client_headers
@@ -43,13 +42,53 @@ app = FastAPI(
     servers=[{"url": f"{settings.BASE_URL}"}],
     tags_metadata=[
         {
-            "name": "authentication",
+            "name": "Authentication",
             "description": "Kya Khao authentication APIs: registration, login, tokens, and account security.",
             "externalDocs": {
                 "description": "JWT Authentication Guide",
                 "url": "https://fastapi.tiangolo.com/tutorial/security/",
             },
-        }
+        },
+        {
+            "name": "FAQs",
+            "description": "Frequently asked questions endpoints for viewing published FAQs.",
+        },
+        {
+            "name": "AI Suggestions",
+            "description": "AI-powered dish suggestions based on user preferences.",
+        },
+        {
+            "name": "Cuisines",
+            "description": "Cuisine browsing and discovery endpoints.",
+        },
+        {
+            "name": "Dishes",
+            "description": "Dish browsing, filtering, and discovery endpoints.",
+        },
+        {
+            "name": "Featured",
+            "description": "Featured dishes of the week endpoints.",
+        },
+        {
+            "name": "Moods",
+            "description": "Mood-based dish discovery endpoints.",
+        },
+        {
+            "name": "Reservations",
+            "description": "Restaurant reservation management endpoints.",
+        },
+        {
+            "name": "Restaurants",
+            "description": "Restaurant browsing, search, and discovery endpoints.",
+        },
+        {
+            "name": "Search",
+            "description": "Global search across dishes, restaurants, and cuisines.",
+        },
+        {
+            "name": "Admin",
+            "description": "Administrative APIs for managing restaurants, dishes, cuisines, moods, FAQs, and other content.",
+        },
     ],
     lifespan=lifespan,
 )
@@ -82,15 +121,13 @@ app.add_middleware(
 # Security
 security = HTTPBearer()
 
-
+# ============================================================================
+# API V1 ROUTES
+# ============================================================================
+# Include all v1 API routes (Authentication, User, Admin)
 app.include_router(
-    admin_router,
-    prefix=settings.API_ADMIN_PREFIX,
-    dependencies=[Depends(validate_client_headers)],
-)
-app.include_router(
-    user_router,
-    prefix=settings.API_USER_PREFIX,
+    api_router,
+    prefix="/api/v1",
     dependencies=[Depends(validate_client_headers)],
 )
 
