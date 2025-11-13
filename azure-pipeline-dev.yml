@@ -1,5 +1,5 @@
 trigger:
-  - databasefix
+  - development
 
 pool:
   vmImage: 'ubuntu-latest'
