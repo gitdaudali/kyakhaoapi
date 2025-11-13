@@ -113,45 +113,8 @@ async def create_dish(payload: DishCreate, session: AsyncSession = Depends(get_d
     return serialize_dish(dish)
 
 
-@router.get("/{dish_id}", response_model=DishOut)
-async def get_dish(dish_id: uuid.UUID, session: AsyncSession = Depends(get_db)) -> DishOut:
-    dish = await get_dish_or_404(session, dish_id)
-    return serialize_dish(dish)
-
-
-@router.put("/{dish_id}", response_model=DishOut)
-async def update_dish(
-    dish_id: uuid.UUID,
-    payload: DishUpdate,
-    session: AsyncSession = Depends(get_db),
-) -> DishOut:
-    dish = await get_dish_or_404(session, dish_id)
-    update_data = payload.dict(exclude_unset=True, exclude={"mood_ids"})
-
-    if "restaurant_id" in update_data or "cuisine_id" in update_data:
-        await ensure_related_entities(
-            session,
-            restaurant_id=update_data.get("restaurant_id", dish.restaurant_id),
-            cuisine_id=update_data.get("cuisine_id", dish.cuisine_id),
-        )
-    for field, value in update_data.items():
-        setattr(dish, field, value)
-
-    if payload.mood_ids is not None:
-        dish.moods = await get_moods_by_ids(session, payload.mood_ids)
-
-    await session.commit()
-    await session.refresh(dish)
-    return serialize_dish(dish)
-
-
-@router.delete("/{dish_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_dish(dish_id: uuid.UUID, session: AsyncSession = Depends(get_db)) -> Response:
-    dish = await get_dish_or_404(session, dish_id)
-    dish.is_deleted = True
-    await session.commit()
-    return Response(status_code=status.HTTP_204_NO_CONTENT)
-
+# IMPORTANT: Specific routes must come BEFORE parameterized routes like /{dish_id}
+# Otherwise FastAPI will try to match "featured" and "top-rated" as UUIDs
 
 @router.get("/featured", response_model=List[DishOut])
 async def featured_dishes(
@@ -216,3 +179,43 @@ async def dishes_by_mood(
         .order_by(Dish.rating.desc().nullslast(), Dish.name.asc())
     )
     return await paginate(session, stmt, params, mapper=serialize_dish)
+
+
+@router.get("/{dish_id}", response_model=DishOut)
+async def get_dish(dish_id: uuid.UUID, session: AsyncSession = Depends(get_db)) -> DishOut:
+    dish = await get_dish_or_404(session, dish_id)
+    return serialize_dish(dish)
+
+
+@router.put("/{dish_id}", response_model=DishOut)
+async def update_dish(
+    dish_id: uuid.UUID,
+    payload: DishUpdate,
+    session: AsyncSession = Depends(get_db),
+) -> DishOut:
+    dish = await get_dish_or_404(session, dish_id)
+    update_data = payload.dict(exclude_unset=True, exclude={"mood_ids"})
+
+    if "restaurant_id" in update_data or "cuisine_id" in update_data:
+        await ensure_related_entities(
+            session,
+            restaurant_id=update_data.get("restaurant_id", dish.restaurant_id),
+            cuisine_id=update_data.get("cuisine_id", dish.cuisine_id),
+        )
+    for field, value in update_data.items():
+        setattr(dish, field, value)
+
+    if payload.mood_ids is not None:
+        dish.moods = await get_moods_by_ids(session, payload.mood_ids)
+
+    await session.commit()
+    await session.refresh(dish)
+    return serialize_dish(dish)
+
+
+@router.delete("/{dish_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_dish(dish_id: uuid.UUID, session: AsyncSession = Depends(get_db)) -> Response:
+    dish = await get_dish_or_404(session, dish_id)
+    dish.is_deleted = True
+    await session.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)

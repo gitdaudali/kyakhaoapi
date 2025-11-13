@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import date
-from typing import List
+from typing import List, Optional
 
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy import select
@@ -17,7 +17,7 @@ router = APIRouter(prefix="/featured", tags=["Featured"])
 
 @router.get("/", response_model=List[DishOut])
 async def featured_dish_of_the_week(
-    week: date | None = Query(default=None, description="ISO week date to filter on"),
+    week: Optional[date] = Query(default=None, description="ISO week date to filter on"),
     limit: int = Query(default=10, gt=0, le=50),
     session: AsyncSession = Depends(get_db),
 ) -> List[DishOut]:

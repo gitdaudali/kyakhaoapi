@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Smoky Chipotle Power Bowl",
+    "description": "Charred corn, black beans, avocado, grilled chicken, and chipotle yogurt over cilantro-lime farro.",
+    "image_url": "https://cdn.kyakhao.com/images/dishes/smoky-chipotle-power-bowl.jpg",
+    "price": 13.5,
+    "rating": 4.7,
+    "is_featured": true,
+    "cuisine": "Southwestern",
+    "mood": "Energizing"
+  },
+  {
+    "name": "Korean BBQ Protein Bowl",
+    "description": "Gochujang glazed beef, kimchi slaw, sesame sweet potatoes, and a soft egg on jasmine rice.",
+    "image_url": "https://cdn.kyakhao.com/images/dishes/korean-bbq-protein-bowl.jpg",
+    "price": 14.25,
+    "rating": 4.5,
+    "is_featured": false,
+    "cuisine": "Korean",
+    "mood": "Bold"
+  }
+]

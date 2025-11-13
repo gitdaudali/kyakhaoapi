@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Dark Chocolate Lava Cake",
+    "description": "Warm molten chocolate cake served with vanilla bean gelato and salted caramel drizzle.",
+    "image_url": "https://cdn.kyakhao.com/images/dishes/dark-chocolate-lava-cake.jpg",
+    "price": 8.5,
+    "rating": 4.9,
+    "is_featured": true,
+    "cuisine": "French",
+    "mood": "Decadent"
+  },
+  {
+    "name": "Mango Kulfi Parfait",
+    "description": "Layers of creamy mango kulfi, pistachio crumble, and rosewater whipped cream.",
+    "image_url": "https://cdn.kyakhao.com/images/dishes/mango-kulfi-parfait.jpg",
+    "price": 6.75,
+    "rating": 4.5,
+    "is_featured": false,
+    "cuisine": "Indian",
+    "mood": "Festive"
+  }
+]
