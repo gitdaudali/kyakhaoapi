@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import uuid
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy import select
@@ -9,8 +10,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from app.core.database import get_db
+from app.core.response_handler import error_response, success_response
 from app.models.food import Reservation, Restaurant
-from app.schemas.pagination import PaginatedResponse, PaginationParams
+from app.schemas.pagination import PaginationParams
 from app.schemas.reservation import ReservationCreate, ReservationOut
 from app.utils.pagination import paginate
 
@@ -29,46 +31,87 @@ async def get_reservation_or_404(session: AsyncSession, reservation_id: uuid.UUI
     return reservation
 
 
-@router.get("/", response_model=PaginatedResponse[ReservationOut])
+@router.get("/")
 async def list_reservations(
     params: PaginationParams = Depends(),
     restaurant_id: uuid.UUID | None = Query(default=None),
     session: AsyncSession = Depends(get_db),
-) -> PaginatedResponse[ReservationOut]:
-    stmt = select(Reservation).where(Reservation.is_deleted.is_(False))
-    if restaurant_id:
-        stmt = stmt.where(Reservation.restaurant_id == restaurant_id)
-    stmt = stmt.order_by(Reservation.reservation_time.asc())
-    return await paginate(session, stmt, params, mapper=lambda obj: ReservationOut.model_validate(obj))
+) -> Any:
+    try:
+        stmt = select(Reservation).where(Reservation.is_deleted.is_(False))
+        if restaurant_id:
+            stmt = stmt.where(Reservation.restaurant_id == restaurant_id)
+        stmt = stmt.order_by(Reservation.reservation_time.asc())
+        result = await paginate(session, stmt, params, mapper=lambda obj: ReservationOut.model_validate(obj))
+        
+        return success_response(
+            message="Reservations retrieved successfully",
+            data=result.model_dump()
+        )
+    except Exception as e:
+        return error_response(
+            message=f"Error retrieving reservations: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 
 
-@router.post("/", response_model=ReservationOut, status_code=status.HTTP_201_CREATED)
+@router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_reservation(
     payload: ReservationCreate,
     session: AsyncSession = Depends(get_db),
-) -> ReservationOut:
-    restaurant = await session.get(Restaurant, payload.restaurant_id)
-    if not restaurant or restaurant.is_deleted:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Restaurant not found")
-
-    reservation = Reservation(**payload.dict())
-    session.add(reservation)
+) -> Any:
     try:
-        await session.commit()
-    except IntegrityError:
-        await session.rollback()
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="A reservation already exists for this time slot",
+        restaurant = await session.get(Restaurant, payload.restaurant_id)
+        if not restaurant or restaurant.is_deleted:
+            return error_response(
+                message="Restaurant not found",
+                status_code=status.HTTP_404_NOT_FOUND
+            )
+
+        reservation = Reservation(**payload.dict())
+        session.add(reservation)
+        try:
+            await session.commit()
+        except IntegrityError:
+            await session.rollback()
+            return error_response(
+                message="A reservation already exists for this time slot",
+                status_code=status.HTTP_409_CONFLICT
+            )
+        await session.refresh(reservation)
+        reservation_out = ReservationOut.model_validate(reservation)
+        
+        return success_response(
+            message="Reservation created successfully",
+            data=reservation_out.model_dump(),
+            status_code=status.HTTP_201_CREATED
         )
-    await session.refresh(reservation)
-    return ReservationOut.model_validate(reservation)
+    except HTTPException:
+        raise
+    except Exception as e:
+        await session.rollback()
+        return error_response(
+            message=f"Error creating reservation: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 
 
-@router.get("/{reservation_id}", response_model=ReservationOut)
+@router.get("/{reservation_id}")
 async def get_reservation(
     reservation_id: uuid.UUID,
     session: AsyncSession = Depends(get_db),
-) -> ReservationOut:
-    reservation = await get_reservation_or_404(session, reservation_id)
-    return ReservationOut.model_validate(reservation)
+) -> Any:
+    try:
+        reservation = await get_reservation_or_404(session, reservation_id)
+        reservation_out = ReservationOut.model_validate(reservation)
+        return success_response(
+            message="Reservation retrieved successfully",
+            data=reservation_out.model_dump()
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        return error_response(
+            message=f"Error retrieving reservation: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )

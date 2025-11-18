@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from uuid import UUID
 
 from app.core.database import get_db
-from app.core.response_handler import success_response
+from app.core.response_handler import error_response, success_response
 from app.schemas.faq import FAQResponse, FAQListResponse
 from app.utils.faq_utils import (
     get_faq_by_id_or_404,
@@ -35,14 +35,13 @@ async def get_all_faqs(
         )
         return success_response(
             message="FAQs retrieved successfully",
-            data=faq_list.model_dump(),
-            use_body=True
+            data=faq_list.model_dump()
         )
 
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving FAQs: {str(e)}",
+        return error_response(
+            message=f"Error retrieving FAQs: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
 
@@ -65,15 +64,14 @@ async def get_faq(
         faq_response = FAQResponse.model_validate(faq)
         return success_response(
             message="FAQ retrieved successfully",
-            data=faq_response.model_dump(),
-            use_body=True
+            data=faq_response.model_dump()
         )
 
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving FAQ: {str(e)}",
+        return error_response(
+            message=f"Error retrieving FAQ: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 

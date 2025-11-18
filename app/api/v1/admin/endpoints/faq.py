@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import get_db
 from app.core.admin_deps import AdminUser
-from app.core.response_handler import success_response
+from app.core.response_handler import error_response, success_response
 from app.models.faq import FAQ
 from app.schemas.faq import FAQCreate, FAQUpdate, FAQResponse, FAQListResponse
 from app.utils.faq_utils import (
@@ -33,9 +33,9 @@ async def create_faq(
         # Check if FAQ with same question already exists
         existing_faq = await get_faq_by_question(db, faq_data.question)
         if existing_faq:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="FAQ with this question already exists",
+            return error_response(
+                message="FAQ with this question already exists",
+                status_code=status.HTTP_409_CONFLICT
             )
 
         db_faq = FAQ(
@@ -53,8 +53,7 @@ async def create_faq(
         return success_response(
             message="FAQ created successfully",
             data=faq_response.model_dump(),
-            status_code=status.HTTP_201_CREATED,
-            use_body=True
+            status_code=status.HTTP_201_CREATED
         )
 
     except HTTPException:
@@ -63,13 +62,13 @@ async def create_faq(
         await db.rollback()
         # Check if it's a unique constraint violation
         if "unique constraint" in str(e).lower() or "duplicate key" in str(e).lower():
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="FAQ with this question already exists",
+            return error_response(
+                message="FAQ with this question already exists",
+                status_code=status.HTTP_409_CONFLICT
             )
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error creating FAQ: {str(e)}",
+        return error_response(
+            message=f"Error creating FAQ: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
 
@@ -90,14 +89,13 @@ async def list_faqs(
         )
         return success_response(
             message="FAQs retrieved successfully",
-            data=faq_list.model_dump(),
-            use_body=True
+            data=faq_list.model_dump()
         )
 
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving FAQs: {str(e)}",
+        return error_response(
+            message=f"Error retrieving FAQs: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
 
@@ -113,16 +111,15 @@ async def get_faq(
         faq_response = FAQResponse.model_validate(faq)
         return success_response(
             message="FAQ retrieved successfully",
-            data=faq_response.model_dump(),
-            use_body=True
+            data=faq_response.model_dump()
         )
 
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving FAQ: {str(e)}",
+        return error_response(
+            message=f"Error retrieving FAQ: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
 
@@ -159,8 +156,7 @@ async def update_faq(
         faq_response = FAQResponse.model_validate(faq)
         return success_response(
             message="FAQ updated successfully",
-            data=faq_response.model_dump(),
-            use_body=True
+            data=faq_response.model_dump()
         )
 
     except HTTPException:
@@ -169,13 +165,13 @@ async def update_faq(
         await db.rollback()
         # Check if it's a unique constraint violation (for question updates)
         if "unique constraint" in str(e).lower() or "duplicate key" in str(e).lower():
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="FAQ with this question already exists",
+            return error_response(
+                message="FAQ with this question already exists",
+                status_code=status.HTTP_409_CONFLICT
             )
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error updating FAQ: {str(e)}",
+        return error_response(
+            message=f"Error updating FAQ: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
 
@@ -192,16 +188,15 @@ async def delete_faq(
         
         return success_response(
             message="FAQ deleted successfully",
-            data={"id": str(faq.id), "question": faq.question},
-            use_body=True
+            data={"id": str(faq.id), "question": faq.question}
         )
 
     except HTTPException:
         raise
     except Exception as e:
         await db.rollback()
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error deleting FAQ: {str(e)}",
+        return error_response(
+            message=f"Error deleting FAQ: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 

@@ -22,6 +22,8 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
+from app.models.base import BaseModel, TimestampMixin as SQLModelTimestampMixin
+from sqlmodel import Field
 
 
 def utcnow() -> datetime:
@@ -156,5 +158,29 @@ class Reservation(UUIDPrimaryKeyMixin, TimestampMixin, Base):
             "reservation_time",
             "customer_email",
             name="uq_reservation_unique_slot",
+        ),
+    )
+
+
+# Note: Favorite model uses SQLModel (BaseModel) instead of SQLAlchemy Base
+# to ensure it's in the same metadata as User model for proper foreign key resolution
+class Favorite(BaseModel, SQLModelTimestampMixin, table=True):
+    __tablename__ = "favorites"
+
+    user_id: uuid.UUID = Field(
+        sa_type=UUID(as_uuid=True), foreign_key="users.id", nullable=False, index=True
+    )
+    item_id: uuid.UUID = Field(
+        sa_type=UUID(as_uuid=True), nullable=False, index=True
+    )
+    # item_type can be 'dish' or 'restaurant' to support different types of favorites
+    item_type: str = Field(sa_type=String(50), nullable=False, default="dish", index=True)
+
+    __table_args__ = (
+        UniqueConstraint(
+            "user_id",
+            "item_id",
+            "item_type",
+            name="uq_user_item_favorite",
         ),
     )

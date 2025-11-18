@@ -39,14 +39,13 @@ class BaseAPIException(HTTPException):
 
 
 def success_response(
-    message: str, data: Any = None, status_code: int = status.HTTP_200_OK, use_body: bool = False
+    message: str, data: Any = None, status_code: int = status.HTTP_200_OK
 ) -> JSONResponse:
-    """Return a standard success envelope."""
-    key = "body" if use_body else "data"
+    """Return a standard success envelope with consistent format: {success, message, data}."""
     payload = {
         "success": True,
         "message": message,
-        key: jsonable_encoder(data) if data is not None else None,
+        "data": jsonable_encoder(data) if data is not None else None,
     }
     return JSONResponse(status_code=status_code, content=payload)
 

@@ -1,15 +1,17 @@
 from __future__ import annotations
 
 import uuid
+from typing import Any
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import get_db
+from app.core.response_handler import error_response, success_response
 from app.models.food import Cuisine
 from app.schemas.cuisine import CuisineOut
-from app.schemas.pagination import PaginatedResponse, PaginationParams
+from app.schemas.pagination import PaginationParams
 from app.utils.pagination import paginate
 
 router = APIRouter(prefix="/cuisines", tags=["Cuisines"])
@@ -25,23 +27,46 @@ async def get_cuisine_or_404(session: AsyncSession, cuisine_id: uuid.UUID) -> Cu
     return cuisine
 
 
-@router.get("/", response_model=PaginatedResponse[CuisineOut])
+@router.get("/")
 async def list_cuisines(
     params: PaginationParams = Depends(),
     session: AsyncSession = Depends(get_db),
-) -> PaginatedResponse[CuisineOut]:
-    stmt = select(Cuisine).where(Cuisine.is_deleted.is_(False))
-    stmt = stmt.order_by(Cuisine.name.asc())
+) -> Any:
+    try:
+        stmt = select(Cuisine).where(Cuisine.is_deleted.is_(False))
+        stmt = stmt.order_by(Cuisine.name.asc())
 
-    return await paginate(
-        session,
-        stmt,
-        params,
-        mapper=lambda obj: CuisineOut.model_validate(obj),
-    )
+        result = await paginate(
+            session,
+            stmt,
+            params,
+            mapper=lambda obj: CuisineOut.model_validate(obj),
+        )
+        
+        return success_response(
+            message="Cuisines retrieved successfully",
+            data=result.model_dump()
+        )
+    except Exception as e:
+        return error_response(
+            message=f"Error retrieving cuisines: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 
 
-@router.get("/{cuisine_id}", response_model=CuisineOut)
-async def get_cuisine(cuisine_id: uuid.UUID, session: AsyncSession = Depends(get_db)) -> CuisineOut:
-    cuisine = await get_cuisine_or_404(session, cuisine_id)
-    return CuisineOut.model_validate(cuisine)
+@router.get("/{cuisine_id}")
+async def get_cuisine(cuisine_id: uuid.UUID, session: AsyncSession = Depends(get_db)) -> Any:
+    try:
+        cuisine = await get_cuisine_or_404(session, cuisine_id)
+        cuisine_out = CuisineOut.model_validate(cuisine)
+        return success_response(
+            message="Cuisine retrieved successfully",
+            data=cuisine_out.model_dump()
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        return error_response(
+            message=f"Error retrieving cuisine: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )

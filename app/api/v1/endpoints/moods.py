@@ -1,15 +1,17 @@
 from __future__ import annotations
 
 import uuid
+from typing import Any
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import get_db
+from app.core.response_handler import error_response, success_response
 from app.models.food import Mood
 from app.schemas.mood import MoodOut
-from app.schemas.pagination import PaginatedResponse, PaginationParams
+from app.schemas.pagination import PaginationParams
 from app.utils.pagination import paginate
 
 router = APIRouter(prefix="/moods", tags=["Moods"])
@@ -25,21 +27,44 @@ async def get_mood_or_404(session: AsyncSession, mood_id: uuid.UUID) -> Mood:
     return mood
 
 
-@router.get("/", response_model=PaginatedResponse[MoodOut])
+@router.get("/")
 async def list_moods(
     params: PaginationParams = Depends(),
     session: AsyncSession = Depends(get_db),
-) -> PaginatedResponse[MoodOut]:
-    stmt = select(Mood).where(Mood.is_deleted.is_(False)).order_by(Mood.name.asc())
-    return await paginate(
-        session,
-        stmt,
-        params,
-        mapper=lambda obj: MoodOut.model_validate(obj),
-    )
+) -> Any:
+    try:
+        stmt = select(Mood).where(Mood.is_deleted.is_(False)).order_by(Mood.name.asc())
+        result = await paginate(
+            session,
+            stmt,
+            params,
+            mapper=lambda obj: MoodOut.model_validate(obj),
+        )
+        
+        return success_response(
+            message="Moods retrieved successfully",
+            data=result.model_dump()
+        )
+    except Exception as e:
+        return error_response(
+            message=f"Error retrieving moods: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 
 
-@router.get("/{mood_id}", response_model=MoodOut)
-async def get_mood(mood_id: uuid.UUID, session: AsyncSession = Depends(get_db)) -> MoodOut:
-    mood = await get_mood_or_404(session, mood_id)
-    return MoodOut.model_validate(mood)
+@router.get("/{mood_id}")
+async def get_mood(mood_id: uuid.UUID, session: AsyncSession = Depends(get_db)) -> Any:
+    try:
+        mood = await get_mood_or_404(session, mood_id)
+        mood_out = MoodOut.model_validate(mood)
+        return success_response(
+            message="Mood retrieved successfully",
+            data=mood_out.model_dump()
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        return error_response(
+            message=f"Error retrieving mood: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )

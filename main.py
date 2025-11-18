@@ -54,10 +54,6 @@ app = FastAPI(
             "description": "Frequently asked questions endpoints for viewing published FAQs.",
         },
         {
-            "name": "AI Suggestions",
-            "description": "AI-powered dish suggestions based on user preferences.",
-        },
-        {
             "name": "Cuisines",
             "description": "Cuisine browsing and discovery endpoints.",
         },

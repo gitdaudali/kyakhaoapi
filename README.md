@@ -1,6 +1,6 @@
 ## Kya Khao Platform API
 
-The service now combines authentication with a rich food discovery experience for the Kya Khao platform. Alongside the original auth flows (registration, login, tokens, OTP, Google OAuth), it exposes curated content for dishes, cuisines, moods, restaurants, AI suggestions, and reservations.
+The service now combines authentication with a rich food discovery experience for the Kya Khao platform. Alongside the original auth flows (registration, login, tokens, OTP, Google OAuth), it exposes curated content for dishes, cuisines, moods, restaurants, and reservations.
 
 ### What's Included
 - FastAPI application with versioned `/api/v1/auth`, `/api/v1/` (user endpoints), and `/api/v1/admin` routers (RBAC-protected discovery + admin CRUD)
@@ -25,7 +25,6 @@ kyakhao_API/
 │   │       │   └── endpoints/   # Admin endpoint modules
 │   │       ├── endpoints/       # All user-facing and auth endpoints
 │   │       │   ├── auth.py      # Authentication endpoints (registration, login, OTP, Google OAuth)
-│   │       │   ├── ai.py        # AI suggestion endpoints
 │   │       │   ├── cuisines.py  # Cuisine endpoints
 │   │       │   ├── dishes.py    # Dish endpoints
 │   │       │   ├── faq.py       # FAQ endpoints
@@ -37,7 +36,7 @@ kyakhao_API/
 │   │       └── api.py           # Main API router aggregator
 │   ├── core/                    # Config, DB, auth helpers, response handling
 │   ├── models/                  # Auth + food SQLAlchemy models
-│   ├── schemas/                 # Pydantic schemas (auth, food, pagination, search, AI, admin/user bases)
+│   ├── schemas/                 # Pydantic schemas (auth, food, pagination, search, admin/user bases)
 │   ├── tasks/                   # Celery email tasks
 │   └── utils/                   # Auth helpers, Google OAuth, pagination, filters, seed data
 ├── tests/                       # Pytest suite
@@ -167,7 +166,6 @@ kyakhao_API/
 | Moods          | `/moods`                     | Paginated mood listing |
 | Restaurants    | `/restaurants`               | Listing, detail, top-rated, nearby lookup |
 | Reservations   | `/reservations`              | Create & list reservations |
-| AI Suggestions | `/ai/suggestions`            | Random or top-rated dish recommendations |
 | Featured       | `/featured`                  | Dish of the week feed |
 | Search         | `/search`                    | Unified search across dishes, restaurants, cuisines |
 

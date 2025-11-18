@@ -1,8 +1,8 @@
-"""Initial schema with all tables
+"""initial_schema
 
-Revision ID: 48935f4b3a59
+Revision ID: b3d31ce38ba2
 Revises: 
-Create Date: 2025-11-13 17:04:27.794633
+Create Date: 2025-11-18 10:21:45.326920
 
 """
 from typing import Sequence, Union
@@ -11,9 +11,8 @@ from alembic import op
 import sqlalchemy as sa
 import sqlmodel
 
-
 # revision identifiers, used by Alembic.
-revision: str = '48935f4b3a59'
+revision: str = 'b3d31ce38ba2'
 down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -184,6 +183,22 @@ def upgrade() -> None:
     op.create_index(op.f('ix_email_verification_tokens_is_used'), 'email_verification_tokens', ['is_used'], unique=False)
     op.create_index(op.f('ix_email_verification_tokens_token'), 'email_verification_tokens', ['token'], unique=True)
     op.create_index(op.f('ix_email_verification_tokens_user_id'), 'email_verification_tokens', ['user_id'], unique=False)
+    op.create_table('favorites',
+    sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('is_deleted', sa.Boolean(), nullable=False),
+    sa.Column('id', sa.UUID(), nullable=False),
+    sa.Column('user_id', sa.UUID(), nullable=False),
+    sa.Column('item_id', sa.UUID(), nullable=False),
+    sa.Column('item_type', sa.String(length=50), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('user_id', 'item_id', 'item_type', name='uq_user_item_favorite')
+    )
+    op.create_index(op.f('ix_favorites_is_deleted'), 'favorites', ['is_deleted'], unique=False)
+    op.create_index(op.f('ix_favorites_item_id'), 'favorites', ['item_id'], unique=False)
+    op.create_index(op.f('ix_favorites_item_type'), 'favorites', ['item_type'], unique=False)
+    op.create_index(op.f('ix_favorites_user_id'), 'favorites', ['user_id'], unique=False)
     op.create_table('password_reset_otps',
     sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
     sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
@@ -345,6 +360,11 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_password_reset_otps_is_deleted'), table_name='password_reset_otps')
     op.drop_index(op.f('ix_password_reset_otps_email'), table_name='password_reset_otps')
     op.drop_table('password_reset_otps')
+    op.drop_index(op.f('ix_favorites_user_id'), table_name='favorites')
+    op.drop_index(op.f('ix_favorites_item_type'), table_name='favorites')
+    op.drop_index(op.f('ix_favorites_item_id'), table_name='favorites')
+    op.drop_index(op.f('ix_favorites_is_deleted'), table_name='favorites')
+    op.drop_table('favorites')
     op.drop_index(op.f('ix_email_verification_tokens_user_id'), table_name='email_verification_tokens')
     op.drop_index(op.f('ix_email_verification_tokens_token'), table_name='email_verification_tokens')
     op.drop_index(op.f('ix_email_verification_tokens_is_used'), table_name='email_verification_tokens')

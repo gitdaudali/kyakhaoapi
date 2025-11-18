@@ -8,7 +8,7 @@ from app.models.verification import (
     PasswordResetOTP,
     PasswordResetToken,
 )
-from app.models.food import Cuisine, Dish, Mood, Reservation, Restaurant
+from app.models.food import Cuisine, Dish, Favorite, Mood, Reservation, Restaurant
 
 __all__ = [
     "BaseModel",
@@ -30,4 +30,5 @@ __all__ = [
     "Restaurant",
     "Dish",
     "Reservation",
+    "Favorite",
 ]
