@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Quinoa & Edamame Salad",
+    "description": "",
+    "price": 1700,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Chilli & Lime Calamari Salad",
+    "description": "",
+    "price": 1600,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Spicy Seaweed Salad",
+    "description": "",
+    "price": 1700,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Edamame Seasalt",
+    "description": "",
+    "price": 1200,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Edamame Chilli Garlic",
+    "description": "",
+    "price": 1300,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  }
+]
+

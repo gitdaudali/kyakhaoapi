@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Tuna MAGURU",
+    "description": "",
+    "price": 1700,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Norwegian Salmon SHAKE",
+    "description": "",
+    "price": 1700,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Yellowtail HAMACHI",
+    "description": "",
+    "price": 1750,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Freshwater Eel UNAGI",
+    "description": "",
+    "price": 1800,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Crabstick KANI",
+    "description": "",
+    "price": 1450,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Nigiri Platter (14 Pcs)",
+    "description": "",
+    "price": 5400,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  }
+]
+

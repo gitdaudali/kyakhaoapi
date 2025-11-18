@@ -18,7 +18,7 @@ from app.utils.faq_utils import (
     soft_delete_faq,
 )
 
-router = APIRouter(tags=["Admin"])
+router = APIRouter(tags=["Admin FAQs"])
 security = HTTPBearer()
 
 

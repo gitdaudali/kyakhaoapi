@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Miso Soup",
+    "description": "",
+    "price": 1050,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Spiced Noodle Broth",
+    "description": "",
+    "price": 950,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Dobin Mushi Soup",
+    "description": "",
+    "price": 1250,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  }
+]
+

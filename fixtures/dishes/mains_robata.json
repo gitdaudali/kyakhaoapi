@@ -1,0 +1,35 @@
+[
+  {
+    "name": "MISO SALMON",
+    "description": "",
+    "price": 5200,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "NEW STYLE GRILLED SALMON",
+    "description": "",
+    "price": 5300,
+    "rating": null,
+    "cuisine": "Japanese Robata",
+    "mood": "Anytime"
+  },
+  {
+    "name": "BLACK COD",
+    "description": "",
+    "price": 6500,
+    "rating": null,
+    "cuisine": "Japanese Robata",
+    "mood": "Anytime"
+  },
+  {
+    "name": "SPICED BEEF TENDERLOIN",
+    "description": "",
+    "price": 3700,
+    "rating": null,
+    "cuisine": "Japanese Robata",
+    "mood": "Anytime"
+  }
+]
+

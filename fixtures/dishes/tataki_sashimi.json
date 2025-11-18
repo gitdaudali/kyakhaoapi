@@ -1,0 +1,75 @@
+[
+  {
+    "name": "Spicy Tuna Tataki",
+    "description": "",
+    "price": 3000,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Salmon Sashimi (5 Pcs)",
+    "description": "",
+    "price": 4700,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Yellowtail Sashimi (5 Pcs)",
+    "description": "",
+    "price": 4800,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Yellowtail Tataki with Jalapeno",
+    "description": "",
+    "price": 3000,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Angus Beef Tataki (8 Pcs)",
+    "description": "",
+    "price": 3100,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Tuna Sashimi (5 Pcs)",
+    "description": "",
+    "price": 4700,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Sashimi Platter (8 Pcs)",
+    "description": "",
+    "price": 5700,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Sashimi Platter (12 Pcs)",
+    "description": "",
+    "price": 6900,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Spicy Salmon Sashimi",
+    "description": "",
+    "price": 4900,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  }
+]
+

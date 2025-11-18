@@ -3,18 +3,27 @@ import sys
 from logging.config import fileConfig
 from pathlib import Path
 
-from sqlalchemy import engine_from_config, pool, MetaData
+from sqlalchemy import engine_from_config, pool
 from alembic import context
 
 # Add the project root to the Python path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
+from sqlalchemy import MetaData
+from sqlmodel import SQLModel
+
 # Import your models and settings
 from app.core.config import settings
 from app.core.database import Base
-from app.models import *  # make sure all models are imported so they're registered
-from sqlmodel import SQLModel
+# Import all models so they're registered
+from app.models import (
+    faq,
+    food,
+    token,
+    user,
+    verification,
+)
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -27,17 +36,15 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-# Combine both SQLModel and SQLAlchemy Base metadata to detect all models
+# Combine both SQLModel and SQLAlchemy Base metadata
 target_metadata = MetaData()
-
-# Add all tables from SQLModel.metadata (for User, FAQ, Token, etc.)
+# Copy all tables from SQLModel.metadata (for User, FAQ, Token, etc.)
 for table in SQLModel.metadata.tables.values():
-    target_metadata._add_table(table.name, table.schema, table)
-
-# Add all tables from Base.metadata (for food models)
+    table.tometadata(target_metadata)
+# Copy all tables from Base.metadata (for food models)
 for table in Base.metadata.tables.values():
     if table.name not in target_metadata.tables:
-        target_metadata._add_table(table.name, table.schema, table)
+        table.tometadata(target_metadata)
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -47,7 +54,14 @@ for table in Base.metadata.tables.values():
 
 def get_url():
     """Get database URL from environment variables."""
-    return settings.DATABASE_URL
+    # Alembic needs a sync database URL, not async
+    db_url = settings.DATABASE_URL
+    # Ensure it's a sync postgresql:// URL (not postgresql+asyncpg://)
+    if db_url.startswith("postgresql+asyncpg://"):
+        db_url = db_url.replace("postgresql+asyncpg://", "postgresql://")
+    elif db_url.startswith("postgresql+psycopg2://"):
+        db_url = db_url.replace("postgresql+psycopg2://", "postgresql://")
+    return db_url
 
 
 def run_migrations_offline() -> None:
@@ -92,9 +106,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

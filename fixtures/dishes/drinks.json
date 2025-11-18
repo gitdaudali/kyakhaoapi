@@ -1,0 +1,219 @@
+[
+  {
+    "name": "Pink Grapefruit Fizz",
+    "description": "",
+    "price": 695,
+    "rating": null,
+    "cuisine": "Beverage",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Passion Fruit Mojito",
+    "description": "",
+    "price": 695,
+    "rating": null,
+    "cuisine": "Beverage",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Mint Margarita",
+    "description": "",
+    "price": 695,
+    "rating": null,
+    "cuisine": "Beverage",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Pina Colada",
+    "description": "",
+    "price": 725,
+    "rating": null,
+    "cuisine": "Beverage",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Electric Lemonade",
+    "description": "",
+    "price": 695,
+    "rating": null,
+    "cuisine": "Beverage",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Green Apple Soda",
+    "description": "",
+    "price": 645,
+    "rating": null,
+    "cuisine": "Beverage",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Kiwi Chiller",
+    "description": "",
+    "price": 695,
+    "rating": null,
+    "cuisine": "Beverage",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Apple Gingerade",
+    "description": "",
+    "price": 725,
+    "rating": null,
+    "cuisine": "Beverage",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Peach Iced Tea",
+    "description": "",
+    "price": 695,
+    "rating": null,
+    "cuisine": "Beverage",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Fresh Juice",
+    "description": "",
+    "price": 765,
+    "rating": null,
+    "cuisine": "Beverage",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Green Tea",
+    "description": "",
+    "price": 365,
+    "rating": null,
+    "cuisine": "Hot Drink",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Black Tea",
+    "description": "",
+    "price": 365,
+    "rating": null,
+    "cuisine": "Hot Drink",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Americano",
+    "description": "",
+    "price": 645,
+    "rating": null,
+    "cuisine": "Coffee",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Espresso",
+    "description": "",
+    "price": 545,
+    "rating": null,
+    "cuisine": "Coffee",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Cappuccino",
+    "description": "",
+    "price": 695,
+    "rating": null,
+    "cuisine": "Coffee",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Fresh Lime",
+    "description": "",
+    "price": 365,
+    "rating": null,
+    "cuisine": "Beverage",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Coke",
+    "description": "",
+    "price": 245,
+    "rating": null,
+    "cuisine": "Soda",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Diet Coke",
+    "description": "",
+    "price": 245,
+    "rating": null,
+    "cuisine": "Soda",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Sprite",
+    "description": "",
+    "price": 245,
+    "rating": null,
+    "cuisine": "Soda",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Sprite Zero",
+    "description": "",
+    "price": 245,
+    "rating": null,
+    "cuisine": "Soda",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Fanta",
+    "description": "",
+    "price": 245,
+    "rating": null,
+    "cuisine": "Soda",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Mineral Water Sm",
+    "description": "",
+    "price": 125,
+    "rating": null,
+    "cuisine": "Water",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Mineral Water Lg",
+    "description": "",
+    "price": 245,
+    "rating": null,
+    "cuisine": "Water",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Club Soda",
+    "description": "",
+    "price": 465,
+    "rating": null,
+    "cuisine": "Water",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Perrier Sm",
+    "description": "",
+    "price": 795,
+    "rating": null,
+    "cuisine": "Water",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Perrier Lg",
+    "description": "",
+    "price": 1395,
+    "rating": null,
+    "cuisine": "Water",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Nestle Sparkling Water",
+    "description": "",
+    "price": 295,
+    "rating": null,
+    "cuisine": "Water",
+    "mood": "Anytime"
+  }
+]
+

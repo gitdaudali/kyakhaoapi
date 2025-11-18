@@ -1,0 +1,59 @@
+[
+  {
+    "name": "HIBACHI CHICKEN",
+    "description": "",
+    "price": 3000,
+    "rating": null,
+    "cuisine": "Japanese Teppanyaki",
+    "mood": "Anytime"
+  },
+  {
+    "name": "HIBACHI PRAWN",
+    "description": "",
+    "price": 3950,
+    "rating": null,
+    "cuisine": "Japanese Teppanyaki",
+    "mood": "Anytime"
+  },
+  {
+    "name": "RED SNAPPER",
+    "description": "",
+    "price": 3700,
+    "rating": null,
+    "cuisine": "Japanese Teppanyaki",
+    "mood": "Anytime"
+  },
+  {
+    "name": "LOBSTER TAIL",
+    "description": "",
+    "price": 6400,
+    "rating": null,
+    "cuisine": "Japanese Teppanyaki",
+    "mood": "Anytime"
+  },
+  {
+    "name": "TENDERLOIN BEEF",
+    "description": "",
+    "price": 3600,
+    "rating": null,
+    "cuisine": "Japanese Teppanyaki",
+    "mood": "Anytime"
+  },
+  {
+    "name": "ANGUS BEEF",
+    "description": "",
+    "price": 6800,
+    "rating": null,
+    "cuisine": "Japanese Teppanyaki",
+    "mood": "Anytime"
+  },
+  {
+    "name": "NORWEGIAN SALMON",
+    "description": "",
+    "price": 5900,
+    "rating": null,
+    "cuisine": "Japanese Teppanyaki",
+    "mood": "Anytime"
+  }
+]
+

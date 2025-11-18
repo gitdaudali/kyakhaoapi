@@ -1,0 +1,43 @@
+[
+  {
+    "name": "White Rice",
+    "description": "",
+    "price": 900,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Butter Rice",
+    "description": "",
+    "price": 900,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Garlic Rice",
+    "description": "",
+    "price": 1150,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Egg Fried Rice",
+    "description": "",
+    "price": 1200,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Truffle Rice",
+    "description": "",
+    "price": 1350,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  }
+]
+

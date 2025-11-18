@@ -1,22 +1,50 @@
 [
   {
-    "name": "Dark Chocolate Lava Cake",
-    "description": "Warm molten chocolate cake served with vanilla bean gelato and salted caramel drizzle.",
-    "image_url": "https://cdn.kyakhao.com/images/dishes/dark-chocolate-lava-cake.jpg",
-    "price": 8.5,
-    "rating": 4.9,
-    "is_featured": true,
-    "cuisine": "French",
-    "mood": "Decadent"
+    "name": "DARK CHOCOLATE FONDANT",
+    "description": "",
+    "price": 1350,
+    "rating": null,
+    "cuisine": "Classic Dessert",
+    "mood": "Anytime"
   },
   {
-    "name": "Mango Kulfi Parfait",
-    "description": "Layers of creamy mango kulfi, pistachio crumble, and rosewater whipped cream.",
-    "image_url": "https://cdn.kyakhao.com/images/dishes/mango-kulfi-parfait.jpg",
-    "price": 6.75,
-    "rating": 4.5,
-    "is_featured": false,
-    "cuisine": "Indian",
-    "mood": "Festive"
+    "name": "PASSIONFRUIT CHEESECAKE",
+    "description": "",
+    "price": 1450,
+    "rating": null,
+    "cuisine": "Dessert Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "SPICED APPLE CRUMBLE",
+    "description": "",
+    "price": 1050,
+    "rating": null,
+    "cuisine": "Classic Dessert",
+    "mood": "Anytime"
+  },
+  {
+    "name": "SIGNATURE CHOCOLATE CAKE",
+    "description": "",
+    "price": 1100,
+    "rating": null,
+    "cuisine": "Classic Dessert",
+    "mood": "Anytime"
+  },
+  {
+    "name": "TRES LECHES CAKE",
+    "description": "",
+    "price": 1150,
+    "rating": null,
+    "cuisine": "Classic Dessert",
+    "mood": "Anytime"
+  },
+  {
+    "name": "EMPRESS DESSERT PLATTER",
+    "description": "",
+    "price": 2900,
+    "rating": null,
+    "cuisine": "Assorted",
+    "mood": "Anytime"
   }
 ]

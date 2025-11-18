@@ -1,0 +1,83 @@
+[
+  {
+    "name": "Tuna Pizza",
+    "description": "",
+    "price": 3000,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Rock Shrimp",
+    "description": "",
+    "price": 2450,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Moriawase Tempura",
+    "description": "",
+    "price": 2800,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Prawn Tempura (2 Pcs)",
+    "description": "",
+    "price": 2050,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Prawn Tempura (5 Pcs)",
+    "description": "",
+    "price": 3100,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Gyoza Chicken",
+    "description": "",
+    "price": 1600,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Gyoza Shrimp",
+    "description": "",
+    "price": 1750,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Chicken Yakitori",
+    "description": "",
+    "price": 1500,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Tebayaki Chicken",
+    "description": "",
+    "price": 1650,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "Spicy Beef Gyoza",
+    "description": "",
+    "price": 1650,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  }
+]
+
