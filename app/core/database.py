@@ -2,11 +2,28 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from app.core.config import settings
+from sqlmodel import SQLModel
 import logging
 
 logger = logging.getLogger(__name__)
 
 Base = declarative_base()
+
+# Merge Base.metadata into SQLModel.metadata at runtime so SQLModel models
+# can reference Base models (like dishes table) via foreign keys
+# This ensures foreign keys work at runtime, not just in migrations
+def merge_metadata():
+    """Merge Base.metadata tables into SQLModel.metadata for runtime foreign key resolution."""
+    # Import models to ensure they're registered
+    from app.models import Dish, Cuisine, Restaurant, Mood, Reservation
+    
+    # Copy Base.metadata tables to SQLModel.metadata if not already present
+    for table in Base.metadata.tables.values():
+        if table.name not in SQLModel.metadata.tables:
+            table.tometadata(SQLModel.metadata)
+
+# Call merge_metadata after all models are imported
+# This will be called when this module is imported after models are loaded
 
 # Build database URL
 

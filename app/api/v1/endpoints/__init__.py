@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 
 from app.utils.auth import get_current_user
 
-from . import auth, cuisines, dishes, faq, favorites, featured, moods, reservations, restaurants, search
+from . import auth, cuisines, dishes, faq, favorites, featured, moods, reservations, restaurants, reviews, search
 
 user_router = APIRouter()
 
@@ -27,5 +27,6 @@ user_router.include_router(featured.router, dependencies=protected_dependencies)
 user_router.include_router(moods.router, dependencies=protected_dependencies)
 user_router.include_router(reservations.router, dependencies=protected_dependencies)
 user_router.include_router(restaurants.router, dependencies=protected_dependencies)
+user_router.include_router(reviews.router, dependencies=protected_dependencies)
 user_router.include_router(search.router, dependencies=protected_dependencies)
 

@@ -18,7 +18,7 @@ from sqlalchemy import (
     Text,
     UniqueConstraint,
 )
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.dialects.postgresql import JSON, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
@@ -112,7 +112,8 @@ class Restaurant(UUIDPrimaryKeyMixin, TimestampMixin, Base):
 
 
 class Dish(UUIDPrimaryKeyMixin, TimestampMixin, Base):
-    __tablename__ = "dishes"
+    """Dish model - table name 'dishes' must match ForeignKey references in Review model."""
+    __tablename__ = "dishes"  # This table name is referenced as "dishes.id" in Review model
 
     name: Mapped[str] = mapped_column(String(180), nullable=False, index=True)
     description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
@@ -182,5 +183,61 @@ class Favorite(BaseModel, SQLModelTimestampMixin, table=True):
             "item_id",
             "item_type",
             name="uq_user_item_favorite",
+        ),
+    )
+
+
+# Review model for dish ratings and comments
+class Review(BaseModel, SQLModelTimestampMixin, table=True):
+    __tablename__ = "reviews"
+
+    user_id: uuid.UUID = Field(
+        sa_type=UUID(as_uuid=True), foreign_key="users.id", nullable=False, index=True
+    )
+    dish_id: uuid.UUID = Field(
+        sa_type=UUID(as_uuid=True), 
+        foreign_key="dishes.id",
+        nullable=False, 
+        index=True,
+        description="Foreign key to dishes table (table name must be 'dishes')"
+    )
+    rating: int = Field(
+        sa_type=Integer, nullable=False, index=True,
+        description="Rating from 1 to 5"
+    )
+    title: Optional[str] = Field(
+        sa_type=String(120), nullable=True, default=None, max_length=120,
+        description="Review title (max 120 characters)"
+    )
+    comment: str = Field(
+        sa_type=Text, nullable=False, max_length=1000,
+        description="Review comment/body (max 1000 characters, required)"
+    )
+    visit_date: Optional[Date] = Field(
+        sa_type=Date, nullable=True, default=None,
+        description="Date when the user visited/ordered (e.g., October 2025)"
+    )
+    spice_level: Optional[str] = Field(
+        sa_type=String(50), nullable=True, default=None,
+        description="Spice level: Mild, Medium, Spicy, Extra Spicy"
+    )
+    delivery_time: Optional[str] = Field(
+        sa_type=String(50), nullable=True, default=None,
+        description="Delivery time: Early, On-Time, Late"
+    )
+    companion_type: Optional[str] = Field(
+        sa_type=String(50), nullable=True, default=None,
+        description="Who they went with: Solo, Couples, Family, Friends, Business"
+    )
+    photos: Optional[List[str]] = Field(
+        sa_type=JSON, nullable=True, default=None,
+        description="JSON array of photo URLs"
+    )
+
+    __table_args__ = (
+        UniqueConstraint(
+            "user_id",
+            "dish_id",
+            name="uq_user_dish_review",
         ),
     )

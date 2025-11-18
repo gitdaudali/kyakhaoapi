@@ -13,7 +13,17 @@ sys.path.insert(0, str(project_root))
 # Import your models and settings
 from app.core.config import settings
 from app.core.database import Base
-from app.models import *  # make sure all models are imported so they're registered
+# Import all models explicitly to ensure they're registered
+from app.models import (
+    Cuisine,
+    Dish,  # Import Dish before Review to ensure dishes table exists
+    Favorite,
+    Mood,
+    Reservation,
+    Restaurant,
+    Review,  # Review model that references dishes.id
+    User,
+)
 from sqlmodel import SQLModel
 
 # this is the Alembic Config object, which provides
@@ -30,14 +40,19 @@ if config.config_file_name is not None:
 # Combine both SQLModel and SQLAlchemy Base metadata to detect all models
 target_metadata = MetaData()
 
-# Add all tables from SQLModel.metadata (for User, FAQ, Token, etc.)
-for table in SQLModel.metadata.tables.values():
-    target_metadata._add_table(table.name, table.schema, table)
+# First, add all tables from Base.metadata (for food models like Dish, Cuisine, etc.)
+# This ensures dishes table exists before Review tries to reference it
+# Use sorted_tables to get proper dependency order
+for table in Base.metadata.sorted_tables:
+    table.tometadata(target_metadata)
 
-# Add all tables from Base.metadata (for food models)
-for table in Base.metadata.tables.values():
+# Then, add all tables from SQLModel.metadata (for User, FAQ, Token, Review, etc.)
+# IMPORTANT: Use .tables.values() instead of .sorted_tables to avoid foreign key resolution
+# errors during sorting. The tables will be sorted correctly after being added to target_metadata.
+for table in SQLModel.metadata.tables.values():
     if table.name not in target_metadata.tables:
-        target_metadata._add_table(table.name, table.schema, table)
+        # Copy table to target metadata - foreign keys will resolve because Base tables are already there
+        table.tometadata(target_metadata)
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

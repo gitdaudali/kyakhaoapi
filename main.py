@@ -9,19 +9,24 @@ from fastapi.security import HTTPBearer
 
 from app.api.v1 import api_router
 from app.core.config import settings
-from app.core.database import engine
+from app.core.database import engine, merge_metadata
 from app.core.deps import validate_client_headers
 from app.core.response_handler import (
     BaseAPIException,
     handle_exception,
     error_response
 )
+# Import all models to ensure they're registered before merging metadata
+from app.models import *  # noqa: F401, F403
 
 
 # Database tables are now managed by Alembic migrations
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
+    # Merge Base.metadata into SQLModel.metadata for runtime foreign key resolution
+    # This allows SQLModel models (like Review) to reference Base models (like Dish)
+    merge_metadata()
     print("✅ FastAPI application started")
     yield
     # Shutdown
