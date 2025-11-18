@@ -8,6 +8,7 @@ from app.models.verification import (
     PasswordResetOTP,
     PasswordResetToken,
 )
+from app.models.cart import Cart, CartItem, Order, OrderItem, OrderStatus
 from app.models.food import Cuisine, Dish, Mood, Reservation, Restaurant
 
 __all__ = [
@@ -30,4 +31,9 @@ __all__ = [
     "Restaurant",
     "Dish",
     "Reservation",
+    "Cart",
+    "CartItem",
+    "Order",
+    "OrderItem",
+    "OrderStatus",
 ]

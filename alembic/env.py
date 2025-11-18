@@ -18,6 +18,7 @@ from app.core.config import settings
 from app.core.database import Base
 # Import all models so they're registered
 from app.models import (
+    cart,
     faq,
     food,
     token,
