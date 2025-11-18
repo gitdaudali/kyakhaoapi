@@ -8,7 +8,10 @@ from app.models.verification import (
     PasswordResetOTP,
     PasswordResetToken,
 )
+from app.models.contact import ContactMessage
 from app.models.food import Cuisine, Dish, Favorite, Mood, Reservation, Restaurant, Review
+from app.models.notification import Notification
+from app.models.promotion import Promotion
 
 __all__ = [
     "BaseModel",
@@ -25,6 +28,9 @@ __all__ = [
     "EmailVerificationOTP",
     "PasswordResetOTP",
     "FAQ",
+    "ContactMessage",
+    "Notification",
+    "Promotion",
     "Cuisine",
     "Mood",
     "Restaurant",

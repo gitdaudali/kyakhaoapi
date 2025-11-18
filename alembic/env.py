@@ -15,10 +15,13 @@ from app.core.config import settings
 from app.core.database import Base
 # Import all models explicitly to ensure they're registered
 from app.models import (
+    ContactMessage,
     Cuisine,
     Dish,  # Import Dish before Review to ensure dishes table exists
     Favorite,
     Mood,
+    Notification,
+    Promotion,
     Reservation,
     Restaurant,
     Review,  # Review model that references dishes.id

@@ -225,23 +225,20 @@ async def update_review(
                 status_code=status.HTTP_403_FORBIDDEN
             )
 
-        # Update review fields
-        if payload.rating is not None:
-            review.rating = payload.rating
-        if payload.title is not None:
-            review.title = payload.title
-        if payload.comment is not None:
-            review.comment = payload.comment
-        if payload.visit_date is not None:
-            review.visit_date = payload.visit_date
-        if payload.spice_level is not None:
-            review.spice_level = payload.spice_level
-        if payload.delivery_time is not None:
-            review.delivery_time = payload.delivery_time
-        if payload.companion_type is not None:
-            review.companion_type = payload.companion_type
-        if payload.photos is not None:
-            review.photos = payload.photos  # JSON type handles List[str] automatically
+        # Get update data - only fields that were explicitly provided
+        # exclude_unset=True means fields not in the request are ignored
+        # exclude_none=False means None values are included (they mean "keep existing value")
+        update_data = payload.model_dump(exclude_unset=True, exclude_none=False)
+
+        # Update only fields that were provided with non-None values
+        # None values mean "keep the existing value" (don't update this field)
+        # This applies to both required and optional fields
+        for field, value in update_data.items():
+            # Skip None values - they mean "keep existing value"
+            if value is None:
+                continue
+            # Update the field with the new value
+            setattr(review, field, value)
 
         await session.commit()
         await session.refresh(review)

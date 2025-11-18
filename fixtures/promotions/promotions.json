@@ -1,0 +1,25 @@
+[
+  {
+    "title": "Winter Sale",
+    "description": "Get 10% off on all dishes. Perfect for the winter season!",
+    "promo_code": "WINTER10",
+    "discount_type": "percentage",
+    "value": 10,
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31",
+    "minimum_order_amount": 1000,
+    "applicable_dish_ids": null
+  },
+  {
+    "title": "New Customer Special",
+    "description": "Get 500 PKR off on your first order. Welcome to Kyakhao!",
+    "promo_code": "NEW500",
+    "discount_type": "fixed",
+    "value": 500,
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31",
+    "minimum_order_amount": 2000,
+    "applicable_dish_ids": null
+  }
+]
+

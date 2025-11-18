@@ -23,10 +23,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.auth import get_password_hash
 from app.core.database import AsyncSessionLocal
 from app.models.food import Cuisine, Dish, Mood, Restaurant
+from app.models.promotion import Promotion
 from app.models.user import ProfileStatus, User, UserRole
 
 FIXTURES_ROOT = Path(__file__).parent / "fixtures"
 DISH_FIXTURES_DIR = FIXTURES_ROOT / "dishes"
+PROMOTIONS_FIXTURE = FIXTURES_ROOT / "promotions" / "promotions.json"
 
 
 def load_json_fixture(file_path: Path) -> Any:
@@ -255,6 +257,71 @@ async def seed_users(db: AsyncSession, fixture_data: Any) -> int:
     return created_count
 
 
+async def seed_promotions(session: AsyncSession, fixture_data: Any) -> int:
+    """Seed promotions from fixture data."""
+    from datetime import date
+    from decimal import Decimal
+    
+    created_count = 0
+    
+    if not fixture_data:
+        return 0
+    
+    for promo_data in fixture_data:
+        promo_code = promo_data.get("promo_code", "").strip().upper()
+        if not promo_code:
+            continue
+        
+        # Check if promotion already exists
+        result = await session.execute(
+            select(Promotion).where(
+                Promotion.promo_code == promo_code,
+                Promotion.is_deleted.is_(False)
+            )
+        )
+        existing_promo = result.scalar_one_or_none()
+        
+        if existing_promo:
+            print(f"🔄 Promotion '{promo_code}' already exists, skipping...")
+            continue
+        
+        # Parse dates
+        start_date_str = promo_data.get("start_date")
+        end_date_str = promo_data.get("end_date")
+        try:
+            start_date = date.fromisoformat(start_date_str) if start_date_str else date.today()
+            end_date = date.fromisoformat(end_date_str) if end_date_str else date.today()
+        except (ValueError, TypeError):
+            print(f"⚠️  Invalid date format for promotion '{promo_code}', skipping...")
+            continue
+        
+        # Parse applicable_dish_ids
+        applicable_dish_ids = promo_data.get("applicable_dish_ids")
+        if applicable_dish_ids:
+            try:
+                applicable_dish_ids = [UUID(dish_id) for dish_id in applicable_dish_ids]
+            except (ValueError, TypeError):
+                applicable_dish_ids = None
+        
+        # Create promotion
+        promotion = Promotion(
+            title=promo_data.get("title", ""),
+            description=promo_data.get("description"),
+            promo_code=promo_code,
+            discount_type=promo_data.get("discount_type", "percentage"),
+            value=Decimal(str(promo_data.get("value", 0))),
+            start_date=start_date,
+            end_date=end_date,
+            minimum_order_amount=Decimal(str(promo_data.get("minimum_order_amount", 0))),
+            applicable_dish_ids=applicable_dish_ids,
+        )
+        session.add(promotion)
+        created_count += 1
+        print(f"✅ Created promotion: {promo_code} - {promotion.title}")
+    
+    return created_count
+
+
 async def seed_database():
     """Main function to seed database from fixtures."""
     if not FIXTURES_ROOT.exists():
@@ -268,6 +335,7 @@ async def seed_database():
     stats = {
         "users": 0,
         "dishes": 0,
+        "promotions": 0,
     }
     
     async with AsyncSessionLocal() as db:
@@ -287,11 +355,24 @@ async def seed_database():
             # Seed dishes
             dishes_created = await seed_dish_fixtures(db)
             stats["dishes"] = dishes_created
+            await db.commit()
+            
+            # Seed promotions
+            if PROMOTIONS_FIXTURE.exists():
+                print("📝 Seeding promotions...")
+                promotions_data = load_json_fixture(PROMOTIONS_FIXTURE)
+                created = await seed_promotions(db, promotions_data)
+                stats["promotions"] = created
+                await db.commit()
+                print(f"✅ Promotions seeding complete: {created} promotion(s) created\n")
+            else:
+                print("⚠️  No promotions fixture found, skipping...\n")
             
             print("=" * 50)
             print("📊 Seeding Summary:")
             print(f"   Users created: {stats['users']}")
             print(f"   Dishes created: {stats['dishes']}")
+            print(f"   Promotions created: {stats['promotions']}")
             print("=" * 50)
             print("\n✅ Database seeding completed successfully!")
             

@@ -1,4 +1,4 @@
 """Admin endpoints module."""
-from . import cuisines, dishes, faq, favorites, moods, restaurants, reviews
+from . import contact, cuisines, dishes, faq, favorites, moods, notifications, promotions, restaurants, reviews
 
-__all__ = ["cuisines", "dishes", "faq", "favorites", "moods", "restaurants", "reviews"]
+__all__ = ["contact", "cuisines", "dishes", "faq", "favorites", "moods", "notifications", "promotions", "restaurants", "reviews"]

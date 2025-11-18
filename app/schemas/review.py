@@ -5,6 +5,19 @@ from uuid import UUID
 
 from pydantic import BaseModel, Field, field_validator
 
+# Placeholder values that should be treated as None
+PLACEHOLDERS = {"", "string", "null", "none", "n/a", "-"}
+
+
+def clean_placeholder(value: str | None) -> str | None:
+    """Convert placeholder values to None."""
+    if value is None:
+        return None
+    if isinstance(value, str):
+        cleaned = value.strip().lower()
+        return None if cleaned in PLACEHOLDERS else value.strip()
+    return value
+
 
 class ReviewCreate(BaseModel):
     """Schema for creating a new review."""
@@ -92,6 +105,12 @@ class ReviewUpdate(BaseModel):
         None,
         description="List of photo URLs (optional)"
     )
+
+    @field_validator("title", "comment", "spice_level", "delivery_time", "companion_type", mode="before")
+    @classmethod
+    def clean_placeholders(cls, v: str | None) -> str | None:
+        """Convert placeholder values to None."""
+        return clean_placeholder(v)
 
     @field_validator("rating")
     @classmethod
