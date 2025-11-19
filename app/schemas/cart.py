@@ -90,6 +90,10 @@ class OrderCreate(BaseModel):
     delivery_fee: float = Field(default=0.0, ge=0, description="Delivery fee")
     tax_amount: float = Field(default=0.0, ge=0, description="Tax amount")
     discount_amount: float = Field(default=0.0, ge=0, description="Discount amount")
+    cart_item_ids: Optional[list[uuid.UUID]] = Field(
+        None,
+        description="Optional: List of cart item IDs to include in order. If not provided, all cart items will be ordered."
+    )
 
 
 class OrderOut(BaseModel):

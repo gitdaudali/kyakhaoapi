@@ -22,11 +22,16 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.auth import get_password_hash
 from app.core.database import AsyncSessionLocal
-from app.models.food import Cuisine, Dish, Mood, Restaurant
+
+# Import all models to ensure relationships are properly registered
+# Import order matters: import User before models that reference it
 from app.models.user import ProfileStatus, User, UserRole
+from app.models.membership import BillingCycle, MembershipPlan, Subscription
+from app.models.food import Cuisine, Dish, Mood, Restaurant
 
 FIXTURES_ROOT = Path(__file__).parent / "fixtures"
 DISH_FIXTURES_DIR = FIXTURES_ROOT / "dishes"
+MEMBERSHIP_FIXTURES_DIR = FIXTURES_ROOT / "membership"
 
 
 def load_json_fixture(file_path: Path) -> Any:
@@ -172,6 +177,71 @@ async def seed_dish_fixtures(session: AsyncSession) -> int:
     return total_seeded
 
 
+async def seed_membership_plans(session: AsyncSession) -> int:
+    """Seed membership plans from fixture file."""
+    plans_fixture = MEMBERSHIP_FIXTURES_DIR / "plans.json"
+    
+    if not plans_fixture.exists():
+        print(f"⚠️  No membership plans fixture found at {plans_fixture}")
+        return 0
+    
+    plans_data = load_json_fixture(plans_fixture)
+    if not isinstance(plans_data, list):
+        print("⚠️  Membership plans fixture must be a list")
+        return 0
+    
+    created_count = 0
+    
+    for plan_data in plans_data:
+        plan_id = plan_data.get("id")
+        if plan_id:
+            try:
+                plan_id = UUID(str(plan_id))
+            except ValueError:
+                print(f"⚠️  Invalid UUID '{plan_id}' for plan, generating new one...")
+                plan_id = None
+        
+        # Check if plan already exists
+        if plan_id:
+            result = await session.execute(
+                select(MembershipPlan).where(MembershipPlan.id == plan_id, MembershipPlan.is_deleted == False)
+            )
+            existing_plan = result.scalar_one_or_none()
+            if existing_plan:
+                print(f"🔄 Plan '{plan_data.get('name')}' already exists, skipping...")
+                continue
+        
+        # Map billing_cycle string to enum
+        billing_cycle_str = plan_data.get("billing_cycle", "monthly").lower()
+        billing_cycle_map = {
+            "monthly": BillingCycle.MONTHLY,
+            "yearly": BillingCycle.YEARLY,
+        }
+        billing_cycle = billing_cycle_map.get(billing_cycle_str, BillingCycle.MONTHLY)
+        
+        plan = MembershipPlan(
+            id=plan_id,
+            name=plan_data.get("name", ""),
+            description=plan_data.get("description"),
+            price=float(plan_data.get("price", 0)),
+            currency=plan_data.get("currency", "PKR"),
+            billing_cycle=billing_cycle,
+            is_active=bool(plan_data.get("is_active", True)),
+        )
+        
+        session.add(plan)
+        created_count += 1
+        print(f"✅ Created membership plan: {plan.name} (Price: {plan.price} {plan.currency})")
+    
+    if created_count > 0:
+        await session.commit()
+        print("Membership plans seeded successfully.")
+    else:
+        await session.rollback()
+    
+    return created_count
+
+
 async def seed_users(db: AsyncSession, fixture_data: Any) -> int:
     """
     Seed users from fixture data.
@@ -268,6 +338,7 @@ async def seed_database():
     stats = {
         "users": 0,
         "dishes": 0,
+        "membership_plans": 0,
     }
     
     async with AsyncSessionLocal() as db:
@@ -288,10 +359,21 @@ async def seed_database():
             dishes_created = await seed_dish_fixtures(db)
             stats["dishes"] = dishes_created
             
+            # Seed membership plans
+            plans_fixture = MEMBERSHIP_FIXTURES_DIR / "plans.json"
+            if plans_fixture.exists():
+                print("📝 Seeding membership plans...")
+                plans_created = await seed_membership_plans(db)
+                stats["membership_plans"] = plans_created
+                print(f"✅ Membership plans seeding complete: {plans_created} plan(s) created\n")
+            else:
+                print("⚠️  No membership plans fixture found, skipping...\n")
+            
             print("=" * 50)
             print("📊 Seeding Summary:")
             print(f"   Users created: {stats['users']}")
             print(f"   Dishes created: {stats['dishes']}")
+            print(f"   Membership plans created: {stats['membership_plans']}")
             print("=" * 50)
             print("\n✅ Database seeding completed successfully!")
             

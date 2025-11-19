@@ -9,6 +9,7 @@ from app.models.base import BaseModel, TimestampMixin
 from app.models.token import RefreshToken, Token
 
 if TYPE_CHECKING:
+    from app.models.membership import Subscription
     from app.models.verification import (
         EmailVerificationOTP,
         EmailVerificationToken,
@@ -70,6 +71,9 @@ class User(BaseModel, TimestampMixin, table=True):
     google_id: Optional[str] = Field(max_length=100, default=None, index=True)
     apple_id: Optional[str] = Field(max_length=100, default=None, index=True)
 
+    # Membership fields
+    is_premium: bool = Field(default=False, index=True)
+
     # Relationships
     tokens: List[Token] = Relationship(
         back_populates="user",
@@ -93,6 +97,9 @@ class User(BaseModel, TimestampMixin, table=True):
     )
     password_reset_otps: List["PasswordResetOTP"] = Relationship(
         back_populates="user",
+        sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
+    )
+    subscriptions: List["Subscription"] = Relationship(
         sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
     )
 

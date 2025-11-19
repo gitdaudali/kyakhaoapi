@@ -84,8 +84,33 @@ async def create_order(
             detail="Cart is empty. Add items to cart before creating an order.",
         )
 
+    # Filter cart items if specific IDs are provided
+    items_to_order = cart.items
+    if order_data.cart_item_ids:
+        # Filter to only include specified cart item IDs
+        items_to_order = [
+            item for item in cart.items 
+            if item.id in order_data.cart_item_ids
+        ]
+        
+        if not items_to_order:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="No valid cart items found for the provided cart_item_ids.",
+            )
+        
+        # Validate all provided IDs exist in cart
+        provided_ids = set(order_data.cart_item_ids)
+        found_ids = {item.id for item in items_to_order}
+        missing_ids = provided_ids - found_ids
+        if missing_ids:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Cart item IDs not found in your cart: {list(missing_ids)}",
+            )
+
     # Verify all dishes still exist and have prices
-    for item in cart.items:
+    for item in items_to_order:
         dish_result = await session.execute(
             select(Dish).where(Dish.id == item.dish_id, Dish.is_deleted.is_(False))
         )
@@ -101,8 +126,8 @@ async def create_order(
                 detail=f"Dish {item.dish.name} does not have a price",
             )
 
-    # Calculate totals
-    subtotal = sum(float(item.subtotal) for item in cart.items)
+    # Calculate totals from selected items only
+    subtotal = sum(float(item.subtotal) for item in items_to_order)
     total = subtotal + order_data.tax_amount + order_data.delivery_fee - order_data.discount_amount
 
     if total < 0:
@@ -133,9 +158,9 @@ async def create_order(
     session.add(order)
     await session.flush()
 
-    # Create order items from cart items
+    # Create order items from selected cart items
     order_items = []
-    for cart_item in cart.items:
+    for cart_item in items_to_order:
         dish_result = await session.execute(
             select(Dish).where(Dish.id == cart_item.dish_id)
         )
@@ -155,12 +180,14 @@ async def create_order(
 
     await session.flush()
 
-    # Clear cart (soft delete all items)
-    for cart_item in cart.items:
+    # Clear only the ordered items from cart (soft delete)
+    for cart_item in items_to_order:
         cart_item.is_deleted = True
 
-    cart.total_amount = 0.0
-    cart.item_count = 0
+    # Recalculate cart totals based on remaining items
+    remaining_items = [item for item in cart.items if not item.is_deleted]
+    cart.total_amount = sum(float(item.subtotal) for item in remaining_items)
+    cart.item_count = sum(item.quantity for item in remaining_items)
 
     await session.commit()
     await session.refresh(order)

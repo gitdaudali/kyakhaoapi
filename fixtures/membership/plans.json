@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Premium",
+    "description": "Unlimited access to all features.",
+    "price": 1100,
+    "currency": "PKR",
+    "billing_cycle": "monthly",
+    "is_active": true
+  }
+]
+

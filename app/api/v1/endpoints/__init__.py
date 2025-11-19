@@ -2,7 +2,24 @@ from fastapi import APIRouter, Depends
 
 from app.utils.auth import get_current_user
 
-from . import ai, auth, cart, cuisines, dishes, faq, featured, menu, moods, orders, reservations, restaurants, search
+from . import (
+    ai,
+    auth,
+    cart,
+    cuisines,
+    dishes,
+    faq,
+    favorites,
+    featured,
+    membership,
+    menu,
+    moods,
+    orders,
+    reservations,
+    restaurants,
+    search,
+    subscriptions,
+)
 
 user_router = APIRouter()
 
@@ -14,6 +31,10 @@ auth_router = auth.router
 # ============================================================================
 # FAQ routes are public so users can view published FAQs
 user_router.include_router(faq.router, prefix="/faqs")
+# Membership plan is public (to show price), but subscribe requires auth
+user_router.include_router(membership.public_router, prefix="/membership")
+# Subscription management endpoints (get status, cancel)
+user_router.include_router(subscriptions.router)
 
 # ============================================================================
 # PROTECTED ROUTES (Authentication required)
@@ -31,4 +52,7 @@ user_router.include_router(orders.router, dependencies=protected_dependencies)
 user_router.include_router(reservations.router, dependencies=protected_dependencies)
 user_router.include_router(restaurants.router, dependencies=protected_dependencies)
 user_router.include_router(search.router, dependencies=protected_dependencies)
+user_router.include_router(favorites.router, prefix="/favorites", dependencies=protected_dependencies)
+# Membership subscribe requires authentication
+user_router.include_router(membership.router, prefix="/membership", dependencies=protected_dependencies)
 

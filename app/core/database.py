@@ -1,12 +1,35 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy import MetaData
+from sqlmodel import SQLModel
 from app.core.config import settings
 import logging
 
 logger = logging.getLogger(__name__)
 
 Base = declarative_base()
+
+# Synchronize SQLModel.metadata with Base.metadata for foreign key resolution
+# This ensures that tables in SQLModel.metadata (like users) are available
+# when Base.metadata models (like Cart) try to reference them
+def sync_metadata():
+    """Copy SQLModel tables to Base.metadata so foreign keys can resolve."""
+    # Import User model to ensure it's registered in SQLModel.metadata
+    from app.models.user import User  # noqa: F401
+    
+    # Copy users table from SQLModel.metadata to Base.metadata if it exists
+    # This allows Cart model (in Base.metadata) to reference users table
+    # Note: use_alter=True in Cart model defers validation, but we still need
+    # the table to exist in Base.metadata for proper foreign key resolution
+    if 'users' in SQLModel.metadata.tables and 'users' not in Base.metadata.tables:
+        users_table = SQLModel.metadata.tables['users']
+        # Create a copy of the table in Base.metadata
+        users_table.tometadata(Base.metadata, schema=None)
+
+# Call sync_metadata after Base is created
+# This must happen before Cart models are imported/used
+sync_metadata()
 
 # Build database URL
 

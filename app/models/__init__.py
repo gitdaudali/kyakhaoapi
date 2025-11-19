@@ -1,6 +1,7 @@
 from app.models.base import BaseModel, TimestampMixin
 from app.models.faq import FAQ
 from app.models.token import RefreshToken, Token, TokenBlacklist
+# Import User first to ensure it's available for relationships
 from app.models.user import ProfileStatus, SignupType, User, UserRole
 from app.models.verification import (
     EmailVerificationOTP,
@@ -9,7 +10,17 @@ from app.models.verification import (
     PasswordResetToken,
 )
 from app.models.cart import Cart, CartItem, Order, OrderItem, OrderStatus
+from app.models.favorites import UserFavorite
 from app.models.food import Cuisine, Dish, Mood, Reservation, Restaurant
+# Import membership models after User to ensure User is registered
+from app.models.membership import (
+    BillingCycle,
+    MembershipPlan,
+    Payment,
+    PaymentStatus,
+    Subscription,
+    SubscriptionStatus,
+)
 
 __all__ = [
     "BaseModel",
@@ -36,4 +47,11 @@ __all__ = [
     "Order",
     "OrderItem",
     "OrderStatus",
+    "MembershipPlan",
+    "Subscription",
+    "Payment",
+    "SubscriptionStatus",
+    "PaymentStatus",
+    "BillingCycle",
+    "UserFavorite",
 ]

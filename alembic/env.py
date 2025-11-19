@@ -19,6 +19,7 @@ from app.core.database import Base
 # Import all models so they're registered
 from app.models import (
     cart,
+    favorites,
     faq,
     food,
     token,

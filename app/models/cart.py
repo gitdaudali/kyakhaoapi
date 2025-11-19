@@ -21,6 +21,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
 from app.models.food import Dish, TimestampMixin, UUIDPrimaryKeyMixin
+# Import User to ensure SQLModel.metadata is populated before Cart tries to reference users.id
+from app.models.user import User  # noqa: F401
 
 
 def utcnow() -> datetime:
@@ -46,7 +48,7 @@ class Cart(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     __tablename__ = "carts"
 
     user_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("users.id"), nullable=False, unique=True, index=True
+        UUID(as_uuid=True), ForeignKey("users.id", use_alter=True), nullable=False, unique=True, index=True
     )
     total_amount: Mapped[float] = mapped_column(Numeric(10, 2), default=0.0, nullable=False)
     item_count: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
@@ -89,7 +91,7 @@ class Order(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     __tablename__ = "orders"
 
     user_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("users.id"), nullable=False, index=True
+        UUID(as_uuid=True), ForeignKey("users.id", use_alter=True), nullable=False, index=True
     )
     order_number: Mapped[str] = mapped_column(String(50), unique=True, nullable=False, index=True)
     status: Mapped[str] = mapped_column(
