@@ -79,7 +79,54 @@ class OrderItemOut(BaseModel):
 
 
 class OrderCreate(BaseModel):
-    """Schema for creating order from cart."""
+    """
+    Schema for creating order from cart.
+    
+    Examples:
+    
+    **Order from Specific Cart Items:**
+    ```json
+    {
+      "customer_name": "John Doe",
+      "customer_email": "john.doe@example.com",
+      "customer_phone": "+1234567890",
+      "delivery_address": "123 Main Street, Apt 4B",
+      "delivery_city": "New York",
+      "delivery_notes": "Please ring doorbell twice",
+      "delivery_fee": 5.00,
+      "tax_amount": 2.50,
+      "discount_amount": 0.00,
+      "cart_item_ids": [
+        "550e8400-e29b-41d4-a716-446655440000",
+        "550e8400-e29b-41d4-a716-446655440001"
+      ]
+    }
+    ```
+    
+    **Order from All Cart Items:**
+    ```json
+    {
+      "customer_name": "Jane Smith",
+      "customer_email": "jane.smith@example.com",
+      "customer_phone": "+1987654321",
+      "delivery_address": "456 Oak Avenue",
+      "delivery_city": "Los Angeles",
+      "delivery_notes": "Leave at front door",
+      "delivery_fee": 7.50,
+      "tax_amount": 3.75,
+      "discount_amount": 5.00,
+      "cart_item_ids": null
+    }
+    ```
+    
+    **Minimal Request:**
+    ```json
+    {
+      "customer_name": "Bob Johnson",
+      "customer_email": "bob@example.com"
+    }
+    ```
+    """
 
     customer_name: str = Field(..., max_length=200, description="Customer full name")
     customer_email: str = Field(..., max_length=255, description="Customer email")
@@ -94,6 +141,58 @@ class OrderCreate(BaseModel):
         None,
         description="Optional: List of cart item IDs to include in order. If not provided, all cart items will be ordered."
     )
+
+    class Config:
+        json_schema_extra = {
+            "examples": [
+                {
+                    "name": "Order from Specific Cart Items",
+                    "summary": "Order only selected items from cart",
+                    "description": "Use this when you want to order specific items from your cart",
+                    "value": {
+                        "customer_name": "John Doe",
+                        "customer_email": "john.doe@example.com",
+                        "customer_phone": "+1234567890",
+                        "delivery_address": "123 Main Street, Apt 4B",
+                        "delivery_city": "New York",
+                        "delivery_notes": "Please ring doorbell twice",
+                        "delivery_fee": 5.00,
+                        "tax_amount": 2.50,
+                        "discount_amount": 0.00,
+                        "cart_item_ids": [
+                            "550e8400-e29b-41d4-a716-446655440000",
+                            "550e8400-e29b-41d4-a716-446655440001"
+                        ]
+                    }
+                },
+                {
+                    "name": "Order from All Cart Items",
+                    "summary": "Order all items in cart",
+                    "description": "Use this when you want to order all items in your cart. Omit cart_item_ids or set to null.",
+                    "value": {
+                        "customer_name": "Jane Smith",
+                        "customer_email": "jane.smith@example.com",
+                        "customer_phone": "+1987654321",
+                        "delivery_address": "456 Oak Avenue",
+                        "delivery_city": "Los Angeles",
+                        "delivery_notes": "Leave at front door",
+                        "delivery_fee": 7.50,
+                        "tax_amount": 3.75,
+                        "discount_amount": 5.00,
+                        "cart_item_ids": None
+                    }
+                },
+                {
+                    "name": "Minimal Request",
+                    "summary": "Minimal order request",
+                    "description": "Simplest request with only required fields. All cart items will be ordered.",
+                    "value": {
+                        "customer_name": "Bob Johnson",
+                        "customer_email": "bob@example.com"
+                    }
+                }
+            ]
+        }
 
 
 class OrderOut(BaseModel):

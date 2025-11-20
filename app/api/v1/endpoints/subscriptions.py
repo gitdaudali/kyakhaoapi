@@ -1,9 +1,9 @@
 """Subscription endpoints."""
 
-from typing import Any
+from typing import Any, Optional
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -459,21 +459,33 @@ async def reactivate_subscription(
 @router.post("/cancel")
 async def cancel_user_subscription(
     current_user: CurrentUser,
+    subscription_id: Optional[UUID] = Query(
+        None, 
+        description="Optional: Specific subscription ID to cancel. If not provided, cancels the most recent active subscription."
+    ),
     session: AsyncSession = Depends(get_db),
 ) -> Any:
     """
     Cancel current user's subscription.
     
-    Sets subscription.status = "cancelled" and user.is_premium = False.
+    If subscription_id is provided, cancels that specific subscription.
+    Otherwise, cancels the most recent active subscription.
+    
+    Only sets user.is_premium = False if there are no other active subscriptions.
     
     Args:
+        subscription_id: Optional specific subscription ID to cancel
         current_user: Current authenticated user
         session: Database session
         
     Returns:
         Cancelled subscription details wrapped in success response
     """
-    subscription = await cancel_subscription(session=session, user_id=current_user.id)
+    subscription = await cancel_subscription(
+        session=session, 
+        user_id=current_user.id,
+        subscription_id=subscription_id
+    )
     
     if not subscription:
         raise HTTPException(

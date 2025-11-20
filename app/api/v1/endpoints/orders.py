@@ -74,7 +74,61 @@ async def create_order(
     current_user: CurrentUser,
     session: AsyncSession = Depends(get_db),
 ) -> OrderOut:
-    """Create an order from the user's cart."""
+    """
+    Create an order from the user's cart.
+    
+    **Request Body Examples:**
+    
+    **1. Order from Specific Cart Items:**
+    ```json
+    {
+      "customer_name": "John Doe",
+      "customer_email": "john.doe@example.com",
+      "customer_phone": "+1234567890",
+      "delivery_address": "123 Main Street, Apt 4B",
+      "delivery_city": "New York",
+      "delivery_notes": "Please ring doorbell twice",
+      "delivery_fee": 5.00,
+      "tax_amount": 2.50,
+      "discount_amount": 0.00,
+      "cart_item_ids": [
+        "550e8400-e29b-41d4-a716-446655440000",
+        "550e8400-e29b-41d4-a716-446655440001"
+      ]
+    }
+    ```
+    
+    **2. Order from All Cart Items (omit cart_item_ids or set to null):**
+    ```json
+    {
+      "customer_name": "Jane Smith",
+      "customer_email": "jane.smith@example.com",
+      "customer_phone": "+1987654321",
+      "delivery_address": "456 Oak Avenue",
+      "delivery_city": "Los Angeles",
+      "delivery_notes": "Leave at front door",
+      "delivery_fee": 7.50,
+      "tax_amount": 3.75,
+      "discount_amount": 5.00,
+      "cart_item_ids": null
+    }
+    ```
+    
+    **3. Minimal Request (all cart items):**
+    ```json
+    {
+      "customer_name": "Bob Johnson",
+      "customer_email": "bob@example.com"
+    }
+    ```
+    
+    **Notes:**
+    - If `cart_item_ids` is provided, only those specific cart items will be ordered
+    - If `cart_item_ids` is null or omitted, ALL items in the cart will be ordered
+    - Cart must not be empty
+    - All dishes must still be available and have valid prices
+    - Total amount = subtotal + tax_amount + delivery_fee - discount_amount
+    """
     # Get user's cart
     cart = await get_cart_with_items(current_user.id, session)
 

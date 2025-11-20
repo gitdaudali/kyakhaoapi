@@ -24,6 +24,8 @@ async def get_active_membership_plan(
     """
     Get the active membership plan.
     
+    If multiple active plans exist, returns the most recently created one.
+    
     Args:
         session: Database session
         
@@ -31,9 +33,13 @@ async def get_active_membership_plan(
         Active membership plan or None if not found
     """
     result = await session.execute(
-        select(MembershipPlan).where(
-            MembershipPlan.is_active == True, MembershipPlan.is_deleted == False
+        select(MembershipPlan)
+        .where(
+            MembershipPlan.is_active == True, 
+            MembershipPlan.is_deleted == False
         )
+        .order_by(MembershipPlan.created_at.desc())
+        .limit(1)
     )
     return result.scalar_one_or_none()
 
@@ -138,11 +144,15 @@ async def start_subscription(
     Raises:
         ValueError: If no active plan found or user not found
     """
-    # Fetch active membership plan
+    # Fetch active membership plan (most recent if multiple exist)
     plan_result = await session.execute(
-        select(MembershipPlan).where(
-            MembershipPlan.is_active == True, MembershipPlan.is_deleted == False
+        select(MembershipPlan)
+        .where(
+            MembershipPlan.is_active == True, 
+            MembershipPlan.is_deleted == False
         )
+        .order_by(MembershipPlan.created_at.desc())
+        .limit(1)
     )
     plan = plan_result.scalar_one_or_none()
     
@@ -203,27 +213,49 @@ async def start_subscription(
     return subscription
 
 
-async def cancel_subscription(session: AsyncSession, user_id: UUID) -> Optional[Subscription]:
+async def cancel_subscription(
+    session: AsyncSession, 
+    user_id: UUID, 
+    subscription_id: Optional[UUID] = None
+) -> Optional[Subscription]:
     """
-    Cancel a user's active subscription.
+    Cancel a user's subscription.
+    
+    If subscription_id is provided, cancels that specific subscription.
+    Otherwise, cancels the most recent active subscription.
     
     Args:
         session: Database session
         user_id: User ID
+        subscription_id: Optional specific subscription ID to cancel
         
     Returns:
         Cancelled subscription or None if not found
     """
-    # Find active subscription
-    result = await session.execute(
-        select(Subscription)
-        .where(
-            Subscription.user_id == user_id,
-            Subscription.status == SubscriptionStatus.ACTIVE,
-            Subscription.is_deleted == False,
+    # Find subscription to cancel
+    if subscription_id:
+        # Cancel specific subscription
+        result = await session.execute(
+            select(Subscription)
+            .where(
+                Subscription.id == subscription_id,
+                Subscription.user_id == user_id,
+                Subscription.status == SubscriptionStatus.ACTIVE,
+                Subscription.is_deleted == False,
+            )
         )
-        .order_by(Subscription.created_at.desc())
-    )
+    else:
+        # Cancel most recent active subscription
+        result = await session.execute(
+            select(Subscription)
+            .where(
+                Subscription.user_id == user_id,
+                Subscription.status == SubscriptionStatus.ACTIVE,
+                Subscription.is_deleted == False,
+            )
+            .order_by(Subscription.created_at.desc())
+        )
+    
     subscription = result.scalar_one_or_none()
     
     if not subscription:
@@ -234,11 +266,23 @@ async def cancel_subscription(session: AsyncSession, user_id: UUID) -> Optional[
     subscription.end_date = datetime.now(timezone.utc)
     session.add(subscription)
     
-    # Update user premium status
+    # Check if user has any other active subscriptions
+    other_active_result = await session.execute(
+        select(Subscription)
+        .where(
+            Subscription.user_id == user_id,
+            Subscription.id != subscription.id,  # Exclude the one being cancelled
+            Subscription.status == SubscriptionStatus.ACTIVE,
+            Subscription.is_deleted == False,
+        )
+    )
+    other_active_subscriptions = other_active_result.scalars().all()
+    
+    # Only set is_premium = False if there are no other active subscriptions
     user_result = await session.execute(select(User).where(User.id == user_id))
     user = user_result.scalar_one_or_none()
     
-    if user:
+    if user and not other_active_subscriptions:
         user.is_premium = False
         session.add(user)
     
@@ -372,7 +416,7 @@ async def get_user_payments(
             Subscription.is_deleted == False,
         )
     )
-    subscription_ids = [sub.id for sub in subscriptions_result.scalars().all()]
+    subscription_ids = list(subscriptions_result.scalars().all())
     
     if not subscription_ids:
         return [], 0
@@ -455,20 +499,36 @@ async def retry_failed_payment(
     Raises:
         ValueError: If payment not found or not failed
     """
-    # Get payment and verify it belongs to user
+    # First check if payment exists and belongs to user (regardless of status)
     payment_result = await session.execute(
         select(Payment)
         .join(Subscription)
         .where(
             Payment.id == payment_id,
+            Payment.is_deleted == False,
             Subscription.user_id == user_id,
-            Payment.status == PaymentStatus.FAILED,
+            Subscription.is_deleted == False,
         )
     )
     payment = payment_result.scalar_one_or_none()
     
     if not payment:
-        raise ValueError("Failed payment not found or does not belong to user")
+        # Check if payment exists at all
+        payment_check = await session.execute(
+            select(Payment).where(Payment.id == payment_id, Payment.is_deleted == False)
+        )
+        if not payment_check.scalar_one_or_none():
+            raise ValueError(f"Payment {payment_id} not found")
+        else:
+            raise ValueError(f"Payment {payment_id} does not belong to user {user_id}")
+    
+    # Check if payment status is FAILED
+    # Handle both enum and string comparison
+    payment_status = payment.status.value if hasattr(payment.status, 'value') else str(payment.status)
+    if payment_status != PaymentStatus.FAILED.value:
+        raise ValueError(
+            f"Payment status is '{payment_status}', not 'failed'. Only failed payments can be retried."
+        )
     
     # Get subscription
     subscription_result = await session.execute(
