@@ -24,8 +24,16 @@ async def get_allergies(
     
     Returns format:
     [
-        {"id": "wheat", "name": "Wheat"},
-        {"id": "peanut", "name": "Peanut"},
+        {
+            "id": "uuid-string",  # UUID for API operations (use this when updating user allergies)
+            "name": "Wheat",
+            "identifier": "wheat"  # Optional string identifier (e.g., "wheat", "peanut")
+        },
+        {
+            "id": "uuid-string",
+            "name": "Peanut",
+            "identifier": "peanut"
+        },
         ...
     ]
     """
@@ -37,7 +45,11 @@ async def get_allergies(
         allergies = result.scalars().all()
         
         allergy_list = [
-            {"id": str(allergy.id), "name": allergy.name}
+            {
+                "id": str(allergy.id),  # UUID for API operations
+                "name": allergy.name,
+                "identifier": allergy.identifier  # Optional string identifier (e.g., "wheat", "peanut")
+            }
             for allergy in allergies
         ]
         

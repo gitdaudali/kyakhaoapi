@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+import json
 
 import uvicorn
 from fastapi import Depends, FastAPI, HTTPException, Request
@@ -153,12 +154,32 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         field = ".".join(str(loc) for loc in error["loc"])
         if field not in field_errors:
             field_errors[field] = []
-        field_errors[field].append(error["msg"])
+        
+        # Provide more helpful message for JSON decode errors
+        error_msg = error["msg"]
+        if "JSON decode error" in error_msg or "expecting" in error_msg.lower():
+            error_msg = "Invalid JSON format. Please check your request body for syntax errors (e.g., extra quotes, missing commas, or unclosed brackets)."
+        
+        field_errors[field].append(error_msg)
     
     return error_response(
         message="Request validation failed",
         status_code=422,
         data=field_errors
+    )
+
+
+@app.exception_handler(json.JSONDecodeError)
+async def json_decode_exception_handler(request: Request, exc: json.JSONDecodeError):
+    """Handle JSON decode errors with a helpful message."""
+    return error_response(
+        message="Invalid JSON format in request body",
+        status_code=422,
+        data={
+            "error": "JSON decode error",
+            "detail": f"Invalid JSON at position {exc.pos}: {exc.msg}",
+            "hint": "Please check your request body for syntax errors (e.g., extra quotes, missing commas, or unclosed brackets)."
+        }
     )
 
 

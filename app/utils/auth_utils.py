@@ -99,6 +99,46 @@ async def get_user_by_id_or_404(session: AsyncSession, user_id: str) -> UserMode
     return user
 
 
+async def get_user_by_name(
+    session: AsyncSession, first_name: str, last_name: Optional[str] = None
+) -> Optional[UserModel]:
+    """
+    Get user by first_name and last_name combination.
+    Checks if a user with the same name already exists.
+    Only checks ACTIVE users (verified users), not PENDING_VERIFICATION users.
+
+    Args:
+        session: Database session
+        first_name: User's first name
+        last_name: User's last name (optional)
+
+    Returns:
+        User object if found, None otherwise
+    """
+    from app.models.user import ProfileStatus
+    
+    if last_name:
+        result = await session.execute(
+            select(UserModel).where(
+                UserModel.first_name == first_name,
+                UserModel.last_name == last_name,
+                UserModel.is_deleted == False,
+                UserModel.profile_status == ProfileStatus.ACTIVE
+            )
+        )
+    else:
+        # If no last_name, check only first_name but ensure last_name is also None
+        result = await session.execute(
+            select(UserModel).where(
+                UserModel.first_name == first_name,
+                UserModel.last_name.is_(None),
+                UserModel.is_deleted == False,
+                UserModel.profile_status == ProfileStatus.ACTIVE
+            )
+        )
+    return result.scalar_one_or_none()
+
+
 def validate_password_match(password: str, password_confirm: str) -> None:
     """
     Validate that passwords match.

@@ -83,6 +83,7 @@ from app.utils.auth_utils import (
     get_device_info,
     get_user_by_email,
     get_user_by_id_or_404,
+    get_user_by_name,
     increment_otp_attempts,
     increment_password_reset_otp_attempts,
     mark_email_verification_otp_used,
@@ -112,12 +113,26 @@ async def register_user(
     """
     Register a new user account with email validation.
     Creates user account and sends OTP for email verification.
+    
+    Request body should include:
+    - name: Full name (e.g., "John Doe")
+    - email: User email address
+    - password: User password
+    - password_confirm: Password confirmation
     """
     try:
+        # Split name into first_name and last_name
+        name_parts = user_data.name.strip().split(maxsplit=1)
+        first_name = name_parts[0] if name_parts else ""
+        last_name = name_parts[1] if len(name_parts) > 1 else None
+        
         existing_user = await get_user_by_email(db, user_data.email)
 
         if existing_user:
             if existing_user.profile_status == ProfileStatus.PENDING_VERIFICATION:
+                # User is re-registering, allow name update
+                existing_user.first_name = first_name
+                existing_user.last_name = last_name
                 existing_user.password = get_password_hash(user_data.password)
                 await db.commit()
 
@@ -144,9 +159,20 @@ async def register_user(
             else:
                 raise EmailExistsException()
 
+        # Check if a user with the same name already exists (only for ACTIVE users)
+        # This check only happens for new registrations, not for pending verification updates
+        existing_name_user = await get_user_by_name(db, first_name, last_name)
+        if existing_name_user:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="A user with this name already exists. Please use a different name."
+            )
+
         hashed_password = get_password_hash(user_data.password)
         db_user = User(
             email=user_data.email,
+            first_name=first_name,
+            last_name=last_name,
             password=hashed_password,
             is_active=True,
             is_superuser=False,
@@ -329,16 +355,60 @@ async def logout_user(
         )
 
 
-@router.get("/me", response_model=UserSchema, dependencies=[Depends(HTTPBearer())])
+@router.get("/me", dependencies=[Depends(HTTPBearer())])
 async def get_current_user_info(
     current_user: Annotated[User, Depends(get_current_user)],
+    db: AsyncSession = Depends(get_db),
 ) -> Any:
     """
-    Returns user profile data from JWT token.
+    Returns user profile data from JWT token including saved allergies.
     **Authentication Required**: Bearer token in Authorization header
     """
     try:
-        return UserSchema.model_validate(current_user)
+        # Get user allergies
+        from app.models.food import Allergy, UserAllergyAssociation
+        from sqlalchemy import select
+        
+        stmt = select(Allergy).join(
+            UserAllergyAssociation,
+            Allergy.id == UserAllergyAssociation.c.allergy_id
+        ).where(
+            UserAllergyAssociation.c.user_id == current_user.id,
+            Allergy.is_deleted.is_(False)
+        )
+        result = await db.execute(stmt)
+        user_allergies = result.scalars().all()
+        
+        # Build allergies list
+        allergies_list = [
+            {
+                "id": str(allergy.id),
+                "name": allergy.name,
+                "identifier": allergy.identifier
+            }
+            for allergy in user_allergies
+        ]
+        
+        # Build user data
+        user_dict = UserSchema.from_orm(current_user).dict()
+        
+        # Add full name
+        full_name = None
+        if current_user.first_name:
+            full_name = current_user.first_name
+            if current_user.last_name:
+                full_name = f"{current_user.first_name} {current_user.last_name}"
+        elif current_user.last_name:
+            full_name = current_user.last_name
+        user_dict["name"] = full_name
+        
+        # Add allergies to response
+        user_dict["allergies"] = allergies_list
+        
+        return success_response(
+            message="User information retrieved successfully",
+            data=user_dict
+        )
 
     except HTTPException:
         raise
@@ -536,14 +606,25 @@ async def verify_otp(
         )
 
         await db.commit()
+        await db.refresh(user)
+
+        # Build full name from first_name and last_name
+        full_name = None
+        if user.first_name:
+            full_name = user.first_name
+            if user.last_name:
+                full_name = f"{user.first_name} {user.last_name}"
+        elif user.last_name:
+            full_name = user.last_name
 
         return success_response(
             message=OTP_VERIFICATION_SUCCESS,
             data={
-                "user_id": user.id,
+                "user_id": str(user.id),
+                "name": full_name,
                 "email": user.email,
                 "status": "verified",
-                "verified_at": datetime.utcnow()
+                "verified_at": datetime.now(timezone.utc).isoformat()
             }
         )
 

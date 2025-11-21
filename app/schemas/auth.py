@@ -8,29 +8,34 @@ from .user import User as UserSchema
 
 
 class UserRegisterRequest(BaseModel):
+    name: str = Field(..., min_length=1, max_length=300, example="John Doe", description="Full name of the user")
     email: EmailStr = Field(..., example="user@example.com")
     password: constr(min_length=8, max_length=128) = Field(...)
     password_confirm: constr(min_length=8, max_length=128) = Field(...)
 
-    @validator("password_confirm")
-    def passwords_match(cls, value, values):
-        if value != values.get("password"):
-            raise ValueError("Password confirmation must match password")
-        return value
-
     @validator("password")
-    def validate_password_strength(cls, value: str) -> str:
-        if not any(c.isupper() for c in value):
+    def validate_password_strength(cls, v: str) -> str:
+        if not any(c.isupper() for c in v):
             raise ValueError("Password must contain at least one uppercase letter")
-        if not any(c.islower() for c in value):
+        if not any(c.islower() for c in v):
             raise ValueError("Password must contain at least one lowercase letter")
-        if not any(c.isdigit() for c in value):
+        if not any(c.isdigit() for c in v):
             raise ValueError("Password must contain at least one digit")
-        return value
+        return v
+
+    @validator("password_confirm")
+    def passwords_match(cls, v: str, values: dict) -> str:
+        if "password" in values and v != values["password"]:
+            raise ValueError("Password confirmation must match password")
+        return v
 
     @validator("email")
-    def normalize_email(cls, value: str) -> str:
-        return value.strip().lower()
+    def normalize_email(cls, v: str) -> str:
+        return v.strip().lower() if v else v
+
+    @validator("name")
+    def normalize_name(cls, v: str) -> str:
+        return v.strip() if v else v
 
     class Config:
         from_attributes = True
