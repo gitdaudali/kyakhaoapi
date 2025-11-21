@@ -95,6 +95,16 @@ class User(BaseModel, TimestampMixin, table=True):
         back_populates="user",
         sa_relationship_kwargs={"lazy": "selectin", "cascade": "all, delete-orphan"},
     )
+    
+    # Personalization preferences
+    spice_level_preference: Optional[str] = Field(
+        max_length=50, default=None,
+        description="User's preferred spice level: Mild, Spicy, Extra Spicy"
+    )
+    
+    # Note: Allergies, favorite_cuisines, and preferred_restaurants relationships
+    # are not defined here because they use SQLAlchemy Base models (not SQLModel).
+    # These are accessed through queries in the endpoints using the association tables.
 
     def __repr__(self):
         return f"<User(id={self.id}, email='{self.email}')>"

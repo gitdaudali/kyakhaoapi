@@ -3,10 +3,11 @@ from fastapi import APIRouter, Depends
 
 from app.utils.auth import get_current_admin
 
-from .endpoints import contact, cuisines, dishes, faq, favorites, moods, notifications, promotions, restaurants, reviews
+from .endpoints import allergies, contact, cuisines, dishes, faq, favorites, moods, notifications, promotions, restaurants, reviews
 
 admin_router = APIRouter(dependencies=[Depends(get_current_admin)])
 
+admin_router.include_router(allergies.router)
 admin_router.include_router(contact.router)
 admin_router.include_router(cuisines.router)
 admin_router.include_router(dishes.router)

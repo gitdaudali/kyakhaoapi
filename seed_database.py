@@ -22,7 +22,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.auth import get_password_hash
 from app.core.database import AsyncSessionLocal
-from app.models.food import Cuisine, Dish, Mood, Restaurant
+from app.models.food import Allergy, Cuisine, Dish, Mood, Restaurant
 from app.models.promotion import Promotion
 from app.models.user import ProfileStatus, User, UserRole
 
@@ -322,6 +322,50 @@ async def seed_promotions(session: AsyncSession, fixture_data: Any) -> int:
     return created_count
 
 
+async def seed_allergies(session: AsyncSession) -> int:
+    """Seed default allergies into the database."""
+    default_allergies = [
+        {"identifier": "wheat", "name": "Wheat", "type": "food"},
+        {"identifier": "peanut", "name": "Peanut", "type": "food"},
+        {"identifier": "milk", "name": "Milk", "type": "food"},
+        {"identifier": "eggs", "name": "Eggs", "type": "food"},
+        {"identifier": "soy", "name": "Soy", "type": "food"},
+        {"identifier": "nuts", "name": "Nuts", "type": "food"},
+    ]
+    
+    created_count = 0
+    
+    for allergy_data in default_allergies:
+        # Check if allergy already exists by identifier
+        stmt = select(Allergy).where(Allergy.identifier == allergy_data["identifier"])
+        result = await session.execute(stmt)
+        existing = result.scalar_one_or_none()
+        
+        if existing:
+            print(f"🔄 Allergy '{allergy_data['identifier']}' already exists, skipping...")
+            continue
+        
+        # Create new allergy (UUID will be auto-generated)
+        allergy = Allergy(
+            name=allergy_data["name"],
+            type=allergy_data["type"],
+            identifier=allergy_data["identifier"],
+            is_deleted=False,
+        )
+        session.add(allergy)
+        created_count += 1
+        print(f"✅ Added allergy: {allergy_data['name']} (identifier: {allergy_data['identifier']}, id: {allergy.id})")
+    
+    if created_count > 0:
+        await session.commit()
+        print(f"✅ Allergies seeding complete: {created_count} allergy/allergies created\n")
+    else:
+        await session.rollback()
+        print("✅ All allergies already exist, skipping...\n")
+    
+    return created_count
+
+
 async def seed_database():
     """Main function to seed database from fixtures."""
     if not FIXTURES_ROOT.exists():
@@ -336,6 +380,7 @@ async def seed_database():
         "users": 0,
         "dishes": 0,
         "promotions": 0,
+        "allergies": 0,
     }
     
     async with AsyncSessionLocal() as db:
@@ -368,11 +413,17 @@ async def seed_database():
             else:
                 print("⚠️  No promotions fixture found, skipping...\n")
             
+            # Seed allergies
+            print("📝 Seeding allergies...")
+            created = await seed_allergies(db)
+            stats["allergies"] = created
+            
             print("=" * 50)
             print("📊 Seeding Summary:")
             print(f"   Users created: {stats['users']}")
             print(f"   Dishes created: {stats['dishes']}")
             print(f"   Promotions created: {stats['promotions']}")
+            print(f"   Allergies created: {stats['allergies']}")
             print("=" * 50)
             print("\n✅ Database seeding completed successfully!")
             

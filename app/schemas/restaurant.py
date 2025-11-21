@@ -43,6 +43,8 @@ class RestaurantUpdate(BaseModel):
 
 class RestaurantOut(RestaurantBase):
     id: uuid.UUID
+    is_active: bool = Field(default=True)
+    delivery_radius_km: Optional[float] = Field(default=None)
     created_at: datetime
     updated_at: datetime
 

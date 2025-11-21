@@ -9,8 +9,9 @@ from app.models.verification import (
     PasswordResetToken,
 )
 from app.models.contact import ContactMessage
-from app.models.food import Cuisine, Dish, Favorite, Mood, Reservation, Restaurant, Review
+from app.models.food import Allergy, Cuisine, Dish, Favorite, Mood, Reservation, Restaurant, Review
 from app.models.notification import Notification
+from app.models.order import Order
 from app.models.promotion import Promotion
 
 __all__ = [
@@ -31,6 +32,7 @@ __all__ = [
     "ContactMessage",
     "Notification",
     "Promotion",
+    "Allergy",
     "Cuisine",
     "Mood",
     "Restaurant",
@@ -38,4 +40,5 @@ __all__ = [
     "Reservation",
     "Favorite",
     "Review",
+    "Order",
 ]

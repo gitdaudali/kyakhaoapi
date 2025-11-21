@@ -62,6 +62,36 @@ DishMoodAssociation = Table(
     UniqueConstraint("dish_id", "mood_id", name="uq_dish_mood"),
 )
 
+# Association table for many-to-many between users and allergies
+UserAllergyAssociation = Table(
+    "user_allergies",
+    Base.metadata,
+    Column("user_id", UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
+    Column("allergy_id", UUID(as_uuid=True), ForeignKey("allergies.id", ondelete="CASCADE"), primary_key=True),
+    Column("added_at", DateTime(timezone=True), default=utcnow, nullable=False),
+    UniqueConstraint("user_id", "allergy_id", name="uq_user_allergy"),
+)
+
+# Association table for many-to-many between users and cuisines (favorite cuisines)
+UserCuisineAssociation = Table(
+    "user_cuisines",
+    Base.metadata,
+    Column("user_id", UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
+    Column("cuisine_id", UUID(as_uuid=True), ForeignKey("cuisines.id", ondelete="CASCADE"), primary_key=True),
+    Column("added_at", DateTime(timezone=True), default=utcnow, nullable=False),
+    UniqueConstraint("user_id", "cuisine_id", name="uq_user_cuisine"),
+)
+
+# Association table for many-to-many between users and restaurants (preferred restaurants)
+UserRestaurantAssociation = Table(
+    "user_restaurants",
+    Base.metadata,
+    Column("user_id", UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
+    Column("restaurant_id", UUID(as_uuid=True), ForeignKey("restaurants.id", ondelete="CASCADE"), primary_key=True),
+    Column("added_at", DateTime(timezone=True), default=utcnow, nullable=False),
+    UniqueConstraint("user_id", "restaurant_id", name="uq_user_restaurant"),
+)
+
 
 class Cuisine(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     __tablename__ = "cuisines"
@@ -72,6 +102,7 @@ class Cuisine(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     dishes: Mapped[List["Dish"]] = relationship(
         "Dish", back_populates="cuisine", cascade="all, delete-orphan"
     )
+    # Note: users relationship not defined here - accessed via queries in endpoints
 
 
 class Mood(UUIDPrimaryKeyMixin, TimestampMixin, Base):
@@ -102,6 +133,8 @@ class Restaurant(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     longitude: Mapped[Optional[float]] = mapped_column(Float, nullable=True, index=True)
     rating: Mapped[Optional[float]] = mapped_column(Float, nullable=True, index=True)
     price_level: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False, index=True)
+    delivery_radius_km: Mapped[Optional[float]] = mapped_column(Float, nullable=True, default=10.0)
 
     dishes: Mapped[List["Dish"]] = relationship(
         "Dish", back_populates="restaurant", cascade="all, delete-orphan"
@@ -109,6 +142,10 @@ class Restaurant(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     reservations: Mapped[List["Reservation"]] = relationship(
         "Reservation", back_populates="restaurant", cascade="all, delete-orphan"
     )
+    orders: Mapped[List["Order"]] = relationship(
+        "Order", back_populates="restaurant", cascade="all, delete-orphan"
+    )
+    # Note: users relationship not defined here - accessed via queries in endpoints
 
 
 class Dish(UUIDPrimaryKeyMixin, TimestampMixin, Base):
@@ -241,3 +278,16 @@ class Review(BaseModel, SQLModelTimestampMixin, table=True):
             name="uq_user_dish_review",
         ),
     )
+
+
+class Allergy(UUIDPrimaryKeyMixin, TimestampMixin, Base):
+    """Allergy model for food allergies."""
+    __tablename__ = "allergies"
+
+    # Use UUID as primary key
+    name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False, index=True)
+    type: Mapped[Optional[str]] = mapped_column(String(50), nullable=True, default="food")
+    # Store the original string identifier for reference (e.g., "wheat", "peanut")
+    identifier: Mapped[Optional[str]] = mapped_column(String(50), nullable=True, unique=True, index=True)
+
+    # Note: users relationship not defined here - accessed via queries in endpoints

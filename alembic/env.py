@@ -21,6 +21,7 @@ from app.models import (
     Favorite,
     Mood,
     Notification,
+    Order,  # Order model for tracking restaurant popularity
     Promotion,
     Reservation,
     Restaurant,
@@ -43,18 +44,19 @@ if config.config_file_name is not None:
 # Combine both SQLModel and SQLAlchemy Base metadata to detect all models
 target_metadata = MetaData()
 
-# First, add all tables from Base.metadata (for food models like Dish, Cuisine, etc.)
-# This ensures dishes table exists before Review tries to reference it
-# Use sorted_tables to get proper dependency order
-for table in Base.metadata.sorted_tables:
-    table.tometadata(target_metadata)
-
-# Then, add all tables from SQLModel.metadata (for User, FAQ, Token, Review, etc.)
-# IMPORTANT: Use .tables.values() instead of .sorted_tables to avoid foreign key resolution
-# errors during sorting. The tables will be sorted correctly after being added to target_metadata.
+# IMPORTANT: Add SQLModel tables FIRST (User, etc.) so that Base tables (Order, etc.)
+# that reference them can resolve their foreign keys
+# Use .tables.values() to avoid foreign key resolution errors during initial copy
 for table in SQLModel.metadata.tables.values():
     if table.name not in target_metadata.tables:
-        # Copy table to target metadata - foreign keys will resolve because Base tables are already there
+        table.tometadata(target_metadata)
+
+# Then, add all tables from Base.metadata (for food models like Dish, Cuisine, Order, etc.)
+# Now that SQLModel tables are in target_metadata, we can copy Base tables
+# Use .tables.values() instead of .sorted_tables to avoid foreign key resolution errors
+# Alembic will handle the proper ordering during migration generation
+for table in Base.metadata.tables.values():
+    if table.name not in target_metadata.tables:
         table.tometadata(target_metadata)
 
 # other values from the config, defined by the needs of env.py,
