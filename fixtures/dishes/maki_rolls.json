@@ -1,0 +1,115 @@
+[
+  {
+    "name": "CRUNCHY MAKI",
+    "description": "",
+    "price": 2700,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "CRUNCHY VEGETABLE ROLL",
+    "description": "",
+    "price": 1250,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "SIGNATURE CALIFORNIA ROLL",
+    "description": "",
+    "price": 2700,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "DYNAMITE CALIFORNIA ROLL",
+    "description": "",
+    "price": 3000,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "SUMO SUNSET ROLL",
+    "description": "",
+    "price": 3100,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "KAMIKAZI MAKI",
+    "description": "",
+    "price": 3100,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "ANGUS STEAK TARTARE ROLL",
+    "description": "",
+    "price": 3300,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "SUMO PHILADELPHIA ROLL",
+    "description": "",
+    "price": 3200,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "SPICY SALMON ROLL",
+    "description": "",
+    "price": 3300,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "VOLCANO MAKI",
+    "description": "",
+    "price": 3300,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "RAINBOW ROLL",
+    "description": "",
+    "price": 3400,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "SPICY TUNA ROLL",
+    "description": "",
+    "price": 3300,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "POKE ROLL",
+    "description": "",
+    "price": 3000,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "DRAGON ROLL",
+    "description": "",
+    "price": 3800,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  }
+]
+

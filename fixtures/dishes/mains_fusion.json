@@ -1,0 +1,99 @@
+[
+  {
+    "name": "KYOTO CURRY",
+    "description": "",
+    "price": 2500,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "CLASSIC KATSU CURRY",
+    "description": "",
+    "price": 2650,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "ANGUS BEEF FILLET",
+    "description": "",
+    "price": 6800,
+    "rating": null,
+    "cuisine": "Japanese Fusion Grill",
+    "mood": "Anytime"
+  },
+  {
+    "name": "WAGYU BEEF TENDERLOIN (Grade 8-9)",
+    "description": "",
+    "price": 17500,
+    "rating": null,
+    "cuisine": "Japanese Premium",
+    "mood": "Anytime"
+  },
+  {
+    "name": "WAGYU BEEF RIBEYE (Grade 8-9)",
+    "description": "",
+    "price": 16000,
+    "rating": null,
+    "cuisine": "Japanese Premium",
+    "mood": "Anytime"
+  },
+  {
+    "name": "TERIYAKI CHICKEN",
+    "description": "",
+    "price": 2750,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "TERIYAKI BEEF",
+    "description": "",
+    "price": 3500,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "TERIYAKI SALMON",
+    "description": "",
+    "price": 5000,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  },
+  {
+    "name": "AUSTRALIAN PRIME RIBEYE STEAK",
+    "description": "",
+    "price": 10500,
+    "rating": null,
+    "cuisine": "Japanese Fusion Grill",
+    "mood": "Anytime"
+  },
+  {
+    "name": "BUDDHA BOWL",
+    "description": "",
+    "price": 2650,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "LOBSTER WITH PONZU BUTTER",
+    "description": "",
+    "price": 6500,
+    "rating": null,
+    "cuisine": "Japanese Fusion",
+    "mood": "Anytime"
+  },
+  {
+    "name": "SUMO SIGNATURE SHRIMP UDON",
+    "description": "",
+    "price": 3200,
+    "rating": null,
+    "cuisine": "Japanese",
+    "mood": "Anytime"
+  }
+]
+

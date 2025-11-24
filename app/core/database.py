@@ -1,6 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy import MetaData
+from sqlmodel import SQLModel
 from app.core.config import settings
 from sqlmodel import SQLModel
 import logging
@@ -9,21 +11,31 @@ logger = logging.getLogger(__name__)
 
 Base = declarative_base()
 
-# Merge Base.metadata into SQLModel.metadata at runtime so SQLModel models
-# can reference Base models (like dishes table) via foreign keys
-# This ensures foreign keys work at runtime, not just in migrations
-def merge_metadata():
-    """Merge Base.metadata tables into SQLModel.metadata for runtime foreign key resolution."""
-    # Import models to ensure they're registered
-    from app.models import Dish, Cuisine, Restaurant, Mood, Reservation
+# Synchronize metadata between SQLModel and Base for foreign key resolution
+# This ensures that tables in both metadata objects can reference each other
+def sync_metadata():
+    """Synchronize metadata between SQLModel and Base for foreign key resolution."""
+    # Import User model to ensure it's registered in SQLModel.metadata
+    from app.models.user import User  # noqa: F401
+    
+    # Copy users table from SQLModel.metadata to Base.metadata if it exists
+    # This allows Base.metadata models (like Cart) to reference users table
+    if 'users' in SQLModel.metadata.tables and 'users' not in Base.metadata.tables:
+        users_table = SQLModel.metadata.tables['users']
+        users_table.tometadata(Base.metadata, schema=None)
+    
+    # Import Base models to ensure they're registered
+    from app.models import Dish, Cuisine, Restaurant, Mood, Reservation  # noqa: F401
     
     # Copy Base.metadata tables to SQLModel.metadata if not already present
+    # This ensures SQLModel models can reference Base models via foreign keys
     for table in Base.metadata.tables.values():
         if table.name not in SQLModel.metadata.tables:
             table.tometadata(SQLModel.metadata)
 
-# Call merge_metadata after all models are imported
-# This will be called when this module is imported after models are loaded
+# Call sync_metadata after Base is created
+# This must happen before models that reference each other are imported/used
+sync_metadata()
 
 # Build database URL
 

@@ -1,181 +1,162 @@
 """User favorites endpoints."""
-from __future__ import annotations
-
-import uuid
 from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
+from uuid import UUID
 
 from app.core.database import get_db
-from app.core.response_handler import error_response, success_response
-from app.models.food import Dish, Favorite, Restaurant
-from app.schemas.favorite import FavoriteCreate, FavoriteListItem, FavoriteOut
-from app.utils.auth import get_current_user
-from app.models.user import User
+from app.core.deps import CurrentUser
+from app.core.response_handler import success_response
+from app.models.favorites import UserFavorite
+from app.models.food import Dish
+from app.schemas.favorites import (
+    FavoriteCreate,
+    FavoriteListResponse,
+    FavoriteResponse,
+)
+from app.utils.favorites_utils import (
+    check_favorite_exists,
+    get_user_favorites,
+    soft_delete_favorite,
+    verify_dish_exists,
+)
 
-router = APIRouter(prefix="/favorites", tags=["Favorites"])
-
-
-async def get_item_name(session: AsyncSession, item_id: uuid.UUID, item_type: str) -> str:
-    """Get the name of an item (dish or restaurant) by ID."""
-    if item_type == "dish":
-        result = await session.execute(select(Dish).where(Dish.id == item_id, Dish.is_deleted.is_(False)))
-        item = result.scalar_one_or_none()
-        if not item:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Dish not found")
-        return item.name
-    elif item_type == "restaurant":
-        result = await session.execute(select(Restaurant).where(Restaurant.id == item_id, Restaurant.is_deleted.is_(False)))
-        item = result.scalar_one_or_none()
-        if not item:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Restaurant not found")
-        return item.name
-    else:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid item_type. Must be 'dish' or 'restaurant'")
+router = APIRouter(tags=["Favorites"])
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
-async def add_to_favorites(
-    payload: FavoriteCreate,
-    current_user: User = Depends(get_current_user),
-    session: AsyncSession = Depends(get_db),
+async def add_favorite(
+    favorite_data: FavoriteCreate,
+    current_user: CurrentUser,
+    db: AsyncSession = Depends(get_db),
 ) -> Any:
-    """Add an item to the authenticated user's favorites."""
+    """Add a dish to user favorites."""
     try:
-        # Verify item exists
-        await get_item_name(session, payload.item_id, payload.item_type)
+        # Verify dish exists
+        await verify_dish_exists(db, favorite_data.dish_id)
 
         # Check if already favorited
-        result = await session.execute(
-            select(Favorite).where(
-                Favorite.user_id == current_user.id,
-                Favorite.item_id == payload.item_id,
-                Favorite.item_type == payload.item_type,
-                Favorite.is_deleted.is_(False)
-            )
-        )
-        existing = result.scalar_one_or_none()
-        if existing:
-            return error_response(
-                message="Item is already in favorites",
-                status_code=status.HTTP_409_CONFLICT
+        if await check_favorite_exists(db, current_user.id, favorite_data.dish_id):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Dish is already in favorites",
             )
 
-        favorite = Favorite(
+        # Create favorite
+        db_favorite = UserFavorite(
             user_id=current_user.id,
-            item_id=payload.item_id,
-            item_type=payload.item_type
+            dish_id=favorite_data.dish_id,
         )
-        session.add(favorite)
-        await session.commit()
-        await session.refresh(favorite)
+        db.add(db_favorite)
+        await db.commit()
+        await db.refresh(db_favorite)
 
-        favorite_out = FavoriteOut(
-            id=favorite.id,
-            item_id=favorite.item_id,
-            item_type=favorite.item_type,
-            added_at=favorite.created_at
+        # Load dish relationship with moods
+        query = (
+            select(UserFavorite)
+            .options(selectinload(UserFavorite.dish).selectinload(Dish.moods))
+            .where(UserFavorite.id == db_favorite.id)
         )
+        result = await db.execute(query)
+        favorite = result.scalar_one()
 
+        favorite_response = FavoriteResponse.model_validate(favorite)
         return success_response(
-            message="Added to favorites",
-            data=favorite_out.model_dump(),
-            status_code=status.HTTP_201_CREATED
+            message="Dish added to favorites successfully",
+            data=favorite_response.model_dump(),
+            status_code=status.HTTP_201_CREATED,
+            use_body=True
         )
-    except IntegrityError:
-        await session.rollback()
-        return error_response(
-            message="Item is already in favorites",
-            status_code=status.HTTP_409_CONFLICT
-        )
+
     except HTTPException:
         raise
     except Exception as e:
-        await session.rollback()
-        return error_response(
-            message=f"Error adding to favorites: {str(e)}",
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error adding favorite: {str(e)}",
         )
 
 
-@router.delete("/")
-async def remove_from_favorites(
-    payload: FavoriteCreate,
-    current_user: User = Depends(get_current_user),
-    session: AsyncSession = Depends(get_db),
+@router.get("/", status_code=status.HTTP_200_OK)
+async def get_favorites(
+    current_user: CurrentUser,
+    db: AsyncSession = Depends(get_db),
+    skip: int = 0,
+    limit: int = 100,
 ) -> Any:
-    """Remove an item from the authenticated user's favorites."""
+    """Get all user favorites."""
     try:
-        result = await session.execute(
-            select(Favorite).where(
-                Favorite.user_id == current_user.id,
-                Favorite.item_id == payload.item_id,
-                Favorite.item_type == payload.item_type,
-                Favorite.is_deleted.is_(False)
-            )
-        )
-        favorite = result.scalar_one_or_none()
-        if not favorite:
-            return error_response(
-                message="Item not found in favorites",
-                status_code=status.HTTP_404_NOT_FOUND
-            )
-
-        favorite.is_deleted = True
-        await session.commit()
-
-        return success_response(
-            message="Removed from favorites",
-            data=None
-        )
-    except Exception as e:
-        await session.rollback()
-        return error_response(
-            message=f"Error removing from favorites: {str(e)}",
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+        favorites, total = await get_user_favorites(
+            db, current_user.id, skip=skip, limit=limit
         )
 
-
-@router.get("/")
-async def get_user_favorites(
-    current_user: User = Depends(get_current_user),
-    session: AsyncSession = Depends(get_db),
-) -> Any:
-    """Retrieve the list of favorites for the authenticated user."""
-    try:
-        result = await session.execute(
-            select(Favorite).where(
-                Favorite.user_id == current_user.id,
-                Favorite.is_deleted.is_(False)
-            ).order_by(Favorite.created_at.desc())
+        favorite_list = FavoriteListResponse(
+            favorites=[FavoriteResponse.model_validate(fav) for fav in favorites],
+            total=total,
         )
-        favorites = result.scalars().all()
-
-        favorites_data = []
-        for fav in favorites:
-            try:
-                item_name = await get_item_name(session, fav.item_id, fav.item_type)
-                favorites_data.append(
-                    FavoriteListItem(
-                        item_id=fav.item_id,
-                        name=item_name,
-                        added_at=fav.created_at
-                    ).model_dump()
-                )
-            except HTTPException:
-                # Skip items that no longer exist
-                continue
-
         return success_response(
             message="Favorites retrieved successfully",
-            data=favorites_data
+            data=favorite_list.model_dump(),
+            use_body=True
         )
+
     except Exception as e:
-        return error_response(
-            message=f"Error retrieving favorites: {str(e)}",
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving favorites: {str(e)}",
+        )
+
+
+@router.delete("/{dish_id}", status_code=status.HTTP_200_OK)
+async def remove_favorite(
+    dish_id: UUID,
+    current_user: CurrentUser,
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """Remove a dish from user favorites."""
+    try:
+        favorite = await soft_delete_favorite(db, current_user.id, dish_id)
+        await db.commit()
+
+        return success_response(
+            message="Favorite removed successfully",
+            data={"dish_id": str(dish_id)},
+            use_body=True
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        await db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error removing favorite: {str(e)}",
+        )
+
+
+@router.get("/check/{dish_id}", status_code=status.HTTP_200_OK)
+async def check_favorite(
+    dish_id: UUID,
+    current_user: CurrentUser,
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    """Check if a dish is in user favorites."""
+    try:
+        is_favorited = await check_favorite_exists(db, current_user.id, dish_id)
+
+        return success_response(
+            message="Favorite status retrieved successfully",
+            data={"dish_id": str(dish_id), "is_favorited": is_favorited},
+            use_body=True
+        )
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error checking favorite: {str(e)}",
         )
 

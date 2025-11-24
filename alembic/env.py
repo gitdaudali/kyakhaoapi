@@ -3,30 +3,46 @@ import sys
 from logging.config import fileConfig
 from pathlib import Path
 
-from sqlalchemy import engine_from_config, pool, MetaData
+from sqlalchemy import engine_from_config, pool
 from alembic import context
 
 # Add the project root to the Python path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
+from sqlalchemy import MetaData
+from sqlmodel import SQLModel
+
 # Import your models and settings
 from app.core.config import settings
 from app.core.database import Base
 # Import all models explicitly to ensure they're registered
 from app.models import (
+    Allergy,
+    BillingCycle,
+    Cart,
+    CartItem,
     ContactMessage,
     Cuisine,
     Dish,  # Import Dish before Review to ensure dishes table exists
+    FAQ,
     Favorite,
+    MembershipPlan,
     Mood,
     Notification,
     Order,  # Order model for tracking restaurant popularity
+    OrderItem,
+    OrderStatus,
+    Payment,
+    PaymentStatus,
     Promotion,
     Reservation,
     Restaurant,
     Review,  # Review model that references dishes.id
+    Subscription,
+    SubscriptionStatus,
     User,
+    UserFavorite,
 )
 from sqlmodel import SQLModel
 
@@ -41,7 +57,7 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-# Combine both SQLModel and SQLAlchemy Base metadata to detect all models
+# Combine both SQLModel and SQLAlchemy Base metadata
 target_metadata = MetaData()
 
 # IMPORTANT: Add SQLModel tables FIRST (User, etc.) so that Base tables (Order, etc.)
@@ -67,7 +83,14 @@ for table in Base.metadata.tables.values():
 
 def get_url():
     """Get database URL from environment variables."""
-    return settings.DATABASE_URL
+    # Alembic needs a sync database URL, not async
+    db_url = settings.DATABASE_URL
+    # Ensure it's a sync postgresql:// URL (not postgresql+asyncpg://)
+    if db_url.startswith("postgresql+asyncpg://"):
+        db_url = db_url.replace("postgresql+asyncpg://", "postgresql://")
+    elif db_url.startswith("postgresql+psycopg2://"):
+        db_url = db_url.replace("postgresql+psycopg2://", "postgresql://")
+    return db_url
 
 
 def run_migrations_offline() -> None:
@@ -112,9 +135,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

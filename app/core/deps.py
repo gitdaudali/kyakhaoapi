@@ -64,10 +64,17 @@ async def get_current_user(
     # Verify token and get user ID
     try:
         user_id = get_current_user_id(token)
-    except Exception:
+    except HTTPException:
+        # Re-raise HTTPException as-is (it already has proper error message)
+        raise
+    except Exception as e:
+        # Log the actual error for debugging
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Token validation error: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid authentication credentials",
+            detail=f"Invalid authentication credentials: {str(e)}",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
