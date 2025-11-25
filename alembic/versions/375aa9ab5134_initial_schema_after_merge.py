@@ -1,18 +1,18 @@
-"""initial_schema
+"""Initial schema after merge
 
-Revision ID: e5a1f5aa686c
+Revision ID: 375aa9ab5134
 Revises: 
-Create Date: 2025-11-21 11:41:00.232907
+Create Date: 2025-11-24 18:36:13.336112
 
 """
 from typing import Sequence, Union
-
+import sqlmodel
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-import sqlmodel
+
 # revision identifiers, used by Alembic.
-revision: str = 'e5a1f5aa686c'
+revision: str = '375aa9ab5134'
 down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -34,6 +34,19 @@ def upgrade() -> None:
     op.create_index(op.f('ix_allergies_identifier'), 'allergies', ['identifier'], unique=True)
     op.create_index(op.f('ix_allergies_is_deleted'), 'allergies', ['is_deleted'], unique=False)
     op.create_index(op.f('ix_allergies_name'), 'allergies', ['name'], unique=True)
+    op.create_table('carts',
+    sa.Column('user_id', sa.UUID(), nullable=False),
+    sa.Column('total_amount', sa.Numeric(precision=10, scale=2), nullable=False),
+    sa.Column('item_count', sa.Integer(), nullable=False),
+    sa.Column('id', sa.UUID(), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('updated_at', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('is_deleted', sa.Boolean(), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], use_alter=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_carts_is_deleted'), 'carts', ['is_deleted'], unique=False)
+    op.create_index(op.f('ix_carts_user_id'), 'carts', ['user_id'], unique=True)
     op.create_table('contact_messages',
     sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
     sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
@@ -102,6 +115,37 @@ def upgrade() -> None:
     )
     op.create_index(op.f('ix_moods_is_deleted'), 'moods', ['is_deleted'], unique=False)
     op.create_index(op.f('ix_moods_name'), 'moods', ['name'], unique=True)
+    op.create_table('orders',
+    sa.Column('user_id', sa.UUID(), nullable=False),
+    sa.Column('order_number', sa.String(length=50), nullable=False),
+    sa.Column('status', sa.String(length=30), nullable=False),
+    sa.Column('total_amount', sa.Numeric(precision=10, scale=2), nullable=False),
+    sa.Column('subtotal', sa.Numeric(precision=10, scale=2), nullable=False),
+    sa.Column('tax_amount', sa.Numeric(precision=10, scale=2), nullable=False),
+    sa.Column('delivery_fee', sa.Numeric(precision=10, scale=2), nullable=False),
+    sa.Column('discount_amount', sa.Numeric(precision=10, scale=2), nullable=False),
+    sa.Column('customer_name', sa.String(length=200), nullable=False),
+    sa.Column('customer_email', sa.String(length=255), nullable=False),
+    sa.Column('customer_phone', sa.String(length=30), nullable=True),
+    sa.Column('delivery_address', sa.Text(), nullable=True),
+    sa.Column('delivery_city', sa.String(length=120), nullable=True),
+    sa.Column('delivery_notes', sa.Text(), nullable=True),
+    sa.Column('confirmed_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('prepared_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('delivered_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('cancelled_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('id', sa.UUID(), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('updated_at', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('is_deleted', sa.Boolean(), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], use_alter=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_orders_customer_email'), 'orders', ['customer_email'], unique=False)
+    op.create_index(op.f('ix_orders_is_deleted'), 'orders', ['is_deleted'], unique=False)
+    op.create_index(op.f('ix_orders_order_number'), 'orders', ['order_number'], unique=True)
+    op.create_index(op.f('ix_orders_status'), 'orders', ['status'], unique=False)
+    op.create_index(op.f('ix_orders_user_id'), 'orders', ['user_id'], unique=False)
     op.create_table('promotions',
     sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
     sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
@@ -174,8 +218,8 @@ def upgrade() -> None:
     sa.Column('signup_type', sa.String(length=20), nullable=False),
     sa.Column('google_id', sqlmodel.sql.sqltypes.AutoString(length=100), nullable=True),
     sa.Column('apple_id', sqlmodel.sql.sqltypes.AutoString(length=100), nullable=True),
-    sa.Column('spice_level_preference', sqlmodel.sql.sqltypes.AutoString(length=50), nullable=True),
     sa.Column('is_premium', sa.Boolean(), nullable=False),
+    sa.Column('spice_level_preference', sqlmodel.sql.sqltypes.AutoString(length=50), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_users_apple_id'), 'users', ['apple_id'], unique=False)
@@ -187,19 +231,6 @@ def upgrade() -> None:
     op.create_index(op.f('ix_users_profile_status'), 'users', ['profile_status'], unique=False)
     op.create_index(op.f('ix_users_role'), 'users', ['role'], unique=False)
     op.create_index(op.f('ix_users_signup_type'), 'users', ['signup_type'], unique=False)
-    op.create_table('carts',
-    sa.Column('user_id', sa.UUID(), nullable=False),
-    sa.Column('total_amount', sa.Numeric(precision=10, scale=2), nullable=False),
-    sa.Column('item_count', sa.Integer(), nullable=False),
-    sa.Column('id', sa.UUID(), nullable=False),
-    sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
-    sa.Column('updated_at', sa.DateTime(timezone=True), nullable=False),
-    sa.Column('is_deleted', sa.Boolean(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.create_index(op.f('ix_carts_is_deleted'), 'carts', ['is_deleted'], unique=False)
-    op.create_index(op.f('ix_carts_user_id'), 'carts', ['user_id'], unique=True)
     op.create_table('dishes',
     sa.Column('name', sa.String(length=180), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
@@ -299,45 +330,6 @@ def upgrade() -> None:
     op.create_index(op.f('ix_notifications_is_read'), 'notifications', ['is_read'], unique=False)
     op.create_index(op.f('ix_notifications_notification_type'), 'notifications', ['notification_type'], unique=False)
     op.create_index(op.f('ix_notifications_user_id'), 'notifications', ['user_id'], unique=False)
-    op.create_table('orders',
-    sa.Column('user_id', sa.UUID(), nullable=False),
-    sa.Column('restaurant_id', sa.UUID(), nullable=True),
-    sa.Column('order_number', sa.String(length=50), nullable=True),
-    sa.Column('status', sa.String(length=50), nullable=False),
-    sa.Column('total_amount', sa.Numeric(precision=10, scale=2), nullable=False),
-    sa.Column('subtotal', sa.Numeric(precision=10, scale=2), nullable=True),
-    sa.Column('tax_amount', sa.Numeric(precision=10, scale=2), nullable=True),
-    sa.Column('delivery_fee', sa.Numeric(precision=10, scale=2), nullable=True),
-    sa.Column('discount_amount', sa.Numeric(precision=10, scale=2), nullable=True),
-    sa.Column('order_date', sa.DateTime(timezone=True), nullable=True),
-    sa.Column('customer_name', sa.String(length=200), nullable=True),
-    sa.Column('customer_email', sa.String(length=255), nullable=True),
-    sa.Column('customer_phone', sa.String(length=30), nullable=True),
-    sa.Column('delivery_address', sa.Text(), nullable=True),
-    sa.Column('delivery_city', sa.String(length=120), nullable=True),
-    sa.Column('delivery_latitude', sa.Float(), nullable=True),
-    sa.Column('delivery_longitude', sa.Float(), nullable=True),
-    sa.Column('delivery_notes', sa.Text(), nullable=True),
-    sa.Column('notes', sa.Text(), nullable=True),
-    sa.Column('confirmed_at', sa.DateTime(timezone=True), nullable=True),
-    sa.Column('prepared_at', sa.DateTime(timezone=True), nullable=True),
-    sa.Column('delivered_at', sa.DateTime(timezone=True), nullable=True),
-    sa.Column('cancelled_at', sa.DateTime(timezone=True), nullable=True),
-    sa.Column('id', sa.UUID(), nullable=False),
-    sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
-    sa.Column('updated_at', sa.DateTime(timezone=True), nullable=False),
-    sa.Column('is_deleted', sa.Boolean(), nullable=False),
-    sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.create_index(op.f('ix_orders_customer_email'), 'orders', ['customer_email'], unique=False)
-    op.create_index(op.f('ix_orders_is_deleted'), 'orders', ['is_deleted'], unique=False)
-    op.create_index(op.f('ix_orders_order_date'), 'orders', ['order_date'], unique=False)
-    op.create_index(op.f('ix_orders_order_number'), 'orders', ['order_number'], unique=True)
-    op.create_index(op.f('ix_orders_restaurant_id'), 'orders', ['restaurant_id'], unique=False)
-    op.create_index(op.f('ix_orders_status'), 'orders', ['status'], unique=False)
-    op.create_index(op.f('ix_orders_user_id'), 'orders', ['user_id'], unique=False)
     op.create_table('password_reset_otps',
     sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
     sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
@@ -528,30 +520,6 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('dish_id', 'mood_id'),
     sa.UniqueConstraint('dish_id', 'mood_id', name='uq_dish_mood')
     )
-    op.create_table('reviews',
-    sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
-    sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
-    sa.Column('is_deleted', sa.Boolean(), nullable=False),
-    sa.Column('id', sa.UUID(), nullable=False),
-    sa.Column('user_id', sa.UUID(), nullable=False),
-    sa.Column('dish_id', sa.UUID(), nullable=False),
-    sa.Column('rating', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=120), nullable=True),
-    sa.Column('comment', sa.Text(), nullable=False),
-    sa.Column('visit_date', sa.Date(), nullable=True),
-    sa.Column('spice_level', sa.String(length=50), nullable=True),
-    sa.Column('delivery_time', sa.String(length=50), nullable=True),
-    sa.Column('companion_type', sa.String(length=50), nullable=True),
-    sa.Column('photos', postgresql.JSON(astext_type=sa.Text()), nullable=True),
-    sa.ForeignKeyConstraint(['dish_id'], ['dishes.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('user_id', 'dish_id', name='uq_user_dish_review')
-    )
-    op.create_index(op.f('ix_reviews_dish_id'), 'reviews', ['dish_id'], unique=False)
-    op.create_index(op.f('ix_reviews_is_deleted'), 'reviews', ['is_deleted'], unique=False)
-    op.create_index(op.f('ix_reviews_rating'), 'reviews', ['rating'], unique=False)
-    op.create_index(op.f('ix_reviews_user_id'), 'reviews', ['user_id'], unique=False)
     op.create_table('order_items',
     sa.Column('order_id', sa.UUID(), nullable=False),
     sa.Column('dish_id', sa.UUID(), nullable=False),
@@ -587,12 +555,60 @@ def upgrade() -> None:
     op.create_index(op.f('ix_payments_status'), 'payments', ['status'], unique=False)
     op.create_index(op.f('ix_payments_subscription_id'), 'payments', ['subscription_id'], unique=False)
     op.create_index(op.f('ix_payments_transaction_id'), 'payments', ['transaction_id'], unique=False)
+    op.create_table('reviews',
+    sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('is_deleted', sa.Boolean(), nullable=False),
+    sa.Column('id', sa.UUID(), nullable=False),
+    sa.Column('user_id', sa.UUID(), nullable=False),
+    sa.Column('dish_id', sa.UUID(), nullable=False),
+    sa.Column('rating', sa.Integer(), nullable=False),
+    sa.Column('title', sa.String(length=120), nullable=True),
+    sa.Column('comment', sa.Text(), nullable=False),
+    sa.Column('visit_date', sa.Date(), nullable=True),
+    sa.Column('spice_level', sa.String(length=50), nullable=True),
+    sa.Column('delivery_time', sa.String(length=50), nullable=True),
+    sa.Column('companion_type', sa.String(length=50), nullable=True),
+    sa.Column('photos', postgresql.JSON(astext_type=sa.Text()), nullable=True),
+    sa.ForeignKeyConstraint(['dish_id'], ['dishes.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('user_id', 'dish_id', name='uq_user_dish_review')
+    )
+    op.create_index(op.f('ix_reviews_dish_id'), 'reviews', ['dish_id'], unique=False)
+    op.create_index(op.f('ix_reviews_is_deleted'), 'reviews', ['is_deleted'], unique=False)
+    op.create_index(op.f('ix_reviews_rating'), 'reviews', ['rating'], unique=False)
+    op.create_index(op.f('ix_reviews_user_id'), 'reviews', ['user_id'], unique=False)
+    op.create_table('user_favorites',
+    sa.Column('user_id', sa.UUID(), nullable=False),
+    sa.Column('dish_id', sa.UUID(), nullable=False),
+    sa.Column('id', sa.UUID(), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('updated_at', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('is_deleted', sa.Boolean(), nullable=False),
+    sa.ForeignKeyConstraint(['dish_id'], ['dishes.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('user_id', 'dish_id', name='uq_user_dish_favorite')
+    )
+    op.create_index(op.f('ix_user_favorites_dish_id'), 'user_favorites', ['dish_id'], unique=False)
+    op.create_index(op.f('ix_user_favorites_is_deleted'), 'user_favorites', ['is_deleted'], unique=False)
+    op.create_index(op.f('ix_user_favorites_user_id'), 'user_favorites', ['user_id'], unique=False)
     # ### end Alembic commands ###
 
 
 def downgrade() -> None:
     """Downgrade schema."""
     # ### commands auto generated by Alembic - please adjust! ###
+    op.drop_index(op.f('ix_user_favorites_user_id'), table_name='user_favorites')
+    op.drop_index(op.f('ix_user_favorites_is_deleted'), table_name='user_favorites')
+    op.drop_index(op.f('ix_user_favorites_dish_id'), table_name='user_favorites')
+    op.drop_table('user_favorites')
+    op.drop_index(op.f('ix_reviews_user_id'), table_name='reviews')
+    op.drop_index(op.f('ix_reviews_rating'), table_name='reviews')
+    op.drop_index(op.f('ix_reviews_is_deleted'), table_name='reviews')
+    op.drop_index(op.f('ix_reviews_dish_id'), table_name='reviews')
+    op.drop_table('reviews')
     op.drop_index(op.f('ix_payments_transaction_id'), table_name='payments')
     op.drop_index(op.f('ix_payments_subscription_id'), table_name='payments')
     op.drop_index(op.f('ix_payments_status'), table_name='payments')
@@ -602,11 +618,6 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_order_items_is_deleted'), table_name='order_items')
     op.drop_index(op.f('ix_order_items_dish_id'), table_name='order_items')
     op.drop_table('order_items')
-    op.drop_index(op.f('ix_reviews_user_id'), table_name='reviews')
-    op.drop_index(op.f('ix_reviews_rating'), table_name='reviews')
-    op.drop_index(op.f('ix_reviews_is_deleted'), table_name='reviews')
-    op.drop_index(op.f('ix_reviews_dish_id'), table_name='reviews')
-    op.drop_table('reviews')
     op.drop_table('dish_moods')
     op.drop_index(op.f('ix_cart_items_is_deleted'), table_name='cart_items')
     op.drop_index(op.f('ix_cart_items_dish_id'), table_name='cart_items')
@@ -649,14 +660,6 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_password_reset_otps_is_deleted'), table_name='password_reset_otps')
     op.drop_index(op.f('ix_password_reset_otps_email'), table_name='password_reset_otps')
     op.drop_table('password_reset_otps')
-    op.drop_index(op.f('ix_orders_user_id'), table_name='orders')
-    op.drop_index(op.f('ix_orders_status'), table_name='orders')
-    op.drop_index(op.f('ix_orders_restaurant_id'), table_name='orders')
-    op.drop_index(op.f('ix_orders_order_number'), table_name='orders')
-    op.drop_index(op.f('ix_orders_order_date'), table_name='orders')
-    op.drop_index(op.f('ix_orders_is_deleted'), table_name='orders')
-    op.drop_index(op.f('ix_orders_customer_email'), table_name='orders')
-    op.drop_table('orders')
     op.drop_index(op.f('ix_notifications_user_id'), table_name='notifications')
     op.drop_index(op.f('ix_notifications_notification_type'), table_name='notifications')
     op.drop_index(op.f('ix_notifications_is_read'), table_name='notifications')
@@ -687,9 +690,6 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_dishes_featured_week'), table_name='dishes')
     op.drop_index(op.f('ix_dishes_cuisine_id'), table_name='dishes')
     op.drop_table('dishes')
-    op.drop_index(op.f('ix_carts_user_id'), table_name='carts')
-    op.drop_index(op.f('ix_carts_is_deleted'), table_name='carts')
-    op.drop_table('carts')
     op.drop_index(op.f('ix_users_signup_type'), table_name='users')
     op.drop_index(op.f('ix_users_role'), table_name='users')
     op.drop_index(op.f('ix_users_profile_status'), table_name='users')
@@ -714,6 +714,12 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_promotions_end_date'), table_name='promotions')
     op.drop_index(op.f('ix_promotions_discount_type'), table_name='promotions')
     op.drop_table('promotions')
+    op.drop_index(op.f('ix_orders_user_id'), table_name='orders')
+    op.drop_index(op.f('ix_orders_status'), table_name='orders')
+    op.drop_index(op.f('ix_orders_order_number'), table_name='orders')
+    op.drop_index(op.f('ix_orders_is_deleted'), table_name='orders')
+    op.drop_index(op.f('ix_orders_customer_email'), table_name='orders')
+    op.drop_table('orders')
     op.drop_index(op.f('ix_moods_name'), table_name='moods')
     op.drop_index(op.f('ix_moods_is_deleted'), table_name='moods')
     op.drop_table('moods')
@@ -733,6 +739,9 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_contact_messages_is_deleted'), table_name='contact_messages')
     op.drop_index(op.f('ix_contact_messages_email'), table_name='contact_messages')
     op.drop_table('contact_messages')
+    op.drop_index(op.f('ix_carts_user_id'), table_name='carts')
+    op.drop_index(op.f('ix_carts_is_deleted'), table_name='carts')
+    op.drop_table('carts')
     op.drop_index(op.f('ix_allergies_name'), table_name='allergies')
     op.drop_index(op.f('ix_allergies_is_deleted'), table_name='allergies')
     op.drop_index(op.f('ix_allergies_identifier'), table_name='allergies')

@@ -142,9 +142,8 @@ class Restaurant(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     reservations: Mapped[List["Reservation"]] = relationship(
         "Reservation", back_populates="restaurant", cascade="all, delete-orphan"
     )
-    orders: Mapped[List["Order"]] = relationship(
-        "Order", back_populates="restaurant", cascade="all, delete-orphan"
-    )
+    # Note: orders relationship removed - orders are now linked to restaurants through OrderItem -> Dish -> Restaurant
+    # The new Order model doesn't have a direct restaurant_id foreign key
     # Note: users relationship not defined here - accessed via queries in endpoints
 
 

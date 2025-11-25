@@ -14,7 +14,6 @@ from app.models.cart import Cart, CartItem, Order, OrderItem, OrderStatus
 from app.models.favorites import UserFavorite
 from app.models.food import Allergy, Cuisine, Dish, Favorite, Mood, Reservation, Restaurant, Review
 from app.models.notification import Notification
-from app.models.order import Order as OrderModel
 from app.models.promotion import Promotion
 # Import membership models after User to ensure User is registered
 from app.models.membership import (
@@ -57,7 +56,6 @@ __all__ = [
     "Order",
     "OrderItem",
     "OrderStatus",
-    "OrderModel",
     "MembershipPlan",
     "Subscription",
     "Payment",

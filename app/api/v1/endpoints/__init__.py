@@ -3,7 +3,6 @@ from fastapi import APIRouter, Depends
 from app.utils.auth import get_current_user
 
 from . import (
-    ai,
     allergies,
     auth,
     cart,
@@ -55,7 +54,6 @@ user_router.include_router(subscriptions.router)
 # ============================================================================
 protected_dependencies = [Depends(get_current_user)]
 
-user_router.include_router(ai.router, dependencies=protected_dependencies)
 user_router.include_router(cart.router, dependencies=protected_dependencies)
 user_router.include_router(cuisines.router, dependencies=protected_dependencies)
 user_router.include_router(dishes.router, dependencies=protected_dependencies)

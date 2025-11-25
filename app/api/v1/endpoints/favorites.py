@@ -67,8 +67,7 @@ async def add_favorite(
         return success_response(
             message="Dish added to favorites successfully",
             data=favorite_response.model_dump(),
-            status_code=status.HTTP_201_CREATED,
-            use_body=True
+            status_code=status.HTTP_201_CREATED
         )
 
     except HTTPException:
@@ -100,8 +99,7 @@ async def get_favorites(
         )
         return success_response(
             message="Favorites retrieved successfully",
-            data=favorite_list.model_dump(),
-            use_body=True
+            data=favorite_list.model_dump()
         )
 
     except Exception as e:
@@ -124,8 +122,7 @@ async def remove_favorite(
 
         return success_response(
             message="Favorite removed successfully",
-            data={"dish_id": str(dish_id)},
-            use_body=True
+            data={"dish_id": str(dish_id)}
         )
 
     except HTTPException:
@@ -150,8 +147,7 @@ async def check_favorite(
 
         return success_response(
             message="Favorite status retrieved successfully",
-            data={"dish_id": str(dish_id), "is_favorited": is_favorited},
-            use_body=True
+            data={"dish_id": str(dish_id), "is_favorited": is_favorited}
         )
 
     except Exception as e:

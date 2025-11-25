@@ -4,7 +4,6 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy import MetaData
 from sqlmodel import SQLModel
 from app.core.config import settings
-from sqlmodel import SQLModel
 import logging
 
 logger = logging.getLogger(__name__)
@@ -25,7 +24,8 @@ def sync_metadata():
         users_table.tometadata(Base.metadata, schema=None)
     
     # Import Base models to ensure they're registered
-    from app.models import Dish, Cuisine, Restaurant, Mood, Reservation  # noqa: F401
+    # Import these lazily to avoid circular import issues
+    from app.models.food import Dish, Cuisine, Restaurant, Mood, Reservation  # noqa: F401
     
     # Copy Base.metadata tables to SQLModel.metadata if not already present
     # This ensures SQLModel models can reference Base models via foreign keys
@@ -33,9 +33,13 @@ def sync_metadata():
         if table.name not in SQLModel.metadata.tables:
             table.tometadata(SQLModel.metadata)
 
-# Call sync_metadata after Base is created
-# This must happen before models that reference each other are imported/used
-sync_metadata()
+# Alias for backward compatibility with main.py
+def merge_metadata():
+    """Alias for sync_metadata - merges Base.metadata into SQLModel.metadata."""
+    sync_metadata()
+
+# Note: sync_metadata() is NOT called at module level to avoid circular imports
+# It should be called after all models are imported, typically in the app lifespan
 
 # Build database URL
 
