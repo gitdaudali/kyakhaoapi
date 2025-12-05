@@ -11,31 +11,26 @@ __pycache__/
 *.pyc
 .Python
 
-# Virtualenv
+# Virtualenv - MUST NOT COMMIT TO PRODUCTION
 venv/
 env/
 .venv/
 ENV/
 env.bak/
 venv.bak/
+**/venv/
+**/env/
 
 # Celery
 celerybeat-schedule*
 celerybeat-schedule.bak
 celerybeat-schedule.dat
 celerybeat-schedule.dir
-
-# Django
-logs/
-*.log
-*.pot
-*.sqlite3
-db.sqlite3
-media/
-staticfiles/
+celerybeat-schedule.db
 
 # Alembic
 alembic/__pycache__/
+alembic/versions/__pycache__/
 */migrations/__pycache__/
 */migrations/*.pyc
 
@@ -64,9 +59,12 @@ Desktop.ini
 coverage.xml
 htmlcov/
 .tox/
+.nox/
 .pytest_cache/
 .hypothesis/
 *.cover
+.cache
+nosetests.xml
 
 # Environments and Secrets
 .env
@@ -98,6 +96,7 @@ dmypy.json
 *.sqlite
 *.sqlite3
 *.db-journal
+db.sqlite3
 
 # Test files
 policy_test_frontend.html
@@ -105,29 +104,96 @@ test_*.html
 
 # Build / Distribution
 build/
+develop-eggs/
 dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
 *.whl
 *.tar.gz
+.installed.cfg
+MANIFEST
 
 # Jupyter Notebook
-.ipynb_checkpoints
+.ipynb_checkpoints/
+*.ipynb
 
 # pyenv
 .python-version
-
-# Local development scripts (optional - uncomment if you don't want to track them)
-# *.ps1
-# *.sh
-# setup_*.ps1
-# setup_*.sh
 
 # Temporary files
 *.tmp
 *.temp
 *.bak
-*.swp
 *~
 
 # Project specific
 local_settings.py
 local_config.py
+tatus
+
+# Docker
+.dockerignore
+*.dockerignore
+
+# FastAPI / Uvicorn
+*.pid
+*.sock
+
+# Type checking
+.pytype/
+
+# Bandit security
+.bandit
+
+# Cython
+*.c
+*.html
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Translations
+*.mo
+*.pot
+
+# Flask stuff (if used)
+instance/
+.webassets-cache
+
+# Scrapy stuff
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# SageMath parsed files
+*.sage.py
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# Pyre type checker
+.pyre/
+
+# Django (if used)
+logs/
+media/
+staticfiles/
