@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Hummus",
+    "description": "Traditional Creamy chickpea dip with olive oil",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 3.4
+  },
+  {
+    "name": "Baba Ganoush",
+    "description": "Homemade Smoky eggplant dip",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 3.6
+  },
+  {
+    "name": "Chicken Mandi",
+    "description": "Signature Fragrant rice with tender spiced chicken",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 3.5
+  },
+  {
+    "name": "Beef Shawarma",
+    "description": "Fresh Tender beef wrapped in pita with garlic sauce",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 3.5
+  },
+  {
+    "name": "Mixed Shawarma",
+    "description": "Delicious Combination of chicken and beef",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 3.5
+  },
+  {
+    "name": "Chicken Shawarma",
+    "description": "Premium Marinated chicken wrapped in pita bread with tahini",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 3.6
+  }
+]

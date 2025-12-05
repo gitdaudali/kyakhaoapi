@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Cappuccino",
+    "description": "Special Espresso with steamed milk and foam",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.6
+  },
+  {
+    "name": "Mocha",
+    "description": "Authentic Chocolate espresso with steamed milk",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  },
+  {
+    "name": "Iced Latte",
+    "description": "Traditional Cold latte with ice",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  },
+  {
+    "name": "Iced Coffee",
+    "description": "Homemade Cold coffee with ice",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.6
+  },
+  {
+    "name": "Bagel with Cream Cheese",
+    "description": "Signature Fresh bagel with cream cheese",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.7
+  },
+  {
+    "name": "Banana Bread",
+    "description": "Fresh Moist banana bread slice",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  }
+]

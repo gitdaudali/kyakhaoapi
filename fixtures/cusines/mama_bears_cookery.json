@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Qorma",
+    "description": "Special Mild mutton curry with yogurt",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Yakhni Pulao",
+    "description": "Authentic Rice cooked with mutton stock",
+    "price": 950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Qorma",
+    "description": "Traditional Mild chicken curry with yogurt",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Homemade Lentil curry with rice",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Signature Beef meatballs in curry",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Kofta",
+    "description": "Fresh Chicken meatballs in curry",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  }
+]

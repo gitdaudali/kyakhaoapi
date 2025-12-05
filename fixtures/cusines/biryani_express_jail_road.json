@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Qorma",
+    "description": "Traditional Mild mutton curry with yogurt",
+    "price": 2000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Homemade Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Seekh Kabab (4pc)",
+    "description": "Signature Spiced minced meat skewers",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Fresh Spicy chicken curry cooked in a wok",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Delicious Slow-cooked mutton in spicy gravy",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Chicken Qorma",
+    "description": "Premium Mild chicken curry with yogurt",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.2
+  }
+]

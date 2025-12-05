@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Pulao",
+    "description": "Traditional Mildly spiced rice with chicken",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Nihari",
+    "description": "Homemade Slow-cooked chicken in spicy gravy",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Paratha Roll",
+    "description": "Signature Paratha stuffed with spiced chicken",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Mutton Qorma",
+    "description": "Fresh Mild mutton curry with yogurt",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Delicious Spicy chicken with bell peppers",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Premium Stuffed paratha with your choice of filling",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  }
+]

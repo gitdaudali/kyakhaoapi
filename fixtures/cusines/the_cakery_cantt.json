@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Tiramisu",
+    "description": "Signature Italian classic with coffee and mascarpone",
+    "price": 1100,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.8
+  },
+  {
+    "name": "Chocolate Cake Slice",
+    "description": "Fresh Rich chocolate cake with frosting",
+    "price": 700,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 5.0
+  },
+  {
+    "name": "Panna Cotta",
+    "description": "Delicious Italian creamy dessert",
+    "price": 800,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 5.0
+  },
+  {
+    "name": "Cheesecake",
+    "description": "Premium Creamy New York style cheesecake",
+    "price": 950,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 5.0
+  },
+  {
+    "name": "Ras Malai (2pc)",
+    "description": "Special Sweet cheese dumplings in milk",
+    "price": 500,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.9
+  },
+  {
+    "name": "Gulab Jamun (2pc)",
+    "description": "Authentic Sweet milk dumplings in sugar syrup",
+    "price": 200,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 5.0
+  }
+]

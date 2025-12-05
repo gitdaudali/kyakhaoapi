@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Orange Chicken",
+    "description": "Fresh Crispy chicken with orange glaze",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 5.0
+  },
+  {
+    "name": "Beef Chow Mein",
+    "description": "Delicious Stir-fried noodles with beef",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.9
+  },
+  {
+    "name": "Chicken Lo Mein",
+    "description": "Premium Soft noodles with chicken and vegetables",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.9
+  },
+  {
+    "name": "Spring Rolls (4pc)",
+    "description": "Special Crispy spring rolls filled with vegetables",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Hot and Sour Soup",
+    "description": "Authentic Traditional Chinese soup with a perfect balance of heat and tang",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.6
+  },
+  {
+    "name": "Wonton Soup",
+    "description": "Traditional Clear soup with pork wontons",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 5.0
+  }
+]

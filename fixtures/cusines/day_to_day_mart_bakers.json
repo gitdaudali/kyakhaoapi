@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Ice Cream (2 Scoops)",
+    "description": "Premium Creamy ice cream in your favorite flavor",
+    "price": 300,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.2
+  },
+  {
+    "name": "Gulab Jamun (2pc)",
+    "description": "Special Sweet milk dumplings in sugar syrup",
+    "price": 200,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.2
+  },
+  {
+    "name": "Panna Cotta",
+    "description": "Authentic Italian creamy dessert",
+    "price": 750,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.3
+  },
+  {
+    "name": "Strawberry Cheesecake",
+    "description": "Traditional Cheesecake topped with fresh strawberries",
+    "price": 950,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.6
+  },
+  {
+    "name": "Apple Pie",
+    "description": "Homemade Warm apple pie with cinnamon",
+    "price": 600,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.4
+  },
+  {
+    "name": "Kulfi",
+    "description": "Signature Traditional frozen dessert",
+    "price": 350,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.2
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Wings (6pc)",
+    "description": "Traditional Spicy fried chicken wings",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.0
+  },
+  {
+    "name": "Chicken Fillet Burger",
+    "description": "Homemade Grilled chicken fillet with mayo",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.0
+  },
+  {
+    "name": "Onion Rings (6pc)",
+    "description": "Signature Crispy battered onion rings",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.0
+  },
+  {
+    "name": "Double Beef Burger",
+    "description": "Fresh Two beef patties with cheese and vegetables",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.0
+  },
+  {
+    "name": "Veggie Burger",
+    "description": "Delicious Vegetable patty with fresh toppings",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.0
+  },
+  {
+    "name": "French Fries (Regular)",
+    "description": "Premium Golden crispy fries",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.0
+  }
+]

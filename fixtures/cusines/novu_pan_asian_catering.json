@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Teriyaki",
+    "description": "Homemade Grilled beef with teriyaki sauce",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 3.5
+  },
+  {
+    "name": "Dragon Roll",
+    "description": "Signature Eel and cucumber with avocado",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 3.3
+  },
+  {
+    "name": "Gyoza (6pc)",
+    "description": "Fresh Pan-fried dumplings",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 3.5
+  },
+  {
+    "name": "Spicy Tuna Roll",
+    "description": "Delicious Tuna with spicy mayo",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 3.5
+  },
+  {
+    "name": "Beef Ramen",
+    "description": "Premium Ramen with tender beef slices",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 3.2
+  },
+  {
+    "name": "Chicken Katsu",
+    "description": "Special Breaded and fried chicken cutlet",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 3.4
+  }
+]

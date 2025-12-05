@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Pulao",
+    "description": "Fresh Spiced rice with tender beef",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Delicious Beef meatballs in curry",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Korma",
+    "description": "Premium Mild creamy chicken curry",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Special Spicy chicken curry cooked in a wok",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Authentic Creamy mutton curry in clay pot",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Traditional Paratha stuffed with beef",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Special Spicy chicken with bell peppers",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Authentic Spicy chicken curry cooked in a wok",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Traditional Marinated grilled chicken pieces",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Nihari",
+    "description": "Homemade Slow-cooked chicken in spicy gravy",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Signature Naan with garlic and butter",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Mutton Biryani",
+    "description": "Fresh Aromatic rice with tender mutton pieces",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

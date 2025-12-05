@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Kofta",
+    "description": "Premium Chicken meatballs in curry",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Special Paratha stuffed with beef",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.2
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Authentic Spicy mutton curry cooked in a wok",
+    "price": 1800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  },
+  {
+    "name": "Chicken Curry",
+    "description": "Traditional chicken curry",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.7
+  },
+  {
+    "name": "Chicken Korma",
+    "description": "Homemade Mild creamy chicken curry",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Signature Naan with garlic and butter",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  }
+]

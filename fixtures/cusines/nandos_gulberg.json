@@ -1,0 +1,58 @@
+[
+  {
+    "name": "1/4 Chicken (Peri-Peri)",
+    "description": "Quarter chicken marinated in peri-peri sauce",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "1/2 Chicken (Peri-Peri)",
+    "description": "Half chicken with your choice of peri-peri flavor",
+    "price": 1800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Butterfly",
+    "description": "Butterflied chicken breast with peri-peri sauce",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Peri-Peri Wings (5pc)",
+    "description": "Spicy chicken wings",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Grilled Chicken Wrap",
+    "description": "Grilled chicken in a soft tortilla wrap",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Peri-Peri Fries",
+    "description": "Crispy fries with peri-peri seasoning",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Garlic Bread",
+    "description": "Warm bread with garlic butter",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  }
+]

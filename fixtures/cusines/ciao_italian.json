@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Naan (2pc)",
+    "description": "Homemade Freshly baked tandoori bread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Signature Stuffed paratha with your choice of filling",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.8
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Fresh Spicy mutton curry cooked in a wok",
+    "price": 1800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Chicken Kofta",
+    "description": "Delicious Chicken meatballs in curry",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Chicken Curry",
+    "description": "Premium Traditional chicken curry",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.7
+  },
+  {
+    "name": "Mutton Qorma",
+    "description": "Special Mild mutton curry with yogurt",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.9
+  }
+]

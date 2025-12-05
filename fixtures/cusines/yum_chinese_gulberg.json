@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Shrimp Chow Mein",
+    "description": "Special Stir-fried noodles with shrimp",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.6
+  },
+  {
+    "name": "Beef with Broccoli",
+    "description": "Authentic Tender beef with fresh broccoli",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Shrimp Fried Rice",
+    "description": "Traditional Fried rice with fresh shrimp",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Spring Rolls (4pc)",
+    "description": "Homemade Crispy rolls with chicken and vegetables",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.9
+  },
+  {
+    "name": "Mongolian Beef",
+    "description": "Signature Tender beef with vegetables in savory sauce",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Wonton Soup",
+    "description": "Fresh Clear soup with pork wontons",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  }
+]

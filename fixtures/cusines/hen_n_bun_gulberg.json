@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Seekh Kabab (4pc)",
+    "description": "Traditional Spiced minced meat skewers",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Homemade Creamy mutton curry in clay pot",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Chicken Kofta",
+    "description": "Signature Chicken meatballs in curry",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Fresh Spicy mutton curry cooked in a wok",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Delicious Stuffed paratha with your choice of filling",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Pulao",
+    "description": "Premium Mildly spiced rice with chicken",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

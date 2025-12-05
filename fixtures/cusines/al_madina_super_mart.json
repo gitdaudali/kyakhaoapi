@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Special Spicy chicken with bell peppers",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Beef Pulao",
+    "description": "Authentic Spiced rice with tender beef",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Traditional Spicy chicken curry cooked in a wok",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.7
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Homemade Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Signature Freshly baked tandoori bread",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Fresh Paratha stuffed with beef",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  }
+]

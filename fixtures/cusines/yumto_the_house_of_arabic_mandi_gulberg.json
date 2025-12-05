@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Chicken Mandi",
+    "description": "Fragrant rice with tender spiced chicken",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 4.8
+  },
+  {
+    "name": "Mutton Mandi",
+    "description": "Aromatic rice with tender mutton",
+    "price": 2000,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 4.8
+  },
+  {
+    "name": "Mixed Grill",
+    "description": "Assorted grilled meats with rice",
+    "price": 1800,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 4.5
+  },
+  {
+    "name": "Hummus",
+    "description": "Creamy chickpea dip with olive oil",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 4.5
+  },
+  {
+    "name": "Fattoush Salad",
+    "description": "Fresh mixed salad with pita chips",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 4.7
+  }
+]

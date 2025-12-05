@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Nihari",
+    "description": "Special Slow-cooked mutton in spicy gravy",
+    "price": 2100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Nihari",
+    "description": "Authentic Slow-cooked chicken in spicy gravy",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Korma",
+    "description": "Traditional Mild creamy chicken curry",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Homemade Freshly baked tandoori bread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Handi",
+    "description": "Signature Creamy chicken curry cooked in a clay pot",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Qorma",
+    "description": "Fresh Mild mutton curry with yogurt",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Delicious Aromatic rice cooked with chicken stock",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Premium Spicy chicken with bell peppers",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Special Creamy mutton curry in clay pot",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Authentic Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Traditional Beef meatballs in curry",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Mutton Yakhni Pulao",
+    "description": "Homemade Rice cooked with mutton stock",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

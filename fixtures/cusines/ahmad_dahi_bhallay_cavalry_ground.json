@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Karahi",
+    "description": "Fresh Spicy chicken curry cooked in a wok",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Delicious Stuffed paratha with your choice of filling",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Premium Freshly baked tandoori bread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Mutton Biryani",
+    "description": "Special Aromatic rice with tender mutton pieces",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Authentic Paratha stuffed with beef",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Beef Pulao",
+    "description": "Traditional Spiced rice with tender beef",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  }
+]

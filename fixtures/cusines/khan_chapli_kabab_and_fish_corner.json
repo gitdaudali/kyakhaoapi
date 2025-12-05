@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Delicious Spicy chicken with bell peppers",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Biryani",
+    "description": "Premium Fragrant basmati rice with tender chicken and spices",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Special Freshly baked tandoori bread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Curry",
+    "description": "Authentic Traditional chicken curry",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Pulao",
+    "description": "Traditional Mildly spiced rice with chicken",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Mutton Yakhni Pulao",
+    "description": "Homemade Rice cooked with mutton stock",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  }
+]

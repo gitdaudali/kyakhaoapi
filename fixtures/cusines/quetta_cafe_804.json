@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mocha",
+    "description": "Special Chocolate espresso with steamed milk",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.0
+  },
+  {
+    "name": "Croissant",
+    "description": "Authentic Buttery French pastry",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.0
+  },
+  {
+    "name": "Cinnamon Roll",
+    "description": "Traditional Sweet cinnamon pastry",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.4
+  },
+  {
+    "name": "Iced Latte",
+    "description": "Homemade Cold latte with ice",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.2
+  },
+  {
+    "name": "Frappuccino",
+    "description": "Signature Blended coffee drink",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.3
+  },
+  {
+    "name": "Caramel Macchiato",
+    "description": "Fresh Espresso with caramel and steamed milk",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.2
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Paratha Roll",
+    "description": "Fresh Paratha stuffed with spiced chicken",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  },
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Delicious Naan with garlic and butter",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Premium Slow-cooked mutton in spicy gravy",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Special Stuffed paratha with your choice of filling",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  },
+  {
+    "name": "Chicken Qorma",
+    "description": "Authentic Mild chicken curry with yogurt",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.3
+  },
+  {
+    "name": "Chicken Pulao",
+    "description": "Traditional Mildly spiced rice with chicken",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Club Burger",
+    "description": "Premium Chicken with bacon, lettuce, and tomato",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 5.0
+  },
+  {
+    "name": "Fish Burger",
+    "description": "Special Crispy fish fillet with tartar sauce",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.9
+  },
+  {
+    "name": "BBQ Bacon Burger",
+    "description": "Authentic Beef patty with bacon and BBQ sauce",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  },
+  {
+    "name": "Veggie Burger",
+    "description": "Traditional Vegetable patty with fresh toppings",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.8
+  },
+  {
+    "name": "Fried Chicken (4pc)",
+    "description": "Homemade Crispy fried chicken pieces",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Broast (Full)",
+    "description": "Signature Full broasted chicken",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 5.0
+  }
+]

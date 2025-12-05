@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Premium Naan with garlic and butter",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.3
+  },
+  {
+    "name": "Beef Biryani",
+    "description": "Special Spiced rice with beef chunks",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.2
+  },
+  {
+    "name": "Chicken Curry",
+    "description": "Authentic Traditional chicken curry",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Traditional Lentil curry with rice",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Homemade Spicy chicken curry cooked in a wok",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  },
+  {
+    "name": "Chicken Nihari",
+    "description": "Signature Slow-cooked chicken in spicy gravy",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  }
+]

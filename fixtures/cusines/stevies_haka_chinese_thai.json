@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Vegetable Fried Rice",
+    "description": "Special Fried rice with mixed vegetables",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Spring Rolls (4pc)",
+    "description": "Authentic Crispy spring rolls filled with vegetables",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.9
+  },
+  {
+    "name": "Kung Pao Chicken",
+    "description": "Traditional Spicy stir-fried chicken with peanuts and vegetables",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.9
+  },
+  {
+    "name": "General Tso's Chicken",
+    "description": "Homemade Crispy chicken in a sweet and spicy sauce",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Hot and Sour Soup",
+    "description": "Signature Traditional Chinese soup with a perfect balance of heat and tang",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Honey Chicken",
+    "description": "Fresh Crispy chicken with honey glaze",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 5.0
+  }
+]

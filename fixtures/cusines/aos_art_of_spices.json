@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Biryani",
+    "description": "Special Fragrant basmati rice with tender chicken and spices",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Authentic Slow-cooked mutton in spicy gravy",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Nihari",
+    "description": "Traditional Slow-cooked chicken in spicy gravy",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Seekh Kabab (4pc)",
+    "description": "Homemade Spiced minced meat skewers",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Signature Spicy chicken with bell peppers",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Freshly baked tandoori bread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

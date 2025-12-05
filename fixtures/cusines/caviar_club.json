@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Biryani",
+    "description": "Homemade Fragrant basmati rice with tender chicken and spices",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Signature Freshly baked tandoori bread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Beef Biryani",
+    "description": "Fresh Spiced rice with beef chunks",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Butter Naan (2pc)",
+    "description": "Delicious Naan brushed with butter",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Mutton Biryani",
+    "description": "Premium Aromatic rice with tender mutton pieces",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Mutton Qorma",
+    "description": "Special Mild mutton curry with yogurt",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  }
+]

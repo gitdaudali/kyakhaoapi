@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Paratha Roll",
+    "description": "Signature Stuffed paratha with your choice of filling",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Kofta",
+    "description": "Fresh Chicken meatballs in curry",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Delicious Aromatic rice cooked with chicken stock",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Mutton Qorma",
+    "description": "Premium Mild mutton curry with yogurt",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Special Marinated grilled chicken pieces",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Biryani",
+    "description": "Authentic Aromatic rice with tender mutton pieces",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

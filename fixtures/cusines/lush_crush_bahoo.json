@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Nihari",
+    "description": "Delicious Slow-cooked chicken in spicy gravy",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Premium Spicy mutton curry cooked in a wok",
+    "price": 1800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Special Spicy chicken curry cooked in a wok",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Qorma",
+    "description": "Authentic Mild chicken curry with yogurt",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Biryani",
+    "description": "Traditional Fragrant basmati rice with tender chicken and spices",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Homemade Creamy mutton curry in clay pot",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Fish Burger",
+    "description": "Homemade Crispy fish fillet with tartar sauce",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.4
+  },
+  {
+    "name": "Chicken Broast (Full)",
+    "description": "Signature Full broasted chicken",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.6
+  },
+  {
+    "name": "Fried Chicken (4pc)",
+    "description": "Fresh Crispy fried chicken pieces",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Nuggets (6pc)",
+    "description": "Delicious Crispy chicken nuggets",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Burger",
+    "description": "Premium Crispy chicken patty with fresh vegetables",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.3
+  },
+  {
+    "name": "Zinger Burger",
+    "description": "Special Spicy chicken fillet burger with mayo",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.4
+  }
+]

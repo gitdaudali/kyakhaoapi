@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Qorma",
+    "description": "Signature Mild mutton curry with yogurt",
+    "price": 1800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.8
+  },
+  {
+    "name": "Chicken Paratha Roll",
+    "description": "Fresh Paratha stuffed with spiced chicken",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Chicken Handi",
+    "description": "Delicious Creamy chicken curry cooked in a clay pot",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.8
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Premium Beef meatballs in curry",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.7
+  },
+  {
+    "name": "Beef Pulao",
+    "description": "Special Spiced rice with tender beef",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Authentic Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  }
+]

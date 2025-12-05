@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Karahi",
+    "description": "Traditional Spicy mutton curry cooked in a wok",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Korma",
+    "description": "Homemade Mild creamy chicken curry",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Mutton Yakhni Pulao",
+    "description": "Signature Rice cooked with mutton stock",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Fresh Paratha stuffed with beef",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Nihari",
+    "description": "Delicious Slow-cooked chicken in spicy gravy",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Biryani",
+    "description": "Premium Aromatic rice with tender mutton pieces",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

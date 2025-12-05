@@ -1,0 +1,50 @@
+[
+  {
+    "name": "General Tso's Chicken",
+    "description": "Authentic Crispy chicken in a sweet and spicy sauce",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.3
+  },
+  {
+    "name": "Sweet and Sour Chicken",
+    "description": "Traditional Crispy chicken pieces in tangy sweet and sour sauce",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.6
+  },
+  {
+    "name": "Lemon Chicken",
+    "description": "Homemade Crispy chicken with lemon sauce",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.4
+  },
+  {
+    "name": "Mongolian Beef",
+    "description": "Signature Tender beef with vegetables in savory sauce",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Mapo Tofu",
+    "description": "Fresh Spicy Sichuan dish with tofu and minced meat",
+    "price": 950,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.7
+  },
+  {
+    "name": "Egg Drop Soup",
+    "description": "Delicious Classic Chinese egg soup",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.7
+  }
+]

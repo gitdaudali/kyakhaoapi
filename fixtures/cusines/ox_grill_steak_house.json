@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Grilled Fish",
+    "description": "Homemade Fresh fish fillet grilled to perfection",
+    "price": 1600,
+    "mood": "Dinner",
+    "cuisine": "Steak",
+    "rating": 4.6
+  },
+  {
+    "name": "T-Bone Steak",
+    "description": "Signature Premium T-bone steak",
+    "price": 3000,
+    "mood": "Dinner",
+    "cuisine": "Steak",
+    "rating": 4.8
+  },
+  {
+    "name": "Garlic Bread",
+    "description": "Fresh Toasted bread with garlic butter",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Steak",
+    "rating": 4.8
+  },
+  {
+    "name": "Baked Potato",
+    "description": "Delicious Baked potato with butter and sour cream",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Steak",
+    "rating": 4.6
+  },
+  {
+    "name": "Ribeye Steak",
+    "description": "Premium Juicy ribeye steak cooked to perfection",
+    "price": 2850,
+    "mood": "Dinner",
+    "cuisine": "Steak",
+    "rating": 4.8
+  },
+  {
+    "name": "Grilled Chicken",
+    "description": "Special Marinated grilled chicken breast",
+    "price": 1500,
+    "mood": "Dinner",
+    "cuisine": "Steak",
+    "rating": 4.5
+  }
+]

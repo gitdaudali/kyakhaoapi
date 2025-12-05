@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Double Beef Burger",
+    "description": "Premium Two beef patties with cheese and vegetables",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.8
+  },
+  {
+    "name": "French Fries (Large)",
+    "description": "Special Large portion of crispy fries",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 5.0
+  },
+  {
+    "name": "Cheese Burger",
+    "description": "Authentic Beef patty with melted cheese",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  },
+  {
+    "name": "Chili Cheese Fries",
+    "description": "Traditional Fries with chili and cheese",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.8
+  },
+  {
+    "name": "BBQ Bacon Burger",
+    "description": "Homemade Beef patty with bacon and BBQ sauce",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Tenders (3pc)",
+    "description": "Signature Breaded chicken tenders",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.8
+  }
+]

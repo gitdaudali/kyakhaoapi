@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Biryani",
+    "description": "Authentic Fragrant basmati rice with tender chicken and spices",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Traditional Creamy mutton curry in clay pot",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.1
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Homemade Spicy mutton curry cooked in a wok",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.0
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Signature Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Chicken Curry",
+    "description": "Fresh Traditional chicken curry",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Delicious Lentil curry with rice",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Vegetable Fried Rice",
+    "description": "Premium Fried rice with mixed vegetables",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.4
+  },
+  {
+    "name": "Shrimp Fried Rice",
+    "description": "Special Fried rice with fresh shrimp",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.4
+  },
+  {
+    "name": "Szechuan Chicken",
+    "description": "Authentic Spicy Szechuan-style chicken",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.2
+  },
+  {
+    "name": "Lemon Chicken",
+    "description": "Traditional Crispy chicken with lemon sauce",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.4
+  },
+  {
+    "name": "Mapo Tofu",
+    "description": "Homemade Spicy Sichuan dish with tofu and minced meat",
+    "price": 950,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.2
+  },
+  {
+    "name": "Beef Fried Rice",
+    "description": "Signature Fried rice with tender beef strips",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.4
+  }
+]

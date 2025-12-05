@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Traditional Paratha stuffed with beef",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Qorma",
+    "description": "Homemade Mild chicken curry with yogurt",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Signature Creamy mutton curry in clay pot",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Biryani",
+    "description": "Fresh Fragrant basmati rice with tender chicken and spices",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Delicious Spicy chicken curry cooked in a wok",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Premium Spicy mutton curry cooked in a wok",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

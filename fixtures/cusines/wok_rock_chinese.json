@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Lo Mein",
+    "description": "Homemade Soft noodles with chicken and vegetables",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.1
+  },
+  {
+    "name": "Hot and Sour Soup",
+    "description": "Signature Traditional Chinese soup with a perfect balance of heat and tang",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.2
+  },
+  {
+    "name": "Lemon Chicken",
+    "description": "Fresh Crispy chicken with lemon sauce",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.2
+  },
+  {
+    "name": "Chicken Chow Mein",
+    "description": "Delicious Stir-fried noodles with chicken and mixed vegetables",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.4
+  },
+  {
+    "name": "Kung Pao Chicken",
+    "description": "Premium Spicy stir-fried chicken with peanuts and vegetables",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.2
+  },
+  {
+    "name": "Szechuan Chicken",
+    "description": "Special Spicy Szechuan-style chicken",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.4
+  }
+]

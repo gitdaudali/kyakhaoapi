@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Chops",
+    "description": "Signature Grilled mutton chops",
+    "price": 1750,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 4.2
+  },
+  {
+    "name": "Mixed BBQ Platter",
+    "description": "Fresh Assorted grilled meats with naan",
+    "price": 1950,
+    "mood": "Dinner",
+    "cuisine": "BBQ",
+    "rating": 4.0
+  },
+  {
+    "name": "Seekh Kabab (4pc)",
+    "description": "Delicious Spiced minced meat skewers",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 3.8
+  },
+  {
+    "name": "Beef Boti",
+    "description": "Premium Tender beef cubes marinated and grilled",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 4.2
+  },
+  {
+    "name": "BBQ Chicken (Full)",
+    "description": "Special Grilled full chicken",
+    "price": 2200,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 3.8
+  },
+  {
+    "name": "BBQ Chicken (Half)",
+    "description": "Authentic Grilled half chicken",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 3.9
+  }
+]

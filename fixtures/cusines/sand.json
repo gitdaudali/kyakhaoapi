@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Nihari",
+    "description": "Homemade Slow-cooked mutton in spicy gravy",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Mutton Biryani",
+    "description": "Signature Aromatic rice with tender mutton pieces",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  },
+  {
+    "name": "Seekh Kabab (4pc)",
+    "description": "Fresh Spiced minced meat skewers",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Nihari",
+    "description": "Delicious Slow-cooked chicken in spicy gravy",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Korma",
+    "description": "Premium Mild creamy chicken curry",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Special Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  }
+]

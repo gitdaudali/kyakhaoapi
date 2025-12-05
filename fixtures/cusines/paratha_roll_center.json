@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Curry",
+    "description": "Delicious Traditional chicken curry",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Premium Slow-cooked mutton in spicy gravy",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Special Naan with garlic and butter",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Mutton Qorma",
+    "description": "Authentic Mild mutton curry with yogurt",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Traditional Marinated grilled chicken pieces",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Chicken Qorma",
+    "description": "Homemade Mild chicken curry with yogurt",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  }
+]

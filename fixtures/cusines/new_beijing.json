@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Kofta",
+    "description": "Special Beef meatballs in curry",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Beef Biryani",
+    "description": "Authentic Spiced rice with beef chunks",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Traditional Slow-cooked mutton in spicy gravy",
+    "price": 2050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Pulao",
+    "description": "Homemade Mildly spiced rice with chicken",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Kofta",
+    "description": "Signature Chicken meatballs in curry",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Chicken Korma",
+    "description": "Fresh Mild creamy chicken curry",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  }
+]

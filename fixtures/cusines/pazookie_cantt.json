@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Premium Aromatic rice cooked with chicken stock",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Special Marinated grilled chicken pieces",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Butter Naan (2pc)",
+    "description": "Authentic Naan brushed with butter",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Traditional Paratha stuffed with beef",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Homemade Beef meatballs in curry",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Signature Spicy chicken curry cooked in a wok",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.1
+  }
+]

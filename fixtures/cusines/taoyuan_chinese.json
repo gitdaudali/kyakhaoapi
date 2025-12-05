@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Sweet and Sour Chicken",
+    "description": "Special Crispy chicken pieces in tangy sweet and sour sauce",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.6
+  },
+  {
+    "name": "Mapo Tofu",
+    "description": "Authentic Spicy Sichuan dish with tofu and minced meat",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Wonton Soup",
+    "description": "Traditional Clear soup with pork wontons",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Chow Mein",
+    "description": "Homemade Stir-fried noodles with chicken and mixed vegetables",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Lo Mein",
+    "description": "Signature Soft noodles with chicken and vegetables",
+    "price": 950,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Spring Rolls (4pc)",
+    "description": "Fresh Crispy spring rolls filled with vegetables",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.6
+  }
+]

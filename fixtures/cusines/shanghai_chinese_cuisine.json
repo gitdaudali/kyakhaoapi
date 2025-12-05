@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Lo Mein",
+    "description": "Fresh Soft noodles with chicken and vegetables",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.1
+  },
+  {
+    "name": "Orange Chicken",
+    "description": "Delicious Crispy chicken with orange glaze",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.1
+  },
+  {
+    "name": "General Tso's Chicken",
+    "description": "Premium Crispy chicken in a sweet and spicy sauce",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.9
+  },
+  {
+    "name": "Szechuan Chicken",
+    "description": "Special Spicy Szechuan-style chicken",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.1
+  },
+  {
+    "name": "Wonton Soup",
+    "description": "Authentic Clear soup with pork wontons",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.1
+  },
+  {
+    "name": "Mongolian Beef",
+    "description": "Traditional Tender beef with vegetables in savory sauce",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.0
+  }
+]

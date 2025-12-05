@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Baked Potato",
+    "description": "Authentic Baked potato with butter and sour cream",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Steak",
+    "rating": 4.8
+  },
+  {
+    "name": "Grilled Chicken",
+    "description": "Traditional Marinated grilled chicken breast",
+    "price": 1450,
+    "mood": "Dinner",
+    "cuisine": "Steak",
+    "rating": 5.0
+  },
+  {
+    "name": "T-Bone Steak",
+    "description": "Homemade Premium T-bone steak",
+    "price": 3050,
+    "mood": "Dinner",
+    "cuisine": "Steak",
+    "rating": 4.9
+  },
+  {
+    "name": "Garlic Bread",
+    "description": "Signature Toasted bread with garlic butter",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Steak",
+    "rating": 4.6
+  },
+  {
+    "name": "Sirloin Steak",
+    "description": "Fresh Tender sirloin with your choice of sides",
+    "price": 2400,
+    "mood": "Dinner",
+    "cuisine": "Steak",
+    "rating": 4.6
+  },
+  {
+    "name": "Ribeye Steak",
+    "description": "Delicious Juicy ribeye steak cooked to perfection",
+    "price": 2700,
+    "mood": "Dinner",
+    "cuisine": "Steak",
+    "rating": 4.5
+  }
+]

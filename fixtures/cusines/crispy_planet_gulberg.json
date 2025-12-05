@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Kofta",
+    "description": "Authentic Beef meatballs in curry",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.9
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Traditional Spicy chicken curry cooked in a wok",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.8
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Homemade Freshly baked tandoori bread",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.7
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Signature Lentil curry with rice",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.8
+  },
+  {
+    "name": "Chicken Kofta",
+    "description": "Fresh Chicken meatballs in curry",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Delicious Stuffed paratha with your choice of filling",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  }
+]

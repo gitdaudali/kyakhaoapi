@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Cheese Burger",
+    "description": "Delicious Beef patty with melted cheese",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.5
+  },
+  {
+    "name": "Double Beef Burger",
+    "description": "Premium Two beef patties with cheese and vegetables",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  },
+  {
+    "name": "Fried Chicken (4pc)",
+    "description": "Special Crispy fried chicken pieces",
+    "price": 950,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.3
+  },
+  {
+    "name": "Fish Burger",
+    "description": "Authentic Crispy fish fillet with tartar sauce",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.4
+  },
+  {
+    "name": "Classic Beef Burger",
+    "description": "Traditional Juicy beef patty with lettuce, tomato, and special sauce",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Strips (4pc)",
+    "description": "Homemade Breaded chicken strips",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.4
+  }
+]

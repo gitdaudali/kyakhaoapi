@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Garlic Bread",
+    "description": "Authentic Fresh baked bread with garlic butter",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.5
+  },
+  {
+    "name": "Buffalo Chicken Pizza",
+    "description": "Traditional Spicy buffalo chicken with blue cheese",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.5
+  },
+  {
+    "name": "BBQ Chicken Pizza",
+    "description": "Homemade Grilled chicken with BBQ sauce and red onions",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.3
+  },
+  {
+    "name": "Meat Lovers Pizza",
+    "description": "Signature Pepperoni, sausage, ham, and bacon",
+    "price": 1700,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.4
+  },
+  {
+    "name": "Pepperoni Pizza",
+    "description": "Fresh Traditional pepperoni with mozzarella cheese",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Fajita Pizza",
+    "description": "Delicious Spiced chicken with bell peppers and onions",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.5
+  }
+]

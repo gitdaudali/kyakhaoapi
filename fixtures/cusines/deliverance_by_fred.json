@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Delicious Paratha stuffed with beef",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Premium Beef meatballs in curry",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Special Freshly baked tandoori bread",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Authentic Spicy chicken curry cooked in a wok",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Beef Biryani",
+    "description": "Traditional Spiced rice with beef chunks",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Homemade Fresh flatbread",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  }
+]

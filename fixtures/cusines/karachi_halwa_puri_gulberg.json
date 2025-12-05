@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Nihari",
+    "description": "Delicious Slow-cooked mutton in spicy gravy",
+    "price": 2100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Premium Aromatic rice cooked with chicken stock",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Curry",
+    "description": "Special Traditional chicken curry",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Butter Naan (2pc)",
+    "description": "Authentic Naan brushed with butter",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Traditional Freshly baked tandoori bread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Homemade Lentil curry with rice",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

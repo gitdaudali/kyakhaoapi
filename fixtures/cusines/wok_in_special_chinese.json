@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Chow Mein",
+    "description": "Authentic Stir-fried noodles with chicken and mixed vegetables",
+    "price": 950,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Shrimp Fried Rice",
+    "description": "Traditional Fried rice with fresh shrimp",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Kung Pao Chicken",
+    "description": "Homemade Spicy stir-fried chicken with peanuts and vegetables",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.9
+  },
+  {
+    "name": "Peking Duck",
+    "description": "Signature Crispy duck with pancakes",
+    "price": 2400,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Fried Rice",
+    "description": "Fresh Fragrant fried rice with tender chicken pieces and vegetables",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Honey Chicken",
+    "description": "Delicious Crispy chicken with honey glaze",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.9
+  }
+]

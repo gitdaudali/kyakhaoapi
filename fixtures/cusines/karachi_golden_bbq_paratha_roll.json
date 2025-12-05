@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Boti",
+    "description": "Authentic Tender beef cubes marinated and grilled",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Traditional Marinated grilled chicken pieces",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 4.8
+  },
+  {
+    "name": "Mixed BBQ Platter",
+    "description": "Homemade Assorted grilled meats with naan",
+    "price": 2050,
+    "mood": "Dinner",
+    "cuisine": "BBQ",
+    "rating": 4.5
+  },
+  {
+    "name": "BBQ Chicken (Full)",
+    "description": "Signature Grilled full chicken",
+    "price": 2250,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 4.9
+  },
+  {
+    "name": "BBQ Chicken (Half)",
+    "description": "Fresh Grilled half chicken",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Boti",
+    "description": "Delicious Marinated chicken pieces grilled",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 4.6
+  }
+]

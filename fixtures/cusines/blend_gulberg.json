@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Qorma",
+    "description": "Premium Mild mutton curry with yogurt",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Beef Pulao",
+    "description": "Special Spiced rice with tender beef",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Authentic Spicy mutton curry cooked in a wok",
+    "price": 1800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Traditional Naan with garlic and butter",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Curry",
+    "description": "Homemade Traditional chicken curry",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Signature Spicy chicken curry cooked in a wok",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  }
+]

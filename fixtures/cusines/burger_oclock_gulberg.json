@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Broast (Full)",
+    "description": "Homemade Full broasted chicken",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 5.0
+  },
+  {
+    "name": "Onion Rings (6pc)",
+    "description": "Signature Crispy battered onion rings",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 5.0
+  },
+  {
+    "name": "Fried Chicken (4pc)",
+    "description": "Fresh Crispy fried chicken pieces",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.9
+  },
+  {
+    "name": "Zinger Burger",
+    "description": "Delicious Spicy chicken fillet burger with mayo",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  },
+  {
+    "name": "Veggie Burger",
+    "description": "Premium Vegetable patty with fresh toppings",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  },
+  {
+    "name": "Cheese Burger",
+    "description": "Special Beef patty with melted cheese",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.8
+  }
+]

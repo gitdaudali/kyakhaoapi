@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Chow Mein",
+    "description": "Premium Stir-fried noodles with beef",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.6
+  },
+  {
+    "name": "General Tso's Chicken",
+    "description": "Special Crispy chicken in a sweet and spicy sauce",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Shrimp Chow Mein",
+    "description": "Authentic Stir-fried noodles with shrimp",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.4
+  },
+  {
+    "name": "Wonton Soup",
+    "description": "Traditional Clear soup with pork wontons",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.7
+  },
+  {
+    "name": "Egg Drop Soup",
+    "description": "Homemade Classic Chinese egg soup",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Spring Rolls (4pc)",
+    "description": "Signature Crispy rolls with chicken and vegetables",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Kofta",
+    "description": "Signature Chicken meatballs in curry",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Fresh Stuffed paratha with your choice of filling",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Biryani",
+    "description": "Delicious Fragrant basmati rice with tender chicken and spices",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Chicken Korma",
+    "description": "Premium Mild creamy chicken curry",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Special Spicy chicken with bell peppers",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Authentic Slow-cooked mutton in spicy gravy",
+    "price": 2050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Frappuccino",
+    "description": "Signature Blended coffee drink",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.5
+  },
+  {
+    "name": "Latte",
+    "description": "Fresh Smooth espresso with steamed milk",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.5
+  },
+  {
+    "name": "Americano",
+    "description": "Delicious Espresso with hot water",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.5
+  },
+  {
+    "name": "Banana Bread",
+    "description": "Premium Moist banana bread slice",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.4
+  },
+  {
+    "name": "Mocha",
+    "description": "Special Chocolate espresso with steamed milk",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.4
+  },
+  {
+    "name": "Cappuccino",
+    "description": "Authentic Espresso with steamed milk and foam",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.7
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Korma",
+    "description": "Delicious Mild creamy chicken curry",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Mutton Qorma",
+    "description": "Premium Mild mutton curry with yogurt",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Handi",
+    "description": "Special Creamy chicken curry cooked in a clay pot",
+    "price": 1450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  },
+  {
+    "name": "Chicken Qorma",
+    "description": "Authentic Mild chicken curry with yogurt",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Traditional Freshly baked tandoori bread",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Homemade Beef meatballs in curry",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  }
+]

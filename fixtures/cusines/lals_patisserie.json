@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Butter Naan (2pc)",
+    "description": "Traditional Naan brushed with butter",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Homemade Spicy mutton curry cooked in a wok",
+    "price": 1800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Korma",
+    "description": "Signature Mild creamy chicken curry",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Fresh Naan with garlic and butter",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Chicken Pulao",
+    "description": "Delicious Mildly spiced rice with chicken",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Premium Aromatic rice cooked with chicken stock",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  }
+]

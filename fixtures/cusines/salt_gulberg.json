@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Qorma",
+    "description": "Homemade Mild chicken curry with yogurt",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.2
+  },
+  {
+    "name": "Chicken Kofta",
+    "description": "Signature Chicken meatballs in curry",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Fresh Spicy mutton curry cooked in a wok",
+    "price": 1750,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.3
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Delicious Marinated grilled chicken pieces",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  },
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Premium Aromatic rice cooked with chicken stock",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Chicken Paratha Roll",
+    "description": "Special Paratha stuffed with spiced chicken",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.2
+  }
+]

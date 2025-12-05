@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Nihari",
+    "description": "Fresh Slow-cooked chicken in spicy gravy",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Delicious Naan with garlic and butter",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Premium Aromatic rice cooked with chicken stock",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Mutton Biryani",
+    "description": "Special Aromatic rice with tender mutton pieces",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Authentic Beef meatballs in curry",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Traditional Slow-cooked mutton in spicy gravy",
+    "price": 2000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  }
+]

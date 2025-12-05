@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Spring Rolls (4pc)",
+    "description": "Special Crispy spring rolls filled with vegetables",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.7
+  },
+  {
+    "name": "Hot and Sour Soup",
+    "description": "Authentic Traditional Chinese soup with a perfect balance of heat and tang",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.4
+  },
+  {
+    "name": "Honey Chicken",
+    "description": "Traditional Crispy chicken with honey glaze",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Lo Mein",
+    "description": "Homemade Soft noodles with chicken and vegetables",
+    "price": 950,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Kung Pao Chicken",
+    "description": "Signature Spicy stir-fried chicken with peanuts and vegetables",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Beef Chow Mein",
+    "description": "Fresh Stir-fried noodles with beef",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  }
+]

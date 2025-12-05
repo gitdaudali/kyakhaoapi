@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Banana Bread",
+    "description": "Signature Moist banana bread slice",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.9
+  },
+  {
+    "name": "Mocha",
+    "description": "Fresh Chocolate espresso with steamed milk",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  },
+  {
+    "name": "Iced Latte",
+    "description": "Delicious Cold latte with ice",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.6
+  },
+  {
+    "name": "Espresso",
+    "description": "Premium Strong Italian coffee",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.9
+  },
+  {
+    "name": "Flat White",
+    "description": "Special Espresso with microfoam milk",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.5
+  },
+  {
+    "name": "Cinnamon Roll",
+    "description": "Authentic Sweet cinnamon pastry",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.7
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Pulao",
+    "description": "Premium Mildly spiced rice with chicken",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Special Freshly baked tandoori bread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Authentic Paratha stuffed with beef",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Mutton Qorma",
+    "description": "Traditional Mild mutton curry with yogurt",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Homemade Stuffed paratha with your choice of filling",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Signature Spicy mutton curry cooked in a wok",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  }
+]

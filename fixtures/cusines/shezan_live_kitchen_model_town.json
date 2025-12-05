@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Paratha Roll",
+    "description": "Special Paratha stuffed with spiced chicken",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Beef Biryani",
+    "description": "Authentic Spiced rice with beef chunks",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Traditional Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Chicken Handi",
+    "description": "Homemade Creamy chicken curry cooked in a clay pot",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Signature Paratha stuffed with beef",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Biryani",
+    "description": "Fresh Fragrant basmati rice with tender chicken and spices",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  }
+]

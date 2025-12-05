@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Qorma",
+    "description": "Signature Mild mutton curry with yogurt",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Fresh Stuffed paratha with your choice of filling",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.0
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Delicious Slow-cooked mutton in spicy gravy",
+    "price": 2000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Beef Pulao",
+    "description": "Premium Spiced rice with tender beef",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Beef Biryani",
+    "description": "Special Spiced rice with beef chunks",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Authentic Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  }
+]

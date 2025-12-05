@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Handi",
+    "description": "Fresh Creamy chicken curry cooked in a clay pot",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Chicken Kofta",
+    "description": "Delicious Chicken meatballs in curry",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Seekh Kabab (4pc)",
+    "description": "Premium Spiced minced meat skewers",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Special Creamy mutton curry in clay pot",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.3
+  },
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Authentic Aromatic rice cooked with chicken stock",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Traditional Slow-cooked mutton in spicy gravy",
+    "price": 2000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Pulao",
+    "description": "Traditional Mildly spiced rice with chicken",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Homemade Freshly baked tandoori bread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Signature Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Fresh Creamy mutton curry in clay pot",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Paratha Roll",
+    "description": "Delicious Paratha stuffed with spiced chicken",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Premium Beef meatballs in curry",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  }
+]

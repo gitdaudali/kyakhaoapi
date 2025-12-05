@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Pasta Salad",
+    "description": "Signature Cold pasta with vegetables and dressing",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 3.7
+  },
+  {
+    "name": "Four Cheese Pizza",
+    "description": "Fresh Mozzarella, cheddar, parmesan, and feta",
+    "price": 1450,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 3.4
+  },
+  {
+    "name": "Caesar Salad",
+    "description": "Delicious Fresh romaine lettuce with caesar dressing",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 3.5
+  },
+  {
+    "name": "Mushroom Pizza",
+    "description": "Premium Fresh mushrooms with mozzarella and herbs",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 3.4
+  },
+  {
+    "name": "Sausage Pizza",
+    "description": "Special Italian sausage with peppers and onions",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 3.4
+  },
+  {
+    "name": "Meat Lovers Pizza",
+    "description": "Authentic Pepperoni, sausage, ham, and bacon",
+    "price": 1700,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 3.6
+  }
+]

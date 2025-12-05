@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Biryani",
+    "description": "Fresh Fragrant basmati rice with tender chicken and spices",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Delicious Creamy mutton curry in clay pot",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Premium Spicy chicken with bell peppers",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Special Marinated grilled chicken pieces",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Authentic Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Paratha Roll",
+    "description": "Traditional Paratha stuffed with spiced chicken",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Seekh Kabab (4pc)",
+    "description": "Special Spiced minced meat skewers",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Authentic Stuffed paratha with your choice of filling",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Traditional Spicy chicken with bell peppers",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Homemade Marinated grilled chicken pieces",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Signature Lentil curry with rice",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Beef Biryani",
+    "description": "Fresh Spiced rice with beef chunks",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  }
+]

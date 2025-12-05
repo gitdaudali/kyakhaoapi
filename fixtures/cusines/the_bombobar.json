@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Kofta",
+    "description": "Delicious Chicken meatballs in curry",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Premium Spicy chicken with bell peppers",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Pulao",
+    "description": "Special Mildly spiced rice with chicken",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Authentic Aromatic rice cooked with chicken stock",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Traditional Naan with garlic and butter",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Beef Biryani",
+    "description": "Homemade Spiced rice with beef chunks",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

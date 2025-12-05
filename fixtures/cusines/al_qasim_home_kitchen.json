@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Qorma",
+    "description": "Homemade Mild chicken curry with yogurt",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Chicken Nihari",
+    "description": "Signature Slow-cooked chicken in spicy gravy",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.9
+  },
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Fresh Aromatic rice cooked with chicken stock",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.8
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Delicious Lentil curry with rice",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Premium Creamy mutton curry in clay pot",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Seekh Kabab (4pc)",
+    "description": "Special Spiced minced meat skewers",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.9
+  }
+]

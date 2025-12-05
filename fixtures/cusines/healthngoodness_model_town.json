@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Special Spicy chicken with bell peppers",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Authentic Spicy mutton curry cooked in a wok",
+    "price": 1700,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Traditional Lentil curry with rice",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Homemade Beef meatballs in curry",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Signature Spicy chicken curry cooked in a wok",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

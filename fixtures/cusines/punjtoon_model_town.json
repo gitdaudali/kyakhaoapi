@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Karahi",
+    "description": "Premium Spicy chicken curry cooked in a wok",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Kofta",
+    "description": "Special Chicken meatballs in curry",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Authentic Spicy mutton curry cooked in a wok",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Beef Pulao",
+    "description": "Traditional Spiced rice with tender beef",
+    "price": 950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Mutton Yakhni Pulao",
+    "description": "Homemade Rice cooked with mutton stock",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Handi",
+    "description": "Signature Creamy chicken curry cooked in a clay pot",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Kofta",
+    "description": "Traditional Chicken meatballs in curry",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.0
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Homemade Creamy mutton curry in clay pot",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.1
+  },
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Signature Aromatic rice cooked with chicken stock",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Chicken Paratha Roll",
+    "description": "Fresh Paratha stuffed with spiced chicken",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.0
+  },
+  {
+    "name": "Butter Naan (2pc)",
+    "description": "Delicious Naan brushed with butter",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Chicken Curry",
+    "description": "Premium Traditional chicken curry",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.0
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Roti (4pc)",
+    "description": "Delicious Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.7
+  },
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Premium Naan with garlic and butter",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Special Slow-cooked mutton in spicy gravy",
+    "price": 2100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  },
+  {
+    "name": "Seekh Kabab (4pc)",
+    "description": "Authentic Spiced minced meat skewers",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Mutton Biryani",
+    "description": "Traditional Aromatic rice with tender mutton pieces",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.2
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Homemade Marinated grilled chicken pieces",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  }
+]

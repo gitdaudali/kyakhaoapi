@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Tikka",
+    "description": "Homemade Marinated grilled chicken pieces",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Signature Freshly baked tandoori bread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Biryani",
+    "description": "Fresh Aromatic rice with tender mutton pieces",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Korma",
+    "description": "Delicious Mild creamy chicken curry",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Premium Lentil curry with rice",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Nihari",
+    "description": "Special Slow-cooked chicken in spicy gravy",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  }
+]

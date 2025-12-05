@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Pulao",
+    "description": "Authentic Spiced rice with tender beef",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Traditional Beef meatballs in curry",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Homemade Lentil curry with rice",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Chicken Biryani",
+    "description": "Signature Fragrant basmati rice with tender chicken and spices",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Butter Naan (2pc)",
+    "description": "Fresh Naan brushed with butter",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Paratha Roll",
+    "description": "Delicious Paratha stuffed with spiced chicken",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

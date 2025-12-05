@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mocha",
+    "description": "Special Chocolate espresso with steamed milk",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 3.1
+  },
+  {
+    "name": "Bagel with Cream Cheese",
+    "description": "Authentic Fresh bagel with cream cheese",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 3.2
+  },
+  {
+    "name": "Iced Latte",
+    "description": "Traditional Cold latte with ice",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 3.2
+  },
+  {
+    "name": "Americano",
+    "description": "Homemade Espresso with hot water",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 3.1
+  },
+  {
+    "name": "Chocolate Chip Cookie",
+    "description": "Signature Freshly baked cookie",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 3.3
+  },
+  {
+    "name": "Cortado",
+    "description": "Fresh Espresso with equal parts steamed milk",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 3.1
+  }
+]

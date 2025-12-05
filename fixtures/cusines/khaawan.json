@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Qorma",
+    "description": "Homemade Mild chicken curry with yogurt",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Signature Slow-cooked mutton in spicy gravy",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Fresh Stuffed paratha with your choice of filling",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Delicious Lentil curry with rice",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Premium Marinated grilled chicken pieces",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Butter Naan (2pc)",
+    "description": "Special Naan brushed with butter",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  }
+]

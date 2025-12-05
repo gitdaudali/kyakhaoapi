@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Daal Chawal",
+    "description": "Special Lentil curry with rice",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Kofta",
+    "description": "Authentic Chicken meatballs in curry",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Traditional Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Handi",
+    "description": "Homemade Creamy chicken curry cooked in a clay pot",
+    "price": 1450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Mutton Qorma",
+    "description": "Signature Mild mutton curry with yogurt",
+    "price": 2000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Fresh Paratha stuffed with beef",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Signature Paratha stuffed with beef",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Chicken Korma",
+    "description": "Fresh Mild creamy chicken curry",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Paratha Roll",
+    "description": "Delicious Paratha stuffed with spiced chicken",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Premium Slow-cooked mutton in spicy gravy",
+    "price": 2050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Mutton Yakhni Pulao",
+    "description": "Special Rice cooked with mutton stock",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Biryani",
+    "description": "Authentic Fragrant basmati rice with tender chicken and spices",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

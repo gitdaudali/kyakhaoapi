@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Qorma",
+    "description": "Delicious Mild chicken curry with yogurt",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Premium Lentil curry with rice",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Special Beef meatballs in curry",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Beef Biryani",
+    "description": "Authentic Spiced rice with beef chunks",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Butter Naan (2pc)",
+    "description": "Traditional Naan brushed with butter",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Homemade Spicy chicken with bell peppers",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  }
+]

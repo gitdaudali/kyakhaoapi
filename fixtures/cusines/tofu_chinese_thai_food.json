@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Shrimp Fried Rice",
+    "description": "Homemade Fried rice with fresh shrimp",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Sweet and Sour Chicken",
+    "description": "Signature Crispy chicken pieces in tangy sweet and sour sauce",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Mongolian Beef",
+    "description": "Fresh Tender beef with vegetables in savory sauce",
+    "price": 1450,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.9
+  },
+  {
+    "name": "Shrimp Chow Mein",
+    "description": "Delicious Stir-fried noodles with shrimp",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.6
+  },
+  {
+    "name": "Kung Pao Chicken",
+    "description": "Premium Spicy stir-fried chicken with peanuts and vegetables",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.7
+  },
+  {
+    "name": "Orange Chicken",
+    "description": "Special Crispy chicken with orange glaze",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.6
+  }
+]

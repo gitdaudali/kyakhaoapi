@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Butter Naan (2pc)",
+    "description": "Signature Naan brushed with butter",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Fresh Creamy mutton curry in clay pot",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Beef Biryani",
+    "description": "Delicious Spiced rice with beef chunks",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Premium Marinated grilled chicken pieces",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Naan (2pc)",
+    "description": "Special Freshly baked tandoori bread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Seekh Kabab (4pc)",
+    "description": "Authentic Spiced minced meat skewers",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  }
+]

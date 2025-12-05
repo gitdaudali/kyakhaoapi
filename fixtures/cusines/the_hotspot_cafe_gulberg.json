@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Croissant",
+    "description": "Authentic Buttery French pastry",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  },
+  {
+    "name": "Cortado",
+    "description": "Traditional Espresso with equal parts steamed milk",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  },
+  {
+    "name": "Banana Bread",
+    "description": "Homemade Moist banana bread slice",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.7
+  },
+  {
+    "name": "Bagel with Cream Cheese",
+    "description": "Signature Fresh bagel with cream cheese",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 5.0
+  },
+  {
+    "name": "Chocolate Croissant",
+    "description": "Fresh Buttery croissant with chocolate",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 5.0
+  },
+  {
+    "name": "Iced Latte",
+    "description": "Delicious Cold latte with ice",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 5.0
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Biryani",
+    "description": "Signature Aromatic rice with tender mutton pieces",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Chicken Qorma",
+    "description": "Fresh Mild chicken curry with yogurt",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Delicious Aromatic rice cooked with chicken stock",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Curry",
+    "description": "Premium Traditional chicken curry",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Special Stuffed paratha with your choice of filling",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Authentic Spicy chicken curry cooked in a wok",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  }
+]

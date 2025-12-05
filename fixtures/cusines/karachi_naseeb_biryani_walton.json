@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Qorma",
+    "description": "Special Mild mutton curry with yogurt",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.1
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Authentic Creamy mutton curry in clay pot",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.0
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Traditional Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.1
+  },
+  {
+    "name": "Chicken Biryani",
+    "description": "Homemade Fragrant basmati rice with tender chicken and spices",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Seekh Kabab (4pc)",
+    "description": "Signature Spiced minced meat skewers",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.2
+  },
+  {
+    "name": "Chicken Curry",
+    "description": "Fresh Traditional chicken curry",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.3
+  }
+]

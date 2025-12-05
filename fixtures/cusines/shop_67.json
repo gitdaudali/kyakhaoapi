@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Nihari",
+    "description": "Homemade Slow-cooked chicken in spicy gravy",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Signature Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Fresh Paratha stuffed with beef",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Biryani",
+    "description": "Delicious Fragrant basmati rice with tender chicken and spices",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Premium Beef meatballs in curry",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Qorma",
+    "description": "Special Mild chicken curry with yogurt",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  }
+]

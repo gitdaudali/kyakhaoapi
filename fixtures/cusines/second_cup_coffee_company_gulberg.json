@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Cappuccino",
+    "description": "Espresso with steamed milk and foam",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.6
+  },
+  {
+    "name": "Latte",
+    "description": "Smooth espresso with steamed milk",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.6
+  },
+  {
+    "name": "Mocha",
+    "description": "Chocolate espresso with steamed milk",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.2
+  },
+  {
+    "name": "Iced Coffee",
+    "description": "Cold coffee with ice",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.6
+  },
+  {
+    "name": "Blueberry Muffin",
+    "description": "Freshly baked blueberry muffin",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.2
+  }
+]

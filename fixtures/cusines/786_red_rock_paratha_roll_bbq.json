@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mixed BBQ Platter",
+    "description": "Authentic Assorted grilled meats with naan",
+    "price": 2000,
+    "mood": "Dinner",
+    "cuisine": "BBQ",
+    "rating": 4.5
+  },
+  {
+    "name": "Mutton Chops",
+    "description": "Traditional Grilled mutton chops",
+    "price": 1800,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Homemade Marinated grilled chicken pieces",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 4.7
+  },
+  {
+    "name": "BBQ Chicken (Full)",
+    "description": "Signature Grilled full chicken",
+    "price": 2250,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 4.3
+  },
+  {
+    "name": "Seekh Kabab (4pc)",
+    "description": "Fresh Spiced minced meat skewers",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 4.5
+  },
+  {
+    "name": "Beef Boti",
+    "description": "Delicious Tender beef cubes marinated and grilled",
+    "price": 1600,
+    "mood": "Anytime",
+    "cuisine": "BBQ",
+    "rating": 4.4
+  }
+]

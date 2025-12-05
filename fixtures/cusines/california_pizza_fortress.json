@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Hawaiian Pizza",
+    "description": "Traditional Ham, pineapple, and mozzarella cheese",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 3.7
+  },
+  {
+    "name": "Mozzarella Sticks (6pc)",
+    "description": "Homemade Breaded mozzarella with marinara sauce",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 3.6
+  },
+  {
+    "name": "Margherita Pizza",
+    "description": "Signature Classic pizza with fresh mozzarella, basil, and tomato sauce",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 3.9
+  },
+  {
+    "name": "BBQ Chicken Pizza",
+    "description": "Fresh Grilled chicken with BBQ sauce and red onions",
+    "price": 1550,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 3.8
+  },
+  {
+    "name": "Garlic Knots (6pc)",
+    "description": "Delicious Soft bread knots with garlic butter",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 3.8
+  },
+  {
+    "name": "Veggie Delight Pizza",
+    "description": "Premium Fresh vegetables with mozzarella cheese",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 3.7
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Naan (2pc)",
+    "description": "Delicious Freshly baked tandoori bread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Beef Kofta",
+    "description": "Premium Beef meatballs in curry",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Special Spicy mutton curry cooked in a wok",
+    "price": 1750,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Chicken Qorma",
+    "description": "Authentic Mild chicken curry with yogurt",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Beef Biryani",
+    "description": "Traditional Spiced rice with beef chunks",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.3
+  },
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Homemade Naan with garlic and butter",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  }
+]

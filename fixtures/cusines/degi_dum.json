@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Homemade Aromatic rice cooked with chicken stock",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Signature Spicy chicken with bell peppers",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Fresh Slow-cooked mutton in spicy gravy",
+    "price": 2100,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Delicious Stuffed paratha with your choice of filling",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Mutton Qorma",
+    "description": "Premium Mild mutton curry with yogurt",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Special Spicy chicken curry cooked in a wok",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  }
+]

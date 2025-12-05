@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Handi",
+    "description": "Special Creamy mutton curry in clay pot",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.2
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Authentic Slow-cooked mutton in spicy gravy",
+    "price": 2000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Chicken Biryani",
+    "description": "Traditional Fragrant basmati rice with tender chicken and spices",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Chicken Pulao",
+    "description": "Homemade Mildly spiced rice with chicken",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.3
+  },
+  {
+    "name": "Mutton Qorma",
+    "description": "Signature Mild mutton curry with yogurt",
+    "price": 2000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Chicken Kofta",
+    "description": "Fresh Chicken meatballs in curry",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.2
+  }
+]

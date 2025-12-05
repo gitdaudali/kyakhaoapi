@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Kofta",
+    "description": "Special Beef meatballs in curry",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Authentic Naan with garlic and butter",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Beef Biryani",
+    "description": "Traditional Spiced rice with beef chunks",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Paratha Roll",
+    "description": "Homemade Stuffed paratha with your choice of filling",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Kofta",
+    "description": "Signature Chicken meatballs in curry",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Fresh Spicy chicken with bell peppers",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Pulao",
+    "description": "Premium Spiced rice with tender beef",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Paratha Roll",
+    "description": "Special Paratha stuffed with spiced chicken",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Authentic Slow-cooked mutton in spicy gravy",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Qorma",
+    "description": "Traditional Mild chicken curry with yogurt",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Curry",
+    "description": "Homemade Traditional chicken curry",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Signature Lentil curry with rice",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

@@ -76,8 +76,46 @@ async def get_or_create_mood(session: AsyncSession, name: str) -> Mood:
     return mood
 
 
-async def get_or_create_restaurant(session: AsyncSession, category: str) -> Restaurant:
-    restaurant_name = f"{category.title().replace('_', ' ')} Kitchen"
+def convert_price(price_raw: Any) -> Decimal | None:
+    """
+    Convert price to Decimal format.
+    Handles both integer prices (like 1700) and decimal prices (like 16.5).
+    Prices are stored as-is in the base currency (PKR/USD/etc).
+    
+    Examples:
+        - 1700 -> 1700.00
+        - 16.5 -> 16.50
+        - 12.99 -> 12.99
+        - 245 -> 245.00
+    """
+    if price_raw is None:
+        return None
+    
+    try:
+        price_str = str(price_raw).strip()
+        if not price_str:
+            return None
+            
+        price_decimal = Decimal(price_str)
+        # Round to 2 decimal places for consistency
+        return price_decimal.quantize(Decimal('0.01'))
+    except (ValueError, ArithmeticError, TypeError):
+        return None
+
+
+async def get_or_create_restaurant(
+    session: AsyncSession, 
+    restaurant_name: str = None,
+    description: str = None
+) -> Restaurant:
+    """
+    Get or create a restaurant. 
+    If no name provided, creates a default Japanese restaurant for dishes in fixtures/dishes/
+    """
+    if not restaurant_name:
+        restaurant_name = "KyaKhao Japanese Restaurant"
+        description = description or "Authentic Japanese cuisine featuring sushi, robata, teppanyaki, and fusion dishes."
+    
     result = await session.execute(
         select(Restaurant).where(
             func.lower(Restaurant.name) == restaurant_name.lower(),
@@ -90,10 +128,13 @@ async def get_or_create_restaurant(session: AsyncSession, category: str) -> Rest
 
     restaurant = Restaurant(
         name=restaurant_name,
-        description=f"Signature dishes from the {category.replace('_', ' ')} collection.",
-        city="Virtual",
-        country="Global",
+        description=description or f"Premium restaurant offering diverse cuisine selections.",
+        city="Karachi",
+        country="Pakistan",
         rating=4.5,
+        price_level=3,
+        is_active=True,
+        delivery_radius_km=15.0,
     )
     session.add(restaurant)
     await session.flush()
@@ -112,69 +153,171 @@ async def dish_exists(session: AsyncSession, name: str, restaurant_id) -> bool:
 
 
 async def seed_dish_fixtures(session: AsyncSession) -> int:
+    """
+    Seed dishes from fixture files in fixtures/dishes/.
+    All dishes will belong to a single restaurant (Japanese Restaurant by default).
+    """
     if not DISH_FIXTURES_DIR.exists():
         print(f"⚠️  No dishes fixtures directory found at {DISH_FIXTURES_DIR}")
         return 0
 
-    total_seeded = 0
     json_files = sorted(DISH_FIXTURES_DIR.glob("*.json"))
 
     if not json_files:
         print(f"⚠️  No JSON fixtures found in {DISH_FIXTURES_DIR}")
         return 0
 
+    print(f"📝 Processing {len(json_files)} dish fixture file(s)...")
+    
+    # Create/get a single restaurant for all dishes in fixtures/dishes/
+    restaurant = await get_or_create_restaurant(session)
+    print(f"🏪 Using restaurant: {restaurant.name} (ID: {restaurant.id})\n")
+
+    total_seeded = 0
+    skipped = 0
+    errors = 0
+
     for json_file in json_files:
-        with json_file.open("r", encoding="utf-8") as handle:
-            payload: List[Dict[str, object]] = json.load(handle)
+        file_count = 0
+        file_skipped = 0
+        file_errors = 0
+        
+        try:
+            with json_file.open("r", encoding="utf-8") as handle:
+                payload: List[Dict[str, object]] = json.load(handle)
 
-        category = json_file.stem
-        restaurant = await get_or_create_restaurant(session, category)
-
-        for entry in payload:
-            name = str(entry.get("name", "")).strip()
-            if not name:
+            if not isinstance(payload, list):
+                print(f"⚠️  Skipping {json_file.name}: not a valid JSON array")
                 continue
 
-            if await dish_exists(session, name, restaurant.id):
-                continue
+            category = json_file.stem.replace('_', ' ').title()
+            print(f"  📄 Processing {json_file.name} ({category})...")
 
-            cuisine_name = str(entry.get("cuisine", "Uncategorized"))
-            mood_name = str(entry.get("mood", "Anytime"))
+            for entry in payload:
+                if not isinstance(entry, dict):
+                    file_errors += 1
+                    continue
 
-            cuisine = await get_or_create_cuisine(session, cuisine_name)
-            mood = await get_or_create_mood(session, mood_name)
+                name = str(entry.get("name", "")).strip()
+                if not name:
+                    file_skipped += 1
+                    continue
 
-            price_raw = entry.get("price")
-            try:
-                price = Decimal(str(price_raw)) if price_raw is not None else None
-            except (ValueError, ArithmeticError):
-                price = None
+                # Check if dish already exists
+                if await dish_exists(session, name, restaurant.id):
+                    file_skipped += 1
+                    continue
 
-            rating_raw = entry.get("rating")
-            try:
-                rating = float(rating_raw) if rating_raw is not None else None
-            except (ValueError, TypeError):
+                # Get or create cuisine
+                cuisine_name = str(entry.get("cuisine", "Uncategorized")).strip()
+                if not cuisine_name:
+                    cuisine_name = "Uncategorized"
+                cuisine = await get_or_create_cuisine(session, cuisine_name)
+
+                # Get or create mood (can handle multiple moods if provided as array)
+                mood_names = entry.get("mood", "Anytime")
+                if isinstance(mood_names, str):
+                    mood_names = [mood_names]
+                elif not isinstance(mood_names, list):
+                    mood_names = ["Anytime"]
+                
+                moods = []
+                for mood_name in mood_names:
+                    mood_name_str = str(mood_name).strip() if mood_name else "Anytime"
+                    if mood_name_str:
+                        mood = await get_or_create_mood(session, mood_name_str)
+                        moods.append(mood)
+
+                if not moods:
+                    mood = await get_or_create_mood(session, "Anytime")
+                    moods = [mood]
+
+                # Convert price (smart detection of cents vs dollars)
+                price_raw = entry.get("price")
+                price = convert_price(price_raw)
+
+                # Parse rating
+                rating_raw = entry.get("rating")
                 rating = None
+                if rating_raw is not None:
+                    try:
+                        rating_val = float(rating_raw)
+                        # Validate rating is between 0-5
+                        if 0 <= rating_val <= 5:
+                            rating = rating_val
+                    except (ValueError, TypeError):
+                        pass
 
-            dish = Dish(
-                name=name,
-                description=str(entry.get("description", "")).strip(),
-                price=price,
-                rating=rating,
-                is_featured=bool(entry.get("is_featured", False)),
-                cuisine_id=cuisine.id,
-                restaurant_id=restaurant.id,
-            )
-            # Ensure relationship list exists before assignment
-            dish.moods = [mood]
-            session.add(dish)
-            total_seeded += 1
+                # Parse additional fields
+                calories = entry.get("calories")
+                if calories is not None:
+                    try:
+                        calories = int(calories) if calories else None
+                    except (ValueError, TypeError):
+                        calories = None
 
-    if total_seeded:
-        await session.commit()
-        print(f"✅ Seeded {total_seeded} dishes from fixtures in {DISH_FIXTURES_DIR}")
+                preparation_time_minutes = entry.get("preparation_time_minutes") or entry.get("prep_time")
+                if preparation_time_minutes is not None:
+                    try:
+                        preparation_time_minutes = int(preparation_time_minutes) if preparation_time_minutes else None
+                    except (ValueError, TypeError):
+                        preparation_time_minutes = None
+
+                # Create dish
+                # Convert Decimal price to float for the model (Numeric column accepts both)
+                price_value = float(price) if price is not None else None
+                
+                dish = Dish(
+                    name=name,
+                    description=str(entry.get("description", "")).strip() or None,
+                    price=price_value,
+                    rating=rating,
+                    is_featured=bool(entry.get("is_featured", False)),
+                    cuisine_id=cuisine.id,
+                    restaurant_id=restaurant.id,
+                    calories=calories,
+                    preparation_time_minutes=preparation_time_minutes,
+                )
+                
+                # Assign moods (many-to-many relationship)
+                dish.moods = moods
+                
+                session.add(dish)
+                file_count += 1
+                total_seeded += 1
+
+            print(f"    ✅ {file_count} dish(es) added, {file_skipped} skipped")
+            if file_errors > 0:
+                print(f"    ⚠️  {file_errors} error(s)")
+
+        except json.JSONDecodeError as e:
+            print(f"    ❌ JSON decode error in {json_file.name}: {str(e)}")
+            errors += 1
+        except Exception as e:
+            print(f"    ❌ Error processing {json_file.name}: {str(e)}")
+            errors += 1
+            import traceback
+            traceback.print_exc()
+
+        skipped += file_skipped
+
+    # Commit all dishes at once
+    if total_seeded > 0:
+        try:
+            await session.commit()
+            print(f"\n✅ Successfully seeded {total_seeded} dish(es) from {len(json_files)} file(s)")
+            if skipped > 0:
+                print(f"   (Skipped {skipped} duplicate(s) or invalid entries)")
+            if errors > 0:
+                print(f"   (Encountered {errors} error(s))")
+        except Exception as e:
+            await session.rollback()
+            print(f"\n❌ Error committing dishes: {str(e)}")
+            raise
     else:
         await session.rollback()
+        if skipped > 0:
+            print(f"\n⚠️  No new dishes to seed ({skipped} already exist or were invalid)")
 
     return total_seeded
 

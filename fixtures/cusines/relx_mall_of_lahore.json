@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Biryani",
+    "description": "Traditional Fragrant basmati rice with tender chicken and spices",
+    "price": 950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Butter Naan (2pc)",
+    "description": "Homemade Naan brushed with butter",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Chicken Qorma",
+    "description": "Signature Mild chicken curry with yogurt",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Chicken Handi",
+    "description": "Fresh Creamy chicken curry cooked in a clay pot",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Delicious Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.7
+  },
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Premium Naan with garlic and butter",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  }
+]

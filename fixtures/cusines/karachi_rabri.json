@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mutton Yakhni Pulao",
+    "description": "Traditional Rice cooked with mutton stock",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.1
+  },
+  {
+    "name": "Chicken Handi",
+    "description": "Homemade Creamy chicken curry cooked in a clay pot",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.4
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Signature Fresh flatbread",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.0
+  },
+  {
+    "name": "Chicken Paratha Roll",
+    "description": "Fresh Paratha stuffed with spiced chicken",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  },
+  {
+    "name": "Beef Biryani",
+    "description": "Delicious Spiced rice with beef chunks",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.1
+  },
+  {
+    "name": "Butter Naan (2pc)",
+    "description": "Premium Naan brushed with butter",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  }
+]

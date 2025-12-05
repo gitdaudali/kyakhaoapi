@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Fresh Spicy chicken with bell peppers",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Qorma",
+    "description": "Delicious Mild mutton curry with yogurt",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Nihari",
+    "description": "Premium Slow-cooked chicken in spicy gravy",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Butter Naan (2pc)",
+    "description": "Special Naan brushed with butter",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Authentic Aromatic rice cooked with chicken stock",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  },
+  {
+    "name": "Beef Paratha Roll",
+    "description": "Traditional Paratha stuffed with beef",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 5.0
+  }
+]

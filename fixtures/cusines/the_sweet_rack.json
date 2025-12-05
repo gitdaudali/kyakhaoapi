@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Tiramisu",
+    "description": "Special Italian classic with coffee and mascarpone",
+    "price": 1150,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.8
+  },
+  {
+    "name": "Brownie Sundae",
+    "description": "Authentic Brownie with ice cream and chocolate sauce",
+    "price": 750,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 5.0
+  },
+  {
+    "name": "Mango Mousse",
+    "description": "Traditional Light and airy mango mousse",
+    "price": 700,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 5.0
+  },
+  {
+    "name": "Brownie",
+    "description": "Homemade Fudgy chocolate brownie",
+    "price": 400,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 5.0
+  },
+  {
+    "name": "Strawberry Cheesecake",
+    "description": "Signature Cheesecake topped with fresh strawberries",
+    "price": 900,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.8
+  },
+  {
+    "name": "Ras Malai (2pc)",
+    "description": "Fresh Sweet cheese dumplings in milk",
+    "price": 400,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 5.0
+  }
+]

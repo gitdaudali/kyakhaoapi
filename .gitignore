@@ -8,12 +8,16 @@ __pycache__/
 *.egg
 *.manifest
 *.spec
+*.pyc
+.Python
 
 # Virtualenv
 venv/
 env/
 .venv/
 ENV/
+env.bak/
+venv.bak/
 
 # Celery
 celerybeat-schedule*
@@ -25,53 +29,105 @@ celerybeat-schedule.dir
 logs/
 *.log
 *.pot
-*.pyc
 *.sqlite3
 db.sqlite3
 media/
 staticfiles/
 
-
-# Migrations (optional, keep if you want them tracked)
+# Alembic
+alembic/__pycache__/
 */migrations/__pycache__/
 */migrations/*.pyc
-# Uncomment next line if you don’t want migration files in git
-# */migrations/
 
 # IDEs / Editors
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
 
 # OS files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+Desktop.ini
 
 # Coverage / Testing
 .coverage
+.coverage.*
 coverage.xml
 htmlcov/
 .tox/
 .pytest_cache/
+.hypothesis/
+*.cover
 
-# Environments
+# Environments and Secrets
 .env
 .env.local
 .env.*.local
+.env.development
+.env.production
+.env.test
+*.env
 
 # AWS / S3 / Secrets
 *.pem
 *.key
 *.crt
 *.der
+*.p12
+*.pfx
+secrets/
 
 # Cache
 .cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
 
-#Database
+# Database
 *.db
+*.sqlite
 *.sqlite3
+*.db-journal
 
 # Test files
 policy_test_frontend.html
+test_*.html
+
+# Build / Distribution
+build/
+dist/
+*.whl
+*.tar.gz
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Local development scripts (optional - uncomment if you don't want to track them)
+# *.ps1
+# *.sh
+# setup_*.ps1
+# setup_*.sh
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# Project specific
+local_settings.py
+local_config.py

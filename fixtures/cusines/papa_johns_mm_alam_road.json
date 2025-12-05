@@ -1,0 +1,50 @@
+[
+  {
+    "name": "The Works Pizza",
+    "description": "Pepperoni, Italian sausage, ham, mushrooms, onions, green peppers",
+    "price": 1600,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  },
+  {
+    "name": "BBQ Chicken & Bacon Pizza",
+    "description": "Grilled chicken, bacon, and BBQ sauce",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Garden Fresh Pizza",
+    "description": "Fresh vegetables with mozzarella cheese",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Parmesan Pizza",
+    "description": "Breaded chicken with marinara and mozzarella",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.9
+  },
+  {
+    "name": "Papa's Favorite Pizza",
+    "description": "Pepperoni, sausage, mushrooms, and peppers",
+    "price": 1450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Garlic Parmesan Breadsticks",
+    "description": "Breadsticks with garlic and parmesan",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.7
+  }
+]

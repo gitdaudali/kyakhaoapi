@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Frappuccino",
+    "description": "Premium Blended coffee drink",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.7
+  },
+  {
+    "name": "Chocolate Croissant",
+    "description": "Special Buttery croissant with chocolate",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  },
+  {
+    "name": "Cinnamon Roll",
+    "description": "Authentic Sweet cinnamon pastry",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 5.0
+  },
+  {
+    "name": "Espresso",
+    "description": "Traditional Strong Italian coffee",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.9
+  },
+  {
+    "name": "Blueberry Muffin",
+    "description": "Homemade Freshly baked blueberry muffin",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.6
+  },
+  {
+    "name": "Americano",
+    "description": "Signature Espresso with hot water",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  }
+]

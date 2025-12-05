@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Double Double Coffee",
+    "description": "Coffee with two creams and two sugars",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Iced Capp",
+    "description": "Frozen coffee drink",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Timbits (10pc)",
+    "description": "Donut holes in various flavors",
+    "price": 400,
+    "mood": "Dessert",
+    "cuisine": "Pakistani",
+    "rating": 4.6
+  },
+  {
+    "name": "Chocolate Dip Donut",
+    "description": "Donut with chocolate frosting",
+    "price": 180,
+    "mood": "Dessert",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  },
+  {
+    "name": "Bagel with Cream Cheese",
+    "description": "Fresh bagel with cream cheese",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.8
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Apple Pie",
+    "description": "Authentic Warm apple pie with cinnamon",
+    "price": 650,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.4
+  },
+  {
+    "name": "Cheesecake",
+    "description": "Traditional Creamy New York style cheesecake",
+    "price": 950,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.5
+  },
+  {
+    "name": "Panna Cotta",
+    "description": "Homemade Italian creamy dessert",
+    "price": 850,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.5
+  },
+  {
+    "name": "Ice Cream (2 Scoops)",
+    "description": "Signature Creamy ice cream in your favorite flavor",
+    "price": 250,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.5
+  },
+  {
+    "name": "Chocolate Cake Slice",
+    "description": "Fresh Rich chocolate cake with frosting",
+    "price": 600,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.5
+  },
+  {
+    "name": "Chocolate Lava Cake",
+    "description": "Delicious Warm chocolate cake with molten center",
+    "price": 900,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.5
+  }
+]

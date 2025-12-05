@@ -1,0 +1,50 @@
+[
+  {
+    "name": "French Fries (Large)",
+    "description": "Traditional Large portion of crispy fries",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  },
+  {
+    "name": "BBQ Bacon Burger",
+    "description": "Homemade Beef patty with bacon and BBQ sauce",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Strips (4pc)",
+    "description": "Signature Breaded chicken strips",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  },
+  {
+    "name": "Veggie Burger",
+    "description": "Vegetable patty with fresh toppings",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.5
+  },
+  {
+    "name": "Double Beef Burger",
+    "description": "Delicious Two beef patties with cheese and vegetables",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Fillet Burger",
+    "description": "Premium Grilled chicken fillet with mayo",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.4
+  }
+]

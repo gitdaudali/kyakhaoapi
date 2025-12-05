@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Tenders (3pc)",
+    "description": "Premium Breaded chicken tenders",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.5
+  },
+  {
+    "name": "Classic Beef Burger",
+    "description": "Juicy beef patty with lettuce, tomato, and special sauce",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.4
+  },
+  {
+    "name": "Chicken Strips (4pc)",
+    "description": "Authentic Breaded chicken strips",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.7
+  },
+  {
+    "name": "Chicken Broast (Half)",
+    "description": "Traditional Crispy broasted chicken pieces",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.5
+  },
+  {
+    "name": "French Fries (Regular)",
+    "description": "Homemade Golden crispy fries",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.5
+  },
+  {
+    "name": "Chicken Burger",
+    "description": "Signature Crispy chicken patty with fresh vegetables",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.5
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Teriyaki",
+    "description": "Traditional Grilled beef with teriyaki sauce",
+    "price": 1650,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 5.0
+  },
+  {
+    "name": "Gyoza (6pc)",
+    "description": "Homemade Pan-fried dumplings",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 4.6
+  },
+  {
+    "name": "Miso Soup",
+    "description": "Signature Traditional Japanese soup with miso paste and tofu",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 4.8
+  },
+  {
+    "name": "California Roll",
+    "description": "Fresh Crab, avocado, and cucumber roll",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 4.5
+  },
+  {
+    "name": "Spicy Tuna Roll",
+    "description": "Delicious Tuna with spicy mayo",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 4.5
+  },
+  {
+    "name": "Tempura Shrimp",
+    "description": "Premium Lightly battered and fried shrimp",
+    "price": 1450,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 4.5
+  }
+]

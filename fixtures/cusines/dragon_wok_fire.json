@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Lo Mein",
+    "description": "Signature Soft noodles with chicken and vegetables",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.0
+  },
+  {
+    "name": "Chicken Spring Rolls (4pc)",
+    "description": "Fresh Crispy rolls with chicken and vegetables",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.0
+  },
+  {
+    "name": "Lemon Chicken",
+    "description": "Delicious Crispy chicken with lemon sauce",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.0
+  },
+  {
+    "name": "General Tso's Chicken",
+    "description": "Premium Crispy chicken in a sweet and spicy sauce",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.0
+  },
+  {
+    "name": "Beef Fried Rice",
+    "description": "Special Fried rice with tender beef strips",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.0
+  },
+  {
+    "name": "Vegetable Fried Rice",
+    "description": "Authentic Fried rice with mixed vegetables",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.0
+  }
+]

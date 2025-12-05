@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Yakhni Pulao",
+    "description": "Authentic Aromatic rice cooked with chicken stock",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.0
+  },
+  {
+    "name": "Mutton Handi",
+    "description": "Traditional Creamy mutton curry in clay pot",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.1
+  },
+  {
+    "name": "Chicken Biryani",
+    "description": "Homemade Fragrant basmati rice with tender chicken and spices",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Chicken Karahi",
+    "description": "Signature Spicy chicken curry cooked in a wok",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.1
+  },
+  {
+    "name": "Mutton Karahi",
+    "description": "Fresh Spicy mutton curry cooked in a wok",
+    "price": 1800,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.1
+  },
+  {
+    "name": "Mutton Qorma",
+    "description": "Delicious Mild mutton curry with yogurt",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.8
+  }
+]

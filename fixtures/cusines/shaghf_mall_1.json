@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Biryani",
+    "description": "Delicious Spiced rice with beef chunks",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Garlic Naan (2pc)",
+    "description": "Premium Naan with garlic and butter",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.3
+  },
+  {
+    "name": "Seekh Kabab (4pc)",
+    "description": "Special Spiced minced meat skewers",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Daal Chawal",
+    "description": "Authentic Lentil curry with rice",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  },
+  {
+    "name": "Mutton Yakhni Pulao",
+    "description": "Traditional Rice cooked with mutton stock",
+    "price": 950,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Homemade Marinated grilled chicken pieces",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 4.2
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mocha",
+    "description": "Authentic Chocolate espresso with steamed milk",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 5.0
+  },
+  {
+    "name": "Banana Bread",
+    "description": "Traditional Moist banana bread slice",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 5.0
+  },
+  {
+    "name": "Iced Coffee",
+    "description": "Homemade Cold coffee with ice",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 5.0
+  },
+  {
+    "name": "Bagel with Cream Cheese",
+    "description": "Signature Fresh bagel with cream cheese",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.5
+  },
+  {
+    "name": "Flat White",
+    "description": "Fresh Espresso with microfoam milk",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.5
+  },
+  {
+    "name": "Blueberry Muffin",
+    "description": "Delicious Freshly baked blueberry muffin",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  }
+]

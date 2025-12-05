@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Daal Chawal",
+    "description": "Delicious Lentil curry with rice",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Chicken Nihari",
+    "description": "Premium Slow-cooked chicken in spicy gravy",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.4
+  },
+  {
+    "name": "Chicken Korma",
+    "description": "Special Mild creamy chicken curry",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.5
+  },
+  {
+    "name": "Mutton Nihari",
+    "description": "Authentic Slow-cooked mutton in spicy gravy",
+    "price": 1900,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  },
+  {
+    "name": "Roti (4pc)",
+    "description": "Traditional Fresh flatbread",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  },
+  {
+    "name": "Chicken Jalfrezi",
+    "description": "Homemade Spicy chicken with bell peppers",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pakistani",
+    "rating": 3.6
+  }
+]

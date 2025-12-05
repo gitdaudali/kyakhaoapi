@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Ribeye Steak",
+    "description": "Fresh Juicy ribeye steak cooked to perfection",
+    "price": 2900,
+    "mood": "Dinner",
+    "cuisine": "Steak",
+    "rating": 3.2
+  },
+  {
+    "name": "Garlic Bread",
+    "description": "Delicious Toasted bread with garlic butter",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Steak",
+    "rating": 3.0
+  },
+  {
+    "name": "Sirloin Steak",
+    "description": "Premium Tender sirloin with your choice of sides",
+    "price": 2400,
+    "mood": "Dinner",
+    "cuisine": "Steak",
+    "rating": 3.0
+  },
+  {
+    "name": "Grilled Fish",
+    "description": "Special Fresh fish fillet grilled to perfection",
+    "price": 1550,
+    "mood": "Dinner",
+    "cuisine": "Steak",
+    "rating": 3.1
+  },
+  {
+    "name": "Baked Potato",
+    "description": "Authentic Baked potato with butter and sour cream",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Steak",
+    "rating": 3.0
+  },
+  {
+    "name": "T-Bone Steak",
+    "description": "Traditional Premium T-bone steak",
+    "price": 2950,
+    "mood": "Dinner",
+    "cuisine": "Steak",
+    "rating": 3.0
+  }
+]

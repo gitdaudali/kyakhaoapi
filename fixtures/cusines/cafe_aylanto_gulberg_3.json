@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Blueberry Muffin",
+    "description": "Signature Freshly baked blueberry muffin",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.9
+  },
+  {
+    "name": "Banana Bread",
+    "description": "Fresh Moist banana bread slice",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 5.0
+  },
+  {
+    "name": "Americano",
+    "description": "Delicious Espresso with hot water",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  },
+  {
+    "name": "Flat White",
+    "description": "Premium Espresso with microfoam milk",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.9
+  },
+  {
+    "name": "Latte",
+    "description": "Special Smooth espresso with steamed milk",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.9
+  },
+  {
+    "name": "Chocolate Croissant",
+    "description": "Authentic Buttery croissant with chocolate",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.9
+  }
+]

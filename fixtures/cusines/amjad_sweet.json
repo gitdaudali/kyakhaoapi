@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Tiramisu",
+    "description": "Homemade Italian classic with coffee and mascarpone",
+    "price": 1100,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.8
+  },
+  {
+    "name": "Ras Malai (2pc)",
+    "description": "Signature Sweet cheese dumplings in milk",
+    "price": 450,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.5
+  },
+  {
+    "name": "Chocolate Lava Cake",
+    "description": "Fresh Warm chocolate cake with molten center",
+    "price": 1000,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.6
+  },
+  {
+    "name": "Ice Cream Sundae",
+    "description": "Delicious Ice cream with hot fudge and whipped cream",
+    "price": 850,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.8
+  },
+  {
+    "name": "Chocolate Cake Slice",
+    "description": "Premium Rich chocolate cake with frosting",
+    "price": 750,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.8
+  },
+  {
+    "name": "Red Velvet Cake",
+    "description": "Special Moist red velvet with cream cheese frosting",
+    "price": 650,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 5.0
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "BBQ Bacon Burger",
+    "description": "Traditional Beef patty with bacon and BBQ sauce",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.9
+  },
+  {
+    "name": "Chicken Strips (4pc)",
+    "description": "Homemade Breaded chicken strips",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.9
+  },
+  {
+    "name": "Chili Cheese Fries",
+    "description": "Signature Fries with chili and cheese",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.7
+  },
+  {
+    "name": "Classic Beef Burger",
+    "description": "Fresh Juicy beef patty with lettuce, tomato, and special sauce",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.0
+  },
+  {
+    "name": "Chicken Club Burger",
+    "description": "Delicious Chicken with bacon, lettuce, and tomato",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.9
+  },
+  {
+    "name": "Onion Rings (6pc)",
+    "description": "Premium Crispy battered onion rings",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.8
+  }
+]

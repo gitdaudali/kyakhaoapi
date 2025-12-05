@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chocolate Chip Cookie",
+    "description": "Signature Freshly baked cookie",
+    "price": 200,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.9
+  },
+  {
+    "name": "Frappuccino",
+    "description": "Fresh Blended coffee drink",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  },
+  {
+    "name": "Chocolate Croissant",
+    "description": "Delicious Buttery croissant with chocolate",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.9
+  },
+  {
+    "name": "Iced Latte",
+    "description": "Premium Cold latte with ice",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  },
+  {
+    "name": "Espresso",
+    "description": "Special Strong Italian coffee",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  },
+  {
+    "name": "Banana Bread",
+    "description": "Authentic Moist banana bread slice",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  }
+]

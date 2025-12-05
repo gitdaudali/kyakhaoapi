@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Sweet and Sour Chicken",
+    "description": "Signature Crispy chicken pieces in tangy sweet and sour sauce",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 5.0
+  },
+  {
+    "name": "Shrimp Chow Mein",
+    "description": "Fresh Stir-fried noodles with shrimp",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 5.0
+  },
+  {
+    "name": "Beef with Broccoli",
+    "description": "Delicious Tender beef with fresh broccoli",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 5.0
+  },
+  {
+    "name": "Lemon Chicken",
+    "description": "Premium Crispy chicken with lemon sauce",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Beef Fried Rice",
+    "description": "Special Fried rice with tender beef strips",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Lo Mein",
+    "description": "Authentic Soft noodles with chicken and vegetables",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  }
+]

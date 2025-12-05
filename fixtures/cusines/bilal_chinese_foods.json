@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mapo Tofu",
+    "description": "Authentic Spicy Sichuan dish with tofu and minced meat",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.0
+  },
+  {
+    "name": "Egg Drop Soup",
+    "description": "Traditional Classic Chinese egg soup",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.0
+  },
+  {
+    "name": "Shrimp Chow Mein",
+    "description": "Homemade Stir-fried noodles with shrimp",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.0
+  },
+  {
+    "name": "Chicken Spring Rolls (4pc)",
+    "description": "Signature Crispy rolls with chicken and vegetables",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.0
+  },
+  {
+    "name": "Szechuan Chicken",
+    "description": "Fresh Spicy Szechuan-style chicken",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.0
+  },
+  {
+    "name": "Wonton Soup",
+    "description": "Delicious Clear soup with pork wontons",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.0
+  }
+]

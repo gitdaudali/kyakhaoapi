@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Chicken Shawarma",
+    "description": "Marinated chicken wrapped in pita bread with tahini",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 4.6
+  },
+  {
+    "name": "Beef Shawarma",
+    "description": "Tender beef wrapped in pita with garlic sauce",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 4.6
+  },
+  {
+    "name": "Mixed Shawarma",
+    "description": "Combination of chicken and beef",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 4.9
+  },
+  {
+    "name": "Shawarma Platter",
+    "description": "Shawarma meat with rice and salad",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 4.6
+  },
+  {
+    "name": "Hummus",
+    "description": "Creamy chickpea dip",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 4.9
+  }
+]

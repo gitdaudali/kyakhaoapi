@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Veggie Delight Pizza",
+    "description": "Homemade Fresh vegetables with mozzarella cheese",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.5
+  },
+  {
+    "name": "Hawaiian Pizza",
+    "description": "Signature Ham, pineapple, and mozzarella cheese",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.4
+  },
+  {
+    "name": "Buffalo Chicken Pizza",
+    "description": "Fresh Spicy buffalo chicken with blue cheese",
+    "price": 1600,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.8
+  },
+  {
+    "name": "Mozzarella Sticks (6pc)",
+    "description": "Delicious Breaded mozzarella with marinara sauce",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.8
+  },
+  {
+    "name": "Four Cheese Pizza",
+    "description": "Premium Mozzarella, cheddar, parmesan, and feta",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.5
+  },
+  {
+    "name": "Chicken Wings (6pc)",
+    "description": "Special Spicy buffalo wings",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.7
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Chocolate Fudge Cake",
+    "description": "Rich and moist chocolate cake layered with creamy chocolate fudge frosting",
+    "price": 1200,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.7
+  },
+  {
+    "name": "Red Velvet Cake Slice",
+    "description": "Classic red velvet cake with cream cheese frosting",
+    "price": 950,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.7
+  },
+  {
+    "name": "Strawberry Cheesecake",
+    "description": "Creamy New York style cheesecake topped with fresh strawberries",
+    "price": 1100,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.9
+  },
+  {
+    "name": "Tiramisu",
+    "description": "Italian classic with layers of coffee-soaked ladyfingers and mascarpone",
+    "price": 1050,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.7
+  },
+  {
+    "name": "Chocolate Chip Cookies (6pc)",
+    "description": "Freshly baked cookies loaded with chocolate chips",
+    "price": 650,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.7
+  },
+  {
+    "name": "Brownie Sundae",
+    "description": "Warm chocolate brownie topped with vanilla ice cream and chocolate sauce",
+    "price": 850,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 5.0
+  },
+  {
+    "name": "Mango Mousse",
+    "description": "Light and airy mango mousse with fresh mango pieces",
+    "price": 750,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.9
+  },
+  {
+    "name": "Chocolate Lava Cake",
+    "description": "Warm chocolate cake with a molten chocolate center, served with vanilla ice cream",
+    "price": 950,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 4.9
+  }
+]

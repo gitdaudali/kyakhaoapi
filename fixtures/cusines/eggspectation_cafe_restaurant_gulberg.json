@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Cappuccino",
+    "description": "Special Espresso with steamed milk and foam",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 5.0
+  },
+  {
+    "name": "Caramel Macchiato",
+    "description": "Authentic Espresso with caramel and steamed milk",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 5.0
+  },
+  {
+    "name": "Cortado",
+    "description": "Traditional Espresso with equal parts steamed milk",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.9
+  },
+  {
+    "name": "Chocolate Croissant",
+    "description": "Homemade Buttery croissant with chocolate",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.7
+  },
+  {
+    "name": "Banana Bread",
+    "description": "Signature Moist banana bread slice",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.7
+  },
+  {
+    "name": "Cinnamon Roll",
+    "description": "Fresh Sweet cinnamon pastry",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.9
+  }
+]

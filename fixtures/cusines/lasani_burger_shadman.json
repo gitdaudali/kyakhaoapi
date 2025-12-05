@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Zinger Burger",
+    "description": "Fresh Spicy chicken fillet burger with mayo",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.9
+  },
+  {
+    "name": "Classic Beef Burger",
+    "description": "Delicious Juicy beef patty with lettuce, tomato, and special sauce",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.5
+  },
+  {
+    "name": "Double Beef Burger",
+    "description": "Premium Two beef patties with cheese and vegetables",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.6
+  },
+  {
+    "name": "Chicken Burger",
+    "description": "Special Crispy chicken patty with fresh vegetables",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.8
+  },
+  {
+    "name": "Chicken Broast (Full)",
+    "description": "Authentic Full broasted chicken",
+    "price": 1950,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.9
+  },
+  {
+    "name": "Fried Chicken (4pc)",
+    "description": "Traditional Crispy fried chicken pieces",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 3.7
+  }
+]

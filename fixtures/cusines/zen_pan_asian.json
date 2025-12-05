@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Gyoza (6pc)",
+    "description": "Fresh Pan-fried dumplings",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 3.9
+  },
+  {
+    "name": "Chicken Katsu",
+    "description": "Delicious Breaded and fried chicken cutlet",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 4.0
+  },
+  {
+    "name": "Chicken Ramen",
+    "description": "Premium Japanese noodle soup with chicken and vegetables",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 3.8
+  },
+  {
+    "name": "Tuna Sashimi",
+    "description": "Special Fresh raw tuna slices",
+    "price": 1800,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 3.9
+  },
+  {
+    "name": "Dragon Roll",
+    "description": "Authentic Eel and cucumber with avocado",
+    "price": 1450,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 4.2
+  },
+  {
+    "name": "Edamame",
+    "description": "Traditional Steamed soybeans with salt",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 4.1
+  }
+]

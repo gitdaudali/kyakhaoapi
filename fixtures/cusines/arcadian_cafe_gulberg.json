@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Flat White",
+    "description": "Signature Espresso with microfoam milk",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  },
+  {
+    "name": "Cortado",
+    "description": "Fresh Espresso with equal parts steamed milk",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.9
+  },
+  {
+    "name": "Cappuccino",
+    "description": "Delicious Espresso with steamed milk and foam",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 5.0
+  },
+  {
+    "name": "Cinnamon Roll",
+    "description": "Premium Sweet cinnamon pastry",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  },
+  {
+    "name": "Latte",
+    "description": "Special Smooth espresso with steamed milk",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  },
+  {
+    "name": "Iced Latte",
+    "description": "Authentic Cold latte with ice",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.6
+  }
+]

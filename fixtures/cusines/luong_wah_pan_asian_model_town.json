@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Spicy Tuna Roll",
+    "description": "Signature Tuna with spicy mayo",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 5.0
+  },
+  {
+    "name": "Tempura Shrimp",
+    "description": "Fresh Lightly battered and fried shrimp",
+    "price": 1450,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Teriyaki",
+    "description": "Delicious Grilled chicken glazed with teriyaki sauce",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 5.0
+  },
+  {
+    "name": "Edamame",
+    "description": "Premium Steamed soybeans with salt",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Katsu",
+    "description": "Special Breaded and fried chicken cutlet",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 5.0
+  },
+  {
+    "name": "Dragon Roll",
+    "description": "Authentic Eel and cucumber with avocado",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Japanese",
+    "rating": 5.0
+  }
+]

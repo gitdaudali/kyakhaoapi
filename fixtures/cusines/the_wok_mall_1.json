@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mongolian Beef",
+    "description": "Premium Tender beef with vegetables in savory sauce",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.3
+  },
+  {
+    "name": "Mapo Tofu",
+    "description": "Special Spicy Sichuan dish with tofu and minced meat",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.2
+  },
+  {
+    "name": "Shrimp Fried Rice",
+    "description": "Authentic Fried rice with fresh shrimp",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.4
+  },
+  {
+    "name": "Sweet and Sour Chicken",
+    "description": "Traditional Crispy chicken pieces in tangy sweet and sour sauce",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Honey Chicken",
+    "description": "Homemade Crispy chicken with honey glaze",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.2
+  },
+  {
+    "name": "Chicken Fried Rice",
+    "description": "Signature Fragrant fried rice with tender chicken pieces and vegetables",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  }
+]

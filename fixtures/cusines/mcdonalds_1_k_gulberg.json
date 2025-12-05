@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Big Mac",
+    "description": "Two 100% pure beef patties, special sauce, lettuce, cheese, pickles, onions on a sesame seed bun",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.5
+  },
+  {
+    "name": "McChicken",
+    "description": "Crispy chicken patty with mayonnaise and lettuce on a sesame seed bun",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.9
+  },
+  {
+    "name": "Chicken McNuggets (6pc)",
+    "description": "Tender, juicy chicken nuggets made with 100% white meat",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.5
+  },
+  {
+    "name": "French Fries (Regular)",
+    "description": "World famous golden fries, crispy on the outside and fluffy on the inside",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.8
+  },
+  {
+    "name": "McFlurry Oreo",
+    "description": "Creamy vanilla soft serve mixed with Oreo cookie pieces",
+    "price": 550,
+    "mood": "Dessert",
+    "cuisine": "Fast Food",
+    "rating": 4.6
+  },
+  {
+    "name": "Quarter Pounder with Cheese",
+    "description": "Quarter pound of 100% pure beef, two slices of cheese, onions, pickles, ketchup, mustard on a sesame seed bun",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.9
+  },
+  {
+    "name": "Filet-O-Fish",
+    "description": "Wild-caught fish fillet with tartar sauce and cheese on a steamed bun",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.6
+  },
+  {
+    "name": "Apple Pie",
+    "description": "Warm apple pie with cinnamon",
+    "price": 250,
+    "mood": "Dessert",
+    "cuisine": "Fast Food",
+    "rating": 4.9
+  }
+]

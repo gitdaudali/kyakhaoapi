@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chocolate Cake Slice",
+    "description": "Fresh Rich chocolate cake with frosting",
+    "price": 650,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 3.0
+  },
+  {
+    "name": "Brownie",
+    "description": "Delicious Fudgy chocolate brownie",
+    "price": 500,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 3.0
+  },
+  {
+    "name": "Chocolate Mousse",
+    "description": "Premium Light and airy chocolate mousse",
+    "price": 750,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 3.2
+  },
+  {
+    "name": "Cheesecake",
+    "description": "Special Creamy New York style cheesecake",
+    "price": 900,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 3.0
+  },
+  {
+    "name": "Apple Pie",
+    "description": "Authentic Warm apple pie with cinnamon",
+    "price": 700,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 3.1
+  },
+  {
+    "name": "Kulfi",
+    "description": "Traditional frozen dessert",
+    "price": 200,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 3.0
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Chicken Fajita Pizza",
+    "description": "Spiced chicken with bell peppers and onions",
+    "price": 1300,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.4
+  },
+  {
+    "name": "Chicken Tikka Pizza",
+    "description": "Tender chicken tikka with onions and green chilies",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.5
+  },
+  {
+    "name": "Pepperoni Pizza",
+    "description": "Classic pepperoni with mozzarella cheese",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.4
+  },
+  {
+    "name": "Chicken Supreme Pizza",
+    "description": "Chicken, peppers, onions, and mushrooms",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.3
+  },
+  {
+    "name": "Garlic Bread",
+    "description": "Soft breadsticks with garlic butter",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Wings (6pc)",
+    "description": "Spicy buffalo wings",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.3
+  },
+  {
+    "name": "Chocolate Lava Cake",
+    "description": "Warm chocolate cake with molten center",
+    "price": 450,
+    "mood": "Dessert",
+    "cuisine": "Pizza",
+    "rating": 4.4
+  }
+]

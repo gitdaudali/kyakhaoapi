@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Mixed Grill",
+    "description": "Signature Assorted grilled meats with rice and salad",
+    "price": 1850,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 5.0
+  },
+  {
+    "name": "Mutton Mandi",
+    "description": "Fresh Aromatic rice with tender mutton",
+    "price": 2050,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Shawarma",
+    "description": "Delicious Marinated chicken wrapped in pita bread with tahini",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 4.8
+  },
+  {
+    "name": "Tabbouleh",
+    "description": "Premium Fresh parsley salad with bulgur",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 4.9
+  },
+  {
+    "name": "Beef Shawarma",
+    "description": "Special Tender beef wrapped in pita with garlic sauce",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Mandi",
+    "description": "Authentic Fragrant rice with tender spiced chicken",
+    "price": 1450,
+    "mood": "Anytime",
+    "cuisine": "Arabic",
+    "rating": 5.0
+  }
+]

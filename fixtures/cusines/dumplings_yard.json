@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Honey Chicken",
+    "description": "Premium Crispy chicken with honey glaze",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.3
+  },
+  {
+    "name": "Sweet and Sour Chicken",
+    "description": "Special Crispy chicken pieces in tangy sweet and sour sauce",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.5
+  },
+  {
+    "name": "Wonton Soup",
+    "description": "Authentic Clear soup with pork wontons",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.2
+  },
+  {
+    "name": "Beef Chow Mein",
+    "description": "Traditional Stir-fried noodles with beef",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.7
+  },
+  {
+    "name": "Peking Duck",
+    "description": "Homemade Crispy duck with pancakes",
+    "price": 2550,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.2
+  },
+  {
+    "name": "Egg Drop Soup",
+    "description": "Signature Classic Chinese egg soup",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 3.6
+  }
+]

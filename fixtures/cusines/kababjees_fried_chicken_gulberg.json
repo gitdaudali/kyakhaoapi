@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Veggie Burger",
+    "description": "Vegetable patty with fresh toppings",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.6
+  },
+  {
+    "name": "Fish Burger",
+    "description": "Delicious Crispy fish fillet with tartar sauce",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  },
+  {
+    "name": "Classic Beef Burger",
+    "description": "Premium Juicy beef patty with lettuce, tomato, and special sauce",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.5
+  },
+  {
+    "name": "French Fries (Large)",
+    "description": "Special Large portion of crispy fries",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Club Burger",
+    "description": "Authentic Chicken with bacon, lettuce, and tomato",
+    "price": 950,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.4
+  },
+  {
+    "name": "Chicken Tenders (3pc)",
+    "description": "Traditional Breaded chicken tenders",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.4
+  }
+]

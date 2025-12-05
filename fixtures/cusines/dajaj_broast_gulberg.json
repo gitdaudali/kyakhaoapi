@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Fillet Burger",
+    "description": "Signature Grilled chicken fillet with mayo",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  },
+  {
+    "name": "French Fries (Regular)",
+    "description": "Fresh Golden crispy fries",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 5.0
+  },
+  {
+    "name": "Loaded Fries",
+    "description": "Delicious Fries topped with cheese and bacon",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 5.0
+  },
+  {
+    "name": "Zinger Burger",
+    "description": "Premium Spicy chicken fillet burger with mayo",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Broast (Full)",
+    "description": "Special Full broasted chicken",
+    "price": 2100,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 5.0
+  },
+  {
+    "name": "Double Beef Burger",
+    "description": "Authentic Two beef patties with cheese and vegetables",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.9
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Beef Fried Rice",
+    "description": "Authentic Fried rice with tender beef strips",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Beef Chow Mein",
+    "description": "Traditional Stir-fried noodles with beef",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Spring Rolls (4pc)",
+    "description": "Homemade Crispy rolls with chicken and vegetables",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.9
+  },
+  {
+    "name": "Kung Pao Chicken",
+    "description": "Signature Spicy stir-fried chicken with peanuts and vegetables",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.6
+  },
+  {
+    "name": "Spring Rolls (4pc)",
+    "description": "Fresh Crispy spring rolls filled with vegetables",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.9
+  },
+  {
+    "name": "Shrimp Fried Rice",
+    "description": "Delicious Fried rice with fresh shrimp",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  }
+]

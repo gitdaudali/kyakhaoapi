@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Orange Chicken",
+    "description": "Delicious Crispy chicken with orange glaze",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.6
+  },
+  {
+    "name": "Peking Duck",
+    "description": "Premium Crispy duck with pancakes",
+    "price": 2400,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.2
+  },
+  {
+    "name": "Wonton Soup",
+    "description": "Special Clear soup with pork wontons",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.6
+  },
+  {
+    "name": "Shrimp Chow Mein",
+    "description": "Authentic Stir-fried noodles with shrimp",
+    "price": 1050,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.4
+  },
+  {
+    "name": "General Tso's Chicken",
+    "description": "Traditional Crispy chicken in a sweet and spicy sauce",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Sweet and Sour Chicken",
+    "description": "Homemade Crispy chicken pieces in tangy sweet and sour sauce",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.4
+  }
+]

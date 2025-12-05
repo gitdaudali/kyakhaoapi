@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Lo Mein",
+    "description": "Fresh Soft noodles with chicken and vegetables",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Lemon Chicken",
+    "description": "Delicious Crispy chicken with lemon sauce",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.3
+  },
+  {
+    "name": "Beef Chow Mein",
+    "description": "Premium Stir-fried noodles with beef",
+    "price": 1000,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.3
+  },
+  {
+    "name": "Egg Drop Soup",
+    "description": "Special Classic Chinese egg soup",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.4
+  },
+  {
+    "name": "Shrimp Chow Mein",
+    "description": "Authentic Stir-fried noodles with shrimp",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  },
+  {
+    "name": "Wonton Soup",
+    "description": "Traditional Clear soup with pork wontons",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.5
+  }
+]

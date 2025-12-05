@@ -1,0 +1,50 @@
+[
+  {
+    "name": "BBQ Bacon Burger",
+    "description": "Homemade Beef patty with bacon and BBQ sauce",
+    "price": 900,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.8
+  },
+  {
+    "name": "Cheese Burger",
+    "description": "Signature Beef patty with melted cheese",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  },
+  {
+    "name": "Chicken Wings (6pc)",
+    "description": "Fresh Spicy fried chicken wings",
+    "price": 850,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.6
+  },
+  {
+    "name": "Chicken Tenders (3pc)",
+    "description": "Delicious Breaded chicken tenders",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  },
+  {
+    "name": "Onion Rings (6pc)",
+    "description": "Premium Crispy battered onion rings",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.8
+  },
+  {
+    "name": "Chili Cheese Fries",
+    "description": "Special Fries with chili and cheese",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Fast Food",
+    "rating": 4.7
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Apple Pie",
+    "description": "Authentic Warm apple pie with cinnamon",
+    "price": 600,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 3.5
+  },
+  {
+    "name": "Ice Cream (2 Scoops)",
+    "description": "Traditional Creamy ice cream in your favorite flavor",
+    "price": 350,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 3.4
+  },
+  {
+    "name": "Gulab Jamun (2pc)",
+    "description": "Homemade Sweet milk dumplings in sugar syrup",
+    "price": 300,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 3.6
+  },
+  {
+    "name": "Ras Malai (2pc)",
+    "description": "Signature Sweet cheese dumplings in milk",
+    "price": 450,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 3.7
+  },
+  {
+    "name": "Kulfi",
+    "description": "Fresh Traditional frozen dessert",
+    "price": 350,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 3.4
+  },
+  {
+    "name": "Cheesecake",
+    "description": "Delicious Creamy New York style cheesecake",
+    "price": 950,
+    "mood": "Dessert",
+    "cuisine": "Desserts",
+    "rating": 3.2
+  }
+]

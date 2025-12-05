@@ -1,0 +1,66 @@
+[
+  {
+    "name": "NY 212 Classic Pizza",
+    "description": "Traditional New York style pizza with mozzarella and tomato sauce",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.4
+  },
+  {
+    "name": "Pepperoni Pizza",
+    "description": "Classic pepperoni pizza with mozzarella cheese",
+    "price": 1400,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.4
+  },
+  {
+    "name": "BBQ Chicken Pizza",
+    "description": "Grilled chicken with BBQ sauce, onions, and mozzarella",
+    "price": 1500,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.5
+  },
+  {
+    "name": "Margherita Pizza",
+    "description": "Fresh mozzarella, basil, and tomato sauce",
+    "price": 1100,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.8
+  },
+  {
+    "name": "Supreme Pizza",
+    "description": "Pepperoni, sausage, peppers, onions, and mushrooms",
+    "price": 1600,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.6
+  },
+  {
+    "name": "Hawaiian Pizza",
+    "description": "Ham, pineapple, and mozzarella cheese",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.6
+  },
+  {
+    "name": "Garlic Bread",
+    "description": "Fresh baked bread with garlic butter",
+    "price": 450,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.8
+  },
+  {
+    "name": "Caesar Salad",
+    "description": "Fresh romaine lettuce with caesar dressing",
+    "price": 750,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.8
+  }
+]

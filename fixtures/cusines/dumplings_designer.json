@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Shrimp Chow Mein",
+    "description": "Premium Stir-fried noodles with shrimp",
+    "price": 1150,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 5.0
+  },
+  {
+    "name": "Wonton Soup",
+    "description": "Special Clear soup with pork wontons",
+    "price": 650,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.7
+  },
+  {
+    "name": "Hot and Sour Soup",
+    "description": "Authentic Traditional Chinese soup with a perfect balance of heat and tang",
+    "price": 600,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 5.0
+  },
+  {
+    "name": "Chicken Fried Rice",
+    "description": "Traditional Fragrant fried rice with tender chicken pieces and vegetables",
+    "price": 950,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.7
+  },
+  {
+    "name": "Szechuan Chicken",
+    "description": "Homemade Spicy Szechuan-style chicken",
+    "price": 1200,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 4.8
+  },
+  {
+    "name": "Egg Drop Soup",
+    "description": "Signature Classic Chinese egg soup",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Chinese",
+    "rating": 5.0
+  }
+]

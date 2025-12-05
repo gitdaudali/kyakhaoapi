@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Cinnamon Roll",
+    "description": "Special Sweet cinnamon pastry",
+    "price": 300,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.6
+  },
+  {
+    "name": "Latte",
+    "description": "Authentic Smooth espresso with steamed milk",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.7
+  },
+  {
+    "name": "Chocolate Chip Cookie",
+    "description": "Traditional Freshly baked cookie",
+    "price": 250,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 5.0
+  },
+  {
+    "name": "Cortado",
+    "description": "Homemade Espresso with equal parts steamed milk",
+    "price": 500,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.9
+  },
+  {
+    "name": "Croissant",
+    "description": "Signature Buttery French pastry",
+    "price": 400,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.6
+  },
+  {
+    "name": "Blueberry Muffin",
+    "description": "Freshly baked blueberry muffin",
+    "price": 350,
+    "mood": "Anytime",
+    "cuisine": "Coffee",
+    "rating": 4.8
+  }
+]

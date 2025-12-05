@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Chicken Tikka Pizza",
+    "description": "Fresh Spiced chicken tikka with onions and green chilies",
+    "price": 1350,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.5
+  },
+  {
+    "name": "Hawaiian Pizza",
+    "description": "Delicious Ham, pineapple, and mozzarella cheese",
+    "price": 1250,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.8
+  },
+  {
+    "name": "Chicken Wings (6pc)",
+    "description": "Premium Spicy buffalo wings",
+    "price": 800,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.8
+  },
+  {
+    "name": "Caesar Salad",
+    "description": "Special Fresh romaine lettuce with caesar dressing",
+    "price": 700,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.6
+  },
+  {
+    "name": "Four Cheese Pizza",
+    "description": "Authentic Mozzarella, cheddar, parmesan, and feta",
+    "price": 1450,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.7
+  },
+  {
+    "name": "Garlic Knots (6pc)",
+    "description": "Traditional Soft bread knots with garlic butter",
+    "price": 550,
+    "mood": "Anytime",
+    "cuisine": "Pizza",
+    "rating": 4.6
+  }
+]
