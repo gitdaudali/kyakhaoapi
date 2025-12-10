@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Karachi Spicy Roll Corner Gulberg",
+  "menu": [
+    {
+      "name": "Daal Chawal",
+      "description": "Premium Lentil curry with rice",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 297
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Special Paratha stuffed with spiced chicken",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 392
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Authentic Naan with garlic and butter",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 233
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Traditional Spiced rice with beef chunks",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 546
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Homemade Fragrant basmati rice with tender chicken and spices",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 497
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Signature Spicy chicken curry cooked in a wok",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 401
+    }
+  ]
+}

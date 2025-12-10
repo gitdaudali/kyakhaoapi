@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Timmys Gulberg",
+  "menu": [
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Special Naan with garlic and butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 289
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Authentic Lentil curry with rice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 362
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Traditional Spicy mutton curry cooked in a wok",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 584
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Homemade Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 229
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Signature Freshly baked tandoori bread",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 276
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Fresh Mild creamy chicken curry",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 491
+    }
+  ]
+}

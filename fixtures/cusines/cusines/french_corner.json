@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "French Corner",
+  "menu": [
+    {
+      "name": "Naan (2pc)",
+      "description": "Authentic Freshly baked tandoori bread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 299
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Traditional Paratha stuffed with spiced chicken",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.1,
+      "estimated_calories": 380
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Homemade Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 176
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Signature Creamy chicken curry cooked in a clay pot",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 558
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Fresh Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 418
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Delicious Rice cooked with mutton stock",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 413
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Bon Ton Model Town",
+  "menu": [
+    {
+      "name": "Chicken Korma",
+      "description": "Delicious Mild creamy chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 388
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Premium Naan brushed with butter",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 215
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Special Lentil curry with rice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 353
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Authentic Spiced minced meat skewers",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 362
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Traditional Aromatic rice cooked with chicken stock",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 514
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Homemade Marinated grilled chicken pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 361
+    }
+  ]
+}

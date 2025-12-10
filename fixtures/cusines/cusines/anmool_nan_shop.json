@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Anmool Nan Shop",
+  "menu": [
+    {
+      "name": "Chicken Korma",
+      "description": "Traditional Mild creamy chicken curry",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 373
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Homemade Freshly baked tandoori bread",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 265
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Signature Spiced rice with beef chunks",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 551
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Fresh Marinated grilled chicken pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 402
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Delicious Lentil curry with rice",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 362
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Premium Spiced minced meat skewers",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 382
+    }
+  ]
+}

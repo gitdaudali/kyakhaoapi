@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Contra Coffee",
+  "menu": [
+    {
+      "name": "Frappuccino",
+      "description": "Homemade Blended coffee drink",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.7,
+      "estimated_calories": 170
+    },
+    {
+      "name": "Chocolate Croissant",
+      "description": "Signature Buttery croissant with chocolate",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 319
+    },
+    {
+      "name": "Caramel Macchiato",
+      "description": "Fresh Espresso with caramel and steamed milk",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 57
+    },
+    {
+      "name": "Banana Bread",
+      "description": "Delicious Moist banana bread slice",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.7,
+      "estimated_calories": 301
+    },
+    {
+      "name": "Cinnamon Roll",
+      "description": "Premium Sweet cinnamon pastry",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 365
+    },
+    {
+      "name": "Cappuccino",
+      "description": "Special Espresso with steamed milk and foam",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 70
+    }
+  ]
+}

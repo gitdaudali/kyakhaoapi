@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Zakir Tikka Garden Town",
+  "menu": [
+    {
+      "name": "Chicken Kofta",
+      "description": "Authentic Chicken meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 310
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Traditional Spiced rice with beef chunks",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 582
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Homemade Stuffed paratha with your choice of filling",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 444
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Signature Aromatic rice with tender mutton pieces",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 518
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Fresh Paratha stuffed with beef",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 469
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Delicious Fragrant basmati rice with tender chicken and spices",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 565
+    }
+  ]
+}

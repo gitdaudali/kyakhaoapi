@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Dumplings Barpk",
+  "menu": [
+    {
+      "name": "General Tso's Chicken",
+      "description": "Signature Crispy chicken in a sweet and spicy sauce",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.6,
+      "estimated_calories": 304
+    },
+    {
+      "name": "Beef Chow Mein",
+      "description": "Fresh Stir-fried noodles with beef",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.2,
+      "estimated_calories": 570
+    },
+    {
+      "name": "Wonton Soup",
+      "description": "Delicious Clear soup with pork wontons",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.2,
+      "estimated_calories": 222
+    },
+    {
+      "name": "Spring Rolls (4pc)",
+      "description": "Premium Crispy spring rolls filled with vegetables",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.6,
+      "estimated_calories": 200
+    },
+    {
+      "name": "Hot and Sour Soup",
+      "description": "Special Traditional Chinese soup with a perfect balance of heat and tang",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.4,
+      "estimated_calories": 201
+    },
+    {
+      "name": "Lemon Chicken",
+      "description": "Authentic Crispy chicken with lemon sauce",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.2,
+      "estimated_calories": 423
+    }
+  ]
+}

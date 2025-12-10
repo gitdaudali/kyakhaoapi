@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Crosta",
+  "menu": [
+    {
+      "name": "Daal Chawal",
+      "description": "Delicious Lentil curry with rice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 299
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Premium Slow-cooked mutton in spicy gravy",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 626
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Special Aromatic rice with tender mutton pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 503
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Authentic Mildly spiced rice with chicken",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 407
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Traditional Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 474
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Homemade Spiced rice with beef chunks",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 477
+    }
+  ]
+}

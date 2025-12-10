@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Drip Coffee Brewery Bakery",
+  "menu": [
+    {
+      "name": "Kulfi",
+      "description": "Fresh Traditional frozen dessert",
+      "price": 400,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 200
+    },
+    {
+      "name": "Ice Cream Sundae",
+      "description": "Delicious Ice cream with hot fudge and whipped cream",
+      "price": 650,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.9,
+      "estimated_calories": 307
+    },
+    {
+      "name": "Tiramisu",
+      "description": "Premium Italian classic with coffee and mascarpone",
+      "price": 950,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.9,
+      "estimated_calories": 180
+    },
+    {
+      "name": "Gulab Jamun (2pc)",
+      "description": "Special Sweet milk dumplings in sugar syrup",
+      "price": 200,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 400
+    },
+    {
+      "name": "Strawberry Cheesecake",
+      "description": "Authentic Cheesecake topped with fresh strawberries",
+      "price": 900,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 487
+    },
+    {
+      "name": "Chocolate Mousse",
+      "description": "Traditional Light and airy chocolate mousse",
+      "price": 650,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 484
+    }
+  ]
+}

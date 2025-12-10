@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Cocta",
+  "menu": [
+    {
+      "name": "Mutton Nihari",
+      "description": "Authentic Slow-cooked mutton in spicy gravy",
+      "price": 2100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 680
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Traditional Spiced minced meat skewers",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 278
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Homemade Mild chicken curry with yogurt",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 373
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Signature Mild creamy chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 375
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Freshly baked tandoori bread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 249
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Delicious Chicken meatballs in curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 386
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Karachi Biryani Hearts Walton",
+  "menu": [
+    {
+      "name": "Beef Kofta",
+      "description": "Special Beef meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 422
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Authentic Naan with garlic and butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 287
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Traditional Fragrant basmati rice with tender chicken and spices",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 483
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Homemade Spiced rice with beef chunks",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 617
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Signature Marinated grilled chicken pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 342
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Fresh Mildly spiced rice with chicken",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 489
+    }
+  ]
+}

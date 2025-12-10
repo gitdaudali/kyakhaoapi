@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Arcadian Cafe Gulberg",
+  "menu": [
+    {
+      "name": "Flat White",
+      "description": "Signature Espresso with microfoam milk",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 415
+    },
+    {
+      "name": "Cortado",
+      "description": "Fresh Espresso with equal parts steamed milk",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 163
+    },
+    {
+      "name": "Cappuccino",
+      "description": "Delicious Espresso with steamed milk and foam",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 150
+    },
+    {
+      "name": "Cinnamon Roll",
+      "description": "Premium Sweet cinnamon pastry",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 343
+    },
+    {
+      "name": "Latte",
+      "description": "Special Smooth espresso with steamed milk",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 107
+    },
+    {
+      "name": "Iced Latte",
+      "description": "Authentic Cold latte with ice",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.6,
+      "estimated_calories": 420
+    }
+  ]
+}

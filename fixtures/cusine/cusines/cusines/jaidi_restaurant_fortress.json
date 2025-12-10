@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Jaidi Restaurant Fortress",
+  "menu": [
+    {
+      "name": "Chicken Kofta",
+      "description": "Signature Chicken meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 306
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Fresh Naan with garlic and butter",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 282
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Delicious Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 468
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Premium Spicy chicken with bell peppers",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 408
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Special Fresh flatbread",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 245
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Authentic Slow-cooked chicken in spicy gravy",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 570
+    }
+  ]
+}

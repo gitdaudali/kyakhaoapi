@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Mocca Coffee Mall 94",
+  "menu": [
+    {
+      "name": "Frappuccino",
+      "description": "Delicious Blended coffee drink",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.3,
+      "estimated_calories": 62
+    },
+    {
+      "name": "Americano",
+      "description": "Premium Espresso with hot water",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.3,
+      "estimated_calories": 325
+    },
+    {
+      "name": "Bagel with Cream Cheese",
+      "description": "Special Fresh bagel with cream cheese",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.1,
+      "estimated_calories": 345
+    },
+    {
+      "name": "Iced Coffee",
+      "description": "Authentic Cold coffee with ice",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.1,
+      "estimated_calories": 71
+    },
+    {
+      "name": "Caramel Macchiato",
+      "description": "Traditional Espresso with caramel and steamed milk",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.1,
+      "estimated_calories": 52
+    },
+    {
+      "name": "Mocha",
+      "description": "Homemade Chocolate espresso with steamed milk",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.3,
+      "estimated_calories": 162
+    }
+  ]
+}

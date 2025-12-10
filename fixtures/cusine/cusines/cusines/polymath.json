@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Polymath",
+  "menu": [
+    {
+      "name": "Daal Chawal",
+      "description": "Premium Lentil curry with rice",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 302
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Special Beef meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 433
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Authentic Spiced minced meat skewers",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 293
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Traditional Chicken meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 428
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Homemade Traditional chicken curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 475
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Signature Marinated grilled chicken pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 322
+    }
+  ]
+}

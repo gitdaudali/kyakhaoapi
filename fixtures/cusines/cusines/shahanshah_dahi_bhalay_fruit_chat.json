@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Shahanshah Dahi Bhalay Fruit Chat",
+  "menu": [
+    {
+      "name": "Mutton Handi",
+      "description": "Premium Creamy mutton curry in clay pot",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 427
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Special Marinated grilled chicken pieces",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 370
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Authentic Naan with garlic and butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 291
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Traditional chicken curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 339
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Homemade Spicy chicken curry cooked in a wok",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 458
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Signature Fragrant basmati rice with tender chicken and spices",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 537
+    }
+  ]
+}

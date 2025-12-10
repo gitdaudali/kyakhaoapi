@@ -1,0 +1,41 @@
+{
+  "restaurant_name": "Ishaq Yakhni Pulao Main Market Gulberg",
+  "menu": [
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Aromatic rice cooked with chicken stock",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 507
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Rice cooked with mutton stock",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 468
+    },
+    {
+      "name": "Beef Yakhni Pulao",
+      "description": "Rice cooked with beef stock",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 409
+    },
+    {
+      "name": "Raita",
+      "description": "Yogurt with cucumber",
+      "price": 150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 348
+    }
+  ]
+}

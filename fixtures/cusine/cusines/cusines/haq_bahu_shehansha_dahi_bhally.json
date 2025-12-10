@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Haq Bahu Shehansha Dahi Bhally",
+  "menu": [
+    {
+      "name": "Roti (4pc)",
+      "description": "Homemade Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 158
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Signature Chicken meatballs in curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 416
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Fresh Creamy chicken curry cooked in a clay pot",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 454
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Delicious Spicy chicken with bell peppers",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 447
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Premium Traditional chicken curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 359
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Special Slow-cooked chicken in spicy gravy",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 630
+    }
+  ]
+}

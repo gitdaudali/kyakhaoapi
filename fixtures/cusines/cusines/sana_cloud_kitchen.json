@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Sana Cloud Kitchen",
+  "menu": [
+    {
+      "name": "Chicken Tikka",
+      "description": "Authentic Marinated grilled chicken pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 428
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Traditional Freshly baked tandoori bread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 244
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Homemade Mild mutton curry with yogurt",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 306
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Signature Paratha stuffed with beef",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 445
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Fresh Spiced rice with tender beef",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 483
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Delicious Spicy mutton curry cooked in a wok",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 541
+    }
+  ]
+}

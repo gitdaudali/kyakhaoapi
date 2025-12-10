@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Pataha Gulberg",
+  "menu": [
+    {
+      "name": "Chicken Korma",
+      "description": "Authentic Mild creamy chicken curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 378
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Traditional Slow-cooked mutton in spicy gravy",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 573
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Homemade Mildly spiced rice with chicken",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 457
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Signature Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 171
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Fresh Naan with garlic and butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 278
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Delicious Spiced rice with beef chunks",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 637
+    }
+  ]
+}

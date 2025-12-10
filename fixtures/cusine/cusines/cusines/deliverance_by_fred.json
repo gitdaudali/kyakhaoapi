@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Deliverance By Fred",
+  "menu": [
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Delicious Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 400
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Premium Beef meatballs in curry",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 353
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Special Freshly baked tandoori bread",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 206
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Authentic Spicy chicken curry cooked in a wok",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 517
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Traditional Spiced rice with beef chunks",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 486
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Homemade Fresh flatbread",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 248
+    }
+  ]
+}

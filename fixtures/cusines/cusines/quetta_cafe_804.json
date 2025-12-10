@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Quetta Cafe 804",
+  "menu": [
+    {
+      "name": "Mocha",
+      "description": "Special Chocolate espresso with steamed milk",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.0,
+      "estimated_calories": 125
+    },
+    {
+      "name": "Croissant",
+      "description": "Authentic Buttery French pastry",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.0,
+      "estimated_calories": 412
+    },
+    {
+      "name": "Cinnamon Roll",
+      "description": "Traditional Sweet cinnamon pastry",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.4,
+      "estimated_calories": 293
+    },
+    {
+      "name": "Iced Latte",
+      "description": "Homemade Cold latte with ice",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.2,
+      "estimated_calories": 500
+    },
+    {
+      "name": "Frappuccino",
+      "description": "Signature Blended coffee drink",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.3,
+      "estimated_calories": 94
+    },
+    {
+      "name": "Caramel Macchiato",
+      "description": "Fresh Espresso with caramel and steamed milk",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.2,
+      "estimated_calories": 176
+    }
+  ]
+}

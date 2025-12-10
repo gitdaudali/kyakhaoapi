@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Spicy Dip Fortress Square Mall",
+  "menu": [
+    {
+      "name": "Mutton Biryani",
+      "description": "Delicious Aromatic rice with tender mutton pieces",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 616
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Premium Chicken meatballs in curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 351
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Special Mildly spiced rice with chicken",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 496
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Authentic Naan brushed with butter",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 249
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Traditional Aromatic rice cooked with chicken stock",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 491
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Homemade Spiced minced meat skewers",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 341
+    }
+  ]
+}

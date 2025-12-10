@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Subway Gulberg Ii",
+  "menu": [
+    {
+      "name": "Italian B.M.T. Sub",
+      "description": "Pepperoni, salami, and ham with your choice of veggies",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.6,
+      "estimated_calories": 638
+    },
+    {
+      "name": "Chicken Teriyaki Sub",
+      "description": "Grilled chicken with teriyaki sauce and vegetables",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.5,
+      "estimated_calories": 403
+    },
+    {
+      "name": "Turkey Breast Sub",
+      "description": "Lean turkey breast with fresh vegetables",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.6,
+      "estimated_calories": 580
+    },
+    {
+      "name": "Veggie Delite Sub",
+      "description": "Fresh vegetables with your choice of dressing",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.5,
+      "estimated_calories": 638
+    },
+    {
+      "name": "Meatball Marinara Sub",
+      "description": "Meatballs in marinara sauce with cheese",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.4,
+      "estimated_calories": 697
+    },
+    {
+      "name": "Cookies (3pc)",
+      "description": "Freshly baked cookies",
+      "price": 300,
+      "mood": "Dessert",
+      "cuisine": "Fast Food",
+      "rating": 4.8,
+      "estimated_calories": 565
+    }
+  ]
+}

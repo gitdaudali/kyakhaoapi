@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Kababjees Fried Chicken Gulberg",
+  "menu": [
+    {
+      "name": "Veggie Burger",
+      "description": "Vegetable patty with fresh toppings",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.6,
+      "estimated_calories": 646
+    },
+    {
+      "name": "Fish Burger",
+      "description": "Delicious Crispy fish fillet with tartar sauce",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 504
+    },
+    {
+      "name": "Classic Beef Burger",
+      "description": "Premium Juicy beef patty with lettuce, tomato, and special sauce",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.5,
+      "estimated_calories": 409
+    },
+    {
+      "name": "French Fries (Large)",
+      "description": "Special Large portion of crispy fries",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 502
+    },
+    {
+      "name": "Chicken Club Burger",
+      "description": "Authentic Chicken with bacon, lettuce, and tomato",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.4,
+      "estimated_calories": 526
+    },
+    {
+      "name": "Chicken Tenders (3pc)",
+      "description": "Traditional Breaded chicken tenders",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.4,
+      "estimated_calories": 554
+    }
+  ]
+}

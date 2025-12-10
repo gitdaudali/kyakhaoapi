@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Kunafa House Muslim Town",
+  "menu": [
+    {
+      "name": "Chicken Qorma",
+      "description": "Fresh Mild chicken curry with yogurt",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 353
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Delicious Fragrant basmati rice with tender chicken and spices",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 591
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Premium Creamy chicken curry cooked in a clay pot",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 414
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Special Naan brushed with butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 284
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Authentic Creamy mutton curry in clay pot",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 434
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Traditional Paratha stuffed with beef",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 396
+    }
+  ]
+}

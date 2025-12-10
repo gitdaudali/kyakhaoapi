@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Cafe Tandoori",
+  "menu": [
+    {
+      "name": "Banana Bread",
+      "description": "Special Moist banana bread slice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 383
+    },
+    {
+      "name": "Chocolate Croissant",
+      "description": "Authentic Buttery croissant with chocolate",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 491
+    },
+    {
+      "name": "Blueberry Muffin",
+      "description": "Traditional Freshly baked blueberry muffin",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 336
+    },
+    {
+      "name": "Bagel with Cream Cheese",
+      "description": "Homemade Fresh bagel with cream cheese",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 477
+    },
+    {
+      "name": "Chocolate Chip Cookie",
+      "description": "Signature Freshly baked cookie",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 442
+    },
+    {
+      "name": "Croissant",
+      "description": "Fresh Buttery French pastry",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.7,
+      "estimated_calories": 468
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Quetta Karak Chai 127",
+  "menu": [
+    {
+      "name": "Beef Kofta",
+      "description": "Delicious Beef meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.8,
+      "estimated_calories": 438
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Premium Spiced rice with tender beef",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 452
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Special Spicy chicken with bell peppers",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 422
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Authentic Paratha stuffed with spiced chicken",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.8,
+      "estimated_calories": 417
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Traditional Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 402
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Homemade Aromatic rice with tender mutton pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 623
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "K2 Special Chinese Food Corner",
+  "menu": [
+    {
+      "name": "Chicken Fried Rice",
+      "description": "Fresh Fragrant fried rice with tender chicken pieces and vegetables",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 5.0,
+      "estimated_calories": 543
+    },
+    {
+      "name": "Hot and Sour Soup",
+      "description": "Delicious Traditional Chinese soup with a perfect balance of heat and tang",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.9,
+      "estimated_calories": 176
+    },
+    {
+      "name": "Shrimp Fried Rice",
+      "description": "Premium Fried rice with fresh shrimp",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.7,
+      "estimated_calories": 531
+    },
+    {
+      "name": "Wonton Soup",
+      "description": "Special Clear soup with pork wontons",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 5.0,
+      "estimated_calories": 243
+    },
+    {
+      "name": "Mongolian Beef",
+      "description": "Authentic Tender beef with vegetables in savory sauce",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 368
+    },
+    {
+      "name": "Kung Pao Chicken",
+      "description": "Traditional Spicy stir-fried chicken with peanuts and vegetables",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.9,
+      "estimated_calories": 392
+    }
+  ]
+}

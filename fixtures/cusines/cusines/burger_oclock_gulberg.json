@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Burger Oclock Gulberg",
+  "menu": [
+    {
+      "name": "Chicken Broast (Full)",
+      "description": "Homemade Full broasted chicken",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 5.0,
+      "estimated_calories": 537
+    },
+    {
+      "name": "Onion Rings (6pc)",
+      "description": "Signature Crispy battered onion rings",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 5.0,
+      "estimated_calories": 500
+    },
+    {
+      "name": "Fried Chicken (4pc)",
+      "description": "Fresh Crispy fried chicken pieces",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.9,
+      "estimated_calories": 484
+    },
+    {
+      "name": "Zinger Burger",
+      "description": "Delicious Spicy chicken fillet burger with mayo",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 517
+    },
+    {
+      "name": "Veggie Burger",
+      "description": "Premium Vegetable patty with fresh toppings",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 539
+    },
+    {
+      "name": "Cheese Burger",
+      "description": "Special Beef patty with melted cheese",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.8,
+      "estimated_calories": 498
+    }
+  ]
+}

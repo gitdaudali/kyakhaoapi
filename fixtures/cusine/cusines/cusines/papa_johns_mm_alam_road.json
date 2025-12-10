@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Papa Johns Mm Alam Road",
+  "menu": [
+    {
+      "name": "The Works Pizza",
+      "description": "Pepperoni, Italian sausage, ham, mushrooms, onions, green peppers",
+      "price": 1600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 401
+    },
+    {
+      "name": "BBQ Chicken & Bacon Pizza",
+      "description": "Grilled chicken, bacon, and BBQ sauce",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 370
+    },
+    {
+      "name": "Garden Fresh Pizza",
+      "description": "Fresh vegetables with mozzarella cheese",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 478
+    },
+    {
+      "name": "Chicken Parmesan Pizza",
+      "description": "Breaded chicken with marinara and mozzarella",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 353
+    },
+    {
+      "name": "Papa's Favorite Pizza",
+      "description": "Pepperoni, sausage, mushrooms, and peppers",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 406
+    },
+    {
+      "name": "Garlic Parmesan Breadsticks",
+      "description": "Breadsticks with garlic and parmesan",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 389
+    }
+  ]
+}

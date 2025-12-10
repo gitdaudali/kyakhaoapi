@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Bnb Biryani",
+  "menu": [
+    {
+      "name": "Chicken Nihari",
+      "description": "Traditional Slow-cooked chicken in spicy gravy",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 660
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Homemade Creamy chicken curry cooked in a clay pot",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 401
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Signature Spicy chicken curry cooked in a wok",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 472
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Fresh Beef meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 404
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Delicious Freshly baked tandoori bread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 239
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Premium Paratha stuffed with spiced chicken",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 476
+    }
+  ]
+}

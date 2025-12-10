@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Bundu Khan Bakery Gulberg",
+  "menu": [
+    {
+      "name": "Chocolate Lava Cake",
+      "description": "Delicious Warm chocolate cake with molten center",
+      "price": 850,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.9,
+      "estimated_calories": 395
+    },
+    {
+      "name": "Chocolate Mousse",
+      "description": "Premium Light and airy chocolate mousse",
+      "price": 650,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.9,
+      "estimated_calories": 471
+    },
+    {
+      "name": "Creme Brulee",
+      "description": "Special Creamy custard with caramelized sugar",
+      "price": 750,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 465
+    },
+    {
+      "name": "Mango Mousse",
+      "description": "Authentic Light and airy mango mousse",
+      "price": 700,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 384
+    },
+    {
+      "name": "Brownie",
+      "description": "Traditional Fudgy chocolate brownie",
+      "price": 450,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.7,
+      "estimated_calories": 458
+    },
+    {
+      "name": "Kulfi",
+      "description": "Homemade Traditional frozen dessert",
+      "price": 300,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.9,
+      "estimated_calories": 332
+    }
+  ]
+}

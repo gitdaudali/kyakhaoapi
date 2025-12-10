@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Dash Burgers",
+  "menu": [
+    {
+      "name": "Onion Rings (6pc)",
+      "description": "Authentic Crispy battered onion rings",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 3.5,
+      "estimated_calories": 521
+    },
+    {
+      "name": "Fried Chicken (4pc)",
+      "description": "Traditional Crispy fried chicken pieces",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 3.5,
+      "estimated_calories": 557
+    },
+    {
+      "name": "Chicken Club Burger",
+      "description": "Homemade Chicken with bacon, lettuce, and tomato",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 3.7,
+      "estimated_calories": 630
+    },
+    {
+      "name": "Loaded Fries",
+      "description": "Signature Fries topped with cheese and bacon",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 3.8,
+      "estimated_calories": 524
+    },
+    {
+      "name": "Double Beef Burger",
+      "description": "Fresh Two beef patties with cheese and vegetables",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 3.6,
+      "estimated_calories": 536
+    },
+    {
+      "name": "Veggie Burger",
+      "description": "Delicious Vegetable patty with fresh toppings",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 3.8,
+      "estimated_calories": 573
+    }
+  ]
+}

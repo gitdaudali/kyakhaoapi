@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Ellys Kitchen",
+  "menu": [
+    {
+      "name": "Paratha Roll",
+      "description": "Homemade Stuffed paratha with your choice of filling",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 427
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Signature Paratha stuffed with beef",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 397
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Fresh Spicy chicken with bell peppers",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 429
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Delicious Freshly baked tandoori bread",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 203
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Premium Fresh flatbread",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 153
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Special Marinated grilled chicken pieces",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 355
+    }
+  ]
+}

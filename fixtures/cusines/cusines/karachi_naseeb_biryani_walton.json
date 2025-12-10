@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Karachi Naseeb Biryani Walton",
+  "menu": [
+    {
+      "name": "Mutton Qorma",
+      "description": "Special Mild mutton curry with yogurt",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.1,
+      "estimated_calories": 494
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Authentic Creamy mutton curry in clay pot",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 413
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Traditional Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.1,
+      "estimated_calories": 161
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Homemade Fragrant basmati rice with tender chicken and spices",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 451
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Signature Spiced minced meat skewers",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 338
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Fresh Traditional chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 443
+    }
+  ]
+}

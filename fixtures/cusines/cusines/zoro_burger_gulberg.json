@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Zoro Burger Gulberg",
+  "menu": [
+    {
+      "name": "Double Beef Burger",
+      "description": "Delicious Two beef patties with cheese and vegetables",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.9,
+      "estimated_calories": 535
+    },
+    {
+      "name": "Fried Chicken (4pc)",
+      "description": "Premium Crispy fried chicken pieces",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.8,
+      "estimated_calories": 616
+    },
+    {
+      "name": "Loaded Fries",
+      "description": "Special Fries topped with cheese and bacon",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 653
+    },
+    {
+      "name": "Chicken Burger",
+      "description": "Authentic Crispy chicken patty with fresh vegetables",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 452
+    },
+    {
+      "name": "Chili Cheese Fries",
+      "description": "Traditional Fries with chili and cheese",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 5.0,
+      "estimated_calories": 512
+    },
+    {
+      "name": "Chicken Strips (4pc)",
+      "description": "Homemade Breaded chicken strips",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.8,
+      "estimated_calories": 418
+    }
+  ]
+}

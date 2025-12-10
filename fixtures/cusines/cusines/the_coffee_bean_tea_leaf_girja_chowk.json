@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "The Coffee Bean Tea Leaf Girja Chowk",
+  "menu": [
+    {
+      "name": "Americano",
+      "description": "Special Espresso with hot water",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 398
+    },
+    {
+      "name": "Mocha",
+      "description": "Authentic Chocolate espresso with steamed milk",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 196
+    },
+    {
+      "name": "Iced Coffee",
+      "description": "Traditional Cold coffee with ice",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 91
+    },
+    {
+      "name": "Cappuccino",
+      "description": "Homemade Espresso with steamed milk and foam",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 119
+    },
+    {
+      "name": "Caramel Macchiato",
+      "description": "Signature Espresso with caramel and steamed milk",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 68
+    },
+    {
+      "name": "Frappuccino",
+      "description": "Fresh Blended coffee drink",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 52
+    }
+  ]
+}

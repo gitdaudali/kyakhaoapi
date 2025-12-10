@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Qarshi Health Shop Firdous Market",
+  "menu": [
+    {
+      "name": "Chicken Tikka",
+      "description": "Fresh Marinated grilled chicken pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 402
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Delicious Chicken meatballs in curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 383
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Premium Naan brushed with butter",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 235
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Special Creamy chicken curry cooked in a clay pot",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 490
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Authentic Lentil curry with rice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 340
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Traditional Mild creamy chicken curry",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 511
+    }
+  ]
+}

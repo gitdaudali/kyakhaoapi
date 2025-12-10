@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Breakfastcom",
+  "menu": [
+    {
+      "name": "Mutton Qorma",
+      "description": "Signature Mild mutton curry with yogurt",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.1,
+      "estimated_calories": 378
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Freshly baked tandoori bread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.8,
+      "estimated_calories": 287
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Delicious Rice cooked with mutton stock",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.0,
+      "estimated_calories": 449
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Premium Naan brushed with butter",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 243
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Special Paratha stuffed with spiced chicken",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.8,
+      "estimated_calories": 452
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Authentic Spiced minced meat skewers",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.0,
+      "estimated_calories": 262
+    }
+  ]
+}

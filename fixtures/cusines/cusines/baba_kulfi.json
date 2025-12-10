@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Baba Kulfi",
+  "menu": [
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Premium Aromatic rice cooked with chicken stock",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 503
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Special Mild creamy chicken curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 416
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Authentic Marinated grilled chicken pieces",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 399
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Traditional Spiced minced meat skewers",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 354
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Homemade Stuffed paratha with your choice of filling",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 422
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Signature Fragrant basmati rice with tender chicken and spices",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 634
+    }
+  ]
+}

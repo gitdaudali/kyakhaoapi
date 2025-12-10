@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Sichuan Chinese Restaurant Gulberg",
+  "menu": [
+    {
+      "name": "General Tso's Chicken",
+      "description": "Special Crispy chicken in a sweet and spicy sauce",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 492
+    },
+    {
+      "name": "Hot and Sour Soup",
+      "description": "Authentic Traditional Chinese soup with a perfect balance of heat and tang",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.7,
+      "estimated_calories": 226
+    },
+    {
+      "name": "Beef Fried Rice",
+      "description": "Traditional Fried rice with tender beef strips",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 550
+    },
+    {
+      "name": "Spring Rolls (4pc)",
+      "description": "Homemade Crispy spring rolls filled with vegetables",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.6,
+      "estimated_calories": 249
+    },
+    {
+      "name": "Sweet and Sour Chicken",
+      "description": "Signature Crispy chicken pieces in tangy sweet and sour sauce",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 5.0,
+      "estimated_calories": 499
+    },
+    {
+      "name": "Chicken Fried Rice",
+      "description": "Fresh Fragrant fried rice with tender chicken pieces and vegetables",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 5.0,
+      "estimated_calories": 497
+    }
+  ]
+}

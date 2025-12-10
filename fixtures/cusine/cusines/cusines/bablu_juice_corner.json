@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Bablu Juice Corner",
+  "menu": [
+    {
+      "name": "Daal Chawal",
+      "description": "Homemade Lentil curry with rice",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 343
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Signature Spicy chicken curry cooked in a wok",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 475
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Fresh Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 366
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Delicious Creamy mutton curry in clay pot",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 538
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Premium Spiced rice with tender beef",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 418
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Special Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 375
+    }
+  ]
+}

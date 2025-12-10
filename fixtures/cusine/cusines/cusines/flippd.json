@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Flippd",
+  "menu": [
+    {
+      "name": "Chicken Nihari",
+      "description": "Premium Slow-cooked chicken in spicy gravy",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 717
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Special Mildly spiced rice with chicken",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 415
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Authentic Beef meatballs in curry",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 314
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Traditional chicken curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 318
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Homemade Rice cooked with mutton stock",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 528
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Signature Spicy mutton curry cooked in a wok",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 514
+    }
+  ]
+}

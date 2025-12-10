@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Sinnvoll Essen By Amama Sadia",
+  "menu": [
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Homemade Naan brushed with butter",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 246
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Signature Mild creamy chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.1,
+      "estimated_calories": 405
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Fresh Fragrant basmati rice with tender chicken and spices",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 604
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Delicious Slow-cooked chicken in spicy gravy",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 666
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Premium Naan with garlic and butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 234
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Special Stuffed paratha with your choice of filling",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 396
+    }
+  ]
+}

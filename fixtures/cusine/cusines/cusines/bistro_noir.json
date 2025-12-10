@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Bistro Noir",
+  "menu": [
+    {
+      "name": "Mutton Qorma",
+      "description": "Fresh Mild mutton curry with yogurt",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 414
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Delicious Paratha stuffed with beef",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 425
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Premium Mildly spiced rice with chicken",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 519
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Special Chicken meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 344
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Authentic Spicy chicken curry cooked in a wok",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 471
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Traditional Slow-cooked mutton in spicy gravy",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 639
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "restaurant_name": "Dominos Pizza Mm Alam Road",
+  "menu": [
+    {
+      "name": "Chicken Fajita Pizza",
+      "description": "Spiced chicken with bell peppers and onions",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.4,
+      "estimated_calories": 345
+    },
+    {
+      "name": "Chicken Tikka Pizza",
+      "description": "Tender chicken tikka with onions and green chilies",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.5,
+      "estimated_calories": 338
+    },
+    {
+      "name": "Pepperoni Pizza",
+      "description": "Classic pepperoni with mozzarella cheese",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.4,
+      "estimated_calories": 316
+    },
+    {
+      "name": "Chicken Supreme Pizza",
+      "description": "Chicken, peppers, onions, and mushrooms",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.3,
+      "estimated_calories": 312
+    },
+    {
+      "name": "Garlic Bread",
+      "description": "Soft breadsticks with garlic butter",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.7,
+      "estimated_calories": 347
+    },
+    {
+      "name": "Chicken Wings (6pc)",
+      "description": "Spicy buffalo wings",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.3,
+      "estimated_calories": 478
+    },
+    {
+      "name": "Chocolate Lava Cake",
+      "description": "Warm chocolate cake with molten center",
+      "price": 450,
+      "mood": "Dessert",
+      "cuisine": "Pizza",
+      "rating": 4.4,
+      "estimated_calories": 330
+    }
+  ]
+}

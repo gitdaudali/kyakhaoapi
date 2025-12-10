@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Lahore Chatkhara Gulberg",
+  "menu": [
+    {
+      "name": "Mutton Karahi",
+      "description": "Authentic Spicy mutton curry cooked in a wok",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.1,
+      "estimated_calories": 420
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Traditional Creamy chicken curry cooked in a clay pot",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 600
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Homemade Aromatic rice with tender mutton pieces",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 569
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Signature Slow-cooked chicken in spicy gravy",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 676
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Fresh Mild chicken curry with yogurt",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 395
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Delicious Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 156
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Chick City",
+  "menu": [
+    {
+      "name": "Chicken Qorma",
+      "description": "Signature Mild chicken curry with yogurt",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 489
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Fresh Creamy chicken curry cooked in a clay pot",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 470
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Delicious Spicy chicken curry cooked in a wok",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 524
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Premium Marinated grilled chicken pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 300
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Special Freshly baked tandoori bread",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 233
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Authentic Slow-cooked mutton in spicy gravy",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 673
+    }
+  ]
+}

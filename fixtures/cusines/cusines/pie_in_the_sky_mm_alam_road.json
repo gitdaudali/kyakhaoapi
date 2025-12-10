@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Pie In The Sky Mm Alam Road",
+  "menu": [
+    {
+      "name": "Chicken Kofta",
+      "description": "Traditional Chicken meatballs in curry",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 438
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Homemade Marinated grilled chicken pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 445
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Signature Creamy mutton curry in clay pot",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 467
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Fresh Mild chicken curry with yogurt",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 321
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Delicious Spiced rice with tender beef",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 508
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Premium Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 199
+    }
+  ]
+}

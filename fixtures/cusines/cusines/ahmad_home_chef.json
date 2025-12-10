@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Ahmad Home Chef",
+  "menu": [
+    {
+      "name": "Beef Kofta",
+      "description": "Premium Beef meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 384
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Special Rice cooked with mutton stock",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 458
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Authentic Aromatic rice with tender mutton pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 494
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Traditional Spicy chicken with bell peppers",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 446
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Homemade Paratha stuffed with spiced chicken",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 362
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Signature Mildly spiced rice with chicken",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 499
+    }
+  ]
+}

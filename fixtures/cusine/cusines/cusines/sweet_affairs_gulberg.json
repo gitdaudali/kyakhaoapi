@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Sweet Affairs Gulberg",
+  "menu": [
+    {
+      "name": "Mango Mousse",
+      "description": "Homemade Light and airy mango mousse",
+      "price": 700,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 378
+    },
+    {
+      "name": "Creme Brulee",
+      "description": "Signature Creamy custard with caramelized sugar",
+      "price": 750,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 349
+    },
+    {
+      "name": "Ice Cream Sundae",
+      "description": "Fresh Ice cream with hot fudge and whipped cream",
+      "price": 750,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 327
+    },
+    {
+      "name": "Chocolate Lava Cake",
+      "description": "Delicious Warm chocolate cake with molten center",
+      "price": 950,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 424
+    },
+    {
+      "name": "Tiramisu",
+      "description": "Premium Italian classic with coffee and mascarpone",
+      "price": 1050,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 69
+    },
+    {
+      "name": "Cheesecake",
+      "description": "Special Creamy New York style cheesecake",
+      "price": 900,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 405
+    }
+  ]
+}

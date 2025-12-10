@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Al Kuwait Burger Steak And Grill",
+  "menu": [
+    {
+      "name": "Chicken Fillet Burger",
+      "description": "Signature Grilled chicken fillet with mayo",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.0,
+      "estimated_calories": 546
+    },
+    {
+      "name": "Chicken Burger",
+      "description": "Crispy chicken patty with fresh vegetables",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.0,
+      "estimated_calories": 452
+    },
+    {
+      "name": "French Fries (Large)",
+      "description": "Delicious Large portion of crispy fries",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.0,
+      "estimated_calories": 446
+    },
+    {
+      "name": "Cheese Burger",
+      "description": "Premium Beef patty with melted cheese",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.1,
+      "estimated_calories": 609
+    },
+    {
+      "name": "Chicken Tenders (3pc)",
+      "description": "Special Breaded chicken tenders",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.3,
+      "estimated_calories": 512
+    },
+    {
+      "name": "Veggie Burger",
+      "description": "Authentic Vegetable patty with fresh toppings",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.4,
+      "estimated_calories": 667
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Quetta Paratha 112",
+  "menu": [
+    {
+      "name": "Daal Chawal",
+      "description": "Premium Lentil curry with rice",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.1,
+      "estimated_calories": 318
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Special Fragrant basmati rice with tender chicken and spices",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.1,
+      "estimated_calories": 477
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Authentic Spicy chicken with bell peppers",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 375
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Traditional Naan with garlic and butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.1,
+      "estimated_calories": 290
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Homemade Traditional chicken curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 355
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Signature Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.1,
+      "estimated_calories": 472
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Zaiqa Kitchen",
+  "menu": [
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Delicious Paratha stuffed with spiced chicken",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 488
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Premium Rice cooked with mutton stock",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 411
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Special Mild chicken curry with yogurt",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 403
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Authentic Slow-cooked chicken in spicy gravy",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 617
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Traditional chicken curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 337
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Homemade Naan brushed with butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 231
+    }
+  ]
+}

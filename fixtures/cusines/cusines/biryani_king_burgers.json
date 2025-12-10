@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Biryani King Burgers",
+  "menu": [
+    {
+      "name": "Chicken Nuggets (6pc)",
+      "description": "Premium Crispy chicken nuggets",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 434
+    },
+    {
+      "name": "BBQ Bacon Burger",
+      "description": "Special Beef patty with bacon and BBQ sauce",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 473
+    },
+    {
+      "name": "Chili Cheese Fries",
+      "description": "Authentic Fries with chili and cheese",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.8,
+      "estimated_calories": 403
+    },
+    {
+      "name": "Fried Chicken (4pc)",
+      "description": "Traditional Crispy fried chicken pieces",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.8,
+      "estimated_calories": 619
+    },
+    {
+      "name": "Chicken Burger",
+      "description": "Homemade Crispy chicken patty with fresh vegetables",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.6,
+      "estimated_calories": 650
+    },
+    {
+      "name": "Chicken Wings (6pc)",
+      "description": "Signature Spicy fried chicken wings",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.9,
+      "estimated_calories": 457
+    }
+  ]
+}

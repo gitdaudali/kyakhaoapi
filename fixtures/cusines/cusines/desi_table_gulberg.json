@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Desi Table Gulberg",
+  "menu": [
+    {
+      "name": "Beef Biryani",
+      "description": "Delicious Spiced rice with beef chunks",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 469
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Premium Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 225
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Special Fragrant basmati rice with tender chicken and spices",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 471
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Authentic Naan with garlic and butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 276
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Traditional Spiced rice with tender beef",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 506
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Homemade Rice cooked with mutton stock",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 414
+    }
+  ]
+}

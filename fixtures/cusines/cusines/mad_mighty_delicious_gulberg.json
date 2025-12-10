@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Mad Mighty Delicious Gulberg",
+  "menu": [
+    {
+      "name": "Beef Pulao",
+      "description": "Premium Spiced rice with tender beef",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 451
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Special Paratha stuffed with spiced chicken",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 374
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Authentic Slow-cooked mutton in spicy gravy",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 563
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Traditional Mild chicken curry with yogurt",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 323
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Homemade Traditional chicken curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 352
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Signature Lentil curry with rice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 251
+    }
+  ]
+}

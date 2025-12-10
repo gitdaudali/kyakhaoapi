@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Beijing Bites",
+  "menu": [
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Signature Spiced minced meat skewers",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 267
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Fresh Spicy mutton curry cooked in a wok",
+      "price": 1750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 504
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Delicious Spicy chicken with bell peppers",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 492
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Premium Marinated grilled chicken pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 418
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Special Spicy chicken curry cooked in a wok",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 545
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Authentic Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 380
+    }
+  ]
+}

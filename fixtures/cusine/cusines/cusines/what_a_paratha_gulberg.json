@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "What A Paratha Gulberg",
+  "menu": [
+    {
+      "name": "Chicken Karahi",
+      "description": "Special Spicy chicken curry cooked in a wok",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 481
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Authentic Spicy chicken with bell peppers",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 454
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Traditional Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 344
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Homemade Naan brushed with butter",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 243
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Signature Naan with garlic and butter",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 236
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Fresh Spiced rice with tender beef",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 546
+    }
+  ]
+}

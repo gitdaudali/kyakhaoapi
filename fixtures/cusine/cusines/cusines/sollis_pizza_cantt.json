@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Sollis Pizza Cantt",
+  "menu": [
+    {
+      "name": "Mozzarella Sticks (6pc)",
+      "description": "Special Breaded mozzarella with marinara sauce",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 5.0,
+      "estimated_calories": 453
+    },
+    {
+      "name": "Caesar Salad",
+      "description": "Authentic Fresh romaine lettuce with caesar dressing",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.9,
+      "estimated_calories": 464
+    },
+    {
+      "name": "Hawaiian Pizza",
+      "description": "Traditional Ham, pineapple, and mozzarella cheese",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.7,
+      "estimated_calories": 314
+    },
+    {
+      "name": "Buffalo Chicken Pizza",
+      "description": "Homemade Spicy buffalo chicken with blue cheese",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.8,
+      "estimated_calories": 339
+    },
+    {
+      "name": "Margherita Pizza",
+      "description": "Signature Classic pizza with fresh mozzarella, basil, and tomato sauce",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.7,
+      "estimated_calories": 301
+    },
+    {
+      "name": "Garlic Knots (6pc)",
+      "description": "Fresh Soft bread knots with garlic butter",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.8,
+      "estimated_calories": 313
+    }
+  ]
+}

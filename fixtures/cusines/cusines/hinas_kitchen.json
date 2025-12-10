@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Hinas Kitchen",
+  "menu": [
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Homemade Naan with garlic and butter",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 201
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Signature Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 173
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Fresh Creamy mutton curry in clay pot",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 412
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Delicious Slow-cooked chicken in spicy gravy",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 718
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Premium Aromatic rice with tender mutton pieces",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 568
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Special Rice cooked with mutton stock",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 448
+    }
+  ]
+}

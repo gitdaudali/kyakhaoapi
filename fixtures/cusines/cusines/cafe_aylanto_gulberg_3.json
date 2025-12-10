@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Cafe Aylanto Gulberg 3",
+  "menu": [
+    {
+      "name": "Blueberry Muffin",
+      "description": "Signature Freshly baked blueberry muffin",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 309
+    },
+    {
+      "name": "Banana Bread",
+      "description": "Fresh Moist banana bread slice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 496
+    },
+    {
+      "name": "Americano",
+      "description": "Delicious Espresso with hot water",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 327
+    },
+    {
+      "name": "Flat White",
+      "description": "Premium Espresso with microfoam milk",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 469
+    },
+    {
+      "name": "Latte",
+      "description": "Special Smooth espresso with steamed milk",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 95
+    },
+    {
+      "name": "Chocolate Croissant",
+      "description": "Authentic Buttery croissant with chocolate",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 447
+    }
+  ]
+}

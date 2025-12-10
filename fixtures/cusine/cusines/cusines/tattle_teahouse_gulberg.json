@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Tattle Teahouse Gulberg",
+  "menu": [
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Authentic Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 454
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Traditional Beef meatballs in curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 415
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Homemade Slow-cooked mutton in spicy gravy",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 746
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Signature Spicy mutton curry cooked in a wok",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 400
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Fresh Slow-cooked chicken in spicy gravy",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 708
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Delicious Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 475
+    }
+  ]
+}

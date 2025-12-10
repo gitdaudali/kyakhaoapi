@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Ayesha Ka Bawarchi Khana",
+  "menu": [
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Special Paratha stuffed with spiced chicken",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 475
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Authentic Spicy chicken with bell peppers",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 489
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Traditional Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 222
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Homemade Chicken meatballs in curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 417
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Signature Beef meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 357
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Fresh Mildly spiced rice with chicken",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 468
+    }
+  ]
+}

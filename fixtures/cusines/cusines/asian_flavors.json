@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Asian Flavors",
+  "menu": [
+    {
+      "name": "Mutton Handi",
+      "description": "Premium Creamy mutton curry in clay pot",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 514
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Special Traditional chicken curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 369
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Authentic Naan with garlic and butter",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 218
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Traditional Spicy chicken curry cooked in a wok",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 572
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Homemade Mild creamy chicken curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 357
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Signature Beef meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 328
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Kruncheese",
+  "menu": [
+    {
+      "name": "Chicken Pulao",
+      "description": "Premium Mildly spiced rice with chicken",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 535
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Special Traditional chicken curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 355
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Authentic Stuffed paratha with your choice of filling",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 437
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Traditional Chicken meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 442
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Homemade Creamy mutton curry in clay pot",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 544
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Signature Spicy mutton curry cooked in a wok",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 469
+    }
+  ]
+}

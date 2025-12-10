@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "M Pizzeria",
+  "menu": [
+    {
+      "name": "Garlic Knots (6pc)",
+      "description": "Premium Soft bread knots with garlic butter",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.8,
+      "estimated_calories": 433
+    },
+    {
+      "name": "Four Cheese Pizza",
+      "description": "Special Mozzarella, cheddar, parmesan, and feta",
+      "price": 1600,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.6,
+      "estimated_calories": 469
+    },
+    {
+      "name": "Chicken Wings (6pc)",
+      "description": "Authentic Spicy buffalo wings",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.8,
+      "estimated_calories": 475
+    },
+    {
+      "name": "Mozzarella Sticks (6pc)",
+      "description": "Traditional Breaded mozzarella with marinara sauce",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.5,
+      "estimated_calories": 446
+    },
+    {
+      "name": "Chicken Fajita Pizza",
+      "description": "Homemade Spiced chicken with bell peppers and onions",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.6,
+      "estimated_calories": 402
+    },
+    {
+      "name": "Bruschetta",
+      "description": "Signature Toasted bread with tomatoes and basil",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.6,
+      "estimated_calories": 473
+    }
+  ]
+}

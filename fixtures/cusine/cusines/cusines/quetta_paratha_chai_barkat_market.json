@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Quetta Paratha Chai Barkat Market",
+  "menu": [
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Fresh Spicy chicken with bell peppers",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 376
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Delicious Spicy mutton curry cooked in a wok",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 427
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Premium Traditional chicken curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.8,
+      "estimated_calories": 424
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Special Spiced minced meat skewers",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 388
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Authentic Spiced rice with tender beef",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 546
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Traditional Slow-cooked mutton in spicy gravy",
+      "price": 2050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 637
+    }
+  ]
+}

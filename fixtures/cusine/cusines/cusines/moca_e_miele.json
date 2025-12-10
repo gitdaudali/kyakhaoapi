@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Moca E Miele",
+  "menu": [
+    {
+      "name": "Paratha Roll",
+      "description": "Traditional Stuffed paratha with your choice of filling",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 442
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Homemade Spicy mutton curry cooked in a wok",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 570
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Signature Aromatic rice cooked with chicken stock",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 526
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Fresh Spicy chicken with bell peppers",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 450
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Delicious Aromatic rice with tender mutton pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 514
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Premium Mild creamy chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 422
+    }
+  ]
+}

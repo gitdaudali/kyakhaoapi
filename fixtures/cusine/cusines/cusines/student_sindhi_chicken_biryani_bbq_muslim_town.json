@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Student Sindhi Chicken Biryani Bbq Muslim Town",
+  "menu": [
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Special Naan with garlic and butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 238
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Authentic Chicken meatballs in curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.8,
+      "estimated_calories": 500
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Traditional Slow-cooked chicken in spicy gravy",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.8,
+      "estimated_calories": 697
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Homemade Spicy mutton curry cooked in a wok",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.0,
+      "estimated_calories": 513
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Signature Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 225
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Fresh Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 396
+    }
+  ]
+}

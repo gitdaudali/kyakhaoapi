@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Kafenio",
+  "menu": [
+    {
+      "name": "Paratha Roll",
+      "description": "Premium Stuffed paratha with your choice of filling",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 407
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Special Creamy mutton curry in clay pot",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 487
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Authentic Mildly spiced rice with chicken",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 402
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Traditional Aromatic rice with tender mutton pieces",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 553
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Homemade Spiced rice with beef chunks",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 647
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Signature Spicy chicken curry cooked in a wok",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 537
+    }
+  ]
+}

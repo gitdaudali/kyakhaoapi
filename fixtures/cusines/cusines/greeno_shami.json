@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Greeno Shami",
+  "menu": [
+    {
+      "name": "Chicken Korma",
+      "description": "Fresh Mild creamy chicken curry",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 381
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Delicious Slow-cooked mutton in spicy gravy",
+      "price": 2050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 675
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Premium Chicken meatballs in curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 391
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Special Beef meatballs in curry",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 475
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Authentic Stuffed paratha with your choice of filling",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 471
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Traditional Lentil curry with rice",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 321
+    }
+  ]
+}

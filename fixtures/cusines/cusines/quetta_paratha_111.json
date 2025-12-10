@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Quetta Paratha 111",
+  "menu": [
+    {
+      "name": "Mutton Nihari",
+      "description": "Traditional Slow-cooked mutton in spicy gravy",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 629
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Homemade Lentil curry with rice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 312
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Signature Naan brushed with butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 228
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Fresh Creamy mutton curry in clay pot",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 451
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Delicious Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 155
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Premium Stuffed paratha with your choice of filling",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 402
+    }
+  ]
+}

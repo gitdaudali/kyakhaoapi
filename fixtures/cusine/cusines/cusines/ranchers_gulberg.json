@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Ranchers Gulberg",
+  "menu": [
+    {
+      "name": "Mutton Karahi",
+      "description": "Premium Spicy mutton curry cooked in a wok",
+      "price": 1700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 559
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Special Beef meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 382
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Authentic Stuffed paratha with your choice of filling",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 422
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Traditional Paratha stuffed with spiced chicken",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 383
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Homemade Mild creamy chicken curry",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 449
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Signature Creamy mutton curry in clay pot",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 561
+    }
+  ]
+}

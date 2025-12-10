@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Jolly Boba Lahore Cantt",
+  "menu": [
+    {
+      "name": "Beef Biryani",
+      "description": "Delicious Spiced rice with beef chunks",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.0,
+      "estimated_calories": 644
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Premium Slow-cooked mutton in spicy gravy",
+      "price": 2100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 574
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Special Spicy chicken with bell peppers",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.1,
+      "estimated_calories": 370
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Authentic Spiced rice with tender beef",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 486
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Traditional Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.1,
+      "estimated_calories": 236
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Homemade Paratha stuffed with spiced chicken",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.0,
+      "estimated_calories": 458
+    }
+  ]
+}

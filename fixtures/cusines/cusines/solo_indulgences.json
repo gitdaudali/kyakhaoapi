@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Solo Indulgences",
+  "menu": [
+    {
+      "name": "Chicken Karahi",
+      "description": "Premium Spicy chicken curry cooked in a wok",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 436
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Special Beef meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 480
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Authentic Slow-cooked chicken in spicy gravy",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 666
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Traditional Aromatic rice cooked with chicken stock",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 442
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Homemade Spicy chicken with bell peppers",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 387
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Signature Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 426
+    }
+  ]
+}

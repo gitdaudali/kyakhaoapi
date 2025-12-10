@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Waffle Wala",
+  "menu": [
+    {
+      "name": "Chicken Handi",
+      "description": "Traditional Creamy chicken curry cooked in a clay pot",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 539
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Homemade Stuffed paratha with your choice of filling",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 475
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Signature Chicken meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 322
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Fresh Aromatic rice with tender mutton pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 585
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Delicious Paratha stuffed with beef",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 459
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Premium Mildly spiced rice with chicken",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 411
+    }
+  ]
+}

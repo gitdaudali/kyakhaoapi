@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Lasani Grill Chinese Barkat Market",
+  "menu": [
+    {
+      "name": "Shrimp Chow Mein",
+      "description": "Premium Stir-fried noodles with shrimp",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 3.9,
+      "estimated_calories": 540
+    },
+    {
+      "name": "Hot and Sour Soup",
+      "description": "Special Traditional Chinese soup with a perfect balance of heat and tang",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.2,
+      "estimated_calories": 236
+    },
+    {
+      "name": "General Tso's Chicken",
+      "description": "Authentic Crispy chicken in a sweet and spicy sauce",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.2,
+      "estimated_calories": 417
+    },
+    {
+      "name": "Shrimp Fried Rice",
+      "description": "Traditional Fried rice with fresh shrimp",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 3.9,
+      "estimated_calories": 461
+    },
+    {
+      "name": "Wonton Soup",
+      "description": "Homemade Clear soup with pork wontons",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 3.8,
+      "estimated_calories": 315
+    },
+    {
+      "name": "Lemon Chicken",
+      "description": "Signature Crispy chicken with lemon sauce",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 3.8,
+      "estimated_calories": 486
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Tuscany Courtyard",
+  "menu": [
+    {
+      "name": "Chicken Nihari",
+      "description": "Signature Slow-cooked chicken in spicy gravy",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 667
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Fresh Aromatic rice cooked with chicken stock",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 529
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Delicious Spicy mutton curry cooked in a wok",
+      "price": 1750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 574
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Premium Paratha stuffed with spiced chicken",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 351
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Special Lentil curry with rice",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 279
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Authentic Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 427
+    }
+  ]
+}

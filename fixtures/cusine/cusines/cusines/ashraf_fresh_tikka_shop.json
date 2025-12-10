@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Ashraf Fresh Tikka Shop",
+  "menu": [
+    {
+      "name": "Chicken Tikka",
+      "description": "Homemade Marinated grilled chicken pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 308
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Signature Spicy chicken with bell peppers",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 326
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Fresh Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 443
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Delicious Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 171
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Premium Chicken meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 488
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Special Lentil curry with rice",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 386
+    }
+  ]
+}

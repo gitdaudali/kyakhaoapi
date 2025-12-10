@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Karachi Red Rock Gulberg",
+  "menu": [
+    {
+      "name": "Mutton Handi",
+      "description": "Signature Creamy mutton curry in clay pot",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 460
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Fresh Lentil curry with rice",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 295
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Delicious Naan with garlic and butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 218
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Premium Aromatic rice with tender mutton pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 632
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Special Traditional chicken curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 370
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Authentic Chicken meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 352
+    }
+  ]
+}

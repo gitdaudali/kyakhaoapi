@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Relx Gulberg",
+  "menu": [
+    {
+      "name": "Chicken Biryani",
+      "description": "Delicious Fragrant basmati rice with tender chicken and spices",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 492
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Premium Stuffed paratha with your choice of filling",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 483
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Special Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 222
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Authentic Spiced minced meat skewers",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 344
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Traditional Creamy mutton curry in clay pot",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 458
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Homemade Marinated grilled chicken pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 420
+    }
+  ]
+}

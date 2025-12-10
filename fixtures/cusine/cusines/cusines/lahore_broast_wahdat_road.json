@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Lahore Broast Wahdat Road",
+  "menu": [
+    {
+      "name": "Chicken Broast (Full)",
+      "description": "Homemade Full broasted chicken",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.2,
+      "estimated_calories": 542
+    },
+    {
+      "name": "Chicken Burger",
+      "description": "Signature Crispy chicken patty with fresh vegetables",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.5,
+      "estimated_calories": 534
+    },
+    {
+      "name": "Chicken Fillet Burger",
+      "description": "Fresh Grilled chicken fillet with mayo",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.4,
+      "estimated_calories": 425
+    },
+    {
+      "name": "Loaded Fries",
+      "description": "Delicious Fries topped with cheese and bacon",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.4,
+      "estimated_calories": 522
+    },
+    {
+      "name": "French Fries (Regular)",
+      "description": "Premium Golden crispy fries",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.2,
+      "estimated_calories": 647
+    },
+    {
+      "name": "Classic Beef Burger",
+      "description": "Juicy beef patty with lettuce, tomato, and special sauce",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.6,
+      "estimated_calories": 518
+    }
+  ]
+}

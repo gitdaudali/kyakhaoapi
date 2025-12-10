@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Fresh Organic Hub Makkah Colony Gulberg",
+  "menu": [
+    {
+      "name": "Mutton Qorma",
+      "description": "Signature Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 323
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Fresh Spicy mutton curry cooked in a wok",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 432
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Delicious Traditional chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 395
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Premium Spiced minced meat skewers",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 357
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Special Spiced rice with tender beef",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 547
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Authentic Stuffed paratha with your choice of filling",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 482
+    }
+  ]
+}

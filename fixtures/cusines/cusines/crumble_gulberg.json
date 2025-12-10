@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Crumble Gulberg",
+  "menu": [
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Fresh Paratha stuffed with spiced chicken",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 377
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Delicious Aromatic rice with tender mutton pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 638
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Premium Traditional chicken curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 459
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Special Marinated grilled chicken pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 430
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Authentic Beef meatballs in curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 324
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Traditional Spicy mutton curry cooked in a wok",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 460
+    }
+  ]
+}

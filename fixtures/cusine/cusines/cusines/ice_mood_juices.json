@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Ice Mood Juices",
+  "menu": [
+    {
+      "name": "Chicken Karahi",
+      "description": "Special Spicy chicken curry cooked in a wok",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 418
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Authentic Slow-cooked chicken in spicy gravy",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 640
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Traditional Lentil curry with rice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 389
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Homemade Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 164
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Signature Naan brushed with butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 247
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Fresh Rice cooked with mutton stock",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 458
+    }
+  ]
+}

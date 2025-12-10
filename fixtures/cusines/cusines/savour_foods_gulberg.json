@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Savour Foods Gulberg",
+  "menu": [
+    {
+      "name": "Chicken Nihari",
+      "description": "Delicious Slow-cooked chicken in spicy gravy",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 746
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Premium Mild chicken curry with yogurt",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 482
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Special Freshly baked tandoori bread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 233
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Authentic Slow-cooked mutton in spicy gravy",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 685
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Traditional Fragrant basmati rice with tender chicken and spices",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 466
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Homemade Spicy chicken with bell peppers",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 436
+    }
+  ]
+}

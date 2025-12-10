@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Muhammadi Nahari House Dha",
+  "menu": [
+    {
+      "name": "Chicken Curry",
+      "description": "Signature Traditional chicken curry",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 375
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Fresh Mild mutton curry with yogurt",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 316
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Delicious Beef meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 455
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Premium Naan brushed with butter",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 210
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Special Spicy chicken with bell peppers",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 376
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Authentic Stuffed paratha with your choice of filling",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 354
+    }
+  ]
+}

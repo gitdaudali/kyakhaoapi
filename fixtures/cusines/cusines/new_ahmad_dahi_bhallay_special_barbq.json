@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "New Ahmad Dahi Bhallay Special Barbq",
+  "menu": [
+    {
+      "name": "Paratha Roll",
+      "description": "Traditional Stuffed paratha with your choice of filling",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 470
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Homemade Mild chicken curry with yogurt",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 391
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Signature Spicy chicken with bell peppers",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 331
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Fresh Creamy mutton curry in clay pot",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 493
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Delicious Chicken meatballs in curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 306
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Premium Naan brushed with butter",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 240
+    }
+  ]
+}

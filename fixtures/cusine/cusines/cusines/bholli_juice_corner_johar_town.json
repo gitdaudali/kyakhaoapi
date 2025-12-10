@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Bholli Juice Corner Johar Town",
+  "menu": [
+    {
+      "name": "Chicken Nihari",
+      "description": "Fresh Slow-cooked chicken in spicy gravy",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 747
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Delicious Naan with garlic and butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 253
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Premium Aromatic rice cooked with chicken stock",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 423
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Special Aromatic rice with tender mutton pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 615
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Authentic Beef meatballs in curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 401
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Traditional Slow-cooked mutton in spicy gravy",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 570
+    }
+  ]
+}

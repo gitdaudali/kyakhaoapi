@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Pizza Heart",
+  "menu": [
+    {
+      "name": "Pasta Salad",
+      "description": "Premium Cold pasta with vegetables and dressing",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 5.0,
+      "estimated_calories": 449
+    },
+    {
+      "name": "Veggie Delight Pizza",
+      "description": "Special Fresh vegetables with mozzarella cheese",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 5.0,
+      "estimated_calories": 494
+    },
+    {
+      "name": "Margherita Pizza",
+      "description": "Authentic Classic pizza with fresh mozzarella, basil, and tomato sauce",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 5.0,
+      "estimated_calories": 497
+    },
+    {
+      "name": "Buffalo Chicken Pizza",
+      "description": "Traditional Spicy buffalo chicken with blue cheese",
+      "price": 1600,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 5.0,
+      "estimated_calories": 316
+    },
+    {
+      "name": "Sausage Pizza",
+      "description": "Homemade Italian sausage with peppers and onions",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.8,
+      "estimated_calories": 452
+    },
+    {
+      "name": "Four Cheese Pizza",
+      "description": "Signature Mozzarella, cheddar, parmesan, and feta",
+      "price": 1600,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.6,
+      "estimated_calories": 450
+    }
+  ]
+}

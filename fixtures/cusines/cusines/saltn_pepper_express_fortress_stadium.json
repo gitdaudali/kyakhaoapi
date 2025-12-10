@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Saltn Pepper Express Fortress Stadium",
+  "menu": [
+    {
+      "name": "Chicken Biryani",
+      "description": "Premium Fragrant basmati rice with tender chicken and spices",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 461
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Special Beef meatballs in curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 303
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Authentic Creamy chicken curry cooked in a clay pot",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 526
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Traditional Marinated grilled chicken pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 348
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Homemade Mild creamy chicken curry",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 459
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Signature Spiced rice with beef chunks",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 632
+    }
+  ]
+}

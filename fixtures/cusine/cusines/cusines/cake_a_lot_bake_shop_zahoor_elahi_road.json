@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Cake A Lot Bake Shop Zahoor Elahi Road",
+  "menu": [
+    {
+      "name": "Chocolate Mousse",
+      "description": "Signature Light and airy chocolate mousse",
+      "price": 800,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 387
+    },
+    {
+      "name": "Cheesecake",
+      "description": "Fresh Creamy New York style cheesecake",
+      "price": 750,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.9,
+      "estimated_calories": 424
+    },
+    {
+      "name": "Red Velvet Cake",
+      "description": "Delicious Moist red velvet with cream cheese frosting",
+      "price": 700,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 468
+    },
+    {
+      "name": "Panna Cotta",
+      "description": "Premium Italian creamy dessert",
+      "price": 700,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 244
+    },
+    {
+      "name": "Gulab Jamun (2pc)",
+      "description": "Special Sweet milk dumplings in sugar syrup",
+      "price": 200,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 330
+    },
+    {
+      "name": "Strawberry Cheesecake",
+      "description": "Authentic Cheesecake topped with fresh strawberries",
+      "price": 950,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.7,
+      "estimated_calories": 476
+    }
+  ]
+}

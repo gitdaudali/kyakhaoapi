@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Madina Restaurant",
+  "menu": [
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Special Naan with garlic and butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 290
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Authentic Spicy chicken curry cooked in a wok",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 471
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Traditional Mildly spiced rice with chicken",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 520
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Homemade Creamy mutton curry in clay pot",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 585
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Signature Mild creamy chicken curry",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 507
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Fresh Stuffed paratha with your choice of filling",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 474
+    }
+  ]
+}

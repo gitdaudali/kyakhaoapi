@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Wok Rock Chinese Food Point",
+  "menu": [
+    {
+      "name": "Peking Duck",
+      "description": "Traditional Crispy duck with pancakes",
+      "price": 2550,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.5,
+      "estimated_calories": 424
+    },
+    {
+      "name": "Kung Pao Chicken",
+      "description": "Homemade Spicy stir-fried chicken with peanuts and vegetables",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.0,
+      "estimated_calories": 464
+    },
+    {
+      "name": "Chicken Chow Mein",
+      "description": "Signature Stir-fried noodles with chicken and mixed vegetables",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.1,
+      "estimated_calories": 423
+    },
+    {
+      "name": "Honey Chicken",
+      "description": "Fresh Crispy chicken with honey glaze",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.4,
+      "estimated_calories": 377
+    },
+    {
+      "name": "Shrimp Fried Rice",
+      "description": "Delicious Fried rice with fresh shrimp",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.3,
+      "estimated_calories": 464
+    },
+    {
+      "name": "Egg Drop Soup",
+      "description": "Premium Classic Chinese egg soup",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.0,
+      "estimated_calories": 210
+    }
+  ]
+}

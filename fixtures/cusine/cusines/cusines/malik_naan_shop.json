@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Malik Naan Shop",
+  "menu": [
+    {
+      "name": "Chicken Qorma",
+      "description": "Traditional Mild chicken curry with yogurt",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 467
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Homemade Spiced rice with tender beef",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 472
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Signature Aromatic rice cooked with chicken stock",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 402
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Fresh Creamy mutton curry in clay pot",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 543
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Delicious Spiced minced meat skewers",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 276
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Premium Paratha stuffed with beef",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 393
+    }
+  ]
+}

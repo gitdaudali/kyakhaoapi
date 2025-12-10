@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Go Flour Gulberg",
+  "menu": [
+    {
+      "name": "Mutton Karahi",
+      "description": "Delicious Spicy mutton curry cooked in a wok",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 599
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Premium Mild chicken curry with yogurt",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 422
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Special Spiced rice with beef chunks",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 471
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Authentic Naan with garlic and butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 229
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Traditional Aromatic rice with tender mutton pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 649
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Homemade Slow-cooked chicken in spicy gravy",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 660
+    }
+  ]
+}

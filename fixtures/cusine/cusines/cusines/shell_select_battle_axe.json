@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Shell Select Battle Axe",
+  "menu": [
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Premium Paratha stuffed with beef",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 462
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Special Beef meatballs in curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 436
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Authentic Creamy chicken curry cooked in a clay pot",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 519
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Traditional Mild mutton curry with yogurt",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 343
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Homemade Spicy chicken curry cooked in a wok",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 589
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Signature Lentil curry with rice",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 378
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Karamel Gulberg 3",
+  "menu": [
+    {
+      "name": "Naan (2pc)",
+      "description": "Freshly baked tandoori bread",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 281
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Delicious Creamy chicken curry cooked in a clay pot",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 600
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Premium Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 225
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Special Paratha stuffed with beef",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 356
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Authentic Aromatic rice with tender mutton pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 592
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Traditional Marinated grilled chicken pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 411
+    }
+  ]
+}

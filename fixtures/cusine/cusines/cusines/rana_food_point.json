@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Rana Food Point",
+  "menu": [
+    {
+      "name": "Roti (4pc)",
+      "description": "Special Fresh flatbread",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 183
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Authentic Mild mutton curry with yogurt",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 440
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Traditional Chicken meatballs in curry",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 434
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Homemade Creamy mutton curry in clay pot",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 543
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Signature Traditional chicken curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 472
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Fresh Mildly spiced rice with chicken",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 549
+    }
+  ]
+}

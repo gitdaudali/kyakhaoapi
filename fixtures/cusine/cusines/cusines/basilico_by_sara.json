@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Basilico By Sara",
+  "menu": [
+    {
+      "name": "Paratha Roll",
+      "description": "Premium Stuffed paratha with your choice of filling",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 398
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Special Spiced minced meat skewers",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 307
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Authentic Beef meatballs in curry",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 462
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Traditional Creamy chicken curry cooked in a clay pot",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 599
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Homemade Mild creamy chicken curry",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 360
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Signature Spicy chicken curry cooked in a wok",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 440
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Pf Changs Gulberg",
+  "menu": [
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Special Spiced minced meat skewers",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 386
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Authentic Traditional chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 339
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Traditional Lentil curry with rice",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 318
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Homemade Mildly spiced rice with chicken",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 479
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Signature Spicy chicken curry cooked in a wok",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 444
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Fresh Slow-cooked mutton in spicy gravy",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 686
+    }
+  ]
+}

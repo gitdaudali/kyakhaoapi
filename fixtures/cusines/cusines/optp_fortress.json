@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Optp Fortress",
+  "menu": [
+    {
+      "name": "Chicken Biryani",
+      "description": "Fresh Fragrant basmati rice with tender chicken and spices",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 467
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Delicious Creamy mutton curry in clay pot",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 532
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Premium Spicy chicken with bell peppers",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 364
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Special Marinated grilled chicken pieces",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 442
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Authentic Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 184
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Traditional Paratha stuffed with spiced chicken",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 495
+    }
+  ]
+}

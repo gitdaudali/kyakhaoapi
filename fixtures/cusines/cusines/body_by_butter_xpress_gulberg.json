@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Body By Butter Xpress Gulberg",
+  "menu": [
+    {
+      "name": "Mutton Nihari",
+      "description": "Delicious Slow-cooked mutton in spicy gravy",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 674
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Premium Spicy chicken with bell peppers",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 335
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Special Spiced rice with beef chunks",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 643
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Authentic Spicy chicken curry cooked in a wok",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 580
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Traditional Aromatic rice with tender mutton pieces",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 477
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Homemade Lentil curry with rice",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 341
+    }
+  ]
+}

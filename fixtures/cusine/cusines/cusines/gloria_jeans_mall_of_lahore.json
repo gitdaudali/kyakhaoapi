@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Gloria Jeans Mall Of Lahore",
+  "menu": [
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Fresh Paratha stuffed with spiced chicken",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 404
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Delicious Fragrant basmati rice with tender chicken and spices",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 450
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Premium Creamy chicken curry cooked in a clay pot",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 484
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Special Mild mutton curry with yogurt",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 360
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Authentic Naan with garlic and butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 298
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Traditional Spiced minced meat skewers",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 392
+    }
+  ]
+}

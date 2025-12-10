@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Brew Bar",
+  "menu": [
+    {
+      "name": "Mutton Biryani",
+      "description": "Premium Aromatic rice with tender mutton pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 561
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Special Stuffed paratha with your choice of filling",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 455
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Authentic Fragrant basmati rice with tender chicken and spices",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 608
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Traditional Spicy mutton curry cooked in a wok",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 403
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Homemade Lentil curry with rice",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 291
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Signature Spicy chicken with bell peppers",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 443
+    }
+  ]
+}

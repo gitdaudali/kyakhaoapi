@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "London Courtyard Gulberg",
+  "menu": [
+    {
+      "name": "Chicken Korma",
+      "description": "Delicious Mild creamy chicken curry",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 467
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Premium Spicy chicken curry cooked in a wok",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 470
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Special Lentil curry with rice",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 282
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Authentic Creamy mutton curry in clay pot",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 499
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Traditional Paratha stuffed with spiced chicken",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 387
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Homemade Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 189
+    }
+  ]
+}

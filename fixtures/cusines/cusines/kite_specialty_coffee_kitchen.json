@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Kite Specialty Coffee Kitchen",
+  "menu": [
+    {
+      "name": "Frappuccino",
+      "description": "Premium Blended coffee drink",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.7,
+      "estimated_calories": 94
+    },
+    {
+      "name": "Chocolate Croissant",
+      "description": "Special Buttery croissant with chocolate",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 377
+    },
+    {
+      "name": "Cinnamon Roll",
+      "description": "Authentic Sweet cinnamon pastry",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 399
+    },
+    {
+      "name": "Espresso",
+      "description": "Traditional Strong Italian coffee",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 68
+    },
+    {
+      "name": "Blueberry Muffin",
+      "description": "Homemade Freshly baked blueberry muffin",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.6,
+      "estimated_calories": 467
+    },
+    {
+      "name": "Americano",
+      "description": "Signature Espresso with hot water",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 477
+    }
+  ]
+}

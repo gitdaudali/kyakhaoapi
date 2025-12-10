@@ -1,0 +1,50 @@
+{
+  "restaurant_name": "Baskin Robbins Gulberg Lll",
+  "menu": [
+    {
+      "name": "Ice Cream Scoop (Single)",
+      "description": "One scoop of your favorite flavor",
+      "price": 350,
+      "mood": "Dessert",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 471
+    },
+    {
+      "name": "Ice Cream Scoop (Double)",
+      "description": "Two scoops of ice cream",
+      "price": 600,
+      "mood": "Dessert",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 387
+    },
+    {
+      "name": "Ice Cream Sundae",
+      "description": "Ice cream with hot fudge and whipped cream",
+      "price": 750,
+      "mood": "Dessert",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 455
+    },
+    {
+      "name": "Ice Cream Shake",
+      "description": "Thick milkshake in your favorite flavor",
+      "price": 650,
+      "mood": "Dessert",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 372
+    },
+    {
+      "name": "Ice Cream Cake Slice",
+      "description": "Layered ice cream cake",
+      "price": 850,
+      "mood": "Dessert",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 416
+    }
+  ]
+}

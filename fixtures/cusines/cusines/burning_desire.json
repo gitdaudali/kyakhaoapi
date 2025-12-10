@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Burning Desire",
+  "menu": [
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Fresh Aromatic rice cooked with chicken stock",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 513
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Delicious Marinated grilled chicken pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 308
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Premium Fragrant basmati rice with tender chicken and spices",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 568
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Special Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 180
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Authentic Creamy chicken curry cooked in a clay pot",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 512
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Traditional Paratha stuffed with spiced chicken",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 369
+    }
+  ]
+}

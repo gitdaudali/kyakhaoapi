@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Orchard By Capri",
+  "menu": [
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Signature Spicy chicken with bell peppers",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 474
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Fresh Spiced minced meat skewers",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 323
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Delicious Freshly baked tandoori bread",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 233
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Premium Creamy mutton curry in clay pot",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 453
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Special Fragrant basmati rice with tender chicken and spices",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 577
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Authentic Naan brushed with butter",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 216
+    }
+  ]
+}

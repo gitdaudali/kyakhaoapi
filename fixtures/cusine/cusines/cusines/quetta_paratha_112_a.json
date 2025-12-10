@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Quetta Paratha 112 A",
+  "menu": [
+    {
+      "name": "Chicken Tikka",
+      "description": "Special Marinated grilled chicken pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 397
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Authentic Creamy mutton curry in clay pot",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 597
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Traditional Slow-cooked chicken in spicy gravy",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 665
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Homemade Spicy chicken curry cooked in a wok",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 587
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Signature Mildly spiced rice with chicken",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 474
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Fresh Traditional chicken curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 458
+    }
+  ]
+}

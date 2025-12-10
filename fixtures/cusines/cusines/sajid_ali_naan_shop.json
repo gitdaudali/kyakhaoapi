@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Sajid Ali Naan Shop",
+  "menu": [
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Fresh Spicy chicken with bell peppers",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 463
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Delicious Naan with garlic and butter",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 209
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Premium Slow-cooked mutton in spicy gravy",
+      "price": 2100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 677
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Special Spicy chicken curry cooked in a wok",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 448
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Authentic Mild chicken curry with yogurt",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 427
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Traditional Beef meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 337
+    }
+  ]
+}

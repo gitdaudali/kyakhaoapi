@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Desi Chaska",
+  "menu": [
+    {
+      "name": "Mutton Karahi",
+      "description": "Authentic Spicy mutton curry cooked in a wok",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 424
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Traditional Lentil curry with rice",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 300
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Homemade Spiced rice with beef chunks",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.1,
+      "estimated_calories": 547
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Signature Slow-cooked chicken in spicy gravy",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.1,
+      "estimated_calories": 677
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Fresh Stuffed paratha with your choice of filling",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.0,
+      "estimated_calories": 416
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Delicious Fragrant basmati rice with tender chicken and spices",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 490
+    }
+  ]
+}

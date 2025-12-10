@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "New Burger Corner",
+  "menu": [
+    {
+      "name": "French Fries (Regular)",
+      "description": "Homemade Golden crispy fries",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 543
+    },
+    {
+      "name": "Fish Burger",
+      "description": "Signature Crispy fish fillet with tartar sauce",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.4,
+      "estimated_calories": 453
+    },
+    {
+      "name": "Cheese Burger",
+      "description": "Fresh Beef patty with melted cheese",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.5,
+      "estimated_calories": 693
+    },
+    {
+      "name": "Chili Cheese Fries",
+      "description": "Delicious Fries with chili and cheese",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.5,
+      "estimated_calories": 487
+    },
+    {
+      "name": "Veggie Burger",
+      "description": "Premium Vegetable patty with fresh toppings",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 448
+    },
+    {
+      "name": "Chicken Broast (Full)",
+      "description": "Special Full broasted chicken",
+      "price": 2100,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 509
+    }
+  ]
+}

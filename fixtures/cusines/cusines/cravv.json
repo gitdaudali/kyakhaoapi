@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Cravv",
+  "menu": [
+    {
+      "name": "Roti (4pc)",
+      "description": "Special Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 243
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Authentic Chicken meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 384
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Traditional Marinated grilled chicken pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 418
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Homemade Mildly spiced rice with chicken",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 456
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Signature Spicy chicken curry cooked in a wok",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 588
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Fresh Spiced minced meat skewers",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 300
+    }
+  ]
+}

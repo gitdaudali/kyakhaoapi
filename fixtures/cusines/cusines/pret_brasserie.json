@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Pret Brasserie",
+  "menu": [
+    {
+      "name": "Mutton Qorma",
+      "description": "Delicious Mild mutton curry with yogurt",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 411
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Premium Spiced minced meat skewers",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 367
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Special Mild creamy chicken curry",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 526
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Authentic Spicy chicken curry cooked in a wok",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 560
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Traditional Spicy chicken with bell peppers",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 330
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Homemade Creamy mutton curry in clay pot",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 410
+    }
+  ]
+}

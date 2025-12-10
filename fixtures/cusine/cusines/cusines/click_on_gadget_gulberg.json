@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Click On Gadget Gulberg",
+  "menu": [
+    {
+      "name": "Roti (4pc)",
+      "description": "Signature Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 217
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Fresh Slow-cooked mutton in spicy gravy",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 570
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Delicious Chicken meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 308
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Premium Naan brushed with butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 202
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Special Spiced minced meat skewers",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 328
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Authentic Creamy mutton curry in clay pot",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 483
+    }
+  ]
+}

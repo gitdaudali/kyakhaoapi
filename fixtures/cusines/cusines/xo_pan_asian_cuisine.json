@@ -1,0 +1,50 @@
+{
+  "restaurant_name": "Xo Pan Asian Cuisine",
+  "menu": [
+    {
+      "name": "Pad Thai",
+      "description": "Stir-fried rice noodles with shrimp and vegetables",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.8,
+      "estimated_calories": 237
+    },
+    {
+      "name": "Chicken Teriyaki",
+      "description": "Grilled chicken with teriyaki sauce",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.6,
+      "estimated_calories": 424
+    },
+    {
+      "name": "Sushi Platter",
+      "description": "Assorted sushi rolls",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.6,
+      "estimated_calories": 220
+    },
+    {
+      "name": "Chicken Ramen",
+      "description": "Japanese noodle soup with chicken",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.6,
+      "estimated_calories": 307
+    },
+    {
+      "name": "Spring Rolls (4pc)",
+      "description": "Crispy spring rolls",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 5.0,
+      "estimated_calories": 358
+    }
+  ]
+}

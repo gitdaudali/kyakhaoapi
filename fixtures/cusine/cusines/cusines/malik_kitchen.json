@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Malik Kitchen",
+  "menu": [
+    {
+      "name": "Mutton Qorma",
+      "description": "Special Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 363
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Authentic Rice cooked with mutton stock",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 501
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Traditional Creamy chicken curry cooked in a clay pot",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 407
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Homemade Freshly baked tandoori bread",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 269
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Signature Fragrant basmati rice with tender chicken and spices",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 516
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Fresh Paratha stuffed with beef",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 366
+    }
+  ]
+}

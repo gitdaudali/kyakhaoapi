@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Mr Burger Main Market",
+  "menu": [
+    {
+      "name": "Cheese Burger",
+      "description": "Delicious Beef patty with melted cheese",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.5,
+      "estimated_calories": 674
+    },
+    {
+      "name": "Double Beef Burger",
+      "description": "Premium Two beef patties with cheese and vegetables",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 575
+    },
+    {
+      "name": "Fried Chicken (4pc)",
+      "description": "Special Crispy fried chicken pieces",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.3,
+      "estimated_calories": 631
+    },
+    {
+      "name": "Fish Burger",
+      "description": "Authentic Crispy fish fillet with tartar sauce",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.4,
+      "estimated_calories": 431
+    },
+    {
+      "name": "Classic Beef Burger",
+      "description": "Traditional Juicy beef patty with lettuce, tomato, and special sauce",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.6,
+      "estimated_calories": 474
+    },
+    {
+      "name": "Chicken Strips (4pc)",
+      "description": "Homemade Breaded chicken strips",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.4,
+      "estimated_calories": 612
+    }
+  ]
+}

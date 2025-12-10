@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Pulao House Restaurant",
+  "menu": [
+    {
+      "name": "Chicken Biryani",
+      "description": "Special Fragrant basmati rice with tender chicken and spices",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 619
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Authentic Creamy chicken curry cooked in a clay pot",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 560
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Traditional Spicy chicken with bell peppers",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 484
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Homemade Aromatic rice cooked with chicken stock",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 505
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Signature Traditional chicken curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 453
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Fresh Naan with garlic and butter",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 269
+    }
+  ]
+}

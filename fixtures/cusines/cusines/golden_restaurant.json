@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Golden Restaurant",
+  "menu": [
+    {
+      "name": "Paratha Roll",
+      "description": "Traditional Stuffed paratha with your choice of filling",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 427
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Homemade Traditional chicken curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 454
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Signature Spiced minced meat skewers",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 338
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Fresh Chicken meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 466
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Delicious Spicy chicken curry cooked in a wok",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 527
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Premium Mild chicken curry with yogurt",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 436
+    }
+  ]
+}

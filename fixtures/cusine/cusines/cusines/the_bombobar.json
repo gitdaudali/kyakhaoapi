@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "The Bombobar",
+  "menu": [
+    {
+      "name": "Chicken Kofta",
+      "description": "Delicious Chicken meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 463
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Premium Spicy chicken with bell peppers",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 436
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Special Mildly spiced rice with chicken",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 550
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Authentic Aromatic rice cooked with chicken stock",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 478
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Traditional Naan with garlic and butter",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 213
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Homemade Spiced rice with beef chunks",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 533
+    }
+  ]
+}

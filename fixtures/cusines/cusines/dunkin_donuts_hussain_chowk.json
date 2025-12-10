@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Dunkin Donuts Hussain Chowk",
+  "menu": [
+    {
+      "name": "Glazed Donut",
+      "description": "Classic glazed donut",
+      "price": 150,
+      "mood": "Dessert",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 338
+    },
+    {
+      "name": "Chocolate Donut",
+      "description": "Chocolate frosted donut",
+      "price": 180,
+      "mood": "Dessert",
+      "cuisine": "Pakistani",
+      "rating": 3.8,
+      "estimated_calories": 398
+    },
+    {
+      "name": "Boston Kreme Donut",
+      "description": "Donut filled with vanilla cream and chocolate frosting",
+      "price": 200,
+      "mood": "Dessert",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 403
+    },
+    {
+      "name": "Coffee (Regular)",
+      "description": "Freshly brewed coffee",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 452
+    },
+    {
+      "name": "Iced Coffee",
+      "description": "Cold coffee with ice",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 389
+    },
+    {
+      "name": "Munchkins (10pc)",
+      "description": "Donut holes in assorted flavors",
+      "price": 400,
+      "mood": "Dessert",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 458
+    }
+  ]
+}

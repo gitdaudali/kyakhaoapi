@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Artisan Coffee Roaster Mini Market",
+  "menu": [
+    {
+      "name": "Bagel with Cream Cheese",
+      "description": "Premium Fresh bagel with cream cheese",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 453
+    },
+    {
+      "name": "Cortado",
+      "description": "Special Espresso with equal parts steamed milk",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 133
+    },
+    {
+      "name": "Iced Coffee",
+      "description": "Authentic Cold coffee with ice",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.7,
+      "estimated_calories": 165
+    },
+    {
+      "name": "Frappuccino",
+      "description": "Traditional Blended coffee drink",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.5,
+      "estimated_calories": 149
+    },
+    {
+      "name": "Chocolate Chip Cookie",
+      "description": "Homemade Freshly baked cookie",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.7,
+      "estimated_calories": 497
+    },
+    {
+      "name": "Croissant",
+      "description": "Signature Buttery French pastry",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.7,
+      "estimated_calories": 302
+    }
+  ]
+}

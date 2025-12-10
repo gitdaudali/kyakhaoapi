@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Brosto By Biryani King",
+  "menu": [
+    {
+      "name": "Paratha Roll",
+      "description": "Delicious Stuffed paratha with your choice of filling",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 380
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Premium Mild creamy chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 458
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Special Creamy chicken curry cooked in a clay pot",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 596
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Authentic Slow-cooked mutton in spicy gravy",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 745
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Traditional Spicy mutton curry cooked in a wok",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 575
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Homemade Rice cooked with mutton stock",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 510
+    }
+  ]
+}

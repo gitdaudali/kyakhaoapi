@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Coffee Nerds",
+  "menu": [
+    {
+      "name": "Frappuccino",
+      "description": "Fresh Blended coffee drink",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.3,
+      "estimated_calories": 86
+    },
+    {
+      "name": "Chocolate Croissant",
+      "description": "Delicious Buttery croissant with chocolate",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.5,
+      "estimated_calories": 460
+    },
+    {
+      "name": "Espresso",
+      "description": "Premium Strong Italian coffee",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.3,
+      "estimated_calories": 67
+    },
+    {
+      "name": "Bagel with Cream Cheese",
+      "description": "Special Fresh bagel with cream cheese",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.5,
+      "estimated_calories": 305
+    },
+    {
+      "name": "Flat White",
+      "description": "Authentic Espresso with microfoam milk",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.1,
+      "estimated_calories": 468
+    },
+    {
+      "name": "Mocha",
+      "description": "Traditional Chocolate espresso with steamed milk",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.5,
+      "estimated_calories": 195
+    }
+  ]
+}

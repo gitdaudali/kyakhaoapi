@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Extraction Coffee",
+  "menu": [
+    {
+      "name": "Caramel Macchiato",
+      "description": "Signature Espresso with caramel and steamed milk",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 136
+    },
+    {
+      "name": "Cortado",
+      "description": "Fresh Espresso with equal parts steamed milk",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 92
+    },
+    {
+      "name": "Iced Latte",
+      "description": "Delicious Cold latte with ice",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 330
+    },
+    {
+      "name": "Bagel with Cream Cheese",
+      "description": "Premium Fresh bagel with cream cheese",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 324
+    },
+    {
+      "name": "Cinnamon Roll",
+      "description": "Special Sweet cinnamon pastry",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 348
+    },
+    {
+      "name": "Banana Bread",
+      "description": "Authentic Moist banana bread slice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 396
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Bonzo Model Town",
+  "menu": [
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Authentic Naan with garlic and butter",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 298
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Traditional Spicy chicken with bell peppers",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 420
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Homemade Naan brushed with butter",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 255
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Signature Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 188
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Fresh Spiced rice with tender beef",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.1,
+      "estimated_calories": 434
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Delicious Creamy chicken curry cooked in a clay pot",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 463
+    }
+  ]
+}

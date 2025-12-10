@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Wonton Wok",
+  "menu": [
+    {
+      "name": "Mongolian Beef",
+      "description": "Authentic Tender beef with vegetables in savory sauce",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 3.8,
+      "estimated_calories": 421
+    },
+    {
+      "name": "Peking Duck",
+      "description": "Traditional Crispy duck with pancakes",
+      "price": 2500,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.0,
+      "estimated_calories": 352
+    },
+    {
+      "name": "General Tso's Chicken",
+      "description": "Homemade Crispy chicken in a sweet and spicy sauce",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 3.9,
+      "estimated_calories": 310
+    },
+    {
+      "name": "Vegetable Fried Rice",
+      "description": "Signature Fried rice with mixed vegetables",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 3.9,
+      "estimated_calories": 559
+    },
+    {
+      "name": "Shrimp Chow Mein",
+      "description": "Fresh Stir-fried noodles with shrimp",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 3.9,
+      "estimated_calories": 599
+    },
+    {
+      "name": "Beef with Broccoli",
+      "description": "Delicious Tender beef with fresh broccoli",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.1,
+      "estimated_calories": 459
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Yousaf Falooda Qazzafi",
+  "menu": [
+    {
+      "name": "Chicken Korma",
+      "description": "Delicious Mild creamy chicken curry",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 356
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Premium Naan brushed with butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 239
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Special Mild chicken curry with yogurt",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 489
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Authentic Marinated grilled chicken pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 342
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Traditional Fragrant basmati rice with tender chicken and spices",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 566
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Homemade Aromatic rice cooked with chicken stock",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 429
+    }
+  ]
+}

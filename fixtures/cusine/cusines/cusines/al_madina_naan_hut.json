@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Al Madina Naan Hut",
+  "menu": [
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Authentic Spiced minced meat skewers",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 311
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Traditional Marinated grilled chicken pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 387
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Homemade Aromatic rice cooked with chicken stock",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 549
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Signature Naan with garlic and butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 242
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Fresh Traditional chicken curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 304
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Delicious Slow-cooked chicken in spicy gravy",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 620
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "A1 Tasty Halal Cart Gulberg",
+  "menu": [
+    {
+      "name": "Naan (2pc)",
+      "description": "Traditional Freshly baked tandoori bread",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 225
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Homemade Slow-cooked mutton in spicy gravy",
+      "price": 2100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 675
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Signature Stuffed paratha with your choice of filling",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 368
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Fresh Spiced rice with tender beef",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 488
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Delicious Aromatic rice with tender mutton pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 572
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Premium Spiced rice with beef chunks",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 583
+    }
+  ]
+}

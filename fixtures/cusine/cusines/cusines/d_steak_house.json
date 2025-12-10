@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "D Steak House",
+  "menu": [
+    {
+      "name": "Garlic Bread",
+      "description": "Delicious Toasted bread with garlic butter",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Steak",
+      "rating": 3.1,
+      "estimated_calories": 347
+    },
+    {
+      "name": "T-Bone Steak",
+      "description": "Premium T-bone steak",
+      "price": 2950,
+      "mood": "Dinner",
+      "cuisine": "Steak",
+      "rating": 3.3,
+      "estimated_calories": 186
+    },
+    {
+      "name": "Ribeye Steak",
+      "description": "Special Juicy ribeye steak cooked to perfection",
+      "price": 2750,
+      "mood": "Dinner",
+      "cuisine": "Steak",
+      "rating": 3.5,
+      "estimated_calories": 118
+    },
+    {
+      "name": "Grilled Fish",
+      "description": "Authentic Fresh fish fillet grilled to perfection",
+      "price": 1550,
+      "mood": "Dinner",
+      "cuisine": "Steak",
+      "rating": 3.1,
+      "estimated_calories": 487
+    },
+    {
+      "name": "Baked Potato",
+      "description": "Traditional Baked potato with butter and sour cream",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Steak",
+      "rating": 3.3,
+      "estimated_calories": 478
+    },
+    {
+      "name": "Grilled Chicken",
+      "description": "Homemade Marinated grilled chicken breast",
+      "price": 1400,
+      "mood": "Dinner",
+      "cuisine": "Steak",
+      "rating": 3.2,
+      "estimated_calories": 430
+    }
+  ]
+}

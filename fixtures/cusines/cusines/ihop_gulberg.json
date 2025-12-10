@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Ihop Gulberg",
+  "menu": [
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Homemade Naan with garlic and butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 216
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Signature Traditional chicken curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 310
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Fresh Marinated grilled chicken pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 415
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Delicious Slow-cooked chicken in spicy gravy",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 631
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Premium Spiced rice with beef chunks",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 510
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Special Slow-cooked mutton in spicy gravy",
+      "price": 2050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 663
+    }
+  ]
+}

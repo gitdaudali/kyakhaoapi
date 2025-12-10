@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Papa Jees Fast Food Restaurant",
+  "menu": [
+    {
+      "name": "Daal Chawal",
+      "description": "Premium Lentil curry with rice",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 348
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Special Spicy chicken curry cooked in a wok",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 481
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Authentic Spiced rice with tender beef",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 470
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Traditional Slow-cooked chicken in spicy gravy",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 739
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Homemade Creamy chicken curry cooked in a clay pot",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 561
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Signature Rice cooked with mutton stock",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 410
+    }
+  ]
+}

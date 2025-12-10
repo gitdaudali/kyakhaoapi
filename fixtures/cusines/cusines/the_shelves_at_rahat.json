@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "The Shelves At Rahat",
+  "menu": [
+    {
+      "name": "Chicken Pulao",
+      "description": "Delicious Mildly spiced rice with chicken",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 547
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Premium Spicy chicken with bell peppers",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 393
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Special Spicy mutton curry cooked in a wok",
+      "price": 1750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 400
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Authentic Lentil curry with rice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 271
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Traditional Freshly baked tandoori bread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 224
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Homemade Mild creamy chicken curry",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 489
+    }
+  ]
+}

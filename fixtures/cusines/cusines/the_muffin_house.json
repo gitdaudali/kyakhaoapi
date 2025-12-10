@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "The Muffin House",
+  "menu": [
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Fresh Paratha stuffed with spiced chicken",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 429
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Delicious Naan with garlic and butter",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 288
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Premium Slow-cooked mutton in spicy gravy",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 729
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Special Stuffed paratha with your choice of filling",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 358
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Authentic Mild chicken curry with yogurt",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 403
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Traditional Mildly spiced rice with chicken",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 515
+    }
+  ]
+}

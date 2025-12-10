@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Pizza Domeno Hut Gulburg Iii",
+  "menu": [
+    {
+      "name": "Veggie Delight Pizza",
+      "description": "Delicious Fresh vegetables with mozzarella cheese",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.3,
+      "estimated_calories": 352
+    },
+    {
+      "name": "Hawaiian Pizza",
+      "description": "Premium Ham, pineapple, and mozzarella cheese",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.3,
+      "estimated_calories": 344
+    },
+    {
+      "name": "Caesar Salad",
+      "description": "Special Fresh romaine lettuce with caesar dressing",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.2,
+      "estimated_calories": 498
+    },
+    {
+      "name": "Margherita Pizza",
+      "description": "Authentic Classic pizza with fresh mozzarella, basil, and tomato sauce",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.5,
+      "estimated_calories": 408
+    },
+    {
+      "name": "Four Cheese Pizza",
+      "description": "Traditional Mozzarella, cheddar, parmesan, and feta",
+      "price": 1550,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.2,
+      "estimated_calories": 428
+    },
+    {
+      "name": "Chicken Wings (6pc)",
+      "description": "Homemade Spicy buffalo wings",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.1,
+      "estimated_calories": 463
+    }
+  ]
+}

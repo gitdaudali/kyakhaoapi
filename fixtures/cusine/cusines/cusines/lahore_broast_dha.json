@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Lahore Broast Dha",
+  "menu": [
+    {
+      "name": "French Fries (Large)",
+      "description": "Fresh Large portion of crispy fries",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 413
+    },
+    {
+      "name": "Chicken Tenders (3pc)",
+      "description": "Delicious Breaded chicken tenders",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.9,
+      "estimated_calories": 622
+    },
+    {
+      "name": "Chicken Club Burger",
+      "description": "Premium Chicken with bacon, lettuce, and tomato",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 567
+    },
+    {
+      "name": "Chicken Nuggets (6pc)",
+      "description": "Special Crispy chicken nuggets",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 443
+    },
+    {
+      "name": "French Fries (Regular)",
+      "description": "Authentic Golden crispy fries",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.8,
+      "estimated_calories": 419
+    },
+    {
+      "name": "Fish Burger",
+      "description": "Traditional Crispy fish fillet with tartar sauce",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.8,
+      "estimated_calories": 698
+    }
+  ]
+}

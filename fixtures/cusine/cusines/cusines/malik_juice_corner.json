@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Malik Juice Corner",
+  "menu": [
+    {
+      "name": "Chicken Tikka",
+      "description": "Fresh Marinated grilled chicken pieces",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 392
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Delicious Paratha stuffed with beef",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 483
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Premium Spicy chicken curry cooked in a wok",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 502
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Special Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 158
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Authentic Chicken meatballs in curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 452
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Traditional Spicy chicken with bell peppers",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 354
+    }
+  ]
+}

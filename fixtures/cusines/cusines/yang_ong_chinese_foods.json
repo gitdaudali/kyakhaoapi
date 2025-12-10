@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Yang Ong Chinese Foods",
+  "menu": [
+    {
+      "name": "Mapo Tofu",
+      "description": "Delicious Spicy Sichuan dish with tofu and minced meat",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.3,
+      "estimated_calories": 331
+    },
+    {
+      "name": "Wonton Soup",
+      "description": "Premium Clear soup with pork wontons",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.2,
+      "estimated_calories": 292
+    },
+    {
+      "name": "Beef with Broccoli",
+      "description": "Special Tender beef with fresh broccoli",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.2,
+      "estimated_calories": 367
+    },
+    {
+      "name": "Orange Chicken",
+      "description": "Authentic Crispy chicken with orange glaze",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.2,
+      "estimated_calories": 452
+    },
+    {
+      "name": "Chicken Fried Rice",
+      "description": "Traditional Fragrant fried rice with tender chicken pieces and vegetables",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.2,
+      "estimated_calories": 492
+    },
+    {
+      "name": "Spring Rolls (4pc)",
+      "description": "Homemade Crispy spring rolls filled with vegetables",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.6,
+      "estimated_calories": 169
+    }
+  ]
+}
