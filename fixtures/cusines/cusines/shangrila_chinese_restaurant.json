@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Shangrila Chinese Restaurant",
+  "menu": [
+    {
+      "name": "Kung Pao Chicken",
+      "description": "Fresh Spicy stir-fried chicken with peanuts and vegetables",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 429
+    },
+    {
+      "name": "Beef with Broccoli",
+      "description": "Delicious Tender beef with fresh broccoli",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 468
+    },
+    {
+      "name": "Honey Chicken",
+      "description": "Premium Crispy chicken with honey glaze",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 382
+    },
+    {
+      "name": "Shrimp Fried Rice",
+      "description": "Special Fried rice with fresh shrimp",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 468
+    },
+    {
+      "name": "Shrimp Chow Mein",
+      "description": "Authentic Stir-fried noodles with shrimp",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 555
+    },
+    {
+      "name": "Spring Rolls (4pc)",
+      "description": "Traditional Crispy spring rolls filled with vegetables",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.7,
+      "estimated_calories": 196
+    }
+  ]
+}

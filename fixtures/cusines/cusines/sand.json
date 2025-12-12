@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Sand",
+  "menu": [
+    {
+      "name": "Mutton Nihari",
+      "description": "Homemade Slow-cooked mutton in spicy gravy",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 655
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Signature Aromatic rice with tender mutton pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 616
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Fresh Spiced minced meat skewers",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 255
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Delicious Slow-cooked chicken in spicy gravy",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 722
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Premium Mild creamy chicken curry",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 389
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Special Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 193
+    }
+  ]
+}

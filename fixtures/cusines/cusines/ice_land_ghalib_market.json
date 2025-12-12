@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Ice Land Ghalib Market",
+  "menu": [
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Authentic Naan with garlic and butter",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 233
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Traditional Spicy chicken curry cooked in a wok",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 486
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Homemade Mild mutton curry with yogurt",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 390
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Signature Aromatic rice with tender mutton pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 573
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Fresh Slow-cooked mutton in spicy gravy",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 646
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Delicious Creamy chicken curry cooked in a clay pot",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 574
+    }
+  ]
+}

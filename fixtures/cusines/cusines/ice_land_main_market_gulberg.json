@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Ice Land Main Market Gulberg",
+  "menu": [
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Authentic Naan brushed with butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 233
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Traditional Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 368
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Homemade Spicy chicken with bell peppers",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 438
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Signature Rice cooked with mutton stock",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 465
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Fresh Creamy chicken curry cooked in a clay pot",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 490
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Delicious Paratha stuffed with spiced chicken",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 474
+    }
+  ]
+}

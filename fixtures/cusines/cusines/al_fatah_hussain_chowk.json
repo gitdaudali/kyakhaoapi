@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Al Fatah Hussain Chowk",
+  "menu": [
+    {
+      "name": "Chicken Pulao",
+      "description": "Premium Mildly spiced rice with chicken",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 419
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Special Spiced rice with tender beef",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 497
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Authentic Aromatic rice with tender mutton pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 554
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Traditional Spiced minced meat skewers",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 361
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Homemade Freshly baked tandoori bread",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 233
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Signature Slow-cooked chicken in spicy gravy",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 704
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Bhully Shah Restaurant",
+  "menu": [
+    {
+      "name": "Beef Kofta",
+      "description": "Delicious Beef meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.0,
+      "estimated_calories": 465
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Premium Naan with garlic and butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 242
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Special Traditional chicken curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 462
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Authentic Slow-cooked chicken in spicy gravy",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 706
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Traditional Spicy mutton curry cooked in a wok",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.0,
+      "estimated_calories": 599
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Homemade Mild creamy chicken curry",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 525
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Zero Degree",
+  "menu": [
+    {
+      "name": "Chicken Tikka",
+      "description": "Homemade Marinated grilled chicken pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 447
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Signature Aromatic rice with tender mutton pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 534
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Fresh Spiced rice with beef chunks",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 630
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Delicious Naan brushed with butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 278
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Premium Chicken meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 456
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Special Spiced rice with tender beef",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 447
+    }
+  ]
+}

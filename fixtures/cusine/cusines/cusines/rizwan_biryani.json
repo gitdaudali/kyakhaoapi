@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Rizwan Biryani",
+  "menu": [
+    {
+      "name": "Chicken Pulao",
+      "description": "Signature Mildly spiced rice with chicken",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 456
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Fresh Spiced minced meat skewers",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 354
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Delicious Spicy chicken curry cooked in a wok",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 579
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Premium Creamy chicken curry cooked in a clay pot",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 560
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Special Rice cooked with mutton stock",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 493
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Authentic Traditional chicken curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 395
+    }
+  ]
+}

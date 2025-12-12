@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Grub Shack",
+  "menu": [
+    {
+      "name": "Mutton Nihari",
+      "description": "Homemade Slow-cooked mutton in spicy gravy",
+      "price": 2050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 643
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Signature Mild creamy chicken curry",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 386
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Fresh Fragrant basmati rice with tender chicken and spices",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 546
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Delicious Paratha stuffed with beef",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 473
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Premium Mildly spiced rice with chicken",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 527
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Special Lentil curry with rice",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 310
+    }
+  ]
+}

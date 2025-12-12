@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Hardees Gulberg Ii",
+  "menu": [
+    {
+      "name": "Famous Star Burger",
+      "description": "100% beef patty with lettuce, tomato, and special sauce",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.9,
+      "estimated_calories": 463
+    },
+    {
+      "name": "Big Hardee",
+      "description": "Two beef patties with cheese, lettuce, and special sauce",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.6,
+      "estimated_calories": 469
+    },
+    {
+      "name": "Chicken Fillet Burger",
+      "description": "Crispy chicken fillet with mayo and lettuce",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.8,
+      "estimated_calories": 498
+    },
+    {
+      "name": "French Fries",
+      "description": "Golden crispy fries",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 5.0,
+      "estimated_calories": 505
+    },
+    {
+      "name": "Onion Rings",
+      "description": "Crispy battered onion rings",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 601
+    },
+    {
+      "name": "Chicken Tenders (3pc)",
+      "description": "Breaded chicken tenders",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.6,
+      "estimated_calories": 547
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Hamzah Dairy Farms",
+  "menu": [
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Traditional Paratha stuffed with spiced chicken",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 493
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Homemade Chicken meatballs in curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 395
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Signature Mildly spiced rice with chicken",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 423
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Fresh Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.0,
+      "estimated_calories": 491
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Delicious Creamy mutton curry in clay pot",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 413
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Premium Beef meatballs in curry",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.0,
+      "estimated_calories": 344
+    }
+  ]
+}

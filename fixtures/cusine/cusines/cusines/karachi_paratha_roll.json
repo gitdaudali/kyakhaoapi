@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Karachi Paratha Roll",
+  "menu": [
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Homemade Paratha stuffed with beef",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 418
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Signature Paratha stuffed with spiced chicken",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 426
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Fresh Mild chicken curry with yogurt",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 380
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Delicious Stuffed paratha with your choice of filling",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 452
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Premium Spicy chicken with bell peppers",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 425
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Special Slow-cooked mutton in spicy gravy",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 574
+    }
+  ]
+}

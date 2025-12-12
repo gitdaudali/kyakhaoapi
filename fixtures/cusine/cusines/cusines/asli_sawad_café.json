@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Asli Sawad Café",
+  "menu": [
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Delicious Spicy chicken with bell peppers",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 492
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Premium Chicken meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 385
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Special Creamy mutton curry in clay pot",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 533
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Authentic Mild chicken curry with yogurt",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 485
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Traditional Slow-cooked mutton in spicy gravy",
+      "price": 2050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 680
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Homemade Beef meatballs in curry",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 491
+    }
+  ]
+}

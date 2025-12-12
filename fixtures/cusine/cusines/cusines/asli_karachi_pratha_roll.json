@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Asli Karachi Pratha Roll",
+  "menu": [
+    {
+      "name": "Mutton Handi",
+      "description": "Homemade Creamy mutton curry in clay pot",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 522
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Signature Spiced rice with beef chunks",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 584
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Fresh Aromatic rice cooked with chicken stock",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 544
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Delicious Beef meatballs in curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 476
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Premium Slow-cooked chicken in spicy gravy",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 600
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Special Spiced minced meat skewers",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 336
+    }
+  ]
+}

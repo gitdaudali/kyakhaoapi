@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Iceland Gulberg",
+  "menu": [
+    {
+      "name": "Paratha Roll",
+      "description": "Fresh Stuffed paratha with your choice of filling",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 458
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Delicious Mild mutton curry with yogurt",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 425
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Premium Creamy mutton curry in clay pot",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.8,
+      "estimated_calories": 550
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Special Spiced rice with tender beef",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 471
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Authentic Creamy chicken curry cooked in a clay pot",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 461
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Traditional Spiced minced meat skewers",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 309
+    }
+  ]
+}

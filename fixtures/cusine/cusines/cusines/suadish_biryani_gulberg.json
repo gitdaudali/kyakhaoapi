@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Suadish Biryani Gulberg",
+  "menu": [
+    {
+      "name": "Chicken Curry",
+      "description": "Special Traditional chicken curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 472
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Authentic Naan brushed with butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.0,
+      "estimated_calories": 227
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Traditional Stuffed paratha with your choice of filling",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 398
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Homemade Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.8,
+      "estimated_calories": 224
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Signature Paratha stuffed with spiced chicken",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 385
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Fresh Spicy chicken with bell peppers",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 496
+    }
+  ]
+}

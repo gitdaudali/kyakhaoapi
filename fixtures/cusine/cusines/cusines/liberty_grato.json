@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Liberty Grato",
+  "menu": [
+    {
+      "name": "Chicken Kofta",
+      "description": "Delicious Chicken meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 474
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Premium Creamy chicken curry cooked in a clay pot",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 550
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Special Naan with garlic and butter",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 297
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Authentic Mild mutton curry with yogurt",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 306
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Traditional Paratha stuffed with spiced chicken",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 463
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Homemade Rice cooked with mutton stock",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 446
+    }
+  ]
+}

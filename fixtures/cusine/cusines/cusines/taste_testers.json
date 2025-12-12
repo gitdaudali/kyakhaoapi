@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Taste Testers",
+  "menu": [
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Fresh Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 488
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Delicious Rice cooked with mutton stock",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 536
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Premium Fragrant basmati rice with tender chicken and spices",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 610
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Special Mild creamy chicken curry",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 484
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Authentic Mildly spiced rice with chicken",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.1,
+      "estimated_calories": 448
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Traditional Slow-cooked chicken in spicy gravy",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 670
+    }
+  ]
+}

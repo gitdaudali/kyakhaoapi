@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "The Vape Avenue",
+  "menu": [
+    {
+      "name": "Chicken Nihari",
+      "description": "Authentic Slow-cooked chicken in spicy gravy",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 686
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Traditional Chicken meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 491
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Homemade Mildly spiced rice with chicken",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 409
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Signature Mild creamy chicken curry",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 501
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Fresh Spiced rice with beef chunks",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 650
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Delicious Marinated grilled chicken pieces",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 367
+    }
+  ]
+}

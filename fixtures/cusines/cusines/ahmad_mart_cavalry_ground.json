@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Ahmad Mart Cavalry Ground",
+  "menu": [
+    {
+      "name": "Chicken Korma",
+      "description": "Homemade Mild creamy chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 475
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Signature Mild chicken curry with yogurt",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 417
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Fresh Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 489
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Delicious Marinated grilled chicken pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 424
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Premium Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 436
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Special Spicy chicken with bell peppers",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 459
+    }
+  ]
+}

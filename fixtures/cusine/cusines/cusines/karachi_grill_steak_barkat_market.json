@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Karachi Grill Steak Barkat Market",
+  "menu": [
+    {
+      "name": "T-Bone Steak",
+      "description": "Signature Premium T-bone steak",
+      "price": 2900,
+      "mood": "Dinner",
+      "cuisine": "Steak",
+      "rating": 3.9,
+      "estimated_calories": 154
+    },
+    {
+      "name": "Ribeye Steak",
+      "description": "Fresh Juicy ribeye steak cooked to perfection",
+      "price": 2700,
+      "mood": "Dinner",
+      "cuisine": "Steak",
+      "rating": 3.8,
+      "estimated_calories": 75
+    },
+    {
+      "name": "Baked Potato",
+      "description": "Delicious Baked potato with butter and sour cream",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Steak",
+      "rating": 4.3,
+      "estimated_calories": 491
+    },
+    {
+      "name": "Grilled Fish",
+      "description": "Premium Fresh fish fillet grilled to perfection",
+      "price": 1550,
+      "mood": "Dinner",
+      "cuisine": "Steak",
+      "rating": 3.8,
+      "estimated_calories": 436
+    },
+    {
+      "name": "Sirloin Steak",
+      "description": "Special Tender sirloin with your choice of sides",
+      "price": 2500,
+      "mood": "Dinner",
+      "cuisine": "Steak",
+      "rating": 4.0,
+      "estimated_calories": 126
+    },
+    {
+      "name": "Grilled Chicken",
+      "description": "Authentic Marinated grilled chicken breast",
+      "price": 1400,
+      "mood": "Dinner",
+      "cuisine": "Steak",
+      "rating": 3.9,
+      "estimated_calories": 416
+    }
+  ]
+}

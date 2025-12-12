@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Spouse Kitchen Hub",
+  "menu": [
+    {
+      "name": "Beef Biryani",
+      "description": "Homemade Spiced rice with beef chunks",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 587
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Signature Mild chicken curry with yogurt",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 455
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Fresh Mild mutton curry with yogurt",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 358
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Delicious Spicy chicken with bell peppers",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 382
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Premium Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 474
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Special Chicken meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 302
+    }
+  ]
+}

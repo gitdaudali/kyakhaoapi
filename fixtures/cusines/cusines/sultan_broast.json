@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Sultan Broast",
+  "menu": [
+    {
+      "name": "French Fries (Large)",
+      "description": "Homemade Large portion of crispy fries",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.3,
+      "estimated_calories": 432
+    },
+    {
+      "name": "Zinger Burger",
+      "description": "Signature Spicy chicken fillet burger with mayo",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.4,
+      "estimated_calories": 545
+    },
+    {
+      "name": "Chicken Nuggets (6pc)",
+      "description": "Fresh Crispy chicken nuggets",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.1,
+      "estimated_calories": 646
+    },
+    {
+      "name": "Chicken Broast (Half)",
+      "description": "Delicious Crispy broasted chicken pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.0,
+      "estimated_calories": 700
+    },
+    {
+      "name": "Onion Rings (6pc)",
+      "description": "Premium Crispy battered onion rings",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.3,
+      "estimated_calories": 519
+    },
+    {
+      "name": "Loaded Fries",
+      "description": "Special Fries topped with cheese and bacon",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.3,
+      "estimated_calories": 694
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Fuchsia Gulberg 3",
+  "menu": [
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Premium Naan brushed with butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 238
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Special Fragrant basmati rice with tender chicken and spices",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 576
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Authentic Spiced minced meat skewers",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 278
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Traditional Creamy mutton curry in clay pot",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 424
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Homemade Slow-cooked mutton in spicy gravy",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 747
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Signature Spiced rice with beef chunks",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 500
+    }
+  ]
+}

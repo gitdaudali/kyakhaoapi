@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Yashfas Cuisine",
+  "menu": [
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Homemade Spiced minced meat skewers",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 263
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Signature Spiced rice with beef chunks",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 471
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Fresh Slow-cooked chicken in spicy gravy",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 716
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Delicious Mild chicken curry with yogurt",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 423
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Premium Creamy chicken curry cooked in a clay pot",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 517
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Special Traditional chicken curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 450
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "E Lite Gulberg",
+  "menu": [
+    {
+      "name": "Mutton Handi",
+      "description": "Authentic Creamy mutton curry in clay pot",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 553
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Traditional Mild creamy chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 461
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Homemade Chicken meatballs in curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 484
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Signature Traditional chicken curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 362
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Fresh Paratha stuffed with spiced chicken",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 409
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Delicious Spicy chicken with bell peppers",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 300
+    }
+  ]
+}

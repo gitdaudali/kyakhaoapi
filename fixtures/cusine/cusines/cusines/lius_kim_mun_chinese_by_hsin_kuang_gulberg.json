@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Lius Kim Mun Chinese By Hsin Kuang Gulberg",
+  "menu": [
+    {
+      "name": "Orange Chicken",
+      "description": "Fresh Crispy chicken with orange glaze",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 5.0,
+      "estimated_calories": 537
+    },
+    {
+      "name": "Beef Chow Mein",
+      "description": "Delicious Stir-fried noodles with beef",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.9,
+      "estimated_calories": 462
+    },
+    {
+      "name": "Chicken Lo Mein",
+      "description": "Premium Soft noodles with chicken and vegetables",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.9,
+      "estimated_calories": 532
+    },
+    {
+      "name": "Spring Rolls (4pc)",
+      "description": "Special Crispy spring rolls filled with vegetables",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 233
+    },
+    {
+      "name": "Hot and Sour Soup",
+      "description": "Authentic Traditional Chinese soup with a perfect balance of heat and tang",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.6,
+      "estimated_calories": 175
+    },
+    {
+      "name": "Wonton Soup",
+      "description": "Traditional Clear soup with pork wontons",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 5.0,
+      "estimated_calories": 300
+    }
+  ]
+}

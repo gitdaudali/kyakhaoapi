@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Zouq E Saeed Restaurant",
+  "menu": [
+    {
+      "name": "Mutton Nihari",
+      "description": "Signature Slow-cooked mutton in spicy gravy",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 632
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Fresh Spicy mutton curry cooked in a wok",
+      "price": 1750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 592
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Delicious Stuffed paratha with your choice of filling",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 432
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Premium Marinated grilled chicken pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 369
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Special Naan with garlic and butter",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 222
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Authentic Paratha stuffed with beef",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.0,
+      "estimated_calories": 453
+    }
+  ]
+}

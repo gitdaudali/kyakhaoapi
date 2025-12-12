@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Third Culture Coffee",
+  "menu": [
+    {
+      "name": "Mocha",
+      "description": "Homemade Chocolate espresso with steamed milk",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.7,
+      "estimated_calories": 86
+    },
+    {
+      "name": "Blueberry Muffin",
+      "description": "Signature Freshly baked blueberry muffin",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 410
+    },
+    {
+      "name": "Espresso",
+      "description": "Fresh Strong Italian coffee",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 159
+    },
+    {
+      "name": "Bagel with Cream Cheese",
+      "description": "Delicious Fresh bagel with cream cheese",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.7,
+      "estimated_calories": 344
+    },
+    {
+      "name": "Frappuccino",
+      "description": "Premium Blended coffee drink",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 117
+    },
+    {
+      "name": "Iced Coffee",
+      "description": "Special Cold coffee with ice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 110
+    }
+  ]
+}

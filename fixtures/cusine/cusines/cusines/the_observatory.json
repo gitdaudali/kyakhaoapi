@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "The Observatory",
+  "menu": [
+    {
+      "name": "Beef Biryani",
+      "description": "Traditional Spiced rice with beef chunks",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 541
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Homemade Spicy chicken curry cooked in a wok",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 487
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Signature Slow-cooked chicken in spicy gravy",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 725
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Fresh Marinated grilled chicken pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 403
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Delicious Lentil curry with rice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 363
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Premium Spicy mutton curry cooked in a wok",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 579
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Karachi Paratha Roll Bbq",
+  "menu": [
+    {
+      "name": "BBQ Chicken (Full)",
+      "description": "Special Grilled full chicken",
+      "price": 2250,
+      "mood": "Anytime",
+      "cuisine": "BBQ",
+      "rating": 4.0,
+      "estimated_calories": 424
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Authentic Marinated grilled chicken pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "BBQ",
+      "rating": 3.9,
+      "estimated_calories": 433
+    },
+    {
+      "name": "Mixed BBQ Platter",
+      "description": "Traditional Assorted grilled meats with naan",
+      "price": 2050,
+      "mood": "Dinner",
+      "cuisine": "BBQ",
+      "rating": 3.8,
+      "estimated_calories": 352
+    },
+    {
+      "name": "Beef Boti",
+      "description": "Homemade Tender beef cubes marinated and grilled",
+      "price": 1600,
+      "mood": "Anytime",
+      "cuisine": "BBQ",
+      "rating": 3.8,
+      "estimated_calories": 411
+    },
+    {
+      "name": "Mutton Chops",
+      "description": "Signature Grilled mutton chops",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "BBQ",
+      "rating": 3.8,
+      "estimated_calories": 533
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Fresh Spiced minced meat skewers",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "BBQ",
+      "rating": 3.9,
+      "estimated_calories": 393
+    }
+  ]
+}

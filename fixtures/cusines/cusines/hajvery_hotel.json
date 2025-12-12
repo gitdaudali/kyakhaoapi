@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Hajvery Hotel",
+  "menu": [
+    {
+      "name": "Chicken Nihari",
+      "description": "Signature Slow-cooked chicken in spicy gravy",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 670
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Fresh Mild chicken curry with yogurt",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 307
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Delicious Mild creamy chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 436
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Premium Paratha stuffed with spiced chicken",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 360
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Special Aromatic rice cooked with chicken stock",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 454
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Authentic Creamy chicken curry cooked in a clay pot",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 549
+    }
+  ]
+}

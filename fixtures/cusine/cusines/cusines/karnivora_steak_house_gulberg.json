@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Karnivora Steak House Gulberg",
+  "menu": [
+    {
+      "name": "Ribeye Steak",
+      "description": "Fresh Juicy ribeye steak cooked to perfection",
+      "price": 2900,
+      "mood": "Dinner",
+      "cuisine": "Steak",
+      "rating": 3.2,
+      "estimated_calories": 56
+    },
+    {
+      "name": "Garlic Bread",
+      "description": "Delicious Toasted bread with garlic butter",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Steak",
+      "rating": 3.0,
+      "estimated_calories": 481
+    },
+    {
+      "name": "Sirloin Steak",
+      "description": "Premium Tender sirloin with your choice of sides",
+      "price": 2400,
+      "mood": "Dinner",
+      "cuisine": "Steak",
+      "rating": 3.0,
+      "estimated_calories": 50
+    },
+    {
+      "name": "Grilled Fish",
+      "description": "Special Fresh fish fillet grilled to perfection",
+      "price": 1550,
+      "mood": "Dinner",
+      "cuisine": "Steak",
+      "rating": 3.1,
+      "estimated_calories": 472
+    },
+    {
+      "name": "Baked Potato",
+      "description": "Authentic Baked potato with butter and sour cream",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Steak",
+      "rating": 3.0,
+      "estimated_calories": 400
+    },
+    {
+      "name": "T-Bone Steak",
+      "description": "Traditional Premium T-bone steak",
+      "price": 2950,
+      "mood": "Dinner",
+      "cuisine": "Steak",
+      "rating": 3.0,
+      "estimated_calories": 86
+    }
+  ]
+}

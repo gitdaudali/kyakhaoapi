@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Vip Sabir Daal Chawal Chicken Biryani",
+  "menu": [
+    {
+      "name": "Mutton Biryani",
+      "description": "Premium Aromatic rice with tender mutton pieces",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 608
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Special Spiced rice with tender beef",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 457
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Authentic Spicy mutton curry cooked in a wok",
+      "price": 1700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 576
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Traditional Slow-cooked chicken in spicy gravy",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 721
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Homemade Creamy mutton curry in clay pot",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 446
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Signature Spiced minced meat skewers",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 330
+    }
+  ]
+}

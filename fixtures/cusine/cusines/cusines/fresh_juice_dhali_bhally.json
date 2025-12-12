@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Fresh Juice Dhali Bhally",
+  "menu": [
+    {
+      "name": "Chicken Biryani",
+      "description": "Traditional Fragrant basmati rice with tender chicken and spices",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 604
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Homemade Mild mutton curry with yogurt",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 306
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Signature Paratha stuffed with spiced chicken",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 363
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 211
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Delicious Spiced minced meat skewers",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 287
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Premium Paratha stuffed with beef",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 378
+    }
+  ]
+}

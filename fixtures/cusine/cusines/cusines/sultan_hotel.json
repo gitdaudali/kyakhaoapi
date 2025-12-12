@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Sultan Hotel",
+  "menu": [
+    {
+      "name": "Roti (4pc)",
+      "description": "Delicious Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 185
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Premium Aromatic rice with tender mutton pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 592
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Special Spicy chicken with bell peppers",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 378
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Authentic Aromatic rice cooked with chicken stock",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 459
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Traditional Spiced rice with beef chunks",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 523
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Homemade Marinated grilled chicken pieces",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 311
+    }
+  ]
+}

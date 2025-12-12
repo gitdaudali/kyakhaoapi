@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Baba Jalal Din Mutton Chanay",
+  "menu": [
+    {
+      "name": "Mutton Karahi",
+      "description": "Delicious Spicy mutton curry cooked in a wok",
+      "price": 1700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 585
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Premium Fragrant basmati rice with tender chicken and spices",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 607
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Special Paratha stuffed with spiced chicken",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 492
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Authentic Creamy mutton curry in clay pot",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 598
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Traditional Mild creamy chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 469
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Homemade Creamy chicken curry cooked in a clay pot",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 592
+    }
+  ]
+}

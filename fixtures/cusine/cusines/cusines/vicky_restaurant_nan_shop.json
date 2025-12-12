@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Vicky Restaurant Nan Shop",
+  "menu": [
+    {
+      "name": "Mutton Karahi",
+      "description": "Authentic Spicy mutton curry cooked in a wok",
+      "price": 1750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 564
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Traditional Spiced rice with beef chunks",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 608
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Homemade Stuffed paratha with your choice of filling",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 447
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Signature Naan brushed with butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 253
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Fresh Lentil curry with rice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 327
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Delicious Spiced minced meat skewers",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 399
+    }
+  ]
+}

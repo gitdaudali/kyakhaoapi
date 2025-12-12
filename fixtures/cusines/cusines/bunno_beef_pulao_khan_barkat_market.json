@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Bunno Beef Pulao Khan Barkat Market",
+  "menu": [
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Traditional Spicy chicken with bell peppers",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 387
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Homemade Creamy chicken curry cooked in a clay pot",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 453
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Signature Mild mutton curry with yogurt",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 360
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Fresh Spicy mutton curry cooked in a wok",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 564
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Delicious Slow-cooked mutton in spicy gravy",
+      "price": 2050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.1,
+      "estimated_calories": 590
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Premium Rice cooked with mutton stock",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.1,
+      "estimated_calories": 473
+    }
+  ]
+}

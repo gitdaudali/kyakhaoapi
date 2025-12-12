@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Go Sushi",
+  "menu": [
+    {
+      "name": "Salmon Sashimi",
+      "description": "Fresh raw salmon slices",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.3,
+      "estimated_calories": 219
+    },
+    {
+      "name": "California Roll",
+      "description": "Crab, avocado, and cucumber roll",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.3,
+      "estimated_calories": 363
+    },
+    {
+      "name": "Chicken Teriyaki",
+      "description": "Grilled chicken glazed with teriyaki sauce",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.8,
+      "estimated_calories": 356
+    },
+    {
+      "name": "Miso Soup",
+      "description": "Traditional Japanese soup with miso paste and tofu",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.8,
+      "estimated_calories": 346
+    },
+    {
+      "name": "Tempura Shrimp",
+      "description": "Lightly battered and fried shrimp",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.8,
+      "estimated_calories": 350
+    },
+    {
+      "name": "Chicken Ramen",
+      "description": "Japanese noodle soup with chicken and vegetables",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.8,
+      "estimated_calories": 395
+    }
+  ]
+}

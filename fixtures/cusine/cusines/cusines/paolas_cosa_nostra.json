@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Paolas Cosa Nostra",
+  "menu": [
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Authentic Spicy chicken with bell peppers",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 368
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Traditional Beef meatballs in curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 442
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Homemade Fragrant basmati rice with tender chicken and spices",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 468
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Signature Spiced rice with beef chunks",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 557
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Fresh Paratha stuffed with spiced chicken",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 403
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Delicious Freshly baked tandoori bread",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 206
+    }
+  ]
+}

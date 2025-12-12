@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Novu Pan Asian Gulberg",
+  "menu": [
+    {
+      "name": "Tempura Shrimp",
+      "description": "Fresh Lightly battered and fried shrimp",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.9,
+      "estimated_calories": 333
+    },
+    {
+      "name": "Gyoza (6pc)",
+      "description": "Delicious Pan-fried dumplings",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.5,
+      "estimated_calories": 327
+    },
+    {
+      "name": "Chicken Katsu",
+      "description": "Premium Breaded and fried chicken cutlet",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.5,
+      "estimated_calories": 358
+    },
+    {
+      "name": "Sushi Platter",
+      "description": "Special Assorted sushi rolls",
+      "price": 2050,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.9,
+      "estimated_calories": 282
+    },
+    {
+      "name": "California Roll",
+      "description": "Authentic Crab, avocado, and cucumber roll",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.7,
+      "estimated_calories": 378
+    },
+    {
+      "name": "Salmon Sashimi",
+      "description": "Traditional Fresh raw salmon slices",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.6,
+      "estimated_calories": 332
+    }
+  ]
+}

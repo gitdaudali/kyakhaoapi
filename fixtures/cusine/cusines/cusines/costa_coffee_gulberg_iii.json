@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Costa Coffee Gulberg Iii",
+  "menu": [
+    {
+      "name": "Cappuccino",
+      "description": "Espresso with steamed milk and foam",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 152
+    },
+    {
+      "name": "Latte",
+      "description": "Smooth espresso with steamed milk",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 115
+    },
+    {
+      "name": "Americano",
+      "description": "Espresso with hot water",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 444
+    },
+    {
+      "name": "Mocha",
+      "description": "Chocolate espresso with steamed milk",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.7,
+      "estimated_calories": 163
+    },
+    {
+      "name": "Croissant",
+      "description": "Buttery French pastry",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.7,
+      "estimated_calories": 426
+    },
+    {
+      "name": "Chocolate Chip Cookie",
+      "description": "Freshly baked cookie",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 403
+    }
+  ]
+}

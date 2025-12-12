@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Shezan Bakers Sher Pao",
+  "menu": [
+    {
+      "name": "Brownie",
+      "description": "Authentic Fudgy chocolate brownie",
+      "price": 500,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.7,
+      "estimated_calories": 364
+    },
+    {
+      "name": "Ras Malai (2pc)",
+      "description": "Traditional Sweet cheese dumplings in milk",
+      "price": 450,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 254
+    },
+    {
+      "name": "Chocolate Lava Cake",
+      "description": "Homemade Warm chocolate cake with molten center",
+      "price": 1050,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 425
+    },
+    {
+      "name": "Chocolate Mousse",
+      "description": "Signature Light and airy chocolate mousse",
+      "price": 600,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 388
+    },
+    {
+      "name": "Panna Cotta",
+      "description": "Fresh Italian creamy dessert",
+      "price": 650,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 258
+    },
+    {
+      "name": "Brownie Sundae",
+      "description": "Delicious Brownie with ice cream and chocolate sauce",
+      "price": 800,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.9,
+      "estimated_calories": 298
+    }
+  ]
+}

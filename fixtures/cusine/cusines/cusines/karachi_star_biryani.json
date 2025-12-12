@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Karachi Star Biryani",
+  "menu": [
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Special Aromatic rice cooked with chicken stock",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 533
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Authentic Slow-cooked mutton in spicy gravy",
+      "price": 2100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 644
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Traditional Mildly spiced rice with chicken",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 495
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Homemade Spiced minced meat skewers",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 364
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Signature Aromatic rice with tender mutton pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 547
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Fresh Spicy chicken with bell peppers",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.2,
+      "estimated_calories": 352
+    }
+  ]
+}

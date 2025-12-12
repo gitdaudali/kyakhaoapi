@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Caprinos Gulberg",
+  "menu": [
+    {
+      "name": "Chicken Qorma",
+      "description": "Premium Mild chicken curry with yogurt",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 338
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Special Slow-cooked chicken in spicy gravy",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 627
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Authentic Traditional chicken curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 373
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Traditional Naan with garlic and butter",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 252
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Homemade Spicy chicken with bell peppers",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 315
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Signature Spiced rice with tender beef",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 522
+    }
+  ]
+}

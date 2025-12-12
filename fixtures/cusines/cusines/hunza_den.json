@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Hunza Den",
+  "menu": [
+    {
+      "name": "Chicken Tikka",
+      "description": "Premium Marinated grilled chicken pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 355
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Special Slow-cooked mutton in spicy gravy",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 591
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Authentic Mildly spiced rice with chicken",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 497
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Traditional Aromatic rice cooked with chicken stock",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 407
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Homemade Fragrant basmati rice with tender chicken and spices",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 602
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Signature Mild chicken curry with yogurt",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.7,
+      "estimated_calories": 385
+    }
+  ]
+}

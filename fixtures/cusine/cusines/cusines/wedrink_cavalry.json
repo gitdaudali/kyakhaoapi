@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Wedrink Cavalry",
+  "menu": [
+    {
+      "name": "Chicken Tikka",
+      "description": "Signature Marinated grilled chicken pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 430
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Fresh Spiced rice with tender beef",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 466
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Delicious Lentil curry with rice",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 373
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Premium Spicy mutton curry cooked in a wok",
+      "price": 1700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 584
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Special Mild creamy chicken curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 357
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Authentic Beef meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 355
+    }
+  ]
+}

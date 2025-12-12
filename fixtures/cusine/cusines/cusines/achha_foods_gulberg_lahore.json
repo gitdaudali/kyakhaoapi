@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Achha Foods Gulberg Lahore",
+  "menu": [
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Delicious Paratha stuffed with beef",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 454
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Premium Slow-cooked chicken in spicy gravy",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 656
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Special Aromatic rice cooked with chicken stock",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 412
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Authentic Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 321
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Traditional chicken curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 393
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Homemade Naan with garlic and butter",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 284
+    }
+  ]
+}

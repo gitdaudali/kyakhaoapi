@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Pizza City Gulberg 3",
+  "menu": [
+    {
+      "name": "Margherita Pizza",
+      "description": "Premium Classic pizza with fresh mozzarella, basil, and tomato sauce",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.5,
+      "estimated_calories": 489
+    },
+    {
+      "name": "Pasta Salad",
+      "description": "Special Cold pasta with vegetables and dressing",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.2,
+      "estimated_calories": 449
+    },
+    {
+      "name": "Caesar Salad",
+      "description": "Authentic Fresh romaine lettuce with caesar dressing",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.1,
+      "estimated_calories": 387
+    },
+    {
+      "name": "Veggie Delight Pizza",
+      "description": "Traditional Fresh vegetables with mozzarella cheese",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.1,
+      "estimated_calories": 347
+    },
+    {
+      "name": "Garlic Knots (6pc)",
+      "description": "Homemade Soft bread knots with garlic butter",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.0,
+      "estimated_calories": 497
+    },
+    {
+      "name": "Bruschetta",
+      "description": "Signature Toasted bread with tomatoes and basil",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.1,
+      "estimated_calories": 370
+    }
+  ]
+}

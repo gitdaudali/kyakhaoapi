@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Karachi Naseeb Biryani",
+  "menu": [
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Premium Aromatic rice cooked with chicken stock",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.0,
+      "estimated_calories": 444
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Special Lentil curry with rice",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.0,
+      "estimated_calories": 357
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Authentic Mildly spiced rice with chicken",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 452
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Traditional chicken curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.8,
+      "estimated_calories": 495
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Homemade Mild mutton curry with yogurt",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.8,
+      "estimated_calories": 309
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Signature Beef meatballs in curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.1,
+      "estimated_calories": 480
+    }
+  ]
+}

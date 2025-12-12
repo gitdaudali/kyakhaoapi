@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Big Fat Rolls",
+  "menu": [
+    {
+      "name": "Chicken Tikka",
+      "description": "Special Marinated grilled chicken pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 427
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Authentic Spicy mutton curry cooked in a wok",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 552
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Traditional Freshly baked tandoori bread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 209
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Homemade Slow-cooked chicken in spicy gravy",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 719
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Signature Fragrant basmati rice with tender chicken and spices",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 589
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Fresh Spicy chicken curry cooked in a wok",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 551
+    }
+  ]
+}

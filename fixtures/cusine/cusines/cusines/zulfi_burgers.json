@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Zulfi Burgers",
+  "menu": [
+    {
+      "name": "Onion Rings (6pc)",
+      "description": "Homemade Crispy battered onion rings",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.8,
+      "estimated_calories": 639
+    },
+    {
+      "name": "Fish Burger",
+      "description": "Signature Crispy fish fillet with tartar sauce",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.5,
+      "estimated_calories": 575
+    },
+    {
+      "name": "Chicken Tenders (3pc)",
+      "description": "Fresh Breaded chicken tenders",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 684
+    },
+    {
+      "name": "Cheese Burger",
+      "description": "Delicious Beef patty with melted cheese",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.5,
+      "estimated_calories": 690
+    },
+    {
+      "name": "Chicken Nuggets (6pc)",
+      "description": "Premium Crispy chicken nuggets",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.9,
+      "estimated_calories": 585
+    },
+    {
+      "name": "French Fries (Regular)",
+      "description": "Special Golden crispy fries",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.5,
+      "estimated_calories": 527
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Teacakery",
+  "menu": [
+    {
+      "name": "Panna Cotta",
+      "description": "Authentic Italian creamy dessert",
+      "price": 800,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.9,
+      "estimated_calories": 328
+    },
+    {
+      "name": "Red Velvet Cake",
+      "description": "Traditional Moist red velvet with cream cheese frosting",
+      "price": 850,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 378
+    },
+    {
+      "name": "Tiramisu",
+      "description": "Homemade Italian classic with coffee and mascarpone",
+      "price": 1150,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 78
+    },
+    {
+      "name": "Ras Malai (2pc)",
+      "description": "Signature Sweet cheese dumplings in milk",
+      "price": 300,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 354
+    },
+    {
+      "name": "Chocolate Mousse",
+      "description": "Fresh Light and airy chocolate mousse",
+      "price": 650,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.9,
+      "estimated_calories": 345
+    },
+    {
+      "name": "Mango Mousse",
+      "description": "Delicious Light and airy mango mousse",
+      "price": 700,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 411
+    }
+  ]
+}

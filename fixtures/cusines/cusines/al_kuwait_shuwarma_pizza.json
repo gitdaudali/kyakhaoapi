@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Al Kuwait Shuwarma Pizza",
+  "menu": [
+    {
+      "name": "Pepperoni Pizza",
+      "description": "Delicious Traditional pepperoni with mozzarella cheese",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.8,
+      "estimated_calories": 406
+    },
+    {
+      "name": "Chicken Tikka Pizza",
+      "description": "Premium Spiced chicken tikka with onions and green chilies",
+      "price": 1550,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.6,
+      "estimated_calories": 458
+    },
+    {
+      "name": "Chicken Fajita Pizza",
+      "description": "Special Spiced chicken with bell peppers and onions",
+      "price": 1550,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 5.0,
+      "estimated_calories": 313
+    },
+    {
+      "name": "Hawaiian Pizza",
+      "description": "Authentic Ham, pineapple, and mozzarella cheese",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.8,
+      "estimated_calories": 439
+    },
+    {
+      "name": "Chicken Wings (6pc)",
+      "description": "Traditional Spicy buffalo wings",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.8,
+      "estimated_calories": 317
+    },
+    {
+      "name": "Mozzarella Sticks (6pc)",
+      "description": "Homemade Breaded mozzarella with marinara sauce",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.8,
+      "estimated_calories": 484
+    }
+  ]
+}

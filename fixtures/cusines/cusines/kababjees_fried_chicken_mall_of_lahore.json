@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Kababjees Fried Chicken Mall Of Lahore",
+  "menu": [
+    {
+      "name": "Cheese Burger",
+      "description": "Traditional Beef patty with melted cheese",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 520
+    },
+    {
+      "name": "Chicken Fillet Burger",
+      "description": "Homemade Grilled chicken fillet with mayo",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.5,
+      "estimated_calories": 435
+    },
+    {
+      "name": "Onion Rings (6pc)",
+      "description": "Signature Crispy battered onion rings",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 5.0,
+      "estimated_calories": 472
+    },
+    {
+      "name": "Double Beef Burger",
+      "description": "Fresh Two beef patties with cheese and vegetables",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 620
+    },
+    {
+      "name": "Chicken Broast (Full)",
+      "description": "Delicious Full broasted chicken",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.6,
+      "estimated_calories": 453
+    },
+    {
+      "name": "Chicken Strips (4pc)",
+      "description": "Premium Breaded chicken strips",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.8,
+      "estimated_calories": 502
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Liberty Paratha Roll",
+  "menu": [
+    {
+      "name": "Beef Pulao",
+      "description": "Fresh Spiced rice with tender beef",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 490
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Delicious Creamy chicken curry cooked in a clay pot",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 444
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Premium Rice cooked with mutton stock",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 419
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Special Spicy chicken curry cooked in a wok",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 404
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Authentic Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 438
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Traditional Marinated grilled chicken pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 395
+    }
+  ]
+}

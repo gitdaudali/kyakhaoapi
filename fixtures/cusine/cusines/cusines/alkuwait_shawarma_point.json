@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Alkuwait Shawarma Point",
+  "menu": [
+    {
+      "name": "Beef Shawarma",
+      "description": "Special Tender beef wrapped in pita with garlic sauce",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Arabic",
+      "rating": 3.0,
+      "estimated_calories": 318
+    },
+    {
+      "name": "Lamb Kebab",
+      "description": "Authentic Grilled lamb skewers with spices",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Arabic",
+      "rating": 3.0,
+      "estimated_calories": 458
+    },
+    {
+      "name": "Mixed Grill",
+      "description": "Traditional Assorted grilled meats with rice and salad",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Arabic",
+      "rating": 3.0,
+      "estimated_calories": 547
+    },
+    {
+      "name": "Mutton Mandi",
+      "description": "Homemade Aromatic rice with tender mutton",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Arabic",
+      "rating": 3.0,
+      "estimated_calories": 461
+    },
+    {
+      "name": "Mixed Shawarma",
+      "description": "Signature Combination of chicken and beef",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Arabic",
+      "rating": 3.0,
+      "estimated_calories": 304
+    },
+    {
+      "name": "Fattoush Salad",
+      "description": "Fresh mixed salad with pita chips",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Arabic",
+      "rating": 3.0,
+      "estimated_calories": 370
+    }
+  ]
+}

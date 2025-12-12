@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Xo Chinese Chips Cantt",
+  "menu": [
+    {
+      "name": "Orange Chicken",
+      "description": "Premium Crispy chicken with orange glaze",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 549
+    },
+    {
+      "name": "Vegetable Fried Rice",
+      "description": "Special Fried rice with mixed vegetables",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 5.0,
+      "estimated_calories": 468
+    },
+    {
+      "name": "Wonton Soup",
+      "description": "Authentic Clear soup with pork wontons",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.6,
+      "estimated_calories": 297
+    },
+    {
+      "name": "Szechuan Chicken",
+      "description": "Traditional Spicy Szechuan-style chicken",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 473
+    },
+    {
+      "name": "Beef Chow Mein",
+      "description": "Homemade Stir-fried noodles with beef",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.6,
+      "estimated_calories": 533
+    },
+    {
+      "name": "Lemon Chicken",
+      "description": "Signature Crispy chicken with lemon sauce",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.9,
+      "estimated_calories": 379
+    }
+  ]
+}

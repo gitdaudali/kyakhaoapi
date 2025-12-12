@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Falafel Barkat Market",
+  "menu": [
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Fresh Spiced minced meat skewers",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 282
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Delicious Mild creamy chicken curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 367
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Premium Marinated grilled chicken pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 332
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Special Rice cooked with mutton stock",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 485
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Authentic Paratha stuffed with spiced chicken",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 496
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Traditional Spiced rice with tender beef",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 445
+    }
+  ]
+}

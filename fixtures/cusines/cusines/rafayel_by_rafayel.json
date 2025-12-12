@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Rafayel By Rafayel",
+  "menu": [
+    {
+      "name": "Mutton Handi",
+      "description": "Delicious Creamy mutton curry in clay pot",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 520
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Premium Aromatic rice with tender mutton pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 466
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Special Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 208
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Authentic Mild creamy chicken curry",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 494
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Traditional Lentil curry with rice",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 351
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Homemade Mildly spiced rice with chicken",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 490
+    }
+  ]
+}

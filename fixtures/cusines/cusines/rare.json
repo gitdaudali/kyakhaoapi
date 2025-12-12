@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Rare",
+  "menu": [
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Homemade Spicy chicken with bell peppers",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 398
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Signature Fragrant basmati rice with tender chicken and spices",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 647
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Fresh Creamy mutton curry in clay pot",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 548
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Delicious Stuffed paratha with your choice of filling",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 499
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Premium Paratha stuffed with beef",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 466
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Special Lentil curry with rice",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 300
+    }
+  ]
+}

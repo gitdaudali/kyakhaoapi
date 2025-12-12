@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Caprica Food Point",
+  "menu": [
+    {
+      "name": "Mutton Biryani",
+      "description": "Authentic Aromatic rice with tender mutton pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 539
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Traditional Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 156
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Homemade Spiced rice with tender beef",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 483
+    },
+    {
+      "name": "Chicken Tikka",
+      "description": "Signature Marinated grilled chicken pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 375
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Fresh Aromatic rice cooked with chicken stock",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 542
+    },
+    {
+      "name": "Garlic Naan (2pc)",
+      "description": "Delicious Naan with garlic and butter",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 243
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Karachi Naseeb Biryani Murgh Pulao Pakwan Center A",
+  "menu": [
+    {
+      "name": "Mutton Qorma",
+      "description": "Fresh Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 494
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Delicious Creamy chicken curry cooked in a clay pot",
+      "price": 1450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 451
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Premium Traditional chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 403
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Special Naan brushed with butter",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 214
+    },
+    {
+      "name": "Seekh Kabab (4pc)",
+      "description": "Authentic Spiced minced meat skewers",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 355
+    },
+    {
+      "name": "Roti (4pc)",
+      "description": "Traditional Fresh flatbread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 213
+    }
+  ]
+}

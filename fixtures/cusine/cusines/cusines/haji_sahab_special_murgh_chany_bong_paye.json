@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Haji Sahab Special Murgh Chany Bong Paye",
+  "menu": [
+    {
+      "name": "Chicken Biryani",
+      "description": "Signature Fragrant basmati rice with tender chicken and spices",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 583
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Fresh Mild chicken curry with yogurt",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 372
+    },
+    {
+      "name": "Chicken Karahi",
+      "description": "Delicious Spicy chicken curry cooked in a wok",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 469
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Premium Mild mutton curry with yogurt",
+      "price": 2000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 388
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Special Spiced rice with beef chunks",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 500
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Authentic Mild creamy chicken curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 434
+    }
+  ]
+}

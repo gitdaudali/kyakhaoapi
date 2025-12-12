@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Ice Land Fresh Juices Dry Fruit Gulberg Hussain Ch",
+  "menu": [
+    {
+      "name": "Chicken Pulao",
+      "description": "Premium Mildly spiced rice with chicken",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 545
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Special Stuffed paratha with your choice of filling",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 413
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Authentic Beef meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 484
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Traditional Spiced rice with tender beef",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 503
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Homemade Naan brushed with butter",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 296
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Signature Mild chicken curry with yogurt",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 409
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "restaurant_name": "Haagen Dazs Mm Alam Road",
+  "menu": [
+    {
+      "name": "Ice Cream Pint",
+      "description": "Premium ice cream in various flavors",
+      "price": 1200,
+      "mood": "Dessert",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 459
+    },
+    {
+      "name": "Ice Cream Bar",
+      "description": "Premium ice cream bar",
+      "price": 450,
+      "mood": "Dessert",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 335
+    },
+    {
+      "name": "Ice Cream Sundae",
+      "description": "Premium ice cream with toppings",
+      "price": 950,
+      "mood": "Dessert",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 369
+    }
+  ]
+}

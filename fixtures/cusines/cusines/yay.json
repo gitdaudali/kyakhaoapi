@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Yay",
+  "menu": [
+    {
+      "name": "Beef Pulao",
+      "description": "Traditional Spiced rice with tender beef",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 505
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Homemade Freshly baked tandoori bread",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 299
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Signature Lentil curry with rice",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 292
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Fresh Creamy chicken curry cooked in a clay pot",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 433
+    },
+    {
+      "name": "Chicken Kofta",
+      "description": "Delicious Chicken meatballs in curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 398
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Premium Fragrant basmati rice with tender chicken and spices",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 455
+    }
+  ]
+}

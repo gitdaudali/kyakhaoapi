@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Hafis Kitchen",
+  "menu": [
+    {
+      "name": "Paratha Roll",
+      "description": "Special Stuffed paratha with your choice of filling",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.9,
+      "estimated_calories": 372
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Authentic Naan brushed with butter",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.1,
+      "estimated_calories": 237
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Traditional Creamy mutton curry in clay pot",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.1,
+      "estimated_calories": 563
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Homemade Freshly baked tandoori bread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 266
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Signature Mildly spiced rice with chicken",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.2,
+      "estimated_calories": 453
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Fresh Spicy mutton curry cooked in a wok",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 494
+    }
+  ]
+}

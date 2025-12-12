@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Karachi Spicy Pizza",
+  "menu": [
+    {
+      "name": "Pasta Salad",
+      "description": "Delicious Cold pasta with vegetables and dressing",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.1,
+      "estimated_calories": 437
+    },
+    {
+      "name": "Meat Lovers Pizza",
+      "description": "Premium Pepperoni, sausage, ham, and bacon",
+      "price": 1650,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.3,
+      "estimated_calories": 353
+    },
+    {
+      "name": "Hawaiian Pizza",
+      "description": "Special Ham, pineapple, and mozzarella cheese",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.2,
+      "estimated_calories": 410
+    },
+    {
+      "name": "Bruschetta",
+      "description": "Authentic Toasted bread with tomatoes and basil",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.2,
+      "estimated_calories": 320
+    },
+    {
+      "name": "Veggie Delight Pizza",
+      "description": "Traditional Fresh vegetables with mozzarella cheese",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.3,
+      "estimated_calories": 359
+    },
+    {
+      "name": "Chicken Wings (6pc)",
+      "description": "Homemade Spicy buffalo wings",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pizza",
+      "rating": 4.2,
+      "estimated_calories": 475
+    }
+  ]
+}

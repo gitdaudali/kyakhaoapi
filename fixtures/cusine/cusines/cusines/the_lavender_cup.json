@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "The Lavender Cup",
+  "menu": [
+    {
+      "name": "Chicken Pulao",
+      "description": "Premium Mildly spiced rice with chicken",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 487
+    },
+    {
+      "name": "Chicken Nihari",
+      "description": "Special Slow-cooked chicken in spicy gravy",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 720
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Authentic Beef meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 342
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Traditional Mild creamy chicken curry",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 444
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Homemade Aromatic rice with tender mutton pieces",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 563
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Signature Mild mutton curry with yogurt",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 351
+    }
+  ]
+}

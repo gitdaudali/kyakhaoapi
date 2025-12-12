@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Simply Sufi Xprs Cavalry Ground",
+  "menu": [
+    {
+      "name": "Chicken Biryani",
+      "description": "Premium Fragrant basmati rice with tender chicken and spices",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 615
+    },
+    {
+      "name": "Mutton Nihari",
+      "description": "Special Slow-cooked mutton in spicy gravy",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 723
+    },
+    {
+      "name": "Chicken Curry",
+      "description": "Authentic Traditional chicken curry",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 407
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Traditional Creamy mutton curry in clay pot",
+      "price": 1850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 419
+    },
+    {
+      "name": "Chicken Handi",
+      "description": "Homemade Creamy chicken curry cooked in a clay pot",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 575
+    },
+    {
+      "name": "Butter Naan (2pc)",
+      "description": "Signature Naan brushed with butter",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 214
+    }
+  ]
+}

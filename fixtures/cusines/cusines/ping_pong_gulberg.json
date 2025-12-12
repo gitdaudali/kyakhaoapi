@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Ping Pong Gulberg",
+  "menu": [
+    {
+      "name": "Chicken Nihari",
+      "description": "Authentic Slow-cooked chicken in spicy gravy",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 648
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Traditional Paratha stuffed with beef",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 406
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Homemade Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 407
+    },
+    {
+      "name": "Beef Kofta",
+      "description": "Signature Beef meatballs in curry",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 386
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Fresh Mild creamy chicken curry",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 356
+    },
+    {
+      "name": "Mutton Yakhni Pulao",
+      "description": "Delicious Rice cooked with mutton stock",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 518
+    }
+  ]
+}

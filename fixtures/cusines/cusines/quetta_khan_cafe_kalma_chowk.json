@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Quetta Khan Cafe Kalma Chowk",
+  "menu": [
+    {
+      "name": "Mocha",
+      "description": "Delicious Chocolate espresso with steamed milk",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.7,
+      "estimated_calories": 100
+    },
+    {
+      "name": "Latte",
+      "description": "Premium Smooth espresso with steamed milk",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.6,
+      "estimated_calories": 121
+    },
+    {
+      "name": "Chocolate Chip Cookie",
+      "description": "Special Freshly baked cookie",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 492
+    },
+    {
+      "name": "Caramel Macchiato",
+      "description": "Authentic Espresso with caramel and steamed milk",
+      "price": 550,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.4,
+      "estimated_calories": 141
+    },
+    {
+      "name": "Flat White",
+      "description": "Traditional Espresso with microfoam milk",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.5,
+      "estimated_calories": 339
+    },
+    {
+      "name": "Chocolate Croissant",
+      "description": "Homemade Buttery croissant with chocolate",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.4,
+      "estimated_calories": 375
+    }
+  ]
+}

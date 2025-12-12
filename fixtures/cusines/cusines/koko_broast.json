@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Koko Broast",
+  "menu": [
+    {
+      "name": "Chicken Strips (4pc)",
+      "description": "Fresh Breaded chicken strips",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 496
+    },
+    {
+      "name": "Chicken Tenders (3pc)",
+      "description": "Delicious Breaded chicken tenders",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.9,
+      "estimated_calories": 548
+    },
+    {
+      "name": "Loaded Fries",
+      "description": "Premium Fries topped with cheese and bacon",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 5.0,
+      "estimated_calories": 508
+    },
+    {
+      "name": "Chicken Burger",
+      "description": "Special Crispy chicken patty with fresh vegetables",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.9,
+      "estimated_calories": 488
+    },
+    {
+      "name": "French Fries (Large)",
+      "description": "Authentic Large portion of crispy fries",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 641
+    },
+    {
+      "name": "Veggie Burger",
+      "description": "Traditional Vegetable patty with fresh toppings",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.8,
+      "estimated_calories": 491
+    }
+  ]
+}

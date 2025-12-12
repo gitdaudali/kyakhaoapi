@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Broaster",
+  "menu": [
+    {
+      "name": "Loaded Fries",
+      "description": "Homemade Fries topped with cheese and bacon",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 3.6,
+      "estimated_calories": 564
+    },
+    {
+      "name": "Fried Chicken (4pc)",
+      "description": "Signature Crispy fried chicken pieces",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 3.5,
+      "estimated_calories": 639
+    },
+    {
+      "name": "Chicken Club Burger",
+      "description": "Fresh Chicken with bacon, lettuce, and tomato",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 3.5,
+      "estimated_calories": 583
+    },
+    {
+      "name": "Cheese Burger",
+      "description": "Delicious Beef patty with melted cheese",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 3.6,
+      "estimated_calories": 520
+    },
+    {
+      "name": "French Fries (Regular)",
+      "description": "Premium Golden crispy fries",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 3.4,
+      "estimated_calories": 628
+    },
+    {
+      "name": "Chicken Strips (4pc)",
+      "description": "Special Breaded chicken strips",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 3.5,
+      "estimated_calories": 428
+    }
+  ]
+}

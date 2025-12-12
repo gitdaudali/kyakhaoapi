@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Biryani Master Gulbarg",
+  "menu": [
+    {
+      "name": "Chicken Biryani",
+      "description": "Fragrant basmati rice with tender chicken and spices",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 620
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Aromatic rice with tender mutton pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 621
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Spiced rice with beef chunks",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 520
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Mildly spiced rice with chicken",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 508
+    },
+    {
+      "name": "Raita",
+      "description": "Yogurt with cucumber and spices",
+      "price": 150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 416
+    },
+    {
+      "name": "Salad",
+      "description": "Fresh mixed salad",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.5,
+      "estimated_calories": 438
+    }
+  ]
+}

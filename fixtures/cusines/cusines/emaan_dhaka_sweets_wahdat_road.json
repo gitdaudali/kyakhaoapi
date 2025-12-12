@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Emaan Dhaka Sweets Wahdat Road",
+  "menu": [
+    {
+      "name": "Strawberry Cheesecake",
+      "description": "Traditional Cheesecake topped with fresh strawberries",
+      "price": 1000,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.9,
+      "estimated_calories": 380
+    },
+    {
+      "name": "Apple Pie",
+      "description": "Homemade Warm apple pie with cinnamon",
+      "price": 650,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 398
+    },
+    {
+      "name": "Panna Cotta",
+      "description": "Signature Italian creamy dessert",
+      "price": 850,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 271
+    },
+    {
+      "name": "Chocolate Mousse",
+      "description": "Fresh Light and airy chocolate mousse",
+      "price": 600,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 498
+    },
+    {
+      "name": "Chocolate Lava Cake",
+      "description": "Delicious Warm chocolate cake with molten center",
+      "price": 900,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "estimated_calories": 465
+    },
+    {
+      "name": "Red Velvet Cake",
+      "description": "Premium Moist red velvet with cream cheese frosting",
+      "price": 700,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.9,
+      "estimated_calories": 434
+    }
+  ]
+}

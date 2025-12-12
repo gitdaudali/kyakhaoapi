@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Lius Kim Mun Chinese By Hsin Kuang",
+  "menu": [
+    {
+      "name": "Sweet and Sour Chicken",
+      "description": "Homemade Crispy chicken pieces in tangy sweet and sour sauce",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.5,
+      "estimated_calories": 532
+    },
+    {
+      "name": "Chicken Chow Mein",
+      "description": "Signature Stir-fried noodles with chicken and mixed vegetables",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.3,
+      "estimated_calories": 549
+    },
+    {
+      "name": "Egg Drop Soup",
+      "description": "Fresh Classic Chinese egg soup",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.4,
+      "estimated_calories": 125
+    },
+    {
+      "name": "General Tso's Chicken",
+      "description": "Delicious Crispy chicken in a sweet and spicy sauce",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.5,
+      "estimated_calories": 422
+    },
+    {
+      "name": "Beef Chow Mein",
+      "description": "Premium Stir-fried noodles with beef",
+      "price": 1050,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 438
+    },
+    {
+      "name": "Wonton Soup",
+      "description": "Special Clear soup with pork wontons",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.5,
+      "estimated_calories": 313
+    }
+  ]
+}

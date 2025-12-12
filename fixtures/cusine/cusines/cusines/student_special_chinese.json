@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Student Special Chinese",
+  "menu": [
+    {
+      "name": "Sweet and Sour Chicken",
+      "description": "Authentic Crispy chicken pieces in tangy sweet and sour sauce",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 492
+    },
+    {
+      "name": "General Tso's Chicken",
+      "description": "Traditional Crispy chicken in a sweet and spicy sauce",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 399
+    },
+    {
+      "name": "Honey Chicken",
+      "description": "Homemade Crispy chicken with honey glaze",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.6,
+      "estimated_calories": 493
+    },
+    {
+      "name": "Vegetable Fried Rice",
+      "description": "Signature Fried rice with mixed vegetables",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.8,
+      "estimated_calories": 475
+    },
+    {
+      "name": "Kung Pao Chicken",
+      "description": "Fresh Spicy stir-fried chicken with peanuts and vegetables",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.4,
+      "estimated_calories": 404
+    },
+    {
+      "name": "Mapo Tofu",
+      "description": "Delicious Spicy Sichuan dish with tofu and minced meat",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.3,
+      "estimated_calories": 300
+    }
+  ]
+}

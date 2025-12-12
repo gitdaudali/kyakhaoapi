@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Go Sushi Model Town",
+  "menu": [
+    {
+      "name": "Salmon Sashimi",
+      "description": "Fresh raw salmon slices",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.9,
+      "estimated_calories": 350
+    },
+    {
+      "name": "California Roll",
+      "description": "Crab, avocado, and cucumber roll",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 5.0,
+      "estimated_calories": 304
+    },
+    {
+      "name": "Chicken Teriyaki",
+      "description": "Grilled chicken glazed with teriyaki sauce",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.8,
+      "estimated_calories": 497
+    },
+    {
+      "name": "Miso Soup",
+      "description": "Traditional Japanese soup with miso paste and tofu",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.9,
+      "estimated_calories": 323
+    },
+    {
+      "name": "Tempura Shrimp",
+      "description": "Lightly battered and fried shrimp",
+      "price": 1500,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 5.0,
+      "estimated_calories": 372
+    },
+    {
+      "name": "Chicken Ramen",
+      "description": "Japanese noodle soup with chicken and vegetables",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Japanese",
+      "rating": 4.8,
+      "estimated_calories": 305
+    }
+  ]
+}

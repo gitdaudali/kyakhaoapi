@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Filli Cafe",
+  "menu": [
+    {
+      "name": "Cinnamon Roll",
+      "description": "Special Sweet cinnamon pastry",
+      "price": 300,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.6,
+      "estimated_calories": 306
+    },
+    {
+      "name": "Latte",
+      "description": "Authentic Smooth espresso with steamed milk",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.7,
+      "estimated_calories": 114
+    },
+    {
+      "name": "Chocolate Chip Cookie",
+      "description": "Traditional Freshly baked cookie",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 5.0,
+      "estimated_calories": 446
+    },
+    {
+      "name": "Cortado",
+      "description": "Homemade Espresso with equal parts steamed milk",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.9,
+      "estimated_calories": 141
+    },
+    {
+      "name": "Croissant",
+      "description": "Signature Buttery French pastry",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.6,
+      "estimated_calories": 372
+    },
+    {
+      "name": "Blueberry Muffin",
+      "description": "Freshly baked blueberry muffin",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 4.8,
+      "estimated_calories": 396
+    }
+  ]
+}

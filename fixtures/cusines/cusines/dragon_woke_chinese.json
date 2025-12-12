@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Dragon Woke Chinese",
+  "menu": [
+    {
+      "name": "Wonton Soup",
+      "description": "Premium Clear soup with pork wontons",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.7,
+      "estimated_calories": 305
+    },
+    {
+      "name": "Lemon Chicken",
+      "description": "Special Crispy chicken with lemon sauce",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.3,
+      "estimated_calories": 351
+    },
+    {
+      "name": "Peking Duck",
+      "description": "Authentic Crispy duck with pancakes",
+      "price": 2550,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.5,
+      "estimated_calories": 463
+    },
+    {
+      "name": "General Tso's Chicken",
+      "description": "Traditional Crispy chicken in a sweet and spicy sauce",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.7,
+      "estimated_calories": 413
+    },
+    {
+      "name": "Vegetable Fried Rice",
+      "description": "Homemade Fried rice with mixed vegetables",
+      "price": 850,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.5,
+      "estimated_calories": 424
+    },
+    {
+      "name": "Szechuan Chicken",
+      "description": "Signature Spicy Szechuan-style chicken",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.4,
+      "estimated_calories": 500
+    }
+  ]
+}

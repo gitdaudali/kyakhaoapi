@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Madina Sweets",
+  "menu": [
+    {
+      "name": "Red Velvet Cake",
+      "description": "Authentic Moist red velvet with cream cheese frosting",
+      "price": 800,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.6,
+      "estimated_calories": 331
+    },
+    {
+      "name": "Panna Cotta",
+      "description": "Traditional Italian creamy dessert",
+      "price": 850,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.6,
+      "estimated_calories": 362
+    },
+    {
+      "name": "Chocolate Mousse",
+      "description": "Homemade Light and airy chocolate mousse",
+      "price": 800,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.7,
+      "estimated_calories": 325
+    },
+    {
+      "name": "Ras Malai (2pc)",
+      "description": "Signature Sweet cheese dumplings in milk",
+      "price": 300,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.8,
+      "estimated_calories": 224
+    },
+    {
+      "name": "Creme Brulee",
+      "description": "Fresh Creamy custard with caramelized sugar",
+      "price": 750,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.7,
+      "estimated_calories": 392
+    },
+    {
+      "name": "Kulfi",
+      "description": "Delicious Traditional frozen dessert",
+      "price": 250,
+      "mood": "Dessert",
+      "cuisine": "Desserts",
+      "rating": 4.5,
+      "estimated_calories": 357
+    }
+  ]
+}

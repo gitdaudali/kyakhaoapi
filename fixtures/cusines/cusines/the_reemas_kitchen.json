@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "The Reemas Kitchen",
+  "menu": [
+    {
+      "name": "Chicken Kofta",
+      "description": "Traditional Chicken meatballs in curry",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 412
+    },
+    {
+      "name": "Mutton Handi",
+      "description": "Homemade Creamy mutton curry in clay pot",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 575
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Signature Aromatic rice cooked with chicken stock",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 428
+    },
+    {
+      "name": "Naan (2pc)",
+      "description": "Freshly baked tandoori bread",
+      "price": 250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 225
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Delicious Spiced rice with tender beef",
+      "price": 1000,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 506
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Premium Spicy mutton curry cooked in a wok",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 521
+    }
+  ]
+}

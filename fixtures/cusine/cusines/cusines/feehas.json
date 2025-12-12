@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Feehas",
+  "menu": [
+    {
+      "name": "Naan (2pc)",
+      "description": "Homemade Freshly baked tandoori bread",
+      "price": 200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 266
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Signature Aromatic rice cooked with chicken stock",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.7,
+      "estimated_calories": 403
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Fresh Lentil curry with rice",
+      "price": 450,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 400
+    },
+    {
+      "name": "Chicken Pulao",
+      "description": "Delicious Mildly spiced rice with chicken",
+      "price": 750,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 423
+    },
+    {
+      "name": "Chicken Paratha Roll",
+      "description": "Premium Paratha stuffed with spiced chicken",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 410
+    },
+    {
+      "name": "Chicken Biryani",
+      "description": "Special Fragrant basmati rice with tender chicken and spices",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 465
+    }
+  ]
+}

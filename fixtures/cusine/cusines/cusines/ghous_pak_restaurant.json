@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Ghous Pak Restaurant",
+  "menu": [
+    {
+      "name": "Beef Kofta",
+      "description": "Fresh Beef meatballs in curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.3,
+      "estimated_calories": 320
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Delicious Stuffed paratha with your choice of filling",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.4,
+      "estimated_calories": 368
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Premium Spicy mutton curry cooked in a wok",
+      "price": 1800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 530
+    },
+    {
+      "name": "Daal Chawal",
+      "description": "Special Lentil curry with rice",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 346
+    },
+    {
+      "name": "Beef Biryani",
+      "description": "Authentic Spiced rice with beef chunks",
+      "price": 1100,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.6,
+      "estimated_calories": 643
+    },
+    {
+      "name": "Beef Paratha Roll",
+      "description": "Traditional Paratha stuffed with beef",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 382
+    }
+  ]
+}

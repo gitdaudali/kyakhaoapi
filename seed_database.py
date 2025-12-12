@@ -34,6 +34,8 @@ FIXTURES_ROOT = Path(__file__).parent / "fixtures"
 DISH_FIXTURES_DIR = FIXTURES_ROOT / "dishes"
 PROMOTIONS_FIXTURE = FIXTURES_ROOT / "promotions" / "promotions.json"
 MEMBERSHIP_FIXTURES_DIR = FIXTURES_ROOT / "membership"
+# Cuisine data folder - your boss gave you this
+CUISINE_FIXTURES_DIR = FIXTURES_ROOT / "cusine" / "cusines" / "cusines"
 
 
 def load_json_fixture(file_path: Path) -> Any:
@@ -579,6 +581,253 @@ async def seed_allergies(session: AsyncSession) -> int:
     return created_count
 
 
+async def seed_restaurants_and_dishes_from_fixtures(session: AsyncSession) -> Dict[str, int]:
+    """
+    Extract and seed restaurants, cuisines, and dishes from restaurant JSON files.
+    
+    Scans JSON files in:
+    - fixtures/cusine/cusines/cusines/
+    
+    Each JSON file has structure:
+    {
+        "restaurant_name": "3h Food Corner",
+        "menu": [
+            {
+                "name": "Butter Naan",
+                "description": "...",
+                "price": 300,
+                "cuisine": "Pakistani",
+                "mood": "Anytime",
+                "rating": 5.0,
+                "estimated_calories": 218
+            }
+        ]
+    }
+    
+    Creates:
+    - Restaurants (from restaurant_name)
+    - Cuisines (from unique cuisine names in menu)
+    - Dishes (from menu items, linked to restaurant and cuisine)
+    """
+    print("📝 Processing restaurant JSON files to extract restaurants, cuisines, and dishes...")
+    
+    # Check if cuisine fixture directory exists
+    if not CUISINE_FIXTURES_DIR.exists():
+        print(f"⚠️  No cuisine fixture directory found")
+        print(f"   Expected: {CUISINE_FIXTURES_DIR}")
+        return {"restaurants": 0, "cuisines": 0, "dishes": 0}
+    
+    # Statistics
+    stats = {
+        "restaurants": 0,
+        "cuisines": 0,
+        "dishes": 0,
+        "restaurants_skipped": 0,
+        "cuisines_skipped": 0,
+        "dishes_skipped": 0,
+        "errors": 0
+    }
+    
+    # First pass: Collect all unique cuisines
+    unique_cuisines = set()
+    json_files = list(CUISINE_FIXTURES_DIR.glob("*.json"))
+    print(f"  📁 Found {len(json_files)} JSON file(s) in {CUISINE_FIXTURES_DIR}")
+    
+    print("\n  🔍 Step 1: Extracting unique cuisines...")
+    for json_file in json_files:
+        try:
+            with json_file.open("r", encoding="utf-8") as f:
+                data = json.load(f)
+            
+            if isinstance(data, dict) and "menu" in data:
+                menu = data.get("menu", [])
+                if isinstance(menu, list):
+                    for item in menu:
+                        if isinstance(item, dict):
+                            cuisine_name = item.get("cuisine")
+                            if cuisine_name and isinstance(cuisine_name, str):
+                                unique_cuisines.add(cuisine_name.strip())
+        except Exception:
+            pass  # Will handle errors in second pass
+    
+    # Seed all unique cuisines
+    print(f"  📝 Seeding {len(unique_cuisines)} unique cuisine(s)...")
+    for cuisine_name in sorted(unique_cuisines):
+        result = await session.execute(
+            select(Cuisine).where(
+                func.lower(Cuisine.name) == cuisine_name.lower(),
+                Cuisine.is_deleted.is_(False)
+            )
+        )
+        existing_cuisine = result.scalar_one_or_none()
+        
+        if not existing_cuisine:
+            cuisine = Cuisine(
+                name=cuisine_name,
+                description=f"Authentic {cuisine_name} cuisine with traditional flavors and recipes."
+            )
+            session.add(cuisine)
+            stats["cuisines"] += 1
+        else:
+            stats["cuisines_skipped"] += 1
+    
+    await session.flush()  # Flush to get cuisine IDs
+    
+    # Second pass: Process restaurants and dishes
+    print(f"\n  🏪 Step 2: Processing restaurants and dishes...")
+    processed_files = 0
+    
+    for json_file in json_files:
+        try:
+            with json_file.open("r", encoding="utf-8") as f:
+                data = json.load(f)
+            
+            if not isinstance(data, dict) or "restaurant_name" not in data:
+                continue
+            
+            restaurant_name = data.get("restaurant_name", "").strip()
+            if not restaurant_name:
+                continue
+            
+            # Get or create restaurant
+            result = await session.execute(
+                select(Restaurant).where(
+                    func.lower(Restaurant.name) == restaurant_name.lower(),
+                    Restaurant.is_deleted.is_(False)
+                )
+            )
+            restaurant = result.scalar_one_or_none()
+            
+            if not restaurant:
+                restaurant = Restaurant(
+                    name=restaurant_name,
+                    description=f"Restaurant offering diverse cuisine selections.",
+                    city="Karachi",
+                    country="Pakistan",
+                    rating=4.5,
+                    price_level=3,
+                    is_active=True,
+                    delivery_radius_km=15.0,
+                )
+                session.add(restaurant)
+                await session.flush()  # Flush to get restaurant ID
+                stats["restaurants"] += 1
+                print(f"    ✅ Created restaurant: {restaurant_name}")
+            else:
+                stats["restaurants_skipped"] += 1
+            
+            # Process menu items (dishes)
+            menu = data.get("menu", [])
+            if isinstance(menu, list):
+                for item in menu:
+                    if not isinstance(item, dict):
+                        continue
+                    
+                    dish_name = str(item.get("name", "")).strip()
+                    if not dish_name:
+                        continue
+                    
+                    # Check if dish already exists for this restaurant
+                    if await dish_exists(session, dish_name, restaurant.id):
+                        stats["dishes_skipped"] += 1
+                        continue
+                    
+                    # Get cuisine
+                    cuisine_name = str(item.get("cuisine", "Uncategorized")).strip()
+                    if not cuisine_name:
+                        cuisine_name = "Uncategorized"
+                    
+                    cuisine_result = await session.execute(
+                        select(Cuisine).where(
+                            func.lower(Cuisine.name) == cuisine_name.lower(),
+                            Cuisine.is_deleted.is_(False)
+                        )
+                    )
+                    cuisine = cuisine_result.scalar_one_or_none()
+                    if not cuisine:
+                        # Create cuisine if somehow missing
+                        cuisine = Cuisine(
+                            name=cuisine_name,
+                            description=f"Authentic {cuisine_name} cuisine."
+                        )
+                        session.add(cuisine)
+                        await session.flush()
+                    
+                    # Get or create mood
+                    mood_name = str(item.get("mood", "Anytime")).strip()
+                    if not mood_name:
+                        mood_name = "Anytime"
+                    mood = await get_or_create_mood(session, mood_name)
+                    
+                    # Convert price
+                    price = convert_price(item.get("price"))
+                    price_value = float(price) if price is not None else None
+                    
+                    # Parse rating
+                    rating_raw = item.get("rating")
+                    rating = None
+                    if rating_raw is not None:
+                        try:
+                            rating_val = float(rating_raw)
+                            if 0 <= rating_val <= 5:
+                                rating = rating_val
+                        except (ValueError, TypeError):
+                            pass
+                    
+                    # Parse calories
+                    calories = item.get("estimated_calories") or item.get("calories")
+                    if calories is not None:
+                        try:
+                            calories = int(calories) if calories else None
+                        except (ValueError, TypeError):
+                            calories = None
+                    
+                    # Create dish
+                    dish = Dish(
+                        name=dish_name,
+                        description=str(item.get("description", "")).strip() or None,
+                        price=price_value,
+                        rating=rating,
+                        cuisine_id=cuisine.id,
+                        restaurant_id=restaurant.id,
+                        calories=calories,
+                        is_featured=False,
+                    )
+                    dish.moods = [mood]
+                    session.add(dish)
+                    stats["dishes"] += 1
+            
+            processed_files += 1
+            
+        except json.JSONDecodeError as e:
+            print(f"    ⚠️  JSON decode error in {json_file.name}: {str(e)}")
+            stats["errors"] += 1
+        except Exception as e:
+            print(f"    ⚠️  Error processing {json_file.name}: {str(e)}")
+            stats["errors"] += 1
+            import traceback
+            traceback.print_exc()
+    
+    # Commit everything
+    if stats["restaurants"] > 0 or stats["cuisines"] > 0 or stats["dishes"] > 0:
+        await session.commit()
+        print(f"\n✅ Seeding complete:")
+        print(f"   🏪 Restaurants: {stats['restaurants']} created, {stats['restaurants_skipped']} already existed")
+        print(f"   🍽️  Cuisines: {stats['cuisines']} created, {stats['cuisines_skipped']} already existed")
+        print(f"   🍜 Dishes: {stats['dishes']} created, {stats['dishes_skipped']} already existed")
+        if stats["errors"] > 0:
+            print(f"   ⚠️  {stats['errors']} file(s) had errors")
+    else:
+        await session.rollback()
+        print("\n⚠️  No new data to seed")
+    
+    return {
+        "restaurants": stats["restaurants"],
+        "cuisines": stats["cuisines"],
+        "dishes": stats["dishes"]
+    }
+
+
 async def seed_database():
     """Main function to seed database from fixtures."""
     if not FIXTURES_ROOT.exists():
@@ -595,6 +844,8 @@ async def seed_database():
         "promotions": 0,
         "allergies": 0,
         "membership_plans": 0,
+        "restaurants": 0,
+        "cuisines": 0,
     }
     
     async with AsyncSessionLocal() as db:
@@ -611,10 +862,10 @@ async def seed_database():
             else:
                 print("⚠️  No users fixture found, skipping...\n")
             
-            # Seed dishes
-            dishes_created = await seed_dish_fixtures(db)
-            stats["dishes"] = dishes_created
-            await db.commit()
+            # Seed dishes from fixtures/dishes/ - DISABLED: Only using fixtures/cusine/cusines/cusines/
+            # dishes_created = await seed_dish_fixtures(db)
+            # stats["dishes"] = dishes_created
+            # await db.commit()
             
             # Seed promotions
             if PROMOTIONS_FIXTURE.exists():
@@ -632,6 +883,15 @@ async def seed_database():
             created = await seed_allergies(db)
             stats["allergies"] = created
             
+            # Seed restaurants, cuisines, and dishes from restaurant JSON files
+            # ONLY from fixtures/cusine/cusines/cusines/
+            print("\n📝 Seeding restaurants, cuisines, and dishes from fixtures/cusine/cusines/cusines/...")
+            result = await seed_restaurants_and_dishes_from_fixtures(db)
+            stats["restaurants"] = result["restaurants"]
+            stats["cuisines"] = result["cuisines"]
+            stats["dishes"] = result["dishes"]  # Dishes from cuisine folder
+            print()  # Add blank line for spacing
+            
             # Seed membership plans
             plans_fixture = MEMBERSHIP_FIXTURES_DIR / "plans.json"
             if plans_fixture.exists():
@@ -645,7 +905,9 @@ async def seed_database():
             print("=" * 50)
             print("📊 Seeding Summary:")
             print(f"   Users created: {stats['users']}")
-            print(f"   Dishes created: {stats['dishes']}")
+            print(f"   Restaurants created: {stats['restaurants']} (from fixtures/cusine/cusines/cusines/)")
+            print(f"   Cuisines created: {stats['cuisines']} (from fixtures/cusine/cusines/cusines/)")
+            print(f"   Dishes created: {stats['dishes']} (from fixtures/cusine/cusines/cusines/)")
             print(f"   Promotions created: {stats['promotions']}")
             print(f"   Allergies created: {stats['allergies']}")
             print(f"   Membership plans created: {stats['membership_plans']}")

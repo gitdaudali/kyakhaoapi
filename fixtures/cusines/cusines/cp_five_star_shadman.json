@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Cp Five Star Shadman",
+  "menu": [
+    {
+      "name": "Chicken Curry",
+      "description": "Delicious Traditional chicken curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 338
+    },
+    {
+      "name": "Beef Pulao",
+      "description": "Premium Spiced rice with tender beef",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 528
+    },
+    {
+      "name": "Mutton Qorma",
+      "description": "Special Mild mutton curry with yogurt",
+      "price": 1950,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.8,
+      "estimated_calories": 301
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Authentic Mild chicken curry with yogurt",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 5.0,
+      "estimated_calories": 404
+    },
+    {
+      "name": "Paratha Roll",
+      "description": "Traditional Stuffed paratha with your choice of filling",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 418
+    },
+    {
+      "name": "Chicken Korma",
+      "description": "Homemade Mild creamy chicken curry",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 4.9,
+      "estimated_calories": 445
+    }
+  ]
+}

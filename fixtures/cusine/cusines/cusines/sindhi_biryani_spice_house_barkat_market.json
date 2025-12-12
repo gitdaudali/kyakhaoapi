@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Sindhi Biryani Spice House Barkat Market",
+  "menu": [
+    {
+      "name": "Chicken Tikka",
+      "description": "Delicious Marinated grilled chicken pieces",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 379
+    },
+    {
+      "name": "Chicken Yakhni Pulao",
+      "description": "Premium Aromatic rice cooked with chicken stock",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.5,
+      "estimated_calories": 503
+    },
+    {
+      "name": "Mutton Biryani",
+      "description": "Special Aromatic rice with tender mutton pieces",
+      "price": 1250,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 517
+    },
+    {
+      "name": "Chicken Jalfrezi",
+      "description": "Authentic Spicy chicken with bell peppers",
+      "price": 1350,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.6,
+      "estimated_calories": 322
+    },
+    {
+      "name": "Mutton Karahi",
+      "description": "Traditional Spicy mutton curry cooked in a wok",
+      "price": 1900,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.4,
+      "estimated_calories": 558
+    },
+    {
+      "name": "Chicken Qorma",
+      "description": "Homemade Mild chicken curry with yogurt",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Pakistani",
+      "rating": 3.3,
+      "estimated_calories": 470
+    }
+  ]
+}

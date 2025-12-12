@@ -9,7 +9,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import get_db
 from app.core.response_handler import error_response, success_response
-from app.models.food import Restaurant
+from app.models.food import Dish, Restaurant
+from app.schemas.dish import DishOut
 from app.schemas.pagination import PaginatedResponse, PaginationParams
 from app.schemas.restaurant import (
     NearbyRestaurantRequest,
@@ -17,6 +18,7 @@ from app.schemas.restaurant import (
 )
 from app.utils.pagination import paginate
 from app.utils.query_filters import haversine_distance_expr
+from sqlalchemy.orm import selectinload
 
 router = APIRouter(prefix="/restaurants", tags=["Restaurants"])
 
@@ -128,6 +130,46 @@ async def nearby_restaurants(
     except Exception as e:
         return error_response(
             message=f"Error retrieving nearby restaurants: {str(e)}",
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@router.get("/{restaurant_id}/menu")
+async def get_restaurant_menu(
+    restaurant_id: uuid.UUID,
+    params: PaginationParams = Depends(),
+    session: AsyncSession = Depends(get_db),
+) -> Any:
+    """Get all dishes (menu) for a specific restaurant."""
+    try:
+        restaurant = await get_restaurant_or_404(session, restaurant_id)
+        
+        stmt = (
+            select(Dish)
+            .options(selectinload(Dish.moods))
+            .where(
+                Dish.restaurant_id == restaurant_id,
+                Dish.is_deleted.is_(False)
+            )
+            .order_by(Dish.rating.desc().nullslast(), Dish.name.asc())
+        )
+        
+        result = await paginate(
+            session,
+            stmt,
+            params,
+            mapper=lambda dish: DishOut.model_validate(dish),
+        )
+        
+        return success_response(
+            message=f"Menu for {restaurant.name} retrieved successfully",
+            data=result.model_dump()
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        return error_response(
+            message=f"Error retrieving restaurant menu: {str(e)}",
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 

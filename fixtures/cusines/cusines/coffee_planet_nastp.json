@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Coffee Planet Nastp",
+  "menu": [
+    {
+      "name": "Latte",
+      "description": "Signature Smooth espresso with steamed milk",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 3.0,
+      "estimated_calories": 68
+    },
+    {
+      "name": "Chocolate Croissant",
+      "description": "Fresh Buttery croissant with chocolate",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 3.0,
+      "estimated_calories": 364
+    },
+    {
+      "name": "Caramel Macchiato",
+      "description": "Delicious Espresso with caramel and steamed milk",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 3.0,
+      "estimated_calories": 53
+    },
+    {
+      "name": "Mocha",
+      "description": "Premium Chocolate espresso with steamed milk",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 3.0,
+      "estimated_calories": 63
+    },
+    {
+      "name": "Cortado",
+      "description": "Special Espresso with equal parts steamed milk",
+      "price": 500,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 3.0,
+      "estimated_calories": 116
+    },
+    {
+      "name": "Croissant",
+      "description": "Authentic Buttery French pastry",
+      "price": 400,
+      "mood": "Anytime",
+      "cuisine": "Coffee",
+      "rating": 3.0,
+      "estimated_calories": 336
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Lahore Broast Ichra Branch",
+  "menu": [
+    {
+      "name": "Chicken Fillet Burger",
+      "description": "Fresh Grilled chicken fillet with mayo",
+      "price": 650,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 431
+    },
+    {
+      "name": "Chili Cheese Fries",
+      "description": "Delicious Fries with chili and cheese",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.3,
+      "estimated_calories": 423
+    },
+    {
+      "name": "Zinger Burger",
+      "description": "Premium Spicy chicken fillet burger with mayo",
+      "price": 800,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.3,
+      "estimated_calories": 422
+    },
+    {
+      "name": "French Fries (Regular)",
+      "description": "Special Golden crispy fries",
+      "price": 350,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.5,
+      "estimated_calories": 509
+    },
+    {
+      "name": "Chicken Tenders (3pc)",
+      "description": "Authentic Breaded chicken tenders",
+      "price": 700,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.7,
+      "estimated_calories": 643
+    },
+    {
+      "name": "Chicken Club Burger",
+      "description": "Traditional Chicken with bacon, lettuce, and tomato",
+      "price": 950,
+      "mood": "Anytime",
+      "cuisine": "Fast Food",
+      "rating": 4.5,
+      "estimated_calories": 509
+    }
+  ]
+}

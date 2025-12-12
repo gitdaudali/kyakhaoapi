@@ -1,0 +1,59 @@
+{
+  "restaurant_name": "Shanghai Chinese Cuisine",
+  "menu": [
+    {
+      "name": "Chicken Lo Mein",
+      "description": "Fresh Soft noodles with chicken and vegetables",
+      "price": 900,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.1,
+      "estimated_calories": 474
+    },
+    {
+      "name": "Orange Chicken",
+      "description": "Delicious Crispy chicken with orange glaze",
+      "price": 1150,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.1,
+      "estimated_calories": 462
+    },
+    {
+      "name": "General Tso's Chicken",
+      "description": "Premium Crispy chicken in a sweet and spicy sauce",
+      "price": 1200,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 3.9,
+      "estimated_calories": 461
+    },
+    {
+      "name": "Szechuan Chicken",
+      "description": "Special Spicy Szechuan-style chicken",
+      "price": 1300,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.1,
+      "estimated_calories": 416
+    },
+    {
+      "name": "Wonton Soup",
+      "description": "Authentic Clear soup with pork wontons",
+      "price": 600,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.1,
+      "estimated_calories": 240
+    },
+    {
+      "name": "Mongolian Beef",
+      "description": "Traditional Tender beef with vegetables in savory sauce",
+      "price": 1400,
+      "mood": "Anytime",
+      "cuisine": "Chinese",
+      "rating": 4.0,
+      "estimated_calories": 319
+    }
+  ]
+}
