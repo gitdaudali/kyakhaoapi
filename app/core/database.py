@@ -61,13 +61,18 @@ else:
 database_url = urlunparse(parsed)
 
 # Configure SSL for asyncpg
+# For Neon PostgreSQL, use ssl=True (simple boolean)
+# The channel_binding error is a SQLAlchemy/asyncpg compatibility issue
+# that may require SQLAlchemy update or workaround
 connect_args = {}
-if ssl_mode == "require":
-    connect_args["ssl"] = "require"
+if ssl_mode == "require" or ssl_mode == "prefer":
+    # For Neon PostgreSQL and other cloud providers requiring SSL
+    connect_args["ssl"] = True
 elif ssl_mode == "disable":
     connect_args["ssl"] = False
 else:
-    connect_args["ssl"] = ssl_mode
+    # For other modes, default to SSL enabled
+    connect_args["ssl"] = True
 
 engine = create_async_engine(
     database_url,

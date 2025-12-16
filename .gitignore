@@ -197,3 +197,57 @@ target/
 logs/
 media/
 staticfiles/
+
+# Production / Deployment
+*.log
+*.log.*
+*.out
+app.log
+error.log
+access.log
+production.log
+deployment.log
+
+# Docker production artifacts
+.docker/
+docker-compose.override.yml
+*.dockerfile.local
+
+# Production secrets and configs
+config.production.json
+secrets.production.yaml
+*.secret
+*.conf.local
+
+# Deployment artifacts
+.deploy/
+deploy/
+*.deploy
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Application runtime files
+*.pid.lock
+uvicorn.pid
+celery.pid
+
+# Production database dumps (if accidentally created)
+*.dump
+*.sql.gz
+*.backup
+
+# Azure / Cloud specific
+.azure/
+azure-pipelines.local.yml
+
+# Monitoring and analytics (if generated locally)
+monitoring/
+analytics/
+*.metrics
+
+# SSL certificates (if stored locally)
+*.csr
+*.cer
+ssl/
+certs/
