@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy import MetaData
 from sqlmodel import SQLModel
 from app.core.config import settings
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 import logging
 
 logger = logging.getLogger(__name__)
@@ -41,37 +42,39 @@ def merge_metadata():
 # Note: sync_metadata() is NOT called at module level to avoid circular imports
 # It should be called after all models are imported, typically in the app lifespan
 
-# Build database URL
-
+# Build database URL for asyncpg
 database_url = settings.DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://")
 
-# For local development, disable SSL via connect_args (asyncpg doesn't support ssl=disable in URL)
-# Check if we're connecting to localhost/127.0.0.1
-is_local = any(host in database_url for host in ["localhost", "127.0.0.1"])
+# Parse SSL mode from URL or default to require for Neon
 
-# Remove any ssl parameters from URL (we'll handle it via connect_args)
-if "?ssl=" in database_url or "&ssl=" in database_url:
-    import re
-    database_url = re.sub(r'[?&]ssl=[^&]*', '', database_url)
-    if '?' not in database_url and '&' in database_url:
-        database_url = database_url.replace('&', '?', 1)
+parsed = urlparse(database_url)
+query_params = parse_qs(parsed.query)
+ssl_mode = query_params.get("sslmode", ["require"])[0]
 
-# Create async engine for SQLModel
-# For localhost connections, use minimal connection args to avoid SSL issues
+# Remove sslmode from URL (asyncpg handles SSL via connect_args)
+query_params.pop("sslmode", None)
+if query_params:
+    new_query = urlencode(query_params, doseq=True)
+    parsed = parsed._replace(query=new_query)
+else:
+    parsed = parsed._replace(query="")
+database_url = urlunparse(parsed)
+
+# Configure SSL for asyncpg
 connect_args = {}
-if is_local:
-    # Disable SSL for localhost (required for asyncpg)
+if ssl_mode == "require":
+    connect_args["ssl"] = "require"
+elif ssl_mode == "disable":
     connect_args["ssl"] = False
-
-# Print connection details (without password) - using print so it shows immediately
-
+else:
+    connect_args["ssl"] = ssl_mode
 
 engine = create_async_engine(
     database_url,
     pool_pre_ping=True,
-    pool_recycle=300,  # Increased back to 5 minutes
-    pool_size=3,       # Reduced to minimum for testing
-    max_overflow=5,    # Reduced overflow
+    pool_recycle=300,
+    pool_size=3,
+    max_overflow=5,
     pool_timeout=30,
     echo=settings.DEBUG,
     connect_args=connect_args,

@@ -29,29 +29,12 @@ class Settings:
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
     REFRESH_TOKEN_EXPIRE_DAYS: int = int(os.getenv("REFRESH_TOKEN_EXPIRE_DAYS", "7"))
 
-    DB_NAME: str | None = os.getenv("DB_NAME")
-    DB_USER: str | None = os.getenv("DB_USER")
-    DB_PASSWORD: str | None = os.getenv("DB_PASSWORD")
-    DB_HOST: str = os.getenv("DB_HOST", "localhost")
-    DB_PORT: str = os.getenv("DB_PORT", "5432")
-    DATABASE_URL_OVERRIDE: str | None = os.getenv("DATABASE_URL")
-
     @property
     def DATABASE_URL(self) -> str:
-        if self.DATABASE_URL_OVERRIDE:
-            return self.DATABASE_URL_OVERRIDE
-
-        required_parts = [self.DB_USER, self.DB_PASSWORD, self.DB_HOST, self.DB_PORT, self.DB_NAME]
-        if not all(required_parts):
-            raise RuntimeError(
-                "Database configuration is incomplete. Please provide DATABASE_URL or "
-                "DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, and DB_NAME."
-            )
-
-        return (
-            f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}@"
-            f"{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
-        )
+        url = os.getenv("DATABASE_URL")
+        if not url:
+            raise RuntimeError("DATABASE_URL environment variable is required.")
+        return url
 
     CELERY_BROKER_URL: str = os.getenv("CELERY_BROKER_URL", "redis://localhost:6379/0")
     CELERY_RESULT_BACKEND: str = os.getenv(
