@@ -40,6 +40,13 @@ class Settings:
     CELERY_RESULT_BACKEND: str = os.getenv(
         "CELERY_RESULT_BACKEND", CELERY_BROKER_URL
     )
+    REDIS_URL: str = os.getenv("REDIS_URL", CELERY_BROKER_URL)
+    
+    # Cache settings
+    CACHE_ENABLED: bool = os.getenv("CACHE_ENABLED", "true").lower() == "true"
+    CACHE_DEFAULT_TTL: int = int(os.getenv("CACHE_DEFAULT_TTL", "3600"))  # 1 hour
+    CACHE_DISH_TTL: int = int(os.getenv("CACHE_DISH_TTL", "1800"))  # 30 minutes
+    CACHE_LIST_TTL: int = int(os.getenv("CACHE_LIST_TTL", "600"))  # 10 minutes
     CELERY_TASK_SERIALIZER: str = "json"
     CELERY_RESULT_SERIALIZER: str = "json"
     CELERY_ACCEPT_CONTENT: List[str] = ["json"]

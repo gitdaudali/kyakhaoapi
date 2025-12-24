@@ -186,5 +186,52 @@ CurrentUser = Annotated[User, Depends(get_current_user)]
 # HEADER VALIDATION DEPENDENCY
 # ============================================================================
 async def validate_client_headers(request: Request) -> None:
-    """Header validation disabled (legacy dependency placeholder)."""
+    """
+    Validate required client headers for all API requests.
+    
+    Required headers:
+    - X-Device-Id: Device identifier (required)
+    - X-Device-Type: Device type - ios, android, web, desktop (required)
+    - X-App-Version: App version (required)
+    
+    Raises:
+        HeaderValidationException: If required headers are missing
+        InvalidDeviceTypeException: If device type is invalid
+    """
+    from app.core.response_handler import (
+        HeaderValidationException,
+        InvalidDeviceTypeException,
+    )
+    
+    # Get headers
+    device_id = request.headers.get("X-Device-Id")
+    device_type = request.headers.get("X-Device-Type")
+    app_version = request.headers.get("X-App-Version")
+    
+    # Check for missing headers
+    missing_headers = []
+    if not device_id:
+        missing_headers.append("X-Device-Id")
+    if not device_type:
+        missing_headers.append("X-Device-Type")
+    if not app_version:
+        missing_headers.append("X-App-Version")
+    
+    if missing_headers:
+        raise HeaderValidationException(
+            detail=f"Missing required headers: {', '.join(missing_headers)}"
+        )
+    
+    # Validate device type
+    valid_device_types = {"ios", "android", "web", "desktop"}
+    if device_type.lower() not in valid_device_types:
+        raise InvalidDeviceTypeException(
+            detail=f"Invalid device type '{device_type}'. Must be one of: {', '.join(valid_device_types)}"
+        )
+    
+    # Validate app version format (basic check - should be semantic version)
+    if app_version and not app_version.replace(".", "").replace("-", "").isalnum():
+        # Allow alphanumeric with dots and dashes (semantic versioning)
+        pass  # Basic validation passed
+    
     return

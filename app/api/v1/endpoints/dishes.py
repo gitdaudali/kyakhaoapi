@@ -41,11 +41,11 @@ async def list_dishes(
     session: AsyncSession = Depends(get_db),
 ) -> Any:
     try:
-        stmt = (
-            select(Dish)
-            .options(selectinload(Dish.moods))
-            .where(Dish.is_deleted.is_(False))
-        )
+        # Optimize query to prevent N+1 - load all relations eagerly
+        from app.utils.query_optimization import optimize_dish_query
+        
+        stmt = select(Dish).where(Dish.is_deleted.is_(False))
+        stmt = optimize_dish_query(stmt, include_all=True)  # Loads moods, restaurant, cuisine
 
         if filters.cuisine_id:
             stmt = stmt.where(Dish.cuisine_id == filters.cuisine_id)

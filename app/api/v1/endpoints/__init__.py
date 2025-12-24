@@ -19,6 +19,7 @@ from . import (
     orders,
     personalization,
     promotions,
+    recommendations,
     reservations,
     restaurants,
     reviews,
@@ -70,6 +71,7 @@ user_router.include_router(search.router, dependencies=protected_dependencies)
 user_router.include_router(user_allergies.router, dependencies=protected_dependencies)
 user_router.include_router(personalization.router, dependencies=protected_dependencies)
 user_router.include_router(user_profile.router, dependencies=protected_dependencies)
+user_router.include_router(recommendations.router, dependencies=protected_dependencies)
 # Membership subscribe requires authentication
 user_router.include_router(membership.router, prefix="/membership", dependencies=protected_dependencies)
 

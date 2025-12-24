@@ -165,6 +165,9 @@ class Dish(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     featured_week: Mapped[Optional[Date]] = mapped_column(Date, nullable=True, index=True)
     calories: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     preparation_time_minutes: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    spice_level: Mapped[Optional[str]] = mapped_column(
+        String(50), nullable=True, index=True
+    )  # Spice level: Mild, Medium, Spicy, Extra Spicy
 
     cuisine: Mapped["Cuisine"] = relationship("Cuisine", back_populates="dishes")
     restaurant: Mapped["Restaurant"] = relationship("Restaurant", back_populates="dishes")
@@ -173,6 +176,14 @@ class Dish(UUIDPrimaryKeyMixin, TimestampMixin, Base):
         secondary=DishMoodAssociation,
         back_populates="dishes",
     )
+    # Dietary tags relationship (many-to-many via association table)
+    dietary_tags: Mapped[List["DietaryTag"]] = relationship(
+        "DietaryTag",
+        secondary="dish_dietary_tags",
+        back_populates="dishes",
+    )
+    # Note: reviews relationship not defined here (Review uses SQLModel, accessed via queries)
+    # Note: cart_items, order_items, user_favorites relationships accessed via queries
 
 
 class Reservation(UUIDPrimaryKeyMixin, TimestampMixin, Base):
